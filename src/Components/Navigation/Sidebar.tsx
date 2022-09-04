@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { BedSolid } from '../../icons/BedSolid';
 import { CapsulesSolid } from '../../icons/CapsulesSolid';
 import { DumbbellSolid } from '../../icons/DumbbellSolid';
@@ -9,9 +9,16 @@ import { Link } from 'react-router-dom';
 
 export const Sidebar: FC = () => {
     const history = useHistory();
+    const [pathname, setPathname] = useState<string>(history.location.pathname);
+
+    useEffect(() => {
+        history.listen((location) => {
+            setPathname(location.pathname);
+        });
+    }, [history]);
 
     const isSelected = (route: string) => {
-        return history.location.pathname.includes(route);
+        return pathname.includes(route);
     };
 
     const linkStyle = (route: string) =>

@@ -165,6 +165,7 @@ export const SupplementCard: FC<IProps> = ({
                     <a
                         href={url}
                         target="_blank"
+                        rel="noreferrer"
                         className="fill-ternary h-5 w-5"
                     >
                         <ExternalLink />

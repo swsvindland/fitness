@@ -1,10 +1,10 @@
 import { FC, FormEvent, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
 import { Loading } from '../Components/Loading';
 import { TextField } from '../Components/TextField';
+import { getUser } from '../api';
 
 interface IProps {
     setUser: (user: User) => void;
@@ -13,22 +13,6 @@ interface IProps {
 export const Login: FC<IProps> = ({ setUser }) => {
     const [email, setEmail] = useState<string>('');
 
-    useEffect(() => {
-        const oldEmail = localStorage.getItem('email');
-
-        if (oldEmail) {
-            setEmail(oldEmail);
-            mutation.mutate();
-        }
-    }, []);
-
-    const getUser = () => {
-        const params = { email };
-        return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUser`, {
-            params,
-        });
-    };
-
     const mutation = useMutation(getUser, {
         onSuccess: (data, variables, context) => {
             localStorage.setItem('email', email);
@@ -36,9 +20,18 @@ export const Login: FC<IProps> = ({ setUser }) => {
         },
     });
 
+    useEffect(() => {
+        const oldEmail = localStorage.getItem('email');
+
+        if (oldEmail) {
+            setEmail(oldEmail);
+            mutation.mutate(oldEmail);
+        }
+    }, [mutation]);
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate();
+        mutation.mutate(email);
     };
 
     return (

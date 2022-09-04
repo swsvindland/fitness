@@ -11,7 +11,6 @@ import {
     ChartData,
     ScatterDataPoint,
     BubbleDataPoint,
-    Chart,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';

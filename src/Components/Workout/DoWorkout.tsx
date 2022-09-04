@@ -53,11 +53,11 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     return (
         <div className="max-w-2xl w-full">
             <Pagination selected={day} setSelected={setDay} pages={5} />
-            <ul role="list" className="grid grid-cols-1 gap-6">
+            <div role="list" className="grid grid-cols-1 gap-6">
                 {exercises?.map((exercise) => (
                     <WorkoutCard exercise={exercise} />
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

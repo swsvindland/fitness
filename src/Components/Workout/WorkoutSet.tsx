@@ -1,6 +1,6 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextField';
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/20/solid';
+import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';

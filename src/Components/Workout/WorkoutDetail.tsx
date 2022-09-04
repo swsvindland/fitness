@@ -52,7 +52,7 @@ export const WorkoutDetail: FC = () => {
     };
 
     const mutation = useMutation(buyWorkout, {
-        onSuccess: (data, variables, context) => {
+        onSuccess: () => {
             history.push('/workout', { replace: true });
         },
     });
@@ -129,7 +129,7 @@ export const WorkoutDetail: FC = () => {
                                 </h2>
 
                                 <div className="mt-4 prose prose-sm text-ternary">
-                                    <ul role="list">
+                                    <div role="list">
                                         <li>
                                             {
                                                 workoutDetailsQuery.data
@@ -144,7 +144,7 @@ export const WorkoutDetail: FC = () => {
                                             }{' '}
                                             weeks long
                                         </li>
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
