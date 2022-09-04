@@ -13,7 +13,10 @@ export const getUserSupplements = (
         userId,
     };
 
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserSupplements`, {
-        params,
-    });
+    return axios.get(
+        `${process.env.REACT_APP_API_URL}/api/GetUserSupplements`,
+        {
+            params,
+        }
+    );
 };

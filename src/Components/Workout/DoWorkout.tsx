@@ -3,9 +3,9 @@ import axios, { AxiosResponse } from 'axios';
 import { Workout } from '../../types/Workout';
 import { WorkoutBlock } from '../../types/WorkoutBlock';
 import { useQuery } from '@tanstack/react-query';
-import {Loading} from "../Loading";
-import {Pagination} from "../Pagination";
-import {WorkoutCard} from "./WorkoutCard";
+import { Loading } from '../Loading';
+import { Pagination } from '../Pagination';
+import { WorkoutCard } from './WorkoutCard';
 
 interface IProps {
     workoutId: number;

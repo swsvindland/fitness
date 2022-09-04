@@ -47,9 +47,12 @@ export const WeightGraph: FC = () => {
             userId: user?.id,
         };
 
-        return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserWeights`, {
-            params,
-        });
+        return axios.get(
+            `${process.env.REACT_APP_API_URL}/api/GetUserWeights`,
+            {
+                params,
+            }
+        );
     };
 
     const userBloodPressureQuery = useQuery(

@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { WorkoutBlock } from '../../types/WorkoutBlock';
 import { AuthContext } from '../../Auth/Auth';
 import { Button } from '../Buttons/Button';
-import {Loading} from "../Loading";
+import { Loading } from '../Loading';
 
 export const WorkoutDetail: FC = () => {
     const { user } = useContext(AuthContext);

@@ -19,20 +19,19 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import {FC} from "react";
-import {Auth} from "./Auth/Auth";
+import { FC } from 'react';
+import { Auth } from './Auth/Auth';
 
 import './index.css';
 
 setupIonicReact();
 
 export const App: FC = () => {
-  const queryClient = new QueryClient();
+    const queryClient = new QueryClient();
 
-  return (
-      <QueryClientProvider client={queryClient}>
-        <Auth />
-      </QueryClientProvider>
-  );
+    return (
+        <QueryClientProvider client={queryClient}>
+            <Auth />
+        </QueryClientProvider>
+    );
 };
-

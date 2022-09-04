@@ -2,8 +2,8 @@ import { createContext, FC, useState } from 'react';
 import { Login } from '../Layouts/Login';
 import { BrowserRouter } from 'react-router-dom';
 import { User } from '../types/user';
-import {Layout} from "../Components/Layout";
-import {Routes} from "../Components/Routes";
+import { Layout } from '../Components/Layout';
+import { Routes } from '../Components/Routes';
 
 interface IAuthContext {
     user?: User;

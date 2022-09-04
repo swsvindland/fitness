@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { UserWorkout } from '../types/UserWorkout';
 import { useNavigate } from 'react-router-dom';
-import {Loading} from "../Components/Loading";
-import {DoWorkout} from "../Components/Workout/DoWorkout";
+import { Loading } from '../Components/Loading';
+import { DoWorkout } from '../Components/Workout/DoWorkout';
 
 export const Workout: FC = () => {
     const { user } = useContext(AuthContext);

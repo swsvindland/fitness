@@ -1,7 +1,7 @@
 {
-  "name": "fitness",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react"
+    "name": "fitness",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
 }

@@ -2,9 +2,9 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { User } from '../types/user';
-import {Button} from "../Components/Buttons/Button";
-import {Loading} from "../Components/Loading";
-import {TextField} from "../Components/TextField";
+import { Button } from '../Components/Buttons/Button';
+import { Loading } from '../Components/Loading';
+import { TextField } from '../Components/TextField';
 
 interface IProps {
     setUser: (user: User) => void;

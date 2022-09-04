@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { Routes as Switch, Route, Navigate } from 'react-router-dom';
-import {Home} from "../Layouts/Home";
-import {Workout} from "../Layouts/Workout";
-import {WorkoutStore} from "./Workout/WorkoutStore";
-import {WorkoutDetail} from "./Workout/WorkoutDetail";
-import {Eat} from "../Layouts/Eat";
-import {Supplements} from "../Layouts/Supplements";
-import {AllSupplements} from "./Supplements/AllSupplements";
+import { Home } from '../Layouts/Home';
+import { Workout } from '../Layouts/Workout';
+import { WorkoutStore } from './Workout/WorkoutStore';
+import { WorkoutDetail } from './Workout/WorkoutDetail';
+import { Eat } from '../Layouts/Eat';
+import { Supplements } from '../Layouts/Supplements';
+import { AllSupplements } from './Supplements/AllSupplements';
 import { Body } from '../Layouts/Body';
-import {WeighInForm} from "./Body/WeighInForm";
-import {BodyCheckInForm} from "./Body/BodyCheckInForm";
-import {BloodPressureCheckInForm} from "./Body/BloodPressureCheckInForm";
+import { WeighInForm } from './Body/WeighInForm';
+import { BodyCheckInForm } from './Body/BodyCheckInForm';
+import { BloodPressureCheckInForm } from './Body/BloodPressureCheckInForm';
 
 export const Routes: FC = () => {
     return (

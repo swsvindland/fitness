@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { LinkButton } from '../Components/Buttons/LinkButton';
-import {UserSupplements} from "../Components/Supplements/UserSupplements";
+import { UserSupplements } from '../Components/Supplements/UserSupplements';
 
 export const Supplements: FC = () => {
     return (
