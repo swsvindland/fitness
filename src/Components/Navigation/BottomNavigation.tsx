@@ -27,7 +27,7 @@ export const BottomNavigation: FC = () => {
     return (
         <div
             id="bottom-navigation"
-            className="block fixed inset-x-0 bottom-0 z-10 bg-primary-dark shadow"
+            className="block fixed inset-x-0 bottom-0 z-10 bg-primary-dark shadow pb-6"
         >
             <div id="tabs" className="flex justify-between">
                 <Link to="/home" className={linkStyle('/home')}>
