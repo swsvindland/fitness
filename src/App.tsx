@@ -1,9 +1,7 @@
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, setupIonicReact } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import { setupIonicReact } from '@ionic/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-/* Core CSS required for Ionic components to work properly */
+/* Core CSS required for Ionic Components to work properly */
 import '@ionic/react/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
@@ -21,22 +19,20 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import {FC} from "react";
+import {Auth} from "./Auth/Auth";
+
+import './index.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+export const App: FC = () => {
+  const queryClient = new QueryClient();
 
-export default App;
+  return (
+      <QueryClientProvider client={queryClient}>
+        <Auth />
+      </QueryClientProvider>
+  );
+};
+
