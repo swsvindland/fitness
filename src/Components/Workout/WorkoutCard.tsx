@@ -8,7 +8,8 @@ interface IProps {
 
 export const WorkoutCard: FC<IProps> = ({ exercise }) => {
     return (
-        <li
+        <div
+            role="listitem"
             key={exercise.id}
             className="w-full col-span-1 bg-card rounded-lg shadow"
         >
@@ -32,6 +33,6 @@ export const WorkoutCard: FC<IProps> = ({ exercise }) => {
                     <WorkoutSet key={set} set={set} exercise={exercise} />
                 ))}
             </div>
-        </li>
+        </div>
     );
 };
