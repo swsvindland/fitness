@@ -76,7 +76,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
             weight: data?.data.weight,
         });
 
-        if (data.data.reps && data.data.weight) {
+        if (data.data.saved) {
             setSaved(true);
         }
     }, [data]);
@@ -84,6 +84,8 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
     if (isLoading) {
         return <Loading />;
     }
+
+    console.log(data);
 
     return (
         <div className="flex border-y border-ternary last:border-none">

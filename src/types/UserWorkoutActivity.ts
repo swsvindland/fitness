@@ -6,4 +6,5 @@ export interface UserWorkoutActivity {
     set: number;
     reps: number;
     weight: number;
+    saved: boolean;
 }
