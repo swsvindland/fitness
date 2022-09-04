@@ -5,7 +5,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { AuthContext } from '../../Auth/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 interface IState {
     systolic: string;
@@ -16,7 +16,7 @@ export const BloodPressureCheckInForm: FC = () => {
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const [state, setState] = useState<IState>({ systolic: '', diastolic: '' });
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const addBloodPressure = (): Promise<AxiosResponse<boolean>> => {
         const body = {
@@ -43,7 +43,7 @@ export const BloodPressureCheckInForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate();
-        navigate(-1);
+        history.goBack();
     };
 
     const handleClear = () => {

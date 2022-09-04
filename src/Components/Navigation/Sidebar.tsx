@@ -1,16 +1,17 @@
 import { FC } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { BedSolid } from '../../icons/BedSolid';
 import { CapsulesSolid } from '../../icons/CapsulesSolid';
 import { DumbbellSolid } from '../../icons/DumbbellSolid';
 import { UtensilsSolid } from '../../icons/UtensilsSolid';
 import { HomeSolid } from '../../icons/HomeSolid';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 export const Sidebar: FC = () => {
-    const location = useLocation();
+    const history = useHistory();
 
     const isSelected = (route: string) => {
-        return location.pathname.includes(route);
+        return history.location.pathname.includes(route);
     };
 
     const linkStyle = (route: string) =>

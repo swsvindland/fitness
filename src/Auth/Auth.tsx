@@ -1,9 +1,9 @@
 import { createContext, FC, useState } from 'react';
 import { Login } from '../Layouts/Login';
-import { BrowserRouter } from 'react-router-dom';
 import { User } from '../types/user';
 import { Layout } from '../Components/Layout';
 import { Routes } from '../Components/Routes';
+import { IonReactRouter } from '@ionic/react-router';
 
 interface IAuthContext {
     user?: User;
@@ -23,11 +23,12 @@ export const Auth: FC = () => {
     if (user) {
         return (
             <AuthContext.Provider value={authContext}>
-                <BrowserRouter>
+                {/* @ts-ignore */}
+                <IonReactRouter>
                     <Layout>
                         <Routes />
                     </Layout>
-                </BrowserRouter>
+                </IonReactRouter>
             </AuthContext.Provider>
         );
     }

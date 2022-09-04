@@ -2,16 +2,16 @@ import { FC, useContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { Workout } from '../../types/Workout';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
 import { WorkoutBlock } from '../../types/WorkoutBlock';
 import { AuthContext } from '../../Auth/Auth';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
+import { useHistory, useParams } from 'react-router';
 
 export const WorkoutDetail: FC = () => {
     const { user } = useContext(AuthContext);
     const { workoutId } = useParams<{ workoutId?: string }>();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const getWorkout = (): Promise<AxiosResponse<Workout>> => {
         const params = {
@@ -53,7 +53,7 @@ export const WorkoutDetail: FC = () => {
 
     const mutation = useMutation(buyWorkout, {
         onSuccess: (data, variables, context) => {
-            navigate('/workout', { replace: true });
+            history.push('/workout', { replace: true });
         },
     });
 

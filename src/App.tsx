@@ -1,4 +1,4 @@
-import { setupIonicReact } from '@ionic/react';
+import { IonApp, setupIonicReact } from '@ionic/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 /* Core CSS required for Ionic Components to work properly */
@@ -30,8 +30,10 @@ export const App: FC = () => {
     const queryClient = new QueryClient();
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <Auth />
-        </QueryClientProvider>
+        <IonApp>
+            <QueryClientProvider client={queryClient}>
+                <Auth />
+            </QueryClientProvider>
+        </IonApp>
     );
 };

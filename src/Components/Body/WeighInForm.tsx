@@ -5,13 +5,13 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 export const WeighInForm: FC = () => {
     const [weight, setWeight] = useState<string>('');
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const addWeight = (): Promise<AxiosResponse<boolean>> => {
         const body = {
@@ -34,7 +34,7 @@ export const WeighInForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate();
-        navigate(-1);
+        history.goBack();
     };
 
     const handleClear = () => {

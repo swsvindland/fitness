@@ -5,7 +5,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 interface IState {
     neck: string;
@@ -41,7 +41,7 @@ export const BodyCheckInForm: FC = () => {
     const [state, setState] = useState<IState>(initialState);
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const addBody = (): Promise<AxiosResponse<boolean>> => {
         const body = {
@@ -75,7 +75,7 @@ export const BodyCheckInForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate();
-        navigate(-1);
+        history.goBack();
     };
 
     const handleClear = () => {

@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Routes as Switch, Route, Navigate } from 'react-router-dom';
 import { Home } from '../Layouts/Home';
 import { Workout } from '../Layouts/Workout';
 import { WorkoutStore } from './Workout/WorkoutStore';
@@ -11,28 +10,39 @@ import { Body } from '../Layouts/Body';
 import { WeighInForm } from './Body/WeighInForm';
 import { BodyCheckInForm } from './Body/BodyCheckInForm';
 import { BloodPressureCheckInForm } from './Body/BloodPressureCheckInForm';
+import { Redirect, Route, Switch } from 'react-router';
 
 export const Routes: FC = () => {
     return (
         <Switch>
-            <Route path="/home" element={<Home />} />
-            <Route path="/workout" element={<Workout />} />
-            <Route path="/workout/store" element={<WorkoutStore />} />
-            <Route path="/workout/:workoutId" element={<WorkoutDetail />} />
-            <Route path="/eat" element={<Eat />} />
-            <Route path="/supplements" element={<Supplements />} />
+            <Route path="/home" component={Home} exact={true} />
+            <Route path="/workout" component={Workout} exact={true} />
+            <Route
+                path="/workout/store"
+                component={WorkoutStore}
+                exact={true}
+            />
+            <Route
+                path="/workout/:workoutId"
+                component={WorkoutDetail}
+                exact={true}
+            />
+            <Route path="/eat" component={Eat} exact={true} />
+            <Route path="/supplements" component={Supplements} exact={true} />
             <Route
                 path="/supplements/all-supplements"
-                element={<AllSupplements />}
+                component={AllSupplements}
+                exact={true}
             />
-            <Route path="/body" element={<Body />} />
-            <Route path="/body/weight" element={<WeighInForm />} />
-            <Route path="/body/body" element={<BodyCheckInForm />} />
+            <Route path="/body" component={Body} exact={true} />
+            <Route path="/body/weight" component={WeighInForm} exact={true} />
+            <Route path="/body/body" component={BodyCheckInForm} exact={true} />
             <Route
                 path="/body/blood-pressure"
-                element={<BloodPressureCheckInForm />}
+                component={BloodPressureCheckInForm}
+                exact={true}
             />
-            <Route path="*" element={<Navigate to="/home" replace />} />
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
         </Switch>
     );
 };
