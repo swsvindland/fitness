@@ -16,6 +16,12 @@ export const Home: FC = () => {
             >
                 Start Your Workout
             </LinkButton>
+            <LinkButton
+                className="my-2 w-full text-center flex justify-center"
+                to="/body/height"
+            >
+                Add Your Height
+            </LinkButton>
         </div>
     );
 };
