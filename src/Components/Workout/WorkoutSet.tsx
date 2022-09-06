@@ -125,7 +125,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
             <div className="flex-none flex w-16">
                 <div className="w-0 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium border border-transparent rounded-br-lg">
                     <button
-                        className="w-6 h-6"
+                        className="w-8 h-8"
                         onClick={() => {
                             mutation.mutate();
                         }}
