@@ -130,10 +130,16 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
                             mutation.mutate();
                         }}
                     >
-                        {saved ? (
-                            <CheckCircleIcon className="fill-secondary" />
+                        {mutation.isLoading ? (
+                            <Loading />
                         ) : (
-                            <CheckCircleIcon className="fill-transparent border-ternary border rounded-full" />
+                            <CheckCircleIcon
+                                className={
+                                    saved
+                                        ? 'fill-secondary'
+                                        : 'fill-transparent border-ternary border rounded-full'
+                                }
+                            />
                         )}
                     </button>
                 </div>
