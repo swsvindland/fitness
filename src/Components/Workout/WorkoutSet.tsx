@@ -85,8 +85,6 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
         return <Loading />;
     }
 
-    console.log(data);
-
     return (
         <div className="flex border-y border-ternary last:border-none">
             <div className=" flex-1 flex">
