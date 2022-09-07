@@ -156,7 +156,7 @@ export const SupplementCard: FC<IProps> = ({
                     checked &&
                     !mutation.isLoading &&
                     !userSupplementActivityQuery.isFetching && (
-                        <CheckCircleIcon className="fill-secondary w-6 h-6" />
+                        <CheckCircleIcon className="fill-secondary w-8 h-8" />
                     )}
                 {isUser &&
                     (mutation.isLoading ||

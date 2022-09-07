@@ -73,8 +73,8 @@ export const WeightGraph: FC = () => {
                         userBloodPressureQuery.data?.data.map(
                             (item) => item.weight
                         ) ?? [],
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: '#F7C619',
+                    backgroundColor: '#F7C619',
                 },
             ],
         });

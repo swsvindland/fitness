@@ -73,8 +73,8 @@ export const BloodPressureGraph: FC = () => {
                         userBloodPressureQuery.data?.data.map(
                             (item) => item.systolic
                         ) ?? [],
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: '#F7C619',
+                    backgroundColor: '#F7C619',
                 },
                 {
                     label: 'Diastolic',
@@ -82,8 +82,8 @@ export const BloodPressureGraph: FC = () => {
                         userBloodPressureQuery.data?.data.map(
                             (item) => item.diastolic
                         ) ?? [],
-                    borderColor: 'rgb(53, 162, 235)',
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                    borderColor: '#AFD257',
+                    backgroundColor: '#AFD257',
                 },
             ],
         });
