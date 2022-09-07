@@ -45,18 +45,18 @@ export const BodyCheckInForm: FC = () => {
 
     const addBody = (): Promise<AxiosResponse<boolean>> => {
         const body = {
-            neck: parseInt(state.neck),
-            shoulders: parseInt(state.shoulders),
-            chest: parseInt(state.chest),
-            leftBicep: parseInt(state.leftBicep),
-            rightBicep: parseInt(state.rightBicep),
-            navel: parseInt(state.navel),
-            waist: parseInt(state.waist),
-            hip: parseInt(state.hip),
-            leftThigh: parseInt(state.leftThigh),
-            rightThigh: parseInt(state.rightThigh),
-            leftCalf: parseInt(state.leftCalf),
-            rightCalf: parseInt(state.rightCalf),
+            neck: parseFloat(state.neck),
+            shoulders: parseFloat(state.shoulders),
+            chest: parseFloat(state.chest),
+            leftBicep: parseFloat(state.leftBicep),
+            rightBicep: parseFloat(state.rightBicep),
+            navel: parseFloat(state.navel),
+            waist: parseFloat(state.waist),
+            hip: parseFloat(state.hip),
+            leftThigh: parseFloat(state.leftThigh),
+            rightThigh: parseFloat(state.rightThigh),
+            leftCalf: parseFloat(state.leftCalf),
+            rightCalf: parseFloat(state.rightCalf),
             userId: user?.id,
         };
 

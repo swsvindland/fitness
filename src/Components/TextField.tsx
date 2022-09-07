@@ -40,7 +40,6 @@ export const TextField: FC<IProps> = ({
                         id={id}
                         name={name}
                         type="number"
-                        min="0"
                         inputMode={inputMode}
                         autoComplete={autocomplete}
                         value={value}

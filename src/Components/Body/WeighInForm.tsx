@@ -15,7 +15,7 @@ export const WeighInForm: FC = () => {
 
     const addWeight = (): Promise<AxiosResponse<boolean>> => {
         const body = {
-            weight: parseInt(weight),
+            weight: parseFloat(weight),
             userId: user?.id,
         };
 
