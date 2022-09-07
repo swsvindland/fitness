@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, FormEvent, useMemo, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
@@ -20,7 +20,7 @@ export const Login: FC<IProps> = ({ setUser }) => {
         },
     });
 
-    useEffect(() => {
+    useMemo(() => {
         const oldEmail = localStorage.getItem('email');
 
         if (oldEmail) {

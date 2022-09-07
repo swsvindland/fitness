@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Supplement } from './types/supplement';
 import { UserSupplement } from './types/userSupplement';
+import { UserBodyFat } from './types/UserBodyFat';
 
 export const getUser = (email: string) => {
     const params = { email };
@@ -26,4 +27,16 @@ export const getUserSupplements = (
             params,
         }
     );
+};
+
+export const getUserBodyFat = (
+    userId: string
+): Promise<AxiosResponse<UserBodyFat[]>> => {
+    const params = {
+        userId,
+    };
+
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserBodyFat`, {
+        params,
+    });
 };

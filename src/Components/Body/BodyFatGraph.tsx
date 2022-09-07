@@ -15,10 +15,9 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
-import axios, { AxiosResponse } from 'axios';
 import { format } from 'date-fns';
-import { UserWeight } from '../../types/userWeight';
-import { LinkButton } from '../Buttons/LinkButton';
+import { Loading } from '../Loading';
+import { getUserBodyFat } from '../../api';
 
 ChartJS.register(
     CategoryScale,
@@ -30,7 +29,7 @@ ChartJS.register(
     Legend
 );
 
-export const WeightGraph: FC = () => {
+export const BodyFatGraph: FC = () => {
     const { user } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
@@ -41,26 +40,14 @@ export const WeightGraph: FC = () => {
         | undefined
     >(undefined);
 
-    const getAllUserWeights = (): Promise<AxiosResponse<UserWeight[]>> => {
-        const params = {
-            userId: user?.id,
-        };
+    const userBodyFatQuery = useQuery(['UserBodyFat', user?.id], () => {
+        if (!user?.id) return;
 
-        return axios.get(
-            `${process.env.REACT_APP_API_URL}/api/GetUserWeights`,
-            {
-                params,
-            }
-        );
-    };
-
-    const userBloodPressureQuery = useQuery(
-        ['UserWeight', user?.id],
-        getAllUserWeights
-    );
+        return getUserBodyFat(user?.id);
+    });
 
     useMemo(() => {
-        const labels = userBloodPressureQuery.data?.data.map((item) =>
+        const labels = userBodyFatQuery.data?.data.map((item) =>
             format(new Date(item.created), 'PP')
         );
 
@@ -68,20 +55,20 @@ export const WeightGraph: FC = () => {
             labels,
             datasets: [
                 {
-                    label: 'Weights',
+                    label: 'Body Fat',
                     data:
-                        userBloodPressureQuery.data?.data.map(
-                            (item) => item.weight
+                        userBodyFatQuery.data?.data.map(
+                            (item) => item.bodyFat
                         ) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },
             ],
         });
-    }, [userBloodPressureQuery.data]);
+    }, [userBodyFatQuery.data]);
 
-    if (userBloodPressureQuery.isLoading || !data) {
-        return <span>Loading...</span>;
+    if (userBodyFatQuery.isLoading || !data) {
+        return <Loading />;
     }
 
     const options = {
@@ -101,9 +88,6 @@ export const WeightGraph: FC = () => {
 
     return (
         <div className="bg-card rounded shadow p-4 m-4">
-            <LinkButton to="/body/weight" className="float-right">
-                Add
-            </LinkButton>
             <Line options={options} data={data} />
         </div>
     );

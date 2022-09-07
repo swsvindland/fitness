@@ -85,7 +85,7 @@ export const BodyGraph = () => {
                         item.rightCalf,
                     ],
                     backgroundColor: `rgba(247, 198, 25, ${(index + 1) * 0.1})`,
-                    borderColor: `rgba(247, 198, 25, ${(index + 1) / 0.1})`,
+                    borderColor: `rgba(247, 198, 25, 1)`,
                     borderWidth: 1,
                 })) ?? [],
         });
