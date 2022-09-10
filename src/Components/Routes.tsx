@@ -44,7 +44,7 @@ export const Routes: FC = () => {
                 component={BloodPressureCheckInForm}
                 exact={true}
             />
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Redirect from="*" to="/home" />
         </Switch>
     );
 };

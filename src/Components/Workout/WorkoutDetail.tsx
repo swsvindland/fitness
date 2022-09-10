@@ -115,10 +115,13 @@ export const WorkoutDetail: FC = () => {
                                 </h2>
 
                                 <div className="mt-4 prose prose-sm text-ternary">
-                                    {workoutQuery.data?.data.description.map(
-                                        (item) => (
-                                            <p key={item}>{item}</p>
-                                        )
+                                    {workoutQuery.data?.data.description && (
+                                        <p>
+                                            {
+                                                workoutQuery.data?.data
+                                                    .description
+                                            }
+                                        </p>
                                     )}
                                 </div>
                             </div>

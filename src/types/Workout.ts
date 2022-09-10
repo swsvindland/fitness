@@ -3,6 +3,6 @@ export interface Workout {
     created: string;
     version: number;
     name: string;
-    description: string[];
+    description: string;
     cost?: number;
 }
