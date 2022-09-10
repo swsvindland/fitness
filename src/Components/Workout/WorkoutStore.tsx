@@ -20,6 +20,7 @@ export const WorkoutStore: FC = () => {
         <div>
             {data?.data.map((item) => (
                 <WorkoutStoreCard
+                    key={item.id}
                     id={item.id}
                     name={item.name}
                     version={item.version}

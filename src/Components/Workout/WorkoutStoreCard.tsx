@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { IonRouterLink } from '@ionic/react';
+import { Link } from 'react-router-dom';
 
 interface IProps {
     id: number;
@@ -10,8 +10,8 @@ interface IProps {
 
 export const WorkoutStoreCard: FC<IProps> = ({ id, name, version, price }) => {
     return (
-        <IonRouterLink
-            href={`/workout/${id}`}
+        <Link
+            to={`/workout/${id}`}
             className="m-4 max-w-xl w-96 relative block bg-card rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none"
         >
             <span className="flex items-center">
@@ -33,6 +33,6 @@ export const WorkoutStoreCard: FC<IProps> = ({ id, name, version, price }) => {
                 className="border-indigo-500 border-transparent absolute -inset-px rounded-lg pointer-events-none"
                 aria-hidden="true"
             />
-        </IonRouterLink>
+        </Link>
     );
 };

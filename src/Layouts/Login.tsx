@@ -1,4 +1,4 @@
-import { FC, FormEvent, useMemo, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
@@ -15,19 +15,9 @@ export const Login: FC<IProps> = ({ setUser }) => {
 
     const mutation = useMutation(getUser, {
         onSuccess: (data, variables, context) => {
-            localStorage.setItem('email', email);
             setUser(data.data);
         },
     });
-
-    useMemo(() => {
-        const oldEmail = localStorage.getItem('email');
-
-        if (oldEmail) {
-            setEmail(oldEmail);
-            mutation.mutate(oldEmail);
-        }
-    }, [mutation]);
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();

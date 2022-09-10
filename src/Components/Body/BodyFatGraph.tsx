@@ -47,7 +47,7 @@ export const BodyFatGraph: FC = () => {
     });
 
     useMemo(() => {
-        const labels = userBodyFatQuery.data?.data.map((item) =>
+        const labels = userBodyFatQuery.data?.data?.map((item) =>
             format(new Date(item.created), 'PP')
         );
 
@@ -57,7 +57,7 @@ export const BodyFatGraph: FC = () => {
                 {
                     label: 'Body Fat',
                     data:
-                        userBodyFatQuery.data?.data.map(
+                        userBodyFatQuery.data?.data?.map(
                             (item) => item.bodyFat
                         ) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
@@ -67,8 +67,12 @@ export const BodyFatGraph: FC = () => {
         });
     }, [userBodyFatQuery.data]);
 
-    if (userBodyFatQuery.isLoading || !data) {
+    if (userBodyFatQuery.isLoading) {
         return <Loading />;
+    }
+
+    if (!data) {
+        return null;
     }
 
     const options = {
