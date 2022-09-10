@@ -12,6 +12,7 @@ export const Pagination: FC<IProps> = ({ selected, setSelected, pages }) => {
             <div className="">
                 {Array.from(Array(pages).keys()).map((_, index) => (
                     <button
+                        key={index}
                         onClick={() => {
                             setSelected(index + 1);
                         }}
