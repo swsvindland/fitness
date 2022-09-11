@@ -4,6 +4,7 @@ import { UserSupplement } from './types/userSupplement';
 import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
 import { WorkoutBlock } from './types/WorkoutBlock';
+import { UserWorkoutsCompleted } from './types/UserWorkoutsCompleted';
 
 export const getUser = (email: string) => {
     const params = { email };
@@ -61,6 +62,31 @@ export const getWorkoutDetails = (
         workoutId,
     };
     return axios.get(`${process.env.REACT_APP_API_URL}/api/GetWorkoutDetails`, {
+        params,
+    });
+};
+
+export const completeWorkout = (body: {
+    userId: string;
+    workoutId: number;
+    workoutBlock: number;
+    week: number;
+    day: number;
+}): Promise<AxiosResponse> => {
+    return axios.post(
+        `${process.env.REACT_APP_API_URL}/api/AddUserWorkoutCompleted`,
+        body
+    );
+};
+
+export const getUserNextWorkout = (
+    userId: string
+): Promise<AxiosResponse<UserWorkoutsCompleted>> => {
+    const params = {
+        userId,
+    };
+
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetNextWorkout`, {
         params,
     });
 };
