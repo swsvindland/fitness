@@ -62,7 +62,7 @@ export const BloodPressureCheckInForm: FC = () => {
                                 type="number"
                                 inputMode="decimal"
                                 label="Systolic"
-                                autocomplete="off"
+                                autoComplete="off"
                                 value={state.systolic}
                                 onChange={(event) =>
                                     setState({
@@ -76,7 +76,7 @@ export const BloodPressureCheckInForm: FC = () => {
                                 type="number"
                                 inputMode="decimal"
                                 label="Diastolic"
-                                autocomplete="off"
+                                autoComplete="off"
                                 value={state.diastolic}
                                 onChange={(event) =>
                                     setState({

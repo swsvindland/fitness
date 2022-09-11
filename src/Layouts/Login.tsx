@@ -33,6 +33,7 @@ export const Login: FC<IProps> = ({ setUser }) => {
                             id="email"
                             name="email"
                             type="email"
+                            autoComplete="email"
                             label="Email Address"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}

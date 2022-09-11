@@ -5,7 +5,7 @@ interface IProps {
     name?: string;
     type?: HTMLInputTypeAttribute;
     inputMode?: 'numeric' | 'decimal';
-    autocomplete?: 'on' | 'off';
+    autoComplete?: string;
     label?: string;
     value: string | number;
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -17,7 +17,7 @@ export const TextField: FC<IProps> = ({
     name,
     type,
     inputMode,
-    autocomplete,
+    autoComplete,
     label,
     value,
     onChange,
@@ -41,7 +41,7 @@ export const TextField: FC<IProps> = ({
                         name={name}
                         type="number"
                         inputMode={inputMode}
-                        autoComplete={autocomplete}
+                        autoComplete={autoComplete}
                         value={value}
                         required
                         className={styles}
@@ -52,7 +52,7 @@ export const TextField: FC<IProps> = ({
                         id={id}
                         name={name}
                         type={type}
-                        autoComplete={autocomplete}
+                        autoComplete={autoComplete}
                         value={value}
                         required
                         className={styles}
