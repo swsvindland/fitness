@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { Sidebar } from './Navigation/Sidebar';
 import { BottomNavigation } from './Navigation/BottomNavigation';
+import { Header } from './Navigation/Header';
 
 interface IProps {
     children: ReactNode;
@@ -9,14 +10,17 @@ interface IProps {
 export const Layout: FC<IProps> = ({ children }) => {
     return (
         <>
-            <main className="bg-background min-h-screen py-4">
+            <div className="bg-background min-h-screen">
                 <div className="hidden md:flex md:w-48 md:flex-col md:fixed md:inset-y-0">
                     <Sidebar />
                 </div>
-                <div className="md:ml-48 p-4 flex justify-center">
+                <header className="md:ml-48">
+                    <Header />
+                </header>
+                <main className="md:ml-48 mt-20 sm:mt-16 p-4 flex justify-center">
                     {children}
-                </div>
-            </main>
+                </main>
+            </div>
             <footer className="md:hidden pt-16">
                 <BottomNavigation />
             </footer>
