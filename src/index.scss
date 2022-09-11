@@ -14,3 +14,7 @@ body {
 .footer {
     padding-bottom: env(safe-area-inset-bottom);
 }
+
+.sidebar {
+    padding-left: env(safe-area-inset-left);
+}
