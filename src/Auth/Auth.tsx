@@ -4,6 +4,7 @@ import { User } from '../types/user';
 import { Layout } from '../Components/Layout';
 import { Routes } from '../Components/Routes';
 import { IonReactRouter } from '@ionic/react-router';
+import { ScrollToTop } from '../ScrollToTop';
 
 interface IAuthContext {
     user?: User;
@@ -27,6 +28,7 @@ export const Auth: FC = () => {
                 <IonReactRouter>
                     <Layout>
                         <Routes />
+                        <ScrollToTop />
                     </Layout>
                 </IonReactRouter>
             </AuthContext.Provider>
