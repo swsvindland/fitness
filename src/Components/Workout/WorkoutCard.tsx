@@ -4,9 +4,11 @@ import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 
 interface IProps {
     exercise: WorkoutBlockExercise;
+    week: number;
+    day: number;
 }
 
-export const WorkoutCard: FC<IProps> = ({ exercise }) => {
+export const WorkoutCard: FC<IProps> = ({ exercise, week, day }) => {
     return (
         <div
             role="listitem"
@@ -30,7 +32,13 @@ export const WorkoutCard: FC<IProps> = ({ exercise }) => {
             </div>
             <div>
                 {Array.from(Array(exercise.sets).keys()).map((set) => (
-                    <WorkoutSet key={set} set={set} exercise={exercise} />
+                    <WorkoutSet
+                        key={set}
+                        set={set}
+                        exercise={exercise}
+                        week={week}
+                        day={day}
+                    />
                 ))}
             </div>
         </div>

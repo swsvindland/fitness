@@ -11,6 +11,8 @@ import { Loading } from '../Loading';
 interface IProps {
     set: number;
     exercise: WorkoutBlockExercise;
+    week: number;
+    day: number;
 }
 
 interface IState {
@@ -18,7 +20,7 @@ interface IState {
     weight: number;
 }
 
-export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
+export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
     const { user } = useContext(AuthContext);
     const [state, setState] = useState<IState>({ reps: 0, weight: 0 });
     const [saved, setSaved] = useState<boolean>(false);
@@ -30,6 +32,8 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
             userId: user?.id,
             workoutBlockExerciseId: exercise.id,
             set,
+            week,
+            day,
         };
         return axios.get(
             `${process.env.REACT_APP_API_URL}/api/GetUserWorkoutActivity`,
@@ -40,7 +44,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
     };
 
     const { data, isLoading } = useQuery(
-        ['UserWorkoutActivity', user?.id, exercise.id, set],
+        ['UserWorkoutActivity', user?.id, exercise.id, set, week, day],
         getWorkoutActivity
     );
 
@@ -52,6 +56,8 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
             set: set,
             reps: state.reps,
             weight: state.weight,
+            week,
+            day,
         };
 
         return axios.post(
@@ -78,6 +84,8 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise }) => {
 
         if (data.data.saved) {
             setSaved(true);
+        } else {
+            setSaved(false);
         }
     }, [data]);
 
