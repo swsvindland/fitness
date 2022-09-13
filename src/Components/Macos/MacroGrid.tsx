@@ -30,9 +30,9 @@ export const MacroGrid: FC = () => {
     const secondToLast = length > 1 ? data?.data[length - 2] : undefined;
 
     return (
-        <div>
-            <div>
-                <dl className="mt-5 grid grid-cols-2 overflow-hidden md:grid-cols-3">
+        <div className="w-full">
+            <div className="w-full">
+                <dl className="mt-5 grid overflow-hidden grid-cols-3">
                     <MacroGridUnit
                         name="Protein"
                         amount={last?.protein ?? 0}

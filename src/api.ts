@@ -90,3 +90,14 @@ export const getUserNextWorkout = (
         params,
     });
 };
+
+export const foodAutocomplete = (
+    query: string
+): Promise<AxiosResponse<string[]>> => {
+    const params = {
+        query,
+    };
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/AutocompleteFood`, {
+        params,
+    });
+};
