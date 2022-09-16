@@ -84,7 +84,8 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
                         </div>
 
                         <div>
-                            {loginMutation.isLoading ? (
+                            {loginMutation.isLoading ||
+                            authMutation.isLoading ? (
                                 <Loading />
                             ) : (
                                 <Button
