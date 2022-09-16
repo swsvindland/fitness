@@ -13,6 +13,11 @@ export const getUser = (email: string) => {
     });
 };
 
+export const createUser = (email: string) => {
+    const body = { email };
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/CreateUser`, body);
+};
+
 export const getAllSupplements = (): Promise<AxiosResponse<Supplement[]>> => {
     return axios.get(`${process.env.REACT_APP_API_URL}/api/GetAllSupplements`);
 };
