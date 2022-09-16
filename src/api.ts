@@ -6,6 +6,10 @@ import { Workout } from './types/Workout';
 import { WorkoutBlock } from './types/WorkoutBlock';
 import { UserWorkoutsCompleted } from './types/UserWorkoutsCompleted';
 
+export const auth = (body: { email: string; password: string }) => {
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/Auth`, body);
+};
+
 export const getUser = (email: string) => {
     const params = { email };
     return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUser`, {

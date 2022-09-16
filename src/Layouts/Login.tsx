@@ -4,110 +4,41 @@ import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
 import { Loading } from '../Components/Loading';
 import { TextField } from '../Components/TextField';
-import { createUser, getUser } from '../api';
-import { getPasskeyCredential } from '../utils/passkey/authenticate/getPasskeyCredential';
-import validatePassKeyCreation from '../utils/passkey/register/validatePassKeyCreation';
-import { CreatePassKeyCredential } from '../utils/passkey/register/createPasskeyCredential';
+import { auth, createUser, getUser } from '../api';
 import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
 
 interface IProps {
     setUser: (user: User) => void;
+    setRegister: (register: boolean) => void;
 }
 
-export const Login: FC<IProps> = ({ setUser }) => {
+export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+    const authMutation = useMutation(auth, {
+        onSuccess: async (data, variables, context) => {
+            await loginMutation.mutate(email);
+        },
+    });
 
     const loginMutation = useMutation(getUser, {
         onSuccess: async (data, variables, context) => {
-            await performLogin(data.data);
+            setUser(data.data);
         },
     });
 
     const registerMutation = useMutation(createUser, {
-        onSuccess: async (data, variables, context) => {
-            await createPassKey(data.data);
-        },
+        onSuccess: async (data, variables, context) => {},
     });
-
-    const createPassKey = async (user: User) => {
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // MARK: THIS SHOULD BE DONE ON THE BACKEND
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // const userId = generateRandomString(16);
-        console.log('✅  Created userId : ', user.id);
-        // const challengeBufferString = generateRandomString(16);
-        console.log('✅ Created challengeBufferString : ', user.challenge);
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        /* MARK: THIS SHOULD BE DONE IF AN ACCOUNT IS VALID
-                 AND THE CHALLENGE BUFFER AND USERID SHOULD BE PASSED
-                 FROM THE RETURN CALL IN THE SERVER
-        */
-        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        try {
-            const credential = await CreatePassKeyCredential(
-                email.toLowerCase(),
-                user.challenge,
-                user.id
-            );
-
-            console.log('✅ Created Pass Key Credential ! ');
-
-            if (credential) {
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // MARK: THIS SHOULD BE DONE ON THE BACKEND
-                // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                console.log('✅ Credential is not null : ', credential);
-                // Validate PassKey Creation
-                const challenge = validatePassKeyCreation(credential);
-                switch (challenge) {
-                    case null:
-                        console.log('❌ PassKey verification failed.');
-                        return;
-                    default:
-                        console.log(
-                            '✅ PassKey verification passed with challenge : ',
-                            challenge
-                        );
-                        // Save the user account data.
-                        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        // MARK: THIS SHOULD BE SAVED TO YOUR BACKEND DATABASE
-                        // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        setUser(user);
-                        break;
-                }
-            } else {
-                console.log('❌ Credential does not exist.');
-            }
-        } catch (error) {
-            console.log('❌ Error creating credential');
-            // Session Timed Out
-            console.log('ERROR : ', error);
-        }
-    };
-
-    const performLogin = async (user: User) => {
-        console.log('⚈ ⚈ ⚈ performLogin ⚈ ⚈ ⚈');
-        try {
-            const credential = await getPasskeyCredential(user.challenge);
-            console.log(' performLogin ✅ credential : ', credential);
-            setUser(user);
-            return credential;
-        } catch (error) {
-            console.log(
-                'performLogin ❌  Failed to get credential with error : ',
-                error
-            );
-            return null;
-        }
-    };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        loginMutation.mutate(email);
+        authMutation.mutate({ email, password });
     };
 
     const handleRegister = () => {
-        registerMutation.mutate(email);
+        setRegister(true);
     };
 
     return (
@@ -123,6 +54,17 @@ export const Login: FC<IProps> = ({ setUser }) => {
                             label="Email Address"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
+                        />
+                        <TextField
+                            id="password"
+                            name="password"
+                            type="password"
+                            autoComplete="password"
+                            label="Password"
+                            value={password}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
                         />
                         <div className="flex items-center justify-between">
                             <div className="flex items-center">
@@ -154,7 +96,7 @@ export const Login: FC<IProps> = ({ setUser }) => {
                             )}
                         </div>
                         <div>
-                            {loginMutation.isLoading ? (
+                            {registerMutation.isLoading ? (
                                 <Loading />
                             ) : (
                                 <SecondaryButton

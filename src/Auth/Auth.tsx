@@ -5,6 +5,7 @@ import { Layout } from '../Components/Layout';
 import { Routes } from '../Components/Routes';
 import { IonReactRouter } from '@ionic/react-router';
 import { ScrollToTop } from '../ScrollToTop';
+import { Register } from '../Layouts/Register';
 
 interface IAuthContext {
     user?: User;
@@ -15,6 +16,7 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const Auth: FC = () => {
     const [user, setUser] = useState<User | undefined>(undefined);
+    const [register, setRegister] = useState<boolean>(false);
 
     const authContext: IAuthContext = {
         user,
@@ -35,5 +37,9 @@ export const Auth: FC = () => {
         );
     }
 
-    return <Login setUser={setUser} />;
+    if (register) {
+        return <Register setRegister={setRegister} />;
+    }
+
+    return <Login setUser={setUser} setRegister={setRegister} />;
 };
