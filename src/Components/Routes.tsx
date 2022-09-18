@@ -12,6 +12,8 @@ import { BodyCheckInForm } from './Body/BodyCheckInForm';
 import { BloodPressureCheckInForm } from './Body/BloodPressureCheckInForm';
 import { Redirect, Route, Switch } from 'react-router';
 import { HeightForm } from './Body/HeightForm';
+import { AddFood } from './Food/AddFood';
+import { FoodDetail } from './Food/FoodDetail';
 
 export const Routes: FC = () => {
     return (
@@ -29,6 +31,12 @@ export const Routes: FC = () => {
                 exact={true}
             />
             <Route path="/eat" component={Eat} exact={true} />
+            <Route path="/eat/add-food" component={AddFood} exact={true} />
+            <Route
+                path="/eat/food/:foodId"
+                component={FoodDetail}
+                exact={true}
+            />
             <Route path="/supplements" component={Supplements} exact={true} />
             <Route
                 path="/supplements/all-supplements"

@@ -1,28 +1,31 @@
-import { FC } from 'react';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { LinkButton } from '../Buttons/LinkButton';
+import { FC, useState } from 'react';
 import { classNames } from '../../utils/classNames';
+import { FoodAutocomplete } from './FoodAutocomplete';
+import { useQuery } from '@tanstack/react-query';
+import { searchFood } from '../../api';
+import { Loading } from '../Loading';
+import { useHistory } from 'react-router';
 
-const plans = [
-    {
-        id: 1,
-        name: 'Apple',
-        protein: 1,
-        fat: 0,
-        carbs: 100,
-        calories: 100,
-    },
-];
+export const AddFood: FC = () => {
+    const [selected, setSelected] = useState<string | undefined>(undefined);
+    const history = useHistory();
 
-export const FoodGrid: FC = () => {
+    const searchFoodQuery = useQuery(['SearchFood', selected], () => {
+        if (!selected) return;
+        return searchFood(selected);
+    });
+
+    const handleRowClick = (foodId: string) => {
+        history.push(`/eat/food/${foodId}`);
+    };
+
+    if (searchFoodQuery.isLoading) {
+        return <Loading />;
+    }
+
     return (
-        <div className="px-4 sm:px-6 lg:px-8 bg-card rounded m-1 p-4">
-            <div className="flex flex-row justify-end">
-                <SecondaryButton className="mx-1">Scan Barcode</SecondaryButton>
-                <LinkButton to="/eat/add-food" className="mx-1">
-                    Add Food
-                </LinkButton>
-            </div>
+        <div>
+            <FoodAutocomplete setSelected={setSelected} />
             <div className="ring-1 ring-ternary md:mx-0 rounded my-2">
                 <table className="min-w-full divide-y divide-ternary">
                     <thead>
@@ -66,69 +69,76 @@ export const FoodGrid: FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {plans.map((plan, planIdx) => (
-                            <tr key={plan.id}>
+                        {searchFoodQuery.data?.data.map((food, foodIdx) => (
+                            <tr
+                                key={food.foodId}
+                                onClick={() => handleRowClick(food.foodId)}
+                            >
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-transparent',
                                         'relative py-4 pl-4 sm:pl-6 pr-3 text-sm'
                                     )}
                                 >
                                     <div className="font-medium text-secondary">
-                                        {plan.name}
+                                        {food.label}
                                     </div>
                                     <div className="mt-1 flex flex-col text-ternary lg:hidden">
-                                        <span>Protein: {plan.protein}g</span>
-                                        <span>Fat: {plan.fat}g</span>
-                                        <span>Carbs: {plan.carbs}g</span>
-                                        <span>{plan.calories}</span>
+                                        <span>
+                                            Protein: {food.nutrients.PROCNT}g
+                                        </span>
+                                        <span>Fat: {food.nutrients.FAT}g</span>
+                                        <span>
+                                            Carbs: {food.nutrients.CHOCDF}g
+                                        </span>
+                                        <span>{food.nutrients.ENERC_KCAL}</span>
                                     </div>
-                                    {planIdx !== 0 ? (
+                                    {foodIdx !== 0 ? (
                                         <div className="absolute right-0 left-6 -top-px h-px bg-gray-200" />
                                     ) : null}
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {plan.protein}g
+                                    {food.nutrients.PROCNT}g
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {plan.fat}g
+                                    {food.nutrients.FAT}g
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {plan.carbs}g
+                                    {food.nutrients.CHOCDF}g
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'px-3 py-3.5 text-sm text-ternary'
                                     )}
                                 >
                                     <div className="hidden sm:block">
-                                        {plan.calories} Calories
+                                        {food.nutrients.ENERC_KCAL} Calories
                                     </div>
                                 </td>
                             </tr>

@@ -5,6 +5,8 @@ import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
 import { WorkoutBlock } from './types/WorkoutBlock';
 import { UserWorkoutsCompleted } from './types/UserWorkoutsCompleted';
+import { Food } from './types/Food';
+import { FoodDetails } from './types/FoodDetails';
 
 export const auth = (body: { email: string; password: string }) => {
     return axios.post(`${process.env.REACT_APP_API_URL}/api/Auth`, body);
@@ -107,6 +109,26 @@ export const foodAutocomplete = (
         query,
     };
     return axios.get(`${process.env.REACT_APP_API_URL}/api/AutocompleteFood`, {
+        params,
+    });
+};
+
+export const searchFood = (query: string): Promise<AxiosResponse<Food[]>> => {
+    const params = {
+        query,
+    };
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/ParseFood`, {
+        params,
+    });
+};
+
+export const getFoodDetails = (
+    foodId: string
+): Promise<AxiosResponse<FoodDetails>> => {
+    const params = {
+        foodId,
+    };
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetFoodDetails`, {
         params,
     });
 };

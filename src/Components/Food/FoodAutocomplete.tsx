@@ -3,8 +3,12 @@ import { useMutation } from '@tanstack/react-query';
 import { foodAutocomplete } from '../../api';
 import { Autocomplete } from '../Autocomplete';
 
-export const FoodAutocomplete: FC = () => {
-    const [selected, setSelected] = useState<string | undefined>(undefined);
+interface IProps {
+    selected?: string;
+    setSelected: (selected?: string) => void;
+}
+
+export const FoodAutocomplete: FC<IProps> = ({ selected, setSelected }) => {
     const [query, setQuery] = useState('');
     const [filtered, setFiltered] = useState<string[]>([]);
 
