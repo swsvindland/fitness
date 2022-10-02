@@ -5,8 +5,10 @@ import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
 import { WorkoutBlock } from './types/WorkoutBlock';
 import { UserWorkoutsCompleted } from './types/UserWorkoutsCompleted';
-import { Food } from './types/Food';
-import { FoodDetails } from './types/FoodDetails';
+import { EdamamFood } from './types/EdamamFood';
+import { EdamamFoodDetails } from './types/EdamamFoodDetails';
+import { Macros } from './types/Macros';
+import { UserFood } from './types/UserFood';
 
 export const auth = (body: { email: string; password: string }) => {
     return axios.post(`${process.env.REACT_APP_API_URL}/api/Auth`, body);
@@ -113,7 +115,9 @@ export const foodAutocomplete = (
     });
 };
 
-export const searchFood = (query: string): Promise<AxiosResponse<Food[]>> => {
+export const searchFood = (
+    query: string
+): Promise<AxiosResponse<EdamamFood[]>> => {
     const params = {
         query,
     };
@@ -124,11 +128,46 @@ export const searchFood = (query: string): Promise<AxiosResponse<Food[]>> => {
 
 export const getFoodDetails = (
     foodId: string
-): Promise<AxiosResponse<FoodDetails>> => {
+): Promise<AxiosResponse<EdamamFoodDetails>> => {
     const params = {
         foodId,
     };
     return axios.get(`${process.env.REACT_APP_API_URL}/api/GetFoodDetails`, {
         params,
     });
+};
+
+export const getUserFoods = (
+    userId: string
+): Promise<AxiosResponse<UserFood[]>> => {
+    const params = {
+        userId,
+    };
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserFoods`, {
+        params,
+    });
+};
+
+export const getMacros = (userId: string): Promise<AxiosResponse<Macros[]>> => {
+    const params = {
+        userId,
+    };
+
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetMacros`, {
+        params,
+    });
+};
+
+export const getCurrentUserMacros = (
+    userId: string
+): Promise<AxiosResponse<Macros>> => {
+    const params = {
+        userId,
+    };
+    return axios.get(
+        `${process.env.REACT_APP_API_URL}/api/GetCurrentUserMacros`,
+        {
+            params,
+        }
+    );
 };

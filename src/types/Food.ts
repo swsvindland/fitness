@@ -1,17 +1,41 @@
-export interface Food {
-    foodId: string;
-    label: string;
-    knownAs: string;
-    nutrients: Nutrients;
-    category: string;
-    categoryLabel: string;
-    image: string;
-}
+import { Units } from './Units';
 
-export interface Nutrients {
-    ENERC_KCAL: number;
-    PROCNT: number;
-    FAT: number;
-    CHOCDF: number;
-    FIBTG: number;
+export interface Food {
+    id: number;
+    name: string;
+    brand: string;
+    servingSize: number;
+    servingSizeUnit: Units;
+    calories: number;
+    totalFat?: number;
+    saturatedFat?: number;
+    transFat?: number;
+    monounsaturatedFat?: number;
+    polyunsaturatedFat?: number;
+    carbohydrates?: number;
+    fiber?: number;
+    sugar?: number;
+    protein?: number;
+    cholesterol?: number;
+    sodium?: number;
+    potassium?: number;
+    calcium?: number;
+    iron: number;
+    magnesium: number;
+    zinc: number;
+    phosphorus: number;
+    vitaminA: number;
+    vitaminC: number;
+    vitaminD?: number;
+    vitaminE?: number;
+    vitaminK?: number;
+    thiamin?: number;
+    riboflavin?: number;
+    niacin?: number;
+    vitaminB6?: number;
+    folate?: number;
+    vitaminB12?: number;
+    water?: number;
+    alcohol?: number;
+    caffeine?: number;
 }

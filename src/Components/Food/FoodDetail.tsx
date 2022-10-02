@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { getFoodDetails } from '../../api';
 import { Loading } from '../Loading';
-import { TotalNutrients } from '../../types/FoodDetails';
+import { EdamamTotalNutrients } from '../../types/EdamamFoodDetails';
 
 export const FoodDetail: FC = () => {
     const { foodId } = useParams<{ foodId: string }>();
@@ -28,16 +28,25 @@ export const FoodDetail: FC = () => {
                         className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1"
                     >
                         <div className="text-secondary">
-                            {totalNutrients[key as keyof TotalNutrients].label}
-                        </div>
-                        <div className="text-ternary ml-auto">
                             {
-                                totalNutrients[key as keyof TotalNutrients]
-                                    .quantity
+                                totalNutrients[
+                                    key as keyof EdamamTotalNutrients
+                                ].label
                             }
                         </div>
                         <div className="text-ternary ml-auto">
-                            {totalNutrients[key as keyof TotalNutrients].unit}
+                            {
+                                totalNutrients[
+                                    key as keyof EdamamTotalNutrients
+                                ].quantity
+                            }
+                        </div>
+                        <div className="text-ternary ml-auto">
+                            {
+                                totalNutrients[
+                                    key as keyof EdamamTotalNutrients
+                                ].unit
+                            }
                         </div>
                     </div>
                 ))}

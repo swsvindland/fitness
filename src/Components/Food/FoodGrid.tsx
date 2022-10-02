@@ -1,20 +1,24 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
-
-const plans = [
-    {
-        id: 1,
-        name: 'Apple',
-        protein: 1,
-        fat: 0,
-        carbs: 100,
-        calories: 100,
-    },
-];
+import { useQuery } from '@tanstack/react-query';
+import { getUserFoods } from '../../api';
+import { AuthContext } from '../../Auth/Auth';
+import { Loading } from '../Loading';
 
 export const FoodGrid: FC = () => {
+    const { user } = useContext(AuthContext);
+
+    const foodQuery = useQuery(['Food', user?.id], () => {
+        if (!user) return;
+        return getUserFoods(user.id);
+    });
+
+    if (foodQuery.isLoading) {
+        return <Loading />;
+    }
+
     return (
         <div className="px-4 sm:px-6 lg:px-8 bg-card rounded m-1 p-4">
             <div className="flex flex-row justify-end">
@@ -66,69 +70,73 @@ export const FoodGrid: FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {plans.map((plan, planIdx) => (
-                            <tr key={plan.id}>
+                        {foodQuery.data?.data.map((food, foodIdx) => (
+                            <tr key={food.id}>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-transparent',
                                         'relative py-4 pl-4 sm:pl-6 pr-3 text-sm'
                                     )}
                                 >
                                     <div className="font-medium text-secondary">
-                                        {plan.name}
+                                        {food.food?.name}
                                     </div>
                                     <div className="mt-1 flex flex-col text-ternary lg:hidden">
-                                        <span>Protein: {plan.protein}g</span>
-                                        <span>Fat: {plan.fat}g</span>
-                                        <span>Carbs: {plan.carbs}g</span>
-                                        <span>{plan.calories}</span>
+                                        <span>
+                                            Protein: {food.food?.protein}g
+                                        </span>
+                                        <span>Fat: {food.food?.totalFat}g</span>
+                                        <span>
+                                            Carbs: {food.food?.carbohydrates}g
+                                        </span>
+                                        <span>{food.food?.calories}</span>
                                     </div>
-                                    {planIdx !== 0 ? (
+                                    {foodIdx !== 0 ? (
                                         <div className="absolute right-0 left-6 -top-px h-px bg-gray-200" />
                                     ) : null}
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {plan.protein}g
+                                    {food.food?.protein}g
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {plan.fat}g
+                                    {food.food?.totalFat}g
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {plan.carbs}g
+                                    {food.food?.carbohydrates}g
                                 </td>
                                 <td
                                     className={classNames(
-                                        planIdx === 0
+                                        foodIdx === 0
                                             ? ''
                                             : 'border-t border-gray-200',
                                         'px-3 py-3.5 text-sm text-ternary'
                                     )}
                                 >
                                     <div className="hidden sm:block">
-                                        {plan.calories} Calories
+                                        {food.food?.calories} Calories
                                     </div>
                                 </td>
                             </tr>

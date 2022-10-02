@@ -4,7 +4,7 @@ import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
 import { Loading } from '../Components/Loading';
 import { TextField } from '../Components/TextField';
-import { auth, createUser, getUser } from '../api';
+import { createUser, getUser } from '../api';
 import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
 
 interface IProps {
@@ -14,13 +14,6 @@ interface IProps {
 
 export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-
-    const authMutation = useMutation(auth, {
-        onSuccess: async (data, variables, context) => {
-            await loginMutation.mutate(email);
-        },
-    });
 
     const loginMutation = useMutation(getUser, {
         onSuccess: async (data, variables, context) => {
@@ -34,7 +27,7 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        authMutation.mutate({ email, password });
+        loginMutation.mutate(email);
     };
 
     const handleRegister = () => {
@@ -53,17 +46,8 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
                             autoComplete="email"
                             label="Email Address"
                             value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                        />
-                        <TextField
-                            id="password"
-                            name="password"
-                            type="password"
-                            autoComplete="password"
-                            label="Password"
-                            value={password}
                             onChange={(event) =>
-                                setPassword(event.target.value)
+                                setEmail(event.target.value as string)
                             }
                         />
                         <div className="flex items-center justify-between">
@@ -84,8 +68,7 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
                         </div>
 
                         <div>
-                            {loginMutation.isLoading ||
-                            authMutation.isLoading ? (
+                            {loginMutation.isLoading ? (
                                 <Loading />
                             ) : (
                                 <Button
