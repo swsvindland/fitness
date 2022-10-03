@@ -16,7 +16,7 @@ export const FoodDetail: FC = () => {
     const [quantity, setQuantity] = useState<number>(100);
     const [unit, setUnit] = useState<DropdownOption>({
         id: Units.Gram,
-        name: 'Grams',
+        name: 'Gram',
     });
 
     const mutation = useMutation(addUserFood);
@@ -62,7 +62,7 @@ export const FoodDetail: FC = () => {
                                 edamamFoodId: foodId,
                                 userId: user.id,
                                 amount: quantity,
-                                units: unit.name,
+                                unit: unit.name,
                             })
                         }
                     >

@@ -8,5 +8,5 @@ export interface UserFood {
     food?: Food;
     created?: string;
     amount: number;
-    units: string;
+    unit: string;
 }
