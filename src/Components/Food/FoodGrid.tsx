@@ -6,9 +6,19 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
 import { AuthContext } from '../../Auth/Auth';
 import { Loading } from '../Loading';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
+import { useHistory } from 'react-router';
 
 export const FoodGrid: FC = () => {
     const { user } = useContext(AuthContext);
+    const history = useHistory();
+
+    const openScanner = async () => {
+        const data = await BarcodeScanner.scan();
+        console.log(`Barcode data: ${data.text}`);
+
+        history.push(`/eat/scan/${data.text}`);
+    };
 
     const foodQuery = useQuery(['Food', user?.id], () => {
         if (!user) return;
@@ -22,7 +32,9 @@ export const FoodGrid: FC = () => {
     return (
         <div className="px-4 sm:px-6 lg:px-8 bg-card rounded m-1 p-4">
             <div className="flex flex-row justify-end">
-                <SecondaryButton className="mx-1">Scan Barcode</SecondaryButton>
+                <SecondaryButton className="mx-1" onClick={openScanner}>
+                    Scan Barcode
+                </SecondaryButton>
                 <LinkButton to="/eat/add-food" className="mx-1">
                     Add Food
                 </LinkButton>

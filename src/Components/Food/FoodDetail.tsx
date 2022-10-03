@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { addUserFood, getFoodDetails } from '../../api';
+import { addUserFood, getFoodDetails, searchFood } from '../../api';
 import { Loading } from '../Loading';
 import { EdamamTotalNutrients } from '../../types/EdamamFoodDetails';
 import { Button } from '../Buttons/Button';
@@ -18,8 +18,18 @@ export const FoodDetail: FC = () => {
         id: Units.Gram,
         name: 'Gram',
     });
+    const history = useHistory();
 
-    const mutation = useMutation(addUserFood);
+    const mutation = useMutation(addUserFood, {
+        onSuccess: () => {
+            history.push(`/eat`);
+        },
+    });
+
+    const searchFoodQuery = useQuery(['SearchFood', foodId], () => {
+        if (!foodId) return;
+        return searchFood(foodId);
+    });
 
     const foodDetailsQuery = useQuery(['FoodDetails', foodId], () => {
         if (!foodId) return;
@@ -28,7 +38,12 @@ export const FoodDetail: FC = () => {
 
     const totalNutrients = foodDetailsQuery.data?.data?.totalNutrients;
 
-    if (foodDetailsQuery.isLoading || !totalNutrients || !user) {
+    if (
+        searchFoodQuery.isLoading ||
+        foodDetailsQuery.isLoading ||
+        !totalNutrients ||
+        !user
+    ) {
         return <Loading />;
     }
 
@@ -38,6 +53,11 @@ export const FoodDetail: FC = () => {
 
     return (
         <div>
+            <div className="my-8">
+                <h1 className="text-2xl font-bold text-secondary">
+                    {searchFoodQuery.data?.data?.[0].label}
+                </h1>
+            </div>
             <div className="flex flex-row align-middle mb-2 justify-between">
                 <TextField
                     label="Quantity"
@@ -56,18 +76,22 @@ export const FoodDetail: FC = () => {
                     className="my-auto ml-2 w-48"
                 />
                 <div className="mt-auto mx-2">
-                    <Button
-                        onClick={() =>
-                            mutation.mutate({
-                                edamamFoodId: foodId,
-                                userId: user.id,
-                                amount: quantity,
-                                unit: unit.name,
-                            })
-                        }
-                    >
-                        Add
-                    </Button>
+                    {mutation.isLoading ? (
+                        <Loading />
+                    ) : (
+                        <Button
+                            onClick={() =>
+                                mutation.mutate({
+                                    edamamFoodId: foodId,
+                                    userId: user.id,
+                                    amount: quantity,
+                                    unit: unit.name,
+                                })
+                            }
+                        >
+                            Add
+                        </Button>
+                    )}
                 </div>
             </div>
             <div className="flex flex-col justify-center rounded bg-card p-4">

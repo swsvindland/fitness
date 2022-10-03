@@ -14,6 +14,7 @@ import { Redirect, Route, Switch } from 'react-router';
 import { HeightForm } from './Body/HeightForm';
 import { AddFood } from './Food/AddFood';
 import { FoodDetail } from './Food/FoodDetail';
+import { ScanFood } from './Food/ScanFood';
 
 export const Routes: FC = () => {
     return (
@@ -35,6 +36,11 @@ export const Routes: FC = () => {
             <Route
                 path="/eat/food/:foodId"
                 component={FoodDetail}
+                exact={true}
+            />
+            <Route
+                path="/eat/scan/:barcode"
+                component={ScanFood}
                 exact={true}
             />
             <Route path="/supplements" component={Supplements} exact={true} />

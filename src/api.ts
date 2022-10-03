@@ -116,10 +116,12 @@ export const foodAutocomplete = (
 };
 
 export const searchFood = (
-    query: string
+    query: string,
+    barcode?: string
 ): Promise<AxiosResponse<EdamamFood[]>> => {
     const params = {
         query,
+        barcode,
     };
     return axios.get(`${process.env.REACT_APP_API_URL}/api/ParseFood`, {
         params,
