@@ -12,17 +12,33 @@ export interface DropdownOption {
 }
 
 interface IProps {
+    id?: string;
+    label?: string;
     options: DropdownOption[];
     selected: DropdownOption;
     setSelected: (value: DropdownOption) => void;
+    className?: string;
 }
 
-export const Dropdown: FC<IProps> = ({ options, selected, setSelected }) => {
+export const Dropdown: FC<IProps> = ({
+    id,
+    label,
+    options,
+    selected,
+    setSelected,
+    className,
+}) => {
     return (
         <Listbox value={selected} onChange={setSelected}>
             {({ open }) => (
-                <>
-                    <div className="relative mt-1">
+                <div className={className}>
+                    <label
+                        htmlFor={id}
+                        className="block text-sm font-medium text-secondary"
+                    >
+                        {label}
+                    </label>
+                    <div className="relative mt-1" id={id}>
                         <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-background py-2 pl-3 pr-10 text-left shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm">
                             <span className="block truncate text-secondary">
                                 {selected.name}
@@ -91,7 +107,7 @@ export const Dropdown: FC<IProps> = ({ options, selected, setSelected }) => {
                             </Listbox.Options>
                         </Transition>
                     </div>
-                </>
+                </div>
             )}
         </Listbox>
     );

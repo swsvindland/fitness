@@ -1,11 +1,12 @@
 import { Food } from './Food';
 
 export interface UserFood {
-    id: number;
+    id?: number;
     userId: string;
-    foodId: number;
+    foodId?: number;
+    edamamFoodId?: string;
     food?: Food;
-    created: string;
+    created?: string;
     amount: number;
     units: string;
 }

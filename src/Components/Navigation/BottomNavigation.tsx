@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { BedSolid } from '../../icons/BedSolid';
+import { PersonSolid } from '../../icons/PersonSolid';
 import { UtensilsSolid } from '../../icons/UtensilsSolid';
 import { DumbbellSolid } from '../../icons/DumbbellSolid';
 import { CapsulesSolid } from '../../icons/CapsulesSolid';
@@ -56,7 +56,7 @@ export const BottomNavigation: FC = () => {
                     </span>
                 </Link>
                 <Link to="/body" className={linkStyle('/body')}>
-                    <BedSolid className={iconStyle('/body')} />
+                    <PersonSolid className={iconStyle('/body')} />
                     <span className="tab tab-home block text-xs">Body</span>
                 </Link>
             </div>

@@ -5,6 +5,7 @@ import { Button } from '../Buttons/Button';
 import { getAllSupplements, getUserSupplements } from '../../api';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
+import { Loading } from '../Loading';
 
 export const AllSupplements: FC = () => {
     const { user } = useContext(AuthContext);
@@ -17,7 +18,7 @@ export const AllSupplements: FC = () => {
     });
 
     if (allSupplementQuery.isLoading || userSupplementsQuery.isLoading) {
-        return <span>Loading...</span>;
+        return <Loading />;
     }
 
     const userSupIds = userSupplementsQuery.data?.data.map(

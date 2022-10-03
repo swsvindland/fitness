@@ -171,3 +171,10 @@ export const getCurrentUserMacros = (
         }
     );
 };
+
+export const addUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
+    return axios.post(
+        `${process.env.REACT_APP_API_URL}/api/AddUserFood`,
+        userFood
+    );
+};

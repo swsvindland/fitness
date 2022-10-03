@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { AuthContext } from '../../Auth/Auth';
 import { getUserSupplements } from '../../api';
+import { Loading } from '../Loading';
 
 export const UserSupplements: FC = () => {
     const { user } = useContext(AuthContext);
@@ -13,7 +14,7 @@ export const UserSupplements: FC = () => {
     });
 
     if (userSupplementsQuery.isLoading) {
-        return <span>Loading...</span>;
+        return <Loading />;
     }
 
     const morningSups = userSupplementsQuery.data?.data.filter((item) =>

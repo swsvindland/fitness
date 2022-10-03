@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import { BedSolid } from '../../icons/BedSolid';
+import { PersonSolid } from '../../icons/PersonSolid';
 import { CapsulesSolid } from '../../icons/CapsulesSolid';
 import { DumbbellSolid } from '../../icons/DumbbellSolid';
 import { UtensilsSolid } from '../../icons/UtensilsSolid';
@@ -63,7 +63,7 @@ export const Sidebar: FC = () => {
                     </Link>
 
                     <Link to="/body" className={linkStyle('/body')}>
-                        <BedSolid className={iconStyle('/body')} />
+                        <PersonSolid className={iconStyle('/body')} />
                         Body
                     </Link>
                 </nav>
