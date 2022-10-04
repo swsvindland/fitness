@@ -10,8 +10,8 @@ import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
 import { UserFood } from './types/UserFood';
 
-// export const API_URL = "http://localhost:7071"
-export const API_URL = 'https://fitness-dev.azurewebsites.net';
+export const API_URL = 'http://localhost:7071';
+// export const API_URL = 'https://fitness-dev.azurewebsites.net';
 
 export const auth = (body: { email: string; password: string }) => {
     return axios.post(`${API_URL}/api/Auth`, body);

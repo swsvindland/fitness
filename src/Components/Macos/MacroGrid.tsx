@@ -27,7 +27,13 @@ export const MacroGrid: FC = () => {
     return (
         <div className="w-full">
             <div className="w-full">
-                <dl className="mt-5 grid overflow-hidden grid-cols-3">
+                <MacroGridUnit
+                    name="Calories"
+                    amount={last?.calories ?? 0}
+                    currentAmount={currentMacrosQuery.data?.data.calories}
+                    unit="kcal"
+                />
+                <dl className="grid overflow-hidden grid-cols-3">
                     <MacroGridUnit
                         name="Protein"
                         amount={last?.protein ?? 0}
