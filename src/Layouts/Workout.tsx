@@ -6,6 +6,7 @@ import { UserWorkout } from '../types/UserWorkout';
 import { Loading } from '../Components/Loading';
 import { DoWorkout } from '../Components/Workout/DoWorkout';
 import { useHistory } from 'react-router';
+import { API_URL } from '../api';
 
 export const Workout: FC = () => {
     const { user } = useContext(AuthContext);
@@ -15,12 +16,9 @@ export const Workout: FC = () => {
         const params = {
             userId: user?.id,
         };
-        return axios.get(
-            `${process.env.REACT_APP_API_URL}/api/GetUserWorkouts`,
-            {
-                params,
-            }
-        );
+        return axios.get(`${API_URL}/api/GetUserWorkouts`, {
+            params,
+        });
     };
 
     const userWorkoutsQuery = useQuery(

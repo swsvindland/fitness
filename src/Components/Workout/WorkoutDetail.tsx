@@ -7,6 +7,7 @@ import { AuthContext } from '../../Auth/Auth';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { useHistory, useParams } from 'react-router';
+import { API_URL } from '../../api';
 
 export const WorkoutDetail: FC = () => {
     const { user } = useContext(AuthContext);
@@ -17,7 +18,7 @@ export const WorkoutDetail: FC = () => {
         const params = {
             workoutId,
         };
-        return axios.get(`${process.env.REACT_APP_API_URL}/api/GetWorkout`, {
+        return axios.get(`${API_URL}/api/GetWorkout`, {
             params,
         });
     };
@@ -26,12 +27,9 @@ export const WorkoutDetail: FC = () => {
         const params = {
             workoutId,
         };
-        return axios.get(
-            `${process.env.REACT_APP_API_URL}/api/GetWorkoutDetails`,
-            {
-                params,
-            }
-        );
+        return axios.get(`${API_URL}/api/GetWorkoutDetails`, {
+            params,
+        });
     };
 
     const workoutQuery = useQuery(['Workout', workoutId], getWorkout);
@@ -43,7 +41,7 @@ export const WorkoutDetail: FC = () => {
     const buyWorkout = () => {
         const params = { userId: user?.id, workoutId };
         return axios.post(
-            `${process.env.REACT_APP_API_URL}/api/BuyWorkout`,
+            `${API_URL}/api/BuyWorkout`,
             {},
             {
                 params,

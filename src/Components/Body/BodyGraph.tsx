@@ -18,6 +18,7 @@ import { useQuery } from '@tanstack/react-query';
 import { UserBody } from '../../types/userBody';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
+import { API_URL } from '../../api';
 
 ChartJS.register(
     RadialLinearScale,
@@ -44,7 +45,7 @@ export const BodyGraph = () => {
             userId: user?.id,
         };
 
-        return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserBodies`, {
+        return axios.get(`${API_URL}/api/GetUserBodies`, {
             params,
         });
     };

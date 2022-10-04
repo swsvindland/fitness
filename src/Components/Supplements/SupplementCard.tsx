@@ -6,6 +6,7 @@ import axios, { AxiosResponse } from 'axios';
 import { ExternalLink } from '../../icons/ExternalLink';
 import { Loading } from '../Loading';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
+import { API_URL } from '../../api';
 
 interface IProps {
     isUser: boolean;
@@ -54,10 +55,9 @@ export const SupplementCard: FC<IProps> = ({
             time,
         };
 
-        return axios.get(
-            `${process.env.REACT_APP_API_URL}/api/GetUserSupplementActivity`,
-            { params }
-        );
+        return axios.get(`${API_URL}/api/GetUserSupplementActivity`, {
+            params,
+        });
     };
 
     const toggleUserSupplementActivity = (body: {
@@ -66,10 +66,7 @@ export const SupplementCard: FC<IProps> = ({
         userSupplementId: number;
         time: string;
     }): Promise<AxiosResponse<boolean>> => {
-        return axios.post(
-            `${process.env.REACT_APP_API_URL}/api/ToggleUserSupplementActivity`,
-            body
-        );
+        return axios.post(`${API_URL}/api/ToggleUserSupplementActivity`, body);
     };
 
     const userSupplementActivityQuery = useQuery(

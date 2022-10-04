@@ -7,6 +7,7 @@ import { Time } from './SupplementCard';
 import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserSupplement } from '../../types/userSupplement';
+import { API_URL } from '../../api';
 
 interface IProps {
     userSupplementId?: number;
@@ -57,7 +58,7 @@ export const AddSupplement: FC<IProps> = ({
 
     const updateUserSupplement = (userSupplement: UserSupplement) => {
         return axios.post(
-            `${process.env.REACT_APP_API_URL}/api/UpdateUserSupplements`,
+            `${API_URL}/api/UpdateUserSupplements`,
             userSupplement
         );
     };

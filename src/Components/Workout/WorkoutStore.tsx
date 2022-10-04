@@ -4,10 +4,11 @@ import { useQuery } from '@tanstack/react-query';
 import { Workout } from '../../types/Workout';
 import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { Loading } from '../Loading';
+import { API_URL } from '../../api';
 
 export const WorkoutStore: FC = () => {
     const getWorkouts = (): Promise<AxiosResponse<Workout[]>> => {
-        return axios.get(`${process.env.REACT_APP_API_URL}/api/GetWorkouts`);
+        return axios.get(`${API_URL}/api/GetWorkouts`);
     };
 
     const { data, isLoading } = useQuery(['Workouts'], getWorkouts);

@@ -19,6 +19,7 @@ import axios, { AxiosResponse } from 'axios';
 import { UserBloodPressure } from '../../types/userBloodPressure';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
+import { API_URL } from '../../api';
 
 ChartJS.register(
     CategoryScale,
@@ -48,10 +49,7 @@ export const BloodPressureGraph: FC = () => {
             userId: user?.id,
         };
 
-        return axios.get(
-            `${process.env.REACT_APP_API_URL}/api/GetUserBloodPressures`,
-            { params }
-        );
+        return axios.get(`${API_URL}/api/GetUserBloodPressures`, { params });
     };
 
     const userBloodPressureQuery = useQuery(

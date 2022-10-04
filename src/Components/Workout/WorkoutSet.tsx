@@ -7,6 +7,7 @@ import axios, { AxiosResponse } from 'axios';
 import { AuthContext } from '../../Auth/Auth';
 import { UserWorkoutActivity } from '../../types/UserWorkoutActivity';
 import { Loading } from '../Loading';
+import { API_URL } from '../../api';
 
 interface IProps {
     set: number;
@@ -35,12 +36,9 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
             week,
             day,
         };
-        return axios.get(
-            `${process.env.REACT_APP_API_URL}/api/GetUserWorkoutActivity`,
-            {
-                params,
-            }
-        );
+        return axios.get(`${API_URL}/api/GetUserWorkoutActivity`, {
+            params,
+        });
     };
 
     const { data, isLoading } = useQuery(
@@ -60,10 +58,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
             day,
         };
 
-        return axios.post(
-            `${process.env.REACT_APP_API_URL}/api/AddUserWorkoutActivity`,
-            body
-        );
+        return axios.post(`${API_URL}/api/AddUserWorkoutActivity`, body);
     };
 
     const mutation = useMutation(addWorkoutActivity, {

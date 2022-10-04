@@ -10,24 +10,27 @@ import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
 import { UserFood } from './types/UserFood';
 
+// export const API_URL = "http://localhost:7071"
+export const API_URL = 'https://fitness-dev.azurewebsites.net';
+
 export const auth = (body: { email: string; password: string }) => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/api/Auth`, body);
+    return axios.post(`${API_URL}/api/Auth`, body);
 };
 
 export const getUser = (email: string) => {
     const params = { email };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUser`, {
+    return axios.get(`${API_URL}/api/GetUser`, {
         params,
     });
 };
 
 export const createUser = (email: string) => {
     const body = { email };
-    return axios.post(`${process.env.REACT_APP_API_URL}/api/CreateUser`, body);
+    return axios.post(`${API_URL}/api/CreateUser`, body);
 };
 
 export const getAllSupplements = (): Promise<AxiosResponse<Supplement[]>> => {
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetAllSupplements`);
+    return axios.get(`${API_URL}/api/GetAllSupplements`);
 };
 
 export const getUserSupplements = (
@@ -37,12 +40,9 @@ export const getUserSupplements = (
         userId,
     };
 
-    return axios.get(
-        `${process.env.REACT_APP_API_URL}/api/GetUserSupplements`,
-        {
-            params,
-        }
-    );
+    return axios.get(`${API_URL}/api/GetUserSupplements`, {
+        params,
+    });
 };
 
 export const getUserBodyFat = (
@@ -52,7 +52,7 @@ export const getUserBodyFat = (
         userId,
     };
 
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserBodyFat`, {
+    return axios.get(`${API_URL}/api/GetUserBodyFat`, {
         params,
     });
 };
@@ -63,7 +63,7 @@ export const getWorkout = (
     const params = {
         workoutId,
     };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetWorkout`, {
+    return axios.get(`${API_URL}/api/GetWorkout`, {
         params,
     });
 };
@@ -74,7 +74,7 @@ export const getWorkoutDetails = (
     const params = {
         workoutId,
     };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetWorkoutDetails`, {
+    return axios.get(`${API_URL}/api/GetWorkoutDetails`, {
         params,
     });
 };
@@ -86,10 +86,7 @@ export const completeWorkout = (body: {
     week: number;
     day: number;
 }): Promise<AxiosResponse> => {
-    return axios.post(
-        `${process.env.REACT_APP_API_URL}/api/AddUserWorkoutCompleted`,
-        body
-    );
+    return axios.post(`${API_URL}/api/AddUserWorkoutCompleted`, body);
 };
 
 export const getUserNextWorkout = (
@@ -99,7 +96,7 @@ export const getUserNextWorkout = (
         userId,
     };
 
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetNextWorkout`, {
+    return axios.get(`${API_URL}/api/GetNextWorkout`, {
         params,
     });
 };
@@ -110,7 +107,7 @@ export const foodAutocomplete = (
     const params = {
         query,
     };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/AutocompleteFood`, {
+    return axios.get(`${API_URL}/api/AutocompleteFood`, {
         params,
     });
 };
@@ -123,7 +120,7 @@ export const searchFood = (
         query,
         barcode,
     };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/ParseFood`, {
+    return axios.get(`${API_URL}/api/ParseFood`, {
         params,
     });
 };
@@ -134,7 +131,7 @@ export const getFoodDetails = (
     const params = {
         foodId,
     };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetFoodDetails`, {
+    return axios.get(`${API_URL}/api/GetFoodDetails`, {
         params,
     });
 };
@@ -145,7 +142,7 @@ export const getUserFoods = (
     const params = {
         userId,
     };
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetUserFoods`, {
+    return axios.get(`${API_URL}/api/GetUserFoods`, {
         params,
     });
 };
@@ -155,7 +152,7 @@ export const getMacros = (userId: string): Promise<AxiosResponse<Macros[]>> => {
         userId,
     };
 
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/GetMacros`, {
+    return axios.get(`${API_URL}/api/GetMacros`, {
         params,
     });
 };
@@ -166,17 +163,11 @@ export const getCurrentUserMacros = (
     const params = {
         userId,
     };
-    return axios.get(
-        `${process.env.REACT_APP_API_URL}/api/GetCurrentUserMacros`,
-        {
-            params,
-        }
-    );
+    return axios.get(`${API_URL}/api/GetCurrentUserMacros`, {
+        params,
+    });
 };
 
 export const addUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
-    return axios.post(
-        `${process.env.REACT_APP_API_URL}/api/AddUserFood`,
-        userFood
-    );
+    return axios.post(`${API_URL}/api/AddUserFood`, userFood);
 };

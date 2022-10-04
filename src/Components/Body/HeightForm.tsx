@@ -6,6 +6,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
+import { API_URL } from '../../api';
 
 export const HeightForm: FC = () => {
     const [height, setHeight] = useState<string>('');
@@ -19,10 +20,7 @@ export const HeightForm: FC = () => {
             userId: user?.id,
         };
 
-        return axios.post(
-            `${process.env.REACT_APP_API_URL}/api/AddUserHeight`,
-            body
-        );
+        return axios.post(`${API_URL}/api/AddUserHeight`, body);
     };
 
     const mutation = useMutation(addHeight, {
