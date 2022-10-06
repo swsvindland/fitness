@@ -24,7 +24,7 @@ export const AddFood: FC = () => {
     }
 
     return (
-        <div className="bg-card p-4 rounded">
+        <div className="bg-card p-4 rounded max-w-3xl w-full">
             <FoodAutocomplete setSelected={setSelected} />
             <div className="ring-1 ring-ternary md:mx-0 rounded my-2">
                 <table className="divide-y divide-ternary">
