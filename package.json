@@ -22,7 +22,7 @@
         "@heroicons/react": "^2.0.11",
         "@ionic/react": "^6.2.6",
         "@ionic/react-router": "^6.2.5",
-        "@tanstack/react-query": "^4.10.1",
+        "@tanstack/react-query": "^4.10.3",
         "axios": "^0.27.2",
         "chart.js": "^3.9.1",
         "date-fns": "^2.29.3",
