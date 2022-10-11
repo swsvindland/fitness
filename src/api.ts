@@ -10,6 +10,7 @@ import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
 import { UserFood } from './types/UserFood';
 import { UserFoodGridItem } from './types/UserFoodGridItem';
+import { Dashboard } from './types/Dashboard';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
@@ -171,4 +172,17 @@ export const getCurrentUserMacros = (
 
 export const addUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
     return axios.post(`${API_URL}/api/AddUserFood`, userFood);
+};
+
+export const getUserDashboard = (
+    userId: string,
+    date: string
+): Promise<AxiosResponse<Dashboard>> => {
+    const params = {
+        userId,
+        date,
+    };
+    return axios.get(`${API_URL}/api/GetUserDashboard`, {
+        params,
+    });
 };
