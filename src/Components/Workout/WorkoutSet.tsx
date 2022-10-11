@@ -2,7 +2,7 @@ import { FC, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextField';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { AuthContext } from '../../Auth/Auth';
 import { UserWorkoutActivity } from '../../types/UserWorkoutActivity';
@@ -25,6 +25,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
     const { user } = useContext(AuthContext);
     const [state, setState] = useState<IState>({ reps: 0, weight: 0 });
     const [saved, setSaved] = useState<boolean>(false);
+    const queryClient = useQueryClient();
 
     const getWorkoutActivity = (): Promise<
         AxiosResponse<UserWorkoutActivity>
@@ -63,6 +64,13 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
 
     const mutation = useMutation(addWorkoutActivity, {
         onSuccess: (data, variables, context) => {
+            queryClient.invalidateQueries({
+                predicate: (query) =>
+                    query.queryKey[0] === 'UserWorkoutActivity' &&
+                    query.queryKey?.at(1) === user?.id &&
+                    query.queryKey?.at(2) === exercise.id &&
+                    (query.queryKey?.at(3) ?? 0) >= set,
+            });
             setSaved(true);
         },
     });
