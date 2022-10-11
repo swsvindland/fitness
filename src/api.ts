@@ -9,6 +9,7 @@ import { EdamamFood } from './types/EdamamFood';
 import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
 import { UserFood } from './types/UserFood';
+import { UserFoodGridItem } from './types/UserFoodGridItem';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
@@ -138,11 +139,11 @@ export const getFoodDetails = (
 
 export const getUserFoods = (
     userId: string
-): Promise<AxiosResponse<UserFood[]>> => {
+): Promise<AxiosResponse<UserFoodGridItem[]>> => {
     const params = {
         userId,
     };
-    return axios.get(`${API_URL}/api/GetUserFoods`, {
+    return axios.get(`${API_URL}/api/GetUserFoodsForGrid`, {
         params,
     });
 };

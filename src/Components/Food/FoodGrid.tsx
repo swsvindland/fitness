@@ -75,6 +75,12 @@ export const FoodGrid: FC = () => {
                             </th>
                             <th
                                 scope="col"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                            >
+                                Servings
+                            </th>
+                            <th
+                                scope="col"
                                 className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                             >
                                 <span className="sr-only">Select</span>
@@ -103,7 +109,10 @@ export const FoodGrid: FC = () => {
                                         <span>
                                             Carbs: {food.food?.carbohydrates}g
                                         </span>
-                                        <span>{food.food?.calories}</span>
+                                        <span>
+                                            {food.food?.calories} Calories
+                                        </span>
+                                        <span>{food.servings} Servings</span>
                                     </div>
                                     {foodIdx !== 0 ? (
                                         <div className="absolute right-0 left-6 -top-px h-px bg-gray-200" />
@@ -149,6 +158,18 @@ export const FoodGrid: FC = () => {
                                 >
                                     <div className="hidden sm:block">
                                         {food.food?.calories} Calories
+                                    </div>
+                                </td>
+                                <td
+                                    className={classNames(
+                                        foodIdx === 0
+                                            ? ''
+                                            : 'border-t border-gray-200',
+                                        'px-3 py-3.5 text-sm text-ternary'
+                                    )}
+                                >
+                                    <div className="hidden sm:block">
+                                        {food.servings} Servings
                                     </div>
                                 </td>
                             </tr>
