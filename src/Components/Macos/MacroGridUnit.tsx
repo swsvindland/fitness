@@ -18,14 +18,14 @@ export const MacroGridUnit: FC<IProps> = ({
             <dt className="text-base font-normal text-secondary">{name}</dt>
             <dd className="mt-1 flex items-baseline">
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    {currentAmount ?? 0}
+                    {currentAmount?.toFixed(2) ?? 0}
                 </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
                     /
                 </span>
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    {amount}
+                    {amount.toFixed(2)}
                 </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
             </dd>
