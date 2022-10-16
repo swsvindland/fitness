@@ -19,6 +19,7 @@ import { UserBody } from '../../types/userBody';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
 import { API_URL } from '../../api';
+import { Loading } from '../Loading';
 
 ChartJS.register(
     RadialLinearScale,
@@ -93,7 +94,7 @@ export const BodyGraph = () => {
     }, [userBodyQuery.data]);
 
     if (userBodyQuery.isLoading || !data) {
-        return <span>Loading...</span>;
+        return <Loading />;
     }
 
     return (

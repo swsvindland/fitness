@@ -20,6 +20,7 @@ import { format } from 'date-fns';
 import { UserWeight } from '../../types/userWeight';
 import { LinkButton } from '../Buttons/LinkButton';
 import { API_URL } from '../../api';
+import { Loading } from '../Loading';
 
 ChartJS.register(
     CategoryScale,
@@ -79,7 +80,7 @@ export const WeightGraph: FC = () => {
     }, [userBloodPressureQuery.data]);
 
     if (userBloodPressureQuery.isLoading || !data) {
-        return <span>Loading...</span>;
+        return <Loading />;
     }
 
     const options = {

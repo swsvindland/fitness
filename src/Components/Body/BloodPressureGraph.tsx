@@ -20,6 +20,7 @@ import { UserBloodPressure } from '../../types/userBloodPressure';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
 import { API_URL } from '../../api';
+import { Loading } from '../Loading';
 
 ChartJS.register(
     CategoryScale,
@@ -88,7 +89,7 @@ export const BloodPressureGraph: FC = () => {
     }, [userBloodPressureQuery.data]);
 
     if (userBloodPressureQuery.isLoading || !data) {
-        return <span>Loading...</span>;
+        return <Loading />;
     }
 
     return (
