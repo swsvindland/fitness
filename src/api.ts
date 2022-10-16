@@ -4,7 +4,6 @@ import { UserSupplement } from './types/userSupplement';
 import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
 import { WorkoutBlock } from './types/WorkoutBlock';
-import { UserWorkoutsCompleted } from './types/UserWorkoutsCompleted';
 import { EdamamFood } from './types/EdamamFood';
 import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
