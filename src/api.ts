@@ -187,3 +187,10 @@ export const getUserDashboard = (
         params,
     });
 };
+
+export const restartWorkout = (params: {
+    userId: string;
+    workoutId: number;
+}) => {
+    return axios.get(`${API_URL}/api/RestartWorkout`, { params });
+};

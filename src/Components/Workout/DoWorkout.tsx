@@ -76,7 +76,9 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     }
 
     if (nextWorkoutQuery.data?.data.workoutCompleted) {
-        return <WorkoutCompleted />;
+        return (
+            <WorkoutCompleted userId={user?.id ?? ''} workoutId={workoutId} />
+        );
     }
 
     const exercises =

@@ -15,7 +15,6 @@ import { HeightForm } from './Body/HeightForm';
 import { AddFood } from './Food/AddFood';
 import { FoodDetail } from './Food/FoodDetail';
 import { ScanFood } from './Food/ScanFood';
-import { WorkoutCompleted } from './Workout/WorkoutCompleted';
 
 export const Routes: FC = () => {
     return (
