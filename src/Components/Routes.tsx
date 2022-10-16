@@ -15,6 +15,7 @@ import { HeightForm } from './Body/HeightForm';
 import { AddFood } from './Food/AddFood';
 import { FoodDetail } from './Food/FoodDetail';
 import { ScanFood } from './Food/ScanFood';
+import { Settings } from '../Layouts/Settings';
 
 export const Routes: FC = () => {
     return (
@@ -58,6 +59,7 @@ export const Routes: FC = () => {
                 component={BloodPressureCheckInForm}
                 exact={true}
             />
+            <Route path="/settings" component={Settings} exact={true} />
             <Redirect from="*" to="/home" />
         </Switch>
     );
