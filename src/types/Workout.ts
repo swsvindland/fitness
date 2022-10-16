@@ -4,5 +4,4 @@ export interface Workout {
     version: number;
     name: string;
     description: string;
-    cost?: number;
 }

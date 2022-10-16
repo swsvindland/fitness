@@ -5,10 +5,9 @@ interface IProps {
     id: number;
     name: string;
     version: number;
-    price?: number;
 }
 
-export const WorkoutStoreCard: FC<IProps> = ({ id, name, version, price }) => {
+export const WorkoutStoreCard: FC<IProps> = ({ id, name, version }) => {
     return (
         <Link
             to={`/workout/${id}`}
@@ -22,11 +21,6 @@ export const WorkoutStoreCard: FC<IProps> = ({ id, name, version, price }) => {
                             Version: {version}
                         </span>
                     </span>
-                </span>
-            </span>
-            <span className="mt-2 flex text-sm sm:mt-0 sm:flex-col sm:ml-4 sm:text-right">
-                <span className="font-medium text-secondary">
-                    {price ? `$${price}` : ''}
                 </span>
             </span>
             <span

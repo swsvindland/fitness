@@ -11,6 +11,7 @@ import { Macros } from './types/Macros';
 import { UserFood } from './types/UserFood';
 import { UserFoodGridItem } from './types/UserFoodGridItem';
 import { Dashboard } from './types/Dashboard';
+import { UserNextWorkout } from './types/UserNextWorkout';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
@@ -93,7 +94,7 @@ export const completeWorkout = (body: {
 
 export const getUserNextWorkout = (
     userId: string
-): Promise<AxiosResponse<UserWorkoutsCompleted>> => {
+): Promise<AxiosResponse<UserNextWorkout>> => {
     const params = {
         userId,
     };

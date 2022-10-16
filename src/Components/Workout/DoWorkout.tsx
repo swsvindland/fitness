@@ -13,6 +13,7 @@ import { Button } from '../Buttons/Button';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
+import { WorkoutCompleted } from './WorkoutCompleted';
 
 interface IProps {
     workoutId: number;
@@ -72,6 +73,10 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         nextWorkoutQuery.isLoading
     ) {
         return <Loading />;
+    }
+
+    if (nextWorkoutQuery.data?.data.workoutCompleted) {
+        return <WorkoutCompleted />;
     }
 
     const exercises =

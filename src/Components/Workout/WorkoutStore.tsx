@@ -25,7 +25,6 @@ export const WorkoutStore: FC = () => {
                     id={item.id}
                     name={item.name}
                     version={item.version}
-                    price={item.cost}
                 />
             ))}
         </div>
