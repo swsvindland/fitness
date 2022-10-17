@@ -33,7 +33,7 @@
         "react-dom": "^18.2.0",
         "react-router": "=5.3.3",
         "react-router-dom": "=5.3.3",
-        "web-vitals": "^3.0.2",
+        "web-vitals": "^3.0.3",
         "workbox-background-sync": "^6.5.4",
         "workbox-broadcast-update": "^6.5.4",
         "workbox-cacheable-response": "^6.5.4",
