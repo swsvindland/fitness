@@ -11,7 +11,7 @@
         "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
-        "@awesome-cordova-plugins/barcode-scanner": "^5.45.0",
+        "@awesome-cordova-plugins/barcode-scanner": "^6.0.0",
         "@capacitor/app": "4.0.1",
         "@capacitor/core": "4.3.0",
         "@capacitor/haptics": "4.0.1",
