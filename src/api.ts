@@ -143,6 +143,7 @@ export const getUserFoods = (
 ): Promise<AxiosResponse<UserFoodGridItem[]>> => {
     const params = {
         userId,
+        date: new Date().toISOString(),
     };
     return axios.get(`${API_URL}/api/GetUserFoodsForGrid`, {
         params,
@@ -152,6 +153,7 @@ export const getUserFoods = (
 export const getMacros = (userId: string): Promise<AxiosResponse<Macros[]>> => {
     const params = {
         userId,
+        date: new Date().toISOString(),
     };
 
     return axios.get(`${API_URL}/api/GetMacros`, {
@@ -164,6 +166,7 @@ export const getCurrentUserMacros = (
 ): Promise<AxiosResponse<Macros>> => {
     const params = {
         userId,
+        date: new Date().toISOString(),
     };
     return axios.get(`${API_URL}/api/GetCurrentUserMacros`, {
         params,

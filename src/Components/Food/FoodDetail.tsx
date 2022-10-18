@@ -86,6 +86,7 @@ export const FoodDetail: FC = () => {
                                     userId: user.id,
                                     amount: quantity,
                                     unit: unit.name,
+                                    created: new Date().toISOString(),
                                 })
                             }
                         >
