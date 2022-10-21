@@ -43,7 +43,7 @@ export const BodyFatGraph: FC = () => {
     const userBodyFatQuery = useQuery(['UserBodyFat', user?.id], () => {
         if (!user?.id) return;
 
-        return getUserBodyFat(user?.id);
+        return getUserBodyFat();
     });
 
     useMemo(() => {

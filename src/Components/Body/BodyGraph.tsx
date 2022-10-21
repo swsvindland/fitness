@@ -13,12 +13,10 @@ import {
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import { AuthContext } from '../../Auth/Auth';
-import axios, { AxiosResponse } from 'axios';
 import { useQuery } from '@tanstack/react-query';
-import { UserBody } from '../../types/userBody';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
-import { API_URL } from '../../api';
+import { getAllUserBodies } from '../../api';
 import { Loading } from '../Loading';
 
 ChartJS.register(
@@ -40,16 +38,6 @@ export const BodyGraph = () => {
           >
         | undefined
     >(undefined);
-
-    const getAllUserBodies = (): Promise<AxiosResponse<UserBody[]>> => {
-        const params = {
-            userId: user?.id,
-        };
-
-        return axios.get(`${API_URL}/api/GetUserBodies`, {
-            params,
-        });
-    };
 
     const userBodyQuery = useQuery(['UserBody', user?.id], getAllUserBodies);
 

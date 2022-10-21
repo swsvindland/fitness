@@ -3,11 +3,9 @@ import { TextField } from '../TextField';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
 import { AuthContext } from '../../Auth/Auth';
-import { UserWorkoutActivity } from '../../types/UserWorkoutActivity';
 import { Loading } from '../Loading';
-import { API_URL } from '../../api';
+import { addWorkoutActivity, getWorkoutActivity } from '../../api';
 
 interface IProps {
     set: number;
@@ -27,43 +25,13 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
     const [saved, setSaved] = useState<boolean>(false);
     const queryClient = useQueryClient();
 
-    const getWorkoutActivity = (): Promise<
-        AxiosResponse<UserWorkoutActivity>
-    > => {
-        const params = {
-            userId: user?.id,
-            workoutBlockExerciseId: exercise.id,
-            set,
-            week,
-            day,
-        };
-        return axios.get(`${API_URL}/api/GetUserWorkoutActivity`, {
-            params,
-        });
-    };
-
     const { data, isLoading } = useQuery(
         ['UserWorkoutActivity', user?.id, exercise.id, set, week, day],
-        getWorkoutActivity
+        () => getWorkoutActivity(exercise.id, set, week, day)
     );
 
-    const addWorkoutActivity = () => {
-        const body = {
-            id: data?.data.id,
-            userId: user?.id,
-            workoutBlockExerciseId: exercise.id,
-            set: set,
-            reps: state.reps,
-            weight: state.weight,
-            week,
-            day,
-        };
-
-        return axios.post(`${API_URL}/api/AddUserWorkoutActivity`, body);
-    };
-
     const mutation = useMutation(addWorkoutActivity, {
-        onSuccess: (data, variables, context) => {
+        onSuccess: () => {
             queryClient.invalidateQueries({
                 predicate: (query) =>
                     query.queryKey[0] === 'UserWorkoutActivity' &&
@@ -136,7 +104,16 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                     <button
                         className="w-8 h-8"
                         onClick={() => {
-                            mutation.mutate();
+                            mutation.mutate({
+                                id: data?.data.id,
+                                userId: user?.id ?? '',
+                                workoutBlockExerciseId: exercise.exerciseId,
+                                reps: state.reps,
+                                weight: state.weight,
+                                set,
+                                week,
+                                day,
+                            });
                         }}
                     >
                         {mutation.isLoading ? (

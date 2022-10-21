@@ -2,26 +2,16 @@ import { FC, FormEvent, useContext, useState } from 'react';
 import { TextField } from '../TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
-import { API_URL } from '../../api';
+import { addHeight } from '../../api';
 
 export const HeightForm: FC = () => {
     const [height, setHeight] = useState<string>('');
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
-
-    const addHeight = (): Promise<AxiosResponse<boolean>> => {
-        const body = {
-            height: parseInt(height),
-            userId: user?.id,
-        };
-
-        return axios.post(`${API_URL}/api/AddUserHeight`, body);
-    };
 
     const mutation = useMutation(addHeight, {
         onSuccess: async () => {
@@ -31,7 +21,7 @@ export const HeightForm: FC = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate();
+        mutation.mutate({ height: parseFloat(height), userId: user?.id ?? '' });
         history.goBack();
     };
 

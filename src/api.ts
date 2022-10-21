@@ -11,48 +11,68 @@ import { UserFood } from './types/UserFood';
 import { UserFoodGridItem } from './types/UserFoodGridItem';
 import { Dashboard } from './types/Dashboard';
 import { UserNextWorkout } from './types/UserNextWorkout';
+import { Auth } from './types/Auth';
+import { UserWorkoutActivity } from './types/UserWorkoutActivity';
+import { UserWorkout } from './types/UserWorkout';
+import { UserBloodPressure } from './types/userBloodPressure';
+import { UserBody } from './types/userBody';
+import { UserWeight } from './types/userWeight';
+import { User } from './types/user';
 
 // export const API_URL = 'http://localhost:7071';
 export const API_URL = 'https://fitness-dev.azurewebsites.net';
 
-export const auth = (body: { email: string; password: string }) => {
+const getParams = (params?: object) => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+
+    return {
+        userId,
+        token: token,
+        date: new Date().toISOString(),
+        version: '1.0.0',
+        ...params,
+    };
+};
+
+export const auth = (body: {
+    email: string;
+    password: string;
+}): Promise<AxiosResponse<Auth>> => {
     return axios.post(`${API_URL}/api/Auth`, body);
 };
 
-export const getUser = (email: string) => {
-    const params = { email };
+export const getUser = (): Promise<AxiosResponse<User>> => {
+    const params = getParams();
     return axios.get(`${API_URL}/api/GetUser`, {
         params,
     });
 };
 
-export const createUser = (email: string) => {
-    const body = { email };
-    return axios.post(`${API_URL}/api/CreateUser`, body);
+export const createUser = (body: { email: string; password: string }) => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/CreateUser`, body, { params });
 };
 
 export const getAllSupplements = (): Promise<AxiosResponse<Supplement[]>> => {
-    return axios.get(`${API_URL}/api/GetAllSupplements`);
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetAllSupplements`, { params });
 };
 
-export const getUserSupplements = (
-    userId: string
-): Promise<AxiosResponse<UserSupplement[]>> => {
-    const params = {
-        userId,
-    };
+export const getUserSupplements = (): Promise<
+    AxiosResponse<UserSupplement[]>
+> => {
+    const params = getParams();
 
     return axios.get(`${API_URL}/api/GetUserSupplements`, {
         params,
     });
 };
 
-export const getUserBodyFat = (
-    userId: string
-): Promise<AxiosResponse<UserBodyFat[]>> => {
-    const params = {
-        userId,
-    };
+export const getUserBodyFat = (): Promise<AxiosResponse<UserBodyFat[]>> => {
+    const params = getParams();
 
     return axios.get(`${API_URL}/api/GetUserBodyFat`, {
         params,
@@ -62,9 +82,8 @@ export const getUserBodyFat = (
 export const getWorkout = (
     workoutId: number
 ): Promise<AxiosResponse<Workout>> => {
-    const params = {
-        workoutId,
-    };
+    const params = getParams({ workoutId });
+
     return axios.get(`${API_URL}/api/GetWorkout`, {
         params,
     });
@@ -73,10 +92,65 @@ export const getWorkout = (
 export const getWorkoutDetails = (
     workoutId: number
 ): Promise<AxiosResponse<WorkoutBlock[]>> => {
-    const params = {
-        workoutId,
-    };
+    const params = getParams({ workoutId });
+
     return axios.get(`${API_URL}/api/GetWorkoutDetails`, {
+        params,
+    });
+};
+
+export const buyWorkout = (workoutId: number) => {
+    const params = getParams({ workoutId });
+
+    return axios.post(
+        `${API_URL}/api/BuyWorkout`,
+        {},
+        {
+            params,
+        }
+    );
+};
+
+export const getWorkoutActivity = (
+    workoutBlockExerciseId: number,
+    set: number,
+    week: number,
+    day: number
+): Promise<AxiosResponse<UserWorkoutActivity>> => {
+    const params = getParams({ workoutBlockExerciseId, set, week, day });
+
+    return axios.get(`${API_URL}/api/GetUserWorkoutActivity`, {
+        params,
+    });
+};
+
+export const addWorkoutActivity = (body: {
+    id?: number;
+    userId: string;
+    workoutBlockExerciseId: number;
+    set: number;
+    reps: number;
+    weight: number;
+    week: number;
+    day: number;
+}) => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserWorkoutActivity`, body, {
+        params,
+    });
+};
+
+export const getWorkouts = (): Promise<AxiosResponse<Workout[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetWorkouts`, { params });
+};
+
+export const getUserWorkouts = (): Promise<AxiosResponse<UserWorkout[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetUserWorkouts`, {
         params,
     });
 };
@@ -88,15 +162,17 @@ export const completeWorkout = (body: {
     week: number;
     day: number;
 }): Promise<AxiosResponse> => {
-    return axios.post(`${API_URL}/api/AddUserWorkoutCompleted`, body);
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserWorkoutCompleted`, body, {
+        params,
+    });
 };
 
-export const getUserNextWorkout = (
-    userId: string
-): Promise<AxiosResponse<UserNextWorkout>> => {
-    const params = {
-        userId,
-    };
+export const getUserNextWorkout = (): Promise<
+    AxiosResponse<UserNextWorkout>
+> => {
+    const params = getParams();
 
     return axios.get(`${API_URL}/api/GetNextWorkout`, {
         params,
@@ -106,9 +182,8 @@ export const getUserNextWorkout = (
 export const foodAutocomplete = (
     query: string
 ): Promise<AxiosResponse<string[]>> => {
-    const params = {
-        query,
-    };
+    const params = getParams({ query });
+
     return axios.get(`${API_URL}/api/AutocompleteFood`, {
         params,
     });
@@ -118,10 +193,8 @@ export const searchFood = (
     query: string,
     barcode?: string
 ): Promise<AxiosResponse<EdamamFood[]>> => {
-    const params = {
-        query,
-        barcode,
-    };
+    const params = getParams({ query, barcode });
+
     return axios.get(`${API_URL}/api/ParseFood`, {
         params,
     });
@@ -130,69 +203,157 @@ export const searchFood = (
 export const getFoodDetails = (
     foodId: string
 ): Promise<AxiosResponse<EdamamFoodDetails>> => {
-    const params = {
-        foodId,
-    };
+    const params = getParams({ foodId });
+
     return axios.get(`${API_URL}/api/GetFoodDetails`, {
         params,
     });
 };
 
-export const getUserFoods = (
-    userId: string
-): Promise<AxiosResponse<UserFoodGridItem[]>> => {
-    const params = {
-        userId,
-        date: new Date().toISOString(),
-    };
+export const getUserFoods = (): Promise<AxiosResponse<UserFoodGridItem[]>> => {
+    const params = getParams();
+
     return axios.get(`${API_URL}/api/GetUserFoodsForGrid`, {
         params,
     });
 };
 
-export const getMacros = (userId: string): Promise<AxiosResponse<Macros[]>> => {
-    const params = {
-        userId,
-        date: new Date().toISOString(),
-    };
+export const getMacros = (): Promise<AxiosResponse<Macros[]>> => {
+    const params = getParams();
 
     return axios.get(`${API_URL}/api/GetMacros`, {
         params,
     });
 };
 
-export const getCurrentUserMacros = (
-    userId: string
-): Promise<AxiosResponse<Macros>> => {
-    const params = {
-        userId,
-        date: new Date().toISOString(),
-    };
+export const getCurrentUserMacros = (): Promise<AxiosResponse<Macros>> => {
+    const params = getParams();
+
     return axios.get(`${API_URL}/api/GetCurrentUserMacros`, {
         params,
     });
 };
 
 export const addUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
-    return axios.post(`${API_URL}/api/AddUserFood`, userFood);
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserFood`, userFood, { params });
 };
 
-export const getUserDashboard = (
-    userId: string,
-    date: string
-): Promise<AxiosResponse<Dashboard>> => {
-    const params = {
-        userId,
-        date,
-    };
+export const getUserDashboard = (): Promise<AxiosResponse<Dashboard>> => {
+    const params = getParams();
+
     return axios.get(`${API_URL}/api/GetUserDashboard`, {
         params,
     });
 };
 
-export const restartWorkout = (params: {
-    userId: string;
-    workoutId: number;
-}) => {
+export const restartWorkout = (workoutId: number) => {
+    const params = getParams({ workoutId });
+
     return axios.get(`${API_URL}/api/RestartWorkout`, { params });
+};
+
+export const updateUserSupplement = (userSupplement: UserSupplement) => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/UpdateUserSupplements`, userSupplement, {
+        params,
+    });
+};
+
+export const getUserSupplementActivity = (
+    userSupplementId: number,
+    time: string
+): Promise<AxiosResponse<any>> | undefined => {
+    const params = getParams({ userSupplementId, time });
+
+    return axios.get(`${API_URL}/api/GetUserSupplementActivity`, {
+        params,
+    });
+};
+
+export const toggleUserSupplementActivity = (body: {
+    date: string;
+    userId: string;
+    userSupplementId: number;
+    time: string;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/ToggleUserSupplementActivity`, body, {
+        params,
+    });
+};
+
+export const addBloodPressure = (body: {
+    systolic: number;
+    diastolic: number;
+    userId: string;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserBloodPressure`, body, { params });
+};
+
+export const getAllUserBloodPressure = (): Promise<
+    AxiosResponse<UserBloodPressure[]>
+> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetUserBloodPressures`, { params });
+};
+
+export const addBody = (body: {
+    neck: number;
+    shoulders: number;
+    chest: number;
+    leftBicep: number;
+    rightBicep: number;
+    navel: number;
+    waist: number;
+    hip: number;
+    leftThigh: number;
+    rightThigh: number;
+    leftCalf: number;
+    rightCalf: number;
+    userId: string;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserBody`, body, { params });
+};
+
+export const getAllUserBodies = (): Promise<AxiosResponse<UserBody[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetUserBodies`, {
+        params,
+    });
+};
+
+export const addHeight = (body: {
+    height: number;
+    userId: string;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserHeight`, body, { params });
+};
+
+export const addWeight = (body: {
+    weight: number;
+    userId: string;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserWeight`, body, { params });
+};
+
+export const getAllUserWeights = (): Promise<AxiosResponse<UserWeight[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetUserWeights`, {
+        params,
+    });
 };

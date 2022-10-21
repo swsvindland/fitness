@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-    appId: 'io.ionic.starter',
+    appId: 'com.svindland.fitness',
     appName: 'fitness',
     webDir: 'dist',
     bundledWebRuntime: false,

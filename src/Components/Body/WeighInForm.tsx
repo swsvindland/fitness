@@ -2,26 +2,16 @@ import { FC, FormEvent, useContext, useState } from 'react';
 import { TextField } from '../TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
-import { API_URL } from '../../api';
+import { addWeight } from '../../api';
 
 export const WeighInForm: FC = () => {
     const [weight, setWeight] = useState<string>('');
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
-
-    const addWeight = (): Promise<AxiosResponse<boolean>> => {
-        const body = {
-            weight: parseFloat(weight),
-            userId: user?.id,
-        };
-
-        return axios.post(`${API_URL}/api/AddUserWeight`, body);
-    };
 
     const mutation = useMutation(addWeight, {
         onSuccess: async () => {
@@ -31,7 +21,7 @@ export const WeighInForm: FC = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate();
+        mutation.mutate({ weight: parseFloat(weight), userId: user?.id ?? '' });
         history.goBack();
     };
 

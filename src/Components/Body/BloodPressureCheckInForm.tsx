@@ -3,10 +3,9 @@ import { TextField } from '../TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
-import { API_URL } from '../../api';
+import { addBloodPressure } from '../../api';
 
 interface IState {
     systolic: string;
@@ -19,16 +18,6 @@ export const BloodPressureCheckInForm: FC = () => {
     const [state, setState] = useState<IState>({ systolic: '', diastolic: '' });
     const history = useHistory();
 
-    const addBloodPressure = (): Promise<AxiosResponse<boolean>> => {
-        const body = {
-            systolic: parseInt(state.systolic),
-            diastolic: parseInt(state.diastolic),
-            userId: user?.id,
-        };
-
-        return axios.post(`${API_URL}/api/AddUserBloodPressure`, body);
-    };
-
     const mutation = useMutation(addBloodPressure, {
         onSuccess: async () => {
             await queryClient.invalidateQueries([
@@ -40,7 +29,12 @@ export const BloodPressureCheckInForm: FC = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate();
+        if (!user) return;
+        mutation.mutate({
+            userId: user?.id,
+            systolic: parseInt(state.systolic),
+            diastolic: parseInt(state.diastolic),
+        });
         history.goBack();
     };
 

@@ -15,11 +15,9 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
-import axios, { AxiosResponse } from 'axios';
-import { UserBloodPressure } from '../../types/userBloodPressure';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
-import { API_URL } from '../../api';
+import { getAllUserBloodPressure } from '../../api';
 import { Loading } from '../Loading';
 
 ChartJS.register(
@@ -42,16 +40,6 @@ export const BloodPressureGraph: FC = () => {
           >
         | undefined
     >(undefined);
-
-    const getAllUserBloodPressure = (): Promise<
-        AxiosResponse<UserBloodPressure[]>
-    > => {
-        const params = {
-            userId: user?.id,
-        };
-
-        return axios.get(`${API_URL}/api/GetUserBloodPressures`, { params });
-    };
 
     const userBloodPressureQuery = useQuery(
         ['UserBloodPressure', user?.id],

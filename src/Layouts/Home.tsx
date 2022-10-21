@@ -9,10 +9,8 @@ export const Home: FC = () => {
 
     const dashboardQuery = useQuery(['Dashboard', user?.id], () => {
         if (!user) return;
-        return getUserDashboard(user.id, new Date().toISOString());
+        return getUserDashboard();
     });
-
-    console.log(dashboardQuery.data?.data);
 
     return (
         <div className="w-80 grid grid-cols-1">

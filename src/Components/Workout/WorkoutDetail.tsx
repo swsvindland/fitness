@@ -1,53 +1,24 @@
-import { FC, useContext } from 'react';
-import axios, { AxiosResponse } from 'axios';
-import { Workout } from '../../types/Workout';
+import { FC } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { WorkoutBlock } from '../../types/WorkoutBlock';
-import { AuthContext } from '../../Auth/Auth';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { useHistory, useParams } from 'react-router';
-import { API_URL } from '../../api';
+import { buyWorkout, getWorkout, getWorkoutDetails } from '../../api';
 
 export const WorkoutDetail: FC = () => {
-    const { user } = useContext(AuthContext);
     const { workoutId } = useParams<{ workoutId?: string }>();
     const history = useHistory();
 
-    const getWorkout = (): Promise<AxiosResponse<Workout>> => {
-        const params = {
-            workoutId,
-        };
-        return axios.get(`${API_URL}/api/GetWorkout`, {
-            params,
-        });
-    };
-
-    const getWorkoutDetails = (): Promise<AxiosResponse<WorkoutBlock[]>> => {
-        const params = {
-            workoutId,
-        };
-        return axios.get(`${API_URL}/api/GetWorkoutDetails`, {
-            params,
-        });
-    };
-
-    const workoutQuery = useQuery(['Workout', workoutId], getWorkout);
-    const workoutDetailsQuery = useQuery(
-        ['WorkoutDetails', workoutId],
-        getWorkoutDetails
-    );
-
-    const buyWorkout = () => {
-        const params = { userId: user?.id, workoutId };
-        return axios.post(
-            `${API_URL}/api/BuyWorkout`,
-            {},
-            {
-                params,
-            }
-        );
-    };
+    const workoutQuery = useQuery(['Workout', workoutId], () => {
+        if (!workoutId) return;
+        if (isNaN(parseInt(workoutId))) return;
+        return getWorkout(parseInt(workoutId));
+    });
+    const workoutDetailsQuery = useQuery(['WorkoutDetails', workoutId], () => {
+        if (!workoutId) return;
+        if (isNaN(parseInt(workoutId))) return;
+        return getWorkoutDetails(parseInt(workoutId));
+    });
 
     const mutation = useMutation(buyWorkout, {
         onSuccess: () => {
@@ -69,9 +40,6 @@ export const WorkoutDetail: FC = () => {
                                 <h1 className="text-xl font-medium text-secondary mb-2">
                                     {workoutQuery.data?.data.name}
                                 </h1>
-                                <p className="text-xl font-medium text-secondary">
-                                    {workoutQuery.data?.data.cost}
-                                </p>
                             </div>
                         </div>
 
@@ -95,7 +63,9 @@ export const WorkoutDetail: FC = () => {
                                 <form
                                     onSubmit={(event) => {
                                         event.preventDefault();
-                                        mutation.mutate();
+                                        mutation.mutate(
+                                            parseInt(workoutId ?? '0')
+                                        );
                                     }}
                                 >
                                     <Button

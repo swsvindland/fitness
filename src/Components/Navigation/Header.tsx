@@ -8,6 +8,8 @@ export const Header: FC = () => {
     const { setUser } = useContext(AuthContext);
 
     const logout = () => {
+        localStorage.clear();
+
         setUser(undefined);
     };
 

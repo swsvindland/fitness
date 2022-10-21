@@ -2,11 +2,10 @@ import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
 import { TextField } from '../TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import axios, { AxiosResponse } from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
-import { API_URL } from '../../api';
+import { addBody } from '../../api';
 
 interface IState {
     neck: string;
@@ -44,8 +43,15 @@ export const BodyCheckInForm: FC = () => {
     const queryClient = useQueryClient();
     const history = useHistory();
 
-    const addBody = (): Promise<AxiosResponse<boolean>> => {
-        const body = {
+    const mutation = useMutation(addBody, {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['UserBody', user?.id]);
+        },
+    });
+
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        mutation.mutate({
             neck: parseFloat(state.neck),
             shoulders: parseFloat(state.shoulders),
             chest: parseFloat(state.chest),
@@ -58,21 +64,8 @@ export const BodyCheckInForm: FC = () => {
             rightThigh: parseFloat(state.rightThigh),
             leftCalf: parseFloat(state.leftCalf),
             rightCalf: parseFloat(state.rightCalf),
-            userId: user?.id,
-        };
-
-        return axios.post(`${API_URL}/api/AddUserBody`, body);
-    };
-
-    const mutation = useMutation(addBody, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserBody', user?.id]);
-        },
-    });
-
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        mutation.mutate();
+            userId: user?.id ?? '',
+        });
         history.goBack();
     };
 

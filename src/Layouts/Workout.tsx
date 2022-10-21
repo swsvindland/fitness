@@ -1,25 +1,14 @@
 import { FC, useContext } from 'react';
-import axios, { AxiosResponse } from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
-import { UserWorkout } from '../types/UserWorkout';
 import { Loading } from '../Components/Loading';
 import { DoWorkout } from '../Components/Workout/DoWorkout';
 import { useHistory } from 'react-router';
-import { API_URL } from '../api';
+import { getUserWorkouts } from '../api';
 
 export const Workout: FC = () => {
     const { user } = useContext(AuthContext);
     const history = useHistory();
-
-    const getUserWorkouts = (): Promise<AxiosResponse<UserWorkout[]>> => {
-        const params = {
-            userId: user?.id,
-        };
-        return axios.get(`${API_URL}/api/GetUserWorkouts`, {
-            params,
-        });
-    };
 
     const userWorkoutsQuery = useQuery(
         ['UserWorkouts', user?.id],

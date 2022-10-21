@@ -2,11 +2,13 @@ import { FC, useContext, useMemo, useState } from 'react';
 import { AddSupplement } from './AddSupplement';
 import { AuthContext } from '../../Auth/Auth';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
 import { ExternalLink } from '../../icons/ExternalLink';
 import { Loading } from '../Loading';
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
-import { API_URL } from '../../api';
+import {
+    getUserSupplementActivity,
+    toggleUserSupplementActivity,
+} from '../../api';
 
 interface IProps {
     isUser: boolean;
@@ -40,42 +42,13 @@ export const SupplementCard: FC<IProps> = ({
     const queryClient = useQueryClient();
     const today = new Date().toDateString();
 
-    const getUserSupplementActivity = (
-        date: string,
-        userId: string,
-        userSupplementId: number,
-        time: string
-    ): Promise<AxiosResponse<any>> | undefined => {
-        if (!times || !times[0]) return undefined;
-
-        const params = {
-            date,
-            userId,
-            userSupplementId,
-            time,
-        };
-
-        return axios.get(`${API_URL}/api/GetUserSupplementActivity`, {
-            params,
-        });
-    };
-
-    const toggleUserSupplementActivity = (body: {
-        date: string;
-        userId: string;
-        userSupplementId: number;
-        time: string;
-    }): Promise<AxiosResponse<boolean>> => {
-        return axios.post(`${API_URL}/api/ToggleUserSupplementActivity`, body);
-    };
-
     const userSupplementActivityQuery = useQuery(
         ['UserSupplementActivity', today, user?.id, id, times?.at(0)],
         () => {
             if (!user) return;
             if (!times || !times[0]) return;
 
-            return getUserSupplementActivity(today, user?.id, id, times[0]);
+            return getUserSupplementActivity(id, times[0]);
         }
     );
 

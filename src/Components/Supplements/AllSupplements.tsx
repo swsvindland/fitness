@@ -14,7 +14,7 @@ export const AllSupplements: FC = () => {
     const allSupplementQuery = useQuery(['Supplements'], getAllSupplements);
     const userSupplementsQuery = useQuery(['UserSupplements', user?.id], () => {
         if (!user) return;
-        return getUserSupplements(user?.id);
+        return getUserSupplements();
     });
 
     if (allSupplementQuery.isLoading || userSupplementsQuery.isLoading) {

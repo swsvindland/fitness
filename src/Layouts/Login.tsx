@@ -1,10 +1,10 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, useCallback, useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
 import { Loading } from '../Components/Loading';
 import { TextField } from '../Components/TextField';
-import { createUser, getUser } from '../api';
+import { auth, createUser, getUser } from '../api';
 import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
 
 interface IProps {
@@ -14,20 +14,34 @@ interface IProps {
 
 export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
-    const loginMutation = useMutation(getUser, {
+    const silentLogin = useCallback(async () => {
+        const user = await getUser();
+        setUser(user.data);
+    }, [setUser]);
+
+    useEffect(() => {
+        if (localStorage.getItem('token') && localStorage.getItem('userId')) {
+            silentLogin();
+        }
+    }, [silentLogin]);
+
+    const loginMutation = useMutation(auth, {
         onSuccess: async (data, variables, context) => {
-            setUser(data.data);
+            localStorage.setItem('token', data.data.token);
+            localStorage.setItem('userId', data.data.userId);
+
+            const user = await getUser();
+            setUser(user.data);
         },
     });
 
-    const registerMutation = useMutation(createUser, {
-        onSuccess: async (data, variables, context) => {},
-    });
+    const registerMutation = useMutation(createUser, {});
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        loginMutation.mutate(email);
+        loginMutation.mutate({ email, password });
     };
 
     const handleRegister = () => {
@@ -50,23 +64,17 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
                                 setEmail(event.target.value as string)
                             }
                         />
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                                />
-                                <label
-                                    htmlFor="remember-me"
-                                    className="ml-2 block text-sm text-secondary"
-                                >
-                                    Remember me
-                                </label>
-                            </div>
-                        </div>
-
+                        <TextField
+                            id="password"
+                            name="password"
+                            type="password"
+                            autoComplete="password"
+                            label="Password"
+                            value={password}
+                            onChange={(event) =>
+                                setPassword(event.target.value as string)
+                            }
+                        />
                         <div>
                             {loginMutation.isLoading ? (
                                 <Loading />

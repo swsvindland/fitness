@@ -42,14 +42,11 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     const workoutDetailsQuery = useQuery(['WorkoutDetails', workoutId], () =>
         getWorkoutDetails(workoutId)
     );
-    const nextWorkoutQuery = useQuery(['UserNextWorkout', user?.id], () => {
-        if (!user) return undefined;
-        return getUserNextWorkout(user?.id);
+    const nextWorkoutQuery = useQuery(['UserNextWorkout'], () => {
+        return getUserNextWorkout();
     });
 
-    const mutation = useMutation(completeWorkout, {
-        onSuccess: (data, variables, context) => {},
-    });
+    const mutation = useMutation(completeWorkout);
 
     useMemo(() => {
         const workoutDetail = workoutDetailsQuery.data?.data[0];

@@ -19,7 +19,7 @@ export const WorkoutCompleted: FC<IProps> = ({ userId, workoutId }) => {
     });
 
     const handleRestartWorkout = async () => {
-        restartWorkoutMutation.mutate({ userId, workoutId });
+        restartWorkoutMutation.mutate(workoutId);
     };
 
     const handleNewWorkout = () => {

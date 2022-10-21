@@ -4,10 +4,9 @@ import { SupplementTimes } from './SupplementTimes';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 import { Time } from './SupplementCard';
-import axios from 'axios';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { UserSupplement } from '../../types/userSupplement';
-import { API_URL } from '../../api';
+import { updateUserSupplement } from '../../api';
 
 interface IProps {
     userSupplementId?: number;
@@ -56,15 +55,8 @@ export const AddSupplement: FC<IProps> = ({
         },
     ]);
 
-    const updateUserSupplement = (userSupplement: UserSupplement) => {
-        return axios.post(
-            `${API_URL}/api/UpdateUserSupplements`,
-            userSupplement
-        );
-    };
-
     const mutation = useMutation(updateUserSupplement, {
-        onSuccess: (data, variables, context) => {
+        onSuccess: () => {
             queryClient.invalidateQueries(['UserSupplements']);
         },
     });

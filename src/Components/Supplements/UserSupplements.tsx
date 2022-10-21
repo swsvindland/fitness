@@ -9,8 +9,7 @@ export const UserSupplements: FC = () => {
     const { user } = useContext(AuthContext);
 
     const userSupplementsQuery = useQuery(['UserSupplements', user?.id], () => {
-        if (!user) return;
-        return getUserSupplements(user?.id);
+        return getUserSupplements();
     });
 
     if (userSupplementsQuery.isLoading) {
