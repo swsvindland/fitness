@@ -15,10 +15,13 @@ interface IProps {
 export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const silentLogin = useCallback(async () => {
+        setLoading(true);
         const user = await getUser();
         setUser(user.data);
+        setLoading(false);
     }, [setUser]);
 
     useEffect(() => {
@@ -47,6 +50,18 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     const handleRegister = () => {
         setRegister(true);
     };
+
+    if (loading) {
+        return (
+            <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background">
+                <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                    <div className="bg-card py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                        <Loading />
+                    </div>
+                </div>
+            </main>
+        );
+    }
 
     return (
         <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background">
