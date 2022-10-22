@@ -55,6 +55,12 @@ export const createUser = (body: { email: string; password: string }) => {
     return axios.post(`${API_URL}/api/CreateUser`, body, { params });
 };
 
+export const deleteUser = () => {
+    const params = getParams();
+
+    return axios.delete(`${API_URL}/api/DeleteUser`, { params });
+};
+
 export const getAllSupplements = (): Promise<AxiosResponse<Supplement[]>> => {
     const params = getParams();
 
