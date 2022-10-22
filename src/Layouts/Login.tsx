@@ -40,8 +40,6 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
         },
     });
 
-    const registerMutation = useMutation(createUser, {});
-
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         loginMutation.mutate({ email, password });
@@ -103,16 +101,12 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
                             )}
                         </div>
                         <div>
-                            {registerMutation.isLoading ? (
-                                <Loading />
-                            ) : (
-                                <SecondaryButton
-                                    onClick={handleRegister}
-                                    className="w-full text-center flex justify-center"
-                                >
-                                    Register
-                                </SecondaryButton>
-                            )}
+                            <SecondaryButton
+                                onClick={handleRegister}
+                                className="w-full text-center flex justify-center"
+                            >
+                                Register
+                            </SecondaryButton>
                         </div>
                     </form>
                 </div>

@@ -1,14 +1,55 @@
-import { FC, FormEvent } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Button } from '../Components/Buttons/Button';
+import { TextField } from '../Components/TextField';
+import { Loading } from '../Components/Loading';
+import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
+import { useMutation } from '@tanstack/react-query';
+import { auth, createUser, getUser } from '../api';
+import { User } from '../types/user';
 
 interface IProps {
+    setUser: (user: User) => void;
     setRegister: (register: boolean) => void;
 }
 
-export const Register: FC<IProps> = ({ setRegister }) => {
+export const Register: FC<IProps> = ({ setUser, setRegister }) => {
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+    const [error, setError] = useState<string | undefined>(undefined);
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        setRegister(false);
         event.preventDefault();
+        setError(undefined);
+
+        if (password !== passwordConfirm) {
+            setError('Passwords do not match');
+        }
+
+        registerMutation.mutate({ email, password });
+    };
+
+    const loginMutation = useMutation(auth, {
+        onSuccess: async (data, variables, context) => {
+            localStorage.setItem('token', data.data.token);
+            localStorage.setItem('userId', data.data.userId);
+
+            const user = await getUser();
+            setUser(user.data);
+        },
+    });
+
+    const registerMutation = useMutation(createUser, {
+        onSuccess: async (data, variables, context) => {
+            loginMutation.mutate({ email, password });
+        },
+        onError: (error, variables, context) => {
+            setError('Something went wrong');
+        },
+    });
+
+    const goBack = () => {
+        setRegister(false);
     };
 
     return (
@@ -16,8 +57,60 @@ export const Register: FC<IProps> = ({ setRegister }) => {
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-card py-8 px-4 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
-                        <h1>Coming Soon</h1>
-                        <Button type="submit">Go Back</Button>
+                        <TextField
+                            id="email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                            label="Email Address"
+                            value={email}
+                            onChange={(event) =>
+                                setEmail(event.target.value as string)
+                            }
+                        />
+                        <TextField
+                            id="password"
+                            name="password"
+                            type="password"
+                            autoComplete="password"
+                            label="Password"
+                            value={password}
+                            onChange={(event) =>
+                                setPassword(event.target.value as string)
+                            }
+                        />
+                        <TextField
+                            id="password-confirm"
+                            name="password-confirm"
+                            type="password"
+                            autoComplete="password"
+                            label="Confirm Password"
+                            value={passwordConfirm}
+                            onChange={(event) =>
+                                setPasswordConfirm(event.target.value as string)
+                            }
+                        />
+                        {error && <span className="text-red-500">{error}</span>}
+                        <div>
+                            {registerMutation.isLoading ? (
+                                <Loading />
+                            ) : (
+                                <Button
+                                    type="submit"
+                                    className="w-full text-center flex justify-center"
+                                >
+                                    Create Account
+                                </Button>
+                            )}
+                        </div>
+                        <div>
+                            <SecondaryButton
+                                onClick={goBack}
+                                className="w-full text-center flex justify-center"
+                            >
+                                Go Back
+                            </SecondaryButton>
+                        </div>
                     </form>
                 </div>
             </div>

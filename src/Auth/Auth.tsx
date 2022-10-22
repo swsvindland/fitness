@@ -38,7 +38,7 @@ export const Auth: FC = () => {
     }
 
     if (register) {
-        return <Register setRegister={setRegister} />;
+        return <Register setUser={setUser} setRegister={setRegister} />;
     }
 
     return <Login setUser={setUser} setRegister={setRegister} />;
