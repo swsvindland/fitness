@@ -3,6 +3,6 @@ export interface User {
     created: string;
     lastLogin: string;
     email: string;
-    challengeBuffer: string;
-    challenge: string;
+    sex: string;
+    access: boolean;
 }

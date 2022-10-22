@@ -107,7 +107,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                             mutation.mutate({
                                 id: data?.data.id,
                                 userId: user?.id ?? '',
-                                workoutBlockExerciseId: exercise.exerciseId,
+                                workoutBlockExerciseId: exercise.id,
                                 reps: state.reps,
                                 weight: state.weight,
                                 set,

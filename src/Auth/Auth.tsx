@@ -7,6 +7,9 @@ import { IonReactRouter } from '@ionic/react-router';
 import { ScrollToTop } from '../ScrollToTop';
 import { Register } from '../Layouts/Register';
 import { MinVersion } from '../Components/MinVersion';
+import { Purchases } from '@awesome-cordova-plugins/purchases';
+import { Capacitor } from '@capacitor/core';
+import { PurchaseAccess } from '../Components/PurchaseAccess';
 
 interface IAuthContext {
     user?: User;
@@ -15,7 +18,17 @@ interface IAuthContext {
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
+const setupPurchases = () => {
+    Purchases.setDebugLogsEnabled(true);
+    if (Capacitor.getPlatform() === 'ios') {
+        Purchases.configureWith({ apiKey: 'appl_TfmDdJRZsMbyYvoCaaVNwfRAEPw' });
+    } else if (Capacitor.getPlatform() === 'android') {
+        // Purchases.configureWith({apiKey: });
+    }
+};
+
 export const Auth: FC = () => {
+    setupPurchases();
     const [user, setUser] = useState<User | undefined>(undefined);
     const [register, setRegister] = useState<boolean>(false);
 
@@ -32,6 +45,7 @@ export const Auth: FC = () => {
                     <Layout>
                         <Routes />
                         <ScrollToTop />
+                        <PurchaseAccess />
                         <MinVersion />
                     </Layout>
                 </IonReactRouter>
