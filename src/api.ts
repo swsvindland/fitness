@@ -363,3 +363,11 @@ export const getAllUserWeights = (): Promise<AxiosResponse<UserWeight[]>> => {
         params,
     });
 };
+
+export const getMinVersion = (): Promise<AxiosResponse<number>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/MinVersion`, {
+        params,
+    });
+};
