@@ -1,32 +1,113 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment, useEffect, useState } from 'react';
 import { Button } from './Buttons/Button';
 import { SecondaryButton } from './Buttons/SecondaryButton';
-
-const pricing = {
-    tiers: [
-        {
-            title: 'Monthly',
-            price: 4.99,
-            frequency: '/month',
-            description:
-                'Get full access to the app. All features and workouts available.',
-            cta: 'Monthly billing',
-            mostPopular: false,
-        },
-        {
-            title: 'Yearly',
-            price: 29.99,
-            frequency: '/year',
-            description: 'Same as monthly but half off!',
-            cta: 'Yearly billing',
-            mostPopular: true,
-        },
-    ],
-};
+import { isPlatform } from '@ionic/react';
+import {
+    InAppPurchase2 as iap,
+    IAPProduct,
+} from '@awesome-cordova-plugins/in-app-purchase-2';
 
 export const PurchaseAccess: FC = () => {
     const [open] = useState<boolean>(false);
+
+    const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
+    const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
+
+    //initiate initInAppPurchase function
+    useEffect(() => {
+        const init = async () => {
+            await initInAppPurchase();
+        };
+        init();
+    }, []);
+
+    //if on an ios or android device, then get product info
+    const initInAppPurchase = () => {
+        if (isPlatform('ios') || isPlatform('android')) {
+            iap.register({
+                id: 'f345a58b28124c28b14b7a6c3093114e',
+                alias: 'Access Monthly',
+                type: iap.PAID_SUBSCRIPTION,
+            });
+
+            iap.register({
+                id: '5b0353d4799845989d2f4e143b3cb3ad',
+                alias: 'Access Yearly',
+                type: iap.PAID_SUBSCRIPTION,
+            });
+
+            iap.ready(() => {
+                const product = iap.get('f345a58b28124c28b14b7a6c3093114e');
+                setMonthly(product);
+            });
+
+            iap.ready(() => {
+                const product = iap.get('5b0353d4799845989d2f4e143b3cb3ad');
+                setYearly(product);
+            });
+
+            iap.refresh();
+        }
+    };
+
+    //if user clicks purchase button
+    const purchaseMonthly = () => {
+        if (monthly?.owned) {
+            restoreMonthly();
+        } else {
+            iap.order('Access Monthly').then(() => {
+                iap.when('f345a58b28124c28b14b7a6c3093114e').approved(
+                    (p: IAPProduct) => {
+                        //store product
+                        p.verify();
+                        p.finish();
+                    }
+                );
+            });
+            iap.refresh();
+        }
+    };
+
+    const purchaseYearly = () => {
+        if (yearly?.owned) {
+            restoreYearly();
+        } else {
+            iap.order('Access Yearly').then(() => {
+                iap.when('5b0353d4799845989d2f4e143b3cb3ad').approved(
+                    (p: IAPProduct) => {
+                        //store product
+                        p.verify();
+                        p.finish();
+                    }
+                );
+            });
+            iap.refresh();
+        }
+    };
+
+    //if user clicks retore or promo code button
+    const restoreMonthly = () => {
+        iap.when('f345a58b28124c28b14b7a6c3093114e').owned((p: IAPProduct) => {
+            if (monthly?.owned) {
+                //store product
+            } else {
+                alert('You have not purchased this product before.');
+            }
+        });
+        iap.refresh();
+    };
+
+    const restoreYearly = () => {
+        iap.when('5b0353d4799845989d2f4e143b3cb3ad').owned((p: IAPProduct) => {
+            if (monthly?.owned) {
+                //store product
+            } else {
+                alert('You have not purchased this product before.');
+            }
+        });
+        iap.refresh();
+    };
 
     return (
         <>
@@ -67,61 +148,75 @@ export const PurchaseAccess: FC = () => {
                                             <div className="mx-auto max-w-7xl">
                                                 {/* Tiers */}
                                                 <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
-                                                    {pricing.tiers.map(
-                                                        (tier) => (
-                                                            <div
-                                                                key={tier.title}
-                                                                className="relative flex flex-col rounded-2xl border border-ternary bg-card p-8 shadow-sm"
+                                                    <div className="relative flex flex-col rounded-2xl border border-ternary bg-card p-8 shadow-sm">
+                                                        <div className="flex-1">
+                                                            <h3 className="text-xl font-semibold text-secondary">
+                                                                Monthly
+                                                            </h3>
+                                                            <p className="mt-4 flex items-baseline text-secondary">
+                                                                <span className="text-5xl font-bold tracking-tight">
+                                                                    {
+                                                                        monthly?.price
+                                                                    }
+                                                                </span>
+                                                                <span className="ml-1 text-xl font-semibold">
+                                                                    month
+                                                                </span>
+                                                            </p>
+                                                            <p className="mt-6 text-ternary">
+                                                                Get full access
+                                                                to the app. All
+                                                                features and
+                                                                workouts
+                                                                available.
+                                                            </p>
+                                                        </div>
+                                                        <div className="mt-4">
+                                                            <SecondaryButton
+                                                                className="flex w-full justify-center align-middle"
+                                                                onClick={
+                                                                    purchaseMonthly
+                                                                }
                                                             >
-                                                                <div className="flex-1">
-                                                                    <h3 className="text-xl font-semibold text-secondary">
-                                                                        {
-                                                                            tier.title
-                                                                        }
-                                                                    </h3>
-                                                                    {tier.mostPopular ? (
-                                                                        <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
-                                                                            Most
-                                                                            popular
-                                                                        </p>
-                                                                    ) : null}
-                                                                    <p className="mt-4 flex items-baseline text-secondary">
-                                                                        <span className="text-5xl font-bold tracking-tight">
-                                                                            $
-                                                                            {
-                                                                                tier.price
-                                                                            }
-                                                                        </span>
-                                                                        <span className="ml-1 text-xl font-semibold">
-                                                                            {
-                                                                                tier.frequency
-                                                                            }
-                                                                        </span>
-                                                                    </p>
-                                                                    <p className="mt-6 text-ternary">
-                                                                        {
-                                                                            tier.description
-                                                                        }
-                                                                    </p>
-                                                                </div>
-                                                                <div className="mt-4">
-                                                                    {tier.mostPopular ? (
-                                                                        <Button className="flex w-full justify-center align-middle">
-                                                                            {
-                                                                                tier.cta
-                                                                            }
-                                                                        </Button>
-                                                                    ) : (
-                                                                        <SecondaryButton className="flex w-full justify-center align-middle">
-                                                                            {
-                                                                                tier.cta
-                                                                            }
-                                                                        </SecondaryButton>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                    )}
+                                                                Monthly Billing
+                                                            </SecondaryButton>
+                                                        </div>
+                                                    </div>
+                                                    <div className="relative flex flex-col rounded-2xl border border-ternary bg-card p-8 shadow-sm">
+                                                        <div className="flex-1">
+                                                            <h3 className="text-xl font-semibold text-secondary">
+                                                                Yearly
+                                                            </h3>
+                                                            <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
+                                                                Most popular
+                                                            </p>
+                                                            <p className="mt-4 flex items-baseline text-secondary">
+                                                                <span className="text-5xl font-bold tracking-tight">
+                                                                    {
+                                                                        yearly?.price
+                                                                    }
+                                                                </span>
+                                                                <span className="ml-1 text-xl font-semibold">
+                                                                    year
+                                                                </span>
+                                                            </p>
+                                                            <p className="mt-6 text-ternary">
+                                                                All the features
+                                                                of monthly but
+                                                                cheaper!
+                                                            </p>
+                                                        </div>
+                                                        <div className="mt-4">
+                                                            <Button
+                                                                className="flex w-full justify-center align-middle"
+                                                                onClick={
+                                                                    purchaseYearly
+                                                                }
+                                                            >
+                                                                Yearly Billing
+                                                            </Button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
