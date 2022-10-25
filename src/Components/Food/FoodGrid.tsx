@@ -1,16 +1,14 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
 import { useQuery } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
-import { AuthContext } from '../../Auth/Auth';
 import { Loading } from '../Loading';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 import { useHistory } from 'react-router';
 
 export const FoodGrid: FC = () => {
-    const { user } = useContext(AuthContext);
     const history = useHistory();
 
     const openScanner = async () => {
@@ -20,9 +18,8 @@ export const FoodGrid: FC = () => {
         history.push(`/eat/scan/${data.text}`);
     };
 
-    const foodQuery = useQuery(['Food', user?.id], () => {
-        if (!user) return;
-        return getUserFoods(user.id);
+    const foodQuery = useQuery(['Food'], () => {
+        return getUserFoods();
     });
 
     if (foodQuery.isLoading) {

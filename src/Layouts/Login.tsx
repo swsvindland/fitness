@@ -4,7 +4,7 @@ import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
 import { Loading } from '../Components/Loading';
 import { TextField } from '../Components/TextField';
-import { auth, createUser, getUser } from '../api';
+import { auth, getUser } from '../api';
 import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
 
 interface IProps {

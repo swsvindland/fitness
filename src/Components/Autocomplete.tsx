@@ -11,6 +11,7 @@ interface IProps {
     setQuery: (value: string) => void;
     filtered: string[];
     isLoading: boolean;
+    className?: string;
 }
 
 export const Autocomplete: FC<IProps> = ({
@@ -21,10 +22,11 @@ export const Autocomplete: FC<IProps> = ({
     setQuery,
     filtered,
     isLoading,
+    className,
 }) => {
     return (
-        <Combobox value={selected} onChange={setSelected}>
-            <div className="relative mt-1">
+        <Combobox value={selected} onChange={setQuery}>
+            <div className={`${className} relative mt-1`}>
                 <div className="relative w-full cursor-default overflow-hidden rounded text-left">
                     <Combobox.Label className="block text-sm font-medium text-secondary">
                         {label}
@@ -36,21 +38,17 @@ export const Autocomplete: FC<IProps> = ({
                         onChange={(event) => setQuery(event.target.value)}
                     />
                 </div>
-                <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                    afterLeave={() => setQuery('')}
-                >
-                    <Combobox.Options className="z-20 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-card py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                {filtered.length > 0 && (
+                    <Transition
+                        as={Fragment}
+                        leave="transition ease-in duration-100"
+                        leaveFrom="opacity-100"
+                        leaveTo="opacity-0"
+                        afterLeave={() => setQuery('')}
+                    >
                         {isLoading && <Loading />}
-                        {filtered.length === 0 && query !== '' ? (
-                            <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
-                                Nothing found.
-                            </div>
-                        ) : (
-                            filtered.map((item) => (
+                        <Combobox.Options className="z-20 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-card py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                            {filtered.map((item) => (
                                 <Combobox.Option
                                     key={item}
                                     className={({ active }) =>
@@ -90,10 +88,10 @@ export const Autocomplete: FC<IProps> = ({
                                         </>
                                     )}
                                 </Combobox.Option>
-                            ))
-                        )}
-                    </Combobox.Options>
-                </Transition>
+                            ))}
+                        </Combobox.Options>
+                    </Transition>
+                )}
             </div>
         </Combobox>
     );
