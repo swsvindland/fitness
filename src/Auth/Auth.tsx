@@ -28,7 +28,6 @@ export const Auth: FC = () => {
     if (user) {
         return (
             <AuthContext.Provider value={authContext}>
-                {/* @ts-ignore */}
                 <IonReactRouter>
                     <Layout>
                         <Routes />

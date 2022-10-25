@@ -35,8 +35,7 @@ export const WeightGraph: FC = () => {
     const [data, setData] = useState<
         | ChartData<
               'line',
-              (number | ScatterDataPoint | BubbleDataPoint | null)[],
-              unknown
+              (number | ScatterDataPoint | BubbleDataPoint | null)[]
           >
         | undefined
     >(undefined);

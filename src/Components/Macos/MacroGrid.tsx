@@ -1,20 +1,16 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { useQuery } from '@tanstack/react-query';
-import { AuthContext } from '../../Auth/Auth';
 import { Loading } from '../Loading';
 import { getCurrentUserMacros, getMacros } from '../../api';
 
 export const MacroGrid: FC = () => {
-    const { user } = useContext(AuthContext);
-
-    const macrosQuery = useQuery(['Macros', user?.id], () => {
-        if (!user) return;
-        return getMacros(user.id);
+    const macrosQuery = useQuery(['Macros'], () => {
+        return getMacros();
     });
-    const currentMacrosQuery = useQuery(['CurrentMacros', user?.id], () => {
-        if (!user) return;
-        return getCurrentUserMacros(user.id);
+
+    const currentMacrosQuery = useQuery(['CurrentMacros'], () => {
+        return getCurrentUserMacros();
     });
 
     if (macrosQuery.isLoading || currentMacrosQuery.isLoading) {

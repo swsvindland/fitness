@@ -13,7 +13,7 @@ export const WorkoutCompleted: FC<IProps> = ({ userId, workoutId }) => {
     const history = useHistory();
 
     const restartWorkoutMutation = useMutation(restartWorkout, {
-        onSuccess: async (data, variables, context) => {
+        onSuccess: async () => {
             history.push(`/workout`, { replace: true });
         },
     });

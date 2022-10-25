@@ -11,7 +11,7 @@ export const DeleteAccount: FC = () => {
     const [open, setOpen] = useState(false);
 
     const deleteMutation = useMutation(deleteUser, {
-        onSuccess: async (data, variables, context) => {
+        onSuccess: async () => {
             localStorage.clear();
             setUser(undefined);
         },

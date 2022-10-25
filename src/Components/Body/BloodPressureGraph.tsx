@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -14,7 +14,6 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
-import { AuthContext } from '../../Auth/Auth';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
 import { getAllUserBloodPressure } from '../../api';
@@ -31,18 +30,16 @@ ChartJS.register(
 );
 
 export const BloodPressureGraph: FC = () => {
-    const { user } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
               'line',
-              (number | ScatterDataPoint | BubbleDataPoint | null)[],
-              unknown
+              (number | ScatterDataPoint | BubbleDataPoint | null)[]
           >
         | undefined
     >(undefined);
 
     const userBloodPressureQuery = useQuery(
-        ['UserBloodPressure', user?.id],
+        ['UserBloodPressure'],
         getAllUserBloodPressure
     );
 
