@@ -8,6 +8,7 @@ import { ScrollToTop } from '../ScrollToTop';
 import { Register } from '../Layouts/Register';
 import { MinVersion } from '../Components/MinVersion';
 import { PurchaseAccess } from '../Components/PurchaseAccess';
+import { HeaderProvider } from '../Components/Navigation/HeaderContext';
 
 interface IAuthContext {
     user?: User;
@@ -29,12 +30,14 @@ export const Auth: FC = () => {
         return (
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
-                    <Layout>
-                        <Routes />
-                        <ScrollToTop />
-                        <PurchaseAccess />
-                        <MinVersion />
-                    </Layout>
+                    <HeaderProvider>
+                        <Layout>
+                            <Routes />
+                            <ScrollToTop />
+                            <PurchaseAccess />
+                            <MinVersion />
+                        </Layout>
+                    </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>
         );

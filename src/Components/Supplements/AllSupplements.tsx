@@ -6,10 +6,12 @@ import { getAllSupplements, getUserSupplements } from '../../api';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
 import { Loading } from '../Loading';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const AllSupplements: FC = () => {
     const { user } = useContext(AuthContext);
     const history = useHistory();
+    useShowBackButton();
 
     const allSupplementQuery = useQuery(['Supplements'], getAllSupplements);
     const userSupplementsQuery = useQuery(['UserSupplements', user?.id], () => {
@@ -31,7 +33,6 @@ export const AllSupplements: FC = () => {
 
     return (
         <div className="max-w-2xl w-full">
-            <Button onClick={() => history.goBack()}>Back</Button>
             <h2 className="text-lg text-secondary my-4 ">Active</h2>
             {userSupplementsQuery.data?.data.map((supplement) => (
                 <SupplementCard

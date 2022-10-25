@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
 import { addBloodPressure } from '../../api';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 interface IState {
     systolic: string;
@@ -13,6 +14,7 @@ interface IState {
 }
 
 export const BloodPressureCheckInForm: FC = () => {
+    useShowBackButton();
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const [state, setState] = useState<IState>({ systolic: '', diastolic: '' });
@@ -38,9 +40,8 @@ export const BloodPressureCheckInForm: FC = () => {
         history.goBack();
     };
 
-    const handleBack = () => {
+    const handleClear = () => {
         setState({ systolic: '', diastolic: '' });
-        history.goBack();
     };
 
     return (
@@ -79,8 +80,8 @@ export const BloodPressureCheckInForm: FC = () => {
                             />
                         </div>
                         <div className="px-4 py-3 bg-primary-dark text-right sm:px-6 flex justify-between">
-                            <SecondaryButton onClick={handleBack}>
-                                Go Back
+                            <SecondaryButton onClick={handleClear}>
+                                Clear
                             </SecondaryButton>
                             <Button type="submit">Save</Button>
                         </div>

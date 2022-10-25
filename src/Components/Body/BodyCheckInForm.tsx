@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
 import { addBody } from '../../api';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 interface IState {
     neck: string;
@@ -38,6 +39,7 @@ const initialState = {
 };
 
 export const BodyCheckInForm: FC = () => {
+    useShowBackButton();
     const [state, setState] = useState<IState>(initialState);
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
@@ -69,9 +71,8 @@ export const BodyCheckInForm: FC = () => {
         history.goBack();
     };
 
-    const handleBack = () => {
+    const handleClear = () => {
         setState(initialState);
-        history.goBack();
     };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -85,7 +86,7 @@ export const BodyCheckInForm: FC = () => {
         <div className="m-4">
             <div className="mt-5 md:mt-0 md:col-span-2">
                 <form onSubmit={handleSubmit}>
-                    <div className="shadow overflow-hidden rounded bg-card w-80">
+                    <div className="shadow overflow-hidden rounded bg-card w-80 mb-8">
                         <div className="p-4">
                             <TextField
                                 id="neck"
@@ -203,8 +204,8 @@ export const BodyCheckInForm: FC = () => {
                             </div>
                         </div>
                         <div className="px-4 py-3 bg-primary-dark text-right sm:px-6 flex justify-between">
-                            <SecondaryButton onClick={handleBack}>
-                                Go Back
+                            <SecondaryButton onClick={handleClear}>
+                                Clear
                             </SecondaryButton>
                             <Button type="submit">Save</Button>
                         </div>

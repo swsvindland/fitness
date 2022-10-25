@@ -4,10 +4,12 @@ import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { useHistory, useParams } from 'react-router';
 import { buyWorkout, getWorkout, getWorkoutDetails } from '../../api';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const WorkoutDetail: FC = () => {
     const { workoutId } = useParams<{ workoutId?: string }>();
     const history = useHistory();
+    useShowBackButton();
 
     const workoutQuery = useQuery(['Workout', workoutId], () => {
         if (!workoutId) return;

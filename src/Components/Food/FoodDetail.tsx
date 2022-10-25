@@ -9,8 +9,10 @@ import { TextField } from '../TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { Units } from '../../types/Units';
 import { AuthContext } from '../../Auth/Auth';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const FoodDetail: FC = () => {
+    useShowBackButton();
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
     const [quantity, setQuantity] = useState<number>(1);

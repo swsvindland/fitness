@@ -5,9 +5,11 @@ import { Loading } from '../Components/Loading';
 import { DoWorkout } from '../Components/Workout/DoWorkout';
 import { useHistory } from 'react-router';
 import { getUserWorkouts } from '../api';
+import { useHideBackButton } from '../Components/Navigation/headerHooks';
 
 export const Workout: FC = () => {
     const { user } = useContext(AuthContext);
+    const _ = useHideBackButton();
     const history = useHistory();
 
     const userWorkoutsQuery = useQuery(

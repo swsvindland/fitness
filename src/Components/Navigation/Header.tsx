@@ -3,9 +3,14 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import { DumbbellSolid } from '../../icons/DumbbellSolid';
 import { AuthContext } from '../../Auth/Auth';
+import { ArrowBackSolid } from '../../icons/ArrowBackSolid';
+import { useHistory } from 'react-router';
+import { HeaderContext } from './HeaderContext';
 
 export const Header: FC = () => {
     const { setUser } = useContext(AuthContext);
+    const { goBack } = useContext(HeaderContext);
+    const history = useHistory();
 
     const logout = () => {
         localStorage.clear();
@@ -20,9 +25,20 @@ export const Header: FC = () => {
         >
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-end">
-                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <DumbbellSolid className="fill-secondary w-6 h-6" />
-                    </div>
+                    {goBack ? (
+                        <div className="flex flex-1 items-center justify-start">
+                            <button
+                                type="button"
+                                onClick={() => history.goBack()}
+                            >
+                                <ArrowBackSolid className="fill-secondary w-6 h-6" />
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                            <DumbbellSolid className="fill-secondary w-6 h-6" />
+                        </div>
+                    )}
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         {/* TODO: Add back with notifications */}
                         {/*<button*/}

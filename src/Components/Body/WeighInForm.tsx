@@ -6,8 +6,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router';
 import { addWeight } from '../../api';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const WeighInForm: FC = () => {
+    useShowBackButton();
     const [weight, setWeight] = useState<string>('');
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
@@ -25,9 +27,8 @@ export const WeighInForm: FC = () => {
         history.goBack();
     };
 
-    const handleBack = () => {
+    const handleClear = () => {
         setWeight('');
-        history.goBack();
     };
 
     return (
@@ -48,8 +49,8 @@ export const WeighInForm: FC = () => {
                             />
                         </div>
                         <div className="px-4 py-3 bg-primary-dark text-right sm:px-6 flex justify-between">
-                            <SecondaryButton onClick={handleBack}>
-                                Go Back
+                            <SecondaryButton onClick={handleClear}>
+                                Clear
                             </SecondaryButton>
                             <Button type="submit">Save</Button>
                         </div>

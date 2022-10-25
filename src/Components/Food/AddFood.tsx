@@ -5,8 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { searchFood } from '../../api';
 import { Loading } from '../Loading';
 import { useHistory } from 'react-router';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const AddFood: FC = () => {
+    useShowBackButton();
     const [selected, setSelected] = useState<string | undefined>(undefined);
     const history = useHistory();
 
@@ -95,27 +97,27 @@ export const AddFood: FC = () => {
                                         <div className="mt-1 flex flex-col text-ternary lg:hidden">
                                             <span>
                                                 Protein:{' '}
-                                                {hint.food.nutrients.PROCNT.toFixed(
+                                                {hint.food.nutrients.PROCNT?.toFixed(
                                                     2
                                                 )}
                                                 g
                                             </span>
                                             <span>
                                                 Fat:{' '}
-                                                {hint.food.nutrients.FAT.toFixed(
+                                                {hint.food.nutrients.FAT?.toFixed(
                                                     2
                                                 )}
                                                 g
                                             </span>
                                             <span>
                                                 Carbs:{' '}
-                                                {hint.food.nutrients.CHOCDF.toFixed(
+                                                {hint.food.nutrients.CHOCDF?.toFixed(
                                                     2
                                                 )}
                                                 g
                                             </span>
                                             <span>
-                                                {hint.food.nutrients.ENERC_KCAL.toFixed(
+                                                {hint.food.nutrients.ENERC_KCAL?.toFixed(
                                                     2
                                                 )}
                                             </span>
@@ -132,7 +134,8 @@ export const AddFood: FC = () => {
                                             'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                         )}
                                     >
-                                        {hint.food.nutrients.PROCNT.toFixed(2)}g
+                                        {hint.food.nutrients.PROCNT?.toFixed(2)}
+                                        g
                                     </td>
                                     <td
                                         className={classNames(
@@ -142,7 +145,7 @@ export const AddFood: FC = () => {
                                             'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                         )}
                                     >
-                                        {hint.food.nutrients.FAT.toFixed(2)}g
+                                        {hint.food.nutrients.FAT?.toFixed(2)}g
                                     </td>
                                     <td
                                         className={classNames(
@@ -152,7 +155,8 @@ export const AddFood: FC = () => {
                                             'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                         )}
                                     >
-                                        {hint.food.nutrients.CHOCDF.toFixed(2)}g
+                                        {hint.food.nutrients.CHOCDF?.toFixed(2)}
+                                        g
                                     </td>
                                     <td
                                         className={classNames(
@@ -163,7 +167,7 @@ export const AddFood: FC = () => {
                                         )}
                                     >
                                         <div className="hidden sm:block">
-                                            {hint.food.nutrients.ENERC_KCAL.toFixed(
+                                            {hint.food.nutrients.ENERC_KCAL?.toFixed(
                                                 2
                                             )}{' '}
                                             Calories

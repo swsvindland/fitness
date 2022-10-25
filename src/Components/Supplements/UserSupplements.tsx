@@ -4,9 +4,11 @@ import { SupplementCard } from './SupplementCard';
 import { AuthContext } from '../../Auth/Auth';
 import { getUserSupplements } from '../../api';
 import { Loading } from '../Loading';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const UserSupplements: FC = () => {
     const { user } = useContext(AuthContext);
+    useShowBackButton();
 
     const userSupplementsQuery = useQuery(['UserSupplements', user?.id], () => {
         return getUserSupplements();

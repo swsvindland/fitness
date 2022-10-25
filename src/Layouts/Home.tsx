@@ -1,11 +1,13 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useEffect } from 'react';
 import { LinkButton } from '../Components/Buttons/LinkButton';
 import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../api';
 import { AuthContext } from '../Auth/Auth';
+import { useHideBackButton } from '../Components/Navigation/headerHooks';
 
 export const Home: FC = () => {
     const { user } = useContext(AuthContext);
+    useHideBackButton();
 
     const dashboardQuery = useQuery(['Dashboard', user?.id], () => {
         if (!user) return;
