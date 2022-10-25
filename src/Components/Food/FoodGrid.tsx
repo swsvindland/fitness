@@ -100,16 +100,27 @@ export const FoodGrid: FC = () => {
                                     </div>
                                     <div className="mt-1 flex flex-col text-ternary lg:hidden">
                                         <span>
-                                            Protein: {food.food?.protein}g
-                                        </span>
-                                        <span>Fat: {food.food?.totalFat}g</span>
-                                        <span>
-                                            Carbs: {food.food?.carbohydrates}g
+                                            Protein:{' '}
+                                            {food.food?.protein?.toFixed(2)}g
                                         </span>
                                         <span>
-                                            {food.food?.calories} Calories
+                                            Fat:{' '}
+                                            {food.food?.totalFat?.toFixed(2)}g
                                         </span>
-                                        <span>{food.servings} Servings</span>
+                                        <span>
+                                            Carbs:{' '}
+                                            {food.food?.carbohydrates?.toFixed(
+                                                2
+                                            )}
+                                            g
+                                        </span>
+                                        <span>
+                                            {food.food?.calories.toFixed(2)}{' '}
+                                            Calories
+                                        </span>
+                                        <span>
+                                            {food.servings.toFixed(2)} Servings
+                                        </span>
                                     </div>
                                     {foodIdx !== 0 ? (
                                         <div className="absolute right-0 left-6 -top-px h-px bg-gray-200" />
@@ -123,7 +134,7 @@ export const FoodGrid: FC = () => {
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {food.food?.protein}g
+                                    {food.food?.protein?.toFixed(2)}g
                                 </td>
                                 <td
                                     className={classNames(
@@ -133,7 +144,7 @@ export const FoodGrid: FC = () => {
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {food.food?.totalFat}g
+                                    {food.food?.totalFat?.toFixed(2)}g
                                 </td>
                                 <td
                                     className={classNames(
@@ -143,7 +154,7 @@ export const FoodGrid: FC = () => {
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {food.food?.carbohydrates}g
+                                    {food.food?.carbohydrates?.toFixed(2)}g
                                 </td>
                                 <td
                                     className={classNames(
@@ -154,7 +165,8 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     <div className="hidden sm:block">
-                                        {food.food?.calories} Calories
+                                        {food.food?.calories.toFixed(2)}{' '}
+                                        Calories
                                     </div>
                                 </td>
                                 <td
@@ -166,7 +178,7 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     <div className="hidden sm:block">
-                                        {food.servings} Servings
+                                        {food.servings.toFixed(2)} Servings
                                     </div>
                                 </td>
                             </tr>

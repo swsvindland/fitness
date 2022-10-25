@@ -13,7 +13,7 @@ import { AuthContext } from '../../Auth/Auth';
 export const FoodDetail: FC = () => {
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
-    const [quantity, setQuantity] = useState<number>(100);
+    const [quantity, setQuantity] = useState<number>(1);
     const [unit, setUnit] = useState<DropdownOption>({
         id: Units.Gram,
         name: 'Gram',
@@ -31,10 +31,25 @@ export const FoodDetail: FC = () => {
         return searchFood(foodId);
     });
 
-    const foodDetailsQuery = useQuery(['FoodDetails', foodId], () => {
-        if (!foodId) return;
-        return getFoodDetails(foodId);
-    });
+    const foodDetailsQuery = useQuery(
+        ['FoodDetails', foodId],
+        () => {
+            if (!foodId) return;
+
+            const servingSizes = searchFoodQuery.data?.data.at(0)?.measures;
+
+            const servingSize = servingSizes?.find(
+                (e) => e.label === 'Serving'
+            );
+
+            setQuantity(servingSize?.weight ?? 1);
+
+            return getFoodDetails(foodId, servingSize?.weight ?? 0);
+        },
+        {
+            enabled: !!searchFoodQuery.data,
+        }
+    );
 
     const totalNutrients = foodDetailsQuery.data?.data?.totalNutrients;
 
@@ -55,7 +70,7 @@ export const FoodDetail: FC = () => {
         <div>
             <div className="my-8">
                 <h1 className="text-2xl font-bold text-secondary">
-                    {searchFoodQuery.data?.data?.[0].label}
+                    {searchFoodQuery.data?.data?.at(0)?.food.label}
                 </h1>
             </div>
             <div className="flex flex-row align-middle mb-2 justify-between">
@@ -109,11 +124,9 @@ export const FoodDetail: FC = () => {
                             }
                         </div>
                         <div className="text-ternary ml-auto">
-                            {
-                                totalNutrients[
-                                    key as keyof EdamamTotalNutrients
-                                ].quantity
-                            }
+                            {totalNutrients[
+                                key as keyof EdamamTotalNutrients
+                            ].quantity.toFixed(2)}
                         </div>
                         <div className="text-ternary ml-auto">
                             {

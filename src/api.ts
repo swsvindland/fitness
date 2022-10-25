@@ -18,6 +18,7 @@ import { UserBloodPressure } from './types/userBloodPressure';
 import { UserBody } from './types/userBody';
 import { UserWeight } from './types/userWeight';
 import { User } from './types/user';
+import { EdamamFoodHint } from './types/EdamamFoodHint';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
@@ -198,7 +199,7 @@ export const foodAutocomplete = (
 export const searchFood = (
     query: string,
     barcode?: string
-): Promise<AxiosResponse<EdamamFood[]>> => {
+): Promise<AxiosResponse<EdamamFoodHint[]>> => {
     const params = getParams({ query, barcode });
 
     return axios.get(`${API_URL}/api/ParseFood`, {
@@ -207,9 +208,10 @@ export const searchFood = (
 };
 
 export const getFoodDetails = (
-    foodId: string
+    foodId: string,
+    servingSize: number
 ): Promise<AxiosResponse<EdamamFoodDetails>> => {
-    const params = getParams({ foodId });
+    const params = getParams({ foodId, servingSize });
 
     return axios.get(`${API_URL}/api/GetFoodDetails`, {
         params,

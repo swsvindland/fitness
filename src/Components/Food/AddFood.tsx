@@ -74,10 +74,12 @@ export const AddFood: FC = () => {
                                 <span className="text-ternary">No Results</span>
                             </tr>
                         ) : (
-                            searchFoodQuery.data?.data.map((food, foodIdx) => (
+                            searchFoodQuery.data?.data.map((hint, foodIdx) => (
                                 <tr
-                                    key={food.foodId}
-                                    onClick={() => handleRowClick(food.foodId)}
+                                    key={hint.food.foodId}
+                                    onClick={() =>
+                                        handleRowClick(hint.food.foodId)
+                                    }
                                 >
                                     <td
                                         className={classNames(
@@ -88,21 +90,34 @@ export const AddFood: FC = () => {
                                         )}
                                     >
                                         <div className="font-medium text-secondary">
-                                            {food.label}
+                                            {hint.food.label}
                                         </div>
                                         <div className="mt-1 flex flex-col text-ternary lg:hidden">
                                             <span>
-                                                Protein: {food.nutrients.PROCNT}
+                                                Protein:{' '}
+                                                {hint.food.nutrients.PROCNT.toFixed(
+                                                    2
+                                                )}
                                                 g
                                             </span>
                                             <span>
-                                                Fat: {food.nutrients.FAT}g
+                                                Fat:{' '}
+                                                {hint.food.nutrients.FAT.toFixed(
+                                                    2
+                                                )}
+                                                g
                                             </span>
                                             <span>
-                                                Carbs: {food.nutrients.CHOCDF}g
+                                                Carbs:{' '}
+                                                {hint.food.nutrients.CHOCDF.toFixed(
+                                                    2
+                                                )}
+                                                g
                                             </span>
                                             <span>
-                                                {food.nutrients.ENERC_KCAL}
+                                                {hint.food.nutrients.ENERC_KCAL.toFixed(
+                                                    2
+                                                )}
                                             </span>
                                         </div>
                                         {foodIdx !== 0 ? (
@@ -117,7 +132,7 @@ export const AddFood: FC = () => {
                                             'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                         )}
                                     >
-                                        {food.nutrients.PROCNT}g
+                                        {hint.food.nutrients.PROCNT.toFixed(2)}g
                                     </td>
                                     <td
                                         className={classNames(
@@ -127,7 +142,7 @@ export const AddFood: FC = () => {
                                             'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                         )}
                                     >
-                                        {food.nutrients.FAT}g
+                                        {hint.food.nutrients.FAT.toFixed(2)}g
                                     </td>
                                     <td
                                         className={classNames(
@@ -137,7 +152,7 @@ export const AddFood: FC = () => {
                                             'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                         )}
                                     >
-                                        {food.nutrients.CHOCDF}g
+                                        {hint.food.nutrients.CHOCDF.toFixed(2)}g
                                     </td>
                                     <td
                                         className={classNames(
@@ -148,7 +163,10 @@ export const AddFood: FC = () => {
                                         )}
                                     >
                                         <div className="hidden sm:block">
-                                            {food.nutrients.ENERC_KCAL} Calories
+                                            {hint.food.nutrients.ENERC_KCAL.toFixed(
+                                                2
+                                            )}{' '}
+                                            Calories
                                         </div>
                                     </td>
                                 </tr>
