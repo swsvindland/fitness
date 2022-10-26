@@ -9,7 +9,7 @@ import {
 } from '@awesome-cordova-plugins/in-app-purchase-2';
 
 export const PurchaseAccess: FC = () => {
-    const [open] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(false);
 
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
@@ -18,13 +18,21 @@ export const PurchaseAccess: FC = () => {
     useEffect(() => {
         const init = async () => {
             await initInAppPurchase();
+            handleOwned();
         };
-        init();
+        if (isPlatform('ios') || isPlatform('android')) {
+            init();
+        }
     }, []);
 
     //if on an ios or android device, then get product info
     const initInAppPurchase = () => {
         if (isPlatform('ios') || isPlatform('android')) {
+            iap.verbosity = iap.DEBUG;
+
+            iap.validator =
+                'https://validator.fovea.cc/v1/validate?appName=com.svindland.fitness&apiKey=85cb7102-17c8-4f39-adaf-35051a4fb53b';
+
             iap.register({
                 id: 'f345a58b28124c28b14b7a6c3093114e',
                 alias: 'Access Monthly',
@@ -53,9 +61,7 @@ export const PurchaseAccess: FC = () => {
 
     //if user clicks purchase button
     const purchaseMonthly = () => {
-        if (monthly?.owned) {
-            restoreMonthly();
-        } else {
+        try {
             iap.order('Access Monthly').then(() => {
                 iap.when('f345a58b28124c28b14b7a6c3093114e').approved(
                     (p: IAPProduct) => {
@@ -66,13 +72,13 @@ export const PurchaseAccess: FC = () => {
                 );
             });
             iap.refresh();
+        } catch (e) {
+            console.error(e);
         }
     };
 
     const purchaseYearly = () => {
-        if (yearly?.owned) {
-            restoreYearly();
-        } else {
+        try {
             iap.order('Access Yearly').then(() => {
                 iap.when('5b0353d4799845989d2f4e143b3cb3ad').approved(
                     (p: IAPProduct) => {
@@ -83,30 +89,22 @@ export const PurchaseAccess: FC = () => {
                 );
             });
             iap.refresh();
+        } catch (e) {
+            console.error(e);
         }
     };
 
-    //if user clicks retore or promo code button
-    const restoreMonthly = () => {
-        iap.when('f345a58b28124c28b14b7a6c3093114e').owned((p: IAPProduct) => {
-            if (monthly?.owned) {
-                //store product
-            } else {
-                alert('You have not purchased this product before.');
-            }
-        });
-        iap.refresh();
-    };
+    const handleOwned = () => {
+        iap.when('subscription').updated((product: IAPProduct) => {
+            const monthly = iap.get('f345a58b28124c28b14b7a6c3093114e');
+            const yearly = iap.get('5b0353d4799845989d2f4e143b3cb3ad');
 
-    const restoreYearly = () => {
-        iap.when('5b0353d4799845989d2f4e143b3cb3ad').owned((p: IAPProduct) => {
-            if (monthly?.owned) {
-                //store product
+            if (monthly?.owned || yearly.owned) {
+                setOpen(false);
             } else {
-                alert('You have not purchased this product before.');
+                setOpen(true);
             }
         });
-        iap.refresh();
     };
 
     return (
@@ -177,6 +175,9 @@ export const PurchaseAccess: FC = () => {
                                                                 onClick={
                                                                     purchaseMonthly
                                                                 }
+                                                                disabled={
+                                                                    !monthly?.canPurchase
+                                                                }
                                                             >
                                                                 Monthly Billing
                                                             </SecondaryButton>
@@ -211,6 +212,9 @@ export const PurchaseAccess: FC = () => {
                                                                 className="flex w-full justify-center align-middle"
                                                                 onClick={
                                                                     purchaseYearly
+                                                                }
+                                                                disabled={
+                                                                    yearly?.canPurchase
                                                                 }
                                                             >
                                                                 Yearly Billing
