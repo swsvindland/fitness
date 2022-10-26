@@ -53,7 +53,7 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
         setRegister(true);
     };
 
-    if (silentLoginQuery.isLoading) {
+    if (silentLoginQuery.isFetching) {
         return (
             <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
