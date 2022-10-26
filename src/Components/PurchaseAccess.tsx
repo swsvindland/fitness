@@ -99,7 +99,9 @@ export const PurchaseAccess: FC = () => {
             const monthly = iap.get('f345a58b28124c28b14b7a6c3093114e');
             const yearly = iap.get('5b0353d4799845989d2f4e143b3cb3ad');
 
-            if (monthly?.owned || yearly.owned) {
+            if (!monthly || !yearly) {
+                setOpen(false);
+            } else if (monthly.owned || yearly.owned) {
                 setOpen(false);
             } else {
                 setOpen(true);
