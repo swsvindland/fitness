@@ -1,5 +1,5 @@
-import { FC, FormEvent, useCallback, useEffect, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { FC, FormEvent, useState } from 'react';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { User } from '../types/user';
 import { Button } from '../Components/Buttons/Button';
 import { Loading } from '../Components/Loading';
@@ -8,27 +8,31 @@ import { auth, getUser } from '../api';
 import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
 
 interface IProps {
-    setUser: (user: User) => void;
+    setUser: (user?: User) => void;
     setRegister: (register: boolean) => void;
 }
 
 export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(false);
 
-    const silentLogin = useCallback(async () => {
-        setLoading(true);
-        const user = await getUser();
-        setUser(user.data);
-        setLoading(false);
-    }, [setUser]);
-
-    useEffect(() => {
-        if (localStorage.getItem('token') && localStorage.getItem('userId')) {
-            silentLogin();
+    const silentLoginQuery = useQuery(
+        ['User'],
+        async () => {
+            const user = await getUser();
+            if (user.data) {
+                setUser(user.data);
+            } else {
+                setUser(undefined);
+                localStorage.clear();
+            }
+        },
+        {
+            enabled:
+                !!localStorage.getItem('token') &&
+                !!localStorage.getItem('userId'),
         }
-    }, [silentLogin]);
+    );
 
     const loginMutation = useMutation(auth, {
         onSuccess: async (data, variables, context) => {
@@ -49,7 +53,7 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
         setRegister(true);
     };
 
-    if (loading) {
+    if (silentLoginQuery.isLoading) {
         return (
             <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
