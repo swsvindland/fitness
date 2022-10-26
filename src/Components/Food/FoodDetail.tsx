@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addUserFood, getFoodDetails, searchFood } from '../../api';
@@ -15,7 +15,7 @@ export const FoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
-    const [quantity, setQuantity] = useState<number>(1);
+    const [quantity, setQuantity] = useState<number | undefined>(undefined);
     const [unit, setUnit] = useState<DropdownOption>({
         id: Units.Gram,
         name: 'Gram',
@@ -33,34 +33,29 @@ export const FoodDetail: FC = () => {
         return searchFood(foodId);
     });
 
+    useEffect(() => {
+        const servingSizes = searchFoodQuery.data?.data.at(0)?.measures;
+
+        const servingSize = servingSizes?.find((e) => e.label === 'Serving');
+
+        setQuantity(servingSize?.weight ?? 1);
+    }, [searchFoodQuery.data]);
+
     const foodDetailsQuery = useQuery(
-        ['FoodDetails', foodId],
+        ['FoodDetails', foodId, quantity],
         () => {
             if (!foodId) return;
 
-            const servingSizes = searchFoodQuery.data?.data.at(0)?.measures;
-
-            const servingSize = servingSizes?.find(
-                (e) => e.label === 'Serving'
-            );
-
-            setQuantity(servingSize?.weight ?? 1);
-
-            return getFoodDetails(foodId, servingSize?.weight ?? 0);
+            return getFoodDetails(foodId, quantity ?? 0);
         },
         {
-            enabled: !!searchFoodQuery.data,
+            enabled: quantity !== undefined,
         }
     );
 
     const totalNutrients = foodDetailsQuery.data?.data?.totalNutrients;
 
-    if (
-        searchFoodQuery.isLoading ||
-        foodDetailsQuery.isLoading ||
-        !totalNutrients ||
-        !user
-    ) {
+    if (searchFoodQuery.isLoading) {
         return <Loading />;
     }
 
@@ -82,7 +77,7 @@ export const FoodDetail: FC = () => {
                     onChange={(event) =>
                         setQuantity(parseFloat(event.target.value))
                     }
-                    value={quantity}
+                    value={quantity ?? ''}
                     className="my-auto"
                 />
                 <Dropdown
@@ -100,8 +95,8 @@ export const FoodDetail: FC = () => {
                             onClick={() =>
                                 mutation.mutate({
                                     edamamFoodId: foodId,
-                                    userId: user.id,
-                                    amount: quantity,
+                                    userId: user?.id ?? '',
+                                    amount: quantity ?? 0,
                                     unit: unit.name,
                                     created: new Date().toISOString(),
                                 })
@@ -113,32 +108,34 @@ export const FoodDetail: FC = () => {
                 </div>
             </div>
             <div className="flex flex-col justify-center rounded bg-card p-4">
-                {Object.keys(totalNutrients).map((key) => (
-                    <div
-                        key={key}
-                        className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1"
-                    >
-                        <div className="text-secondary">
-                            {
-                                totalNutrients[
+                {foodDetailsQuery.isFetching && <Loading />}
+                {totalNutrients &&
+                    Object.keys(totalNutrients).map((key) => (
+                        <div
+                            key={key}
+                            className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1"
+                        >
+                            <div className="text-secondary">
+                                {
+                                    totalNutrients[
+                                        key as keyof EdamamTotalNutrients
+                                    ].label
+                                }
+                            </div>
+                            <div className="text-ternary ml-auto">
+                                {totalNutrients[
                                     key as keyof EdamamTotalNutrients
-                                ].label
-                            }
+                                ].quantity.toFixed(2)}
+                            </div>
+                            <div className="text-ternary ml-auto">
+                                {
+                                    totalNutrients[
+                                        key as keyof EdamamTotalNutrients
+                                    ].unit
+                                }
+                            </div>
                         </div>
-                        <div className="text-ternary ml-auto">
-                            {totalNutrients[
-                                key as keyof EdamamTotalNutrients
-                            ].quantity.toFixed(2)}
-                        </div>
-                        <div className="text-ternary ml-auto">
-                            {
-                                totalNutrients[
-                                    key as keyof EdamamTotalNutrients
-                                ].unit
-                            }
-                        </div>
-                    </div>
-                ))}
+                    ))}
             </div>
         </div>
     );
