@@ -9,7 +9,7 @@ import { useHideBackButton } from '../Components/Navigation/headerHooks';
 
 export const Workout: FC = () => {
     const { user } = useContext(AuthContext);
-    const _ = useHideBackButton();
+    useHideBackButton();
     const history = useHistory();
 
     const userWorkoutsQuery = useQuery(

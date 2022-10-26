@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { LinkButton } from '../Components/Buttons/LinkButton';
 import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../api';

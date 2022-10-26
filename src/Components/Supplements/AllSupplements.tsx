@@ -1,16 +1,13 @@
 import { FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
-import { Button } from '../Buttons/Button';
 import { getAllSupplements, getUserSupplements } from '../../api';
 import { AuthContext } from '../../Auth/Auth';
-import { useHistory } from 'react-router';
 import { Loading } from '../Loading';
 import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const AllSupplements: FC = () => {
     const { user } = useContext(AuthContext);
-    const history = useHistory();
     useShowBackButton();
 
     const allSupplementQuery = useQuery(['Supplements'], getAllSupplements);

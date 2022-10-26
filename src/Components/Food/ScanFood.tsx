@@ -23,7 +23,7 @@ export const ScanFood: FC = () => {
     }
 
     if ((searchFoodQuery.data?.data.length ?? 0) >= 0) {
-        history.push(`/eat/food/${searchFoodQuery.data?.data[0].foodId}`);
+        history.push(`/eat/food/${searchFoodQuery.data?.data[0].food.foodId}`);
     }
 
     if (searchFoodQuery.data?.data.length === 0) {
