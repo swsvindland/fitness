@@ -8,6 +8,8 @@
         "serve": "vite preview",
         "ionic:serve": "vite",
         "ionic:build": "vite build",
+        "run:ios": "ionic capacitor run ios -l --external",
+        "run:android": "ionic capacitor run android -l --external",
         "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {

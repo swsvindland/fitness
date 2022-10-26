@@ -32,14 +32,7 @@ export const Sidebar: FC = () => {
     return (
         <div className="sidebar z-20 flex-1 flex flex-col min-h-0 border-gray-200 bg-primary-dark shadow">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <div className="flex items-center flex-shrink-0 px-4">
-                    <img
-                        className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600"
-                        alt="Workflow"
-                    />
-                </div>
-                <nav className="mt-5 flex-1 px-2 bg-transparent space-y-1">
+                <nav className="mt-5 flex-1 px-2 bg-transparent space-y-1 mt-16">
                     <Link to="/home" className={linkStyle('/home')}>
                         <HomeSolid className={iconStyle('/home')} />
                         Home
