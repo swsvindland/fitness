@@ -30,7 +30,7 @@ const getParams = (params?: object) => {
     return {
         userId,
         token: token,
-        date: new Date().toISOString(),
+        date: new Date().toDateString(),
         version: '1.0.0',
         ...params,
     };
