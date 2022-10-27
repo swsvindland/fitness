@@ -42,6 +42,7 @@ export const AllSupplements: FC = () => {
                     url={supplement.supplement?.url}
                     commission={supplement.supplement?.commission}
                     userSupplementId={supplement.id}
+                    icon={supplement.supplement?.icon}
                 />
             ))}
             <h2 className="text-lg text-secondary my-4">all</h2>
@@ -54,6 +55,7 @@ export const AllSupplements: FC = () => {
                     brand={supplement.brand}
                     url={supplement.url}
                     commission={supplement.commission}
+                    icon={supplement?.icon}
                 />
             ))}
         </div>

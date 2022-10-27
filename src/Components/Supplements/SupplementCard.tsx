@@ -9,6 +9,10 @@ import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
 } from '../../api';
+import { SupplementIcon } from '../../types/supplement';
+import { CapsulesSolid } from '../../icons/CapsulesSolid';
+import { SyringeSolid } from '../../icons/SyringeSolid';
+import { TabletSolid } from '../../icons/TabletSolid';
 
 interface IProps {
     isUser: boolean;
@@ -19,12 +23,26 @@ interface IProps {
     url?: string;
     commission?: number;
     userSupplementId?: number;
+    icon?: SupplementIcon;
 }
 
 export interface Time {
     name: string;
     enabled: boolean;
 }
+
+const mapToIcon = (icon?: SupplementIcon) => {
+    switch (icon) {
+        case SupplementIcon.Capsule:
+            return <CapsulesSolid className="fill-primary-dark" />;
+        case SupplementIcon.Tablet:
+            return <TabletSolid className="fill-primary-dark" />;
+        case SupplementIcon.Injection:
+            return <SyringeSolid className="fill-primary-dark" />;
+        default:
+            return <></>;
+    }
+};
 
 export const SupplementCard: FC<IProps> = ({
     isUser,
@@ -35,6 +53,7 @@ export const SupplementCard: FC<IProps> = ({
     url,
     commission,
     userSupplementId,
+    icon,
 }) => {
     const { user } = useContext(AuthContext);
     const [open, setOpen] = useState<boolean>(false);
@@ -94,7 +113,9 @@ export const SupplementCard: FC<IProps> = ({
             >
                 <div className="flex items-center">
                     <div className="mr-4">
-                        <div className="bg-ternary w-8 h-8 rounded-full" />
+                        <div className="bg-ternary w-8 h-8 rounded-full flex justify-center items-center">
+                            <div className="w-4 h-4">{mapToIcon(icon)}</div>
+                        </div>
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg text-secondary">{name}</span>

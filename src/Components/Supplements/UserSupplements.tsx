@@ -53,6 +53,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-Morning`}
                             name={userSupplement.supplement!.name}
                             times={['Morning']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
@@ -70,6 +71,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-Breakfast`}
                             name={userSupplement.supplement!.name}
                             times={['Breakfast']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
@@ -87,6 +89,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-Lunch`}
                             name={userSupplement.supplement!.name}
                             times={['Lunch']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
@@ -104,6 +107,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-PreWorkout`}
                             name={userSupplement.supplement!.name}
                             times={['PreWorkout']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
@@ -121,6 +125,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-PostWorkout`}
                             name={userSupplement.supplement!.name}
                             times={['PostWorkout']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
@@ -138,6 +143,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-Dinner`}
                             name={userSupplement.supplement!.name}
                             times={['Dinner']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
@@ -155,6 +161,7 @@ export const UserSupplements: FC = () => {
                             key={`${userSupplement.supplementId}-Evening`}
                             name={userSupplement.supplement!.name}
                             times={['Evening']}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </>
