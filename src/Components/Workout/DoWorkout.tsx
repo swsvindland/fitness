@@ -108,6 +108,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
                         exercise={exercise}
                         week={week.id}
                         day={day}
+                        icon={exercise.exercise.icon}
                     />
                 ))}
             </div>
