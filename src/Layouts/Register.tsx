@@ -17,6 +17,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
     const [error, setError] = useState<string | undefined>(undefined);
+    const [agree, setAgree] = useState<boolean>(false);
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -90,6 +91,41 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                                 setPasswordConfirm(event.target.value as string)
                             }
                         />
+                        <div className="flex items-center">
+                            <input
+                                id="agree"
+                                name="agree"
+                                type="checkbox"
+                                checked={agree}
+                                onChange={(event) => {
+                                    setAgree(event.target.checked);
+                                }}
+                                className="h-4 w-4 rounded border-ternary accent-secondary focus:ring-secondary"
+                            />
+                            <label
+                                htmlFor="agree"
+                                className="ml-2 block text-sm text-ternary"
+                            >
+                                Agree to{' '}
+                                <a
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    href="https://svindland.dev/terms.html"
+                                    className="text-secondary"
+                                >
+                                    Terms and Conditions
+                                </a>{' '}
+                                and{' '}
+                                <a
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    href="https://svindland.dev/privacy.html"
+                                    className="text-secondary"
+                                >
+                                    Privacy Policy
+                                </a>
+                            </label>
+                        </div>
                         {error && <span className="text-red-500">{error}</span>}
                         <div>
                             {registerMutation.isLoading ? (
@@ -98,6 +134,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                                 <Button
                                     type="submit"
                                     className="w-full text-center flex justify-center"
+                                    disabled={!agree}
                                 >
                                     Create Account
                                 </Button>

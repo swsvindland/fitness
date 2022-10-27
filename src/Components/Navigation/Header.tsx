@@ -83,6 +83,30 @@ export const Header: FC = () => {
                                         </Link>
                                     </Menu.Item>
                                     <Menu.Item>
+                                        <a
+                                            href="https://svindland.dev/terms.html"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className={
+                                                'block px-4 py-2 text-sm text-ternary hover:bg-primary-dark'
+                                            }
+                                        >
+                                            Terms &amp; Conditions
+                                        </a>
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                        <a
+                                            href="https://svindland.dev/privacy.html"
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className={
+                                                'block px-4 py-2 text-sm text-ternary hover:bg-primary-dark'
+                                            }
+                                        >
+                                            Privacy Policy
+                                        </a>
+                                    </Menu.Item>
+                                    <Menu.Item>
                                         <button
                                             onClick={logout}
                                             className={
