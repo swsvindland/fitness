@@ -4,7 +4,6 @@ import { AuthContext } from '../../Auth/Auth';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ExternalLink } from '../../icons/ExternalLink';
 import { Loading } from '../Loading';
-import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
@@ -13,6 +12,7 @@ import { SupplementIcon } from '../../types/supplement';
 import { CapsulesSolid } from '../../icons/CapsulesSolid';
 import { SyringeSolid } from '../../icons/SyringeSolid';
 import { TabletSolid } from '../../icons/TabletSolid';
+import { CircleCheckSolid } from '../../icons/CircleCheckSolid';
 
 interface IProps {
     isUser: boolean;
@@ -147,7 +147,7 @@ export const SupplementCard: FC<IProps> = ({
                     checked &&
                     !mutation.isLoading &&
                     !userSupplementActivityQuery.isFetching && (
-                        <CheckCircleIcon className="fill-secondary w-8 h-8" />
+                        <CircleCheckSolid className="fill-secondary w-8 h-8" />
                     )}
                 {isUser &&
                     (mutation.isLoading ||

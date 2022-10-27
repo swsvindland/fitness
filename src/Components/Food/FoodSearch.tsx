@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 import { Button } from '../Buttons/Button';
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid';
 import { TextField } from '../TextField';
+import { MagnifyingGlassSolid } from '../../icons/MagnifyingGlassSolid';
 
 interface IProps {
     selected?: string;
@@ -30,7 +30,7 @@ export const FoodSearch: FC<IProps> = ({ selected, setSelected }) => {
                 onChange={(event) => setQuery(event.target.value as string)}
             />
             <Button className=" w-10 h-10 ml-2 m-1 !p-2" type="submit">
-                <MagnifyingGlassIcon className="w-6 h-6 text-secondary" />
+                <MagnifyingGlassSolid className="w-6 h-6 text-secondary" />
             </Button>
         </form>
     );

@@ -1,6 +1,7 @@
 import { FC, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { CircleCheckSolid } from '../icons/CircleCheckSolid';
+import { ChevronDownSolid } from '../icons/ChevronDownSolid';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
@@ -44,7 +45,7 @@ export const Dropdown: FC<IProps> = ({
                                 {selected.name}
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                <ChevronUpDownIcon
+                                <ChevronDownSolid
                                     className="h-5 w-5 text-secondary"
                                     aria-hidden="true"
                                 />
@@ -94,7 +95,7 @@ export const Dropdown: FC<IProps> = ({
                                                             'absolute inset-y-0 right-0 flex items-center pr-4'
                                                         )}
                                                     >
-                                                        <CheckIcon
+                                                        <CircleCheckSolid
                                                             className="h-5 w-5"
                                                             aria-hidden="true"
                                                         />

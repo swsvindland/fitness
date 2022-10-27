@@ -1,11 +1,11 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextField';
-import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { Loading } from '../Loading';
 import { addWorkoutActivity, getWorkoutActivity } from '../../api';
+import { CircleCheckSolid } from '../../icons/CircleCheckSolid';
 
 interface IProps {
     set: number;
@@ -119,7 +119,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                         {mutation.isLoading ? (
                             <Loading />
                         ) : (
-                            <CheckCircleIcon
+                            <CircleCheckSolid
                                 className={
                                     saved
                                         ? 'fill-secondary'

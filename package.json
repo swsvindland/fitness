@@ -24,7 +24,6 @@
         "@capacitor/keyboard": "4.0.1",
         "@capacitor/status-bar": "4.0.1",
         "@headlessui/react": "^1.7.3",
-        "@heroicons/react": "^2.0.12",
         "@ionic/react": "^6.3.3",
         "@ionic/react-router": "^6.3.3",
         "@tanstack/react-query": "^4.13.0",

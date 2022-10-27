@@ -1,13 +1,10 @@
 import { FC } from 'react';
+import { IconProps } from './IconProps';
 
-interface IProps {
-    className?: string;
-}
-
-export const ExternalLink: FC<IProps> = ({ className }) => {
+export const ExternalLink: FC<IconProps> = (props) => {
     return (
         <svg
-            className={className}
+            {...props}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
         >
