@@ -19,9 +19,9 @@ import { UserWeight } from './types/userWeight';
 import { User } from './types/user';
 import { EdamamFoodHint } from './types/EdamamFoodHint';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');

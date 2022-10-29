@@ -53,80 +53,92 @@ export const PurchaseAccess: FC = () => {
 
     //if user clicks purchase button
     const purchaseMonthly = () => {
-        try {
-            setLoading(true);
-            iap.order('Access Monthly');
-        } catch (e) {
-            console.error(e);
-        } finally {
-            iap.refresh();
-            setLoading(false);
+        if (isPlatform('ios') || isPlatform('android')) {
+            try {
+                setLoading(true);
+                iap.order('Access Monthly');
+            } catch (e) {
+                console.error(e);
+            } finally {
+                iap.refresh();
+                setLoading(false);
+            }
         }
     };
 
     const purchaseYearly = () => {
-        try {
-            setLoading(true);
-            iap.order('Access Yearly');
-        } catch (e) {
-            console.error(e);
-        } finally {
-            iap.refresh();
-            setLoading(false);
+        if (isPlatform('ios') || isPlatform('android')) {
+            try {
+                setLoading(true);
+                iap.order('Access Yearly');
+            } catch (e) {
+                console.error(e);
+            } finally {
+                iap.refresh();
+                setLoading(false);
+            }
         }
     };
 
     const restore = () => {
-        iap.refresh();
+        if (isPlatform('ios') || isPlatform('android')) {
+            iap.refresh();
+        }
     };
 
     useEffect(() => {
-        iap.when(MONTHLY_SUBSCRIPTION).approved((p: IAPProduct) => {
-            p.verify();
-            p.finish();
-            setOpen(true);
-        });
-        iap.when(MONTHLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
-            setOpen(true);
-        });
-        iap.when(MONTHLY_SUBSCRIPTION).expired((p: IAPProduct) => {
-            setOpen(true);
-        });
-        iap.when(MONTHLY_SUBSCRIPTION).error((p: IAPProduct) => {
-            setOpen(true);
-        });
-    });
-
-    useEffect(() => {
-        iap.when(YEARLY_SUBSCRIPTION).approved((p: IAPProduct) => {
-            p.verify();
-            p.finish();
-            setOpen(true);
-        });
-        iap.when(YEARLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
-            setOpen(true);
-        });
-        iap.when(YEARLY_SUBSCRIPTION).expired((p: IAPProduct) => {
-            setOpen(true);
-        });
-        iap.when(YEARLY_SUBSCRIPTION).error((p: IAPProduct) => {
-            setOpen(true);
-        });
-    });
-
-    useEffect(() => {
-        iap.when('subscription').updated((product: IAPProduct) => {
-            const monthly = iap.get(MONTHLY_SUBSCRIPTION);
-            const yearly = iap.get(YEARLY_SUBSCRIPTION);
-
-            if (!monthly || !yearly) {
-                setOpen(false);
-            } else if (monthly.owned || yearly.owned) {
-                setOpen(false);
-            } else {
+        if (isPlatform('ios') || isPlatform('android')) {
+            iap.when(MONTHLY_SUBSCRIPTION).approved((p: IAPProduct) => {
+                p.verify();
+                p.finish();
                 setOpen(true);
-            }
-        });
+            });
+            iap.when(MONTHLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
+                setOpen(true);
+            });
+            iap.when(MONTHLY_SUBSCRIPTION).expired((p: IAPProduct) => {
+                setOpen(true);
+            });
+            iap.when(MONTHLY_SUBSCRIPTION).error((p: IAPProduct) => {
+                setOpen(true);
+            });
+        }
+    });
+
+    useEffect(() => {
+        if (isPlatform('ios') || isPlatform('android')) {
+            iap.when(YEARLY_SUBSCRIPTION).approved((p: IAPProduct) => {
+                p.verify();
+                p.finish();
+                setOpen(true);
+            });
+            iap.when(YEARLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
+                setOpen(true);
+            });
+            iap.when(YEARLY_SUBSCRIPTION).expired((p: IAPProduct) => {
+                setOpen(true);
+            });
+            iap.when(YEARLY_SUBSCRIPTION).error((p: IAPProduct) => {
+                setOpen(true);
+            });
+        }
+    });
+
+    useEffect(() => {
+        if (isPlatform('ios') || isPlatform('android')) {
+            iap.when('subscription').updated((product: IAPProduct) => {
+                const monthly = iap.get(MONTHLY_SUBSCRIPTION);
+                const yearly = iap.get(YEARLY_SUBSCRIPTION);
+
+                if (!monthly || !yearly) {
+                    setOpen(false);
+                } else if (monthly.owned || yearly.owned) {
+                    setOpen(false);
+                } else {
+                    setOpen(true);
+                }
+            });
+        }
     });
 
     return (
