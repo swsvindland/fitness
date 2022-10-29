@@ -381,3 +381,12 @@ export const updateSex = (body: {
 
     return axios.post(`${API_URL}/api/UpdateUserSex`, body, { params });
 };
+
+export const changePassword = (body: {
+    oldPassword: string;
+    newPassword: string;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/ChangePassword`, body, { params });
+};

@@ -17,6 +17,7 @@ import { FoodDetail } from './Food/FoodDetail';
 import { ScanFood } from './Food/ScanFood';
 import { Settings } from '../Layouts/Settings';
 import { SexForm } from './Body/SexForm';
+import { ChangePasswordForm } from './Settings/ChangePasswordForm';
 
 export const Routes: FC = () => {
     return (
@@ -62,6 +63,11 @@ export const Routes: FC = () => {
             />
             <Route path="/body/sex" component={SexForm} exact={true} />
             <Route path="/settings" component={Settings} exact={true} />
+            <Route
+                path="/settings/change-password"
+                component={ChangePasswordForm}
+                exact={true}
+            />
             <Redirect from="*" to="/home" />
         </Switch>
     );
