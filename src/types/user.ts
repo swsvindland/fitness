@@ -3,6 +3,12 @@ export interface User {
     created: string;
     lastLogin: string;
     email: string;
-    sex: string;
+    sex: Sex;
     access: boolean;
+}
+
+export enum Sex {
+    Unknown,
+    Male,
+    Female,
 }

@@ -16,7 +16,7 @@ import { UserWorkout } from './types/UserWorkout';
 import { UserBloodPressure } from './types/userBloodPressure';
 import { UserBody } from './types/userBody';
 import { UserWeight } from './types/userWeight';
-import { User } from './types/user';
+import { Sex, User } from './types/user';
 import { EdamamFoodHint } from './types/EdamamFoodHint';
 
 export const API_URL = 'http://localhost:7071';
@@ -372,4 +372,12 @@ export const getMinVersion = (): Promise<AxiosResponse<number>> => {
     return axios.get(`${API_URL}/api/MinVersion`, {
         params,
     });
+};
+
+export const updateSex = (body: {
+    sex: Sex;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/UpdateUserSex`, body, { params });
 };
