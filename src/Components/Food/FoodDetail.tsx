@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addUserFood, getFoodDetails, searchFood } from '../../api';
@@ -10,15 +10,18 @@ import { Dropdown, DropdownOption } from '../Dropdown';
 import { Units } from '../../types/Units';
 import { AuthContext } from '../../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
+import { convertFromUnitToGrams } from './convertUnits';
 
 export const FoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
+    const [displayedQuantity, setDisplayedQuantity] = useState<number>(1);
     const [quantity, setQuantity] = useState<number | undefined>(undefined);
+    const [servingSize, setServingSize] = useState<number>(0);
     const [unit, setUnit] = useState<DropdownOption>({
-        id: Units.Gram,
-        name: 'Gram',
+        id: Units.Serving,
+        name: 'Serving',
     });
     const history = useHistory();
 
@@ -38,7 +41,9 @@ export const FoodDetail: FC = () => {
 
         const servingSize = servingSizes?.find((e) => e.label === 'Serving');
 
+        setDisplayedQuantity(1);
         setQuantity(servingSize?.weight ?? 1);
+        setServingSize(servingSize?.weight ?? 1);
     }, [searchFoodQuery.data]);
 
     const foodDetailsQuery = useQuery(
@@ -52,6 +57,12 @@ export const FoodDetail: FC = () => {
             enabled: quantity !== undefined,
         }
     );
+
+    useMemo(() => {
+        setQuantity(
+            convertFromUnitToGrams(displayedQuantity, unit.id, servingSize)
+        );
+    }, [displayedQuantity, servingSize, unit.id]);
 
     const totalNutrients = foodDetailsQuery.data?.data?.totalNutrients;
 
@@ -75,9 +86,9 @@ export const FoodDetail: FC = () => {
                     label="Quantity"
                     type="number"
                     onChange={(event) =>
-                        setQuantity(parseFloat(event.target.value))
+                        setDisplayedQuantity(parseInt(event.target.value))
                     }
-                    value={quantity ?? ''}
+                    value={displayedQuantity ?? ''}
                     className="my-auto"
                 />
                 <Dropdown
@@ -109,6 +120,13 @@ export const FoodDetail: FC = () => {
             </div>
             <div className="flex flex-col justify-center rounded bg-card p-4">
                 {foodDetailsQuery.isFetching && <Loading />}
+                <div className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1">
+                    <div className="text-secondary">Serving Size</div>
+                    <div className="text-ternary ml-auto">
+                        {servingSize?.toFixed(2)} ({quantity?.toFixed(2)})
+                    </div>
+                    <div className="text-ternary ml-auto">g</div>
+                </div>
                 {totalNutrients &&
                     Object.keys(totalNutrients).map((key) => (
                         <div
