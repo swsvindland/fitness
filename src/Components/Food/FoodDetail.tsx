@@ -108,7 +108,7 @@ export const FoodDetail: FC = () => {
                                     edamamFoodId: foodId,
                                     userId: user?.id ?? '',
                                     amount: quantity ?? 0,
-                                    unit: unit.name,
+                                    unit: 'Gram',
                                     created: new Date().toDateString(),
                                 })
                             }
