@@ -30,7 +30,7 @@ export const FoodSearch: FC<IProps> = ({ selected, setSelected }) => {
                 onChange={(event) => setQuery(event.target.value as string)}
             />
             <Button className=" w-10 h-10 ml-2 m-1 !p-2" type="submit">
-                <MagnifyingGlassSolid className="w-6 h-6 text-secondary" />
+                <MagnifyingGlassSolid className="w-6 h-6 fill-secondary" />
             </Button>
         </form>
     );

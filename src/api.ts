@@ -18,6 +18,7 @@ import { UserBody } from './types/userBody';
 import { UserWeight } from './types/userWeight';
 import { Sex, User } from './types/user';
 import { EdamamFoodHint } from './types/EdamamFoodHint';
+import { Food } from './types/Food';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
@@ -218,6 +219,24 @@ export const getFoodDetails = (
     });
 };
 
+export const getUserFood = (
+    foodId: string
+): Promise<AxiosResponse<UserFood>> => {
+    const params = getParams({ foodId });
+
+    return axios.get(`${API_URL}/api/GetUserFood`, {
+        params,
+    });
+};
+
+export const getFood = (foodId: string): Promise<AxiosResponse<Food>> => {
+    const params = getParams({ foodId });
+
+    return axios.get(`${API_URL}/api/GetFood`, {
+        params,
+    });
+};
+
 export const getUserFoods = (): Promise<AxiosResponse<UserFoodGridItem[]>> => {
     const params = getParams();
 
@@ -246,6 +265,18 @@ export const addUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
     const params = getParams();
 
     return axios.post(`${API_URL}/api/AddUserFood`, userFood, { params });
+};
+
+export const updateUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
+    const params = getParams();
+
+    return axios.put(`${API_URL}/api/UpdateUserFood`, userFood, { params });
+};
+
+export const deleteUserFood = (userFoodId: number): Promise<AxiosResponse> => {
+    const params = getParams({ userFoodId });
+
+    return axios.delete(`${API_URL}/api/DeleteUserFood`, { params });
 };
 
 export const getUserDashboard = (): Promise<AxiosResponse<Dashboard>> => {

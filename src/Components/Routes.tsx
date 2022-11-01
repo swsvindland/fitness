@@ -18,6 +18,7 @@ import { ScanFood } from './Food/ScanFood';
 import { Settings } from '../Layouts/Settings';
 import { SexForm } from './Body/SexForm';
 import { ChangePasswordForm } from './Settings/ChangePasswordForm';
+import { UserFoodDetail } from './Food/UserFoodDetail';
 
 export const Routes: FC = () => {
     return (
@@ -39,6 +40,11 @@ export const Routes: FC = () => {
             <Route
                 path="/eat/food/:foodId"
                 component={FoodDetail}
+                exact={true}
+            />
+            <Route
+                path="/eat/user-food/:foodId"
+                component={UserFoodDetail}
                 exact={true}
             />
             <Route

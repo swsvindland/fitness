@@ -18,6 +18,11 @@ export const FoodGrid: FC = () => {
         history.push(`/eat/scan/${data.text}`);
     };
 
+    const handleRowClick = (foodId?: number) => {
+        if (!foodId) return;
+        history.push(`/eat/user-food/${foodId}`);
+    };
+
     const foodQuery = useQuery(['Food'], () => {
         return getUserFoods();
     });
@@ -88,6 +93,9 @@ export const FoodGrid: FC = () => {
                         {foodQuery.data?.data.map((food, foodIdx) => (
                             <tr key={food.id}>
                                 <td
+                                    onClick={() =>
+                                        handleRowClick(food.food?.id)
+                                    }
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
