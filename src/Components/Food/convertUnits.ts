@@ -130,6 +130,18 @@ export const convertFromUnitToGrams = (
             return poundToGram(amount);
         case Units.Quart:
             return quartToGram(amount);
+        case Units.FluidOunce:
+            return fluidOunceToGram(amount);
+        case Units.Drop:
+            return dropToGram(amount);
+        case Units.Tablespoon:
+            return tablespoonToGram(amount);
+        case Units.Teaspoon:
+            return tablespoonToGram(amount) / 3;
+        case Units.Pinch:
+            return pinchToGram(amount);
+        case Units.Gram:
+            return amount;
         default:
             return amount;
     }
@@ -161,6 +173,18 @@ export const convertFromGramsToUnit = (
             return gramToPound(amount);
         case Units.Quart:
             return gramToQuart(amount);
+        case Units.FluidOunce:
+            return gramToFluidOunce(amount);
+        case Units.Drop:
+            return gramToDrop(amount);
+        case Units.Tablespoon:
+            return gramToTablespoon(amount);
+        case Units.Teaspoon:
+            return gramToTablespoon(amount) / 3;
+        case Units.Pinch:
+            return gramToPinch(amount);
+        case Units.Gram:
+            return amount;
         default:
             return amount;
     }
