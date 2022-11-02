@@ -1,10 +1,13 @@
 import { FC } from 'react';
+import { Gear } from '../../icons/Gear';
+import { LinkButton } from '../Buttons/LinkButton';
 
 interface IProps {
     name: string;
     amount: number;
     currentAmount?: number;
     unit: string;
+    customMacros?: boolean;
 }
 
 export const MacroGridUnit: FC<IProps> = ({
@@ -12,20 +15,31 @@ export const MacroGridUnit: FC<IProps> = ({
     amount,
     currentAmount,
     unit,
+    customMacros,
 }) => {
     return (
         <div className="m-1 rounded shadow bg-card px-4 py-5 sm:p-6">
-            <dt className="text-base font-normal text-secondary">{name}</dt>
+            <dt className="text-base font-normal text-secondary flex justify-between">
+                <span>{name}</span>
+                {customMacros && (
+                    <LinkButton
+                        to="/eat/custom-macros"
+                        className="bg-transparent"
+                    >
+                        <Gear className="w-6 h-6 fill-secondary" />
+                    </LinkButton>
+                )}
+            </dt>
             <dd className="mt-1 flex items-baseline">
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    {currentAmount?.toFixed(2) ?? 0}
+                    {currentAmount?.toFixed(0) ?? 0}
                 </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
                     /
                 </span>
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    {amount.toFixed(2)}
+                    {amount.toFixed(0)}
                 </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
             </dd>

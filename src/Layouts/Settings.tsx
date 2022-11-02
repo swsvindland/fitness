@@ -12,6 +12,9 @@ export const Settings: FC = () => {
             <LinkButton to="/body/sex" className="mb-2">
                 Change Sex
             </LinkButton>
+            <LinkButton to="/eat/custom-macros" className="mb-2">
+                Set Custom Macros
+            </LinkButton>
             <LinkButton to="/settings/change-password" className="mb-2">
                 Change Password
             </LinkButton>

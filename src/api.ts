@@ -245,10 +245,20 @@ export const getUserFoods = (): Promise<AxiosResponse<UserFoodGridItem[]>> => {
     });
 };
 
-export const getMacros = (): Promise<AxiosResponse<Macros[]>> => {
+export const getMacros = (): Promise<AxiosResponse<Macros>> => {
     const params = getParams();
 
     return axios.get(`${API_URL}/api/GetMacros`, {
+        params,
+    });
+};
+
+export const addCustomMacros = (
+    body: Macros
+): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddCustomMacros`, body, {
         params,
     });
 };

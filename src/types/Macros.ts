@@ -1,4 +1,5 @@
 export interface Macros {
+    id?: number;
     calories: number;
     protein: number;
     fat: number;

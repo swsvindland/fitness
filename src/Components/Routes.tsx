@@ -19,6 +19,7 @@ import { Settings } from '../Layouts/Settings';
 import { SexForm } from './Body/SexForm';
 import { ChangePasswordForm } from './Settings/ChangePasswordForm';
 import { UserFoodDetail } from './Food/UserFoodDetail';
+import { CustomMacroForm } from './Macos/CustomMacroForm';
 
 export const Routes: FC = () => {
     return (
@@ -50,6 +51,11 @@ export const Routes: FC = () => {
             <Route
                 path="/eat/scan/:barcode"
                 component={ScanFood}
+                exact={true}
+            />
+            <Route
+                path="/eat/custom-macros"
+                component={CustomMacroForm}
                 exact={true}
             />
             <Route path="/supplements" component={Supplements} exact={true} />
