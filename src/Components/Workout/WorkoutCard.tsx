@@ -36,7 +36,7 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
             <div className="w-full flex items-center justify-start p-6 space-x-6">
                 <div className="">
                     <div className="bg-ternary w-10 h-10 rounded-full flex justify-center items-center">
-                        <div className="w-4 h-4">{mapToIcon(icon)}</div>
+                        <div className="w-4">{mapToIcon(icon)}</div>
                     </div>
                 </div>
                 <div className="flex-1 truncate">
