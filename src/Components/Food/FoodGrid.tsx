@@ -1,22 +1,64 @@
-import { FC } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
 import { useQuery } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
 import { Loading } from '../Loading';
-import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner';
 import { useHistory } from 'react-router';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { ScannerContext } from './ScannerContext';
+import { Button } from '../Buttons/Button';
 
 export const FoodGrid: FC = () => {
     const history = useHistory();
+    const { hideBackground, setHideBackground } = useContext(ScannerContext);
+    const [err, setErr] = useState<string>();
 
-    const openScanner = async () => {
-        const data = await BarcodeScanner.scan();
-        console.log(`Barcode data: ${data.text}`);
+    const startScan = async () => {
+        BarcodeScanner.hideBackground(); // make background of WebView transparent
+        setHideBackground(true);
 
-        history.push(`/eat/scan/${data.text}`);
+        const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
+        stopScan();
+
+        // if the result has content
+        if (result.hasContent) {
+            console.log(result.content);
+            history.push(`/eat/scan/${result.content}`);
+            // present(result.content!, [{ text: 'OK', role: 'cancel' }]);
+            // log the raw scanned content
+        }
     };
+
+    const stopScan = () => {
+        BarcodeScanner.showBackground();
+        BarcodeScanner.stopScan();
+        setHideBackground(false);
+    };
+
+    useEffect(() => {
+        const checkPermission = async () => {
+            try {
+                const status = await BarcodeScanner.checkPermission({
+                    force: true,
+                });
+
+                if (status.granted) {
+                    return true;
+                }
+
+                return false;
+            } catch (error: any) {
+                setErr(error.message);
+                console.log(error.message);
+            }
+        };
+
+        checkPermission();
+
+        return () => {};
+    }, []);
 
     const handleRowClick = (foodId?: number) => {
         if (!foodId) return;
@@ -31,10 +73,21 @@ export const FoodGrid: FC = () => {
         return <Loading />;
     }
 
+    if (hideBackground) {
+        return (
+            <div className="flex justify-center">
+                <div className="fixed bottom-56 w-80 border-b border-secondary"></div>
+                <Button className="fixed bottom-24" onClick={stopScan}>
+                    Close Scanner
+                </Button>
+            </div>
+        );
+    }
+
     return (
         <div className="px-4 sm:px-6 lg:px-8 bg-card rounded m-1 p-4">
             <div className="flex flex-row justify-end">
-                <SecondaryButton className="mx-1" onClick={openScanner}>
+                <SecondaryButton className="mx-1" onClick={startScan}>
                     Scan Barcode
                 </SecondaryButton>
                 <LinkButton to="/eat/add-food" className="mx-1">

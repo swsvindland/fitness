@@ -9,6 +9,7 @@ import { Register } from '../Layouts/Register';
 import { MinVersion } from '../Components/MinVersion';
 import { PurchaseAccess } from '../Components/PurchaseAccess';
 import { HeaderProvider } from '../Components/Navigation/HeaderContext';
+import { ScannerProvider } from '../Components/Food/ScannerContext';
 
 interface IAuthContext {
     user?: User;
@@ -31,12 +32,14 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
-                        <Layout>
-                            <Routes />
-                            <ScrollToTop />
-                            <PurchaseAccess />
-                            <MinVersion />
-                        </Layout>
+                        <ScannerProvider>
+                            <Layout>
+                                <Routes />
+                                <ScrollToTop />
+                                <PurchaseAccess />
+                                <MinVersion />
+                            </Layout>
+                        </ScannerProvider>
                     </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>

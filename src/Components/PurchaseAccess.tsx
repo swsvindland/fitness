@@ -18,8 +18,12 @@ export const PurchaseAccess: FC = () => {
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
 
+    const canCharge =
+        !isPlatform('mobileweb') &&
+        (isPlatform('ios') || isPlatform('android'));
+
     useEffect(() => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
             iap.verbosity = iap.DEBUG;
 
             iap.validator =
@@ -49,11 +53,11 @@ export const PurchaseAccess: FC = () => {
 
             iap.refresh();
         }
-    }, []);
+    }, [canCharge]);
 
     //if user clicks purchase button
     const purchaseMonthly = () => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
             try {
                 setLoading(true);
                 iap.order('Access Monthly');
@@ -81,13 +85,13 @@ export const PurchaseAccess: FC = () => {
     };
 
     const restore = () => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
             iap.refresh();
         }
     };
 
     useEffect(() => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
             iap.when(MONTHLY_SUBSCRIPTION).approved((p: IAPProduct) => {
                 p.verify();
                 p.finish();
@@ -106,7 +110,7 @@ export const PurchaseAccess: FC = () => {
     });
 
     useEffect(() => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
             iap.when(YEARLY_SUBSCRIPTION).approved((p: IAPProduct) => {
                 p.verify();
                 p.finish();
@@ -125,7 +129,7 @@ export const PurchaseAccess: FC = () => {
     });
 
     useEffect(() => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
             iap.when('subscription').updated((product: IAPProduct) => {
                 const monthly = iap.get(MONTHLY_SUBSCRIPTION);
                 const yearly = iap.get(YEARLY_SUBSCRIPTION);

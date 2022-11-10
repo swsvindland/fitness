@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-color: #0d3140;
-}
-
 .header {
     padding-top: env(safe-area-inset-top);
 }
