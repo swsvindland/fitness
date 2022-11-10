@@ -1,9 +1,9 @@
 import { FC, useContext } from 'react';
-import { LinkButton } from '../Components/Buttons/LinkButton';
+import { LinkButton } from '../Buttons/LinkButton';
 import { useQuery } from '@tanstack/react-query';
-import { getUserDashboard } from '../api';
+import { getUserDashboard } from '../../api';
 import { AuthContext } from '../Auth/Auth';
-import { useHideBackButton } from '../Components/Navigation/headerHooks';
+import { useHideBackButton } from '../Navigation/headerHooks';
 
 export const Home: FC = () => {
     const { user } = useContext(AuthContext);
@@ -16,6 +16,10 @@ export const Home: FC = () => {
 
     return (
         <div className="w-80 grid grid-cols-1">
+            <h2 className="text-ternary text-center">
+                Interactive dashboard. You will see your daily actions here. If
+                it is empty, congrats you have done everything for today!
+            </h2>
             {dashboardQuery.data?.data.addHeight && (
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
@@ -40,7 +44,7 @@ export const Home: FC = () => {
                     Add Your Blood Pressure
                 </LinkButton>
             )}
-            {dashboardQuery.data?.data.addBodyMeasurement && (
+            {dashboardQuery.data?.data.addBodyMeasurements && (
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/workout/body"

@@ -3,5 +3,5 @@ export interface Dashboard {
     addWeight: boolean;
     addHeight: boolean;
     addBloodPressure: boolean;
-    addBodyMeasurement: boolean;
+    addBodyMeasurements: boolean;
 }

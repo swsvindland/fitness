@@ -1,18 +1,18 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { AddSupplement } from './AddSupplement';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ExternalLink } from '../../icons/ExternalLink';
+import { ExternalLink } from '../Icons/ExternalLink';
 import { Loading } from '../Loading';
 import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
 } from '../../api';
 import { SupplementIcon } from '../../types/supplement';
-import { CapsulesSolid } from '../../icons/CapsulesSolid';
-import { SyringeSolid } from '../../icons/SyringeSolid';
-import { TabletSolid } from '../../icons/TabletSolid';
-import { CircleCheckSolid } from '../../icons/CircleCheckSolid';
+import { CapsulesSolid } from '../Icons/CapsulesSolid';
+import { SyringeSolid } from '../Icons/SyringeSolid';
+import { TabletSolid } from '../Icons/TabletSolid';
+import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
 
 interface IProps {
     isUser: boolean;

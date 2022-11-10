@@ -2,7 +2,7 @@ import { FC, FormEvent, useContext, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router';
 import { updateSex } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';

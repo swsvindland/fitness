@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { DeleteAccount } from '../Components/DeleteAccount';
-import { useShowBackButton } from '../Components/Navigation/headerHooks';
-import { LinkButton } from '../Components/Buttons/LinkButton';
+import { DeleteAccount } from '../DeleteAccount';
+import { useShowBackButton } from '../Navigation/headerHooks';
+import { LinkButton } from '../Buttons/LinkButton';
 
 export const Settings: FC = () => {
     useShowBackButton();

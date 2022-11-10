@@ -7,7 +7,7 @@ import { Button } from '../Buttons/Button';
 import { TextField } from '../TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { Units } from '../../types/Units';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { convertFromGramsToUnit, convertFromUnitToGrams } from './convertUnits';
 import { SecondaryButton } from '../Buttons/SecondaryButton';

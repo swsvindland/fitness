@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { MacroGrid } from '../Components/Macos/MacroGrid';
-import { FoodGrid } from '../Components/Food/FoodGrid';
-import { useHideBackButton } from '../Components/Navigation/headerHooks';
+import { MacroGrid } from './MacroGrid';
+import { FoodGrid } from '../Food/FoodGrid';
+import { useHideBackButton } from '../Navigation/headerHooks';
 
 export const Eat: FC = () => {
     useHideBackButton();

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Gear } from '../../icons/Gear';
+import { Gear } from '../Icons/Gear';
 import { LinkButton } from '../Buttons/LinkButton';
 
 interface IProps {

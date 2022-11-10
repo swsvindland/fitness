@@ -1,11 +1,11 @@
 import { FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
-import { Loading } from '../Components/Loading';
-import { DoWorkout } from '../Components/Workout/DoWorkout';
+import { Loading } from '../Loading';
+import { DoWorkout } from './DoWorkout';
 import { useHistory } from 'react-router';
-import { getUserWorkouts } from '../api';
-import { useHideBackButton } from '../Components/Navigation/headerHooks';
+import { getUserWorkouts } from '../../api';
+import { useHideBackButton } from '../Navigation/headerHooks';
 
 export const Workout: FC = () => {
     const { user } = useContext(AuthContext);

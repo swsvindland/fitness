@@ -1,7 +1,7 @@
 import { FC, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { CircleCheckSolid } from '../icons/CircleCheckSolid';
-import { ChevronDownSolid } from '../icons/ChevronDownSolid';
+import { CircleCheckSolid } from './Icons/CircleCheckSolid';
+import { ChevronDownSolid } from './Icons/ChevronDownSolid';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');

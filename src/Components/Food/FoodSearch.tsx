@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextField';
-import { MagnifyingGlassSolid } from '../../icons/MagnifyingGlassSolid';
+import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
 
 interface IProps {
     selected?: string;

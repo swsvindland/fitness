@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
-import { PersonSolid } from '../../icons/PersonSolid';
-import { UtensilsSolid } from '../../icons/UtensilsSolid';
-import { DumbbellSolid } from '../../icons/DumbbellSolid';
-import { CapsulesSolid } from '../../icons/CapsulesSolid';
-import { HomeSolid } from '../../icons/HomeSolid';
+import { PersonSolid } from '../Icons/PersonSolid';
+import { UtensilsSolid } from '../Icons/UtensilsSolid';
+import { DumbbellSolid } from '../Icons/DumbbellSolid';
+import { CapsulesSolid } from '../Icons/CapsulesSolid';
+import { HomeSolid } from '../Icons/HomeSolid';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 

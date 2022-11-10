@@ -1,15 +1,15 @@
 import { createContext, FC, useState } from 'react';
-import { Login } from '../Layouts/Login';
-import { User } from '../types/user';
-import { Layout } from '../Components/Layout';
-import { Routes } from '../Components/Routes';
+import { Login } from './Login';
+import { User } from '../../types/user';
+import { Layout } from '../Layout';
+import { Routes } from '../Routes';
 import { IonReactRouter } from '@ionic/react-router';
-import { ScrollToTop } from '../ScrollToTop';
-import { Register } from '../Layouts/Register';
-import { MinVersion } from '../Components/MinVersion';
-import { PurchaseAccess } from '../Components/PurchaseAccess';
-import { HeaderProvider } from '../Components/Navigation/HeaderContext';
-import { ScannerProvider } from '../Components/Food/ScannerContext';
+import { ScrollToTop } from '../../ScrollToTop';
+import { Register } from './Register';
+import { MinVersion } from '../MinVersion';
+import { PurchaseAccess } from '../PurchaseAccess';
+import { HeaderProvider } from '../Navigation/HeaderContext';
+import { ScannerProvider } from '../Food/ScannerContext';
 
 interface IAuthContext {
     user?: User;

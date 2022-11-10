@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { LinkButton } from '../Components/Buttons/LinkButton';
-import { UserSupplements } from '../Components/Supplements/UserSupplements';
-import { useHideBackButton } from '../Components/Navigation/headerHooks';
+import { LinkButton } from '../Buttons/LinkButton';
+import { UserSupplements } from './UserSupplements';
+import { useHideBackButton } from '../Navigation/headerHooks';
 
 export const Supplements: FC = () => {
     useHideBackButton();

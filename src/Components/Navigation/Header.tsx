@@ -1,12 +1,12 @@
 import { FC, Fragment, useContext } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
-import { DumbbellSolid } from '../../icons/DumbbellSolid';
-import { AuthContext } from '../../Auth/Auth';
-import { ArrowBackSolid } from '../../icons/ArrowBackSolid';
+import { DumbbellSolid } from '../Icons/DumbbellSolid';
+import { AuthContext } from '../Auth/Auth';
+import { ArrowBackSolid } from '../Icons/ArrowBackSolid';
 import { useHistory } from 'react-router';
 import { HeaderContext } from './HeaderContext';
-import { UserSolid } from '../../icons/UserSolid';
+import { UserSolid } from '../Icons/UserSolid';
 
 export const Header: FC = () => {
     const { setUser } = useContext(AuthContext);

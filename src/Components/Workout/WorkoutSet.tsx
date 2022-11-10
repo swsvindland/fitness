@@ -2,10 +2,10 @@ import { FC, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextField';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { addWorkoutActivity, getWorkoutActivity } from '../../api';
-import { CircleCheckSolid } from '../../icons/CircleCheckSolid';
+import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
 
 interface IProps {
     set: number;

@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { FC, Fragment, useContext, useState } from 'react';
 import { Button } from './Buttons/Button';
 import { SecondaryButton } from './Buttons/SecondaryButton';
-import { AuthContext } from '../Auth/Auth';
+import { AuthContext } from './Auth/Auth';
 import { useMutation } from '@tanstack/react-query';
 import { deleteUser } from '../api';
 

@@ -12,7 +12,7 @@ import {
     BubbleDataPoint,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';

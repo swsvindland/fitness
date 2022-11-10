@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { getAllSupplements, getUserSupplements } from '../../api';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { useShowBackButton } from '../Navigation/headerHooks';
 

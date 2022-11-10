@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { WorkoutSet } from './WorkoutSet';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 import { ExerciseIcon } from '../../types/Exercise';
-import { BarbellSolid } from '../../icons/BarbellSolid';
-import { DumbbellSolid } from '../../icons/DumbbellSolid';
-import { HeartPulseSolid } from '../../icons/HeartPulseSolid';
+import { BarbellSolid } from '../Icons/BarbellSolid';
+import { DumbbellSolid } from '../Icons/DumbbellSolid';
+import { HeartPulseSolid } from '../Icons/HeartPulseSolid';
 
 interface IProps {
     exercise: WorkoutBlockExercise;

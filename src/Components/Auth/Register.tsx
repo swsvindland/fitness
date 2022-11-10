@@ -1,11 +1,11 @@
 import { FC, FormEvent, useState } from 'react';
-import { Button } from '../Components/Buttons/Button';
-import { TextField } from '../Components/TextField';
-import { Loading } from '../Components/Loading';
-import { SecondaryButton } from '../Components/Buttons/SecondaryButton';
+import { Button } from '../Buttons/Button';
+import { TextField } from '../TextField';
+import { Loading } from '../Loading';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
-import { auth, createUser, getUser } from '../api';
-import { User } from '../types/user';
+import { auth, createUser, getUser } from '../../api';
+import { User } from '../../types/user';
 
 interface IProps {
     setUser: (user: User) => void;

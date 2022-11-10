@@ -14,7 +14,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
-import { AuthContext } from '../../Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
 import { getAllUserWeights } from '../../api';
