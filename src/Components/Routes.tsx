@@ -80,7 +80,7 @@ export const Routes: FC = () => {
                 component={ChangePasswordForm}
                 exact={true}
             />
-            {/*<Redirect from="*" to="/home" />*/}
+            <Redirect from="*" to="/home" />
         </>
     );
 };
