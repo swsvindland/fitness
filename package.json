@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "@awesome-cordova-plugins/core": "^6.1.0",
-        "@awesome-cordova-plugins/in-app-purchase-2": "^6.1.0",
+        "@awesome-cordova-plugins/in-app-purchase-2": "^6.2.0",
         "@capacitor-community/barcode-scanner": "^3.0.0",
         "@capacitor/android": "4.4.0",
         "@capacitor/app": "4.1.0",
