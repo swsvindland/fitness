@@ -10,11 +10,11 @@ import { Body } from './Body/Body';
 import { WeighInForm } from './Body/WeighInForm';
 import { BodyCheckInForm } from './Body/BodyCheckInForm';
 import { BloodPressureCheckInForm } from './Body/BloodPressureCheckInForm';
-import { Redirect, Route, Switch } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import { HeightForm } from './Body/HeightForm';
 import { AddFood } from './Food/AddFood';
 import { FoodDetail } from './Food/FoodDetail';
-import { ScanFood } from './Food/ScanFood';
+import { ScanFood } from './Scanner/ScanFood';
 import { Settings } from './Settings/Settings';
 import { SexForm } from './Body/SexForm';
 import { ChangePasswordForm } from './Settings/ChangePasswordForm';
@@ -23,7 +23,7 @@ import { CustomMacroForm } from './Macos/CustomMacroForm';
 
 export const Routes: FC = () => {
     return (
-        <Switch>
+        <>
             <Route path="/home" component={Home} exact={true} />
             <Route path="/workout" component={Workout} exact={true} />
             <Route
@@ -80,7 +80,7 @@ export const Routes: FC = () => {
                 component={ChangePasswordForm}
                 exact={true}
             />
-            <Redirect from="*" to="/home" />
-        </Switch>
+            {/*<Redirect from="*" to="/home" />*/}
+        </>
     );
 };

@@ -31,37 +31,37 @@ export const MacroGrid: FC = () => {
                     <MacroGridUnit
                         name="Protein"
                         amount={macrosQuery.data?.data?.protein ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data.protein}
+                        currentAmount={currentMacrosQuery.data?.data?.protein}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fat"
                         amount={macrosQuery.data?.data?.fat ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data.fat}
+                        currentAmount={currentMacrosQuery.data?.data?.fat}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Carbs"
                         amount={macrosQuery.data?.data?.carbs ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data.carbs}
+                        currentAmount={currentMacrosQuery.data?.data?.carbs}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fiber"
                         amount={macrosQuery.data?.data?.fiber ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data.fiber}
+                        currentAmount={currentMacrosQuery.data?.data?.fiber}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Alcohol"
                         amount={macrosQuery.data?.data?.alcohol ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data.alcohol}
+                        currentAmount={currentMacrosQuery.data?.data?.alcohol}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Water"
                         amount={macrosQuery.data?.data?.water ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data.water}
+                        currentAmount={currentMacrosQuery.data?.data?.water}
                         unit="floz"
                     />
                 </dl>

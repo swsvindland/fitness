@@ -39,7 +39,7 @@ export const MacroGridUnit: FC<IProps> = ({
                     /
                 </span>
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    {amount.toFixed(0)}
+                    {amount?.toFixed(0)}
                 </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
             </dd>

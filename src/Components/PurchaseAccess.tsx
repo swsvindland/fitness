@@ -24,7 +24,7 @@ export const PurchaseAccess: FC = () => {
 
     useEffect(() => {
         if (canCharge) {
-            iap.verbosity = iap.DEBUG;
+            iap.verbosity = iap.QUIET;
 
             iap.validator =
                 'https://validator.fovea.cc/v1/validate?appName=com.svindland.fitness&apiKey=85cb7102-17c8-4f39-adaf-35051a4fb53b';
