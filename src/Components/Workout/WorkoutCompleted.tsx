@@ -1,6 +1,6 @@
 import { Button } from '../Buttons/Button';
 import { FC } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { restartWorkout } from '../../api';
 import { useMutation } from '@tanstack/react-query';
 

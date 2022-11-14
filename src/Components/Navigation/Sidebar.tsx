@@ -4,7 +4,7 @@ import { CapsulesSolid } from '../Icons/CapsulesSolid';
 import { DumbbellSolid } from '../Icons/DumbbellSolid';
 import { UtensilsSolid } from '../Icons/UtensilsSolid';
 import { HomeSolid } from '../Icons/HomeSolid';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export const Sidebar: FC = () => {

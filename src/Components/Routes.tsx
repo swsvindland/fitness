@@ -10,7 +10,7 @@ import { Body } from './Body/Body';
 import { WeighInForm } from './Body/WeighInForm';
 import { BodyCheckInForm } from './Body/BodyCheckInForm';
 import { BloodPressureCheckInForm } from './Body/BloodPressureCheckInForm';
-import { Redirect, Route } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { HeightForm } from './Body/HeightForm';
 import { AddFood } from './Food/AddFood';
 import { FoodDetail } from './Food/FoodDetail';
@@ -20,66 +20,79 @@ import { SexForm } from './Body/SexForm';
 import { ChangePasswordForm } from './Settings/ChangePasswordForm';
 import { UserFoodDetail } from './Food/UserFoodDetail';
 import { CustomMacroForm } from './Macos/CustomMacroForm';
+import { Scanner } from './Scanner/Scanner';
+import { Layout } from './Layout';
 
 export const Routes: FC = () => {
     return (
-        <>
-            <Route path="/home" component={Home} exact={true} />
-            <Route path="/workout" component={Workout} exact={true} />
-            <Route
-                path="/workout/store"
-                component={WorkoutStore}
-                exact={true}
-            />
-            <Route
-                path="/workout/:workoutId"
-                component={WorkoutDetail}
-                exact={true}
-            />
-            <Route path="/eat" component={Eat} exact={true} />
-            <Route path="/eat/add-food" component={AddFood} exact={true} />
-            <Route
-                path="/eat/food/:foodId"
-                component={FoodDetail}
-                exact={true}
-            />
-            <Route
-                path="/eat/user-food/:foodId"
-                component={UserFoodDetail}
-                exact={true}
-            />
-            <Route
-                path="/eat/scan/:barcode"
-                component={ScanFood}
-                exact={true}
-            />
-            <Route
-                path="/eat/custom-macros"
-                component={CustomMacroForm}
-                exact={true}
-            />
-            <Route path="/supplements" component={Supplements} exact={true} />
-            <Route
-                path="/supplements/all-supplements"
-                component={AllSupplements}
-                exact={true}
-            />
-            <Route path="/body" component={Body} exact={true} />
-            <Route path="/body/weight" component={WeighInForm} exact={true} />
-            <Route path="/body/body" component={BodyCheckInForm} exact={true} />
-            <Route path="/body/height" component={HeightForm} exact={true} />
-            <Route
-                path="/body/blood-pressure"
-                component={BloodPressureCheckInForm}
-                exact={true}
-            />
-            <Route path="/body/sex" component={SexForm} exact={true} />
-            <Route path="/settings" component={Settings} exact={true} />
-            <Route
-                path="/settings/change-password"
-                component={ChangePasswordForm}
-                exact={true}
-            />
-        </>
+        <Switch>
+            <Redirect exact={true} from="/" to="/home" />
+            <Route path="/scanner" exact={true}>
+                <Scanner />
+            </Route>
+            <Layout>
+                <Route path="/home" exact={true}>
+                    <Home />
+                </Route>
+                <Route path="/workout" exact={true}>
+                    <Workout />
+                </Route>
+                <Route path="/workout/store" exact={true}>
+                    <WorkoutStore />
+                </Route>
+                <Route path="/workout/:workoutId" exact={true}>
+                    <WorkoutDetail />
+                </Route>
+                <Route path="/eat" exact={true}>
+                    <Eat />
+                </Route>
+                <Route path="/eat/add-food" exact={true}>
+                    <AddFood />
+                </Route>
+                <Route path="/eat/food/:foodId" exact={true}>
+                    <FoodDetail />
+                </Route>
+                <Route path="/eat/user-food/:foodId" exact={true}>
+                    <UserFoodDetail />
+                </Route>
+                <Route path="/eat/scan/:barcode" exact={true}>
+                    <ScanFood />
+                </Route>
+                <Route path="/eat/custom-macros" exact={true}>
+                    <CustomMacroForm />
+                </Route>
+                <Route path="/supplements" exact={true}>
+                    <Supplements />
+                </Route>
+                <Route path="/supplements/all-supplements" exact={true}>
+                    <AllSupplements />
+                </Route>
+                <Route path="/body" exact={true}>
+                    <Body />
+                </Route>
+                <Route path="/body/weight" exact={true}>
+                    <WeighInForm />
+                </Route>
+                <Route path="/body/body" exact={true}>
+                    <BodyCheckInForm />
+                </Route>
+                <Route path="/body/height" exact={true}>
+                    <HeightForm />
+                </Route>
+                <Route path="/body/blood-pressure" exact={true}>
+                    <BloodPressureCheckInForm />
+                </Route>
+                <Route path="/body/sex" exact={true}>
+                    <SexForm />
+                </Route>
+                <Route path="/settings" exact={true}>
+                    <Settings />
+                </Route>
+                <Route path="/settings/change-password" exact={true}>
+                    <ChangePasswordForm />
+                </Route>
+            </Layout>
+            <Redirect from="*" to="/home" />
+        </Switch>
     );
 };

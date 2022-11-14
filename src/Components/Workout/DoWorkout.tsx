@@ -12,7 +12,7 @@ import {
 import { Button } from '../Buttons/Button';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
 
 interface IProps {

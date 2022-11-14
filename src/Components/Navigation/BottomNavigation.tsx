@@ -4,7 +4,7 @@ import { UtensilsSolid } from '../Icons/UtensilsSolid';
 import { DumbbellSolid } from '../Icons/DumbbellSolid';
 import { CapsulesSolid } from '../Icons/CapsulesSolid';
 import { HomeSolid } from '../Icons/HomeSolid';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export const BottomNavigation: FC = () => {

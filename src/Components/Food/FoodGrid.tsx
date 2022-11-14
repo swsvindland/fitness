@@ -5,7 +5,7 @@ import { classNames } from '../../utils/classNames';
 import { useQuery } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
 import { Loading } from '../Loading';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 export const FoodGrid: FC = () => {
     const history = useHistory();
@@ -16,7 +16,7 @@ export const FoodGrid: FC = () => {
     };
 
     const handleStartScan = () => {
-        history.push('/scan');
+        history.push('/scanner');
     };
 
     const foodQuery = useQuery(['Food'], () => {

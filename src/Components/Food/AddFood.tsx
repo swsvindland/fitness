@@ -4,7 +4,7 @@ import { FoodSearch } from './FoodSearch';
 import { useQuery } from '@tanstack/react-query';
 import { searchFood } from '../../api';
 import { Loading } from '../Loading';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const AddFood: FC = () => {

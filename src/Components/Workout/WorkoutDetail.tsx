@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 import { buyWorkout, getWorkout, getWorkoutDetails } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
 

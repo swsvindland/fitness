@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { DoWorkout } from './DoWorkout';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { getUserWorkouts } from '../../api';
 import { useHideBackButton } from '../Navigation/headerHooks';
 

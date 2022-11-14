@@ -4,7 +4,7 @@ import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { addCustomMacros, getMacros } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
 

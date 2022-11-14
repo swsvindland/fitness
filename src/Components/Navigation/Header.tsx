@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { DumbbellSolid } from '../Icons/DumbbellSolid';
 import { AuthContext } from '../Auth/Auth';
 import { ArrowBackSolid } from '../Icons/ArrowBackSolid';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { HeaderContext } from './HeaderContext';
 import { UserSolid } from '../Icons/UserSolid';
 

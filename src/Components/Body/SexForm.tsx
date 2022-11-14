@@ -3,7 +3,7 @@ import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { updateSex } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { Sex, User } from '../../types/user';

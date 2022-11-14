@@ -1,16 +1,13 @@
 import { createContext, FC, useState } from 'react';
 import { Login } from './Login';
 import { User } from '../../types/user';
-import { Layout } from '../Layout';
 import { Routes } from '../Routes';
 import { IonReactRouter } from '@ionic/react-router';
-import { ScrollToTop } from '../../ScrollToTop';
 import { Register } from './Register';
-import { MinVersion } from '../MinVersion';
-import { PurchaseAccess } from '../PurchaseAccess';
 import { HeaderProvider } from '../Navigation/HeaderContext';
-import { Redirect, Route, Switch } from 'react-router';
-import { Scanner } from '../Scanner/Scanner';
+import { ScrollToTop } from '../../ScrollToTop';
+import { PurchaseAccess } from '../PurchaseAccess';
+import { MinVersion } from '../MinVersion';
 
 interface IAuthContext {
     user?: User;
@@ -33,20 +30,10 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
-                        <Switch>
-                            <Layout>
-                                <Routes />
-                                <ScrollToTop />
-                                <PurchaseAccess />
-                                <MinVersion />
-                            </Layout>
-                            <Route
-                                path="/scan"
-                                component={Scanner}
-                                exact={true}
-                            />
-                            <Redirect from="*" to="/home" />
-                        </Switch>
+                        <Routes />
+                        <ScrollToTop />
+                        <PurchaseAccess />
+                        <MinVersion />
                     </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>
