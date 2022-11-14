@@ -4,4 +4,5 @@
     <string name="title_activity_main">WorkoutTrack</string>
     <string name="package_name">com.svindland.fitness</string>
     <string name="custom_url_scheme">com.svindland.fitness</string>
+    <string name="billing_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7wjNUmZD/2CYgtkHP5le5WG8qboIbuqkY3pKU+dTlmkdWOk3mx2phNH7oYBc7xKYU7pgioSoSfQift0GmI3r9Fe1xiQ/0rzF9rfVQSEkzVAXyyUWVn1V/vauMvCXngRIxPFM20Q8cDoqhnChg9muMmGKtjbU8x+sh2/DkB0LHCWnX5/sdqxlcXbzrzn6eCwRbEFZbdVfJvqTHD+TkQMyYJgF2YgBnNUgCY1t6JkQsMq19TNgUbIx0QBV2a7v4TPoDuee+03AB9uLvztN5VfY61pbZXUURFDYj/uCvZnctfIbfsbf4uXlFaRqpLyyd6f7JhcPrYJOOYhNozQrbahhPQIDAQAB</string>
 </resources>
