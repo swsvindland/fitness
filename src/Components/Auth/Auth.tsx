@@ -9,7 +9,7 @@ import { Register } from './Register';
 import { MinVersion } from '../MinVersion';
 import { PurchaseAccess } from '../PurchaseAccess';
 import { HeaderProvider } from '../Navigation/HeaderContext';
-import { Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { Scanner } from '../Scanner/Scanner';
 
 interface IAuthContext {
@@ -34,17 +34,18 @@ export const Auth: FC = () => {
                 <IonReactRouter>
                     <HeaderProvider>
                         <Switch>
-                            <Route
-                                path="/scan"
-                                component={Scanner}
-                                exact={true}
-                            />
                             <Layout>
                                 <Routes />
                                 <ScrollToTop />
                                 <PurchaseAccess />
                                 <MinVersion />
                             </Layout>
+                            <Route
+                                path="/scan"
+                                component={Scanner}
+                                exact={true}
+                            />
+                            <Redirect from="*" to="/home" />
                         </Switch>
                     </HeaderProvider>
                 </IonReactRouter>

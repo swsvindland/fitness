@@ -16,12 +16,12 @@ interface IProps {
 
 interface IState {
     reps: number;
-    weight: number;
+    weight: string;
 }
 
 export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
     const { user } = useContext(AuthContext);
-    const [state, setState] = useState<IState>({ reps: 0, weight: 0 });
+    const [state, setState] = useState<IState>({ reps: 0, weight: '0' });
     const [saved, setSaved] = useState<boolean>(false);
     const queryClient = useQueryClient();
 
@@ -50,7 +50,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
 
         setState({
             reps: data?.data.reps,
-            weight: data?.data.weight,
+            weight: data?.data.weight.toString(),
         });
 
         if (data.data.saved) {
@@ -88,11 +88,11 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                     id={`exercise-weight-${exercise.exerciseId}`}
                     value={state.weight}
                     type="number"
-                    inputMode="numeric"
+                    inputMode="decimal"
                     onChange={(event) => {
                         setState({
                             ...state,
-                            weight: parseInt(event.target.value),
+                            weight: event.target.value,
                         });
                     }}
                     className="my-auto"
@@ -109,7 +109,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                                 userId: user?.id ?? '',
                                 workoutBlockExerciseId: exercise.id,
                                 reps: state.reps,
-                                weight: state.weight,
+                                weight: parseFloat(state.weight),
                                 set,
                                 week,
                                 day,
