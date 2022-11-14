@@ -18,9 +18,9 @@ export const PurchaseAccess: FC = () => {
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
 
+    // TODO: Enable android when https://github.com/j3k0/cordova-plugin-purchase/pull/1330 is merged
     const canCharge =
-        !isPlatform('mobileweb') &&
-        (isPlatform('ios') || isPlatform('android'));
+        !isPlatform('mobileweb') && !isPlatform('android') && isPlatform('ios');
 
     useEffect(() => {
         if (canCharge) {
