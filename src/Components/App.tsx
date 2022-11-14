@@ -1,9 +1,9 @@
 import { IonApp, setupIonicReact } from '@ionic/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Auth } from './Components/Auth/Auth';
+import { Auth } from './Auth/Auth';
 
-import './index.scss';
+import '../index.scss';
 
 setupIonicReact();
 

@@ -5,7 +5,7 @@ import { Routes } from '../Routes';
 import { IonReactRouter } from '@ionic/react-router';
 import { Register } from './Register';
 import { HeaderProvider } from '../Navigation/HeaderContext';
-import { ScrollToTop } from '../../ScrollToTop';
+import { ScrollToTop } from '../ScrollToTop';
 import { PurchaseAccess } from '../PurchaseAccess';
 import { MinVersion } from '../MinVersion';
 
