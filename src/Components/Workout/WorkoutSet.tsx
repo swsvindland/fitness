@@ -65,7 +65,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
     }
 
     return (
-        <div className="flex border-y border-ternary last:border-none">
+        <div className="flex border-t border-ternary">
             <div className=" flex-1 flex">
                 <div className="flex-1 inline-flex items-center justify-center p-2">
                     <TextField
