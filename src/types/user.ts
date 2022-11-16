@@ -4,11 +4,17 @@ export interface User {
     lastLogin: string;
     email: string;
     sex: Sex;
-    access: boolean;
+    userRole: UserRole;
 }
 
 export enum Sex {
     Unknown,
     Male,
     Female,
+}
+
+export enum UserRole {
+    User,
+    FreeUser,
+    Admin,
 }

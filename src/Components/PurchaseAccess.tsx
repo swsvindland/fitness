@@ -1,18 +1,21 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { Button } from './Buttons/Button';
 import { SecondaryButton } from './Buttons/SecondaryButton';
 import { isPlatform } from '@ionic/react';
 import {
-    InAppPurchase2 as iap,
     IAPProduct,
+    InAppPurchase2 as iap,
 } from '@awesome-cordova-plugins/in-app-purchase-2';
 import { Loading } from './Loading';
+import { AuthContext } from './Auth/Auth';
+import { UserRole } from '../types/user';
 
 const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
 
 export const PurchaseAccess: FC = () => {
+    const { user } = useContext(AuthContext);
     const [open, setOpen] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
@@ -133,7 +136,12 @@ export const PurchaseAccess: FC = () => {
                 const monthly = iap.get(MONTHLY_SUBSCRIPTION);
                 const yearly = iap.get(YEARLY_SUBSCRIPTION);
 
-                if (!monthly || !yearly) {
+                if (
+                    user?.userRole === UserRole.FreeUser ||
+                    user?.userRole === UserRole.Admin
+                ) {
+                    setOpen(false);
+                } else if (!monthly || !yearly) {
                     setOpen(false);
                 } else if (monthly.owned || yearly.owned) {
                     setOpen(false);
