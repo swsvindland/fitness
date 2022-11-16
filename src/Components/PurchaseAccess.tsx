@@ -18,9 +18,9 @@ export const PurchaseAccess: FC = () => {
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
 
-    // TODO: Enable android when https://github.com/j3k0/cordova-plugin-purchase/pull/1330 is merged
     const canCharge =
-        !isPlatform('mobileweb') && !isPlatform('android') && isPlatform('ios');
+        !isPlatform('mobileweb') &&
+        (isPlatform('android') || isPlatform('ios'));
 
     useEffect(() => {
         if (canCharge) {
@@ -29,26 +29,25 @@ export const PurchaseAccess: FC = () => {
             iap.validator =
                 'https://validator.fovea.cc/v1/validate?appName=com.svindland.fitness&apiKey=85cb7102-17c8-4f39-adaf-35051a4fb53b';
 
-            iap.register({
-                id: MONTHLY_SUBSCRIPTION,
-                alias: 'Access Monthly',
-                type: iap.PAID_SUBSCRIPTION,
-            });
-
-            iap.register({
-                id: YEARLY_SUBSCRIPTION,
-                alias: 'Access Yearly',
-                type: iap.PAID_SUBSCRIPTION,
-            });
-
-            iap.ready(() => {
-                const product = iap.get(MONTHLY_SUBSCRIPTION);
-                setMonthly(product);
-            });
+            iap.register([
+                {
+                    id: MONTHLY_SUBSCRIPTION,
+                    alias: 'Access Monthly',
+                    type: iap.PAID_SUBSCRIPTION,
+                },
+                {
+                    id: YEARLY_SUBSCRIPTION,
+                    alias: 'Access Yearly',
+                    type: iap.PAID_SUBSCRIPTION,
+                },
+            ]);
 
             iap.ready(() => {
-                const product = iap.get(YEARLY_SUBSCRIPTION);
-                setYearly(product);
+                const newMonthly = iap.get(MONTHLY_SUBSCRIPTION);
+                setMonthly(newMonthly);
+
+                const newYearly = iap.get(YEARLY_SUBSCRIPTION);
+                setYearly(newYearly);
             });
 
             iap.refresh();
@@ -258,7 +257,7 @@ export const PurchaseAccess: FC = () => {
                                                                         purchaseYearly
                                                                     }
                                                                     disabled={
-                                                                        yearly?.canPurchase
+                                                                        !yearly?.canPurchase
                                                                     }
                                                                 >
                                                                     Yearly
