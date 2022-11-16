@@ -22,7 +22,7 @@ export const Header: FC = () => {
     return (
         <Disclosure
             as="nav"
-            className="bg-primary-dark block fixed inset-x-0 top-0 z-10 shadow header"
+            className="bg-primary-dark block fixed inset-x-0 top-0 z-10 shadow pt-safe"
         >
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-end">

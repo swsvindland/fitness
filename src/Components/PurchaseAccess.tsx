@@ -23,6 +23,7 @@ export const PurchaseAccess: FC = () => {
 
     const canCharge =
         !isPlatform('mobileweb') &&
+        user?.userRole === UserRole.User &&
         (isPlatform('android') || isPlatform('ios'));
 
     useEffect(() => {

@@ -17,11 +17,11 @@ export const Layout: FC<IProps> = ({ children }) => {
                 <header className="md:ml-48">
                     <Header />
                 </header>
-                <main className="md:ml-48 my-24 p-4 flex justify-center">
+                <main className="pt-safe md:ml-48 my-24 p-4 flex justify-center">
                     {children}
                 </main>
             </div>
-            <footer className="md:hidden footer">
+            <footer className="md:hidden pb-safe">
                 <BottomNavigation />
             </footer>
         </>

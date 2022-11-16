@@ -38,6 +38,7 @@
         "react-dom": "^18.2.0",
         "react-router": "=5.3.3",
         "react-router-dom": "=5.3.3",
+        "tailwindcss-safe-area": "^0.2.2",
         "web-vitals": "^3.0.4"
     },
     "devDependencies": {
