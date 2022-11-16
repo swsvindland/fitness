@@ -55,7 +55,7 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
 
     if (silentLoginQuery.isFetching) {
         return (
-            <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background">
+            <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background dark:bg-black">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-card py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <Loading />
@@ -66,7 +66,7 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
     }
 
     return (
-        <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background">
+        <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background dark:bg-black">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-card py-8 px-4 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>

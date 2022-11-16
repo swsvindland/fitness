@@ -10,7 +10,7 @@ interface IProps {
 export const Layout: FC<IProps> = ({ children }) => {
     return (
         <>
-            <div className="bg-background min-h-screen">
+            <div className="bg-background dark:bg-black min-h-screen">
                 <div className="hidden md:flex md:w-48 md:flex-col md:fixed md:inset-y-0">
                     <Sidebar />
                 </div>
