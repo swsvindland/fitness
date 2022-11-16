@@ -17,7 +17,7 @@ export const UserFoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
-    const [displayedQuantity, setDisplayedQuantity] = useState<number>(1);
+    const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
     const [quantity, setQuantity] = useState<number | undefined>(undefined);
     const [servingSize, setServingSize] = useState<number>(0);
     const [unit, setUnit] = useState<DropdownOption>({
@@ -54,7 +54,7 @@ export const UserFoodDetail: FC = () => {
             newServingSize
         );
 
-        setDisplayedQuantity(newDisplayedQuantity);
+        setDisplayedQuantity(newDisplayedQuantity.toString());
         setQuantity(newQuantity);
         setServingSize(newServingSize);
     }, [
@@ -64,7 +64,11 @@ export const UserFoodDetail: FC = () => {
 
     useMemo(() => {
         setQuantity(
-            convertFromUnitToGrams(displayedQuantity, unit.id, servingSize)
+            convertFromUnitToGrams(
+                parseFloat(displayedQuantity),
+                unit.id,
+                servingSize
+            )
         );
     }, [displayedQuantity, servingSize, unit.id]);
 
@@ -110,9 +114,9 @@ export const UserFoodDetail: FC = () => {
                     type="number"
                     inputMode={'decimal'}
                     onChange={(event) =>
-                        setDisplayedQuantity(parseInt(event.target.value))
+                        setDisplayedQuantity(event.target.value)
                     }
-                    value={displayedQuantity.toFixed(2) ?? ''}
+                    value={displayedQuantity}
                     className="my-auto"
                 />
                 <Dropdown
