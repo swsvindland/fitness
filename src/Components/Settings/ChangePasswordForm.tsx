@@ -113,7 +113,7 @@ export const ChangePasswordForm: FC = () => {
                                 </span>
                             )}
                         </div>
-                        <div className="px-4 py-3 bg-primary-dark text-right sm:px-6 flex justify-between">
+                        <div className="px-4 py-3 bg-primary-dark dark:bg-background text-right sm:px-6 flex justify-between">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

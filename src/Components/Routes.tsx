@@ -16,12 +16,13 @@ import { AddFood } from './Food/AddFood';
 import { FoodDetail } from './Food/FoodDetail';
 import { ScanFood } from './Scanner/ScanFood';
 import { Settings } from './Settings/Settings';
-import { SexForm } from './Body/SexForm';
+import { SexForm } from './Settings/SexForm';
 import { ChangePasswordForm } from './Settings/ChangePasswordForm';
 import { UserFoodDetail } from './Food/UserFoodDetail';
 import { CustomMacroForm } from './Macos/CustomMacroForm';
 import { Scanner } from './Scanner/Scanner';
 import { Layout } from './Layout';
+import { UnitsForm } from './Settings/UnitsForm';
 
 export const Routes: FC = () => {
     return (
@@ -87,6 +88,9 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/settings" exact={true}>
                     <Settings />
+                </Route>
+                <Route path="/settings/units" exact={true}>
+                    <UnitsForm />
                 </Route>
                 <Route path="/settings/change-password" exact={true}>
                     <ChangePasswordForm />

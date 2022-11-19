@@ -4,21 +4,21 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { updateSex } from '../../api';
+import { updateUnits } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Sex, User } from '../../types/user';
+import { Units, User } from '../../types/user';
 
-export const SexForm: FC = () => {
+export const UnitsForm: FC = () => {
     const { user, setUser } = useContext(AuthContext);
     useShowBackButton();
-    const [sex, setSex] = useState<Sex>(user?.sex ?? Sex.Unknown);
+    const [unit, setUnit] = useState<Units>(user?.unit ?? Units.Imperial);
     const queryClient = useQueryClient();
     const history = useHistory();
 
-    const mutation = useMutation(updateSex, {
+    const mutation = useMutation(updateUnits, {
         onSuccess: async () => {
             if (user) {
-                const newUser: User = { ...user, sex };
+                const newUser: User = { ...user, unit };
                 setUser(newUser);
             }
             await queryClient.invalidateQueries(['User', user?.id]);
@@ -27,12 +27,12 @@ export const SexForm: FC = () => {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate({ sex });
+        mutation.mutate({ unit });
         history.goBack();
     };
 
     const handleClear = () => {
-        setSex(user?.sex ?? Sex.Unknown);
+        setUnit(user?.unit ?? Units.Imperial);
     };
 
     return (
@@ -43,33 +43,13 @@ export const SexForm: FC = () => {
                         <div className="p-4">
                             <div className="flex items-center">
                                 <input
-                                    id="sex-unknown"
-                                    name="sex-unknown"
+                                    id="imperial"
+                                    name="imperial"
                                     type="radio"
-                                    value={sex}
+                                    checked={unit === Units.Imperial}
                                     onChange={(event) => {
                                         if (event.target.checked) {
-                                            setSex(Sex.Unknown);
-                                        }
-                                    }}
-                                    className="h-4 w-4 accent-secondary border-ternary"
-                                />
-                                <label
-                                    htmlFor="sex-unknown"
-                                    className="ml-3 block text-sm font-medium text-ternary"
-                                >
-                                    Unknown
-                                </label>
-                            </div>
-                            <div className="flex items-center">
-                                <input
-                                    id="sex-male"
-                                    name="sex-male"
-                                    type="radio"
-                                    checked={sex === Sex.Male}
-                                    onChange={(event) => {
-                                        if (event.target.checked) {
-                                            setSex(Sex.Male);
+                                            setUnit(Units.Imperial);
                                         }
                                     }}
                                     className="h-4 w-4 accent-secondary border-ternary"
@@ -78,18 +58,18 @@ export const SexForm: FC = () => {
                                     htmlFor="sex-male"
                                     className="ml-3 block text-sm font-medium text-ternary"
                                 >
-                                    Male
+                                    Imperial
                                 </label>
                             </div>
                             <div className="flex items-center">
                                 <input
-                                    id="sex-female"
-                                    name="sex-female"
+                                    id="metric"
+                                    name="metric"
                                     type="radio"
-                                    checked={sex === Sex.Female}
+                                    checked={unit === Units.Metric}
                                     onChange={(event) => {
                                         if (event.target.checked) {
-                                            setSex(Sex.Female);
+                                            setUnit(Units.Metric);
                                         }
                                     }}
                                     className="h-4 w-4 accent-secondary border-ternary"
@@ -98,11 +78,11 @@ export const SexForm: FC = () => {
                                     htmlFor="sex-female"
                                     className="ml-3 block text-sm font-medium text-ternary"
                                 >
-                                    Female
+                                    Metric
                                 </label>
                             </div>
                         </div>
-                        <div className="px-4 py-3 bg-primary-dark text-right sm:px-6 flex justify-between">
+                        <div className="px-4 py-3 bg-primary-dark dark:bg-background text-right sm:px-6 flex justify-between">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

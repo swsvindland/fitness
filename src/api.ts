@@ -16,13 +16,13 @@ import { UserWorkout } from './types/UserWorkout';
 import { UserBloodPressure } from './types/userBloodPressure';
 import { UserBody } from './types/userBody';
 import { UserWeight } from './types/userWeight';
-import { Sex, User } from './types/user';
+import { Sex, Units, User } from './types/user';
 import { EdamamFoodHint } from './types/EdamamFoodHint';
 import { Food } from './types/Food';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -430,4 +430,12 @@ export const changePassword = (body: {
     const params = getParams();
 
     return axios.post(`${API_URL}/api/ChangePassword`, body, { params });
+};
+
+export const updateUnits = (body: {
+    unit: Units;
+}): Promise<AxiosResponse<boolean>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/UpdateUserUnits`, body, { params });
 };
