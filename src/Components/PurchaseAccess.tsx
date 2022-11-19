@@ -10,6 +10,7 @@ import {
 import { Loading } from './Loading';
 import { AuthContext } from './Auth/Auth';
 import { UserRole } from '../types/user';
+import { DeleteAccount } from './DeleteAccount';
 
 const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
@@ -282,6 +283,7 @@ export const PurchaseAccess: FC = () => {
                                                 >
                                                     Restore Purchases
                                                 </SecondaryButton>
+                                                <DeleteAccount />
                                             </div>
                                         </div>
                                     )}
