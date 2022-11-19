@@ -24,7 +24,9 @@ export const DeleteAccount: FC = () => {
 
     return (
         <>
-            <Button onClick={() => setOpen(true)}>Delete Account</Button>
+            <Button className="w-full" onClick={() => setOpen(true)}>
+                Delete Account
+            </Button>
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={setOpen}>
                     <Transition.Child

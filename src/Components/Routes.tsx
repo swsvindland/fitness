@@ -25,16 +25,15 @@ import { Layout } from './Layout';
 import { UnitsForm } from './Settings/UnitsForm';
 import { PurchaseAccess } from './PurchaseAccess';
 import { AuthContext } from './Auth/Auth';
+import { GettingStartedLayout } from './GettingStartedLayout';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
 
-    console.log(newUser);
-
     if (newUser) {
         return (
             <Switch>
-                <Layout>
+                <GettingStartedLayout>
                     <Route path="/getting-started/units" exact={true}>
                         <UnitsForm />
                     </Route>
@@ -48,7 +47,7 @@ export const Routes: FC = () => {
                         <BodyCheckInForm />
                     </Route>
                     <Redirect from="*" to="/getting-started/units" />
-                </Layout>
+                </GettingStartedLayout>
             </Switch>
         );
     }

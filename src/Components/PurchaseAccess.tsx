@@ -278,7 +278,7 @@ export const PurchaseAccess: FC = () => {
                                                     </div>
                                                 </div>
                                                 <SecondaryButton
-                                                    className="flex w-full justify-center align-middle mt-4"
+                                                    className="flex w-full justify-center align-middle my-4"
                                                     onClick={restore}
                                                 >
                                                     Restore Purchases
