@@ -41,7 +41,7 @@ const initialState = {
 export const BodyCheckInForm: FC = () => {
     useShowBackButton();
     const [state, setState] = useState<IState>(initialState);
-    const { user } = useContext(AuthContext);
+    const { user, newUser, setNewUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -68,7 +68,12 @@ export const BodyCheckInForm: FC = () => {
             rightCalf: parseFloat(state.rightCalf),
             userId: user?.id ?? '',
         });
-        history.goBack();
+        if (newUser) {
+            setNewUser(false);
+            history.push('/home');
+        } else {
+            history.goBack();
+        }
     };
 
     const handleClear = () => {

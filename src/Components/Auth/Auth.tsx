@@ -12,6 +12,8 @@ import { MinVersion } from '../MinVersion';
 interface IAuthContext {
     user?: User;
     setUser: (user?: User) => void;
+    newUser: boolean;
+    setNewUser: (newUser: boolean) => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -19,10 +21,13 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const Auth: FC = () => {
     const [user, setUser] = useState<User | undefined>(undefined);
     const [register, setRegister] = useState<boolean>(false);
+    const [newUser, setNewUser] = useState<boolean>(false);
 
     const authContext: IAuthContext = {
         user,
         setUser,
+        newUser,
+        setNewUser,
     };
 
     if (user) {
@@ -32,7 +37,6 @@ export const Auth: FC = () => {
                     <HeaderProvider>
                         <Routes />
                         <ScrollToTop />
-                        <PurchaseAccess />
                         <MinVersion />
                     </HeaderProvider>
                 </IonReactRouter>
@@ -41,7 +45,13 @@ export const Auth: FC = () => {
     }
 
     if (register) {
-        return <Register setUser={setUser} setRegister={setRegister} />;
+        return (
+            <Register
+                setUser={setUser}
+                setRegister={setRegister}
+                setNewUser={setNewUser}
+            />
+        );
     }
 
     return <Login setUser={setUser} setRegister={setRegister} />;

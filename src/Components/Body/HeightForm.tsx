@@ -12,7 +12,7 @@ import { Units } from '../../types/user';
 export const HeightForm: FC = () => {
     useShowBackButton();
     const [height, setHeight] = useState<string>('');
-    const { user } = useContext(AuthContext);
+    const { user, newUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -25,7 +25,11 @@ export const HeightForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ height: parseFloat(height), userId: user?.id ?? '' });
-        history.goBack();
+        if (newUser) {
+            history.push('/getting-started/weight');
+        } else {
+            history.goBack();
+        }
     };
 
     const handleClear = () => {

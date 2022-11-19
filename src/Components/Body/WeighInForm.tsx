@@ -11,7 +11,7 @@ import { useShowBackButton } from '../Navigation/headerHooks';
 export const WeighInForm: FC = () => {
     useShowBackButton();
     const [weight, setWeight] = useState<string>('');
-    const { user } = useContext(AuthContext);
+    const { user, newUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -24,7 +24,11 @@ export const WeighInForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ weight: parseFloat(weight), userId: user?.id ?? '' });
-        history.goBack();
+        if (newUser) {
+            history.push('/getting-started/check-in');
+        } else {
+            history.goBack();
+        }
     };
 
     const handleClear = () => {

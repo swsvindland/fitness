@@ -9,7 +9,7 @@ import { useShowBackButton } from '../Navigation/headerHooks';
 import { Units, User } from '../../types/user';
 
 export const UnitsForm: FC = () => {
-    const { user, setUser } = useContext(AuthContext);
+    const { user, setUser, newUser } = useContext(AuthContext);
     useShowBackButton();
     const [unit, setUnit] = useState<Units>(user?.unit ?? Units.Imperial);
     const queryClient = useQueryClient();
@@ -28,7 +28,11 @@ export const UnitsForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ unit });
-        history.goBack();
+        if (newUser) {
+            history.push('/getting-started/height');
+        } else {
+            history.goBack();
+        }
     };
 
     const handleClear = () => {

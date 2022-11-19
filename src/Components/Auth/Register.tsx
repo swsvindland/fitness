@@ -10,9 +10,10 @@ import { User } from '../../types/user';
 interface IProps {
     setUser: (user: User) => void;
     setRegister: (register: boolean) => void;
+    setNewUser: (newUser: boolean) => void;
 }
 
-export const Register: FC<IProps> = ({ setUser, setRegister }) => {
+export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -25,9 +26,9 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
 
         if (password !== passwordConfirm) {
             setError('Passwords do not match');
+        } else {
+            registerMutation.mutate({ email, password });
         }
-
-        registerMutation.mutate({ email, password });
     };
 
     const loginMutation = useMutation(auth, {
@@ -42,6 +43,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
 
     const registerMutation = useMutation(createUser, {
         onSuccess: async (data, variables, context) => {
+            setNewUser(true);
             loginMutation.mutate({ email, password });
         },
         onError: (error, variables, context) => {

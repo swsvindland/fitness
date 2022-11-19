@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Home } from './Home/Home';
 import { Workout } from './Workout/Workout';
 import { WorkoutStore } from './Workout/WorkoutStore';
@@ -23,15 +23,44 @@ import { CustomMacroForm } from './Macos/CustomMacroForm';
 import { Scanner } from './Scanner/Scanner';
 import { Layout } from './Layout';
 import { UnitsForm } from './Settings/UnitsForm';
+import { PurchaseAccess } from './PurchaseAccess';
+import { AuthContext } from './Auth/Auth';
 
 export const Routes: FC = () => {
+    const { newUser } = useContext(AuthContext);
+
+    console.log(newUser);
+
+    if (newUser) {
+        return (
+            <Switch>
+                <Layout>
+                    <Route path="/getting-started/units" exact={true}>
+                        <UnitsForm />
+                    </Route>
+                    <Route path="/getting-started/height" exact={true}>
+                        <HeightForm />
+                    </Route>
+                    <Route path="/getting-started/weight" exact={true}>
+                        <WeighInForm />
+                    </Route>
+                    <Route path="/getting-started/check-in" exact={true}>
+                        <BodyCheckInForm />
+                    </Route>
+                    <Redirect from="*" to="/getting-started/units" />
+                </Layout>
+            </Switch>
+        );
+    }
+
     return (
         <Switch>
-            <Redirect exact={true} from="/" to="/home" />
             <Route path="/scanner" exact={true}>
                 <Scanner />
             </Route>
             <Layout>
+                <PurchaseAccess />
+                <Redirect exact={true} from="/" to="/home" />
                 <Route path="/home" exact={true}>
                     <Home />
                 </Route>
