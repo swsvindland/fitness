@@ -7,6 +7,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { addHeight } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
+import { Units } from '../../types/user';
 
 export const HeightForm: FC = () => {
     useShowBackButton();
@@ -41,7 +42,11 @@ export const HeightForm: FC = () => {
                                 id="height"
                                 type="number"
                                 inputMode="decimal"
-                                label="Height In Inches"
+                                label={
+                                    user?.unit === Units.Imperial
+                                        ? 'Height In Inches'
+                                        : 'Height In Centimeters'
+                                }
                                 value={height}
                                 onChange={(event) =>
                                     setHeight(event.target.value)

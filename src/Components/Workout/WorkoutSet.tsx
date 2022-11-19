@@ -6,6 +6,7 @@ import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { addWorkoutActivity, getWorkoutActivity } from '../../api';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
+import { Units } from '../../types/user';
 
 interface IProps {
     set: number;
@@ -97,7 +98,9 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                     }}
                     className="my-auto"
                 />
-                <span className="mx-2 my-auto text-ternary text-xs">lbs</span>
+                <span className="mx-2 my-auto text-ternary text-xs">
+                    {user?.unit === Units.Imperial ? 'lbs' : 'kg'}
+                </span>
             </div>
             <div className="flex-none flex w-16">
                 <div className="w-0 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium border border-transparent rounded-br-lg">

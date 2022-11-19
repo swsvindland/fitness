@@ -38,6 +38,12 @@ export const UnitsForm: FC = () => {
     return (
         <div className="m-4">
             <div className="mt-5 md:mt-0 md:col-span-2">
+                <p className="text-ternary w-80 mb-4 text-center">
+                    It is recommended that you do not change once you add a
+                    bunch of data. It will not update past data entry, just how
+                    labels and certain computations, such as body fat, are
+                    computed
+                </p>
                 <form onSubmit={handleSubmit}>
                     <div className="shadow overflow-hidden rounded card w-80">
                         <div className="p-4">

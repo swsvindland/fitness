@@ -1,10 +1,13 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../Loading';
 import { getCurrentUserMacros, getMacros } from '../../api';
+import { Units } from '../../types/user';
+import { AuthContext } from '../Auth/Auth';
 
 export const MacroGrid: FC = () => {
+    const { user } = useContext(AuthContext);
     const macrosQuery = useQuery(['Macros'], () => {
         return getMacros();
     });
@@ -24,7 +27,7 @@ export const MacroGrid: FC = () => {
                     name="Calories"
                     amount={macrosQuery.data?.data?.calories ?? 0}
                     currentAmount={currentMacrosQuery.data?.data.calories}
-                    unit="kcal"
+                    unit={user?.unit === Units.Imperial ? 'Cal' : 'kcal'}
                     customMacros={true}
                 />
                 <dl className="grid overflow-hidden grid-cols-3">
@@ -62,7 +65,7 @@ export const MacroGrid: FC = () => {
                         name="Water"
                         amount={macrosQuery.data?.data?.water ?? 0}
                         currentAmount={currentMacrosQuery.data?.data?.water}
-                        unit="floz"
+                        unit={user?.unit === Units.Imperial ? 'floz' : 'ml'}
                     />
                 </dl>
             </div>
