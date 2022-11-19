@@ -180,7 +180,7 @@ export const PurchaseAccess: FC = () => {
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="relative transform rounded-lg bg-card px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                                <Dialog.Panel className="relative transform rounded-lg card px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                                     {loading ? (
                                         <Loading />
                                     ) : (
@@ -195,7 +195,7 @@ export const PurchaseAccess: FC = () => {
                                                 <div className="mx-auto max-w-7xl">
                                                     {/* Tiers */}
                                                     <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
-                                                        <div className="relative flex flex-col rounded-2xl border border-ternary bg-card p-8 shadow-sm">
+                                                        <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
                                                             <div className="flex-1">
                                                                 <h3 className="text-xl font-semibold text-secondary">
                                                                     Monthly
@@ -234,7 +234,7 @@ export const PurchaseAccess: FC = () => {
                                                                 </SecondaryButton>
                                                             </div>
                                                         </div>
-                                                        <div className="relative flex flex-col rounded-2xl border border-ternary bg-card p-8 shadow-sm">
+                                                        <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
                                                             <div className="flex-1">
                                                                 <h3 className="text-xl font-semibold text-secondary">
                                                                     Yearly

@@ -86,7 +86,7 @@ export const BodyGraph = () => {
     }
 
     return (
-        <div className="bg-card rounded shadow p-4 m-4">
+        <div className="card rounded shadow p-4 m-4">
             <LinkButton to="/body/body" className="float-right">
                 Add
             </LinkButton>

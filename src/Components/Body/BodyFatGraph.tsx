@@ -86,7 +86,7 @@ export const BodyFatGraph: FC = () => {
     };
 
     return (
-        <div className="bg-card rounded shadow p-4 m-4">
+        <div className="card rounded shadow p-4 m-4">
             <Line options={options} data={data} />
         </div>
     );

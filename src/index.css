@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000000;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #0D3140;
+    }
+}
+
+@layer components {
+    .card {
+        @apply bg-card dark:bg-background rounded shadow
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-secondary bg-primary dark:bg-primary-dark hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-800 disabled:cursor-not-allowed
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center px-4 py-2 border border-secondary shadow-sm text-sm font-medium rounded-md text-secondary bg-transparent hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-gray-800 disabled:border-none disabled:cursor-not-allowed
+    }
+}
+

@@ -66,7 +66,7 @@ export const ChangePasswordForm: FC = () => {
         <div className="m-4">
             <div className="mt-5 md:mt-0 md:col-span-2">
                 <form onSubmit={handleSubmit}>
-                    <div className="shadow overflow-hidden rounded bg-card w-80">
+                    <div className="shadow overflow-hidden rounded card w-80">
                         <div className="p-4">
                             <TextField
                                 id="oldPassword"

@@ -86,7 +86,7 @@ export const WeightGraph: FC = () => {
     };
 
     return (
-        <div className="bg-card rounded shadow p-4 m-4">
+        <div className="card rounded shadow p-4 m-4">
             <LinkButton to="/body/weight" className="float-right">
                 Add
             </LinkButton>

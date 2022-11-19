@@ -108,7 +108,7 @@ export const SupplementCard: FC<IProps> = ({
             <button
                 onClick={() => (isUser ? handleCheck() : setOpen(true))}
                 className={`${
-                    checked ? 'bg-primary-dark' : 'bg-card'
+                    checked ? 'bg-primary-dark' : 'card'
                 } rounded overflow-hidden shadow-lg p-4 my-2 flex justify-between items-center w-full text-left`}
             >
                 <div className="flex items-center">

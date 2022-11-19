@@ -33,7 +33,7 @@ export const WorkoutDetail: FC = () => {
     }
 
     return (
-        <div className="bg-card rounded">
+        <div className="card rounded">
             <div className="pt-6 sm:pb-6">
                 <div className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">

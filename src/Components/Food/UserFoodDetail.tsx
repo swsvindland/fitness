@@ -164,7 +164,7 @@ export const UserFoodDetail: FC = () => {
                     )}
                 </div>
             </div>
-            <div className="flex flex-col justify-center rounded bg-card p-4">
+            <div className="flex flex-col justify-center rounded card p-4">
                 {foodDetailsQuery.isFetching && <Loading />}
                 <div className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1">
                     <div className="text-secondary">Serving Size</div>

@@ -31,7 +31,7 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
         <div
             role="listitem"
             key={exercise.id}
-            className="w-full col-span-1 bg-card rounded-lg shadow"
+            className="w-full col-span-1 card rounded-lg shadow"
         >
             <div className="w-full flex items-center justify-start p-6 space-x-6">
                 <div className="">

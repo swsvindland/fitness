@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Auth } from './Auth/Auth';
 
-import '../index.scss';
+import '../index.css';
 
 setupIonicReact();
 

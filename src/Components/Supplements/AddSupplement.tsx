@@ -86,7 +86,7 @@ export const AddSupplement: FC<IProps> = ({
 
             {/* Full-screen container to center the panel */}
             <div className="fixed inset-0 flex items-center justify-center p-4">
-                <Dialog.Panel className="mx-auto max-w-sm w-full rounded bg-card p-4">
+                <Dialog.Panel className="mx-auto max-w-sm w-full card p-4">
                     <Dialog.Title className="text-secondary">
                         Add Supplement
                     </Dialog.Title>
