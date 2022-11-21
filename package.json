@@ -22,7 +22,7 @@
         "@capacitor/core": "4.4.0",
         "@capacitor/haptics": "4.0.1",
         "@capacitor/ios": "4.4.0",
-        "@capacitor/keyboard": "4.0.1",
+        "@capacitor/keyboard": "4.1.0",
         "@capacitor/status-bar": "4.0.1",
         "@headlessui/react": "^1.7.4",
         "@ionic/react": "^6.3.6",
