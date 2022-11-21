@@ -10,7 +10,7 @@ interface IProps {
 export const WorkoutStoreCard: FC<IProps> = ({ id, name, version }) => {
     return (
         <Link
-            to={`/workout/${id}`}
+            to={`/workout/store/${id}`}
             className="m-4 max-w-xl w-96 relative block card rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none"
         >
             <span className="flex items-center">

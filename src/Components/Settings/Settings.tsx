@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { DeleteAccount } from '../DeleteAccount';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { LinkButton } from '../Buttons/LinkButton';
+import { RestartWorkout } from '../Workout/RestartWorkout';
 
 export const Settings: FC = () => {
     useShowBackButton();
@@ -21,6 +22,10 @@ export const Settings: FC = () => {
             <LinkButton to="/settings/change-password" className="mb-2">
                 Change Password
             </LinkButton>
+            <LinkButton to="/workout/store" className="mb-2">
+                Change Workout
+            </LinkButton>
+            <RestartWorkout />
             <DeleteAccount />
         </div>
     );
