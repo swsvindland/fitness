@@ -5,6 +5,9 @@ const config: CapacitorConfig = {
     appName: 'WorkoutTrack',
     webDir: 'dist',
     bundledWebRuntime: false,
+    server: {
+        hostname: 'lifttrack-b8673.web.app',
+    },
 };
 
 export default config;
