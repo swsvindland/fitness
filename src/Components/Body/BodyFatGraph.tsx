@@ -87,7 +87,15 @@ export const BodyFatGraph: FC = () => {
 
     return (
         <div className="card rounded shadow p-4 m-4">
-            <Line options={options} data={data} />
+            {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
+                <Line options={options} data={data} />
+            ) : (
+                <span className="text-ternary">
+                    Add your weight, height, and body measurements to compute
+                    your body fat. This is also needed for accurate macros and
+                    calories.
+                </span>
+            )}
         </div>
     );
 };

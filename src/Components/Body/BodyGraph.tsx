@@ -90,7 +90,13 @@ export const BodyGraph = () => {
             <LinkButton to="/body/body" className="float-right">
                 Add
             </LinkButton>
-            <Radar data={data} />
+            {data.datasets.length > 0 ? (
+                <Radar data={data} />
+            ) : (
+                <span className="text-ternary">
+                    Use the Add button to add body measurements
+                </span>
+            )}
         </div>
     );
 };

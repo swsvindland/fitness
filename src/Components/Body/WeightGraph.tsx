@@ -90,7 +90,13 @@ export const WeightGraph: FC = () => {
             <LinkButton to="/body/weight" className="float-right">
                 Add
             </LinkButton>
-            <Line options={options} data={data} />
+            {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
+                <Line options={options} data={data} />
+            ) : (
+                <span className="text-ternary">
+                    Use the Add button to add your weight
+                </span>
+            )}
         </div>
     );
 };

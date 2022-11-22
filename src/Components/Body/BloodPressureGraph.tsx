@@ -82,7 +82,13 @@ export const BloodPressureGraph: FC = () => {
             <LinkButton to="/body/blood-pressure" className="float-right">
                 Add
             </LinkButton>
-            <Line data={data} />
+            {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
+                <Line data={data} />
+            ) : (
+                <span className="text-ternary">
+                    Use the Add button to add your blood pressure
+                </span>
+            )}
         </div>
     );
 };
