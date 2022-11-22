@@ -70,25 +70,10 @@ export const BodyFatGraph: FC = () => {
         return null;
     }
 
-    const options = {
-        plugins: {
-            legend: {
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
-                        family: 'Quicksand',
-                        size: 12,
-                        color: 'blue',
-                    },
-                },
-            },
-        },
-    };
-
     return (
         <div className="card rounded shadow p-4 m-4">
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
-                <Line options={options} data={data} />
+                <Line data={data} />
             ) : (
                 <span className="text-ternary">
                     Add your weight, height, and body measurements to compute

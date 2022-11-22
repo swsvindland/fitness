@@ -70,28 +70,13 @@ export const WeightGraph: FC = () => {
         return <Loading />;
     }
 
-    const options = {
-        plugins: {
-            legend: {
-                labels: {
-                    // This more specific font property overrides the global property
-                    font: {
-                        family: 'Quicksand',
-                        size: 12,
-                        color: 'blue',
-                    },
-                },
-            },
-        },
-    };
-
     return (
         <div className="card rounded shadow p-4 m-4">
             <LinkButton to="/body/weight" className="float-right">
                 Add
             </LinkButton>
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
-                <Line options={options} data={data} />
+                <Line data={data} />
             ) : (
                 <span className="text-ternary">
                     Use the Add button to add your weight
