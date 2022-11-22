@@ -29,6 +29,7 @@
         "@ionic/react-router": "^6.3.6",
         "@tanstack/react-query": "^4.16.1",
         "axios": "^1.1.3",
+        "capacitor-ios-autofill-save-password": "^1.1.4",
         "chart.js": "^3.9.1",
         "cordova-plugin-purchase": "^11.0.0",
         "date-fns": "^2.29.3",

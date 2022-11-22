@@ -6,6 +6,8 @@ import { Loading } from '../Loading';
 import { TextField } from '../TextField';
 import { auth, getUser } from '../../api';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { Capacitor } from '@capacitor/core';
+import { SavePassword } from 'capacitor-ios-autofill-save-password';
 
 interface IProps {
     setUser: (user?: User) => void;
@@ -38,6 +40,13 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
         onSuccess: async (data, variables, context) => {
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('userId', data.data.userId);
+
+            if (Capacitor.getPlatform() === 'ios') {
+                await SavePassword.promptDialog({
+                    username: email,
+                    password: password,
+                });
+            }
 
             const user = await getUser();
             setUser(user.data);

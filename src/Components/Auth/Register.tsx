@@ -6,6 +6,8 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
 import { auth, createUser, getUser } from '../../api';
 import { User } from '../../types/user';
+import { Capacitor } from '@capacitor/core';
+import { SavePassword } from 'capacitor-ios-autofill-save-password';
 
 interface IProps {
     setUser: (user: User) => void;
@@ -35,6 +37,13 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
         onSuccess: async (data, variables, context) => {
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('userId', data.data.userId);
+
+            if (Capacitor.getPlatform() === 'ios') {
+                await SavePassword.promptDialog({
+                    username: email,
+                    password: password,
+                });
+            }
 
             const user = await getUser();
             setUser(user.data);
