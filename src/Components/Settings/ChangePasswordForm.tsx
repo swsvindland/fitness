@@ -7,6 +7,8 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { addBloodPressure, changePassword } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
+import { Capacitor } from '@capacitor/core';
+import { SavePassword } from 'capacitor-ios-autofill-save-password';
 
 interface IState {
     oldPassword: string;
@@ -30,6 +32,14 @@ export const ChangePasswordForm: FC = () => {
     const mutation = useMutation(changePassword, {
         onSuccess: async () => {
             await queryClient.invalidateQueries(['User', user?.id]);
+
+            if (Capacitor.getPlatform() === 'ios') {
+                await SavePassword.promptDialog({
+                    username: user?.email ?? '',
+                    password: state.newPassword,
+                });
+            }
+
             history.goBack();
         },
         onError: (error) => {
