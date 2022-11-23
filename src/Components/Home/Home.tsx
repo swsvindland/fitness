@@ -6,7 +6,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useHideBackButton } from '../Navigation/headerHooks';
 
 export const Home: FC = () => {
-    const { user } = useContext(AuthContext);
+    const { user, paid } = useContext(AuthContext);
     useHideBackButton();
 
     const dashboardQuery = useQuery(['Dashboard', user?.id], () => {
@@ -24,6 +24,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/height"
+                    disabled={!paid}
                 >
                     Add Your Height
                 </LinkButton>
@@ -32,6 +33,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/weight"
+                    disabled={!paid}
                 >
                     Daily Weigh In
                 </LinkButton>
@@ -40,6 +42,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/blood-pressure"
+                    disabled={!paid}
                 >
                     Add Your Blood Pressure
                 </LinkButton>
@@ -48,6 +51,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/workout/body"
+                    disabled={!paid}
                 >
                     Add Your Body Measurements
                 </LinkButton>
@@ -56,6 +60,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/workout"
+                    disabled={!paid}
                 >
                     Start Your Workout
                 </LinkButton>

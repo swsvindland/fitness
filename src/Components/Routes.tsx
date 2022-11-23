@@ -23,7 +23,6 @@ import { CustomMacroForm } from './Macros/CustomMacroForm';
 import { Scanner } from './Scanner/Scanner';
 import { Layout } from './Layout';
 import { UnitsForm } from './Settings/UnitsForm';
-import { PurchaseAccess } from './PurchaseAccess';
 import { AuthContext } from './Auth/Auth';
 import { GettingStartedLayout } from './GettingStartedLayout';
 
@@ -58,7 +57,6 @@ export const Routes: FC = () => {
                 <Scanner />
             </Route>
             <Layout>
-                <PurchaseAccess />
                 <Redirect exact={true} from="/" to="/home" />
                 <Route path="/home" exact={true}>
                     <Home />

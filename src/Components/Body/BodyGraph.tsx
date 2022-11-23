@@ -29,7 +29,7 @@ ChartJS.register(
 );
 
 export const BodyGraph = () => {
-    const { user } = useContext(AuthContext);
+    const { user, paid } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
               'radar',
@@ -87,7 +87,11 @@ export const BodyGraph = () => {
 
     return (
         <div className="card rounded shadow p-4 m-4">
-            <LinkButton to="/body/body" className="float-right">
+            <LinkButton
+                to="/body/body"
+                className="relative top-0 right-0"
+                disabled={!paid}
+            >
                 Add
             </LinkButton>
             {data.datasets.length > 0 ? (

@@ -6,7 +6,6 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Register } from './Register';
 import { HeaderProvider } from '../Navigation/HeaderContext';
 import { ScrollToTop } from '../ScrollToTop';
-import { PurchaseAccess } from '../PurchaseAccess';
 import { MinVersion } from '../MinVersion';
 
 interface IAuthContext {
@@ -14,6 +13,10 @@ interface IAuthContext {
     setUser: (user?: User) => void;
     newUser: boolean;
     setNewUser: (newUser: boolean) => void;
+    paid: boolean;
+    setPaid: (paid: boolean) => void;
+    openPurchase: boolean;
+    setOpenPurchase: (openPurchase: boolean) => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -22,12 +25,18 @@ export const Auth: FC = () => {
     const [user, setUser] = useState<User | undefined>(undefined);
     const [register, setRegister] = useState<boolean>(false);
     const [newUser, setNewUser] = useState<boolean>(false);
+    const [paid, setPaid] = useState<boolean>(false);
+    const [openPurchase, setOpenPurchase] = useState<boolean>(false);
 
     const authContext: IAuthContext = {
         user,
         setUser,
         newUser,
         setNewUser,
+        paid,
+        setPaid,
+        openPurchase,
+        setOpenPurchase,
     };
 
     if (user) {

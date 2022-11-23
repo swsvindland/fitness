@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
@@ -6,8 +6,10 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
 import { Loading } from '../Loading';
 import { useHistory } from 'react-router-dom';
+import { AuthContext } from '../Auth/Auth';
 
 export const FoodGrid: FC = () => {
+    const { paid } = useContext(AuthContext);
     const history = useHistory();
 
     const handleRowClick = (foodId?: number) => {
@@ -30,10 +32,18 @@ export const FoodGrid: FC = () => {
     return (
         <div className="px-4 sm:px-6 lg:px-8 card rounded m-1 p-4">
             <div className="flex flex-row justify-end">
-                <SecondaryButton className="mx-1" onClick={handleStartScan}>
+                <SecondaryButton
+                    className="mx-1"
+                    onClick={handleStartScan}
+                    disabled={!paid}
+                >
                     Scan Barcode
                 </SecondaryButton>
-                <LinkButton to="/eat/add-food" className="mx-1">
+                <LinkButton
+                    to="/eat/add-food"
+                    className="mx-1"
+                    disabled={!paid}
+                >
                     Add Food
                 </LinkButton>
             </div>

@@ -5,9 +5,23 @@ interface IProps {
     to: string;
     children: ReactNode;
     className?: string;
+    disabled?: boolean;
 }
 
-export const LinkButton: FC<IProps> = ({ to, children, className }) => {
+export const LinkButton: FC<IProps> = ({
+    to,
+    children,
+    className,
+    disabled,
+}) => {
+    if (disabled) {
+        return (
+            <button className={`btn-primary ${className}`} disabled>
+                {children}
+            </button>
+        );
+    }
+
     return (
         <Link to={to} className={`${className} btn-primary`}>
             {children}

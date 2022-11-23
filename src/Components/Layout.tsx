@@ -2,6 +2,7 @@ import { FC, ReactNode } from 'react';
 import { Sidebar } from './Navigation/Sidebar';
 import { BottomNavigation } from './Navigation/BottomNavigation';
 import { Header } from './Navigation/Header';
+import { PurchaseAccess } from './PurchaseAccess';
 
 interface IProps {
     children: ReactNode;
@@ -18,7 +19,10 @@ export const Layout: FC<IProps> = ({ children }) => {
                     <Header />
                 </header>
                 <main className="pt-safe md:ml-48 my-24 p-4 flex justify-center">
-                    {children}
+                    <div className="flex flex-col justify-center items-center">
+                        <PurchaseAccess />
+                        {children}
+                    </div>
                 </main>
             </div>
             <footer className="md:hidden pb-safe">

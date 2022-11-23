@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { WorkoutSet } from './WorkoutSet';
 import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
 import { ExerciseIcon } from '../../types/Exercise';
 import { BarbellSolid } from '../Icons/BarbellSolid';
 import { DumbbellSolid } from '../Icons/DumbbellSolid';
 import { HeartPulseSolid } from '../Icons/HeartPulseSolid';
+import { AuthContext } from '../Auth/Auth';
 
 interface IProps {
     exercise: WorkoutBlockExercise;
@@ -27,6 +28,8 @@ const mapToIcon = (icon?: ExerciseIcon) => {
 };
 
 export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
+    const { paid } = useContext(AuthContext);
+
     return (
         <div
             role="listitem"
@@ -48,19 +51,28 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                     <p className="mt-1 text-ternary text-sm truncate">
                         {exercise.minReps} - {exercise.maxReps} Reps
                     </p>
+                    {!paid && (
+                        <p className="mt-1 text-ternary text-sm truncate">
+                            {exercise.sets} Sets
+                        </p>
+                    )}
                 </div>
             </div>
-            <div>
-                {Array.from(Array(exercise.sets).keys()).map((set) => (
-                    <WorkoutSet
-                        key={set}
-                        set={set}
-                        exercise={exercise}
-                        week={week}
-                        day={day}
-                    />
-                ))}
-            </div>
+            {!paid ? (
+                <div />
+            ) : (
+                <div>
+                    {Array.from(Array(exercise.sets).keys()).map((set) => (
+                        <WorkoutSet
+                            key={set}
+                            set={set}
+                            exercise={exercise}
+                            week={week}
+                            day={day}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
