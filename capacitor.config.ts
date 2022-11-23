@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
     webDir: 'dist',
     bundledWebRuntime: false,
     server: {
-        hostname: 'lifttrack-b8673.web.app',
+        hostname: 'workout-track.com',
     },
 };
 
