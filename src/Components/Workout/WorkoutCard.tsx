@@ -1,6 +1,6 @@
 import { FC, useContext } from 'react';
 import { WorkoutSet } from './WorkoutSet';
-import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
+import { WorkoutExercise } from '../../types/WorkoutExercise';
 import { ExerciseIcon } from '../../types/Exercise';
 import { BarbellSolid } from '../Icons/BarbellSolid';
 import { DumbbellSolid } from '../Icons/DumbbellSolid';
@@ -8,7 +8,7 @@ import { HeartPulseSolid } from '../Icons/HeartPulseSolid';
 import { AuthContext } from '../Auth/Auth';
 
 interface IProps {
-    exercise: WorkoutBlockExercise;
+    exercise: WorkoutExercise;
     week: number;
     day: number;
     icon?: ExerciseIcon;

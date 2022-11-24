@@ -4,4 +4,7 @@ export interface Workout {
     version: number;
     name: string;
     description: string;
+    image: string;
+    days: number;
+    duration: number;
 }

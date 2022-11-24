@@ -1,6 +1,6 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextField';
-import { WorkoutBlockExercise } from '../../types/WorkoutBlockExercise';
+import { WorkoutExercise } from '../../types/WorkoutExercise';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
@@ -10,7 +10,7 @@ import { Units } from '../../types/user';
 
 interface IProps {
     set: number;
-    exercise: WorkoutBlockExercise;
+    exercise: WorkoutExercise;
     week: number;
     day: number;
 }

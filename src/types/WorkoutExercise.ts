@@ -1,9 +1,9 @@
 import { Exercise } from './Exercise';
 
-export interface WorkoutBlockExercise {
+export interface WorkoutExercise {
     id: number;
     created: string;
-    workoutBlockId: number;
+    workoutId: number;
     exerciseId: number;
     exercise: Exercise;
     day: number;

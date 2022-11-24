@@ -7,7 +7,7 @@ import {
     completeWorkout,
     getUserNextWorkout,
     getWorkout,
-    getWorkoutDetails,
+    getWorkoutExercises,
 } from '../../api';
 import { Button } from '../Buttons/Button';
 import { Dropdown, DropdownOption } from '../Dropdown';
@@ -39,9 +39,11 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     const workoutQuery = useQuery(['Workout', workoutId], () =>
         getWorkout(workoutId)
     );
-    const workoutDetailsQuery = useQuery(['WorkoutDetails', workoutId], () =>
-        getWorkoutDetails(workoutId)
+
+    const exercisesQuery = useQuery(['WorkoutExercises'], () =>
+        getWorkoutExercises(workoutId, day)
     );
+
     const nextWorkoutQuery = useQuery(['UserNextWorkout'], () => {
         return getUserNextWorkout();
     });
@@ -49,12 +51,12 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     const mutation = useMutation(completeWorkout);
 
     useMemo(() => {
-        const workoutDetail = workoutDetailsQuery.data?.data[0];
-        if (!workoutDetail) return;
+        const workout = workoutQuery.data?.data;
+        if (!workout) return;
 
-        setMaxDays(workoutDetail.days);
-        setOptions(generateOptions(workoutDetail.duration));
-    }, [workoutDetailsQuery.data?.data]);
+        setMaxDays(workout.days);
+        setOptions(generateOptions(workout.duration));
+    }, [workoutQuery.data?.data]);
 
     useMemo(() => {
         const nextWorkout = nextWorkoutQuery.data?.data;
@@ -64,11 +66,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
     }, [nextWorkoutQuery.data?.data]);
 
-    if (
-        workoutQuery.isLoading ||
-        workoutDetailsQuery.isLoading ||
-        nextWorkoutQuery.isLoading
-    ) {
+    if (workoutQuery.isLoading || nextWorkoutQuery.isLoading) {
         return <Loading />;
     }
 
@@ -78,16 +76,11 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         );
     }
 
-    const exercises =
-        workoutDetailsQuery.data?.data[0].workoutBlockExercises.filter(
-            (exercise) => exercise.day === day
-        );
-
     const handleCompleteWorkout = () => {
         if (!user) return;
 
         mutation.mutate({
-            workoutId: workoutDetailsQuery.data?.data[0].workoutId ?? 0,
+            workoutId,
             workoutBlock: 1,
             userId: user.id,
             day,
@@ -102,7 +95,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
             <div role="list" className="grid grid-cols-1 gap-6">
-                {exercises?.map((exercise) => (
+                {exercisesQuery.data?.data?.map((exercise) => (
                     <WorkoutCard
                         key={exercise.id}
                         exercise={exercise}

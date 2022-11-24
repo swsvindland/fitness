@@ -19,7 +19,7 @@ export const Layout: FC<IProps> = ({ children }) => {
                     <Header />
                 </header>
                 <main className="pt-safe md:ml-48 my-24 p-4 flex justify-center">
-                    <div className="flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center flex-1">
                         <PurchaseAccess />
                         {children}
                     </div>

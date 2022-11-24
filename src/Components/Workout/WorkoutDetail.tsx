@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { useHistory, useParams } from 'react-router-dom';
-import { buyWorkout, getWorkout, getWorkoutDetails } from '../../api';
+import { buyWorkout, getWorkout } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const WorkoutDetail: FC = () => {
@@ -16,11 +16,6 @@ export const WorkoutDetail: FC = () => {
         if (isNaN(parseInt(workoutId))) return;
         return getWorkout(parseInt(workoutId));
     });
-    const workoutDetailsQuery = useQuery(['WorkoutDetails', workoutId], () => {
-        if (!workoutId) return;
-        if (isNaN(parseInt(workoutId))) return;
-        return getWorkoutDetails(parseInt(workoutId));
-    });
 
     const mutation = useMutation(buyWorkout, {
         onSuccess: () => {
@@ -28,7 +23,7 @@ export const WorkoutDetail: FC = () => {
         },
     });
 
-    if (workoutQuery.isLoading || workoutDetailsQuery.isLoading) {
+    if (workoutQuery.isLoading) {
         return <Loading />;
     }
 
@@ -51,7 +46,7 @@ export const WorkoutDetail: FC = () => {
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
                                 <img
-                                    src="https://as2.ftcdn.net/v2/jpg/03/09/97/55/1000_F_309975507_OZK8uQHIdKUfSOnMqfXX2B8NPFPMrpq5.jpg"
+                                    src={workoutQuery.data?.data.image}
                                     alt=""
                                     className="lg:col-span-2 lg:row-span-2 rounded-lg"
                                 />
@@ -104,17 +99,11 @@ export const WorkoutDetail: FC = () => {
                                 <div className="mt-4 prose prose-sm text-ternary">
                                     <div role="list">
                                         <li>
-                                            {
-                                                workoutDetailsQuery.data
-                                                    ?.data[0].days
-                                            }{' '}
-                                            days per week
+                                            {workoutQuery.data?.data.days} days
+                                            per week
                                         </li>
                                         <li>
-                                            {
-                                                workoutDetailsQuery.data
-                                                    ?.data[0].duration
-                                            }{' '}
+                                            {workoutQuery.data?.data.duration}{' '}
                                             weeks long
                                         </li>
                                     </div>

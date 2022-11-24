@@ -3,7 +3,6 @@ import { Supplement } from './types/supplement';
 import { UserSupplement } from './types/userSupplement';
 import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
-import { WorkoutBlock } from './types/WorkoutBlock';
 import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
 import { UserFood } from './types/UserFood';
@@ -19,10 +18,11 @@ import { UserWeight } from './types/userWeight';
 import { Sex, Units, User } from './types/user';
 import { EdamamFoodHint } from './types/EdamamFoodHint';
 import { Food } from './types/Food';
+import { WorkoutExercise } from './types/WorkoutExercise';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -97,12 +97,13 @@ export const getWorkout = (
     });
 };
 
-export const getWorkoutDetails = (
-    workoutId: number
-): Promise<AxiosResponse<WorkoutBlock[]>> => {
-    const params = getParams({ workoutId });
+export const getWorkoutExercises = (
+    workoutId: number,
+    day: number
+): Promise<AxiosResponse<WorkoutExercise[]>> => {
+    const params = getParams({ workoutId, day });
 
-    return axios.get(`${API_URL}/api/GetWorkoutDetails`, {
+    return axios.get(`${API_URL}/api/GetWorkoutExercises`, {
         params,
     });
 };
