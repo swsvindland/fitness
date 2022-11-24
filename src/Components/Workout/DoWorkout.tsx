@@ -81,7 +81,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
 
         mutation.mutate({
             workoutId,
-            workoutBlock: 1,
             userId: user.id,
             day,
             week: week.id,

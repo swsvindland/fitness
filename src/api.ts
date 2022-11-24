@@ -20,9 +20,9 @@ import { EdamamFoodHint } from './types/EdamamFoodHint';
 import { Food } from './types/Food';
 import { WorkoutExercise } from './types/WorkoutExercise';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -121,12 +121,12 @@ export const buyWorkout = (workoutId: number) => {
 };
 
 export const getWorkoutActivity = (
-    workoutBlockExerciseId: number,
+    workoutExerciseId: number,
     set: number,
     week: number,
     day: number
 ): Promise<AxiosResponse<UserWorkoutActivity>> => {
-    const params = getParams({ workoutBlockExerciseId, set, week, day });
+    const params = getParams({ workoutExerciseId, set, week, day });
 
     return axios.get(`${API_URL}/api/GetUserWorkoutActivity`, {
         params,
@@ -136,7 +136,7 @@ export const getWorkoutActivity = (
 export const addWorkoutActivity = (body: {
     id?: number;
     userId: string;
-    workoutBlockExerciseId: number;
+    workoutExerciseId: number;
     set: number;
     reps: number;
     weight: number;
@@ -167,7 +167,6 @@ export const getUserWorkouts = (): Promise<AxiosResponse<UserWorkout[]>> => {
 export const completeWorkout = (body: {
     userId: string;
     workoutId: number;
-    workoutBlock: number;
     week: number;
     day: number;
 }): Promise<AxiosResponse> => {
