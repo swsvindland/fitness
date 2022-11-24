@@ -6,16 +6,12 @@ import { DoWorkout } from './DoWorkout';
 import { useHistory } from 'react-router-dom';
 import { getUserWorkouts } from '../../api';
 import { useHideBackButton } from '../Navigation/headerHooks';
+import { LinkButton } from '../Buttons/LinkButton';
 
 export const Workout: FC = () => {
-    const { user } = useContext(AuthContext);
     useHideBackButton();
-    const history = useHistory();
 
-    const userWorkoutsQuery = useQuery(
-        ['UserWorkouts', user?.id],
-        getUserWorkouts
-    );
+    const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
 
     if (userWorkoutsQuery.isLoading) {
         return <Loading />;
@@ -26,8 +22,15 @@ export const Workout: FC = () => {
     );
 
     if (!activeWorkouts || activeWorkouts.length === 0) {
-        history.push('/workout/store', { replace: true });
-        return null;
+        return (
+            <>
+                <h2 className="text-ternary">
+                    Looks like you haven't started a workout. Select one in the
+                    store.
+                </h2>
+                <LinkButton to="/workout/store">Workout Store</LinkButton>
+            </>
+        );
     }
 
     return (

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { useHistory, useParams } from 'react-router-dom';
@@ -10,6 +10,7 @@ export const WorkoutDetail: FC = () => {
     const { workoutId } = useParams<{ workoutId?: string }>();
     const history = useHistory();
     useShowBackButton();
+    const queryClient = useQueryClient();
 
     const workoutQuery = useQuery(['Workout', workoutId], () => {
         if (!workoutId) return;
@@ -18,7 +19,8 @@ export const WorkoutDetail: FC = () => {
     });
 
     const mutation = useMutation(buyWorkout, {
-        onSuccess: () => {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries();
             history.push('/workout', { replace: true });
         },
     });
