@@ -71,7 +71,7 @@ export const WorkoutDetail: FC = () => {
                                         type="submit"
                                         className="mt-6 w-full text-center flex justify-center"
                                     >
-                                        Add to cart
+                                        Start Workout
                                     </Button>
                                 </form>
                             )}
