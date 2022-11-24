@@ -7,7 +7,6 @@ import {
     IAPProduct,
     InAppPurchase2 as iap,
 } from '@awesome-cordova-plugins/in-app-purchase-2';
-import { Loading } from './Loading';
 import { AuthContext } from './Auth/Auth';
 import { UserRole } from '../types/user';
 import { DeleteAccount } from './DeleteAccount';
@@ -18,7 +17,6 @@ const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
 export const PurchaseOptions: FC = () => {
     const { user, openPurchase, setOpenPurchase, setPaid } =
         useContext(AuthContext);
-    const [loading, setLoading] = useState<boolean>(false);
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
 
@@ -63,13 +61,11 @@ export const PurchaseOptions: FC = () => {
     const purchaseMonthly = () => {
         if (canCharge) {
             try {
-                setLoading(true);
                 iap.order('Access Monthly');
             } catch (e) {
                 console.error(e);
             } finally {
                 iap.refresh();
-                setLoading(false);
             }
         }
     };
@@ -77,13 +73,11 @@ export const PurchaseOptions: FC = () => {
     const purchaseYearly = () => {
         if (isPlatform('ios') || isPlatform('android')) {
             try {
-                setLoading(true);
                 iap.order('Access Yearly');
             } catch (e) {
                 console.error(e);
             } finally {
                 iap.refresh();
-                setLoading(false);
             }
         }
     };
@@ -184,120 +178,112 @@ export const PurchaseOptions: FC = () => {
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
                                 <Dialog.Panel className="relative transform rounded-lg card px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                                    {loading ? (
-                                        <Loading />
-                                    ) : (
-                                        <div>
-                                            <div className="mt-3 text-center sm:mt-5">
-                                                <Dialog.Title
-                                                    as="h3"
-                                                    className="text-lg font-medium leading-6 text-secondary"
-                                                >
-                                                    Get full to the app and all
-                                                    it's features
-                                                </Dialog.Title>
-                                                <div className="mx-auto max-w-7xl">
-                                                    {/* Tiers */}
-                                                    <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
-                                                        <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
-                                                            <div className="flex-1">
-                                                                <h3 className="text-xl font-semibold text-secondary">
-                                                                    Monthly
-                                                                </h3>
-                                                                <p className="mt-4 flex items-baseline text-secondary">
-                                                                    <span className="text-5xl font-bold tracking-tight">
-                                                                        {
-                                                                            monthly?.price
-                                                                        }
-                                                                    </span>
-                                                                    <span className="ml-1 text-xl font-semibold">
-                                                                        month
-                                                                    </span>
-                                                                </p>
-                                                                <p className="mt-6 text-ternary">
-                                                                    Get full
-                                                                    access to
-                                                                    the app. All
-                                                                    features and
-                                                                    workouts
-                                                                    available.
-                                                                </p>
-                                                            </div>
-                                                            <div className="mt-4">
-                                                                <SecondaryButton
-                                                                    className="flex w-full justify-center align-middle"
-                                                                    onClick={
-                                                                        purchaseMonthly
+                                    <div>
+                                        <div className="mt-3 text-center sm:mt-5">
+                                            <Dialog.Title
+                                                as="h3"
+                                                className="text-lg font-medium leading-6 text-secondary"
+                                            >
+                                                Get full to the app and all it's
+                                                features
+                                            </Dialog.Title>
+                                            <div className="mx-auto max-w-7xl">
+                                                {/* Tiers */}
+                                                <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
+                                                    <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
+                                                        <div className="flex-1">
+                                                            <h3 className="text-xl font-semibold text-secondary">
+                                                                Monthly
+                                                            </h3>
+                                                            <p className="mt-4 flex items-baseline text-secondary">
+                                                                <span className="text-5xl font-bold tracking-tight">
+                                                                    {
+                                                                        monthly?.price
                                                                     }
-                                                                    disabled={
-                                                                        !monthly?.canPurchase
-                                                                    }
-                                                                >
-                                                                    Monthly
-                                                                    Billing
-                                                                </SecondaryButton>
-                                                            </div>
+                                                                </span>
+                                                                <span className="ml-1 text-xl font-semibold">
+                                                                    month
+                                                                </span>
+                                                            </p>
+                                                            <p className="mt-6 text-ternary">
+                                                                Get full access
+                                                                to the app. All
+                                                                features and
+                                                                workouts
+                                                                available.
+                                                            </p>
                                                         </div>
-                                                        <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
-                                                            <div className="flex-1">
-                                                                <h3 className="text-xl font-semibold text-secondary">
-                                                                    Yearly
-                                                                </h3>
-                                                                <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
-                                                                    Most popular
-                                                                </p>
-                                                                <p className="mt-4 flex items-baseline text-secondary">
-                                                                    <span className="text-5xl font-bold tracking-tight">
-                                                                        {
-                                                                            yearly?.price
-                                                                        }
-                                                                    </span>
-                                                                    <span className="ml-1 text-xl font-semibold">
-                                                                        year
-                                                                    </span>
-                                                                </p>
-                                                                <p className="mt-6 text-ternary">
-                                                                    All the
-                                                                    features of
-                                                                    monthly but
-                                                                    cheaper!
-                                                                </p>
-                                                            </div>
-                                                            <div className="mt-4">
-                                                                <Button
-                                                                    className="flex w-full justify-center align-middle"
-                                                                    onClick={
-                                                                        purchaseYearly
+                                                        <div className="mt-4">
+                                                            <SecondaryButton
+                                                                className="flex w-full justify-center align-middle"
+                                                                onClick={
+                                                                    purchaseMonthly
+                                                                }
+                                                                disabled={
+                                                                    !monthly?.canPurchase
+                                                                }
+                                                            >
+                                                                Monthly Billing
+                                                            </SecondaryButton>
+                                                        </div>
+                                                    </div>
+                                                    <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
+                                                        <div className="flex-1">
+                                                            <h3 className="text-xl font-semibold text-secondary">
+                                                                Yearly
+                                                            </h3>
+                                                            <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
+                                                                Most popular
+                                                            </p>
+                                                            <p className="mt-4 flex items-baseline text-secondary">
+                                                                <span className="text-5xl font-bold tracking-tight">
+                                                                    {
+                                                                        yearly?.price
                                                                     }
-                                                                    disabled={
-                                                                        !yearly?.canPurchase
-                                                                    }
-                                                                >
-                                                                    Yearly
-                                                                    Billing
-                                                                </Button>
-                                                            </div>
+                                                                </span>
+                                                                <span className="ml-1 text-xl font-semibold">
+                                                                    year
+                                                                </span>
+                                                            </p>
+                                                            <p className="mt-6 text-ternary">
+                                                                All the features
+                                                                of monthly but
+                                                                cheaper!
+                                                            </p>
+                                                        </div>
+                                                        <div className="mt-4">
+                                                            <Button
+                                                                className="flex w-full justify-center align-middle"
+                                                                onClick={
+                                                                    purchaseYearly
+                                                                }
+                                                                disabled={
+                                                                    !yearly?.canPurchase
+                                                                }
+                                                            >
+                                                                Yearly Billing
+                                                            </Button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <SecondaryButton
-                                                    className="flex w-full justify-center align-middle my-4"
-                                                    onClick={restore}
-                                                >
-                                                    Restore Purchases
-                                                </SecondaryButton>
-                                                <SecondaryButton
-                                                    className="flex w-full justify-center align-middle my-4"
-                                                    onClick={() =>
-                                                        setOpenPurchase(false)
-                                                    }
-                                                >
-                                                    Close
-                                                </SecondaryButton>
-                                                <DeleteAccount />
                                             </div>
+                                            <SecondaryButton
+                                                className="flex w-full justify-center align-middle my-4"
+                                                onClick={restore}
+                                            >
+                                                Restore Purchases
+                                            </SecondaryButton>
+                                            <SecondaryButton
+                                                className="flex w-full justify-center align-middle my-4"
+                                                onClick={() =>
+                                                    setOpenPurchase(false)
+                                                }
+                                            >
+                                                Close
+                                            </SecondaryButton>
+                                            <DeleteAccount />
                                         </div>
-                                    )}
+                                    </div>
                                 </Dialog.Panel>
                             </Transition.Child>
                         </div>

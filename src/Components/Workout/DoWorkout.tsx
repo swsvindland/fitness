@@ -40,7 +40,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         getWorkout(workoutId)
     );
 
-    const exercisesQuery = useQuery(['WorkoutExercises'], () =>
+    const exercisesQuery = useQuery(['WorkoutExercises', day, week], () =>
         getWorkoutExercises(workoutId, day)
     );
 
