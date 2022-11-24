@@ -17,7 +17,8 @@ export const WeighInForm: FC = () => {
 
     const mutation = useMutation(addWeight, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserWeight', user?.id]);
+            await queryClient.invalidateQueries(['UserWeight']);
+            await queryClient.invalidateQueries(['Dashboard']);
         },
     });
 

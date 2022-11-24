@@ -22,10 +22,8 @@ export const BloodPressureCheckInForm: FC = () => {
 
     const mutation = useMutation(addBloodPressure, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries([
-                'UserBloodPressure',
-                user?.id,
-            ]);
+            await queryClient.invalidateQueries(['UserBloodPressure']);
+            await queryClient.invalidateQueries(['Dashboard']);
         },
     });
 

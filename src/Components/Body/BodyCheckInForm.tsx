@@ -47,7 +47,8 @@ export const BodyCheckInForm: FC = () => {
 
     const mutation = useMutation(addBody, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserBody', user?.id]);
+            await queryClient.invalidateQueries(['UserBody']);
+            await queryClient.invalidateQueries(['Dashboard']);
         },
     });
 

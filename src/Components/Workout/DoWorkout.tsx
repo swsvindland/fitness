@@ -1,5 +1,5 @@
 import { FC, useContext, useMemo, useState } from 'react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Loading } from '../Loading';
 import { Pagination } from '../Pagination';
 import { WorkoutCard } from './WorkoutCard';
@@ -35,6 +35,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     const [week, setWeek] = useState<DropdownOption>({ id: 1, name: 'Week 1' });
     const [options, setOptions] = useState<DropdownOption[]>([]);
     const history = useHistory();
+    const queryClient = useQueryClient();
 
     const workoutQuery = useQuery(['Workout', workoutId], () =>
         getWorkout(workoutId)
@@ -48,7 +49,11 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         return getUserNextWorkout();
     });
 
-    const mutation = useMutation(completeWorkout);
+    const mutation = useMutation(completeWorkout, {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['Dashboard']);
+        },
+    });
 
     useMemo(() => {
         const workout = workoutQuery.data?.data;

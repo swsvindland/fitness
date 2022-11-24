@@ -18,7 +18,8 @@ export const HeightForm: FC = () => {
 
     const mutation = useMutation(addHeight, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserHeight', user?.id]);
+            await queryClient.invalidateQueries(['UserHeight']);
+            await queryClient.invalidateQueries(['Dashboard']);
         },
     });
 
