@@ -50,7 +50,7 @@ export const Home: FC = () => {
             {dashboardQuery.data?.data.addBodyMeasurements && (
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
-                    to="/workout/body"
+                    to="/body/body"
                     disabled={!paid}
                 >
                     Add Your Body Measurements
