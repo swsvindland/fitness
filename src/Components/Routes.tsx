@@ -57,7 +57,6 @@ export const Routes: FC = () => {
                 <Scanner />
             </Route>
             <Layout>
-                <Redirect exact={true} from="/" to="/home" />
                 <Route path="/home" exact={true}>
                     <Home />
                 </Route>
