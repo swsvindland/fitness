@@ -18,7 +18,11 @@ export const BottomNavigation: FC = () => {
     }, [history]);
 
     const isSelected = (route: string) => {
-        return pathname.includes(route);
+        if (route === '/') {
+            return route === pathname;
+        } else {
+            return pathname.includes(route);
+        }
     };
 
     const linkStyle = (route: string) =>
@@ -37,8 +41,8 @@ export const BottomNavigation: FC = () => {
             className="block fixed inset-x-0 bottom-0 z-10 bg-primary-dark dark:bg-background shadow pb-6"
         >
             <div id="tabs" className="flex justify-between">
-                <Link to="/home" className={linkStyle('/home')}>
-                    <HomeSolid className={iconStyle('/home')} />
+                <Link to="/" className={linkStyle('/')}>
+                    <HomeSolid className={iconStyle('/')} />
                     <span className="tab tab-home block text-xs">Home</span>
                 </Link>
                 <Link to="/workout" className={linkStyle('/workout')}>

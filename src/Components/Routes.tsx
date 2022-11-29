@@ -57,7 +57,7 @@ export const Routes: FC = () => {
                 <Scanner />
             </Route>
             <Layout>
-                <Route path="/home" exact={true}>
+                <Route path="/" exact={true}>
                     <Home />
                 </Route>
                 <Route path="/workout" exact={true}>
@@ -121,7 +121,7 @@ export const Routes: FC = () => {
                     <ChangePasswordForm />
                 </Route>
             </Layout>
-            <Redirect from="*" to="/home" />
+            <Redirect from="*" to="/" />
         </Switch>
     );
 };

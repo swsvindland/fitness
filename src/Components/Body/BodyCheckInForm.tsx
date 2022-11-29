@@ -71,7 +71,7 @@ export const BodyCheckInForm: FC = () => {
         });
         if (newUser) {
             setNewUser(false);
-            history.push('/home');
+            history.push('/');
         } else {
             history.goBack();
         }

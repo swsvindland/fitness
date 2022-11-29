@@ -18,7 +18,11 @@ export const Sidebar: FC = () => {
     }, [history]);
 
     const isSelected = (route: string) => {
-        return pathname.includes(route);
+        if (route === '/') {
+            return route === pathname;
+        } else {
+            return pathname.includes(route);
+        }
     };
 
     const linkStyle = (route: string) =>
@@ -33,8 +37,8 @@ export const Sidebar: FC = () => {
         <div className="z-20 flex-1 flex flex-col min-h-0 border-gray-200 bg-primary-dark dark:bg-background shadow pl-safe ">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                 <nav className="mt-5 flex-1 px-2 bg-transparent space-y-1 mt-16">
-                    <Link to="/home" className={linkStyle('/home')}>
-                        <HomeSolid className={iconStyle('/home')} />
+                    <Link to="/" className={linkStyle('/')}>
+                        <HomeSolid className={iconStyle('/')} />
                         Home
                     </Link>
                     <Link to="/workout" className={linkStyle('/workout')}>

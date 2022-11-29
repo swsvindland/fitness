@@ -91,7 +91,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             week: week.id,
         });
 
-        history.push('/home', { replace: true });
+        history.push('/', { replace: true });
     };
 
     return (
