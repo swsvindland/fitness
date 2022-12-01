@@ -1,7 +1,4 @@
 import { FC, ReactNode } from 'react';
-import { Sidebar } from './Navigation/Sidebar';
-import { BottomNavigation } from './Navigation/BottomNavigation';
-import { Header } from './Navigation/Header';
 
 interface IProps {
     children: ReactNode;
