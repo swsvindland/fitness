@@ -42,6 +42,24 @@ export const BodyGraph = () => {
     const userBodyQuery = useQuery(['UserBody', user?.id], getAllUserBodies);
 
     useMemo(() => {
+        const userBody = userBodyQuery.data?.data;
+
+        if (!userBody) {
+            return;
+        }
+
+        let graphedData = [];
+        if (userBody?.length > 3) {
+            graphedData.push(userBody[0]);
+            graphedData.push(userBody[Math.floor(userBody.length / 2)]);
+            graphedData.push(userBody[userBody.length - 1]);
+        } else {
+            graphedData = userBody;
+        }
+
+        const backgrounds = ['rgba(40, 130, 122, 0.2)', "rgba(175, 210, 87, 0.2)", "rgba(247, 198, 25, 0.2)"];
+        const colors = ['#28827A', '#AFD257', '#F7C619'];
+
         setData({
             labels: [
                 'Neck',
@@ -58,7 +76,7 @@ export const BodyGraph = () => {
                 'Right Calf',
             ],
             datasets:
-                userBodyQuery.data?.data.map((item, index) => ({
+                graphedData.map((item, index) => ({
                     label: format(new Date(item.created), 'PP'),
                     data: [
                         item.neck,
@@ -74,8 +92,8 @@ export const BodyGraph = () => {
                         item.leftCalf,
                         item.rightCalf,
                     ],
-                    backgroundColor: `rgba(247, 198, 25, ${(index + 1) * 0.1})`,
-                    borderColor: `rgba(247, 198, 25, 1)`,
+                    backgroundColor: backgrounds[index],
+                    borderColor: colors[index],
                     borderWidth: 1,
                 })) ?? [],
         });
