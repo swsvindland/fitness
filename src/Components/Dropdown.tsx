@@ -40,7 +40,7 @@ export const Dropdown: FC<IProps> = ({
                         {label}
                     </label>
                     <div className="relative mt-1" id={id}>
-                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-background py-2 pl-3 pr-10 text-left shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm">
+                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-ternary bg-background py-2 pl-3 pr-10 text-left shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm">
                             <span className="block truncate text-secondary">
                                 {selected.name}
                             </span>
@@ -96,7 +96,7 @@ export const Dropdown: FC<IProps> = ({
                                                         )}
                                                     >
                                                         <CircleCheckSolid
-                                                            className="h-5 w-5"
+                                                            className="h-5 w-5 fill-ternary"
                                                             aria-hidden="true"
                                                         />
                                                     </span>
