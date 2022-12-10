@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { PersonSolid } from '../Icons/PersonSolid';
-import { CapsulesSolid } from '../Icons/CapsulesSolid';
-import { DumbbellSolid } from '../Icons/DumbbellSolid';
-import { UtensilsSolid } from '../Icons/UtensilsSolid';
-import { HomeSolid } from '../Icons/HomeSolid';
+import { Capsule } from '../Icons/Capsule';
+import { Dumbbell } from '../Icons/Dumbbell';
+import { Food } from '../Icons/Food';
+import { Home } from '../Icons/Home';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -38,16 +38,16 @@ export const Sidebar: FC = () => {
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                 <nav className="mt-5 flex-1 px-2 bg-transparent space-y-1 mt-16">
                     <Link to="/" className={linkStyle('/')}>
-                        <HomeSolid className={iconStyle('/')} />
+                        <Home className={iconStyle('/')} />
                         Home
                     </Link>
                     <Link to="/workout" className={linkStyle('/workout')}>
-                        <DumbbellSolid className={iconStyle('/workout')} />
+                        <Dumbbell className={iconStyle('/workout')} />
                         Workout
                     </Link>
 
                     <Link to="/eat" className={linkStyle('/eat')}>
-                        <UtensilsSolid className={iconStyle('/eat')} />
+                        <Food className={iconStyle('/eat')} />
                         Eat
                     </Link>
 
@@ -55,7 +55,7 @@ export const Sidebar: FC = () => {
                         to="/supplements"
                         className={linkStyle('/supplements')}
                     >
-                        <CapsulesSolid className={iconStyle('/supplements')} />
+                        <Capsule className={iconStyle('/supplements')} />
                         Supplements
                     </Link>
 

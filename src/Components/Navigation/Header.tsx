@@ -1,7 +1,7 @@
 import { FC, Fragment, useContext } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
-import { DumbbellSolid } from '../Icons/DumbbellSolid';
+import { Dumbbell } from '../Icons/Dumbbell';
 import { AuthContext } from '../Auth/Auth';
 import { ArrowBackSolid } from '../Icons/ArrowBackSolid';
 import { useHistory } from 'react-router-dom';
@@ -37,7 +37,7 @@ export const Header: FC = () => {
                         </div>
                     ) : (
                         <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                            <DumbbellSolid className="fill-secondary w-6 h-6" />
+                            <Dumbbell className="fill-secondary w-6 h-6" />
                         </div>
                     )}
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">

@@ -9,10 +9,13 @@ import {
     toggleUserSupplementActivity,
 } from '../../api';
 import { SupplementIcon } from '../../types/supplement';
-import { CapsulesSolid } from '../Icons/CapsulesSolid';
-import { SyringeSolid } from '../Icons/SyringeSolid';
-import { TabletSolid } from '../Icons/TabletSolid';
+import { Capsule } from '../Icons/Capsule';
+import { Injection } from '../Icons/Injection';
+import { Tablet } from '../Icons/Tablet';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
+import { LargeScoop } from '../Icons/LargeScoop';
+import { SmallScoop } from '../Icons/SmallScoop';
+import { Liquid } from '../Icons/Liquid';
 
 interface IProps {
     isUser: boolean;
@@ -34,11 +37,17 @@ export interface Time {
 const mapToIcon = (icon?: SupplementIcon) => {
     switch (icon) {
         case SupplementIcon.Capsule:
-            return <CapsulesSolid className="fill-primary-dark" />;
+            return <Capsule className="fill-primary-dark w-6" />;
         case SupplementIcon.Tablet:
-            return <TabletSolid className="fill-primary-dark" />;
+            return <Tablet className="fill-primary-dark w-6" />;
         case SupplementIcon.Injection:
-            return <SyringeSolid className="fill-primary-dark" />;
+            return <Injection className="fill-primary-dark w-6" />;
+        case SupplementIcon.LargeScoop:
+            return <LargeScoop className="fill-primary-dark w-6" />;
+        case SupplementIcon.SmallScoop:
+            return <SmallScoop className="fill-primary-dark w-6" />;
+        case SupplementIcon.Liquid:
+            return <Liquid className="fill-primary-dark w-6" />;
         default:
             return <></>;
     }
@@ -114,7 +123,7 @@ export const SupplementCard: FC<IProps> = ({
                 <div className="flex items-center">
                     <div className="mr-4">
                         <div className="bg-ternary w-8 h-8 rounded-full flex justify-center items-center">
-                            <div className="w-4 h-4">{mapToIcon(icon)}</div>
+                            <div>{mapToIcon(icon)}</div>
                         </div>
                     </div>
                     <div className="flex flex-col">

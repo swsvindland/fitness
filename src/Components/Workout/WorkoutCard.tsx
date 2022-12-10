@@ -2,10 +2,14 @@ import { FC, useContext } from 'react';
 import { WorkoutSet } from './WorkoutSet';
 import { WorkoutExercise } from '../../types/WorkoutExercise';
 import { ExerciseIcon } from '../../types/Exercise';
-import { BarbellSolid } from '../Icons/BarbellSolid';
-import { DumbbellSolid } from '../Icons/DumbbellSolid';
-import { HeartPulseSolid } from '../Icons/HeartPulseSolid';
+import { Barbell } from '../Icons/Barbell';
+import { Dumbbell } from '../Icons/Dumbbell';
 import { AuthContext } from '../Auth/Auth';
+import { Cardio } from '../Icons/Cardio';
+import { Cable } from '../Icons/Cable';
+import { BodyWeight } from '../Icons/BodyWeight';
+import { Band } from '../Icons/Band';
+import { Machine } from '../Icons/Machine';
 
 interface IProps {
     exercise: WorkoutExercise;
@@ -17,11 +21,19 @@ interface IProps {
 const mapToIcon = (icon?: ExerciseIcon) => {
     switch (icon) {
         case ExerciseIcon.Barbell:
-            return <BarbellSolid className="fill-primary-dark" />;
+            return <Barbell className="fill-primary-dark w-8" />;
         case ExerciseIcon.Dumbbell:
-            return <DumbbellSolid className="fill-primary-dark" />;
+            return <Dumbbell className="fill-primary-dark w-8" />;
+        case ExerciseIcon.Cable:
+            return <Cable className="fill-primary-dark w-8" />;
+        case ExerciseIcon.Bodyweight:
+            return <BodyWeight className="fill-primary-dark w-8" />;
+        case ExerciseIcon.Band:
+            return <Band className="fill-primary-dark w-8" />;
+        case ExerciseIcon.Machine:
+            return <Machine className="fill-primary-dark w-8" />;
         case ExerciseIcon.Cardio:
-            return <HeartPulseSolid className="fill-primary-dark" />;
+            return <Cardio className="fill-primary-dark w-8" />;
         default:
             return <></>;
     }
@@ -39,7 +51,7 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
             <div className="w-full flex items-center justify-start p-6 space-x-6">
                 <div className="">
                     <div className="bg-ternary w-10 h-10 rounded-full flex justify-center items-center">
-                        <div className="w-4">{mapToIcon(icon)}</div>
+                        <div className="">{mapToIcon(icon)}</div>
                     </div>
                 </div>
                 <div className="flex-1 truncate">

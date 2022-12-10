@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 import { PersonSolid } from '../Icons/PersonSolid';
-import { UtensilsSolid } from '../Icons/UtensilsSolid';
-import { DumbbellSolid } from '../Icons/DumbbellSolid';
-import { CapsulesSolid } from '../Icons/CapsulesSolid';
-import { HomeSolid } from '../Icons/HomeSolid';
+import { Food } from '../Icons/Food';
+import { Dumbbell } from '../Icons/Dumbbell';
+import { Capsule } from '../Icons/Capsule';
+import { Home } from '../Icons/Home';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -42,19 +42,19 @@ export const BottomNavigation: FC = () => {
         >
             <div id="tabs" className="flex justify-between">
                 <Link to="/" className={linkStyle('/')}>
-                    <HomeSolid className={iconStyle('/')} />
+                    <Home className={iconStyle('/')} />
                     <span className="tab tab-home block text-xs">Home</span>
                 </Link>
                 <Link to="/workout" className={linkStyle('/workout')}>
-                    <DumbbellSolid className={iconStyle('/workout')} />
+                    <Dumbbell className={iconStyle('/workout')} />
                     <span className="tab tab-home block text-xs">Workout</span>
                 </Link>
                 <Link to="/eat" className={linkStyle('/eat')}>
-                    <UtensilsSolid className={iconStyle('/eat')} />
+                    <Food className={iconStyle('/eat')} />
                     <span className="tab tab-home block text-xs">Eat</span>
                 </Link>
                 <Link to="/supplements" className={linkStyle('/supplements')}>
-                    <CapsulesSolid className={iconStyle('/supplements')} />
+                    <Capsule className={iconStyle('/supplements')} />
                     <span className="tab tab-home block text-xs">
                         Supplements
                     </span>
