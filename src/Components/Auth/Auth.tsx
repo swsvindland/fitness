@@ -7,6 +7,7 @@ import { Register } from './Register';
 import { HeaderProvider } from '../Navigation/HeaderContext';
 import { ScrollToTop } from '../ScrollToTop';
 import { MinVersion } from '../MinVersion';
+import { ForgotPassword } from './ForgotPassword';
 
 interface IAuthContext {
     user?: User;
@@ -24,6 +25,7 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 export const Auth: FC = () => {
     const [user, setUser] = useState<User | undefined>(undefined);
     const [register, setRegister] = useState<boolean>(false);
+    const [forgotPassword, setForgotPassword] = useState<boolean>(false);
     const [newUser, setNewUser] = useState<boolean>(false);
     const [paid, setPaid] = useState<boolean>(false);
     const [openPurchase, setOpenPurchase] = useState<boolean>(false);
@@ -63,5 +65,15 @@ export const Auth: FC = () => {
         );
     }
 
-    return <Login setUser={setUser} setRegister={setRegister} />;
+    if (forgotPassword) {
+        return <ForgotPassword setForgotPassword={setForgotPassword} />;
+    }
+
+    return (
+        <Login
+            setUser={setUser}
+            setRegister={setRegister}
+            setForgotPassword={setForgotPassword}
+        />
+    );
 };

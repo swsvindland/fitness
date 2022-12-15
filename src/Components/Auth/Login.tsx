@@ -12,9 +12,14 @@ import { SavePassword } from 'capacitor-ios-autofill-save-password';
 interface IProps {
     setUser: (user?: User) => void;
     setRegister: (register: boolean) => void;
+    setForgotPassword: (forgotPassword: boolean) => void;
 }
 
-export const Login: FC<IProps> = ({ setUser, setRegister }) => {
+export const Login: FC<IProps> = ({
+    setUser,
+    setRegister,
+    setForgotPassword,
+}) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
@@ -60,6 +65,10 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
 
     const handleRegister = () => {
         setRegister(true);
+    };
+
+    const handleForgotPassword = () => {
+        setForgotPassword(true);
     };
 
     if (silentLoginQuery.isFetching) {
@@ -120,6 +129,14 @@ export const Login: FC<IProps> = ({ setUser, setRegister }) => {
                             >
                                 Register
                             </SecondaryButton>
+                        </div>
+                        <div>
+                            <button
+                                onClick={handleForgotPassword}
+                                className="w-full text-center flex justify-center text-secondary"
+                            >
+                                Forgot Password
+                            </button>
                         </div>
                     </form>
                 </div>
