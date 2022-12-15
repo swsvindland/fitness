@@ -9,7 +9,7 @@ import { useShowBackButton } from '../Navigation/headerHooks';
 import { Sex, User } from '../../types/user';
 
 export const SexForm: FC = () => {
-    const { user, setUser } = useContext(AuthContext);
+    const { user, setUser, newUser, setNewUser } = useContext(AuthContext);
     useShowBackButton();
     const [sex, setSex] = useState<Sex>(user?.sex ?? Sex.Unknown);
     const queryClient = useQueryClient();
@@ -28,7 +28,12 @@ export const SexForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ sex });
-        history.goBack();
+        if (newUser) {
+            setNewUser(false);
+            history.push('/');
+        } else {
+            history.goBack();
+        }
     };
 
     const handleClear = () => {

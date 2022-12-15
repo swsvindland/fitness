@@ -42,8 +42,8 @@ export const Routes: FC = () => {
                     <Route path="/getting-started/weight" exact={true}>
                         <WeighInForm />
                     </Route>
-                    <Route path="/getting-started/check-in" exact={true}>
-                        <BodyCheckInForm />
+                    <Route path="/getting-started/sex" exact={true}>
+                        <SexForm />
                     </Route>
                     <Redirect from="*" to="/getting-started/units" />
                 </GettingStartedLayout>

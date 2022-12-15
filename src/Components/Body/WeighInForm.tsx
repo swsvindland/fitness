@@ -26,7 +26,7 @@ export const WeighInForm: FC = () => {
         event.preventDefault();
         mutation.mutate({ weight: parseFloat(weight), userId: user?.id ?? '' });
         if (newUser) {
-            history.push('/getting-started/check-in');
+            history.push('/getting-started/sex');
         } else {
             history.goBack();
         }
