@@ -24,7 +24,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/height"
-                    disabled={!paid}
+                    hidden={!paid}
                 >
                     Add Your Height
                 </LinkButton>
@@ -33,7 +33,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/weight"
-                    disabled={!paid}
+                    hidden={!paid}
                 >
                     Daily Weigh In
                 </LinkButton>
@@ -42,7 +42,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/blood-pressure"
-                    disabled={!paid}
+                    hidden={!paid}
                 >
                     Add Your Blood Pressure
                 </LinkButton>
@@ -51,7 +51,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/body/body"
-                    disabled={!paid}
+                    hidden={!paid}
                 >
                     Add Your Body Measurements
                 </LinkButton>
@@ -60,7 +60,7 @@ export const Home: FC = () => {
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"
                     to="/workout"
-                    disabled={!paid}
+                    hidden={!paid}
                 >
                     Start Your Workout
                 </LinkButton>

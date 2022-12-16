@@ -84,7 +84,7 @@ export const BloodPressureGraph: FC = () => {
             <LinkButton
                 to="/body/blood-pressure"
                 className="relative top-0 right-0"
-                disabled={!paid}
+                hidden={!paid}
             >
                 Add
             </LinkButton>

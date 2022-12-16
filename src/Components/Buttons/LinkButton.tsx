@@ -6,6 +6,7 @@ interface IProps {
     children: ReactNode;
     className?: string;
     disabled?: boolean;
+    hidden?: boolean;
 }
 
 export const LinkButton: FC<IProps> = ({
@@ -13,17 +14,18 @@ export const LinkButton: FC<IProps> = ({
     children,
     className,
     disabled,
+    hidden
 }) => {
     if (disabled) {
         return (
-            <button className={`btn-primary ${className}`} disabled>
+            <button className={`btn-primary ${className} ${hidden ? 'hidden' : ''}`} disabled>
                 {children}
             </button>
         );
     }
 
     return (
-        <Link to={to} className={`${className} btn-primary`}>
+        <Link to={to} className={`${className} ${hidden ? 'hidden' : ''} btn-primary`}>
             {children}
         </Link>
     );
