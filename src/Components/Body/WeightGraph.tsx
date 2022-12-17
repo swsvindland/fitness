@@ -31,7 +31,7 @@ ChartJS.register(
 );
 
 export const WeightGraph: FC = () => {
-    const { user, paid } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
               'line',
@@ -72,11 +72,7 @@ export const WeightGraph: FC = () => {
 
     return (
         <div className="card rounded shadow p-4 m-4">
-            <LinkButton
-                to="/body/weight"
-                className="relative top-0 right-0"
-                hidden={!paid}
-            >
+            <LinkButton to="/body/weight" className="relative top-0 right-0">
                 Add
             </LinkButton>
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (

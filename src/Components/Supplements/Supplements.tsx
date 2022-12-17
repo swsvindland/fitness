@@ -11,9 +11,7 @@ export const Supplements: FC = () => {
     return (
         <div className="max-w-2xl w-full">
             <UserSupplements />
-            <LinkButton to="/supplements/all-supplements" hidden={!paid}>
-                Edit
-            </LinkButton>
+            <LinkButton to="/supplements/all-supplements">Edit</LinkButton>
         </div>
     );
 };

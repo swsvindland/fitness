@@ -3,20 +3,20 @@ import { FC, useContext } from 'react';
 import { AuthContext } from './Auth/Auth';
 import { PurchaseOptions } from './PurchaseOptions';
 
-export const PurchaseAccess: FC = () => {
+interface IProps {
+    body: string;
+    button: string;
+}
+
+export const PurchaseAccess: FC<IProps> = ({ body, button }) => {
     const { paid, setOpenPurchase } = useContext(AuthContext);
 
     if (paid) return null;
 
     return (
         <div className="flex flex-col mb-8">
-            <h2 className="text-ternary text-center">
-                Welcome to WorkoutTrack. To access all features, please
-                subscribe.
-            </h2>
-            <Button onClick={() => setOpenPurchase(true)}>
-                See Subscription Options
-            </Button>
+            <h2 className="text-ternary text-center">{body}</h2>
+            <Button onClick={() => setOpenPurchase(true)}>{button}</Button>
             <PurchaseOptions />
         </div>
     );

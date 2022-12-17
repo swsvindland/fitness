@@ -29,7 +29,7 @@ ChartJS.register(
 );
 
 export const BodyGraph = () => {
-    const { user, paid } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
               'radar',
@@ -57,7 +57,11 @@ export const BodyGraph = () => {
             graphedData = userBody;
         }
 
-        const backgrounds = ['rgba(40, 130, 122, 0.2)', "rgba(175, 210, 87, 0.2)", "rgba(247, 198, 25, 0.2)"];
+        const backgrounds = [
+            'rgba(40, 130, 122, 0.2)',
+            'rgba(175, 210, 87, 0.2)',
+            'rgba(247, 198, 25, 0.2)',
+        ];
         const colors = ['#28827A', '#AFD257', '#F7C619'];
 
         setData({
@@ -105,11 +109,7 @@ export const BodyGraph = () => {
 
     return (
         <div className="card rounded shadow p-4 m-4">
-            <LinkButton
-                to="/body/body"
-                className="relative top-0 right-0"
-                hidden={!paid}
-            >
+            <LinkButton to="/body/body" className="relative top-0 right-0">
                 Add
             </LinkButton>
             {data.datasets.length > 0 ? (

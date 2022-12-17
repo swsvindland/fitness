@@ -14,6 +14,7 @@ import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
+import { PurchaseAccess } from '../PurchaseAccess';
 
 interface IProps {
     workoutId: number;
@@ -29,7 +30,7 @@ const generateOptions = (weeks: number): DropdownOption[] => {
 };
 
 export const DoWorkout: FC<IProps> = ({ workoutId }) => {
-    const { user } = useContext(AuthContext);
+    const { user, paid } = useContext(AuthContext);
     const [maxDays, setMaxDays] = useState<number>(1);
     const [day, setDay] = useState<number>(1);
     const [week, setWeek] = useState<DropdownOption>({ id: 1, name: 'Week 1' });
@@ -98,6 +99,12 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         <div className="max-w-2xl w-full">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
+            {!paid && (
+                <PurchaseAccess
+                    body="Track your wieghts and get personalized recommendations"
+                    button="Track Weights"
+                />
+            )}
             <div role="list" className="grid grid-cols-1 gap-6">
                 {exercisesQuery.data?.data?.map((exercise) => (
                     <WorkoutCard

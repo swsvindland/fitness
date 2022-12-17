@@ -1,4 +1,4 @@
-import React, { FC, useContext, useMemo, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -18,7 +18,6 @@ import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
 import { getAllUserBloodPressure } from '../../api';
 import { Loading } from '../Loading';
-import { AuthContext } from '../Auth/Auth';
 
 ChartJS.register(
     CategoryScale,
@@ -31,7 +30,6 @@ ChartJS.register(
 );
 
 export const BloodPressureGraph: FC = () => {
-    const { paid } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
               'line',
@@ -84,7 +82,6 @@ export const BloodPressureGraph: FC = () => {
             <LinkButton
                 to="/body/blood-pressure"
                 className="relative top-0 right-0"
-                hidden={!paid}
             >
                 Add
             </LinkButton>
