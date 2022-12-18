@@ -185,7 +185,7 @@ export const PurchaseOptions: FC = () => {
                                                 className="text-lg font-medium leading-6 text-secondary"
                                             >
                                                 Get full to the app and all it's
-                                                features
+                                                features. First month is free.
                                             </Dialog.Title>
                                             <div className="mx-auto max-w-7xl">
                                                 {/* Tiers */}
