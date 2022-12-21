@@ -61,7 +61,10 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                         </h3>
                     </div>
                     <p className="mt-1 text-ternary text-sm truncate">
-                        {exercise.minReps} - {exercise.maxReps} Reps
+                        {exercise.minReps === exercise.maxReps
+                            ? exercise.maxReps
+                            : `${exercise.minReps} - ${exercise.maxReps}`}{' '}
+                        {exercise.maxReps > 1 ? 'Reps' : 'Rep'}
                     </p>
                     {!user?.paid && (
                         <p className="mt-1 text-ternary text-sm truncate">
