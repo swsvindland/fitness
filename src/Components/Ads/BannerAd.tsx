@@ -1,36 +1,66 @@
-import { FC, useEffect } from 'react';
-import { Admob, AdmobOptions } from '@awesome-cordova-plugins/admob';
+import { FC, useCallback, useContext, useEffect, useState } from 'react';
+import { AdMobPlus, BannerAd as Banner } from '@admob-plus/capacitor';
+import { isPlatform } from '@ionic/react';
+import { AuthContext } from '../Auth/Auth';
 
 // TODO: finish implementing banner ads for 1.1.0
 export const BannerAd: FC = () => {
-    useEffect(() => {
-        const admobOptions: AdmobOptions = {
-            bannerAdId: 'ca-app-pub-3940256099942544/6300978111',
-            isTesting: true,
-            autoShowBanner: false,
-            autoShowInterstitial: false,
-            autoShowRewarded: false,
-            adSize: Admob.AD_SIZE.BANNER,
-        };
+    const { user } = useContext(AuthContext);
+    const androidTestBannerId = 'ca-app-pub-3940256099942544/6300978111';
+    const iosTestBannerId = 'ca-app-pub-3940256099942544/2934735716';
+    const androidBannerId = 'ca-app-pub-7533750599105635/4186833075';
+    const iosBannerId = 'ca-app-pub-7533750599105635/3179713363';
 
-        // Set admob options
-        Admob.setOptions(admobOptions)
-            .then(() => console.log('Admob options have been successfully set'))
-            .catch((err) => console.error('Error setting admob options:', err));
-    }, []);
-
-    useEffect(() => {
-        // Show banner ad (createBannerView must be called before and onAdLoaded() event raised)
-        Admob.onAdLoaded().subscribe((ad) => {
-            if (ad.adType === Admob.AD_TYPE.BANNER) {
-                Admob.showBannerAd()
-                    .then(() => console.log('Banner ad shown'))
-                    .catch((err) =>
-                        console.error('Error showing banner ad:', err)
-                    );
+    const mapPlatformToBannerId = () => {
+        if (isPlatform('mobileweb')) {
+            return '';
+        }
+        if (process.env.NODE_ENV === 'development') {
+            if (isPlatform('android')) {
+                return androidTestBannerId;
             }
-        });
+            if (isPlatform('ios')) {
+                return iosTestBannerId;
+            }
+        }
+        if (isPlatform('android')) {
+            return androidBannerId;
+        }
+        if (isPlatform('ios')) {
+            return iosBannerId;
+        }
+        return '';
+    };
+
+    const [showingAd, setShowingAd] = useState(false);
+
+    const banner = new Banner({
+        adUnitId: mapPlatformToBannerId(),
+        position: 'top',
     });
+
+    console.log(mapPlatformToBannerId());
+
+    const loadAd = useCallback(async () => {
+        if (user?.paid) return null;
+        if (mapPlatformToBannerId() === '') return null;
+
+        if (!showingAd) {
+            await AdMobPlus.requestTrackingAuthorization();
+            await banner.show();
+            setShowingAd(true);
+        }
+    }, [banner, showingAd, user?.paid]);
+
+    useEffect(() => {
+        loadAd();
+    }, [loadAd]);
+
+    useEffect(() => {
+        if (user?.paid) {
+            banner.hide();
+        }
+    }, [banner, user?.paid]);
 
     return <div className="banner-ad" />;
 };

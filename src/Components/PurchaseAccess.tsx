@@ -4,14 +4,19 @@ import { AuthContext } from './Auth/Auth';
 import { PurchaseOptions } from './PurchaseOptions';
 
 interface IProps {
-    body: string;
-    button: string;
+    check?: boolean;
+    body?: string;
+    button?: string;
 }
 
-export const PurchaseAccess: FC<IProps> = ({ body, button }) => {
-    const { paid, setOpenPurchase } = useContext(AuthContext);
+export const PurchaseAccess: FC<IProps> = ({ check, body, button }) => {
+    const { user, setOpenPurchase } = useContext(AuthContext);
 
-    if (paid) return null;
+    if (check) {
+        return <PurchaseOptions />;
+    }
+
+    if (user?.paid) return null;
 
     return (
         <div className="flex flex-col mb-8">

@@ -8,14 +8,14 @@ import { HeaderProvider } from '../Navigation/HeaderContext';
 import { ScrollToTop } from '../ScrollToTop';
 import { MinVersion } from '../MinVersion';
 import { ForgotPassword } from './ForgotPassword';
+import { BannerAd } from '../Ads/BannerAd';
+import { PurchaseAccess } from '../PurchaseAccess';
 
 interface IAuthContext {
     user?: User;
     setUser: (user?: User) => void;
     newUser: boolean;
     setNewUser: (newUser: boolean) => void;
-    paid: boolean;
-    setPaid: (paid: boolean) => void;
     openPurchase: boolean;
     setOpenPurchase: (openPurchase: boolean) => void;
 }
@@ -27,7 +27,6 @@ export const Auth: FC = () => {
     const [register, setRegister] = useState<boolean>(false);
     const [forgotPassword, setForgotPassword] = useState<boolean>(false);
     const [newUser, setNewUser] = useState<boolean>(false);
-    const [paid, setPaid] = useState<boolean>(false);
     const [openPurchase, setOpenPurchase] = useState<boolean>(false);
 
     const authContext: IAuthContext = {
@@ -35,8 +34,6 @@ export const Auth: FC = () => {
         setUser,
         newUser,
         setNewUser,
-        paid,
-        setPaid,
         openPurchase,
         setOpenPurchase,
     };
@@ -46,6 +43,8 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
+                        <PurchaseAccess check />
+                        {!user.paid && <BannerAd />}
                         <Routes />
                         <ScrollToTop />
                         <MinVersion />

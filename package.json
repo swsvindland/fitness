@@ -14,7 +14,7 @@
         "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
-        "@awesome-cordova-plugins/admob": "^6.2.0",
+        "@admob-plus/capacitor": "^1.24.0",
         "@awesome-cordova-plugins/core": "^6.2.0",
         "@awesome-cordova-plugins/in-app-purchase-2": "^6.2.0",
         "@capacitor-community/barcode-scanner": "^3.0.1",
@@ -32,7 +32,6 @@
         "axios": "^1.2.1",
         "capacitor-ios-autofill-save-password": "^1.1.4",
         "chart.js": "^4.0.1",
-        "cordova-admob": "^5.1.0",
         "cordova-plugin-purchase": "^11.0.0",
         "date-fns": "^2.29.3",
         "ionicons": "^6.0.4",

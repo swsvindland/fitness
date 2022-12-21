@@ -18,6 +18,14 @@
             android:name="cc.fovea.cordova.purchase.BILLING_KEY"
             android:value="@string/billing_key" />
 
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-7533750599105635~8091566879" />
+
+        <meta-data
+                android:name="com.google.android.gms.ads.DELAY_APP_MEASUREMENT_INIT"
+                android:value="true" />
+
         <activity
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
             android:name="com.svindland.fitness.MainActivity"
