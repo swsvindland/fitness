@@ -1,11 +1,9 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
 import { UserSupplements } from './UserSupplements';
 import { useHideBackButton } from '../Navigation/headerHooks';
-import { AuthContext } from '../Auth/Auth';
 
 export const Supplements: FC = () => {
-    const { paid } = useContext(AuthContext);
     useHideBackButton();
 
     return (

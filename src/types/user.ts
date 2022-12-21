@@ -6,6 +6,7 @@ export interface User {
     sex: Sex;
     userRole: UserRole;
     unit: Units;
+    paid: boolean;
 }
 
 export enum Sex {

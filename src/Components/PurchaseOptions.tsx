@@ -10,20 +10,36 @@ import {
 import { AuthContext } from './Auth/Auth';
 import { UserRole } from '../types/user';
 import { DeleteAccount } from './DeleteAccount';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { updatePaid } from '../api';
 
 const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
 
 export const PurchaseOptions: FC = () => {
-    const { user, openPurchase, setOpenPurchase, setPaid } =
-        useContext(AuthContext);
+    const { user, openPurchase, setOpenPurchase } = useContext(AuthContext);
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
+    const queryClient = useQueryClient();
 
     const canCharge =
         !isPlatform('mobileweb') &&
         user?.userRole === UserRole.User &&
         (isPlatform('android') || isPlatform('ios'));
+
+    const paidMutation = useMutation(updatePaid, {
+        onSuccess: async () => {
+            await queryClient.invalidateQueries();
+            window.location.reload();
+        },
+    });
+
+    const updatePaidIfNeeded = (paid: boolean) => {
+        console.log('updatePaidIfNeeded', paid, user?.paid);
+        if (user?.paid === paid) return;
+        if (user?.userRole !== UserRole.User) return;
+        paidMutation.mutate({ paid });
+    };
 
     useEffect(() => {
         if (canCharge) {
@@ -93,16 +109,16 @@ export const PurchaseOptions: FC = () => {
             iap.when(MONTHLY_SUBSCRIPTION).approved((p: IAPProduct) => {
                 p.verify();
                 p.finish();
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
             iap.when(MONTHLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
             iap.when(MONTHLY_SUBSCRIPTION).expired((p: IAPProduct) => {
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
             iap.when(MONTHLY_SUBSCRIPTION).error((p: IAPProduct) => {
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
         }
     });
@@ -112,16 +128,16 @@ export const PurchaseOptions: FC = () => {
             iap.when(YEARLY_SUBSCRIPTION).approved((p: IAPProduct) => {
                 p.verify();
                 p.finish();
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
             iap.when(YEARLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
             iap.when(YEARLY_SUBSCRIPTION).expired((p: IAPProduct) => {
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
             iap.when(YEARLY_SUBSCRIPTION).error((p: IAPProduct) => {
-                setPaid(false);
+                updatePaidIfNeeded(false);
             });
         }
     });
@@ -136,16 +152,16 @@ export const PurchaseOptions: FC = () => {
                     user?.userRole === UserRole.FreeUser ||
                     user?.userRole === UserRole.Admin
                 ) {
-                    setPaid(true);
+                    updatePaidIfNeeded(true);
                 } else if (monthly.owned || yearly.owned) {
-                    setPaid(true);
+                    updatePaidIfNeeded(true);
                     setOpenPurchase(false);
                 } else {
-                    setPaid(false);
+                    updatePaidIfNeeded(false);
                 }
             });
         } else {
-            setPaid(true);
+            updatePaidIfNeeded(true);
             setOpenPurchase(false);
         }
     });

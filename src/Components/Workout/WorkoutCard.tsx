@@ -40,7 +40,7 @@ const mapToIcon = (icon?: ExerciseIcon) => {
 };
 
 export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
-    const { paid } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     return (
         <div
@@ -63,14 +63,14 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                     <p className="mt-1 text-ternary text-sm truncate">
                         {exercise.minReps} - {exercise.maxReps} Reps
                     </p>
-                    {!paid && (
+                    {!user?.paid && (
                         <p className="mt-1 text-ternary text-sm truncate">
                             {exercise.sets} Sets
                         </p>
                     )}
                 </div>
             </div>
-            {!paid ? (
+            {!user?.paid ? (
                 <div />
             ) : (
                 <div>

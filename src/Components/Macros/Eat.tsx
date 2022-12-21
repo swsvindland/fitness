@@ -6,13 +6,13 @@ import { AuthContext } from '../Auth/Auth';
 import { PurchaseAccess } from '../PurchaseAccess';
 
 export const Eat: FC = () => {
-    const { paid } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     useHideBackButton();
 
     return (
         <div className="max-w-3xl w-full">
             <MacroGrid />
-            {paid ? (
+            {user?.paid ? (
                 <FoodGrid />
             ) : (
                 <PurchaseAccess

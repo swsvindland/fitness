@@ -9,9 +9,9 @@ interface IProps {
 }
 
 export const PurchaseAccess: FC<IProps> = ({ body, button }) => {
-    const { paid, setOpenPurchase } = useContext(AuthContext);
+    const { user, setOpenPurchase } = useContext(AuthContext);
 
-    if (paid) return null;
+    if (user?.paid) return null;
 
     return (
         <div className="flex flex-col mb-8">

@@ -30,7 +30,7 @@ const generateOptions = (weeks: number): DropdownOption[] => {
 };
 
 export const DoWorkout: FC<IProps> = ({ workoutId }) => {
-    const { user, paid } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [maxDays, setMaxDays] = useState<number>(1);
     const [day, setDay] = useState<number>(1);
     const [week, setWeek] = useState<DropdownOption>({ id: 1, name: 'Week 1' });
@@ -99,7 +99,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         <div className="max-w-2xl w-full">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
-            {!paid && (
+            {!user?.paid && (
                 <PurchaseAccess
                     body="Track your wieghts and get personalized recommendations"
                     button="Track Weights"
