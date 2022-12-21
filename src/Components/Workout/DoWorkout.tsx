@@ -99,12 +99,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         <div className="max-w-2xl w-full">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
-            {!user?.paid && (
-                <PurchaseAccess
-                    body="Track your wieghts and get personalized recommendations"
-                    button="Track Weights"
-                />
-            )}
             <div role="list" className="grid grid-cols-1 gap-6">
                 {exercisesQuery.data?.data?.map((exercise) => (
                     <WorkoutCard

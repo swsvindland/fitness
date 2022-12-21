@@ -62,5 +62,13 @@ export const BannerAd: FC = () => {
         }
     }, [banner, user?.paid]);
 
+    useEffect(() => {
+        return () => {
+            banner.hide();
+        };
+        // disabling, because we want to hide the ad when the component unmounts
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return <div className="banner-ad" />;
 };

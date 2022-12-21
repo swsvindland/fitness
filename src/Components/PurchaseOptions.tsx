@@ -200,8 +200,8 @@ export const PurchaseOptions: FC = () => {
                                                 as="h3"
                                                 className="text-lg font-medium leading-6 text-secondary"
                                             >
-                                                Get full to the app and all it's
-                                                features. First month is free.
+                                                Subscribe to Premium for the
+                                                best WorkoutTrack experience!
                                             </Dialog.Title>
                                             <div className="mx-auto max-w-7xl">
                                                 {/* Tiers */}
@@ -222,7 +222,8 @@ export const PurchaseOptions: FC = () => {
                                                                 </span>
                                                             </p>
                                                             <p className="mt-6 text-ternary">
-                                                                Get full access
+                                                                Remove Ads and
+                                                                get full access
                                                                 to the app. All
                                                                 features and
                                                                 workouts

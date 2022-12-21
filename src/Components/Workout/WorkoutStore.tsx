@@ -4,9 +4,12 @@ import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { Loading } from '../Loading';
 import { getUserWorkouts, getWorkouts } from '../../api';
 import { HeaderContext } from '../Navigation/HeaderContext';
+import { PurchaseAccess } from '../PurchaseAccess';
+import { AuthContext } from '../Auth/Auth';
 
 export const WorkoutStore: FC = () => {
     const { setGoBack } = useContext(HeaderContext);
+    const { user } = useContext(AuthContext);
     const { data, isLoading } = useQuery(['Workouts'], getWorkouts);
 
     const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
@@ -25,12 +28,18 @@ export const WorkoutStore: FC = () => {
 
     return (
         <div>
+            {!user?.paid && (
+                <PurchaseAccess
+                    body="Get access to all workouts, macros tracking, and more!"
+                    button="Get Access"
+                />
+            )}
             {data?.data.map((item) => (
                 <WorkoutStoreCard
                     key={item.id}
                     id={item.id}
                     name={item.name}
-                    version={item.version}
+                    premium={item.premium}
                 />
             ))}
         </div>
