@@ -4,17 +4,12 @@ import { AuthContext } from './Auth/Auth';
 import { PurchaseOptions } from './PurchaseOptions';
 
 interface IProps {
-    check?: boolean;
-    body?: string;
-    button?: string;
+    body: string;
+    button: string;
 }
 
-export const PurchaseAccess: FC<IProps> = ({ check, body, button }) => {
+export const PurchaseAccess: FC<IProps> = ({ body, button }) => {
     const { user, setOpenPurchase } = useContext(AuthContext);
-
-    if (check) {
-        return <PurchaseOptions />;
-    }
 
     if (user?.paid) return null;
 

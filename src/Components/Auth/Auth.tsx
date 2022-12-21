@@ -43,7 +43,6 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
-                        <PurchaseAccess check />
                         {!user.paid && <BannerAd />}
                         <Routes />
                         <ScrollToTop />

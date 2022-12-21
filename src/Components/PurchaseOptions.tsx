@@ -29,7 +29,8 @@ export const PurchaseOptions: FC = () => {
 
     const paidMutation = useMutation(updatePaid, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['user']);
+            await queryClient.invalidateQueries();
+            window.location.reload();
         },
     });
 
