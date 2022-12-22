@@ -7,9 +7,10 @@ import { useHistory } from 'react-router-dom';
 import { HeaderContext } from './HeaderContext';
 import { UserSolid } from '../Icons/UserSolid';
 import { Dumbbell } from '../Icons/Dumbbell';
+import { BannerAd } from '../Ads/BannerAd';
 
 export const Header: FC = () => {
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     const { goBack } = useContext(HeaderContext);
     const history = useHistory();
 
@@ -25,6 +26,11 @@ export const Header: FC = () => {
             className="bg-primary-dark dark:bg-background block fixed inset-x-0 top-0 z-10 shadow pt-safe"
         >
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                {!user?.paid && (
+                    <div className="mb-8">
+                        <BannerAd />
+                    </div>
+                )}
                 <div className="relative flex h-16 items-center justify-end">
                     {goBack ? (
                         <div className="flex flex-1 items-center justify-start">

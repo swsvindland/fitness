@@ -4,7 +4,7 @@ import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { Loading } from '../Loading';
 import { getUserWorkouts, getWorkouts } from '../../api';
 import { HeaderContext } from '../Navigation/HeaderContext';
-import { PurchaseAccess } from '../PurchaseAccess';
+import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 import { AuthContext } from '../Auth/Auth';
 
 export const WorkoutStore: FC = () => {

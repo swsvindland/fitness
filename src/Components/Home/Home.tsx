@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../../api';
 import { AuthContext } from '../Auth/Auth';
 import { useHideBackButton } from '../Navigation/headerHooks';
+import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 
 export const Home: FC = () => {
     const { user } = useContext(AuthContext);
@@ -20,6 +21,12 @@ export const Home: FC = () => {
                 Interactive dashboard. You will see your daily actions here. If
                 it is empty, congrats you have done everything for today!
             </h2>
+            {!user?.paid && (
+                <PurchaseAccess
+                    body="Get access to all workouts, macros tracking, and more!"
+                    button="Get Access"
+                />
+            )}
             {dashboardQuery.data?.data.addHeight && (
                 <LinkButton
                     className="my-2 w-full text-center flex justify-center"

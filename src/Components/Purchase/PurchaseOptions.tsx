@@ -1,17 +1,18 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
-import { Button } from './Buttons/Button';
-import { SecondaryButton } from './Buttons/SecondaryButton';
+import { Button } from '../Buttons/Button';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { isPlatform } from '@ionic/react';
 import {
     IAPProduct,
     InAppPurchase2 as iap,
 } from '@awesome-cordova-plugins/in-app-purchase-2';
-import { AuthContext } from './Auth/Auth';
-import { UserRole } from '../types/user';
-import { DeleteAccount } from './DeleteAccount';
+import { AuthContext } from '../Auth/Auth';
+import { UserRole } from '../../types/user';
+import { DeleteAccount } from '../DeleteAccount';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updatePaid } from '../api';
+import { updatePaid } from '../../api';
+import { addDays } from 'date-fns';
 
 const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
@@ -34,11 +35,10 @@ export const PurchaseOptions: FC = () => {
         },
     });
 
-    const updatePaidIfNeeded = (paid: boolean) => {
-        console.log('updatePaidIfNeeded', paid, user?.paid);
+    const updatePaidIfNeeded = (paid: boolean, paidUntil?: string) => {
         if (user?.paid === paid) return;
         if (user?.userRole !== UserRole.User) return;
-        paidMutation.mutate({ paid });
+        paidMutation.mutate({ paid, paidUntil });
     };
 
     useEffect(() => {
@@ -144,25 +144,29 @@ export const PurchaseOptions: FC = () => {
 
     useEffect(() => {
         if (canCharge) {
-            iap.when('subscription').updated((product: IAPProduct) => {
+            iap.when('subscription').updated(() => {
                 const monthly = iap.get(MONTHLY_SUBSCRIPTION);
                 const yearly = iap.get(YEARLY_SUBSCRIPTION);
+
+                console.log(monthly.owned, yearly.owned);
 
                 if (
                     user?.userRole === UserRole.FreeUser ||
                     user?.userRole === UserRole.Admin
                 ) {
                     updatePaidIfNeeded(true);
-                } else if (monthly.owned || yearly.owned) {
-                    updatePaidIfNeeded(true);
+                } else if (monthly.owned) {
+                    updatePaidIfNeeded(true, monthly.expiryDate?.toISOString());
+                    setOpenPurchase(false);
+                } else if (yearly.owned) {
+                    updatePaidIfNeeded(true, yearly.expiryDate?.toISOString());
                     setOpenPurchase(false);
                 } else {
-                    updatePaidIfNeeded(false);
+                    updatePaidIfNeeded(false, undefined);
                 }
             });
         } else {
-            updatePaidIfNeeded(true);
-            setOpenPurchase(false);
+            updatePaidIfNeeded(true, addDays(new Date(), 1).toISOString());
         }
     });
 

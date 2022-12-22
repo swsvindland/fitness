@@ -14,9 +14,9 @@
         "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {
-        "@admob-plus/capacitor": "^1.24.0",
         "@awesome-cordova-plugins/core": "^6.2.0",
         "@awesome-cordova-plugins/in-app-purchase-2": "^6.2.0",
+        "@capacitor-community/admob": "^4.0.0-1",
         "@capacitor-community/barcode-scanner": "^3.0.1",
         "@capacitor/android": "4.6.1",
         "@capacitor/app": "4.1.1",

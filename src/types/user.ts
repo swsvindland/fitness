@@ -7,6 +7,7 @@ export interface User {
     userRole: UserRole;
     unit: Units;
     paid: boolean;
+    paidUntil?: string;
 }
 
 export enum Sex {

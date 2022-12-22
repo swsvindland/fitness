@@ -3,7 +3,7 @@ import { MacroGrid } from './MacroGrid';
 import { FoodGrid } from '../Food/FoodGrid';
 import { useHideBackButton } from '../Navigation/headerHooks';
 import { AuthContext } from '../Auth/Auth';
-import { PurchaseAccess } from '../PurchaseAccess';
+import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 
 export const Eat: FC = () => {
     const { user } = useContext(AuthContext);
