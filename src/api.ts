@@ -430,6 +430,7 @@ export const updateSex = (body: {
 
 export const updatePaid = (body: {
     paid: boolean;
+    paidUntil?: string;
 }): Promise<AxiosResponse<boolean>> => {
     const params = getParams();
 

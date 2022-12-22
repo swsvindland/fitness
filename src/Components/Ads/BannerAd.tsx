@@ -52,19 +52,24 @@ export const BannerAd: FC = () => {
         }
     }, [banner, showingAd, user?.paid]);
 
+    const hideAd = useCallback(async () => {
+        await banner.hide();
+    }, [banner]);
+
     useEffect(() => {
         loadAd();
     }, [loadAd]);
 
     useEffect(() => {
+        console.log('paid', user?.paid);
         if (user?.paid) {
-            banner.hide();
+            hideAd();
         }
-    }, [banner, user?.paid]);
+    }, [banner, hideAd, user?.paid]);
 
     useEffect(() => {
         return () => {
-            banner.hide();
+            hideAd();
         };
         // disabling, because we want to hide the ad when the component unmounts
         // eslint-disable-next-line react-hooks/exhaustive-deps

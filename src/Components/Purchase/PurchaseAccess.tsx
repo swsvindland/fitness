@@ -1,6 +1,6 @@
-import { Button } from './Buttons/Button';
+import { Button } from '../Buttons/Button';
 import { FC, useContext } from 'react';
-import { AuthContext } from './Auth/Auth';
+import { AuthContext } from '../Auth/Auth';
 import { PurchaseOptions } from './PurchaseOptions';
 
 interface IProps {

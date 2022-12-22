@@ -14,7 +14,7 @@ import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
-import { PurchaseAccess } from '../PurchaseAccess';
+import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 
 interface IProps {
     workoutId: number;

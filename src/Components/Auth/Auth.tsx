@@ -9,7 +9,7 @@ import { ScrollToTop } from '../ScrollToTop';
 import { MinVersion } from '../MinVersion';
 import { ForgotPassword } from './ForgotPassword';
 import { BannerAd } from '../Ads/BannerAd';
-import { PurchaseAccess } from '../PurchaseAccess';
+import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 
 interface IAuthContext {
     user?: User;
@@ -43,10 +43,10 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
-                        {!user.paid && <BannerAd />}
                         <Routes />
                         <ScrollToTop />
                         <MinVersion />
+                        {!user.paid && <BannerAd />}
                     </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>

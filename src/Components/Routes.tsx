@@ -25,9 +25,10 @@ import { Layout } from './Layout';
 import { UnitsForm } from './Settings/UnitsForm';
 import { AuthContext } from './Auth/Auth';
 import { GettingStartedLayout } from './GettingStartedLayout';
+import { BannerAd } from './Ads/BannerAd';
 
 export const Routes: FC = () => {
-    const { newUser } = useContext(AuthContext);
+    const { user, newUser } = useContext(AuthContext);
 
     if (newUser) {
         return (

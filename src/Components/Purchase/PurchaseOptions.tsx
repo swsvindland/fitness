@@ -1,23 +1,25 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { FC, Fragment, useContext, useEffect, useState } from 'react';
-import { Button } from './Buttons/Button';
-import { SecondaryButton } from './Buttons/SecondaryButton';
+import { Button } from '../Buttons/Button';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { isPlatform } from '@ionic/react';
 import {
     IAPProduct,
     InAppPurchase2 as iap,
 } from '@awesome-cordova-plugins/in-app-purchase-2';
-import { AuthContext } from './Auth/Auth';
-import { UserRole } from '../types/user';
-import { DeleteAccount } from './DeleteAccount';
+import { AuthContext } from '../Auth/Auth';
+import { UserRole } from '../../types/user';
+import { DeleteAccount } from '../DeleteAccount';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updatePaid } from '../api';
+import { updatePaid } from '../../api';
+import { addDays } from 'date-fns';
 
 const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
 
 export const PurchaseOptions: FC = () => {
-    const { user, openPurchase, setOpenPurchase } = useContext(AuthContext);
+    const { user, setUser, openPurchase, setOpenPurchase } =
+        useContext(AuthContext);
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
     const queryClient = useQueryClient();
@@ -29,16 +31,15 @@ export const PurchaseOptions: FC = () => {
 
     const paidMutation = useMutation(updatePaid, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries();
-            window.location.reload();
+            await queryClient.invalidateQueries(['user', user?.id]);
+            setUser(await queryClient.getQueryData(['user', user?.id]));
         },
     });
 
-    const updatePaidIfNeeded = (paid: boolean) => {
-        console.log('updatePaidIfNeeded', paid, user?.paid);
+    const updatePaidIfNeeded = (paid: boolean, paidUntil?: string) => {
         if (user?.paid === paid) return;
         if (user?.userRole !== UserRole.User) return;
-        paidMutation.mutate({ paid });
+        paidMutation.mutate({ paid, paidUntil });
     };
 
     useEffect(() => {
@@ -154,14 +155,17 @@ export const PurchaseOptions: FC = () => {
                 ) {
                     updatePaidIfNeeded(true);
                 } else if (monthly.owned || yearly.owned) {
-                    updatePaidIfNeeded(true);
+                    updatePaidIfNeeded(
+                        true,
+                        addDays(new Date(), 30).toISOString()
+                    );
                     setOpenPurchase(false);
                 } else {
                     updatePaidIfNeeded(false);
                 }
             });
         } else {
-            updatePaidIfNeeded(true);
+            updatePaidIfNeeded(true, addDays(new Date(), 30).toISOString());
             setOpenPurchase(false);
         }
     });
