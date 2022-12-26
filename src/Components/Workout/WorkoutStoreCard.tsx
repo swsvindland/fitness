@@ -6,9 +6,10 @@ interface IProps {
     id: number;
     name: string;
     premium: boolean;
+    custom: boolean;
 }
 
-export const WorkoutStoreCard: FC<IProps> = ({ id, name, premium }) => {
+export const WorkoutStoreCard: FC<IProps> = ({ id, name, premium, custom }) => {
     const { user } = useContext(AuthContext);
 
     if (premium && !user?.paid) {
@@ -28,9 +29,11 @@ export const WorkoutStoreCard: FC<IProps> = ({ id, name, premium }) => {
         );
     }
 
+    const link = custom ? `/workout/custom/${id}` : `/workout/store/${id}`;
+
     return (
         <Link
-            to={`/workout/store/${id}`}
+            to={link}
             className="m-4 max-w-xl w-96 relative block card rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none"
         >
             <span className="flex items-center">

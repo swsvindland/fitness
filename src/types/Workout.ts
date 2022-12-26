@@ -1,5 +1,6 @@
 export interface Workout {
     id: number;
+    userId?: string;
     created: string;
     name: string;
     description: string;

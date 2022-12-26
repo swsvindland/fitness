@@ -2,12 +2,7 @@ import { FC } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
 import { RestartWorkout } from './RestartWorkout';
 
-interface IProps {
-    userId: string;
-    workoutId: number;
-}
-
-export const WorkoutCompleted: FC<IProps> = ({ userId, workoutId }) => {
+export const WorkoutCompleted: FC = () => {
     return (
         <div className="flex flex-col">
             <h1 className="text-2xl text-secondary">Workout Completed</h1>

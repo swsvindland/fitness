@@ -3,7 +3,6 @@ import { AdMobPlus, BannerAd as Banner } from '@admob-plus/capacitor';
 import { isPlatform } from '@ionic/react';
 import { AuthContext } from '../Auth/Auth';
 
-// TODO: finish implementing banner ads for 1.1.0
 export const BannerAd: FC = () => {
     const { user } = useContext(AuthContext);
     const androidTestBannerId = 'ca-app-pub-3940256099942544/6300978111';
@@ -12,7 +11,7 @@ export const BannerAd: FC = () => {
     const iosBannerId = 'ca-app-pub-7533750599105635/3179713363';
 
     const mapPlatformToBannerId = () => {
-        if (isPlatform('mobileweb')) {
+        if (isPlatform('mobileweb') || isPlatform('desktop')) {
             return '';
         }
         if (process.env.NODE_ENV === 'development') {
@@ -38,8 +37,6 @@ export const BannerAd: FC = () => {
         adUnitId: mapPlatformToBannerId(),
         position: 'top',
     });
-
-    console.log(mapPlatformToBannerId());
 
     const loadAd = useCallback(async () => {
         if (user?.paid) return null;

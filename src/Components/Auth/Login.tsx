@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { User } from '../../types/user';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
-import { TextField } from '../TextField';
+import { TextField } from '../TextFields/TextField';
 import { auth, getUser } from '../../api';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Capacitor } from '@capacitor/core';

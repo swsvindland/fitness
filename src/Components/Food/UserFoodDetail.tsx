@@ -4,7 +4,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { deleteUserFood, getUserFood, updateUserFood } from '../../api';
 import { Loading } from '../Loading';
 import { Button } from '../Buttons/Button';
-import { TextField } from '../TextField';
+import { TextField } from '../TextFields/TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { Units } from '../../types/Units';
 import { AuthContext } from '../Auth/Auth';

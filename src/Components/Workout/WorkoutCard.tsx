@@ -57,7 +57,7 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                 <div className="flex-1 truncate">
                     <div className="flex items-center space-x-3">
                         <h3 className="text-secondary text-sm font-medium truncate">
-                            {exercise.exercise.name}
+                            {exercise.exercise?.name}
                         </h3>
                     </div>
                     <p className="mt-1 text-ternary text-sm truncate">

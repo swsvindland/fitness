@@ -19,10 +19,11 @@ import { Sex, Units, User } from './types/user';
 import { EdamamFoodHint } from './types/EdamamFoodHint';
 import { Food } from './types/Food';
 import { WorkoutExercise } from './types/WorkoutExercise';
+import { Exercise } from './types/Exercise';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -114,7 +115,9 @@ export const getWorkoutExercises = (
 };
 
 export const buyWorkout = (workoutId: number) => {
-    const params = getParams({ workoutId });
+    const params = getParams({
+        workoutId,
+    });
 
     return axios.post(
         `${API_URL}/api/BuyWorkout`,
@@ -171,7 +174,8 @@ export const getUserWorkouts = (): Promise<AxiosResponse<UserWorkout[]>> => {
 
 export const completeWorkout = (body: {
     userId: string;
-    workoutId: number;
+    workoutId?: number;
+    userCustomWorkoutId?: number;
     week: number;
     day: number;
 }): Promise<AxiosResponse> => {
@@ -452,4 +456,76 @@ export const updateUnits = (body: {
     const params = getParams();
 
     return axios.post(`${API_URL}/api/UpdateUserUnits`, body, { params });
+};
+
+export const getWorkoutsByUserId = (): Promise<AxiosResponse<Workout[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetWorkoutsByUserId`, { params });
+};
+
+export const addWorkout = (body: {
+    userId: string;
+    name: string;
+    description: string;
+    days: number;
+    duration: number;
+}): Promise<AxiosResponse<number>> => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddWorkout`, body, { params });
+};
+
+export const editWorkout = (body: {
+    id: number;
+    userId: string;
+    name: string;
+    description: string;
+    days: number;
+    duration: number;
+}): Promise<AxiosResponse<number>> => {
+    const params = getParams();
+
+    return axios.put(`${API_URL}/api/EditWorkout`, body, { params });
+};
+
+export const deleteWorkout = (
+    workoutId: number
+): Promise<AxiosResponse<number>> => {
+    const params = getParams({ workoutId });
+
+    return axios.delete(`${API_URL}/api/DeleteWorkout`, { params });
+};
+
+export const getExercises = (): Promise<AxiosResponse<Exercise[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetExercises`, { params });
+};
+
+export const getAllWorkoutExercises = (
+    workoutId: number
+): Promise<AxiosResponse<WorkoutExercise[]>> => {
+    const params = getParams({ workoutId });
+
+    return axios.get(`${API_URL}/api/GetAllWorkoutExercises`, {
+        params,
+    });
+};
+
+export const upsertWorkoutExercises = (body: {
+    id?: number;
+    exerciseId: number;
+    workoutId: number;
+    day: number;
+    sets: number;
+    minReps: number;
+    maxReps: number;
+    order: number;
+}): Promise<AxiosResponse<WorkoutExercise[]>> => {
+    const params = getParams({ id: body.id });
+
+    return axios.post(`${API_URL}/api/UpsertWorkoutExercises`, body, {
+        params,
+    });
 };

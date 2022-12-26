@@ -5,7 +5,7 @@ import { addUserFood, getFoodDetails, searchFood } from '../../api';
 import { Loading } from '../Loading';
 import { EdamamTotalNutrients } from '../../types/EdamamFoodDetails';
 import { Button } from '../Buttons/Button';
-import { TextField } from '../TextField';
+import { TextField } from '../TextFields/TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { Units } from '../../types/Units';
 import { AuthContext } from '../Auth/Auth';

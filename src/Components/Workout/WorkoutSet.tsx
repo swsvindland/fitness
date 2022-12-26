@@ -1,5 +1,5 @@
 import { FC, useContext, useMemo, useState } from 'react';
-import { TextField } from '../TextField';
+import { TextField } from '../TextFields/TextField';
 import { WorkoutExercise } from '../../types/WorkoutExercise';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
@@ -26,9 +26,12 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
     const [saved, setSaved] = useState<boolean>(false);
     const queryClient = useQueryClient();
 
-    const { data, isLoading } = useQuery(
-        ['UserWorkoutActivity', user?.id, exercise.id, set, week, day],
-        () => getWorkoutActivity(exercise.id, set, week, day)
+    const userWorkoutActivityQuery = useQuery(
+        ['UserWorkoutActivity', exercise.id, set, week, day],
+        () => {
+            if (!exercise.id) return;
+            return getWorkoutActivity(exercise.id, set, week, day);
+        }
     );
 
     const mutation = useMutation(addWorkoutActivity, {
@@ -36,32 +39,31 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
             queryClient.invalidateQueries({
                 predicate: (query) =>
                     query.queryKey[0] === 'UserWorkoutActivity' &&
-                    query.queryKey?.at(1) === user?.id &&
-                    query.queryKey?.at(2) === exercise.id &&
-                    (query.queryKey?.at(3) ?? 0) >= set,
+                    query.queryKey?.at(1) === exercise.id &&
+                    (query.queryKey?.at(2) ?? 0) >= set,
             });
             setSaved(true);
         },
     });
 
     useMemo(() => {
-        if (!data) {
+        if (!userWorkoutActivityQuery.data) {
             return;
         }
 
         setState({
-            reps: data?.data.reps,
-            weight: data?.data.weight.toString(),
+            reps: userWorkoutActivityQuery.data?.data.reps,
+            weight: userWorkoutActivityQuery.data?.data.weight.toString(),
         });
 
-        if (data.data.saved) {
+        if (userWorkoutActivityQuery.data.data.saved) {
             setSaved(true);
         } else {
             setSaved(false);
         }
-    }, [data]);
+    }, [userWorkoutActivityQuery.data]);
 
-    if (isLoading) {
+    if (userWorkoutActivityQuery.isLoading) {
         return <Loading />;
     }
 
@@ -108,9 +110,9 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                         className="w-8 h-8"
                         onClick={() => {
                             mutation.mutate({
-                                id: data?.data.id,
+                                id: userWorkoutActivityQuery.data?.data.id,
                                 userId: user?.id ?? '',
-                                workoutExerciseId: exercise.id,
+                                workoutExerciseId: exercise.id ?? 0,
                                 reps: state.reps,
                                 weight: parseFloat(state.weight),
                                 set,

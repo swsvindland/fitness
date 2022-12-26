@@ -26,6 +26,10 @@ import { UnitsForm } from './Settings/UnitsForm';
 import { AuthContext } from './Auth/Auth';
 import { GettingStartedLayout } from './GettingStartedLayout';
 import { BannerAd } from './Ads/BannerAd';
+import { CreateCustomWorkout } from './CustomWorkout/CreateCustomWorkout';
+import { UserCustomWorkoutDetail } from './Workout/UserCustomWorkoutDetail';
+import { EditCustomWorkoutExercises } from './CustomWorkout/EditCustomWorkoutExercises';
+import { EditCustomWorkout } from './CustomWorkout/EditCustomWorkout';
 
 export const Routes: FC = () => {
     const { user, newUser } = useContext(AuthContext);
@@ -69,6 +73,9 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/workout/store/:workoutId" exact={true}>
                     <WorkoutDetail />
+                </Route>
+                <Route path="/workout/custom/:workoutId" exact={true}>
+                    <UserCustomWorkoutDetail />
                 </Route>
                 <Route path="/eat" exact={true}>
                     <Eat />
@@ -120,6 +127,15 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/settings/change-password" exact={true}>
                     <ChangePasswordForm />
+                </Route>
+                <Route path="/workout/create" exact={true}>
+                    <CreateCustomWorkout />
+                </Route>
+                <Route path="/workout/edit/:workoutId" exact={true}>
+                    <EditCustomWorkout />
+                </Route>
+                <Route path="/workout/edit/exercises/:workoutId" exact={true}>
+                    <EditCustomWorkoutExercises />
                 </Route>
             </Layout>
             <Redirect from="*" to="/" />

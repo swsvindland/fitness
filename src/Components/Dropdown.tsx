@@ -16,7 +16,7 @@ interface IProps {
     id?: string;
     label?: string;
     options: DropdownOption[];
-    selected: DropdownOption;
+    selected?: DropdownOption;
     setSelected: (value: DropdownOption) => void;
     className?: string;
 }
@@ -42,7 +42,7 @@ export const Dropdown: FC<IProps> = ({
                     <div className="relative mt-1" id={id}>
                         <Listbox.Button className="relative w-full cursor-default rounded-md border border-ternary bg-background py-2 pl-3 pr-10 text-left shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm">
                             <span className="block truncate text-secondary">
-                                {selected.name}
+                                {selected ? selected.name : 'Select an option'}
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <ChevronDownSolid

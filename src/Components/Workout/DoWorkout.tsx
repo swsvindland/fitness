@@ -14,7 +14,7 @@ import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
-import { PurchaseAccess } from '../Purchase/PurchaseAccess';
+import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 
 interface IProps {
     workoutId: number;
@@ -38,12 +38,15 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     const history = useHistory();
     const queryClient = useQueryClient();
 
-    const workoutQuery = useQuery(['Workout', workoutId], () =>
-        getWorkout(workoutId)
-    );
+    const workoutQuery = useQuery(['Workout', workoutId], () => {
+        return getWorkout(workoutId);
+    });
 
-    const exercisesQuery = useQuery(['WorkoutExercises', day, week], () =>
-        getWorkoutExercises(workoutId, day)
+    const exercisesQuery = useQuery(
+        ['WorkoutExercises', workoutId, day, week],
+        () => {
+            return getWorkoutExercises(workoutId, day);
+        }
     );
 
     const nextWorkoutQuery = useQuery(['UserNextWorkout'], () => {
@@ -77,9 +80,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     }
 
     if (nextWorkoutQuery.data?.data.workoutCompleted) {
-        return (
-            <WorkoutCompleted userId={user?.id ?? ''} workoutId={workoutId} />
-        );
+        return <WorkoutCompleted />;
     }
 
     const handleCompleteWorkout = () => {
@@ -106,7 +107,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
                         exercise={exercise}
                         week={week.id}
                         day={day}
-                        icon={exercise.exercise.icon}
+                        icon={exercise.exercise?.icon}
                     />
                 ))}
             </div>
@@ -116,6 +117,14 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             >
                 Complete Workout
             </Button>
+            {workoutQuery.data?.data.userId && (
+                <LinkSecondaryButton
+                    to={`/workout/edit/${workoutId}`}
+                    className="my-2 flex justify-center align-middle w-full"
+                >
+                    Edit Workout
+                </LinkSecondaryButton>
+            )}
         </div>
     );
 };
