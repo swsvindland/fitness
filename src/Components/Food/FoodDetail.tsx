@@ -1,28 +1,22 @@
-import { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { addUserFood, getFoodDetails, searchFood } from '../../api';
+import { addUserFood, getFoodDetails } from '../../api';
 import { Loading } from '../Loading';
-import { EdamamTotalNutrients } from '../../types/EdamamFoodDetails';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
-import { Units } from '../../types/Units';
 import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { convertFromUnitToGrams } from './convertUnits';
+import { NutritionLabel } from './NutritionLabel';
 
 export const FoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
     const [displayedQuantity, setDisplayedQuantity] = useState<number>(1);
-    const [quantity, setQuantity] = useState<number | undefined>(undefined);
-    const [servingSize, setServingSize] = useState<number>(0);
-    const [unit, setUnit] = useState<DropdownOption>({
-        id: Units.Serving,
-        name: 'Serving',
-    });
+    const [unit, setUnit] = useState<DropdownOption | undefined>(undefined);
+
     const history = useHistory();
 
     const mutation = useMutation(addUserFood, {
@@ -31,85 +25,60 @@ export const FoodDetail: FC = () => {
         },
     });
 
-    const searchFoodQuery = useQuery(['SearchFood', foodId], () => {
+    const foodDetailsQuery = useQuery(['FoodDetails', foodId], () => {
         if (!foodId) return;
-        return searchFood(foodId);
+
+        return getFoodDetails(parseInt(foodId));
     });
 
-    useEffect(() => {
-        const servingSizes = searchFoodQuery.data?.data.at(0)?.measures;
-
-        const servingSize = servingSizes?.find((e) => e.label === 'Serving');
-
-        setDisplayedQuantity(1);
-        setQuantity(servingSize?.weight ?? 1);
-        setServingSize(servingSize?.weight ?? 1);
-    }, [searchFoodQuery.data]);
-
-    const foodDetailsQuery = useQuery(
-        ['FoodDetails', foodId, quantity],
-        () => {
-            if (!foodId) return;
-
-            return getFoodDetails(foodId, quantity ?? 0);
-        },
-        {
-            enabled: quantity !== undefined,
-        }
-    );
+    const options: DropdownOption[] | undefined =
+        foodDetailsQuery.data?.data?.servings.map((serving) => ({
+            id: serving.id,
+            name: serving.servingDescription,
+        }));
 
     useMemo(() => {
-        setQuantity(
-            convertFromUnitToGrams(displayedQuantity, unit.id, servingSize)
-        );
-    }, [displayedQuantity, servingSize, unit.id]);
-
-    const totalNutrients = foodDetailsQuery.data?.data?.totalNutrients;
-
-    if (searchFoodQuery.isLoading) {
-        return <Loading />;
-    }
-
-    const options = Object.keys(Units)
-        .filter((unit) => isNaN(parseInt(unit)))
-        .map((unit, index) => ({ id: index, name: unit }));
+        if (!unit && options && options.length > 0) {
+            setUnit(options.at(0));
+        }
+    }, [options, unit]);
 
     return (
         <div>
             <div className="my-8">
                 <h1 className="text-2xl font-bold text-secondary">
-                    {searchFoodQuery.data?.data?.at(0)?.food.label}
+                    {foodDetailsQuery.data?.data.name}
                 </h1>
             </div>
-            <div className="flex flex-row align-middle mb-2 justify-between">
+            <div className="w-full flex flex-col align-middle mb-2 justify-between">
                 <TextField
                     label="Quantity"
                     type="number"
                     onChange={(event) =>
-                        setDisplayedQuantity(parseInt(event.target.value))
+                        setDisplayedQuantity(parseInt(event.target.value) ?? 1)
                     }
                     value={displayedQuantity ?? ''}
-                    className="my-auto"
+                    className="pr-2"
                 />
                 <Dropdown
                     label="Unit"
                     options={options}
                     selected={unit}
                     setSelected={setUnit}
-                    className="my-auto ml-2 w-48"
+                    className="p-1"
                 />
-                <div className="mt-auto mx-2">
+                <div className="p-1 mt-2">
                     {mutation.isLoading ? (
                         <Loading />
                     ) : (
                         <Button
+                            className="w-full"
                             onClick={() =>
                                 mutation.mutate({
-                                    edamamFoodId: foodId,
+                                    foodV2Id: parseInt(foodId),
                                     userId: user?.id ?? '',
-                                    amount: quantity ?? 0,
-                                    unit: 'Gram',
-                                    created: new Date().toDateString(),
+                                    servingId: unit?.id ?? 0,
+                                    servingAmount: displayedQuantity,
                                 })
                             }
                         >
@@ -118,41 +87,15 @@ export const FoodDetail: FC = () => {
                     )}
                 </div>
             </div>
-            <div className="flex flex-col justify-center rounded card p-4">
+            <div className="flex flex-col justify-center rounded w-96">
                 {foodDetailsQuery.isFetching && <Loading />}
-                <div className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1">
-                    <div className="text-secondary">Serving Size</div>
-                    <div className="text-ternary ml-auto">
-                        {servingSize?.toFixed(2)} ({quantity?.toFixed(2)})
-                    </div>
-                    <div className="text-ternary ml-auto">g</div>
-                </div>
-                {totalNutrients &&
-                    Object.keys(totalNutrients).map((key) => (
-                        <div
-                            key={key}
-                            className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1"
-                        >
-                            <div className="text-secondary">
-                                {
-                                    totalNutrients[
-                                        key as keyof EdamamTotalNutrients
-                                    ].label
-                                }
-                            </div>
-                            <div className="text-ternary ml-auto">
-                                {totalNutrients[
-                                    key as keyof EdamamTotalNutrients
-                                ].quantity.toFixed(2)}
-                            </div>
-                            <div className="text-ternary ml-auto">
-                                {
-                                    totalNutrients[
-                                        key as keyof EdamamTotalNutrients
-                                    ].unit
-                                }
-                            </div>
-                        </div>
+                {foodDetailsQuery.data?.data.servings
+                    .filter((item) => item.id === unit?.id)
+                    .map((serving) => (
+                        <NutritionLabel
+                            serving={serving}
+                            displayedQuantity={displayedQuantity}
+                        />
                     ))}
             </div>
         </div>

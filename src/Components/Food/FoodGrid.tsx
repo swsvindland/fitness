@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
 import { useQuery } from '@tanstack/react-query';
@@ -15,9 +14,9 @@ export const FoodGrid: FC = () => {
         history.push(`/eat/user-food/${foodId}`);
     };
 
-    const handleStartScan = () => {
-        history.push('/scanner');
-    };
+    // const handleStartScan = () => {
+    //     history.push('/scanner');
+    // };
 
     const foodQuery = useQuery(['Food'], () => {
         return getUserFoods();
@@ -30,16 +29,10 @@ export const FoodGrid: FC = () => {
     return (
         <div className="px-4 sm:px-6 lg:px-8 card rounded m-1 p-4">
             <div className="flex flex-row justify-end">
-                <SecondaryButton
-                    className="mx-1"
-                    onClick={handleStartScan}
-                >
-                    Scan Barcode
-                </SecondaryButton>
-                <LinkButton
-                    to="/eat/add-food"
-                    className="mx-1"
-                >
+                {/*<SecondaryButton className="mx-1" onClick={handleStartScan}>*/}
+                {/*    Scan Barcode*/}
+                {/*</SecondaryButton>*/}
+                <LinkButton to="/eat/add-food" className="mx-1">
                     Add Food
                 </LinkButton>
             </div>
@@ -93,103 +86,122 @@ export const FoodGrid: FC = () => {
                     </thead>
                     <tbody>
                         {foodQuery.data?.data?.map((food, foodIdx) => (
-                            <tr key={food.id}>
+                            <tr key={food.id} className="">
                                 <td
-                                    onClick={() =>
-                                        handleRowClick(food.food?.id)
-                                    }
+                                    onClick={() => handleRowClick(food.id)}
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-transparent',
+                                            : 'border-t border-ternary',
                                         'relative py-4 pl-4 sm:pl-6 pr-3 text-sm'
                                     )}
                                 >
                                     <div className="font-medium text-secondary">
-                                        {food.food?.name}
+                                        {food?.foodV2?.name}
                                     </div>
                                     <div className="mt-1 flex flex-col text-ternary lg:hidden">
                                         <span>
                                             Protein:{' '}
-                                            {food.food?.protein?.toFixed(2)}g
-                                        </span>
-                                        <span>
-                                            Fat:{' '}
-                                            {food.food?.totalFat?.toFixed(2)}g
-                                        </span>
-                                        <span>
-                                            Carbs:{' '}
-                                            {food.food?.carbohydrates?.toFixed(
-                                                2
-                                            )}
+                                            {(
+                                                (food.serving?.protein ?? 0) *
+                                                food.servingAmount
+                                            ).toFixed(2)}
                                             g
                                         </span>
                                         <span>
-                                            {food.food?.calories?.toFixed(2)}{' '}
+                                            Fat:{' '}
+                                            {(
+                                                (food.serving?.fat ?? 0) *
+                                                food.servingAmount
+                                            )?.toFixed(2)}
+                                            g
+                                        </span>
+                                        <span>
+                                            Carbs:{' '}
+                                            {(
+                                                (food.serving?.carbohydrate ??
+                                                    0) * food.servingAmount
+                                            )?.toFixed(2)}
+                                            g
+                                        </span>
+                                        <span>
+                                            {food.serving?.calories?.toFixed(2)}{' '}
                                             Calories
                                         </span>
                                         <span>
-                                            {food.servings?.toFixed(2)} Servings
+                                            {food.servingAmount?.toFixed(2)}{' '}
+                                            Servings
                                         </span>
                                     </div>
                                     {foodIdx !== 0 ? (
-                                        <div className="absolute right-0 left-6 -top-px h-px bg-gray-200" />
+                                        <div className="absolute right-0 left-6 -top-px h-px bg-ternary" />
                                     ) : null}
                                 </td>
                                 <td
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-gray-200',
+                                            : 'border-t border-ternary',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {food.food?.protein?.toFixed(2)}g
+                                    {(
+                                        (food.serving?.protein ?? 0) *
+                                        food.servingAmount
+                                    )?.toFixed(2)}
+                                    g
                                 </td>
                                 <td
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-gray-200',
+                                            : 'border-t border-ternary',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {food.food?.totalFat?.toFixed(2)}g
+                                    {(
+                                        (food.serving?.fat ?? 0) *
+                                        food.servingAmount
+                                    )?.toFixed(2)}
+                                    g
                                 </td>
                                 <td
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-gray-200',
+                                            : 'border-t border-ternary',
                                         'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    {food.food?.carbohydrates?.toFixed(2)}g
+                                    {(
+                                        (food.serving?.carbohydrate ?? 0) *
+                                        food.servingAmount
+                                    )?.toFixed(2)}
+                                    g
                                 </td>
                                 <td
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-gray-200',
-                                        'px-3 py-3.5 text-sm text-ternary'
+                                            : 'border-t border-ternary',
+                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    <div className="hidden sm:block">
-                                        {food.food?.calories?.toFixed(2)}{' '}
-                                        Calories
-                                    </div>
+                                    {(
+                                        (food.serving?.calories ?? 0) *
+                                        food.servingAmount
+                                    )?.toFixed(2)}
+                                    Cal
                                 </td>
                                 <td
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-gray-200',
-                                        'px-3 py-3.5 text-sm text-ternary'
+                                            : 'border-t border-ternary',
+                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
                                     )}
                                 >
-                                    <div className="hidden sm:block">
-                                        {food.servings?.toFixed(2)} Servings
-                                    </div>
+                                    {food.servingAmount?.toFixed(2)} Servings
                                 </td>
                             </tr>
                         ))}

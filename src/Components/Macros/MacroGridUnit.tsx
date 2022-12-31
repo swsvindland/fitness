@@ -31,28 +31,38 @@ export const MacroGridUnit: FC<IProps> = ({
                 )}
             </dt>
             <dd className="mt-1 flex items-baseline">
-                <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    {currentAmount?.toFixed(0) ?? 0}
-                </span>
-                <span className="text-ternary sm:text-lg text-xs">{unit}</span>
-                <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
-                    /
-                </span>
+                {currentAmount !== undefined ? (
+                    <>
+                        <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
+                            {currentAmount?.toFixed(0) ?? 0}
+                        </span>
+                        <span className="text-ternary sm:text-lg text-xs">
+                            {unit}
+                        </span>
+                        <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
+                            /
+                        </span>
+                    </>
+                ) : null}
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
                     {amount?.toFixed(0)}
                 </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
             </dd>
-            <div className="relative mt-4">
-                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-secondary-light shadow-inner">
-                    <div
-                        style={{
-                            width: `${((currentAmount ?? 0) / amount) * 100}%`,
-                        }}
-                        className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-secondary"
-                    ></div>
+            {currentAmount !== undefined ? (
+                <div className="relative mt-4">
+                    <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-secondary-light shadow-inner">
+                        <div
+                            style={{
+                                width: `${
+                                    ((currentAmount ?? 0) / amount) * 100
+                                }%`,
+                            }}
+                            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-secondary"
+                        ></div>
+                    </div>
                 </div>
-            </div>
+            ) : null}
         </div>
     );
 };

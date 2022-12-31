@@ -6,24 +6,17 @@ import { Loading } from '../Loading';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
-import { Units } from '../../types/Units';
 import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { convertFromGramsToUnit, convertFromUnitToGrams } from './convertUnits';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { Food } from '../../types/Food';
+import { NutritionLabel } from './NutritionLabel';
 
 export const UserFoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
-    const { foodId } = useParams<{ foodId: string }>();
-    const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
-    const [quantity, setQuantity] = useState<number | undefined>(undefined);
-    const [servingSize, setServingSize] = useState<number>(0);
-    const [unit, setUnit] = useState<DropdownOption>({
-        id: Units.Serving,
-        name: 'Serving',
-    });
+    const { userFoodId } = useParams<{ userFoodId: string }>();
+    const [displayedQuantity, setDisplayedQuantity] = useState<number>(1);
+    const [unit, setUnit] = useState<DropdownOption | undefined>(undefined);
     const history = useHistory();
 
     const updateMutation = useMutation(updateUserFood, {
@@ -38,109 +31,72 @@ export const UserFoodDetail: FC = () => {
         },
     });
 
-    const foodDetailsQuery = useQuery(['UserFood', foodId], () => {
-        if (!foodId) return;
+    const foodDetailsQuery = useQuery(['UserFood', userFoodId], () => {
+        if (!userFoodId) return;
+        if (isNaN(parseInt(userFoodId))) return;
 
-        return getUserFood(foodId);
+        return getUserFood(parseInt(userFoodId));
     });
 
-    useMemo(() => {
-        const newQuantity = foodDetailsQuery.data?.data.amount ?? 0;
-        const newServingSize =
-            foodDetailsQuery.data?.data.food?.servingSize ?? 0;
-        const newDisplayedQuantity = convertFromGramsToUnit(
-            newQuantity,
-            Units.Serving,
-            newServingSize
-        );
-
-        setDisplayedQuantity(newDisplayedQuantity.toString());
-        setQuantity(newQuantity);
-        setServingSize(newServingSize);
-    }, [
-        foodDetailsQuery.data?.data.amount,
-        foodDetailsQuery.data?.data.food?.servingSize,
-    ]);
+    const options: DropdownOption[] | undefined =
+        foodDetailsQuery.data?.data.foodV2?.servings.map((serving) => ({
+            id: serving.id,
+            name: serving.servingDescription,
+        }));
 
     useMemo(() => {
-        setQuantity(
-            convertFromUnitToGrams(
-                parseFloat(displayedQuantity),
-                unit.id,
-                servingSize
-            )
-        );
-    }, [displayedQuantity, servingSize, unit.id]);
-
-    const options = Object.keys(Units)
-        .filter((unit) => isNaN(parseInt(unit)))
-        .map((unit, index) => ({ id: index, name: unit }));
-
-    const getNutrients = () => {
-        const food = foodDetailsQuery.data?.data.food;
-        let nutrients: {
-            value: number | undefined | Units | string;
-            key: string;
-        }[] = [];
-
-        if (food) {
-            nutrients = Object.keys(food).map((item) => ({
-                key: item,
-                value: food[item as keyof Food],
-            }));
+        if (!unit && options && options.length > 0) {
+            setUnit(options.at(0));
         }
+    }, [options, unit]);
 
-        return nutrients.filter(
-            (item) =>
-                item.key !== 'id' &&
-                item.key !== 'edamamFoodId' &&
-                item.key !== 'servingSize' &&
-                item.key !== 'servingSizeUnit' &&
-                item.key !== 'name' &&
-                item.key !== 'brand'
-        );
-    };
+    useMemo(() => {
+        setDisplayedQuantity(foodDetailsQuery.data?.data.servingAmount ?? 1);
+    }, [foodDetailsQuery.data?.data.servingAmount]);
 
     return (
         <div>
             <div className="my-8">
                 <h1 className="text-2xl font-bold text-secondary">
-                    {foodDetailsQuery.data?.data.food?.name}
+                    {foodDetailsQuery.data?.data.foodV2?.name}
                 </h1>
             </div>
-            <div className="flex flex-row align-middle mb-2 justify-between">
+            <div className="w-full flex flex-col align-middle mb-2 justify-between">
                 <TextField
                     label="Quantity"
                     type="number"
-                    inputMode={'decimal'}
                     onChange={(event) =>
-                        setDisplayedQuantity(event.target.value)
+                        setDisplayedQuantity(parseInt(event.target.value) ?? 1)
                     }
-                    value={displayedQuantity}
-                    className="my-auto"
+                    value={displayedQuantity ?? ''}
+                    className="pr-2"
                 />
                 <Dropdown
                     label="Unit"
                     options={options}
                     selected={unit}
                     setSelected={setUnit}
-                    className="my-auto ml-2 w-48"
+                    className="p-1"
                 />
-                <div className="mt-auto ml-2">
+                <div className="p-1 mt-2">
                     {updateMutation.isLoading ? (
                         <Loading />
                     ) : (
                         <Button
+                            className="w-full"
                             onClick={() =>
                                 updateMutation.mutate({
                                     id: foodDetailsQuery.data?.data.id,
-                                    foodId: foodDetailsQuery.data?.data.food
-                                        ?.id,
-                                    edamamFoodId: foodId,
+                                    servingAmount: displayedQuantity,
+                                    servingId: unit?.id ?? 0,
+                                    foodV2Id:
+                                        foodDetailsQuery.data?.data.foodV2Id ??
+                                        0,
                                     userId: user?.id ?? '',
-                                    amount: quantity ?? 0,
-                                    unit: 'Gram',
-                                    created: new Date().toDateString(),
+                                    created:
+                                        foodDetailsQuery.data?.data.created,
+                                    updated:
+                                        foodDetailsQuery.data?.data.updated,
                                 })
                             }
                         >
@@ -148,11 +104,12 @@ export const UserFoodDetail: FC = () => {
                         </Button>
                     )}
                 </div>
-                <div className="mt-auto ml-2">
+                <div className="p-1 mt-2">
                     {deleteMutation.isLoading ? (
                         <Loading />
                     ) : (
                         <SecondaryButton
+                            className="w-full"
                             onClick={() =>
                                 deleteMutation.mutate(
                                     foodDetailsQuery.data?.data.id ?? 0
@@ -164,27 +121,16 @@ export const UserFoodDetail: FC = () => {
                     )}
                 </div>
             </div>
-            <div className="flex flex-col justify-center rounded card p-4">
+            <div className="flex flex-col justify-center rounded w-96">
                 {foodDetailsQuery.isFetching && <Loading />}
-                <div className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1">
-                    <div className="text-secondary">Serving Size</div>
-                    <div className="text-ternary ml-auto">
-                        {servingSize?.toFixed(2)} ({quantity?.toFixed(2)})
-                    </div>
-                    <div className="text-ternary ml-auto">g</div>
-                </div>
-                {getNutrients().map((item) => (
-                    <div className="grid grid-cols-3 border-secondary border-t border-x last:border-b p-1">
-                        <div className="text-secondary">{item.key}</div>
-                        <div className="text-ternary ml-auto">
-                            {(
-                                parseFloat(item.value?.toString() ?? '0') *
-                                ((quantity ?? 0) / servingSize)
-                            ).toFixed(2)}
-                        </div>
-                        <div className="text-ternary ml-auto">g</div>
-                    </div>
-                ))}
+                {foodDetailsQuery.data?.data.foodV2?.servings
+                    .filter((item) => item.id === unit?.id)
+                    .map((serving) => (
+                        <NutritionLabel
+                            serving={serving}
+                            displayedQuantity={displayedQuantity}
+                        />
+                    ))}
             </div>
         </div>
     );

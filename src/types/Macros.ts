@@ -5,6 +5,4 @@ export interface Macros {
     fat: number;
     carbs: number;
     fiber: number;
-    alcohol: number;
-    water: number;
 }

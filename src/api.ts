@@ -3,10 +3,7 @@ import { Supplement } from './types/supplement';
 import { UserSupplement } from './types/userSupplement';
 import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
-import { EdamamFoodDetails } from './types/EdamamFoodDetails';
 import { Macros } from './types/Macros';
-import { UserFood } from './types/UserFood';
-import { UserFoodGridItem } from './types/UserFoodGridItem';
 import { Dashboard } from './types/Dashboard';
 import { UserNextWorkout } from './types/UserNextWorkout';
 import { Auth } from './types/Auth';
@@ -16,10 +13,11 @@ import { UserBloodPressure } from './types/userBloodPressure';
 import { UserBody } from './types/userBody';
 import { UserWeight } from './types/userWeight';
 import { Sex, Units, User } from './types/user';
-import { EdamamFoodHint } from './types/EdamamFoodHint';
 import { Food } from './types/Food';
 import { WorkoutExercise } from './types/WorkoutExercise';
 import { Exercise } from './types/Exercise';
+import { SearchFood } from './types/SearchFood';
+import { UserFoodV2 } from './types/UserFoodV2';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
@@ -208,32 +206,39 @@ export const foodAutocomplete = (
 
 export const searchFood = (
     query: string,
-    barcode?: string
-): Promise<AxiosResponse<EdamamFoodHint[]>> => {
-    const params = getParams({ query, barcode });
+    page: number
+): Promise<AxiosResponse<SearchFood[]>> => {
+    const params = getParams({ query, page });
 
-    return axios.get(`${API_URL}/api/ParseFood`, {
+    return axios.get(`${API_URL}/api/SearchFood`, {
         params,
     });
 };
 
 export const getFoodDetails = (
-    foodId: string,
-    servingSize: number
-): Promise<AxiosResponse<EdamamFoodDetails>> => {
-    const params = getParams({ foodId, servingSize });
+    foodId: number
+): Promise<AxiosResponse<Food>> => {
+    const params = getParams({ foodId });
 
-    return axios.get(`${API_URL}/api/GetFoodDetails`, {
+    return axios.get(`${API_URL}/api/GetFoodV2`, {
+        params,
+    });
+};
+
+export const addUserFood = (body: UserFoodV2) => {
+    const params = getParams();
+
+    return axios.post(`${API_URL}/api/AddUserFoodV2`, body, {
         params,
     });
 };
 
 export const getUserFood = (
-    foodId: string
-): Promise<AxiosResponse<UserFood>> => {
-    const params = getParams({ foodId });
+    userFoodId: number
+): Promise<AxiosResponse<UserFoodV2>> => {
+    const params = getParams({ userFoodId });
 
-    return axios.get(`${API_URL}/api/GetUserFood`, {
+    return axios.get(`${API_URL}/api/GetUserFoodV2`, {
         params,
     });
 };
@@ -246,10 +251,10 @@ export const getFood = (foodId: string): Promise<AxiosResponse<Food>> => {
     });
 };
 
-export const getUserFoods = (): Promise<AxiosResponse<UserFoodGridItem[]>> => {
+export const getUserFoods = (): Promise<AxiosResponse<UserFoodV2[]>> => {
     const params = getParams();
 
-    return axios.get(`${API_URL}/api/GetUserFoodsForGrid`, {
+    return axios.get(`${API_URL}/api/GetAllUserFoodV2`, {
         params,
     });
 };
@@ -275,27 +280,23 @@ export const addCustomMacros = (
 export const getCurrentUserMacros = (): Promise<AxiosResponse<Macros>> => {
     const params = getParams();
 
-    return axios.get(`${API_URL}/api/GetCurrentUserMacros`, {
+    return axios.get(`${API_URL}/api/GetCurrentUserMacrosV2`, {
         params,
     });
 };
 
-export const addUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
+export const updateUserFood = (
+    userFood: UserFoodV2
+): Promise<AxiosResponse> => {
     const params = getParams();
 
-    return axios.post(`${API_URL}/api/AddUserFood`, userFood, { params });
-};
-
-export const updateUserFood = (userFood: UserFood): Promise<AxiosResponse> => {
-    const params = getParams();
-
-    return axios.put(`${API_URL}/api/UpdateUserFood`, userFood, { params });
+    return axios.put(`${API_URL}/api/UpdateUserFoodV2`, userFood, { params });
 };
 
 export const deleteUserFood = (userFoodId: number): Promise<AxiosResponse> => {
     const params = getParams({ userFoodId });
 
-    return axios.delete(`${API_URL}/api/DeleteUserFood`, { params });
+    return axios.delete(`${API_URL}/api/DeleteUserFoodV2`, { params });
 };
 
 export const getUserDashboard = (): Promise<AxiosResponse<Dashboard>> => {

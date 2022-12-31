@@ -30,42 +30,36 @@ export const MacroGrid: FC = () => {
                     unit={user?.unit === Units.Imperial ? 'Cal' : 'kcal'}
                     customMacros={true}
                 />
-                <dl className="grid overflow-hidden grid-cols-3">
+                <dl className="grid overflow-hidden sm:grid-cols-4 grid-cols-2">
                     <MacroGridUnit
                         name="Protein"
                         amount={macrosQuery.data?.data?.protein ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data?.protein}
+                        currentAmount={
+                            currentMacrosQuery.data?.data?.protein ?? 0
+                        }
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fat"
                         amount={macrosQuery.data?.data?.fat ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data?.fat}
+                        currentAmount={currentMacrosQuery.data?.data?.fat ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Carbs"
                         amount={macrosQuery.data?.data?.carbs ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data?.carbs}
+                        currentAmount={
+                            currentMacrosQuery.data?.data?.carbs ?? 0
+                        }
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fiber"
                         amount={macrosQuery.data?.data?.fiber ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data?.fiber}
+                        currentAmount={
+                            currentMacrosQuery.data?.data?.fiber ?? 0
+                        }
                         unit="g"
-                    />
-                    <MacroGridUnit
-                        name="Alcohol"
-                        amount={macrosQuery.data?.data?.alcohol ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data?.alcohol}
-                        unit="g"
-                    />
-                    <MacroGridUnit
-                        name="Water"
-                        amount={macrosQuery.data?.data?.water ?? 0}
-                        currentAmount={currentMacrosQuery.data?.data?.water}
-                        unit={user?.unit === Units.Imperial ? 'floz' : 'ml'}
                     />
                 </dl>
             </div>

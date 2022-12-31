@@ -86,7 +86,7 @@ export const Routes: FC = () => {
                 <Route path="/eat/food/:foodId" exact={true}>
                     <FoodDetail />
                 </Route>
-                <Route path="/eat/user-food/:foodId" exact={true}>
+                <Route path="/eat/user-food/:userFoodId" exact={true}>
                     <UserFoodDetail />
                 </Route>
                 <Route path="/eat/scan/:barcode" exact={true}>

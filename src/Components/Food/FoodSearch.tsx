@@ -4,11 +4,10 @@ import { TextField } from '../TextFields/TextField';
 import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
 
 interface IProps {
-    selected?: string;
     setSelected: (selected?: string) => void;
 }
 
-export const FoodSearch: FC<IProps> = ({ selected, setSelected }) => {
+export const FoodSearch: FC<IProps> = ({ setSelected }) => {
     const [query, setQuery] = useState('');
 
     const handleSearch = (event: FormEvent) => {

@@ -14,8 +14,6 @@ interface IState {
     fat: number;
     carbs: number;
     fiber: number;
-    alcohol: number;
-    water: number;
 }
 
 export const CustomMacroForm: FC = () => {
@@ -28,8 +26,6 @@ export const CustomMacroForm: FC = () => {
         fat: 0,
         carbs: 0,
         fiber: 0,
-        alcohol: 0,
-        water: 0,
     });
     const history = useHistory();
 
@@ -51,8 +47,6 @@ export const CustomMacroForm: FC = () => {
             fat: macrosQuery.data?.data.fat ?? 0,
             carbs: macrosQuery.data?.data.carbs ?? 0,
             fiber: macrosQuery.data?.data.fiber ?? 0,
-            alcohol: macrosQuery.data?.data.alcohol ?? 0,
-            water: macrosQuery.data?.data.water ?? 0,
         });
     }, [macrosQuery.data]);
 
@@ -61,7 +55,6 @@ export const CustomMacroForm: FC = () => {
         calories += state.protein * 4;
         calories += state.fat * 9;
         calories += state.carbs * 4;
-        calories += state.alcohol * 7;
         setState({
             ...state,
             calories: isNaN(calories) ? 0 : calories,
@@ -79,8 +72,6 @@ export const CustomMacroForm: FC = () => {
             fat: state.fat,
             carbs: state.carbs,
             fiber: state.fiber,
-            alcohol: state.alcohol,
-            water: state.water,
         });
         history.goBack();
     };
@@ -93,8 +84,6 @@ export const CustomMacroForm: FC = () => {
             fat: macrosQuery.data?.data.fat ?? 0,
             carbs: macrosQuery.data?.data.carbs ?? 0,
             fiber: macrosQuery.data?.data.fiber ?? 0,
-            alcohol: macrosQuery.data?.data.alcohol ?? 0,
-            water: macrosQuery.data?.data.water ?? 0,
         });
     };
 
@@ -161,34 +150,6 @@ export const CustomMacroForm: FC = () => {
                                     setState({
                                         ...state,
                                         fiber: parseFloat(event.target.value),
-                                    })
-                                }
-                            />
-                            <TextField
-                                id="alcohol"
-                                type="number"
-                                inputMode="decimal"
-                                label="Alcohol"
-                                autoComplete="off"
-                                value={state.alcohol}
-                                onChange={(event) =>
-                                    setState({
-                                        ...state,
-                                        alcohol: parseFloat(event.target.value),
-                                    })
-                                }
-                            />
-                            <TextField
-                                id="water"
-                                type="number"
-                                inputMode="decimal"
-                                label="Water"
-                                autoComplete="off"
-                                value={state.water}
-                                onChange={(event) =>
-                                    setState({
-                                        ...state,
-                                        water: parseFloat(event.target.value),
                                     })
                                 }
                             />

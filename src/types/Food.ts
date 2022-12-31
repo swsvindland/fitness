@@ -1,41 +1,37 @@
-import { Units } from './Units';
-
 export interface Food {
     id: number;
+    brand?: string;
     name: string;
-    brand: string;
-    servingSize: number;
-    servingSizeUnit: Units;
+    foodType: string;
+    servings: Serving[];
+}
+
+export interface Serving {
+    id: number;
+    foodV2Id: number;
+    addedSugar: number;
+    calcium: number;
     calories: number;
-    totalFat?: number;
-    saturatedFat?: number;
-    transFat?: number;
-    monounsaturatedFat?: number;
-    polyunsaturatedFat?: number;
-    carbohydrates?: number;
-    fiber?: number;
-    sugar?: number;
-    protein?: number;
-    cholesterol?: number;
-    sodium?: number;
-    potassium?: number;
-    calcium?: number;
+    carbohydrate: number;
+    cholesterol: number;
+    fat: number;
+    fiber: number;
     iron: number;
-    magnesium: number;
-    zinc: number;
-    phosphorus: number;
+    measurementDescription: string;
+    metricServingAmount: number;
+    metricServingUnit: string;
+    monounsaturatedFat: string;
+    numberOfUnits: number;
+    polyunsaturatedFat: number;
+    potassium: number;
+    protein: number;
+    saturatedFat: number;
+    servingDescription: string;
+    servingId: number;
+    sodium: number;
+    sugar: number;
+    transFat: number;
     vitaminA: number;
     vitaminC: number;
-    vitaminD?: number;
-    vitaminE?: number;
-    vitaminK?: number;
-    thiamin?: number;
-    riboflavin?: number;
-    niacin?: number;
-    vitaminB6?: number;
-    folate?: number;
-    vitaminB12?: number;
-    water?: number;
-    alcohol?: number;
-    caffeine?: number;
+    vitaminD: number;
 }
