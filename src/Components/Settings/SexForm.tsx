@@ -48,26 +48,6 @@ export const SexForm: FC = () => {
                         <div className="p-4">
                             <div className="flex items-center">
                                 <input
-                                    id="sex-unknown"
-                                    name="sex-unknown"
-                                    type="radio"
-                                    value={sex}
-                                    onChange={(event) => {
-                                        if (event.target.checked) {
-                                            setSex(Sex.Unknown);
-                                        }
-                                    }}
-                                    className="h-4 w-4 accent-secondary border-ternary"
-                                />
-                                <label
-                                    htmlFor="sex-unknown"
-                                    className="ml-3 block text-sm font-medium text-ternary"
-                                >
-                                    Unknown
-                                </label>
-                            </div>
-                            <div className="flex items-center">
-                                <input
                                     id="sex-male"
                                     name="sex-male"
                                     type="radio"
