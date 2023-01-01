@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
 import { getMinVersion } from '../api';
 
-export const VERSION = 30;
+export const VERSION = 31;
 
 export const MinVersion: FC = () => {
     const [open, setOpen] = useState(false);

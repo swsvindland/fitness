@@ -8,6 +8,7 @@ import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const AddFood: FC = () => {
     useShowBackButton();
+    const [query, setQuery] = useState('');
     const [selected, setSelected] = useState<string | undefined>(undefined);
 
     const searchFoodQuery = useQuery(['SearchFood', selected], () => {
@@ -22,7 +23,11 @@ export const AddFood: FC = () => {
     return (
         <div>
             <div className="card p-4 rounded max-w-3xl w-full">
-                <FoodSearch setSelected={setSelected} />
+                <FoodSearch
+                    query={query}
+                    setQuery={setQuery}
+                    setSelected={setSelected}
+                />
             </div>
             <div className="max-w-3xl w-full">
                 {!searchFoodQuery.data?.data && selected ? (
