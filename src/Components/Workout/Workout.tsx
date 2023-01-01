@@ -5,9 +5,15 @@ import { DoWorkout } from './DoWorkout';
 import { getUserWorkouts } from '../../api';
 import { useHideBackButton } from '../Navigation/headerHooks';
 import { LinkButton } from '../Buttons/LinkButton';
+import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 
 export const Workout: FC = () => {
     useHideBackButton();
+
+    FirebaseAnalytics.setScreenName({
+        screenName: 'workout',
+        nameOverride: 'WorkoutScreen',
+    });
 
     const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
 
