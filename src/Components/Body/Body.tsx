@@ -15,7 +15,7 @@ export const Body: FC = () => {
     ChartJS.defaults.font.size = 10;
 
     return (
-        <div className="max-w-2xl w-full">
+        <div className="max-w-2xl w-full grid grid-cols-1">
             <WeightGraph />
             <BodyFatGraph />
             <BodyGraph />

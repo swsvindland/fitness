@@ -9,8 +9,8 @@ interface IProps {
 }
 export const NutritionLabel: FC<IProps> = ({ serving, displayedQuantity }) => {
     return (
-        <div>
-            <div className="grid grid-cols-2">
+        <div className="w-full">
+            <div className="grid sm:grid-cols-4 grid-cols-2 gap-2 w-full">
                 <MacroGridUnit
                     name="Calories"
                     amount={serving.calories * displayedQuantity}
@@ -32,7 +32,7 @@ export const NutritionLabel: FC<IProps> = ({ serving, displayedQuantity }) => {
                     unit="g"
                 />
             </div>
-            <div className="card m-1 p-4">
+            <div className="card p-4 w-full">
                 <FoodDetailRow
                     name="Serving Size"
                     value={serving.metricServingAmount * displayedQuantity}

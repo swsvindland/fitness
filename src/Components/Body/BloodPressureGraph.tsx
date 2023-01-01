@@ -78,7 +78,7 @@ export const BloodPressureGraph: FC = () => {
     }
 
     return (
-        <div className="card rounded shadow p-4 m-4">
+        <div className="card rounded shadow p-4 w-full my-2">
             <LinkButton
                 to="/body/blood-pressure"
                 className="relative top-0 right-0"

@@ -21,8 +21,8 @@ export const AddFood: FC = () => {
     }
 
     return (
-        <div>
-            <div className="card p-4 rounded max-w-3xl w-full">
+        <div className="max-w-2xl w-full grid grid-cols-1">
+            <div className="card p-4">
                 <FoodSearch
                     query={query}
                     setQuery={setQuery}

@@ -71,7 +71,7 @@ export const BodyFatGraph: FC = () => {
     }
 
     return (
-        <div className="card rounded shadow p-4 m-4">
+        <div className="card rounded shadow p-4 w-full my-2">
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
                 <Line data={data} />
             ) : (

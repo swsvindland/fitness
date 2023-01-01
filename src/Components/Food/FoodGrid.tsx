@@ -27,7 +27,7 @@ export const FoodGrid: FC = () => {
     }
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8 card rounded m-1 p-4">
+        <div className="px-4 sm:px-6 lg:px-8 card rounded p-4">
             <div className="flex flex-row justify-end">
                 {/*<SecondaryButton className="mx-1" onClick={handleStartScan}>*/}
                 {/*    Scan Barcode*/}
