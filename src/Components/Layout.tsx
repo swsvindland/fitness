@@ -2,7 +2,6 @@ import { FC, ReactNode } from 'react';
 import { Sidebar } from './Navigation/Sidebar';
 import { BottomNavigation } from './Navigation/BottomNavigation';
 import { Header } from './Navigation/Header';
-import { PurchaseAccess } from './Purchase/PurchaseAccess';
 
 interface IProps {
     children: ReactNode;

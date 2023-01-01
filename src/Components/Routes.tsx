@@ -25,14 +25,13 @@ import { Layout } from './Layout';
 import { UnitsForm } from './Settings/UnitsForm';
 import { AuthContext } from './Auth/Auth';
 import { GettingStartedLayout } from './GettingStartedLayout';
-import { BannerAd } from './Ads/BannerAd';
 import { CreateCustomWorkout } from './CustomWorkout/CreateCustomWorkout';
 import { UserCustomWorkoutDetail } from './Workout/UserCustomWorkoutDetail';
 import { EditCustomWorkoutExercises } from './CustomWorkout/EditCustomWorkoutExercises';
 import { EditCustomWorkout } from './CustomWorkout/EditCustomWorkout';
 
 export const Routes: FC = () => {
-    const { user, newUser } = useContext(AuthContext);
+    const { newUser } = useContext(AuthContext);
 
     if (newUser) {
         return (

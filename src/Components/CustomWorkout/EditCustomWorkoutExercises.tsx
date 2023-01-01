@@ -60,10 +60,6 @@ export const EditCustomWorkoutExercises: FC = () => {
         },
     });
 
-    const handleRemoveWorkoutExercise = (index: number) => {
-        setWorkoutExercises(workoutExercises.filter((item, i) => i !== index));
-    };
-
     const handleStartWorkout = () => {
         mutation.mutate(parseInt(workoutId ?? '0'));
     };

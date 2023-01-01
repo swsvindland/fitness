@@ -33,6 +33,7 @@ export const BannerAd: FC = () => {
 
     const [showingAd, setShowingAd] = useState(false);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const banner = new Banner({
         adUnitId: mapPlatformToBannerId(),
         position: 'top',

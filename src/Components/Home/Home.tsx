@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../../api';
 import { AuthContext } from '../Auth/Auth';
 import { useHideBackButton } from '../Navigation/headerHooks';
-import { FoodGrid } from '../Food/FoodGrid';
 import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 
 export const Home: FC = () => {

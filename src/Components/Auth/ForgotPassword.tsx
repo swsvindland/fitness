@@ -4,10 +4,7 @@ import { TextField } from '../TextFields/TextField';
 import { Loading } from '../Loading';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
-import { auth, createUser, forgotPassword, getUser } from '../../api';
-import { User } from '../../types/user';
-import { Capacitor } from '@capacitor/core';
-import { SavePassword } from 'capacitor-ios-autofill-save-password';
+import { forgotPassword } from '../../api';
 
 interface IProps {
     setForgotPassword: (forgotPassword: boolean) => void;

@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent } from 'react';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
 import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
