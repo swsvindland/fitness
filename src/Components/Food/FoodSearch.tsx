@@ -1,15 +1,35 @@
 import { FC, FormEvent } from 'react';
 import { Button } from '../Buttons/Button';
-import { TextField } from '../TextFields/TextField';
 import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
+import { Autocomplete } from '../Autocomplete';
+import { foodAutocomplete } from '../../api';
+import { useQuery } from '@tanstack/react-query';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { XSolid } from '../Icons/XSolid';
 
 interface IProps {
     query: string;
     setQuery: (query: string) => void;
+    selected: string | undefined;
     setSelected: (selected?: string) => void;
 }
 
-export const FoodSearch: FC<IProps> = ({ query, setQuery, setSelected }) => {
+export const FoodSearch: FC<IProps> = ({
+    query,
+    setQuery,
+    selected,
+    setSelected,
+}) => {
+    const optionsQuery = useQuery(['SearchFoodOptions', query], () => {
+        if (!query) return;
+        return foodAutocomplete(query);
+    });
+
+    const handleClear = () => {
+        setSelected(undefined);
+        setQuery('');
+    };
+
     const handleSearch = (event: FormEvent) => {
         event.preventDefault();
         setSelected(query);
@@ -17,18 +37,25 @@ export const FoodSearch: FC<IProps> = ({ query, setQuery, setSelected }) => {
 
     return (
         <form
-            className="flex items-end justify-between"
+            className="flex flex-row items-end justify-between"
             onSubmit={handleSearch}
         >
-            <TextField
-                id="food"
-                name="food"
-                type="text"
+            <Autocomplete
                 label="Food"
-                value={query}
-                onChange={(event) => setQuery(event.target.value as string)}
+                query={query}
+                setQuery={setQuery}
+                setSelected={setSelected}
+                selected={selected}
+                filtered={optionsQuery.data?.data ?? []}
+                isLoading={optionsQuery.isLoading}
             />
-            <Button className=" w-10 h-10 ml-2 m-1 !p-2" type="submit">
+            <SecondaryButton
+                className=" w-10 h-10 ml-2 !p-2"
+                onClick={handleClear}
+            >
+                <XSolid className="w-6 h-6 fill-secondary" />
+            </SecondaryButton>
+            <Button className=" w-10 h-10 ml-2 !p-2" type="submit">
                 <MagnifyingGlassSolid className="w-6 h-6 fill-secondary" />
             </Button>
         </form>

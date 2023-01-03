@@ -31,6 +31,7 @@ export const AddFood: FC = () => {
                     query={query}
                     setQuery={setQuery}
                     setSelected={setSelected}
+                    selected={selected}
                 />
             </div>
             <div className="max-w-2xl w-full">
