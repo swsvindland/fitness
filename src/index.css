@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 @media (prefers-color-scheme: dark) {
-    body {
+    html {
         background-color: #000000;
     }
 }
 
 @media (prefers-color-scheme: light) {
-    body {
+    html {
         background-color: #0D3140;
     }
 }
