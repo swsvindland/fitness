@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
 import { Loading } from '../Loading';
 import { useHistory } from 'react-router-dom';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
 
 export const FoodGrid: FC = () => {
     const history = useHistory();
@@ -14,9 +15,9 @@ export const FoodGrid: FC = () => {
         history.push(`/eat/user-food/${foodId}`);
     };
 
-    // const handleStartScan = () => {
-    //     history.push('/scanner');
-    // };
+    const handleStartScan = () => {
+        history.push('/scanner');
+    };
 
     const foodQuery = useQuery(['Food'], () => {
         return getUserFoods();
@@ -29,9 +30,9 @@ export const FoodGrid: FC = () => {
     return (
         <div className="px-4 sm:px-6 lg:px-8 card rounded p-4">
             <div className="flex flex-row justify-end">
-                {/*<SecondaryButton className="mx-1" onClick={handleStartScan}>*/}
-                {/*    Scan Barcode*/}
-                {/*</SecondaryButton>*/}
+                <SecondaryButton className="mx-1" onClick={handleStartScan}>
+                    Scan Barcode
+                </SecondaryButton>
                 <LinkButton to="/eat/add-food" className="mx-1">
                     Add Food
                 </LinkButton>

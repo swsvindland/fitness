@@ -20,8 +20,8 @@ import { SearchFood } from './types/SearchFood';
 import { UserFoodV2 } from './types/UserFoodV2';
 
 // export const API_URL = 'http://localhost:7071';
-// export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+export const API_URL = 'https://fitness-dev.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -211,6 +211,16 @@ export const searchFood = (
     const params = getParams({ query, page });
 
     return axios.get(`${API_URL}/api/SearchFood`, {
+        params,
+    });
+};
+
+export const searchFoodByBarcode = (
+    barcode: string
+): Promise<AxiosResponse<Food>> => {
+    const params = getParams({ barcode });
+
+    return axios.get(`${API_URL}/api/SearchFoodByBarcode`, {
         params,
     });
 };

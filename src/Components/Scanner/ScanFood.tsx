@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { searchFood } from '../../api';
+import { searchFoodByBarcode } from '../../api';
 import { Loading } from '../Loading';
 import { LinkButton } from '../Buttons/LinkButton';
 
@@ -9,9 +9,9 @@ export const ScanFood: FC = () => {
     const { barcode } = useParams<{ barcode: string }>();
     const history = useHistory();
 
-    const searchFoodQuery = useQuery(['SearchFood', barcode], () => {
+    const searchFoodQuery = useQuery(['SearchFoodByBarcode', barcode], () => {
         if (!barcode) return;
-        return searchFood('', barcode);
+        return searchFoodByBarcode(barcode);
     });
 
     if (!barcode) {
@@ -22,13 +22,11 @@ export const ScanFood: FC = () => {
         return <Loading />;
     }
 
-    if ((searchFoodQuery.data?.data.length ?? 0) > 0) {
-        history.push(
-            `/eat/food/${searchFoodQuery.data?.data?.at(0)?.food.foodId}`
-        );
+    if (searchFoodQuery.data?.data.id) {
+        history.push(`/eat/food/${searchFoodQuery.data?.data.id}`);
     }
 
-    if (searchFoodQuery.data?.data.length === 0) {
+    if (!searchFoodQuery.data?.data) {
         return (
             <div>
                 <h1 className="text-2xl font-bold text-secondary">
