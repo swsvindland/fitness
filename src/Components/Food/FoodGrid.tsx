@@ -126,7 +126,10 @@ export const FoodGrid: FC = () => {
                                             g
                                         </span>
                                         <span>
-                                            {food.serving?.calories?.toFixed(2)}{' '}
+                                            {(
+                                                (food.serving?.calories ?? 0) *
+                                                food.servingAmount
+                                            ).toFixed(2)}{' '}
                                             Calories
                                         </span>
                                         <span>
