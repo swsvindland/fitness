@@ -30,7 +30,7 @@ export const Autocomplete: FC<IProps> = ({
                         {label}
                     </Combobox.Label>
                     <Combobox.Input
-                        className="appearance-none block w-full px-3 py-2 border border-ternary rounded-md shadow-sm placeholder-ternary focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm bg-background text-secondary focus:bg-background focus:text-secondary autofill:!bg-background autofill:!text-secondary"
+                        className="appearance-none block w-full px-3 py-2 border border-ternary rounded-md shadow-sm placeholder-ternary focus:outline-none focus:ring-secondary focus:border-secondary text-sm bg-background text-secondary focus:bg-background focus:text-secondary autofill:!bg-background autofill:!text-secondary"
                         // @ts-ignore
                         displayValue={(item) => item}
                         onChange={(event) => setQuery(event.target.value)}
@@ -43,7 +43,7 @@ export const Autocomplete: FC<IProps> = ({
                     leaveTo="opacity-0"
                     afterLeave={() => setQuery('')}
                 >
-                    <Combobox.Options className="z-20 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-card py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    <Combobox.Options className="z-20 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-card py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none text-sm">
                         {isLoading && <Loading />}
                         {filtered.length === 0 && query !== '' ? (
                             <div className="relative cursor-default select-none py-2 px-4 text-ternary">
