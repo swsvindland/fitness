@@ -20,7 +20,7 @@ export const Pagination: FC<IProps> = ({ selected, setSelected, pages }) => {
                             selected === index + 1
                                 ? 'bg-ternary text-primary-dark'
                                 : 'bg-primary-dark text-secondary-light'
-                        } mx-2 px-4 py-2 rounded-full text-sm font-medium`}
+                        } mx-2 px-3.5 py-2 rounded-full text-sm font-medium`}
                     >
                         {index + 1}
                     </button>
