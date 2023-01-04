@@ -15,11 +15,6 @@ export const Body: FC = () => {
         nameOverride: 'BodyScreen',
     });
 
-    ChartJS.defaults.color = '#AFD257';
-    ChartJS.defaults.borderColor = '#0D3140';
-    ChartJS.defaults.font.family = "'Oswald', 'sans-serif'";
-    ChartJS.defaults.font.size = 10;
-
     return (
         <div className="max-w-2xl w-full grid grid-cols-1">
             <WeightGraph />
