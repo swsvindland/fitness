@@ -9,4 +9,6 @@ export interface Dashboard {
     bloodPressureAdded: boolean;
     addBodyMeasurements: boolean;
     bodyMeasurementsAdded: boolean;
+    trackMacros: boolean;
+    macrosAdded: boolean;
 }

@@ -548,3 +548,19 @@ export const upsertWorkoutExercises = (body: {
         params,
     });
 };
+
+export const quickAddFood = (
+    foodId: number
+): Promise<AxiosResponse<number>> => {
+    const params = getParams({ foodId });
+
+    return axios.get(`${API_URL}/api/QuickAddUserFoodV2`, { params });
+};
+
+export const quickRemoveFood = (
+    foodId: number
+): Promise<AxiosResponse<number>> => {
+    const params = getParams({ foodId });
+
+    return axios.get(`${API_URL}/api/QuickRemoveUserFoodV2`, { params });
+};

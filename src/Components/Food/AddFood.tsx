@@ -1,10 +1,15 @@
 import { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
-import { useQuery } from '@tanstack/react-query';
-import { getRecentUserFoods, searchFood } from '../../api';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+    getFood,
+    getRecentUserFoods,
+    quickAddFood,
+    searchFood,
+} from '../../api';
 import { Loading } from '../Loading';
-import { Link } from 'react-router-dom';
 import { useShowBackButton } from '../Navigation/headerHooks';
+import { AddFoodCard } from './AddFoodCard';
 
 export const AddFood: FC = () => {
     useShowBackButton();
@@ -41,17 +46,12 @@ export const AddFood: FC = () => {
                     </div>
                 ) : (
                     searchFoodQuery.data?.data.map((food, foodIdx) => (
-                        <Link
-                            to={`/eat/food/${food.foodId}`}
-                            className="card my-2 flex flex-col p-4"
-                        >
-                            <span className="text-lg text-secondary">
-                                {food.foodName}
-                            </span>
-                            <span className="text-md text-ternary">
-                                {food.foodDescription}
-                            </span>
-                        </Link>
+                        <AddFoodCard
+                            key={food.foodId}
+                            foodId={food.foodId}
+                            name={food.foodName}
+                            servingSize={food.foodDescription}
+                        />
                     ))
                 )}
             </div>
@@ -65,17 +65,13 @@ export const AddFood: FC = () => {
                     <div className="flex justify-between items-center text-center" />
                 ) : (
                     recentlyEaten.data?.data.map((food) => (
-                        <Link
-                            to={`/eat/food/${food.foodV2Id}`}
-                            className="card my-2 flex flex-col p-4"
-                        >
-                            <span className="text-lg text-secondary">
-                                {food.foodV2?.name}
-                            </span>
-                            <span className="text-md text-ternary">
-                                {food.serving?.servingDescription}
-                            </span>
-                        </Link>
+                        <AddFoodCard
+                            key={food.foodV2Id}
+                            foodId={food.foodV2Id}
+                            name={food.foodV2?.name ?? ''}
+                            servingSize={food.serving?.servingDescription ?? ''}
+                            defaultServings={food.servingAmount}
+                        />
                     ))
                 )}
             </div>
