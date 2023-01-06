@@ -82,7 +82,7 @@ export const Autocomplete: FC<IProps> = ({
                                                     }`}
                                                 >
                                                     <CircleCheckSolid
-                                                        className="h-5 w-5 text-ternary"
+                                                        className="h-5 w-5 fill-ternary"
                                                         aria-hidden="true"
                                                     />
                                                 </span>

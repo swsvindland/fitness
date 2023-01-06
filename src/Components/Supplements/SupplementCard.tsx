@@ -136,12 +136,12 @@ export const SupplementCard: FC<IProps> = ({
                             <div />
                         )}
                         <div>
-                            {times?.map((time) => (
+                            {times?.map((time, index) => (
                                 <span
-                                    className="text-xs mr-2 text-ternary"
+                                    className="text-xs mr-1 text-ternary"
                                     key={time}
                                 >
-                                    {time}
+                                    {time} {index !== times.length - 1 && '|'}
                                 </span>
                             ))}
                         </div>
