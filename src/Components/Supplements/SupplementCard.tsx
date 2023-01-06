@@ -128,11 +128,6 @@ export const SupplementCard: FC<IProps> = ({
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg text-secondary">{name}</span>
-                        {brand && (
-                            <span className="text-xs text-ternary">
-                                {brand}
-                            </span>
-                        )}
                         {commission ? (
                             <span className="text-xs text-ternary">
                                 {commission}%
@@ -178,6 +173,7 @@ export const SupplementCard: FC<IProps> = ({
                 userId={user!.id}
                 supplementId={id}
                 userSupplementId={userSupplementId}
+                defaultTimes={times ?? []}
             />
         </>
     );

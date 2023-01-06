@@ -14,6 +14,7 @@ interface IProps {
     userId: string;
     open: boolean;
     setOpen: (open: boolean) => void;
+    defaultTimes: string[];
 }
 
 export const AddSupplement: FC<IProps> = ({
@@ -22,36 +23,37 @@ export const AddSupplement: FC<IProps> = ({
     userSupplementId,
     supplementId,
     userId,
+    defaultTimes,
 }) => {
     const queryClient = useQueryClient();
     const [enabledTimes, setEnabledTimes] = useState<Time[]>([
         {
             name: 'Morning',
-            enabled: false,
+            enabled: defaultTimes.includes('Morning'),
         },
         {
             name: 'Breakfast',
-            enabled: false,
+            enabled: defaultTimes.includes('Breakfast'),
         },
         {
             name: 'Lunch',
-            enabled: false,
+            enabled: defaultTimes.includes('Lunch'),
         },
         {
             name: 'PreWorkout',
-            enabled: false,
+            enabled: defaultTimes.includes('PreWorkout'),
         },
         {
             name: 'PostWorkout',
-            enabled: false,
+            enabled: defaultTimes.includes('PostWorkout'),
         },
         {
             name: 'Dinner',
-            enabled: false,
+            enabled: defaultTimes.includes('Dinner'),
         },
         {
             name: 'Evening',
-            enabled: false,
+            enabled: defaultTimes.includes('Evening'),
         },
     ]);
 
@@ -103,7 +105,9 @@ export const AddSupplement: FC<IProps> = ({
                         <SecondaryButton onClick={() => setOpen(false)}>
                             Cancel
                         </SecondaryButton>
-                        <Button onClick={() => handleSubmit()}>Add</Button>
+                        <Button onClick={() => handleSubmit()}>
+                            Set Times
+                        </Button>
                     </div>
                 </Dialog.Panel>
             </div>
