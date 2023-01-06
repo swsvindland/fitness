@@ -57,6 +57,26 @@ export const Todo: FC = () => {
                 route="/body/weight"
             />
             <TodoItem
+                name="Add supplements to track"
+                show={
+                    dashboardQuery.data?.data.addSupplements ||
+                    dashboardQuery.data?.data.supplementsAdded ||
+                    false
+                }
+                checked={dashboardQuery.data?.data.supplementsAdded || false}
+                route="/supplements/all-supplements"
+            />
+            <TodoItem
+                name="Take your supplements"
+                show={
+                    dashboardQuery.data?.data.trackSupplements ||
+                    dashboardQuery.data?.data.supplementsTracked ||
+                    false
+                }
+                checked={dashboardQuery.data?.data.supplementsTracked || false}
+                route="/supplements"
+            />
+            <TodoItem
                 name="Add your blood pressure"
                 show={
                     dashboardQuery.data?.data.addBloodPressure ||

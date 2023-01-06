@@ -11,4 +11,8 @@ export interface Dashboard {
     bodyMeasurementsAdded: boolean;
     trackMacros: boolean;
     macrosAdded: boolean;
+    addSupplements: boolean;
+    supplementsAdded: boolean;
+    trackSupplements: boolean;
+    supplementsTracked: boolean;
 }
