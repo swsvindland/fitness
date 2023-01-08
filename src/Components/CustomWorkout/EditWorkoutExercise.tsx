@@ -16,11 +16,14 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
     const [options, setOptions] = useState<DropdownOption[]>([]);
     const [option, setOption] = useState<DropdownOption | undefined>(undefined);
     const [sets, setSets] = useState<string>(workoutExercise.sets.toString());
-    const [minReps, setMinReps] = useState<string>(
-        workoutExercise.minReps.toString()
+    const [minReps, setMinReps] = useState<string | undefined>(
+        workoutExercise.minReps?.toString()
     );
-    const [maxReps, setMaxReps] = useState<string>(
-        workoutExercise.maxReps.toString()
+    const [maxReps, setMaxReps] = useState<string | undefined>(
+        workoutExercise.maxReps?.toString()
+    );
+    const [time, setTime] = useState<string | undefined>(
+        workoutExercise.time?.toString()
     );
     const queryClient = useQueryClient();
 
@@ -46,8 +49,6 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
     }, [exerciseQuery.data?.data, workoutExercise.exerciseId]);
 
     const handleSubmit = () => {
-        console.log(option, workoutExercise);
-
         if (!option) return;
         if (!workoutExercise.workoutId) return;
 
@@ -56,8 +57,9 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
             workoutId: workoutExercise.workoutId,
             exerciseId: option?.id,
             sets: parseInt(sets),
-            minReps: parseInt(minReps),
-            maxReps: parseInt(maxReps),
+            minReps: minReps ? parseInt(minReps) : undefined,
+            maxReps: maxReps ? parseInt(maxReps) : undefined,
+            time: time ? parseInt(time) : undefined,
             order: index,
             day: workoutExercise.day,
         });
@@ -81,22 +83,33 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
                     }}
                 />
             </div>
+            <span className="my-4 text-ternary">
+                *Choose either a time or rep range. If you choose a time and rep
+                range, it will only show a time based set.
+            </span>
             <div className="flex flex-row">
                 <TextField
                     label="MinReps"
-                    value={minReps}
+                    value={minReps ?? ''}
                     onChange={(event) => {
                         setMinReps(event.target.value);
                     }}
                 />
                 <TextField
                     label="MaxReps"
-                    value={maxReps}
+                    value={maxReps ?? ''}
                     onChange={(event) => {
                         setMaxReps(event.target.value);
                     }}
                 />
             </div>
+            <TextField
+                label="Time (in seconds) (will display in minutes on workout)"
+                value={time ?? ''}
+                onChange={(event) => {
+                    setTime(event.target.value);
+                }}
+            />
             <div className="flex justify-between mt-2">
                 <SecondaryButton className="m-1">Delete</SecondaryButton>
                 <Button onClick={handleSubmit}>Submit</Button>

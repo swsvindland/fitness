@@ -10,6 +10,7 @@ import { Cable } from '../Icons/Cable';
 import { BodyWeight } from '../Icons/BodyWeight';
 import { Band } from '../Icons/Band';
 import { Machine } from '../Icons/Machine';
+import { WorkoutSetTime } from './WorkoutSetTime';
 
 interface IProps {
     exercise: WorkoutExercise;
@@ -60,28 +61,42 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                             {exercise.exercise?.name}
                         </h3>
                     </div>
-                    <p className="mt-1 text-ternary text-sm truncate">
-                        {exercise.minReps === exercise.maxReps
-                            ? exercise.maxReps
-                            : `${exercise.minReps} - ${exercise.maxReps}`}{' '}
-                        {exercise.maxReps > 1 ? 'Reps' : 'Rep'}
-                    </p>
-                    {!user?.paid && (
+
+                    {exercise.time ? (
                         <p className="mt-1 text-ternary text-sm truncate">
-                            {exercise.sets} Sets
+                            {(exercise.time ?? 0) / 60} minutes
+                        </p>
+                    ) : (
+                        <p className="mt-1 text-ternary text-sm truncate">
+                            {exercise.minReps === exercise.maxReps
+                                ? exercise.maxReps
+                                : `${exercise.minReps} - ${exercise.maxReps}`}{' '}
+                            {exercise?.maxReps ?? 0 > 1 ? 'Reps' : 'Rep'}
                         </p>
                     )}
                 </div>
             </div>
             <div>
                 {Array.from(Array(exercise.sets).keys()).map((set) => (
-                    <WorkoutSet
-                        key={set}
-                        set={set}
-                        exercise={exercise}
-                        week={week}
-                        day={day}
-                    />
+                    <>
+                        {exercise.time ? (
+                            <WorkoutSetTime
+                                key={set}
+                                set={set}
+                                exercise={exercise}
+                                week={week}
+                                day={day}
+                            />
+                        ) : (
+                            <WorkoutSet
+                                key={set}
+                                set={set}
+                                exercise={exercise}
+                                week={week}
+                                day={day}
+                            />
+                        )}
+                    </>
                 ))}
             </div>
         </div>

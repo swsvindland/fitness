@@ -8,12 +8,15 @@ import { useMutation } from '@tanstack/react-query';
 import { useHistory } from 'react-router-dom';
 import { TextArea } from '../TextFields/TextArea';
 import { addWorkout } from '../../api';
+import { WorkoutType } from '../../types/WorkoutType';
+import { Dropdown, DropdownOption } from '../Dropdown';
 
 interface IState {
     name: string;
     description: string;
     days: string;
     weeks: string;
+    type: DropdownOption;
 }
 
 export const CreateCustomWorkout: FC = () => {
@@ -24,6 +27,7 @@ export const CreateCustomWorkout: FC = () => {
         description: '',
         days: '',
         weeks: '',
+        type: { id: WorkoutType.Resistance, name: 'Resistance' },
     });
     const history = useHistory();
 
@@ -42,12 +46,23 @@ export const CreateCustomWorkout: FC = () => {
             description: state.description,
             days: parseInt(state.days),
             duration: parseInt(state.weeks),
+            type: state.type.id,
         });
     };
 
     const handleClear = () => {
-        setState({ name: '', description: '', days: '', weeks: '' });
+        setState({
+            name: '',
+            description: '',
+            days: '',
+            weeks: '',
+            type: { id: WorkoutType.Resistance, name: 'Resistance' },
+        });
     };
+
+    const typeOptions = Object.keys(WorkoutType)
+        .filter((item) => isNaN(parseInt(item)))
+        .map((item, index) => ({ id: index, name: item }));
 
     return (
         <div className="m-4">
@@ -55,6 +70,16 @@ export const CreateCustomWorkout: FC = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="shadow overflow-hidden rounded card w-80">
                         <div className="p-4">
+                            <Dropdown
+                                label="Workout Type"
+                                id="workoutType"
+                                selected={state.type}
+                                setSelected={(value) => {
+                                    setState({ ...state, type: value });
+                                }}
+                                className="ml-1"
+                                options={typeOptions}
+                            />
                             <TextField
                                 id="name"
                                 type="text"

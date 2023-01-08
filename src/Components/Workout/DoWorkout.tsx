@@ -5,6 +5,7 @@ import { Pagination } from '../Pagination';
 import { WorkoutCard } from './WorkoutCard';
 import {
     completeWorkout,
+    getUserNextCardioWorkout,
     getUserNextWorkout,
     getWorkout,
     getWorkoutExercises,
@@ -15,6 +16,8 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
+import { WorkoutType } from '../../types/WorkoutType';
+import { SecondaryButton } from '../Buttons/SecondaryButton';
 
 interface IProps {
     workoutId: number;
@@ -53,6 +56,10 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         return getUserNextWorkout();
     });
 
+    const nextCardioWorkoutQuery = useQuery(['UserNextCardioWorkout'], () => {
+        return getUserNextCardioWorkout();
+    });
+
     const mutation = useMutation(completeWorkout, {
         onSuccess: async () => {
             await queryClient.invalidateQueries(['Dashboard']);
@@ -68,20 +75,47 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     }, [workoutQuery.data?.data]);
 
     useMemo(() => {
+        if (workoutQuery.data?.data.type === WorkoutType.Cardio) return;
         const nextWorkout = nextWorkoutQuery.data?.data;
         if (!nextWorkout) return;
 
         setDay(nextWorkout.day);
         setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
-    }, [nextWorkoutQuery.data?.data]);
+    }, [nextWorkoutQuery.data?.data, workoutQuery.data?.data.type]);
 
-    if (workoutQuery.isLoading || nextWorkoutQuery.isLoading) {
+    useMemo(() => {
+        if (workoutQuery.data?.data.type !== WorkoutType.Cardio) return;
+        const nextWorkout = nextCardioWorkoutQuery.data?.data;
+        if (!nextWorkout) return;
+
+        setDay(nextWorkout.day);
+        setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
+    }, [nextCardioWorkoutQuery.data?.data, workoutQuery.data?.data.type]);
+
+    if (
+        workoutQuery.isLoading ||
+        nextWorkoutQuery.isLoading ||
+        nextCardioWorkoutQuery.isLoading
+    ) {
         return <Loading />;
     }
 
     if (nextWorkoutQuery.data?.data.workoutCompleted) {
         return <WorkoutCompleted />;
     }
+
+    const handleCompleteWorkoutAndStartCardio = () => {
+        if (!user) return;
+
+        mutation.mutate({
+            workoutId,
+            userId: user.id,
+            day,
+            week: week.id,
+        });
+
+        history.push('/cardio');
+    };
 
     const handleCompleteWorkout = () => {
         if (!user) return;
@@ -101,9 +135,9 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
             <div role="list" className="grid grid-cols-1 gap-6">
-                {exercisesQuery.data?.data?.map((exercise) => (
+                {exercisesQuery.data?.data?.map((exercise, index) => (
                     <WorkoutCard
-                        key={exercise.id}
+                        key={`${exercise.id}-${day}-${index}`}
                         exercise={exercise}
                         week={week.id}
                         day={day}
@@ -111,12 +145,20 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
                     />
                 ))}
             </div>
-            <Button
+            {workoutQuery.data?.data.type !== WorkoutType.Cardio ? (
+                <Button
+                    onClick={handleCompleteWorkoutAndStartCardio}
+                    className="my-2 flex justify-center align-middle w-full"
+                >
+                    Finish Lift and Start Cardio
+                </Button>
+            ) : null}
+            <SecondaryButton
                 onClick={handleCompleteWorkout}
                 className="my-2 flex justify-center align-middle w-full"
             >
                 Complete Workout
-            </Button>
+            </SecondaryButton>
             {workoutQuery.data?.data.userId && (
                 <LinkSecondaryButton
                     to={`/workout/edit/${workoutId}`}

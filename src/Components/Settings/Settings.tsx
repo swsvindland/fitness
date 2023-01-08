@@ -25,6 +25,9 @@ export const Settings: FC = () => {
             <LinkButton to="/workout/store" className="mb-2">
                 Change Workout
             </LinkButton>
+            <LinkButton to="/cardio/store" className="mb-2">
+                Change Cardio
+            </LinkButton>
             <RestartWorkout />
             <DeleteAccount />
         </div>

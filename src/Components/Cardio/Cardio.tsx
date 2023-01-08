@@ -1,20 +1,20 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../Loading';
-import { DoWorkout } from './DoWorkout';
 import { getUserWorkouts } from '../../api';
 import { useHideBackButton } from '../Navigation/headerHooks';
 import { LinkButton } from '../Buttons/LinkButton';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
-import { WorkoutTabs } from './WorkoutTabs';
+import { WorkoutTabs } from '../Workout/WorkoutTabs';
+import { DoWorkout } from '../Workout/DoWorkout';
 import { WorkoutType } from '../../types/WorkoutType';
 
-export const Workout: FC = () => {
+export const Cardio: FC = () => {
     useHideBackButton();
 
     FirebaseAnalytics.setScreenName({
-        screenName: 'workout',
-        nameOverride: 'WorkoutScreen',
+        screenName: 'cardio',
+        nameOverride: 'CardioScreen',
     });
 
     const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
@@ -24,10 +24,7 @@ export const Workout: FC = () => {
     }
 
     const activeWorkouts = userWorkoutsQuery.data?.data.filter(
-        (item) =>
-            item.active &&
-            (item.workout?.type === WorkoutType.Unknown ||
-                item.workout?.type === WorkoutType.Resistance)
+        (item) => item.active && item.workout?.type === WorkoutType.Cardio
     );
 
     if (!activeWorkouts || activeWorkouts.length === 0) {
@@ -35,10 +32,10 @@ export const Workout: FC = () => {
             <>
                 <WorkoutTabs />
                 <h2 className="text-ternary">
-                    Looks like you haven't started a workout. Select one in the
-                    store.
+                    Looks like you haven't started a cardio workout. Select one
+                    in the store.
                 </h2>
-                <LinkButton to="/workout/store">Workout Store</LinkButton>
+                <LinkButton to="/cardio/store">Cardio Store</LinkButton>
             </>
         );
     }

@@ -18,10 +18,11 @@ import { WorkoutExercise } from './types/WorkoutExercise';
 import { Exercise } from './types/Exercise';
 import { SearchFood } from './types/SearchFood';
 import { UserFoodV2 } from './types/UserFoodV2';
+import { WorkoutType } from './types/WorkoutType';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -145,7 +146,8 @@ export const addWorkoutActivity = (body: {
     workoutExerciseId: number;
     set: number;
     reps: number;
-    weight: number;
+    weight?: number;
+    time?: number;
     week: number;
     day: number;
 }) => {
@@ -160,6 +162,12 @@ export const getWorkouts = (): Promise<AxiosResponse<Workout[]>> => {
     const params = getParams();
 
     return axios.get(`${API_URL}/api/GetWorkouts`, { params });
+};
+
+export const getCardioWorkouts = (): Promise<AxiosResponse<Workout[]>> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetCardioWorkouts`, { params });
 };
 
 export const getUserWorkouts = (): Promise<AxiosResponse<UserWorkout[]>> => {
@@ -190,6 +198,16 @@ export const getUserNextWorkout = (): Promise<
     const params = getParams();
 
     return axios.get(`${API_URL}/api/GetNextWorkout`, {
+        params,
+    });
+};
+
+export const getUserNextCardioWorkout = (): Promise<
+    AxiosResponse<UserNextWorkout>
+> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetNextCardioWorkout`, {
         params,
     });
 };
@@ -489,6 +507,7 @@ export const addWorkout = (body: {
     description: string;
     days: number;
     duration: number;
+    type: WorkoutType;
 }): Promise<AxiosResponse<number>> => {
     const params = getParams();
 
@@ -502,6 +521,7 @@ export const editWorkout = (body: {
     description: string;
     days: number;
     duration: number;
+    type: WorkoutType;
 }): Promise<AxiosResponse<number>> => {
     const params = getParams();
 
@@ -538,8 +558,9 @@ export const upsertWorkoutExercises = (body: {
     workoutId: number;
     day: number;
     sets: number;
-    minReps: number;
-    maxReps: number;
+    minReps?: number;
+    maxReps?: number;
+    time?: number;
     order: number;
 }): Promise<AxiosResponse<WorkoutExercise[]>> => {
     const params = getParams({ id: body.id });

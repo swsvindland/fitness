@@ -5,6 +5,7 @@ import { Loading } from '../Loading';
 import { useHistory, useParams } from 'react-router-dom';
 import { buyWorkout, getWorkout } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
+import { WorkoutType } from '../../types/WorkoutType';
 
 export const WorkoutDetail: FC = () => {
     const { workoutId } = useParams<{ workoutId?: string }>();
@@ -21,7 +22,11 @@ export const WorkoutDetail: FC = () => {
     const mutation = useMutation(buyWorkout, {
         onSuccess: async () => {
             await queryClient.invalidateQueries();
-            history.push('/workout', { replace: true });
+            if (workoutQuery.data?.data.type === WorkoutType.Cardio) {
+                history.push('/cardio', { replace: true });
+            } else {
+                history.push('/workout', { replace: true });
+            }
         },
     });
 

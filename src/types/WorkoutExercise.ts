@@ -8,7 +8,8 @@ export interface WorkoutExercise {
     exercise?: Exercise;
     day: number;
     sets: number;
-    minReps: number;
-    maxReps: number;
+    minReps?: number;
+    maxReps?: number;
+    time?: number;
     order: number;
 }

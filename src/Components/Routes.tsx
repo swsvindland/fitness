@@ -1,8 +1,8 @@
 import { FC, useContext } from 'react';
 import { Home } from './Home/Home';
 import { Workout } from './Workout/Workout';
-import { WorkoutStore } from './Workout/WorkoutStore';
-import { WorkoutDetail } from './Workout/WorkoutDetail';
+import { WorkoutStore } from './Store/WorkoutStore';
+import { WorkoutDetail } from './Store/WorkoutDetail';
 import { Eat } from './Macros/Eat';
 import { Supplements } from './Supplements/Supplements';
 import { AllSupplements } from './Supplements/AllSupplements';
@@ -29,6 +29,8 @@ import { CreateCustomWorkout } from './CustomWorkout/CreateCustomWorkout';
 import { UserCustomWorkoutDetail } from './Workout/UserCustomWorkoutDetail';
 import { EditCustomWorkoutExercises } from './CustomWorkout/EditCustomWorkoutExercises';
 import { EditCustomWorkout } from './CustomWorkout/EditCustomWorkout';
+import { CardioStore } from './Store/CardioStore';
+import { Cardio } from './Cardio/Cardio';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -75,6 +77,12 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/workout/custom/:workoutId" exact={true}>
                     <UserCustomWorkoutDetail />
+                </Route>
+                <Route path="/cardio" exact={true}>
+                    <Cardio />
+                </Route>
+                <Route path="/cardio/store" exact={true}>
+                    <CardioStore />
                 </Route>
                 <Route path="/eat" exact={true}>
                     <Eat />

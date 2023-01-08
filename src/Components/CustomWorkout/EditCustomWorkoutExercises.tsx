@@ -7,6 +7,7 @@ import { Pagination } from '../Pagination';
 import { Button } from '../Buttons/Button';
 import { EditWorkoutExercise } from './EditWorkoutExercise';
 import { WorkoutExercise } from '../../types/WorkoutExercise';
+import { WorkoutType } from '../../types/WorkoutType';
 
 export const EditCustomWorkoutExercises: FC = () => {
     const { workoutId } = useParams<{
@@ -44,8 +45,9 @@ export const EditCustomWorkoutExercises: FC = () => {
             workoutId: parseInt(workoutId ?? '0'),
             exerciseId: 0,
             sets: 0,
-            minReps: 0,
-            maxReps: 0,
+            minReps: undefined,
+            maxReps: undefined,
+            time: undefined,
             day,
             order: workoutExercises.length + 1,
         };
@@ -56,7 +58,11 @@ export const EditCustomWorkoutExercises: FC = () => {
     const mutation = useMutation(buyWorkout, {
         onSuccess: async () => {
             await queryClient.invalidateQueries();
-            history.push('/workout', { replace: true });
+            if (workoutQuery.data?.data.type === WorkoutType.Cardio) {
+                history.push(`/cardio`, { replace: true });
+            } else {
+                history.push('/workout', { replace: true });
+            }
         },
     });
 

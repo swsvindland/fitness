@@ -5,7 +5,8 @@ export interface UserWorkoutActivity {
     workoutExerciseId: number;
     set: number;
     reps: number;
-    weight: number;
+    weight?: number;
+    time?: number;
     week: number;
     day: number;
     saved: boolean;

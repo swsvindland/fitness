@@ -1,3 +1,5 @@
+import { WorkoutType } from './WorkoutType';
+
 export interface Workout {
     id: number;
     userId?: string;
@@ -8,4 +10,5 @@ export interface Workout {
     days: number;
     duration: number;
     premium: boolean;
+    type: WorkoutType;
 }
