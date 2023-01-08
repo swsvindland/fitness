@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { HeaderContext } from './HeaderContext';
 import { UserSolid } from '../Icons/UserSolid';
 import { Dumbbell } from '../Icons/Dumbbell';
+import { PurchaseAccessIcon } from '../Purchase/PurchaseAccessIcon';
 
 export const Header: FC = () => {
     const { setUser } = useContext(AuthContext);
@@ -25,9 +26,9 @@ export const Header: FC = () => {
             className="bg-primary-dark dark:bg-background block fixed inset-x-0 top-0 z-10 shadow pt-safe"
         >
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div className="relative flex h-16 items-center justify-end">
+                <div className="relative flex h-16 items-center justify-between">
                     {goBack ? (
-                        <div className="flex flex-1 items-center justify-start">
+                        <div className="flex flex-1 items-center">
                             <button
                                 type="button"
                                 onClick={() => history.goBack()}
@@ -36,7 +37,7 @@ export const Header: FC = () => {
                             </button>
                         </div>
                     ) : (
-                        <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div className="flex flex-1 items-center">
                             <Dumbbell className="fill-secondary w-10 h-10" />
                         </div>
                     )}
@@ -51,6 +52,7 @@ export const Header: FC = () => {
                         {/*</button>*/}
 
                         {/* Profile dropdown */}
+                        <PurchaseAccessIcon />
                         <Menu as="div" className="relative ml-3">
                             <div>
                                 <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
