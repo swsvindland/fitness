@@ -30,7 +30,7 @@ export const MacroGrid: FC = () => {
                     unit={user?.unit === Units.Imperial ? 'Cal' : 'kcal'}
                     customMacros={true}
                 />
-                <dl className="grid overflow-hidden sm:grid-cols-4 grid-cols-2 gap-2">
+                <dl className="grid overflow-hidden sm:grid-cols-4 grid-cols-2 gap-2 mt-2">
                     <MacroGridUnit
                         name="Protein"
                         amount={macrosQuery.data?.data?.protein ?? 0}

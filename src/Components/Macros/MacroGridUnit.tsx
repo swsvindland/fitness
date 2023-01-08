@@ -18,7 +18,7 @@ export const MacroGridUnit: FC<IProps> = ({
     customMacros,
 }) => {
     return (
-        <div className="card px-4 py-5 sm:p-6 mb-2">
+        <div className="card px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-secondary flex justify-between">
                 <span>{name}</span>
                 {customMacros && (
