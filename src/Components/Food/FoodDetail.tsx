@@ -14,7 +14,7 @@ export const FoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
     const { foodId } = useParams<{ foodId: string }>();
-    const [displayedQuantity, setDisplayedQuantity] = useState<number>(1);
+    const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
     const [unit, setUnit] = useState<DropdownOption | undefined>(undefined);
 
     const history = useHistory();
@@ -55,7 +55,7 @@ export const FoodDetail: FC = () => {
                     label="Quantity"
                     type="number"
                     onChange={(event) =>
-                        setDisplayedQuantity(parseInt(event.target.value) ?? 1)
+                        setDisplayedQuantity(event.target.value ?? '1')
                     }
                     value={displayedQuantity ?? ''}
                     className="pr-2"
@@ -78,7 +78,8 @@ export const FoodDetail: FC = () => {
                                     foodV2Id: parseInt(foodId),
                                     userId: user?.id ?? '',
                                     servingId: unit?.id ?? 0,
-                                    servingAmount: displayedQuantity,
+                                    servingAmount:
+                                        parseFloat(displayedQuantity),
                                 })
                             }
                         >
@@ -94,7 +95,7 @@ export const FoodDetail: FC = () => {
                     .map((serving) => (
                         <NutritionLabel
                             serving={serving}
-                            displayedQuantity={displayedQuantity}
+                            displayedQuantity={parseFloat(displayedQuantity)}
                         />
                     ))}
             </div>
