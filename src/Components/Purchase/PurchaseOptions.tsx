@@ -202,19 +202,31 @@ export const PurchaseOptions: FC = () => {
                                         <div className="mt-3 text-center sm:mt-5">
                                             <Dialog.Title
                                                 as="h3"
-                                                className="text-lg font-medium leading-6 text-secondary"
+                                                className="text-2xl font-bold text-secondary"
                                             >
                                                 Subscribe to Premium for the
                                                 best WorkoutTrack experience!
                                             </Dialog.Title>
+                                            <div className="ml-8">
+                                                <ul className="my-8 list-disc">
+                                                    <li className="text-start text-lg text-ternary">
+                                                        Remove all ads
+                                                    </li>
+                                                    <li className="text-start text-lg text-ternary">
+                                                        Get access to all
+                                                        workouts
+                                                    </li>
+                                                    <li className="text-start text-lg text-ternary">
+                                                        Upload progress photos (
+                                                        Coming Soon )
+                                                    </li>
+                                                </ul>
+                                            </div>
                                             <div className="mx-auto max-w-7xl">
                                                 {/* Tiers */}
                                                 <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
                                                     <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
                                                         <div className="flex-1">
-                                                            <h3 className="text-xl font-semibold text-secondary">
-                                                                Monthly
-                                                            </h3>
                                                             <p className="mt-4 flex items-baseline text-secondary">
                                                                 <span className="text-5xl font-bold tracking-tight">
                                                                     {
@@ -224,14 +236,6 @@ export const PurchaseOptions: FC = () => {
                                                                 <span className="ml-1 text-xl font-semibold">
                                                                     month
                                                                 </span>
-                                                            </p>
-                                                            <p className="mt-6 text-ternary">
-                                                                Remove Ads and
-                                                                get full access
-                                                                to the app. All
-                                                                features and
-                                                                workouts
-                                                                available.
                                                             </p>
                                                         </div>
                                                         <div className="mt-4">
@@ -250,9 +254,6 @@ export const PurchaseOptions: FC = () => {
                                                     </div>
                                                     <div className="relative flex flex-col rounded-2xl border border-ternary card p-8 shadow-sm">
                                                         <div className="flex-1">
-                                                            <h3 className="text-xl font-semibold text-secondary">
-                                                                Yearly
-                                                            </h3>
                                                             <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
                                                                 Most popular
                                                             </p>
@@ -265,11 +266,6 @@ export const PurchaseOptions: FC = () => {
                                                                 <span className="ml-1 text-xl font-semibold">
                                                                     year
                                                                 </span>
-                                                            </p>
-                                                            <p className="mt-6 text-ternary">
-                                                                All the features
-                                                                of monthly but
-                                                                cheaper!
                                                             </p>
                                                         </div>
                                                         <div className="mt-4">
@@ -288,12 +284,6 @@ export const PurchaseOptions: FC = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <SecondaryButton
-                                                className="flex w-full justify-center align-middle my-4"
-                                                onClick={restore}
-                                            >
-                                                Restore Purchases
-                                            </SecondaryButton>
                                             <SecondaryButton
                                                 className="flex w-full justify-center align-middle my-4"
                                                 onClick={() =>
