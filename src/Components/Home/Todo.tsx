@@ -14,7 +14,7 @@ export const Todo: FC = () => {
     }
 
     return (
-        <div className="">
+        <div className="mt-2">
             <h1 className="text-2xl font-bold text-secondary">To Do</h1>
             <TodoItem
                 name="Track your macros"
