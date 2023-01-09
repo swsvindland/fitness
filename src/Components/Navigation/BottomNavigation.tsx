@@ -6,6 +6,7 @@ import { Capsule } from '../Icons/Capsule';
 import { Home } from '../Icons/Home';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { isSelected } from './utils';
 
 export const BottomNavigation: FC = () => {
     const history = useHistory();
@@ -17,22 +18,14 @@ export const BottomNavigation: FC = () => {
         });
     }, [history]);
 
-    const isSelected = (route: string) => {
-        if (route === '/') {
-            return route === pathname;
-        } else {
-            return pathname.includes(route);
-        }
-    };
-
-    const linkStyle = (route: string) =>
+    const linkStyle = (route: string[]) =>
         `${
-            isSelected(route) ? 'text-ternary' : 'text-secondary'
+            isSelected(pathname, route) ? 'text-ternary' : 'text-secondary'
         } w-full justify-center inline-block text-center pt-2 pb-1`;
 
-    const iconStyle = (route: string) =>
+    const iconStyle = (route: string[]) =>
         `${
-            isSelected(route) ? 'fill-ternary' : 'fill-secondary'
+            isSelected(pathname, route) ? 'fill-ternary' : 'fill-secondary'
         } tab tab-home block text-xs w-6 h-6 m-auto`;
 
     return (
@@ -41,26 +34,29 @@ export const BottomNavigation: FC = () => {
             className="block fixed inset-x-0 bottom-0 z-10 bg-primary-dark dark:bg-background shadow pb-6"
         >
             <div id="tabs" className="flex justify-between">
-                <Link to="/" className={linkStyle('/')}>
-                    <Home className={iconStyle('/')} />
+                <Link to="/" className={linkStyle(['/'])}>
+                    <Home className={iconStyle(['/'])} />
                     <span className="tab tab-home block text-xs">Home</span>
                 </Link>
-                <Link to="/workout" className={linkStyle('/workout')}>
-                    <Dumbbell className={iconStyle('/workout')} />
+                <Link
+                    to="/workout"
+                    className={linkStyle(['/workout', '/cardio'])}
+                >
+                    <Dumbbell className={iconStyle(['/workout', '/cardio'])} />
                     <span className="tab tab-home block text-xs">Workout</span>
                 </Link>
-                <Link to="/eat" className={linkStyle('/eat')}>
-                    <Food className={iconStyle('/eat')} />
+                <Link to="/eat" className={linkStyle(['/eat'])}>
+                    <Food className={iconStyle(['/eat'])} />
                     <span className="tab tab-home block text-xs">Eat</span>
                 </Link>
-                <Link to="/supplements" className={linkStyle('/supplements')}>
-                    <Capsule className={iconStyle('/supplements')} />
+                <Link to="/supplements" className={linkStyle(['/supplements'])}>
+                    <Capsule className={iconStyle(['/supplements'])} />
                     <span className="tab tab-home block text-xs">
                         Supplements
                     </span>
                 </Link>
-                <Link to="/body" className={linkStyle('/body')}>
-                    <PersonSolid className={iconStyle('/body')} />
+                <Link to="/body" className={linkStyle(['/body'])}>
+                    <PersonSolid className={iconStyle(['/body'])} />
                     <span className="tab tab-home block text-xs">Body</span>
                 </Link>
             </div>
