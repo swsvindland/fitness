@@ -8,7 +8,7 @@ export const BannerAd: FC = () => {
     const androidTestBannerId = 'ca-app-pub-3940256099942544/6300978111';
     const iosTestBannerId = 'ca-app-pub-3940256099942544/2934735716';
     const androidBannerId = 'ca-app-pub-7533750599105635/4186833075';
-    const iosBannerId = 'ca-app-pub-7533750599105635/3179713363';
+    const iosBannerId = 'ca-app-pub-7533750599105635/8864374874';
 
     const mapPlatformToBannerId = () => {
         if (isPlatform('mobileweb') || isPlatform('desktop')) {
