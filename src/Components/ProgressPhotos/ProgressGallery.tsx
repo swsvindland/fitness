@@ -2,8 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { CDN_URL, getProgressPhotos } from '../../api';
 import { FC } from 'react';
 import { format } from 'date-fns';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
-export const ProgressGallary: FC = () => {
+export const ProgressGallery: FC = () => {
+    useShowBackButton();
     const photosQuery = useQuery(['ProgressPhotos'], getProgressPhotos);
     const photos = photosQuery.data?.data;
     const dates = Array.from(new Set(photos?.map((photo) => photo.created)));

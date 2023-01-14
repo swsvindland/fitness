@@ -32,7 +32,7 @@ import { EditCustomWorkout } from './CustomWorkout/EditCustomWorkout';
 import { CardioStore } from './Store/CardioStore';
 import { Cardio } from './Cardio/Cardio';
 import { ProgressCamera } from './ProgressPhotos/ProgressCamera';
-import { ProgressGallary } from './ProgressPhotos/ProgressGallary';
+import { ProgressGallery } from './ProgressPhotos/ProgressGallery';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -132,7 +132,7 @@ export const Routes: FC = () => {
                     <ProgressCamera />
                 </Route>
                 <Route path="/body/progress" exact={true}>
-                    <ProgressGallary />
+                    <ProgressGallery />
                 </Route>
                 <Route path="/settings" exact={true}>
                     <Settings />

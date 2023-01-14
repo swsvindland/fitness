@@ -13,11 +13,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addProgressPhoto } from '../../api';
 import { Loading } from '../Loading';
 import { Filesystem } from '@capacitor/filesystem';
+import { useShowBackButton } from '../Navigation/headerHooks';
+import { MinusSolid } from '../Icons/MinusSolid';
 
 const b64toBlob = (base64: string, type = 'image/jpeg') =>
     fetch(`data:${type};base64,${base64}`).then((res) => res.blob());
 
 export const ProgressCamera: FC = () => {
+    useShowBackButton();
     const [photos, setPhotos] = useState<Photo[]>([]);
     const history = useHistory();
     const queryClient = useQueryClient();
@@ -44,6 +47,10 @@ export const ProgressCamera: FC = () => {
             history.push('/body');
         },
     });
+
+    const removePhotos = (index: number) => {
+        setPhotos(photos.filter((_, i) => i !== index));
+    };
 
     return (
         <div className="flex flex-col p-4">
@@ -91,8 +98,16 @@ export const ProgressCamera: FC = () => {
                     Photos {photos.length} / 10
                 </span>
                 <div className="grid grid-cols-3 gap-2">
-                    {photos.map((photo) => (
-                        <img src={photo.webPath} alt="" />
+                    {photos.map((photo, index) => (
+                        <div>
+                            <button
+                                className="float-right border-ternary border rounded-full my-2"
+                                onClick={() => removePhotos(index)}
+                            >
+                                <MinusSolid className="w-4 h-4 fill-ternary" />
+                            </button>
+                            <img src={photo.webPath} alt="" />
+                        </div>
                     ))}
                 </div>
             </div>
