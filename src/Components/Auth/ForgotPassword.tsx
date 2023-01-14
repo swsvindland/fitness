@@ -62,7 +62,7 @@ export const ForgotPassword: FC<IProps> = ({ setForgotPassword }) => {
                                 </span>
                             </div>
                         )}
-                        {error && <span className="text-red-500">{error}</span>}
+                        {error && <span className="text-error">{error}</span>}
                         {!submitted && (
                             <div>
                                 {resetMutation.isLoading ? (

@@ -118,7 +118,7 @@ export const ChangePasswordForm: FC = () => {
                                 }
                             />
                             {state.error && (
-                                <span className="text-red-500">
+                                <span className="text-error">
                                     {state.error}
                                 </span>
                             )}

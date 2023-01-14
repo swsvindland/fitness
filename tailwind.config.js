@@ -14,6 +14,7 @@ module.exports = {
                 'ternary-dark': '#86AE21',
                 ternary: '#AFD257',
                 'ternary-light': '#CEEE80',
+                error: '#ba1a1a',
             },
             fontFamily: {
                 sans: ['Oswald', 'sans-serif'],

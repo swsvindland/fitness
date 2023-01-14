@@ -137,7 +137,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
                                 </a>
                             </label>
                         </div>
-                        {error && <span className="text-red-500">{error}</span>}
+                        {error && <span className="text-error">{error}</span>}
                         <div>
                             {registerMutation.isLoading ? (
                                 <Loading />

@@ -5,4 +5,9 @@ export interface Macros {
     fat: number;
     carbs: number;
     fiber: number;
+    caloriesHigh?: number;
+    proteinHigh?: number;
+    fatHigh?: number;
+    carbsHigh?: number;
+    fiberHigh?: number;
 }

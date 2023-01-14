@@ -5,6 +5,7 @@ import { LinkButton } from '../Buttons/LinkButton';
 interface IProps {
     name: string;
     amount: number;
+    amountHigh?: number;
     currentAmount?: number;
     unit: string;
     customMacros?: boolean;
@@ -13,10 +14,15 @@ interface IProps {
 export const MacroGridUnit: FC<IProps> = ({
     name,
     amount,
+    amountHigh,
     currentAmount,
     unit,
     customMacros,
 }) => {
+    const percentage = ((currentAmount ?? 0) / amount) * 100;
+    const percentageHigh =
+        ((currentAmount ?? 0) / (amountHigh ? amountHigh : amount)) * 100;
+
     return (
         <div className="card px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-secondary flex justify-between">
@@ -47,6 +53,9 @@ export const MacroGridUnit: FC<IProps> = ({
                 <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
                     {amount?.toFixed(0)}
                 </span>
+                <span className="flex items-baseline sm:text-2xl text-lg font-semibold text-ternary">
+                    {amountHigh ? `-${amountHigh.toFixed(0)}` : null}
+                </span>
                 <span className="text-ternary sm:text-lg text-xs">{unit}</span>
             </dd>
             {currentAmount !== undefined ? (
@@ -55,10 +64,18 @@ export const MacroGridUnit: FC<IProps> = ({
                         <div
                             style={{
                                 width: `${
-                                    ((currentAmount ?? 0) / amount) * 100
+                                    ((currentAmount ?? 0) /
+                                        (amountHigh ? amountHigh : amount)) *
+                                    100
                                 }%`,
                             }}
-                            className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-secondary"
+                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center shadow-inner ${
+                                percentage < 98
+                                    ? 'bg-secondary'
+                                    : percentageHigh > 100
+                                    ? 'bg-error'
+                                    : 'bg-primary'
+                            }`}
                         ></div>
                     </div>
                 </div>
