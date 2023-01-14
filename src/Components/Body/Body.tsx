@@ -4,8 +4,8 @@ import { WeightGraph } from './WeightGraph';
 import { BodyGraph } from './BodyGraph';
 import { BodyFatGraph } from './BodyFatGraph';
 import { useHideBackButton } from '../Navigation/headerHooks';
-import { Chart as ChartJS } from 'chart.js';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
+import { ProgressPhotos } from '../ProgressPhotos/ProgressPhotos';
 
 export const Body: FC = () => {
     useHideBackButton();
@@ -17,6 +17,7 @@ export const Body: FC = () => {
 
     return (
         <div className="max-w-2xl w-full grid grid-cols-1">
+            <ProgressPhotos />
             <WeightGraph />
             <BodyFatGraph />
             <BodyGraph />

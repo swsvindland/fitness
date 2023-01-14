@@ -31,6 +31,8 @@ import { EditCustomWorkoutExercises } from './CustomWorkout/EditCustomWorkoutExe
 import { EditCustomWorkout } from './CustomWorkout/EditCustomWorkout';
 import { CardioStore } from './Store/CardioStore';
 import { Cardio } from './Cardio/Cardio';
+import { ProgressCamera } from './ProgressPhotos/ProgressCamera';
+import { ProgressGallary } from './ProgressPhotos/ProgressGallary';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -125,6 +127,12 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/body/sex" exact={true}>
                     <SexForm />
+                </Route>
+                <Route path="/body/progress/upload" exact={true}>
+                    <ProgressCamera />
+                </Route>
+                <Route path="/body/progress" exact={true}>
+                    <ProgressGallary />
                 </Route>
                 <Route path="/settings" exact={true}>
                     <Settings />

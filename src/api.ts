@@ -19,10 +19,15 @@ import { Exercise } from './types/Exercise';
 import { SearchFood } from './types/SearchFood';
 import { UserFoodV2 } from './types/UserFoodV2';
 import { WorkoutType } from './types/WorkoutType';
+import { ProgressPhoto } from './types/ProgressPhoto';
 
 // export const API_URL = 'http://localhost:7071';
-// export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'http://192.168.1.6:7071';
+export const API_URL = 'https://fitness-dev.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
+
+export const CDN_URL =
+    'https://fitnessdev.blob.core.windows.net/progress-photos/';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
@@ -584,4 +589,38 @@ export const quickRemoveFood = (
     const params = getParams({ foodId });
 
     return axios.get(`${API_URL}/api/QuickRemoveUserFoodV2`, { params });
+};
+
+export const getProgressPhotos = (): Promise<
+    AxiosResponse<ProgressPhoto[]>
+> => {
+    const params = getParams();
+
+    return axios.get(`${API_URL}/api/GetProgressPhotos`, { params });
+};
+
+export const addProgressPhoto = async (photos: Blob[]) => {
+    const params = getParams();
+    const headers = { 'Content-Type': 'multipart/form-data' };
+    const fileNames: string[] = [];
+
+    photos.map(async (photo) => {
+        const bodyFormData = new FormData();
+        bodyFormData.append('file', photo);
+
+        console.log(bodyFormData);
+
+        const response = await axios.post(
+            `${API_URL}/api/UploadProgressPhoto`,
+            bodyFormData,
+            {
+                params,
+                headers,
+            }
+        );
+
+        fileNames.push(response.data);
+    });
+
+    return fileNames;
 };
