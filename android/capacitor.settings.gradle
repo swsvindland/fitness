@@ -28,3 +28,6 @@ project(':capacitor-keyboard').projectDir = new File('../node_modules/@capacitor
 
 include ':capacitor-status-bar'
 project(':capacitor-status-bar').projectDir = new File('../node_modules/@capacitor/status-bar/android')
+
+include ':perfood-capacitor-google-fit'
+project(':perfood-capacitor-google-fit').projectDir = new File('../node_modules/@perfood/capacitor-google-fit/android')

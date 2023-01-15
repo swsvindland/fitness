@@ -31,6 +31,8 @@
         "@headlessui/react": "^1.7.7",
         "@ionic/react": "^6.4.2",
         "@ionic/react-router": "^6.4.2",
+        "@perfood/capacitor-google-fit": "^1.0.2",
+        "@perfood/capacitor-healthkit": "^1.2.1",
         "@tailwindcss/forms": "^0.5.3",
         "@tanstack/react-query": "^4.22.0",
         "axios": "^1.2.2",

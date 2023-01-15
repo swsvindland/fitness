@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>I need access to this so I can read/write weights, heights, steps, etc.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>I need access to this so I can read/write weights, heights, steps, etc.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>I need access to this, so that I can save the progress photos to your device.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
