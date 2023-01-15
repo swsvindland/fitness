@@ -1,12 +1,7 @@
 import { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import {
-    getFood,
-    getRecentUserFoods,
-    quickAddFood,
-    searchFood,
-} from '../../api';
+import { useQuery } from '@tanstack/react-query';
+import { getRecentUserFoods, searchFood } from '../../api';
 import { Loading } from '../Loading';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { AddFoodCard } from './AddFoodCard';

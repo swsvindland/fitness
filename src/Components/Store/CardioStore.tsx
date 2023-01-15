@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect } from 'react';
+import { FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { Loading } from '../Loading';

@@ -50,7 +50,7 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
         setOptions(newOptions);
         setOption(newOption?.name);
         setQuery(newOption?.name ?? '');
-    }, [exerciseQuery.data?.data, workoutExercise.exercise?.name]);
+    }, [exerciseQuery.data?.data, workoutExercise.exerciseId]);
 
     const handleSubmit = () => {
         if (!option) return;

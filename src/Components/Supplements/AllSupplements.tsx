@@ -5,7 +5,6 @@ import { getAllSupplements, getUserSupplements } from '../../api';
 import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Autocomplete } from '../Autocomplete';
 import { SupplementSearch } from './SupplementSearch';
 
 export const AllSupplements: FC = () => {

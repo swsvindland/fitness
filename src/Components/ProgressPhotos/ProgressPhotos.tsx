@@ -4,7 +4,6 @@ import { CDN_URL, getProgressPhotos } from '../../api';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { AuthContext } from '../Auth/Auth';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 
 export const ProgressPhotos: FC = () => {

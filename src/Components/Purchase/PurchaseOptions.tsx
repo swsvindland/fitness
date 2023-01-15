@@ -99,12 +99,6 @@ export const PurchaseOptions: FC = () => {
         }
     };
 
-    const restore = () => {
-        if (canCharge) {
-            iap.refresh();
-        }
-    };
-
     useEffect(() => {
         if (canCharge) {
             iap.when(MONTHLY_SUBSCRIPTION).approved((p: IAPProduct) => {

@@ -18,7 +18,10 @@ export const Eat: FC = () => {
             <FoodGrid />
             <div className="float-right my-2">
                 <a href="https://platform.fatsecret.com">
-                    <img src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg" />
+                    <img
+                        src="https://platform.fatsecret.com/api/static/images/powered_by_fatsecret.svg"
+                        alt="Powered by Fat Secret"
+                    />
                 </a>
             </div>
         </div>

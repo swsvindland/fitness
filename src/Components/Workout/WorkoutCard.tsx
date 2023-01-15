@@ -1,10 +1,9 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { WorkoutSet } from './WorkoutSet';
 import { WorkoutExercise } from '../../types/WorkoutExercise';
 import { ExerciseIcon } from '../../types/Exercise';
 import { Barbell } from '../Icons/Barbell';
 import { Dumbbell } from '../Icons/Dumbbell';
-import { AuthContext } from '../Auth/Auth';
 import { Cardio } from '../Icons/Cardio';
 import { Cable } from '../Icons/Cable';
 import { BodyWeight } from '../Icons/BodyWeight';
@@ -41,8 +40,6 @@ const mapToIcon = (icon?: ExerciseIcon) => {
 };
 
 export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
-    const { user } = useContext(AuthContext);
-
     return (
         <div
             role="listitem"
