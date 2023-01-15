@@ -7,8 +7,6 @@ export const Pedometer: FC = () => {
 
     const stepsQuery = useQuery(['Steps'], getSteps);
 
-    console.log(stepsQuery.data);
-
     const percentage = ((stepsQuery.data ?? 0) / goal) * 100;
 
     return (
