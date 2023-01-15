@@ -217,8 +217,7 @@ export const PurchaseOptions: FC = () => {
                                                         workouts
                                                     </li>
                                                     <li className="text-start text-lg text-ternary">
-                                                        Upload progress photos (
-                                                        Coming Soon )
+                                                        Upload progress photos
                                                     </li>
                                                 </ul>
                                             </div>

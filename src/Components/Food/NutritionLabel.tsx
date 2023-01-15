@@ -32,7 +32,7 @@ export const NutritionLabel: FC<IProps> = ({ serving, displayedQuantity }) => {
                     unit="g"
                 />
             </div>
-            <div className="card p-4 w-full">
+            <div className="card p-4 w-full mt-3">
                 <FoodDetailRow
                     name="Serving Size"
                     value={serving.metricServingAmount * displayedQuantity}

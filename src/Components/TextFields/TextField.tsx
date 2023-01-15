@@ -37,7 +37,7 @@ export const TextField: FC<IProps> = ({
                 className="block text-sm font-medium text-secondary"
             >
                 {label}
-                {isRequired ? '*' : null}
+                {isRequired && label ? '*' : null}
             </label>
             <div className="mt-1">
                 {type === 'number' ? (
