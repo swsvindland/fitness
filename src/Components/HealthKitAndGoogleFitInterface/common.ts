@@ -3,12 +3,14 @@ import {
     getHealthKitActivityData,
     requestHealthKitAuthorization,
 } from './healthKit';
-import { SampleNames } from '@perfood/capacitor-healthkit';
+import { CapacitorHealthkit, SampleNames } from '@perfood/capacitor-healthkit';
 import { subDays } from 'date-fns';
 import {
     getGoogleFitActivityData,
     requestGoogleFitAuthorization,
 } from './googleFit';
+import { GoogleFit } from '@perfood/capacitor-google-fit';
+import { today, tomorrow } from '../../utils/dateUtils';
 
 export const READ_PERMISSIONS = [
     'calories',
@@ -20,6 +22,40 @@ export const READ_PERMISSIONS = [
     'weight',
 ];
 
+export const connectedToHealthOrFit = async () => {
+    if (isPlatform('desktop') || isPlatform('mobileweb')) {
+        return false;
+    }
+
+    if (isPlatform('ios')) {
+        try {
+            await CapacitorHealthkit.isAvailable();
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    if (isPlatform('android')) {
+        const results = await GoogleFit.isAllowed();
+        return results.allowed;
+    }
+};
+
+export const connectToHealthOrFit = async () => {
+    if (isPlatform('desktop') || isPlatform('mobileweb')) {
+        return;
+    }
+
+    if (isPlatform('ios')) {
+        await requestHealthKitAuthorization();
+    }
+
+    if (isPlatform('android')) {
+        await requestGoogleFitAuthorization();
+    }
+};
+
 export const getSteps = async (): Promise<number> => {
     if (isPlatform('desktop') || isPlatform('mobileweb')) {
         return 0;
@@ -28,7 +64,8 @@ export const getSteps = async (): Promise<number> => {
         await requestHealthKitAuthorization();
         const healthKitData = await getHealthKitActivityData(
             SampleNames.STEP_COUNT,
-            subDays(new Date(), 1)
+            today(),
+            tomorrow()
         );
         // @ts-ignore
         const steps: number[] = healthKitData?.resultData.map(
@@ -40,7 +77,8 @@ export const getSteps = async (): Promise<number> => {
     if (isPlatform('android')) {
         await requestGoogleFitAuthorization();
         const googleFitData = await getGoogleFitActivityData(
-            subDays(new Date(), 1)
+            today(),
+            tomorrow()
         );
         const steps: number[] =
             googleFitData?.activities.map((item) =>

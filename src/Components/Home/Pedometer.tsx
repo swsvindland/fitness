@@ -1,11 +1,28 @@
 import { FC } from 'react';
-import { getSteps } from '../HealthKitAndGoogleFitInterface/common';
+import {
+    connectedToHealthOrFit,
+    getSteps,
+} from '../HealthKitAndGoogleFitInterface/common';
 import { useQuery } from '@tanstack/react-query';
+import { Loading } from '../Loading';
 
 export const Pedometer: FC = () => {
     const goal = 10000;
+    const connected = useQuery(
+        ['ConnectedToHealthOrFit'],
+        connectedToHealthOrFit
+    );
+    const stepsQuery = useQuery(['Steps'], getSteps, {
+        enabled: connected.data,
+    });
 
-    const stepsQuery = useQuery(['Steps'], getSteps);
+    if (connected.isLoading) {
+        return <Loading />;
+    }
+
+    if (!connected.data) {
+        return null;
+    }
 
     const percentage = ((stepsQuery.data ?? 0) / goal) * 100;
 

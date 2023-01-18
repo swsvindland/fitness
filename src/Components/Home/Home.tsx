@@ -4,6 +4,7 @@ import { Todo } from './Todo';
 import { BodyFatGraph } from '../Body/BodyFatGraph';
 import { MacroGrid } from '../Macros/MacroGrid';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
+import { HealthSetup } from './HealthSetup';
 import { Pedometer } from './Pedometer';
 
 export const Home: FC = () => {
@@ -18,6 +19,7 @@ export const Home: FC = () => {
         <div className="max-w-2xl w-full grid grid-cols-1">
             <MacroGrid />
             <Todo />
+            <HealthSetup />
             <Pedometer />
             <BodyFatGraph />
         </div>
