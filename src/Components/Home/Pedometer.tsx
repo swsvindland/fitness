@@ -29,17 +29,22 @@ export const Pedometer: FC = () => {
     return (
         <div className="card p-4 w-full">
             <h2 className="text-lg text-secondary">Pedometer</h2>
-            <div className="relative mt-4">
-                <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-secondary-light shadow-inner">
-                    <div
-                        style={{
-                            width: `${percentage}%`,
-                        }}
-                        className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center shadow-inner ${
-                            percentage < 100 ? 'bg-secondary' : 'bg-primary'
-                        }`}
-                    ></div>
+            <div className="flex flex-col">
+                <div className="relative mt-4 w-full">
+                    <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-secondary-light shadow-inner w-full">
+                        <div
+                            style={{
+                                width: `${percentage}%`,
+                            }}
+                            className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center shadow-inner ${
+                                percentage < 100 ? 'bg-secondary' : 'bg-primary'
+                            }`}
+                        ></div>
+                    </div>
                 </div>
+                <span className="text-sm text-ternary w-24">
+                    {stepsQuery.data} / {goal} steps
+                </span>
             </div>
         </div>
     );

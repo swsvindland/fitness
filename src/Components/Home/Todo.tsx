@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../../api';
 import { TodoItem } from './TodoItem';
 import { Loading } from '../Loading';
+import { HealthSetup } from './HealthSetup';
 
 export const Todo: FC = () => {
     const dashboardQuery = useQuery(['Dashboard'], () => {
@@ -14,7 +15,7 @@ export const Todo: FC = () => {
     }
 
     return (
-        <div className="mt-2">
+        <div className="my-2">
             <h1 className="text-2xl font-bold text-secondary">To Do</h1>
             <TodoItem
                 name="Track your macros"
@@ -98,6 +99,7 @@ export const Todo: FC = () => {
                 }
                 route="/body/body-measurements"
             />
+            <HealthSetup />
         </div>
     );
 };

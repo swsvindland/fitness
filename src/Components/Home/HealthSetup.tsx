@@ -28,7 +28,7 @@ export const HealthSetup: FC = () => {
     return (
         <button
             onClick={connectToHealthOrFit}
-            className="card p-4 mb-2 w-full flex flex-row justify-between"
+            className="card p-4 my-2 w-full flex flex-row justify-between"
         >
             {isPlatform('ios') ? (
                 <>
