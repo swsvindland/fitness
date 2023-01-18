@@ -36,6 +36,7 @@ export const HealthSetup: FC = () => {
                         Connect to HealthKit
                     </h2>
                     <img
+                        className="w-8 h-8"
                         src="https://firebasestorage.googleapis.com/v0/b/lifttrack-b8673.appspot.com/o/Icon%20-%20Apple%20Health.png?alt=media"
                         alt="HealthKit logo"
                     />
@@ -47,6 +48,7 @@ export const HealthSetup: FC = () => {
                         Connect to Google Fit
                     </h2>
                     <img
+                        className="w-8 h-8"
                         src="https://firebasestorage.googleapis.com/v0/b/lifttrack-b8673.appspot.com/o/gfit_512dp.png?alt=media"
                         alt="Google Fit logo"
                     />
