@@ -30,11 +30,27 @@ export const HealthSetup: FC = () => {
             onClick={connectToHealthOrFit}
             className="card p-4 mb-2 w-full flex flex-row justify-between"
         >
-            {isPlatform('ios') && !isPlatform('mobileweb') ? (
-                <h2 className="text-lg text-ternary">Connect to HealthKit</h2>
+            {isPlatform('ios') ? (
+                <>
+                    <h2 className="text-lg text-ternary">
+                        Connect to HealthKit
+                    </h2>
+                    <img
+                        src="https://firebasestorage.googleapis.com/v0/b/lifttrack-b8673.appspot.com/o/Icon%20-%20Apple%20Health.png?alt=media"
+                        alt="HealthKit logo"
+                    />
+                </>
             ) : null}
-            {isPlatform('android') && !isPlatform('mobileweb') ? (
-                <h2 className="text-lg text-ternary">Connect to Google Fit</h2>
+            {isPlatform('android') ? (
+                <>
+                    <h2 className="text-lg text-ternary">
+                        Connect to Google Fit
+                    </h2>
+                    <img
+                        src="https://firebasestorage.googleapis.com/v0/b/lifttrack-b8673.appspot.com/o/gfit_512dp.png?alt=media"
+                        alt="Google Fit logo"
+                    />
+                </>
             ) : null}
         </button>
     );
