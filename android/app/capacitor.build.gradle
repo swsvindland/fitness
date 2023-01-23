@@ -18,7 +18,6 @@ dependencies {
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-status-bar')
-    implementation project(':perfood-capacitor-google-fit')
     implementation "com.android.billingclient:billing:4.0.0"
 }
 

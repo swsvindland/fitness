@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../../api';
 import { TodoItem } from './TodoItem';
 import { Loading } from '../Loading';
-import { HealthSetup } from './HealthSetup';
 
 export const Todo: FC = () => {
     const dashboardQuery = useQuery(['Dashboard'], () => {
@@ -99,7 +98,6 @@ export const Todo: FC = () => {
                 }
                 route="/body/body-measurements"
             />
-            <HealthSetup />
         </div>
     );
 };
