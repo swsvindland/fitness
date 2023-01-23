@@ -36,10 +36,10 @@ export const connectedToHealthOrFit = async () => {
         }
     }
 
-    if (isPlatform('android')) {
-        const results = await GoogleFit.isAllowed();
-        return results.allowed;
-    }
+    // if (isPlatform('android')) {
+    //     const results = await GoogleFit.isAllowed();
+    //     return results.allowed;
+    // }
 };
 
 export const connectToHealthOrFit = async () => {
@@ -51,9 +51,9 @@ export const connectToHealthOrFit = async () => {
         await requestHealthKitAuthorization();
     }
 
-    if (isPlatform('android')) {
-        await requestGoogleFitAuthorization();
-    }
+    // if (isPlatform('android')) {
+    //     await requestGoogleFitAuthorization();
+    // }
 };
 
 export const getSteps = async (): Promise<number> => {

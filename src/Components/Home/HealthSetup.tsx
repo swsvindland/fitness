@@ -42,18 +42,18 @@ export const HealthSetup: FC = () => {
                     />
                 </>
             ) : null}
-            {isPlatform('android') ? (
-                <>
-                    <h2 className="text-lg text-ternary">
-                        Connect to Google Fit
-                    </h2>
-                    <img
-                        className="w-8 h-8"
-                        src="https://firebasestorage.googleapis.com/v0/b/lifttrack-b8673.appspot.com/o/gfit_512dp.png?alt=media"
-                        alt="Google Fit logo"
-                    />
-                </>
-            ) : null}
+            {/*{isPlatform('android') ? (*/}
+            {/*    <>*/}
+            {/*        <h2 className="text-lg text-ternary">*/}
+            {/*            Connect to Google Fit*/}
+            {/*        </h2>*/}
+            {/*        <img*/}
+            {/*            className="w-8 h-8"*/}
+            {/*            src="https://firebasestorage.googleapis.com/v0/b/lifttrack-b8673.appspot.com/o/gfit_512dp.png?alt=media"*/}
+            {/*            alt="Google Fit logo"*/}
+            {/*        />*/}
+            {/*    </>*/}
+            {/*) : null}*/}
         </button>
     );
 };
