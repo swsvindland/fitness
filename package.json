@@ -19,7 +19,7 @@
         "@awesome-cordova-plugins/in-app-purchase-2": "^6.3.0",
         "@capacitor-community/barcode-scanner": "^3.0.1",
         "@capacitor-community/firebase-analytics": "^4.0.0",
-        "@capacitor/android": "4.6.1",
+        "@capacitor/android": "4.6.2",
         "@capacitor/app": "4.1.1",
         "@capacitor/camera": "^4.1.4",
         "@capacitor/core": "4.6.1",
