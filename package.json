@@ -22,20 +22,20 @@
         "@capacitor/android": "4.6.2",
         "@capacitor/app": "4.1.1",
         "@capacitor/camera": "^4.1.4",
-        "@capacitor/core": "4.6.1",
+        "@capacitor/core": "4.6.2",
         "@capacitor/filesystem": "^4.1.4",
         "@capacitor/haptics": "4.1.0",
-        "@capacitor/ios": "^4.6.1",
-        "@capacitor/keyboard": "^4.1.0",
+        "@capacitor/ios": "^4.6.2",
+        "@capacitor/keyboard": "^4.1.1",
         "@capacitor/status-bar": "^4.1.1",
         "@headlessui/react": "^1.7.7",
         "@ionic/react": "^6.5.0",
-        "@ionic/react-router": "^6.4.2",
+        "@ionic/react-router": "^6.5.0",
         "@perfood/capacitor-google-fit": "^1.0.2",
         "@perfood/capacitor-healthkit": "^1.2.1",
         "@tailwindcss/forms": "^0.5.3",
-        "@tanstack/react-query": "^4.22.0",
-        "axios": "^1.2.2",
+        "@tanstack/react-query": "^4.22.4",
+        "axios": "^1.2.3",
         "capacitor-ios-autofill-save-password": "^1.1.4",
         "chart.js": "^4.2.0",
         "cordova-plugin-purchase": "^11.0.0",
@@ -50,7 +50,7 @@
         "web-vitals": "^3.1.1"
     },
     "devDependencies": {
-        "@capacitor/cli": "4.6.1",
+        "@capacitor/cli": "4.6.2",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^14.4.3",
@@ -71,6 +71,6 @@
         "typescript": "^4.9.4",
         "vite": "^4.0.4",
         "vite-plugin-svgr": "2.4.0",
-        "vite-tsconfig-paths": "^4.0.3"
+        "vite-tsconfig-paths": "^4.0.5"
     }
 }
