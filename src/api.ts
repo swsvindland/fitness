@@ -21,10 +21,10 @@ import { UserFoodV2 } from './types/UserFoodV2';
 import { WorkoutType } from './types/WorkoutType';
 import { ProgressPhoto } from './types/ProgressPhoto';
 
-export const API_URL = 'http://localhost:7071';
+// export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://192.168.1.6:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-// export const API_URL = 'https://fitness-prod.azurewebsites.net';
+export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
 // export const CDN_URL =
 //     'https://fitnessdev.blob.core.windows.net/progress-photos/';
