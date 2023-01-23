@@ -86,7 +86,7 @@ export const Header: FC = () => {
                                     </Menu.Item>
                                     <Menu.Item>
                                         <a
-                                            href="https://svindland.dev/terms.html"
+                                            href="https://workout-track.com/terms"
                                             target="_blank"
                                             rel="noreferrer"
                                             className={
@@ -98,7 +98,7 @@ export const Header: FC = () => {
                                     </Menu.Item>
                                     <Menu.Item>
                                         <a
-                                            href="https://svindland.dev/privacy.html"
+                                            href="https://workout-track.com/privacy"
                                             target="_blank"
                                             rel="noreferrer"
                                             className={
