@@ -1,13 +1,16 @@
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CDN_URL, getProgressPhotos } from '../../api';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { AuthContext } from '../Auth/Auth';
 import { Button } from '../Buttons/Button';
+import { Viewer } from './Viewer';
 
 export const ProgressPhotos: FC = () => {
     const { user, setOpenPurchase } = useContext(AuthContext);
+    const [open, setOpen] = useState(false);
+    const [openedImage, setOpenedImage] = useState<string>('');
     const photosQuery = useQuery(['ProgressPhotos'], getProgressPhotos);
 
     if (!user?.paid) {
@@ -26,26 +29,36 @@ export const ProgressPhotos: FC = () => {
     }
 
     return (
-        <div className="card p-4 w-full">
-            <h2 className="text-lg text-secondary my-4">Progress Photos</h2>
-            <div className="flex flex-row">
-                <LinkButton to="body/progress" className="mr-2">
-                    See All
-                </LinkButton>
-                <LinkSecondaryButton to="body/progress/upload">
-                    Upload
-                </LinkSecondaryButton>
+        <>
+            <div className="card p-4 w-full">
+                <h2 className="text-lg text-secondary my-4">Progress Photos</h2>
+                <div className="flex flex-row">
+                    <LinkButton to="body/progress" className="mr-2">
+                        See All
+                    </LinkButton>
+                    <LinkSecondaryButton to="body/progress/upload">
+                        Upload
+                    </LinkSecondaryButton>
+                </div>
+                <div className="grid grid-cols-4 gap-4 mt-2">
+                    {photosQuery.data?.data.slice(0, 4).map((photo) => (
+                        <button
+                            onClick={() => {
+                                setOpen(true);
+                                setOpenedImage(`${CDN_URL}${photo.filename}`);
+                            }}
+                        >
+                            <img
+                                className="rounded shadow"
+                                src={`${CDN_URL}${photo.filename}`}
+                                alt=""
+                                width={150}
+                            />
+                        </button>
+                    ))}
+                </div>
             </div>
-            <div className="grid grid-cols-4 gap-4 mt-2">
-                {photosQuery.data?.data.slice(0, 4).map((photo) => (
-                    <img
-                        className="rounded shadow"
-                        src={`${CDN_URL}${photo.filename}`}
-                        alt=""
-                        width={150}
-                    />
-                ))}
-            </div>
-        </div>
+            <Viewer open={open} setOpen={setOpen} image={openedImage} />
+        </>
     );
 };
