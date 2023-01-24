@@ -610,8 +610,6 @@ export const addProgressPhoto = async (photos: Blob[]) => {
         const bodyFormData = new FormData();
         bodyFormData.append('file', photo);
 
-        console.log(bodyFormData);
-
         const response = await axios.post(
             `${API_URL}/api/UploadProgressPhoto`,
             bodyFormData,

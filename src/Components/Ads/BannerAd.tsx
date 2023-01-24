@@ -59,7 +59,6 @@ export const BannerAd: FC = () => {
     }, [loadAd]);
 
     useEffect(() => {
-        console.log('paid', user?.paid);
         if (user?.paid) {
             hideAd();
         }

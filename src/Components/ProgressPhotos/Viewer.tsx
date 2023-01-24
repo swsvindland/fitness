@@ -1,7 +1,6 @@
-import { FC, Fragment, useState } from 'react';
+import { FC, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XSolid } from '../Icons/XSolid';
-import { CDN_URL } from '../../api';
 
 interface IProps {
     open: boolean;

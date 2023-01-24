@@ -72,9 +72,6 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
         });
     };
 
-    console.log(workoutExercise);
-    console.log(query, option, options);
-
     return (
         <div className="card p-4 my-2">
             {!saved && (
