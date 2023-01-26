@@ -33,6 +33,7 @@ import { CardioStore } from './Store/CardioStore';
 import { Cardio } from './Cardio/Cardio';
 import { ProgressCamera } from './ProgressPhotos/ProgressCamera';
 import { ProgressGallery } from './ProgressPhotos/ProgressGallery';
+import { AllWeights } from './Body/AllWeights';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -115,6 +116,9 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/body/weight" exact={true}>
                     <WeighInForm />
+                </Route>
+                <Route path="/body/all-weight" exact={true}>
+                    <AllWeights />
                 </Route>
                 <Route path="/body/body" exact={true}>
                     <BodyCheckInForm />

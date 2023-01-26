@@ -53,7 +53,8 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
 
         setState({
             reps: userWorkoutActivityQuery.data?.data.reps,
-            weight: userWorkoutActivityQuery.data?.data.weight.toString(),
+            weight:
+                userWorkoutActivityQuery.data?.data.weight?.toString() ?? '0',
         });
 
         if (userWorkoutActivityQuery.data.data.saved) {

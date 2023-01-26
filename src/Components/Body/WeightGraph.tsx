@@ -19,6 +19,7 @@ import { format } from 'date-fns';
 import { LinkButton } from '../Buttons/LinkButton';
 import { getAllUserWeights } from '../../api';
 import { Loading } from '../Loading';
+import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 
 ChartJS.register(
     CategoryScale,
@@ -31,7 +32,6 @@ ChartJS.register(
 );
 
 export const WeightGraph: FC = () => {
-    const { user } = useContext(AuthContext);
     const [data, setData] = useState<
         | ChartData<
               'line',
@@ -40,13 +40,10 @@ export const WeightGraph: FC = () => {
         | undefined
     >(undefined);
 
-    const userBloodPressureQuery = useQuery(
-        ['UserWeight', user?.id],
-        getAllUserWeights
-    );
+    const userWeightQuery = useQuery(['UserWeight'], getAllUserWeights);
 
     useMemo(() => {
-        const labels = userBloodPressureQuery.data?.data.map((item) =>
+        const labels = userWeightQuery.data?.data.map((item) =>
             format(new Date(item.created), 'PP')
         );
 
@@ -56,25 +53,27 @@ export const WeightGraph: FC = () => {
                 {
                     label: 'Weights',
                     data:
-                        userBloodPressureQuery.data?.data.map(
-                            (item) => item.weight
-                        ) ?? [],
+                        userWeightQuery.data?.data.map((item) => item.weight) ??
+                        [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },
             ],
         });
-    }, [userBloodPressureQuery.data]);
+    }, [userWeightQuery.data]);
 
-    if (userBloodPressureQuery.isLoading || !data) {
+    if (userWeightQuery.isLoading || !data) {
         return <Loading />;
     }
 
     return (
         <div className="card rounded shadow p-4 w-full my-2">
-            <LinkButton to="/body/weight" className="relative top-0 right-0">
-                Add
-            </LinkButton>
+            <div className="flex flex-row">
+                <LinkButton to="body/all-weight" className="mr-2">
+                    See All
+                </LinkButton>
+                <LinkSecondaryButton to="body/weight">Add</LinkSecondaryButton>
+            </div>
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
                 <Line data={data} />
             ) : (
