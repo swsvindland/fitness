@@ -1,6 +1,6 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addUserFood, getFoodDetails } from '../../api';
 import { Loading } from '../Loading';
 import { Button } from '../Buttons/Button';
@@ -9,6 +9,7 @@ import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { NutritionLabel } from './NutritionLabel';
+import { useUpdateFoodCache } from './hooks';
 
 export const FoodDetail: FC = () => {
     useShowBackButton();
@@ -16,11 +17,13 @@ export const FoodDetail: FC = () => {
     const { foodId } = useParams<{ foodId: string }>();
     const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
     const [unit, setUnit] = useState<DropdownOption | undefined>(undefined);
+    const updateFoodCache = useUpdateFoodCache();
 
     const history = useHistory();
 
     const mutation = useMutation(addUserFood, {
         onSuccess: () => {
+            updateFoodCache();
             history.push(`/eat`);
         },
     });
@@ -54,6 +57,7 @@ export const FoodDetail: FC = () => {
                 <TextField
                     label="Quantity"
                     type="number"
+                    inputMode="decimal"
                     onChange={(event) =>
                         setDisplayedQuantity(event.target.value ?? '1')
                     }

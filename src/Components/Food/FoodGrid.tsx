@@ -19,7 +19,7 @@ export const FoodGrid: FC = () => {
         history.push('/scanner');
     };
 
-    const foodQuery = useQuery(['Food'], () => {
+    const foodQuery = useQuery(['UserFood'], () => {
         return getUserFoods();
     });
 

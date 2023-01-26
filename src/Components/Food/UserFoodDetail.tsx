@@ -1,6 +1,6 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteUserFood, getUserFood, updateUserFood } from '../../api';
 import { Loading } from '../Loading';
 import { Button } from '../Buttons/Button';
@@ -10,23 +10,27 @@ import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { NutritionLabel } from './NutritionLabel';
+import { useUpdateFoodCache } from './hooks';
 
 export const UserFoodDetail: FC = () => {
     useShowBackButton();
     const { user } = useContext(AuthContext);
     const { userFoodId } = useParams<{ userFoodId: string }>();
-    const [displayedQuantity, setDisplayedQuantity] = useState<number>(1);
+    const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
     const [unit, setUnit] = useState<DropdownOption | undefined>(undefined);
     const history = useHistory();
+    const updateFoodCache = useUpdateFoodCache();
 
     const updateMutation = useMutation(updateUserFood, {
         onSuccess: () => {
+            updateFoodCache();
             history.push(`/eat`);
         },
     });
 
     const deleteMutation = useMutation(deleteUserFood, {
         onSuccess: () => {
+            updateFoodCache();
             history.push(`/eat`);
         },
     });
@@ -51,7 +55,9 @@ export const UserFoodDetail: FC = () => {
     }, [options, unit]);
 
     useMemo(() => {
-        setDisplayedQuantity(foodDetailsQuery.data?.data.servingAmount ?? 1);
+        setDisplayedQuantity(
+            foodDetailsQuery.data?.data.servingAmount.toString() ?? '1'
+        );
     }, [foodDetailsQuery.data?.data.servingAmount]);
 
     return (
@@ -65,8 +71,9 @@ export const UserFoodDetail: FC = () => {
                 <TextField
                     label="Quantity"
                     type="number"
+                    inputMode="decimal"
                     onChange={(event) =>
-                        setDisplayedQuantity(parseInt(event.target.value) ?? 1)
+                        setDisplayedQuantity(event.target.value)
                     }
                     value={displayedQuantity ?? ''}
                     className="pr-2"
@@ -87,7 +94,8 @@ export const UserFoodDetail: FC = () => {
                             onClick={() =>
                                 updateMutation.mutate({
                                     id: foodDetailsQuery.data?.data.id,
-                                    servingAmount: displayedQuantity,
+                                    servingAmount:
+                                        parseFloat(displayedQuantity),
                                     servingId: unit?.id ?? 0,
                                     foodV2Id:
                                         foodDetailsQuery.data?.data.foodV2Id ??
@@ -128,7 +136,11 @@ export const UserFoodDetail: FC = () => {
                     .map((serving) => (
                         <NutritionLabel
                             serving={serving}
-                            displayedQuantity={displayedQuantity}
+                            displayedQuantity={
+                                isNaN(parseFloat(displayedQuantity))
+                                    ? 0
+                                    : parseFloat(displayedQuantity)
+                            }
                         />
                     ))}
             </div>

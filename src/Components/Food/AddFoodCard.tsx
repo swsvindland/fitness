@@ -4,9 +4,10 @@ import { MinusSolid } from '../Icons/MinusSolid';
 import { Button } from '../Buttons/Button';
 import { PlusSolid } from '../Icons/PlusSolid';
 import { FC, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { quickAddFood, quickRemoveFood } from '../../api';
 import { Loading } from '../Loading';
+import { useUpdateFoodCache } from './hooks';
 
 interface IProps {
     foodId: number;
@@ -22,16 +23,19 @@ export const AddFoodCard: FC<IProps> = ({
     defaultServings,
 }) => {
     const [servings, setServings] = useState<number>(defaultServings ?? 0);
+    const updateFoodCache = useUpdateFoodCache();
 
     const quickAddMutation = useMutation(quickAddFood, {
         onSuccess: (data) => {
             setServings(data.data ?? 0);
+            updateFoodCache();
         },
     });
 
     const quickRemoveMutation = useMutation(quickRemoveFood, {
         onSuccess: (data) => {
             setServings(data.data ?? 0);
+            updateFoodCache();
         },
     });
 
