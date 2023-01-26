@@ -1,13 +1,13 @@
 import { format } from 'date-fns';
-import { TextField } from '../TextFields/TextField';
-import { Units } from '../../types/user';
-import { Loading } from '../Loading';
-import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
+import { TextField } from '../../TextFields/TextField';
+import { Units } from '../../../types/user';
+import { Loading } from '../../Loading';
+import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useContext, useState } from 'react';
-import { AuthContext } from '../Auth/Auth';
+import { AuthContext } from '../../Auth/Auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserWeight, updateUserWeight } from '../../api';
-import { CircleXMark } from '../Icons/CircleXMark';
+import { deleteUserWeight, updateUserWeight } from '../../../api';
+import { CircleXMark } from '../../Icons/CircleXMark';
 
 interface IProps {
     id: number;

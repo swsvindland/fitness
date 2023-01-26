@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { BloodPressureGraph } from './BloodPressureGraph';
-import { WeightGraph } from './WeightGraph';
+import { BloodPressureGraph } from './BloodPressure/BloodPressureGraph';
+import { WeightGraph } from './Weight/WeightGraph';
 import { BodyGraph } from './BodyGraph';
 import { BodyFatGraph } from './BodyFatGraph';
 import { useHideBackButton } from '../Navigation/headerHooks';

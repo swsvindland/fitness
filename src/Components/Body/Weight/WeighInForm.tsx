@@ -1,12 +1,12 @@
 import { FC, FormEvent, useContext, useState } from 'react';
-import { TextField } from '../TextFields/TextField';
-import { Button } from '../Buttons/Button';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { TextField } from '../../TextFields/TextField';
+import { Button } from '../../Buttons/Button';
+import { SecondaryButton } from '../../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../Auth/Auth';
+import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addWeight } from '../../api';
-import { useShowBackButton } from '../Navigation/headerHooks';
+import { addWeight } from '../../../api';
+import { useShowBackButton } from '../../Navigation/headerHooks';
 
 export const WeighInForm: FC = () => {
     useShowBackButton();

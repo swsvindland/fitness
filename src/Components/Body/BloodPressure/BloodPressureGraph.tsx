@@ -15,9 +15,10 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { LinkButton } from '../Buttons/LinkButton';
-import { getAllUserBloodPressure } from '../../api';
-import { Loading } from '../Loading';
+import { LinkButton } from '../../Buttons/LinkButton';
+import { getAllUserBloodPressure } from '../../../api';
+import { Loading } from '../../Loading';
+import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 
 ChartJS.register(
     CategoryScale,
@@ -79,12 +80,14 @@ export const BloodPressureGraph: FC = () => {
 
     return (
         <div className="card rounded shadow p-4 w-full my-2">
-            <LinkButton
-                to="/body/blood-pressure"
-                className="relative top-0 right-0"
-            >
-                Add
-            </LinkButton>
+            <div className="flex flex-row">
+                <LinkButton to="body/all-blood-pressure" className="mr-2">
+                    See All
+                </LinkButton>
+                <LinkSecondaryButton to="body/blood-pressure">
+                    Add
+                </LinkSecondaryButton>
+            </div>
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
                 <Line data={data} />
             ) : (

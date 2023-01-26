@@ -7,9 +7,9 @@ import { Eat } from './Macros/Eat';
 import { Supplements } from './Supplements/Supplements';
 import { AllSupplements } from './Supplements/AllSupplements';
 import { Body } from './Body/Body';
-import { WeighInForm } from './Body/WeighInForm';
+import { WeighInForm } from './Body/Weight/WeighInForm';
 import { BodyCheckInForm } from './Body/BodyCheckInForm';
-import { BloodPressureCheckInForm } from './Body/BloodPressureCheckInForm';
+import { BloodPressureCheckInForm } from './Body/BloodPressure/BloodPressureCheckInForm';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { HeightForm } from './Body/HeightForm';
 import { AddFood } from './Food/AddFood';
@@ -33,7 +33,8 @@ import { CardioStore } from './Store/CardioStore';
 import { Cardio } from './Cardio/Cardio';
 import { ProgressCamera } from './ProgressPhotos/ProgressCamera';
 import { ProgressGallery } from './ProgressPhotos/ProgressGallery';
-import { AllWeights } from './Body/AllWeights';
+import { AllWeights } from './Body/Weight/AllWeights';
+import { AllBloodPressure } from './Body/BloodPressure/AllBloodPressure';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -128,6 +129,9 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/body/blood-pressure" exact={true}>
                     <BloodPressureCheckInForm />
+                </Route>
+                <Route path="/body/all-blood-pressure" exact={true}>
+                    <AllBloodPressure />
                 </Route>
                 <Route path="/body/sex" exact={true}>
                     <SexForm />

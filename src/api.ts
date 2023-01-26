@@ -406,6 +406,22 @@ export const getAllUserBloodPressure = (): Promise<
     return axios.get(`${API_URL}/api/GetUserBloodPressures`, { params });
 };
 
+export const updateUserBloodPressure = (
+    body: UserBloodPressure
+): Promise<boolean> => {
+    const params = getParams();
+
+    return axios.put(`${API_URL}/api/UpdateUserBloodPressure`, body, {
+        params,
+    });
+};
+
+export const deleteUserBloodPressure = (id: number): Promise<boolean> => {
+    const params = getParams({ id });
+
+    return axios.delete(`${API_URL}/api/DeleteUserBloodPressure`, { params });
+};
+
 export const addBody = (body: {
     neck: number;
     shoulders: number;

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllUserWeights } from '../../api';
-import { Loading } from '../Loading';
+import { getAllUserWeights } from '../../../api';
+import { Loading } from '../../Loading';
 import { AllWeightCard } from './AllWeightCard';
 
 export const AllWeights: FC = () => {
