@@ -4,7 +4,7 @@ import { MinusSolid } from '../Icons/MinusSolid';
 import { Button } from '../Buttons/Button';
 import { PlusSolid } from '../Icons/PlusSolid';
 import { FC, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { quickAddFood, quickRemoveFood } from '../../api';
 import { Loading } from '../Loading';
 import { useUpdateFoodCache } from './hooks';

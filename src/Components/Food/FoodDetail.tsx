@@ -1,6 +1,6 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { addUserFood, getFoodDetails } from '../../api';
 import { Loading } from '../Loading';
 import { Button } from '../Buttons/Button';
