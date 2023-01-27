@@ -1,5 +1,6 @@
 export interface UserBody {
-    id: number;
+    id?: number;
+    userId: string;
     created: string;
     neck: number;
     shoulders: number;

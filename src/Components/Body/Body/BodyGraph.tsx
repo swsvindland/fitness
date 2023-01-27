@@ -12,12 +12,13 @@ import {
     BubbleDataPoint,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-import { AuthContext } from '../Auth/Auth';
+import { AuthContext } from '../../Auth/Auth';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { LinkButton } from '../Buttons/LinkButton';
-import { getAllUserBodies } from '../../api';
-import { Loading } from '../Loading';
+import { LinkButton } from '../../Buttons/LinkButton';
+import { getAllUserBodies } from '../../../api';
+import { Loading } from '../../Loading';
+import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 
 ChartJS.register(
     RadialLinearScale,
@@ -109,9 +110,12 @@ export const BodyGraph = () => {
 
     return (
         <div className="card rounded shadow p-4 w-full my-2">
-            <LinkButton to="/body/body" className="relative top-0 right-0">
-                Add
-            </LinkButton>
+            <div className="flex flex-row">
+                <LinkButton to="body/all-bodies" className="mr-2">
+                    See All
+                </LinkButton>
+                <LinkSecondaryButton to="body/body">Add</LinkSecondaryButton>
+            </div>
             {data.datasets.length > 0 ? (
                 <Radar data={data} />
             ) : (

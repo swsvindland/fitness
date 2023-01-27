@@ -422,21 +422,7 @@ export const deleteUserBloodPressure = (id: number): Promise<boolean> => {
     return axios.delete(`${API_URL}/api/DeleteUserBloodPressure`, { params });
 };
 
-export const addBody = (body: {
-    neck: number;
-    shoulders: number;
-    chest: number;
-    leftBicep: number;
-    rightBicep: number;
-    navel: number;
-    waist: number;
-    hip: number;
-    leftThigh: number;
-    rightThigh: number;
-    leftCalf: number;
-    rightCalf: number;
-    userId: string;
-}): Promise<AxiosResponse<boolean>> => {
+export const addBody = (body: UserBody): Promise<AxiosResponse<boolean>> => {
     const params = getParams();
 
     return axios.post(`${API_URL}/api/AddUserBody`, body, { params });
@@ -446,6 +432,22 @@ export const getAllUserBodies = (): Promise<AxiosResponse<UserBody[]>> => {
     const params = getParams();
 
     return axios.get(`${API_URL}/api/GetUserBodies`, {
+        params,
+    });
+};
+
+export const updateUserBody = (body: UserBody): Promise<boolean> => {
+    const params = getParams();
+
+    return axios.put(`${API_URL}/api/UpdateUserBody`, body, {
+        params,
+    });
+};
+
+export const deleteUserBody = (id: number): Promise<boolean> => {
+    const params = getParams({ id });
+
+    return axios.delete(`${API_URL}/api/DeleteUserBody`, {
         params,
     });
 };

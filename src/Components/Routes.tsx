@@ -8,7 +8,7 @@ import { Supplements } from './Supplements/Supplements';
 import { AllSupplements } from './Supplements/AllSupplements';
 import { Body } from './Body/Body';
 import { WeighInForm } from './Body/Weight/WeighInForm';
-import { BodyCheckInForm } from './Body/BodyCheckInForm';
+import { BodyCheckInForm } from './Body/Body/BodyCheckInForm';
 import { BloodPressureCheckInForm } from './Body/BloodPressure/BloodPressureCheckInForm';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { HeightForm } from './Body/HeightForm';
@@ -35,6 +35,7 @@ import { ProgressCamera } from './ProgressPhotos/ProgressCamera';
 import { ProgressGallery } from './ProgressPhotos/ProgressGallery';
 import { AllWeights } from './Body/Weight/AllWeights';
 import { AllBloodPressure } from './Body/BloodPressure/AllBloodPressure';
+import { AllBody } from './Body/Body/AllBody';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -123,6 +124,9 @@ export const Routes: FC = () => {
                 </Route>
                 <Route path="/body/body" exact={true}>
                     <BodyCheckInForm />
+                </Route>
+                <Route path="/body/all-bodies" exact={true}>
+                    <AllBody />
                 </Route>
                 <Route path="/body/height" exact={true}>
                     <HeightForm />

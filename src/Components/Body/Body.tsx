@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { BloodPressureGraph } from './BloodPressure/BloodPressureGraph';
 import { WeightGraph } from './Weight/WeightGraph';
-import { BodyGraph } from './BodyGraph';
+import { BodyGraph } from './Body/BodyGraph';
 import { BodyFatGraph } from './BodyFatGraph';
 import { useHideBackButton } from '../Navigation/headerHooks';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';

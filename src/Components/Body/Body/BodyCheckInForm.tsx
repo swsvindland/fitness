@@ -1,14 +1,14 @@
 import { ChangeEvent, FC, FormEvent, useContext, useState } from 'react';
-import { TextField } from '../TextFields/TextField';
-import { Button } from '../Buttons/Button';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { TextField } from '../../TextFields/TextField';
+import { Button } from '../../Buttons/Button';
+import { SecondaryButton } from '../../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../Auth/Auth';
+import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addBody } from '../../api';
-import { useShowBackButton } from '../Navigation/headerHooks';
+import { addBody } from '../../../api';
+import { useShowBackButton } from '../../Navigation/headerHooks';
 
-interface IState {
+export interface IBodyState {
     neck: string;
     shoulders: string;
     chest: string;
@@ -40,7 +40,7 @@ const initialState = {
 
 export const BodyCheckInForm: FC = () => {
     useShowBackButton();
-    const [state, setState] = useState<IState>(initialState);
+    const [state, setState] = useState<IBodyState>(initialState);
     const { user, newUser, setNewUser } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
@@ -68,6 +68,7 @@ export const BodyCheckInForm: FC = () => {
             leftCalf: parseFloat(state.leftCalf),
             rightCalf: parseFloat(state.rightCalf),
             userId: user?.id ?? '',
+            created: new Date().toISOString(),
         });
         if (newUser) {
             setNewUser(false);

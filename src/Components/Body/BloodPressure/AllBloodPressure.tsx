@@ -3,8 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllUserBloodPressure } from '../../../api';
 import { Loading } from '../../Loading';
 import { AllBloodPressureCard } from './AllBloodPressureCard';
+import { useShowBackButton } from '../../Navigation/headerHooks';
 
 export const AllBloodPressure: FC = () => {
+    useShowBackButton();
     const userBloodPressureQuery = useQuery(
         ['UserBloodPressure'],
         getAllUserBloodPressure
