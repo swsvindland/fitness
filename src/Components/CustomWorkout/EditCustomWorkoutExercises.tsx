@@ -90,7 +90,7 @@ export const EditCustomWorkoutExercises: FC = () => {
                 <Button onClick={handleAddWorkoutExercise}>Add</Button>
             </div>
             <Button
-                className="mt-6 w-full text-center flex justify-center"
+                className="mt-6 flex w-full justify-center text-center"
                 onClick={handleStartWorkout}
             >
                 Start Workout

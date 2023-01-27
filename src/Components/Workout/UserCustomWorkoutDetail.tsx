@@ -56,9 +56,9 @@ export const UserCustomWorkoutDetail: FC = () => {
     return (
         <div className="card rounded">
             <div className="py-6">
-                <div className="mt-8 max-w-2xl w-96 mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                <div className="mx-auto mt-8 w-96 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div className="flex justify-between">
-                        <h1 className="text-xl font-medium text-secondary mb-2">
+                        <h1 className="mb-2 text-xl font-medium text-secondary">
                             {workoutQuery.data?.data.name}
                         </h1>
                     </div>
@@ -74,19 +74,19 @@ export const UserCustomWorkoutDetail: FC = () => {
                             >
                                 <Button
                                     type="submit"
-                                    className="mt-6 w-full text-center flex justify-center"
+                                    className="mt-6 flex w-full justify-center text-center"
                                 >
                                     Start Workout
                                 </Button>
                                 <SecondaryButton
                                     onClick={handleEdit}
-                                    className="mt-6 w-full text-center flex justify-center"
+                                    className="mt-6 flex w-full justify-center text-center"
                                 >
                                     Edit Workout
                                 </SecondaryButton>
                                 <SecondaryButton
                                     onClick={handleDelete}
-                                    className="mt-6 w-full text-center flex justify-center"
+                                    className="mt-6 flex w-full justify-center text-center"
                                 >
                                     Delete Workout
                                 </SecondaryButton>
@@ -96,7 +96,7 @@ export const UserCustomWorkoutDetail: FC = () => {
                             <h2 className="text-sm font-medium text-secondary">
                                 Description
                             </h2>
-                            <div className="mt-4 prose prose-sm text-ternary">
+                            <div className="prose prose-sm mt-4 text-ternary">
                                 {workoutQuery.data?.data.description ? (
                                     <p>{workoutQuery.data?.data.description}</p>
                                 ) : (
@@ -104,12 +104,12 @@ export const UserCustomWorkoutDetail: FC = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="mt-8 border-t text-secondary pt-8">
+                        <div className="mt-8 border-t pt-8 text-secondary">
                             <h2 className="text-sm font-medium text-secondary">
                                 Workout Details
                             </h2>
 
-                            <div className="mt-4 prose prose-sm text-ternary">
+                            <div className="prose prose-sm mt-4 text-ternary">
                                 <div role="list">
                                     <li>
                                         {workoutQuery.data?.data.days} days per

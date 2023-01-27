@@ -17,7 +17,7 @@ export const WorkoutTabs: FC = () => {
     ];
 
     return (
-        <div className="max-w-2xl w-full mb-4">
+        <div className="mb-4 w-full max-w-2xl">
             <div className="block">
                 <div className="border-b border-ternary">
                     <nav className="-mb-px flex" aria-label="Tabs">
@@ -29,7 +29,7 @@ export const WorkoutTabs: FC = () => {
                                     tab.current
                                         ? 'border-secondary text-secondary'
                                         : 'border-transparent text-ternary',
-                                    'w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm'
+                                    'w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium'
                                 )}
                                 aria-current={tab.current ? 'page' : undefined}
                             >

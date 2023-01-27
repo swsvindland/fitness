@@ -6,8 +6,8 @@ interface IProps {
 
 export const GettingStartedLayout: FC<IProps> = ({ children }) => {
     return (
-        <div className="bg-background dark:bg-black min-h-screen">
-            <main className="pt-safe md:ml-48 my-24 p-4 flex justify-center">
+        <div className="min-h-screen bg-background dark:bg-black">
+            <main className="my-24 flex justify-center p-4 pt-safe md:ml-48">
                 {children}
             </main>
         </div>

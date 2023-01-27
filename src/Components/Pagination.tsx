@@ -8,7 +8,7 @@ interface IProps {
 
 export const Pagination: FC<IProps> = ({ selected, setSelected, pages }) => {
     return (
-        <nav className="px-4 py-2 mb-2 flex items-center justify-center sm:px-0">
+        <nav className="mb-2 flex items-center justify-center px-4 py-2 sm:px-0">
             <div className="">
                 {Array.from(Array(pages).keys()).map((_, index) => (
                     <button
@@ -20,7 +20,7 @@ export const Pagination: FC<IProps> = ({ selected, setSelected, pages }) => {
                             selected === index + 1
                                 ? 'bg-ternary text-primary-dark'
                                 : 'bg-primary-dark text-secondary-light'
-                        } mx-2 px-3.5 py-2 rounded-full text-sm font-medium`}
+                        } mx-2 rounded-full px-3.5 py-2 text-sm font-medium`}
                     >
                         {index + 1}
                     </button>

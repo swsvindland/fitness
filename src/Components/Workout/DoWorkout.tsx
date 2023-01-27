@@ -131,7 +131,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     };
 
     return (
-        <div className="max-w-2xl w-full">
+        <div className="w-full max-w-2xl">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
             <div role="list" className="grid grid-cols-1 gap-6">
@@ -148,21 +148,21 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             {workoutQuery.data?.data.type !== WorkoutType.Cardio ? (
                 <Button
                     onClick={handleCompleteWorkoutAndStartCardio}
-                    className="my-2 flex justify-center align-middle w-full"
+                    className="my-2 flex w-full justify-center align-middle"
                 >
                     Finish Lift and Start Cardio
                 </Button>
             ) : null}
             <SecondaryButton
                 onClick={handleCompleteWorkout}
-                className="my-2 flex justify-center align-middle w-full"
+                className="my-2 flex w-full justify-center align-middle"
             >
                 Complete Workout
             </SecondaryButton>
             {workoutQuery.data?.data.userId && (
                 <LinkSecondaryButton
                     to={`/workout/edit/${workoutId}`}
-                    className="my-2 flex justify-center align-middle w-full"
+                    className="my-2 flex w-full justify-center align-middle"
                 >
                     Edit Workout
                 </LinkSecondaryButton>

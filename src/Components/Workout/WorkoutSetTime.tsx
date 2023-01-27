@@ -72,7 +72,7 @@ export const WorkoutSetTime: FC<IProps> = ({ set, exercise, week, day }) => {
 
     return (
         <div className="flex border-t border-ternary">
-            <div className="flex-1 flex border-r border-ternary p-2">
+            <div className="flex flex-1 border-r border-ternary p-2">
                 <TextField
                     id={`exercise-weight-${exercise.exerciseId}`}
                     value={state.time}
@@ -86,14 +86,14 @@ export const WorkoutSetTime: FC<IProps> = ({ set, exercise, week, day }) => {
                     }}
                     className="my-auto"
                 />
-                <span className="mx-2 my-auto text-ternary text-xs">
+                <span className="mx-2 my-auto text-xs text-ternary">
                     minutes
                 </span>
             </div>
-            <div className="flex-none flex w-16">
-                <div className="w-0 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium border border-transparent rounded-br-lg">
+            <div className="flex w-16 flex-none">
+                <div className="inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium">
                     <button
-                        className="w-8 h-8"
+                        className="h-8 w-8"
                         onClick={() => {
                             mutation.mutate({
                                 id: userWorkoutActivityQuery.data?.data.id,
@@ -114,7 +114,7 @@ export const WorkoutSetTime: FC<IProps> = ({ set, exercise, week, day }) => {
                                 className={
                                     saved
                                         ? 'fill-secondary'
-                                        : 'fill-transparent border-ternary border rounded-full'
+                                        : 'rounded-full border border-ternary fill-transparent'
                                 }
                             />
                         )}

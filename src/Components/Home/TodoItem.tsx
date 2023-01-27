@@ -18,13 +18,13 @@ export const TodoItem: FC<IProps> = ({ name, show, checked, route }) => {
             <div
                 className={
                     checked
-                        ? 'card p-4 my-2 bg-primary-dark w-full flex flex-row justify-between'
-                        : 'card p-4 my-2 w-full flex flex-row justify-between'
+                        ? 'card my-2 flex w-full flex-row justify-between bg-primary-dark p-4'
+                        : 'card my-2 flex w-full flex-row justify-between p-4'
                 }
             >
                 <h2 className="text-lg text-ternary">{name}</h2>
                 {checked && (
-                    <CircleCheckSolid className="fill-secondary w-6 h-6" />
+                    <CircleCheckSolid className="h-6 w-6 fill-secondary" />
                 )}
             </div>
         </Link>

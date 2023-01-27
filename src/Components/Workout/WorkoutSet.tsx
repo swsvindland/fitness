@@ -70,8 +70,8 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
 
     return (
         <div className="flex border-t border-ternary">
-            <div className=" flex-1 flex">
-                <div className="flex-1 inline-flex items-center justify-center p-2">
+            <div className=" flex flex-1">
+                <div className="inline-flex flex-1 items-center justify-center p-2">
                     <TextField
                         id={`exercise-reps-${exercise.exerciseId}`}
                         value={state.reps}
@@ -84,10 +84,10 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                             });
                         }}
                     />
-                    <span className="mx-2 text-ternary text-xs">Reps</span>
+                    <span className="mx-2 text-xs text-ternary">Reps</span>
                 </div>
             </div>
-            <div className="flex-1 flex border-x border-ternary p-2">
+            <div className="flex flex-1 border-x border-ternary p-2">
                 <TextField
                     id={`exercise-weight-${exercise.exerciseId}`}
                     value={state.weight}
@@ -101,14 +101,14 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                     }}
                     className="my-auto"
                 />
-                <span className="mx-2 my-auto text-ternary text-xs">
+                <span className="mx-2 my-auto text-xs text-ternary">
                     {user?.unit === Units.Imperial ? 'lbs' : 'kg'}
                 </span>
             </div>
-            <div className="flex-none flex w-16">
-                <div className="w-0 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium border border-transparent rounded-br-lg">
+            <div className="flex w-16 flex-none">
+                <div className="inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium">
                     <button
-                        className="w-8 h-8"
+                        className="h-8 w-8"
                         onClick={() => {
                             mutation.mutate({
                                 id: userWorkoutActivityQuery.data?.data.id,
@@ -129,7 +129,7 @@ export const WorkoutSet: FC<IProps> = ({ set, exercise, week, day }) => {
                                 className={
                                     saved
                                         ? 'fill-secondary'
-                                        : 'fill-transparent border-ternary border rounded-full'
+                                        : 'rounded-full border border-ternary fill-transparent'
                                 }
                             />
                         )}

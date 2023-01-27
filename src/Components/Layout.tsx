@@ -10,20 +10,20 @@ interface IProps {
 export const Layout: FC<IProps> = ({ children }) => {
     return (
         <>
-            <div className="bg-background dark:bg-black min-h-screen">
-                <div className="hidden md:flex md:w-48 md:flex-col md:fixed md:inset-y-0">
+            <div className="min-h-screen bg-background dark:bg-black">
+                <div className="hidden md:fixed md:inset-y-0 md:flex md:w-48 md:flex-col">
                     <Sidebar />
                 </div>
                 <header className="md:ml-48">
                     <Header />
                 </header>
-                <main className="pt-safe md:ml-48 my-24 p-4 flex justify-center">
-                    <div className="flex flex-col justify-center items-center flex-1">
+                <main className="my-24 flex justify-center p-4 pt-safe md:ml-48">
+                    <div className="flex flex-1 flex-col items-center justify-center">
                         {children}
                     </div>
                 </main>
             </div>
-            <footer className="md:hidden pb-safe">
+            <footer className="pb-safe md:hidden">
                 <BottomNavigation />
             </footer>
         </>

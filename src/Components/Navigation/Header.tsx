@@ -23,7 +23,7 @@ export const Header: FC = () => {
     return (
         <Disclosure
             as="nav"
-            className="bg-primary-dark dark:bg-background block fixed inset-x-0 top-0 z-10 shadow pt-safe"
+            className="fixed inset-x-0 top-0 z-10 block bg-primary-dark shadow pt-safe dark:bg-background"
         >
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
@@ -33,12 +33,12 @@ export const Header: FC = () => {
                                 type="button"
                                 onClick={() => history.goBack()}
                             >
-                                <ArrowBackSolid className="fill-secondary w-6 h-6" />
+                                <ArrowBackSolid className="h-6 w-6 fill-secondary" />
                             </button>
                         </div>
                     ) : (
                         <div className="flex flex-1 items-center">
-                            <Dumbbell className="fill-secondary w-10 h-10" />
+                            <Dumbbell className="h-10 w-10 fill-secondary" />
                         </div>
                     )}
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -59,8 +59,8 @@ export const Header: FC = () => {
                                     <span className="sr-only">
                                         Open user menu
                                     </span>
-                                    <div className="overflow-hidden w-8 h-8 bg-ternary rounded-full flex justify-center items-center">
-                                        <UserSolid className="w-5 h-5 fill-primary-dark" />
+                                    <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-ternary">
+                                        <UserSolid className="h-5 w-5 fill-primary-dark" />
                                     </div>
                                 </Menu.Button>
                             </div>
@@ -73,7 +73,7 @@ export const Header: FC = () => {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md card py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <Menu.Items className="card absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                     <Menu.Item>
                                         <Link
                                             to="/settings"
@@ -112,7 +112,7 @@ export const Header: FC = () => {
                                         <button
                                             onClick={logout}
                                             className={
-                                                'block px-4 py-2 text-sm text-ternary hover:bg-primary-dark w-full text-left'
+                                                'block w-full px-4 py-2 text-left text-sm text-ternary hover:bg-primary-dark'
                                             }
                                         >
                                             Sign out

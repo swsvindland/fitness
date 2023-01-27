@@ -37,25 +37,25 @@ export const WorkoutDetail: FC = () => {
     return (
         <div className="card rounded">
             <div className="py-6">
-                <div className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
-                        <div className="lg:col-start-8 lg:col-span-5">
+                <div className="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+                    <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
+                        <div className="lg:col-span-5 lg:col-start-8">
                             <div className="flex justify-between">
-                                <h1 className="text-xl font-medium text-secondary mb-2">
+                                <h1 className="mb-2 text-xl font-medium text-secondary">
                                     {workoutQuery.data?.data.name}
                                 </h1>
                             </div>
                         </div>
 
                         {/* Image gallery */}
-                        <div className="lg:mt-0 lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-3">
+                        <div className="lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
                             <h2 className="sr-only">Images</h2>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
                                 <img
                                     src={workoutQuery.data?.data.image}
                                     alt=""
-                                    className="lg:col-span-2 lg:row-span-2 rounded-lg"
+                                    className="rounded-lg lg:col-span-2 lg:row-span-2"
                                 />
                             </div>
                         </div>
@@ -74,7 +74,7 @@ export const WorkoutDetail: FC = () => {
                                 >
                                     <Button
                                         type="submit"
-                                        className="mt-6 w-full text-center flex justify-center"
+                                        className="mt-6 flex w-full justify-center text-center"
                                     >
                                         Start Workout
                                     </Button>
@@ -86,7 +86,7 @@ export const WorkoutDetail: FC = () => {
                                     Description
                                 </h2>
 
-                                <div className="mt-4 prose prose-sm text-ternary">
+                                <div className="prose prose-sm mt-4 text-ternary">
                                     {workoutQuery.data?.data.description && (
                                         <p>
                                             {
@@ -98,12 +98,12 @@ export const WorkoutDetail: FC = () => {
                                 </div>
                             </div>
 
-                            <div className="mt-8 border-t text-secondary pt-8">
+                            <div className="mt-8 border-t pt-8 text-secondary">
                                 <h2 className="text-sm font-medium text-secondary">
                                     Workout Details
                                 </h2>
 
-                                <div className="mt-4 prose prose-sm text-ternary">
+                                <div className="prose prose-sm mt-4 text-ternary">
                                     <div role="list">
                                         <li>
                                             {workoutQuery.data?.data.days} days

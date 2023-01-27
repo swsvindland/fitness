@@ -44,13 +44,13 @@ export const AllBloodPressureCard: FC<IProps> = ({
     });
 
     return (
-        <div className="card p-4 my-2">
+        <div className="card my-2 p-4">
             <span className="text-lg text-secondary">
                 {format(new Date(date ?? ''), 'PP')}
             </span>
             <hr className="border-secondary" />
             <div className="flex flex-row">
-                <div className="flex-1 flex border-r border-secondary p-2">
+                <div className="flex flex-1 border-r border-secondary p-2">
                     <TextField
                         id={`user-systolic-${date}`}
                         label="Systolic"
@@ -63,7 +63,7 @@ export const AllBloodPressureCard: FC<IProps> = ({
                         className="my-auto"
                     />
                 </div>
-                <div className="flex-1 flex border-r border-secondary p-2">
+                <div className="flex flex-1 border-r border-secondary p-2">
                     <TextField
                         id={`user-diastolic-${date}`}
                         label="Diastolic"
@@ -76,10 +76,10 @@ export const AllBloodPressureCard: FC<IProps> = ({
                         className="my-auto"
                     />
                 </div>
-                <div className="flex-none flex">
-                    <div className="w-16 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium border-r border-secondary">
+                <div className="flex flex-none">
+                    <div className="inline-flex w-16 flex-1 items-center justify-center border-r border-secondary py-4 text-sm font-medium">
                         <button
-                            className="w-8 h-8"
+                            className="h-8 w-8"
                             onClick={() => {
                                 updateMutation.mutate({
                                     id,
@@ -97,15 +97,15 @@ export const AllBloodPressureCard: FC<IProps> = ({
                                     className={
                                         saved
                                             ? 'fill-secondary'
-                                            : 'fill-transparent border-ternary border rounded-full'
+                                            : 'rounded-full border border-ternary fill-transparent'
                                     }
                                 />
                             )}
                         </button>
                     </div>
-                    <div className="w-16 flex-1 inline-flex items-center justify-center py-4 text-sm font-medium">
+                    <div className="inline-flex w-16 flex-1 items-center justify-center py-4 text-sm font-medium">
                         <button
-                            className="w-8 h-8"
+                            className="h-8 w-8"
                             onClick={() => {
                                 deleteMutation.mutate(id);
                             }}

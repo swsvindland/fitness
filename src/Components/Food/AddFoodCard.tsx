@@ -48,7 +48,7 @@ export const AddFoodCard: FC<IProps> = ({
     };
 
     return (
-        <div className="card my-2 flex flex-row justify-between items-center p-4">
+        <div className="card my-2 flex flex-row items-center justify-between p-4">
             <Link to={`/eat/food/${foodId}`} className="flex flex-col p-4">
                 <span className="text-lg text-secondary">{name}</span>
                 <span className="text-sm text-ternary">{servingSize}</span>
@@ -59,13 +59,13 @@ export const AddFoodCard: FC<IProps> = ({
                 <div className="flex items-center">
                     <SecondaryButton
                         onClick={handleRemove}
-                        className="w-8 w-8 !p-2 ml-1"
+                        className="ml-1 w-8 w-8 !p-2"
                     >
-                        <MinusSolid className="fill-secondary w-6 h-6" />
+                        <MinusSolid className="h-6 w-6 fill-secondary" />
                     </SecondaryButton>
-                    <span className="text-ternary m-3">{servings}</span>
-                    <Button onClick={handleAdd} className="w-8 w-8 !p-2 mr-1">
-                        <PlusSolid className="fill-secondary w-6 h-6" />
+                    <span className="m-3 text-ternary">{servings}</span>
+                    <Button onClick={handleAdd} className="mr-1 w-8 w-8 !p-2">
+                        <PlusSolid className="h-6 w-6 fill-secondary" />
                     </Button>
                 </div>
             )}

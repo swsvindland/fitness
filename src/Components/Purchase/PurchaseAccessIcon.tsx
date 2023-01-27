@@ -11,8 +11,8 @@ export const PurchaseAccessIcon: FC = () => {
 
     return (
         <>
-            <Button className="!p-2 m-2" onClick={() => setOpenPurchase(true)}>
-                <UpSolid className="w-7 h-7 fill-secondary" />
+            <Button className="m-2 !p-2" onClick={() => setOpenPurchase(true)}>
+                <UpSolid className="h-7 w-7 fill-secondary" />
             </Button>
             <PurchaseOptions />
         </>

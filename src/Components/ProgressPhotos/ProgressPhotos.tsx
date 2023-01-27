@@ -15,8 +15,8 @@ export const ProgressPhotos: FC = () => {
 
     if (!user?.paid) {
         return (
-            <div className="max-w-2xl w-full card p-4 mb-2">
-                <h2 className="text-lg text-secondary my-4">Progress Photos</h2>
+            <div className="card mb-2 w-full max-w-2xl p-4">
+                <h2 className="my-4 text-lg text-secondary">Progress Photos</h2>
                 <p className="text-secondary">
                     You must be a paid member to view and upload progress
                     photos.
@@ -30,8 +30,8 @@ export const ProgressPhotos: FC = () => {
 
     return (
         <>
-            <div className="card p-4 w-full">
-                <h2 className="text-lg text-secondary my-4">Progress Photos</h2>
+            <div className="card w-full p-4">
+                <h2 className="my-4 text-lg text-secondary">Progress Photos</h2>
                 <div className="flex flex-row">
                     <LinkButton to="body/progress" className="mr-2">
                         See All
@@ -40,7 +40,7 @@ export const ProgressPhotos: FC = () => {
                         Upload
                     </LinkSecondaryButton>
                 </div>
-                <div className="grid grid-cols-4 gap-4 mt-2">
+                <div className="mt-2 grid grid-cols-4 gap-4">
                     {photosQuery.data?.data.slice(0, 4).map((photo) => (
                         <button
                             onClick={() => {

@@ -15,10 +15,10 @@ export const ProgressGallery: FC = () => {
 
     return (
         <>
-            <div className="max-w-2xl w-full grid grid-cols-1">
+            <div className="grid w-full max-w-2xl grid-cols-1">
                 {dates.map((date) => (
                     <div>
-                        <h2 className="text-lg text-secondary my-2">
+                        <h2 className="my-2 text-lg text-secondary">
                             {format(new Date(date), 'PP')}
                         </h2>
                         <div className="grid grid-cols-3 gap-4">

@@ -14,8 +14,8 @@ export const PurchaseAccess: FC<IProps> = ({ body, button }) => {
     if (user?.paid) return null;
 
     return (
-        <div className="flex flex-col mb-8">
-            <h2 className="text-ternary text-center">{body}</h2>
+        <div className="mb-8 flex flex-col">
+            <h2 className="text-center text-ternary">{body}</h2>
             <Button onClick={() => setOpenPurchase(true)}>{button}</Button>
             <PurchaseOptions />
         </div>

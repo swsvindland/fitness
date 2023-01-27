@@ -13,8 +13,8 @@ export const Supplements: FC = () => {
     });
 
     return (
-        <div className="max-w-2xl w-full">
-            <div className="flex justify-end items-center">
+        <div className="w-full max-w-2xl">
+            <div className="flex items-center justify-end">
                 <LinkButton className="mb-2" to="/supplements/all-supplements">
                     Edit
                 </LinkButton>

@@ -41,14 +41,14 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
     };
 
     return (
-        <div className="card p-4 my-2">
+        <div className="card my-2 p-4">
             <span className="text-lg text-secondary">
                 {format(new Date(date ?? ''), 'PP')}
             </span>
             <hr className="border-secondary" />
             <div className="flex flex-col">
                 <div className="flex flex-row">
-                    <div className="flex-1 flex  p-2">
+                    <div className="flex flex-1  p-2">
                         <TextField
                             id={`user-shoulders-${date}`}
                             label="Shoulders"
@@ -60,7 +60,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-chest-${date}`}
                             label="Chest"
@@ -72,7 +72,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex  p-2">
+                    <div className="flex flex-1  p-2">
                         <TextField
                             id={`user-navel-${date}`}
                             label="Navel"
@@ -86,7 +86,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                     </div>
                 </div>
                 <div className="flex flex-row">
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-left-bicep-${date}`}
                             label="Left Bicep"
@@ -98,7 +98,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex  p-2">
+                    <div className="flex flex-1  p-2">
                         <TextField
                             id={`user-right-bicep-${date}`}
                             label="Right Bicep"
@@ -110,7 +110,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-waist-${date}`}
                             label="Waist"
@@ -124,7 +124,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                     </div>
                 </div>
                 <div className="flex flex-row">
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-hip-${date}`}
                             label="Hip"
@@ -136,7 +136,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-left-thigh-${date}`}
                             label="Left Thigh"
@@ -148,7 +148,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-right-thigh-${date}`}
                             label="Right Thigh"
@@ -162,7 +162,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                     </div>
                 </div>
                 <div className="flex flex-row">
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-left-calf-${date}`}
                             label="Left Calf"
@@ -174,7 +174,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex p-2">
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-right-calf-${date}`}
                             label="Right Calf"
@@ -186,9 +186,9 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="my-auto"
                         />
                     </div>
-                    <div className="flex-1 flex p-2 items-center justify-center mt-4">
+                    <div className="mt-4 flex flex-1 items-center justify-center p-2">
                         <button
-                            className="w-8 h-8 mr-8"
+                            className="mr-8 h-8 w-8"
                             onClick={() => {
                                 updateMutation.mutate({
                                     id,
@@ -203,13 +203,13 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                                     className={
                                         saved
                                             ? 'fill-secondary'
-                                            : 'fill-transparent border-ternary border rounded-full'
+                                            : 'rounded-full border border-ternary fill-transparent'
                                     }
                                 />
                             )}
                         </button>
                         <button
-                            className="w-8 h-8"
+                            className="h-8 w-8"
                             onClick={() => {
                                 deleteMutation.mutate(id);
                             }}

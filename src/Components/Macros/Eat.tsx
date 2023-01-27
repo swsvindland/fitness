@@ -13,7 +13,7 @@ export const Eat: FC = () => {
     });
 
     return (
-        <div className="max-w-3xl w-full">
+        <div className="w-full max-w-3xl">
             <MacroGrid />
             <FoodGrid />
             <div className="float-right my-2">

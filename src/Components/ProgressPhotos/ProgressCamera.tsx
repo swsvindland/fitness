@@ -101,10 +101,10 @@ export const ProgressCamera: FC = () => {
                     {photos.map((photo, index) => (
                         <div>
                             <button
-                                className="float-right border-ternary border rounded-full my-2"
+                                className="float-right my-2 rounded-full border border-ternary"
                                 onClick={() => removePhotos(index)}
                             >
-                                <MinusSolid className="w-4 h-4 fill-ternary" />
+                                <MinusSolid className="h-4 w-4 fill-ternary" />
                             </button>
                             <img src={photo.webPath} alt="" />
                         </div>

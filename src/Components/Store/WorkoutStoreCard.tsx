@@ -14,9 +14,9 @@ export const WorkoutStoreCard: FC<IProps> = ({ id, name, premium, custom }) => {
 
     if (premium && !user?.paid) {
         return (
-            <div className="m-4 max-w-xl w-96 relative block card bg-primary-dark rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none">
+            <div className="card relative m-4 block w-96 max-w-xl cursor-pointer rounded-lg bg-primary-dark px-6 py-4 shadow-sm focus:outline-none sm:flex sm:justify-between">
                 <span className="flex items-center">
-                    <span className="text-sm flex flex-col">
+                    <span className="flex flex-col text-sm">
                         <span className="font-medium text-secondary">
                             {name}
                         </span>
@@ -34,10 +34,10 @@ export const WorkoutStoreCard: FC<IProps> = ({ id, name, premium, custom }) => {
     return (
         <Link
             to={link}
-            className="m-4 max-w-xl w-96 relative block card rounded-lg shadow-sm px-6 py-4 cursor-pointer sm:flex sm:justify-between focus:outline-none"
+            className="card relative m-4 block w-96 max-w-xl cursor-pointer rounded-lg px-6 py-4 shadow-sm focus:outline-none sm:flex sm:justify-between"
         >
             <span className="flex items-center">
-                <span className="text-sm flex flex-col">
+                <span className="flex flex-col text-sm">
                     <span className="font-medium text-secondary">{name}</span>
                 </span>
             </span>

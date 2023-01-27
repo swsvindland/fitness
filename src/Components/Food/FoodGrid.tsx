@@ -28,7 +28,7 @@ export const FoodGrid: FC = () => {
     }
 
     return (
-        <div className="px-4 sm:px-6 lg:px-8 card rounded p-4 mt-2">
+        <div className="card mt-2 rounded p-4 px-4 sm:px-6 lg:px-8">
             <div className="flex flex-row justify-end">
                 <SecondaryButton className="mx-1" onClick={handleStartScan}>
                     Scan Barcode
@@ -37,7 +37,7 @@ export const FoodGrid: FC = () => {
                     Add Food
                 </LinkButton>
             </div>
-            <div className="ring-1 ring-ternary md:mx-0 rounded my-2">
+            <div className="my-2 rounded ring-1 ring-ternary md:mx-0">
                 <table className="min-w-full divide-y divide-ternary">
                     <thead>
                         <tr>
@@ -94,7 +94,7 @@ export const FoodGrid: FC = () => {
                                         foodIdx === 0
                                             ? ''
                                             : 'border-t border-ternary',
-                                        'relative py-4 pl-4 sm:pl-6 pr-3 text-sm'
+                                        'relative py-4 pl-4 pr-3 text-sm sm:pl-6'
                                     )}
                                 >
                                     <div className="font-medium text-secondary">

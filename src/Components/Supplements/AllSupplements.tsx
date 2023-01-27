@@ -33,7 +33,7 @@ export const AllSupplements: FC = () => {
     );
 
     return (
-        <div className="max-w-2xl w-full">
+        <div className="w-full max-w-2xl">
             <SupplementSearch
                 query={query}
                 setQuery={setQuery}
@@ -43,7 +43,7 @@ export const AllSupplements: FC = () => {
                     allSupplementQuery.data?.data.map((item) => item.name) || []
                 }
             />
-            <h2 className="text-lg text-secondary my-4 ">Active</h2>
+            <h2 className="my-4 text-lg text-secondary ">Active</h2>
             {userSupplementsQuery.data?.data
                 .filter((item) =>
                     item.supplement?.name
@@ -64,7 +64,7 @@ export const AllSupplements: FC = () => {
                         icon={supplement.supplement?.icon}
                     />
                 ))}
-            <h2 className="text-lg text-secondary my-4">all</h2>
+            <h2 className="my-4 text-lg text-secondary">all</h2>
             {filteredAllSupplements
                 ?.filter((item) =>
                     item?.name

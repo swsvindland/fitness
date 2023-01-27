@@ -8,8 +8,8 @@ export const Settings: FC = () => {
     useShowBackButton();
 
     return (
-        <div className="flex flex-col max-w-lg w-full">
-            <h1 className="text-secondary mb-2">Settings</h1>
+        <div className="flex w-full max-w-lg flex-col">
+            <h1 className="mb-2 text-secondary">Settings</h1>
             <LinkButton to="/settings/units" className="mb-2">
                 Change Units
             </LinkButton>

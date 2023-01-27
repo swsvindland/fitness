@@ -73,9 +73,9 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
     };
 
     return (
-        <div className="card p-4 my-2">
+        <div className="card my-2 p-4">
             {!saved && (
-                <span className="text-ternary mb-4">*Unsaved changes</span>
+                <span className="mb-4 text-ternary">*Unsaved changes</span>
             )}
             <Autocomplete
                 label="Exercise"
@@ -131,7 +131,7 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
                     setTime(event.target.value);
                 }}
             />
-            <div className="flex justify-between mt-2">
+            <div className="mt-2 flex justify-between">
                 <SecondaryButton className="m-1">Delete</SecondaryButton>
                 <Button onClick={handleSubmit}>Submit</Button>
             </div>

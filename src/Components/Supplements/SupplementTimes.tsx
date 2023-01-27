@@ -24,7 +24,7 @@ export const SupplementTimes: FC<IProps> = ({ times, setTimes }) => {
             <div className="mx-auto w-full max-w-md">
                 {times.map((time) => (
                     <Switch.Group key={time.name}>
-                        <div className="flex items-center justify-between my-2">
+                        <div className="my-2 flex items-center justify-between">
                             <Switch.Label className="mr-4 text-ternary">
                                 {time.name}
                             </Switch.Label>

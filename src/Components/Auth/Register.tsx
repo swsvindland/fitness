@@ -65,7 +65,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
     };
 
     return (
-        <main className="min-h-screen flex flex-col justify-center align-middle p-4 sm:px-6 lg:px-8 bg-background dark:bg-black">
+        <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="card py-8 px-4 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -144,7 +144,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
                             ) : (
                                 <Button
                                     type="submit"
-                                    className="w-full text-center flex justify-center"
+                                    className="flex w-full justify-center text-center"
                                     disabled={!agree}
                                 >
                                     Create Account
@@ -154,7 +154,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
                         <div>
                             <SecondaryButton
                                 onClick={goBack}
-                                className="w-full text-center flex justify-center"
+                                className="flex w-full justify-center text-center"
                             >
                                 Go Back
                             </SecondaryButton>

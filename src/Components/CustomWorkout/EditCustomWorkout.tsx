@@ -95,9 +95,9 @@ export const EditCustomWorkout: FC = () => {
 
     return (
         <div className="m-4">
-            <div className="mt-5 md:mt-0 md:col-span-2">
+            <div className="mt-5 md:col-span-2 md:mt-0">
                 <form onSubmit={handleSubmit}>
-                    <div className="shadow overflow-hidden rounded card w-80">
+                    <div className="card w-80 overflow-hidden rounded shadow">
                         <div className="p-4">
                             <Dropdown
                                 label="Workout Type"
@@ -164,7 +164,7 @@ export const EditCustomWorkout: FC = () => {
                                 }
                             />
                         </div>
-                        <div className="px-4 py-3 bg-primary-dark dark:bg-background text-right sm:px-6 flex justify-between">
+                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

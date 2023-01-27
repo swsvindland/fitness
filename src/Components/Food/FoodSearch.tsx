@@ -50,13 +50,13 @@ export const FoodSearch: FC<IProps> = ({
                 isLoading={optionsQuery.isLoading}
             />
             <SecondaryButton
-                className=" w-10 h-10 ml-2 !p-2"
+                className=" ml-2 h-10 w-10 !p-2"
                 onClick={handleClear}
             >
-                <XSolid className="w-6 h-6 fill-secondary" />
+                <XSolid className="h-6 w-6 fill-secondary" />
             </SecondaryButton>
-            <Button className=" w-10 h-10 ml-2 !p-2" type="submit">
-                <MagnifyingGlassSolid className="w-6 h-6 fill-secondary" />
+            <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
+                <MagnifyingGlassSolid className="h-6 w-6 fill-secondary" />
             </Button>
         </form>
     );

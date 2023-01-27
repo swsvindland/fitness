@@ -41,15 +41,15 @@ export const UnitsForm: FC = () => {
 
     return (
         <div className="m-4">
-            <div className="mt-5 md:mt-0 md:col-span-2">
-                <p className="text-ternary w-80 mb-4 text-center">
+            <div className="mt-5 md:col-span-2 md:mt-0">
+                <p className="mb-4 w-80 text-center text-ternary">
                     It is recommended that you do not change once you add a
                     bunch of data. It will not update past data entry, just how
                     labels and certain computations, such as body fat, are
                     computed
                 </p>
                 <form onSubmit={handleSubmit}>
-                    <div className="shadow overflow-hidden rounded card w-80">
+                    <div className="card w-80 overflow-hidden rounded shadow">
                         <div className="p-4">
                             <div className="flex items-center">
                                 <input
@@ -62,7 +62,7 @@ export const UnitsForm: FC = () => {
                                             setUnit(Units.Imperial);
                                         }
                                     }}
-                                    className="h-4 w-4 accent-secondary border-ternary"
+                                    className="h-4 w-4 border-ternary accent-secondary"
                                 />
                                 <label
                                     htmlFor="sex-male"
@@ -82,7 +82,7 @@ export const UnitsForm: FC = () => {
                                             setUnit(Units.Metric);
                                         }
                                     }}
-                                    className="h-4 w-4 accent-secondary border-ternary"
+                                    className="h-4 w-4 border-ternary accent-secondary"
                                 />
                                 <label
                                     htmlFor="sex-female"
@@ -92,7 +92,7 @@ export const UnitsForm: FC = () => {
                                 </label>
                             </div>
                         </div>
-                        <div className="px-4 py-3 bg-primary-dark dark:bg-background text-right sm:px-6 flex justify-between">
+                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

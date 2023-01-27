@@ -29,9 +29,9 @@ export const Sidebar: FC = () => {
         } mr-2 h-6 w-6`;
 
     return (
-        <div className="z-20 flex-1 flex flex-col min-h-0 border-gray-200 bg-primary-dark dark:bg-background shadow pl-safe ">
-            <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-                <nav className="mt-5 flex-1 px-2 bg-transparent space-y-1 mt-16">
+        <div className="z-20 flex min-h-0 flex-1 flex-col border-gray-200 bg-primary-dark shadow pl-safe dark:bg-background ">
+            <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+                <nav className="mt-5 mt-16 flex-1 space-y-1 bg-transparent px-2">
                     <Link to="/" className={linkStyle(['/'])}>
                         <Home className={iconStyle(['/'])} />
                         Home

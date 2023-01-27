@@ -47,13 +47,13 @@ export const FoodDetail: FC = () => {
     }, [options, unit]);
 
     return (
-        <div className="max-w-2xl w-full grid grid-cols-1">
+        <div className="grid w-full max-w-2xl grid-cols-1">
             <div className="my-8">
                 <h1 className="text-2xl font-bold text-secondary">
                     {foodDetailsQuery.data?.data.name}
                 </h1>
             </div>
-            <div className="w-full flex flex-col align-middle mb-2 justify-between">
+            <div className="mb-2 flex w-full flex-col justify-between align-middle">
                 <TextField
                     label="Quantity"
                     type="number"
@@ -71,7 +71,7 @@ export const FoodDetail: FC = () => {
                     setSelected={setUnit}
                     className="p-1"
                 />
-                <div className="p-1 mt-2">
+                <div className="mt-2 p-1">
                     {mutation.isLoading ? (
                         <Loading />
                     ) : (

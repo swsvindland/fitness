@@ -25,7 +25,7 @@ export const TextArea: FC<IProps> = ({
         'appearance-none block w-full px-3 py-2 border border-ternary rounded-md shadow-sm placeholder-ternary focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm bg-background text-secondary focus:bg-background focus:text-secondary autofill:!bg-background autofill:!text-secondary';
 
     return (
-        <div className={`${className} w-full m-1`}>
+        <div className={`${className} m-1 w-full`}>
             <label
                 htmlFor={id}
                 className="block text-sm font-medium text-secondary"

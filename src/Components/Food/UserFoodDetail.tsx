@@ -61,13 +61,13 @@ export const UserFoodDetail: FC = () => {
     }, [foodDetailsQuery.data?.data.servingAmount]);
 
     return (
-        <div className="max-w-2xl w-full grid grid-cols-1">
+        <div className="grid w-full max-w-2xl grid-cols-1">
             <div className="my-8">
                 <h1 className="text-2xl font-bold text-secondary">
                     {foodDetailsQuery.data?.data.foodV2?.name}
                 </h1>
             </div>
-            <div className="w-full flex flex-col align-middle mb-2 justify-between">
+            <div className="mb-2 flex w-full flex-col justify-between align-middle">
                 <TextField
                     label="Quantity"
                     type="number"
@@ -85,7 +85,7 @@ export const UserFoodDetail: FC = () => {
                     setSelected={setUnit}
                     className="p-1"
                 />
-                <div className="p-1 mt-2">
+                <div className="mt-2 p-1">
                     {updateMutation.isLoading ? (
                         <Loading />
                     ) : (
@@ -112,7 +112,7 @@ export const UserFoodDetail: FC = () => {
                         </Button>
                     )}
                 </div>
-                <div className="p-1 mt-2">
+                <div className="mt-2 p-1">
                     {deleteMutation.isLoading ? (
                         <Loading />
                     ) : (

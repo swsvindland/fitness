@@ -25,7 +25,7 @@ export const AddFood: FC = () => {
     }
 
     return (
-        <div className="max-w-2xl w-full grid grid-cols-1">
+        <div className="grid w-full max-w-2xl grid-cols-1">
             <div className="card p-4">
                 <FoodSearch
                     query={query}
@@ -34,9 +34,9 @@ export const AddFood: FC = () => {
                     selected={selected}
                 />
             </div>
-            <div className="max-w-2xl w-full">
+            <div className="w-full max-w-2xl">
                 {!searchFoodQuery.data?.data && selected ? (
-                    <div className="flex justify-between items-center text-center">
+                    <div className="flex items-center justify-between text-center">
                         <span className="text-ternary">No Results</span>
                     </div>
                 ) : (
@@ -50,14 +50,14 @@ export const AddFood: FC = () => {
                     ))
                 )}
             </div>
-            <div className="max-w-2xl w-full">
+            <div className="w-full max-w-2xl">
                 {!recentlyEaten.data?.data ? null : (
                     <h2 className="mt-2 text-lg text-secondary">
                         Recently Eaten
                     </h2>
                 )}
                 {!recentlyEaten.data?.data ? (
-                    <div className="flex justify-between items-center text-center" />
+                    <div className="flex items-center justify-between text-center" />
                 ) : (
                     recentlyEaten.data?.data.map((food) => (
                         <AddFoodCard

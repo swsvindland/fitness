@@ -54,7 +54,7 @@ export const Scanner: FC = () => {
     }, [stopScan]);
 
     return (
-        <div className="flex flex-col justify-center items-center z-50 min-h-screen p-4">
+        <div className="z-50 flex min-h-screen flex-col items-center justify-center p-4">
             <hr className="w-full border-y border-secondary" />
             <span>{err}</span>
             <Button className="fixed bottom-24" onClick={clickStopScan}>

@@ -14,7 +14,7 @@ export const Home: FC = () => {
     });
 
     return (
-        <div className="max-w-2xl w-full grid grid-cols-1">
+        <div className="grid w-full max-w-2xl grid-cols-1">
             <MacroGrid />
             <Todo />
             <BodyFatGraph />

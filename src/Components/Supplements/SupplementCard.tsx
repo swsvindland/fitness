@@ -37,17 +37,17 @@ export interface Time {
 const mapToIcon = (icon?: SupplementIcon) => {
     switch (icon) {
         case SupplementIcon.Capsule:
-            return <Capsule className="fill-primary-dark w-6" />;
+            return <Capsule className="w-6 fill-primary-dark" />;
         case SupplementIcon.Tablet:
-            return <Tablet className="fill-primary-dark w-6" />;
+            return <Tablet className="w-6 fill-primary-dark" />;
         case SupplementIcon.Injection:
-            return <Injection className="fill-primary-dark w-6" />;
+            return <Injection className="w-6 fill-primary-dark" />;
         case SupplementIcon.LargeScoop:
-            return <LargeScoop className="fill-primary-dark w-6" />;
+            return <LargeScoop className="w-6 fill-primary-dark" />;
         case SupplementIcon.SmallScoop:
-            return <SmallScoop className="fill-primary-dark w-6" />;
+            return <SmallScoop className="w-6 fill-primary-dark" />;
         case SupplementIcon.Liquid:
-            return <Liquid className="fill-primary-dark w-6" />;
+            return <Liquid className="w-6 fill-primary-dark" />;
         default:
             return <></>;
     }
@@ -118,11 +118,11 @@ export const SupplementCard: FC<IProps> = ({
                 onClick={() => (isUser ? handleCheck() : setOpen(true))}
                 className={`${
                     checked ? 'bg-primary-dark' : 'card'
-                } rounded overflow-hidden shadow-lg p-4 my-2 flex justify-between items-center w-full text-left`}
+                } my-2 flex w-full items-center justify-between overflow-hidden rounded p-4 text-left shadow-lg`}
             >
                 <div className="flex items-center">
                     <div className="mr-4">
-                        <div className="bg-ternary w-8 h-8 rounded-full flex justify-center items-center">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-ternary">
                             <div>{mapToIcon(icon)}</div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@ export const SupplementCard: FC<IProps> = ({
                         <div>
                             {times?.map((time, index) => (
                                 <span
-                                    className="text-xs mr-1 text-ternary"
+                                    className="mr-1 text-xs text-ternary"
                                     key={time}
                                 >
                                     {time} {index !== times.length - 1 && '|'}
@@ -151,7 +151,7 @@ export const SupplementCard: FC<IProps> = ({
                     checked &&
                     !mutation.isLoading &&
                     !userSupplementActivityQuery.isFetching && (
-                        <CircleCheckSolid className="fill-secondary w-8 h-8" />
+                        <CircleCheckSolid className="h-8 w-8 fill-secondary" />
                     )}
                 {isUser &&
                     (mutation.isLoading ||
@@ -161,7 +161,7 @@ export const SupplementCard: FC<IProps> = ({
                         href={url}
                         target="_blank"
                         rel="noreferrer"
-                        className="fill-ternary h-5 w-5"
+                        className="h-5 w-5 fill-ternary"
                     >
                         <ExternalLink />
                     </a>

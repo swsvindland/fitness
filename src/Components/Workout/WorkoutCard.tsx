@@ -21,19 +21,19 @@ interface IProps {
 const mapToIcon = (icon?: ExerciseIcon) => {
     switch (icon) {
         case ExerciseIcon.Barbell:
-            return <Barbell className="fill-primary-dark w-8" />;
+            return <Barbell className="w-8 fill-primary-dark" />;
         case ExerciseIcon.Dumbbell:
-            return <Dumbbell className="fill-primary-dark w-8" />;
+            return <Dumbbell className="w-8 fill-primary-dark" />;
         case ExerciseIcon.Cable:
-            return <Cable className="fill-primary-dark w-8" />;
+            return <Cable className="w-8 fill-primary-dark" />;
         case ExerciseIcon.Bodyweight:
-            return <BodyWeight className="fill-primary-dark w-8" />;
+            return <BodyWeight className="w-8 fill-primary-dark" />;
         case ExerciseIcon.Band:
-            return <Band className="fill-primary-dark w-8" />;
+            return <Band className="w-8 fill-primary-dark" />;
         case ExerciseIcon.Machine:
-            return <Machine className="fill-primary-dark w-8" />;
+            return <Machine className="w-8 fill-primary-dark" />;
         case ExerciseIcon.Cardio:
-            return <Cardio className="fill-primary-dark w-8" />;
+            return <Cardio className="w-8 fill-primary-dark" />;
         default:
             return <></>;
     }
@@ -44,27 +44,27 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
         <div
             role="listitem"
             key={exercise.id}
-            className="w-full col-span-1 card rounded-lg shadow"
+            className="card col-span-1 w-full rounded-lg shadow"
         >
-            <div className="w-full flex items-center justify-start p-6 space-x-6">
+            <div className="flex w-full items-center justify-start space-x-6 p-6">
                 <div className="">
-                    <div className="bg-ternary w-10 h-10 rounded-full flex justify-center items-center">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-ternary">
                         <div className="">{mapToIcon(icon)}</div>
                     </div>
                 </div>
                 <div className="flex-1 truncate">
                     <div className="flex items-center space-x-3">
-                        <h3 className="text-secondary text-sm font-medium truncate">
+                        <h3 className="truncate text-sm font-medium text-secondary">
                             {exercise.exercise?.name}
                         </h3>
                     </div>
 
                     {exercise.time ? (
-                        <p className="mt-1 text-ternary text-sm truncate">
+                        <p className="mt-1 truncate text-sm text-ternary">
                             {(exercise.time ?? 0) / 60} minutes
                         </p>
                     ) : (
-                        <p className="mt-1 text-ternary text-sm truncate">
+                        <p className="mt-1 truncate text-sm text-ternary">
                             {exercise.minReps === exercise.maxReps
                                 ? exercise.maxReps
                                 : `${exercise.minReps} - ${exercise.maxReps}`}{' '}
