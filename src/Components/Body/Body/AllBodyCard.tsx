@@ -2,8 +2,7 @@ import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
 import { Loading } from '../../Loading';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
-import { ChangeEvent, FC, useContext, useState } from 'react';
-import { AuthContext } from '../../Auth/Auth';
+import { ChangeEvent, FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteUserBody, updateUserBody } from '../../../api';
 import { CircleXMark } from '../../Icons/CircleXMark';
@@ -16,7 +15,6 @@ interface IProps {
 }
 
 export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
-    const { user } = useContext(AuthContext);
     const [bodyState, setBodyState] = useState<UserBody>(defaultBody);
     const [saved, setSaved] = useState<boolean>(false);
     const queryClient = useQueryClient();
