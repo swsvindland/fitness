@@ -93,52 +93,40 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                 </div>
             </div>
             <div>
-                {workoutExerciseQuery.isFetching ? (
-                    <div className="flex flex-col">
-                        {Array.from({
-                            length: workoutExerciseQuery.data?.data.sets ?? 1,
-                        }).map((_, index) => (
-                            <Loading key={index} className="my-2" />
-                        ))}
-                    </div>
-                ) : (
-                    <>
-                        {workoutExerciseQuery.data?.data.userWorkoutActivities.map(
-                            (activity, index) => (
-                                <>
-                                    {activity.time ? (
-                                        <WorkoutSetTime
-                                            key={index}
-                                            id={activity.id}
-                                            workoutExerciseId={
-                                                activity.workoutExerciseId
-                                            }
-                                            set={index}
-                                            week={week}
-                                            day={day}
-                                            defaultReps={activity.reps}
-                                            defaultTime={activity.time}
-                                            defaultSaved={activity.saved}
-                                        />
-                                    ) : (
-                                        <WorkoutSet
-                                            key={index}
-                                            id={activity.id}
-                                            workoutExerciseId={
-                                                activity.workoutExerciseId
-                                            }
-                                            set={index}
-                                            week={week}
-                                            day={day}
-                                            defaultReps={activity.reps}
-                                            defaultWeight={activity.weight}
-                                            defaultSaved={activity.saved}
-                                        />
-                                    )}
-                                </>
-                            )
-                        )}
-                    </>
+                {workoutExerciseQuery.data?.data.userWorkoutActivities.map(
+                    (activity, index) => (
+                        <>
+                            {activity.time ? (
+                                <WorkoutSetTime
+                                    key={`${index}-${activity.id}-${activity.time}`}
+                                    id={activity.id}
+                                    workoutExerciseId={
+                                        activity.workoutExerciseId
+                                    }
+                                    set={index}
+                                    week={week}
+                                    day={day}
+                                    defaultReps={activity.reps}
+                                    defaultTime={activity.time}
+                                    defaultSaved={activity.saved}
+                                />
+                            ) : (
+                                <WorkoutSet
+                                    key={`${index}-${activity.id}-${activity.weight}`}
+                                    id={activity.id}
+                                    workoutExerciseId={
+                                        activity.workoutExerciseId
+                                    }
+                                    set={index}
+                                    week={week}
+                                    day={day}
+                                    defaultReps={activity.reps}
+                                    defaultWeight={activity.weight}
+                                    defaultSaved={activity.saved}
+                                />
+                            )}
+                        </>
+                    )
                 )}
             </div>
         </div>
