@@ -121,7 +121,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
                                 <a
                                     target="_blank"
                                     rel="noreferrer"
-                                    href="https://svindland.dev/terms.html"
+                                    href="https://workout-track.com/terms"
                                     className="text-secondary"
                                 >
                                     Terms and Conditions
@@ -130,7 +130,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
                                 <a
                                     target="_blank"
                                     rel="noreferrer"
-                                    href="https://svindland.dev/privacy.html"
+                                    href="https://workout-track.com/privacy"
                                     className="text-secondary"
                                 >
                                     Privacy Policy

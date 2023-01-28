@@ -1,15 +1,26 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useContext } from 'react';
+import { AuthContext } from './Auth/Auth';
+import { SecondaryButton } from './Buttons/SecondaryButton';
+import { useHistory } from 'react-router-dom';
 
 interface IProps {
     children: ReactNode;
 }
 
 export const GettingStartedLayout: FC<IProps> = ({ children }) => {
+    const history = useHistory();
     return (
-        <div className="min-h-screen bg-background dark:bg-black">
-            <main className="my-24 flex justify-center p-4 pt-safe md:ml-48">
-                {children}
-            </main>
-        </div>
+        <main className="flex min-h-screen w-screen flex-col items-center justify-center bg-background p-4 dark:bg-black">
+            {children}
+            <SecondaryButton
+                onClick={() => {
+                    history.push('/');
+                    window.location.reload();
+                }}
+                className="max-w-lg"
+            >
+                Skip Setup
+            </SecondaryButton>
+        </main>
     );
 };
