@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';
 import { Loading } from '../Loading';
 import { useHistory } from 'react-router-dom';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
+import { Button } from '../Buttons/Button';
 
 export const FoodGrid: FC = () => {
     const history = useHistory();
+    const queryClient = useQueryClient();
 
     const handleRowClick = (foodId?: number) => {
         if (!foodId) return;
@@ -17,6 +19,11 @@ export const FoodGrid: FC = () => {
 
     const handleStartScan = () => {
         history.push('/scanner');
+    };
+
+    const handleAddFood = async () => {
+        await queryClient.invalidateQueries(['RecentUserFoods']);
+        history.push('/eat/add-food');
     };
 
     const foodQuery = useQuery(['UserFood'], () => {
@@ -33,9 +40,9 @@ export const FoodGrid: FC = () => {
                 <SecondaryButton className="mx-1" onClick={handleStartScan}>
                     Scan Barcode
                 </SecondaryButton>
-                <LinkButton to="/eat/add-food" className="mx-1">
+                <Button className="mx-1" onClick={handleAddFood}>
                     Add Food
-                </LinkButton>
+                </Button>
             </div>
             <div className="my-2 rounded ring-1 ring-ternary md:mx-0">
                 <table className="min-w-full divide-y divide-ternary">

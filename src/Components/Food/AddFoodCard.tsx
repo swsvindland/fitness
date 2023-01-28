@@ -6,7 +6,6 @@ import { PlusSolid } from '../Icons/PlusSolid';
 import { FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { quickAddFood, quickRemoveFood } from '../../api';
-import { Loading } from '../Loading';
 import { useUpdateFoodCache } from './hooks';
 
 interface IProps {
@@ -26,15 +25,15 @@ export const AddFoodCard: FC<IProps> = ({
     const updateFoodCache = useUpdateFoodCache();
 
     const quickAddMutation = useMutation(quickAddFood, {
-        onSuccess: (data) => {
-            setServings(data.data ?? 0);
+        onSuccess: () => {
+            setServings(servings + 1);
             updateFoodCache();
         },
     });
 
     const quickRemoveMutation = useMutation(quickRemoveFood, {
-        onSuccess: (data) => {
-            setServings(data.data ?? 0);
+        onSuccess: () => {
+            setServings(servings < 1 ? 0 : servings - 1);
             updateFoodCache();
         },
     });
@@ -53,22 +52,18 @@ export const AddFoodCard: FC<IProps> = ({
                 <span className="text-lg text-secondary">{name}</span>
                 <span className="text-sm text-ternary">{servingSize}</span>
             </Link>
-            {quickAddMutation.isLoading || quickRemoveMutation.isLoading ? (
-                <Loading />
-            ) : (
-                <div className="flex items-center">
-                    <SecondaryButton
-                        onClick={handleRemove}
-                        className="ml-1 w-8 w-8 !p-2"
-                    >
-                        <MinusSolid className="h-6 w-6 fill-secondary" />
-                    </SecondaryButton>
-                    <span className="m-3 text-ternary">{servings}</span>
-                    <Button onClick={handleAdd} className="mr-1 w-8 w-8 !p-2">
-                        <PlusSolid className="h-6 w-6 fill-secondary" />
-                    </Button>
-                </div>
-            )}
+            <div className="flex items-center">
+                <SecondaryButton
+                    onClick={handleRemove}
+                    className="ml-1 w-8 w-8 !p-2"
+                >
+                    <MinusSolid className="h-6 w-6 fill-secondary" />
+                </SecondaryButton>
+                <span className="m-3 text-ternary">{servings}</span>
+                <Button onClick={handleAdd} className="mr-1 w-8 w-8 !p-2">
+                    <PlusSolid className="h-6 w-6 fill-secondary" />
+                </Button>
+            </div>
         </div>
     );
 };

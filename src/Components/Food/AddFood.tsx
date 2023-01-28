@@ -59,9 +59,9 @@ export const AddFood: FC = () => {
                 {!recentlyEaten.data?.data ? (
                     <div className="flex items-center justify-between text-center" />
                 ) : (
-                    recentlyEaten.data?.data.map((food) => (
+                    recentlyEaten.data?.data.map((food, index) => (
                         <AddFoodCard
-                            key={food.foodV2Id}
+                            key={`${food.foodV2Id}-${food.servingAmount}`}
                             foodId={food.foodV2Id}
                             name={food.foodV2?.name ?? ''}
                             servingSize={food.serving?.servingDescription ?? ''}
