@@ -22,15 +22,15 @@ import { WorkoutType } from './types/WorkoutType';
 import { ProgressPhoto } from './types/ProgressPhoto';
 import { UserWorkoutExercise } from './types/UserWorkoutExercise';
 
-export const API_URL = 'http://localhost:7071';
+// export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://192.168.1.6:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-// export const API_URL = 'https://fitness-prod.azurewebsites.net';
+export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
-export const CDN_URL =
-    'https://fitnessdev.blob.core.windows.net/progress-photos/';
 // export const CDN_URL =
-//     'https://fitnessprod.blob.core.windows.net/progress-photos/';
+//     'https://fitnessdev.blob.core.windows.net/progress-photos/';
+export const CDN_URL =
+    'https://fitnessprod.blob.core.windows.net/progress-photos/';
 
 const getParams = (params?: object) => {
     const userId = localStorage.getItem('userId');
