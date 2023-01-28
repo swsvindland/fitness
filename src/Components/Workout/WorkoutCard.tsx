@@ -10,6 +10,9 @@ import { BodyWeight } from '../Icons/BodyWeight';
 import { Band } from '../Icons/Band';
 import { Machine } from '../Icons/Machine';
 import { WorkoutSetTime } from './WorkoutSetTime';
+import { getUserWorkoutExercise } from '../../api';
+import { useQuery } from '@tanstack/react-query';
+import { Loading } from '../Loading';
 
 interface IProps {
     exercise: WorkoutExercise;
@@ -40,6 +43,22 @@ const mapToIcon = (icon?: ExerciseIcon) => {
 };
 
 export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
+    const workoutExerciseQuery = useQuery(
+        ['UserWorkoutExercises', exercise.id, week, day],
+        () => getUserWorkoutExercise(exercise.id!, week, day),
+        { enabled: !!exercise.id }
+    );
+
+    if (exercise.id === undefined) {
+        return null;
+    }
+
+    if (workoutExerciseQuery.isLoading) {
+        return <Loading />;
+    }
+
+    console.log(workoutExerciseQuery.data);
+
     return (
         <div
             role="listitem"
@@ -74,27 +93,53 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                 </div>
             </div>
             <div>
-                {Array.from(Array(exercise.sets).keys()).map((set) => (
+                {workoutExerciseQuery.isFetching ? (
+                    <div className="flex flex-col">
+                        {Array.from({
+                            length: workoutExerciseQuery.data?.data.sets ?? 1,
+                        }).map((_, index) => (
+                            <Loading key={index} className="my-2" />
+                        ))}
+                    </div>
+                ) : (
                     <>
-                        {exercise.time ? (
-                            <WorkoutSetTime
-                                key={set}
-                                set={set}
-                                exercise={exercise}
-                                week={week}
-                                day={day}
-                            />
-                        ) : (
-                            <WorkoutSet
-                                key={set}
-                                set={set}
-                                exercise={exercise}
-                                week={week}
-                                day={day}
-                            />
+                        {workoutExerciseQuery.data?.data.userWorkoutActivities.map(
+                            (activity, index) => (
+                                <>
+                                    {activity.time ? (
+                                        <WorkoutSetTime
+                                            key={index}
+                                            id={activity.id}
+                                            workoutExerciseId={
+                                                activity.workoutExerciseId
+                                            }
+                                            set={index}
+                                            week={week}
+                                            day={day}
+                                            defaultReps={activity.reps}
+                                            defaultTime={activity.time}
+                                            defaultSaved={activity.saved}
+                                        />
+                                    ) : (
+                                        <WorkoutSet
+                                            key={index}
+                                            id={activity.id}
+                                            workoutExerciseId={
+                                                activity.workoutExerciseId
+                                            }
+                                            set={index}
+                                            week={week}
+                                            day={day}
+                                            defaultReps={activity.reps}
+                                            defaultWeight={activity.weight}
+                                            defaultSaved={activity.saved}
+                                        />
+                                    )}
+                                </>
+                            )
                         )}
                     </>
-                ))}
+                )}
             </div>
         </div>
     );

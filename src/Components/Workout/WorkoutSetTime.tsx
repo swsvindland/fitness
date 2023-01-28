@@ -1,17 +1,20 @@
-import { FC, useContext, useMemo, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
-import { WorkoutExercise } from '../../types/WorkoutExercise';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
-import { addWorkoutActivity, getWorkoutActivity } from '../../api';
+import { addWorkoutActivity } from '../../api';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
 
 interface IProps {
+    id: number | undefined;
+    workoutExerciseId: number;
     set: number;
-    exercise: WorkoutExercise;
     week: number;
     day: number;
+    defaultReps: number;
+    defaultTime?: number;
+    defaultSaved: boolean;
 }
 
 interface IState {
@@ -19,62 +22,39 @@ interface IState {
     time: string;
 }
 
-export const WorkoutSetTime: FC<IProps> = ({ set, exercise, week, day }) => {
+export const WorkoutSetTime: FC<IProps> = ({
+    id,
+    workoutExerciseId,
+    set,
+    week,
+    day,
+    defaultReps,
+    defaultTime,
+    defaultSaved,
+}) => {
     const { user } = useContext(AuthContext);
-    const [state, setState] = useState<IState>({ reps: 0, time: '0' });
-    const [saved, setSaved] = useState<boolean>(false);
+    const [state, setState] = useState<IState>({
+        reps: defaultReps ?? 0,
+        time: ((defaultTime ?? 0) / 60)?.toString(),
+    });
+    const [saved, setSaved] = useState<boolean>(defaultSaved);
     const queryClient = useQueryClient();
-
-    const userWorkoutActivityQuery = useQuery(
-        ['UserWorkoutActivity', exercise.id, set, week, day],
-        () => {
-            if (!exercise.id) return;
-            return getWorkoutActivity(exercise.id, set, week, day);
-        }
-    );
 
     const mutation = useMutation(addWorkoutActivity, {
         onSuccess: () => {
-            queryClient.invalidateQueries({
-                predicate: (query) =>
-                    query.queryKey[0] === 'UserWorkoutActivity' &&
-                    query.queryKey?.at(1) === exercise.id &&
-                    (query.queryKey?.at(2) ?? 0) >= set,
-            });
+            queryClient.invalidateQueries([
+                'UserWorkoutExercises',
+                workoutExerciseId,
+            ]);
             setSaved(true);
         },
     });
-
-    useMemo(() => {
-        if (!userWorkoutActivityQuery.data) {
-            return;
-        }
-
-        setState({
-            reps: userWorkoutActivityQuery.data?.data.reps,
-            time: (
-                parseFloat(
-                    userWorkoutActivityQuery.data?.data.time?.toString() ?? '0'
-                ) / 60
-            ).toString(),
-        });
-
-        if (userWorkoutActivityQuery.data.data.saved) {
-            setSaved(true);
-        } else {
-            setSaved(false);
-        }
-    }, [userWorkoutActivityQuery.data]);
-
-    if (userWorkoutActivityQuery.isLoading) {
-        return <Loading />;
-    }
 
     return (
         <div className="flex border-t border-ternary">
             <div className="flex flex-1 border-r border-ternary p-2">
                 <TextField
-                    id={`exercise-weight-${exercise.exerciseId}`}
+                    id={`exercise-weight-${id}-${set}`}
                     value={state.time}
                     type="number"
                     inputMode="decimal"
@@ -96,9 +76,9 @@ export const WorkoutSetTime: FC<IProps> = ({ set, exercise, week, day }) => {
                         className="h-8 w-8"
                         onClick={() => {
                             mutation.mutate({
-                                id: userWorkoutActivityQuery.data?.data.id,
+                                id: id,
                                 userId: user?.id ?? '',
-                                workoutExerciseId: exercise.id ?? 0,
+                                workoutExerciseId: workoutExerciseId,
                                 reps: state.reps,
                                 time: parseFloat(state.time) * 60,
                                 set,
