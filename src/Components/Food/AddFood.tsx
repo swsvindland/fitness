@@ -61,7 +61,7 @@ export const AddFood: FC = () => {
                 ) : (
                     recentlyEaten.data?.data.map((food, index) => (
                         <AddFoodCard
-                            key={`${food.foodV2Id}-${food.servingAmount}`}
+                            key={food.id}
                             foodId={food.foodV2Id}
                             name={food.foodV2?.name ?? ''}
                             servingSize={food.serving?.servingDescription ?? ''}
