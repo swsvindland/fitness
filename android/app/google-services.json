@@ -1,46 +1,54 @@
 {
-    "project_info": {
-        "project_number": "857870999277",
-        "project_id": "lifttrack-b8673",
-        "storage_bucket": "lifttrack-b8673.appspot.com"
-    },
-    "client": [
-        {
-            "client_info": {
-                "mobilesdk_app_id": "1:857870999277:android:6acd082a6d76753014b6e4",
-                "android_client_info": {
-                    "package_name": "com.svindland.fitness"
-                }
-            },
-            "oauth_client": [
-                {
-                    "client_id": "857870999277-fffqhhe88m1pabagkoce1mmnqevbfpvn.apps.googleusercontent.com",
-                    "client_type": 3
-                }
-            ],
-            "api_key": [
-                {
-                    "current_key": "AIzaSyD0r1jdzmAlI8vTTUao8xNSv3xR8FFqud0"
-                }
-            ],
-            "services": {
-                "appinvite_service": {
-                    "other_platform_oauth_client": [
-                        {
-                            "client_id": "857870999277-fffqhhe88m1pabagkoce1mmnqevbfpvn.apps.googleusercontent.com",
-                            "client_type": 3
-                        },
-                        {
-                            "client_id": "857870999277-028pa9vrl01ug85od5rtum5kc6ecssop.apps.googleusercontent.com",
-                            "client_type": 2,
-                            "ios_info": {
-                                "bundle_id": "com.svindland.fitness"
-                            }
-                        }
-                    ]
-                }
-            }
+  "project_info": {
+    "project_number": "857870999277",
+    "project_id": "lifttrack-b8673",
+    "storage_bucket": "lifttrack-b8673.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857870999277:android:6acd082a6d76753014b6e4",
+        "android_client_info": {
+          "package_name": "com.svindland.fitness"
         }
-    ],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "857870999277-01qjsspeoort7u2m3met8dpqt7a5qpkl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.svindland.fitness",
+            "certificate_hash": "1363226da8610ce9756ae3560839d70eeb3fa3dc"
+          }
+        },
+        {
+          "client_id": "857870999277-fffqhhe88m1pabagkoce1mmnqevbfpvn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0r1jdzmAlI8vTTUao8xNSv3xR8FFqud0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "857870999277-fffqhhe88m1pabagkoce1mmnqevbfpvn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "857870999277-028pa9vrl01ug85od5rtum5kc6ecssop.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.svindland.fitness"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

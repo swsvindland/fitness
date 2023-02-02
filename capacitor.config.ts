@@ -8,6 +8,12 @@ const config: CapacitorConfig = {
     server: {
         hostname: 'workout-track.com',
     },
+    plugins: {
+        FirebaseAuthentication: {
+            skipNativeAuth: false,
+            providers: ['apple.com', 'google.com'],
+        },
+    },
 };
 
 export default config;

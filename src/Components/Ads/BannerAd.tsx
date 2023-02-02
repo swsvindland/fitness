@@ -1,7 +1,14 @@
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
-import { AdMobPlus, BannerAd as Banner } from '@admob-plus/capacitor';
-import { isPlatform } from '@ionic/react';
+import {
+    AdMob,
+    AdMobBannerSize,
+    BannerAdOptions,
+    BannerAdPluginEvents,
+    BannerAdPosition,
+    BannerAdSize,
+} from '@capacitor-community/admob';
 import { AuthContext } from '../Auth/Auth';
+import { isPlatform } from '@ionic/react';
 
 export const BannerAd: FC = () => {
     const { user } = useContext(AuthContext);
@@ -33,44 +40,45 @@ export const BannerAd: FC = () => {
 
     const [showingAd, setShowingAd] = useState(false);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const banner = new Banner({
-        adUnitId: mapPlatformToBannerId(),
-        position: 'top',
-    });
-
     const loadAd = useCallback(async () => {
         if (user?.paid) return null;
         if (mapPlatformToBannerId() === '') return null;
 
         if (!showingAd) {
-            await AdMobPlus.requestTrackingAuthorization();
-            await banner.show();
+            await AdMob.initialize({
+                requestTrackingAuthorization: true,
+                testingDevices: [mapPlatformToBannerId()],
+                initializeForTesting: true,
+            });
+
+            AdMob.addListener(BannerAdPluginEvents.Loaded, () => {
+                // Subscribe Banner Event Listener
+            });
+
+            AdMob.addListener(
+                BannerAdPluginEvents.SizeChanged,
+                (size: AdMobBannerSize) => {
+                    // Subscribe Change Banner Size
+                }
+            );
+
+            const options: BannerAdOptions = {
+                adId: mapPlatformToBannerId(),
+                adSize: BannerAdSize.BANNER,
+                position: BannerAdPosition.TOP_CENTER,
+                margin: 0,
+            };
+            await AdMob.showBanner(options);
+
             setShowingAd(true);
         }
-    }, [banner, showingAd, user?.paid]);
-
-    const hideAd = useCallback(async () => {
-        await banner.hide();
-    }, [banner]);
+    }, [showingAd, user?.paid]);
 
     useEffect(() => {
         loadAd();
     }, [loadAd]);
 
-    useEffect(() => {
-        if (user?.paid) {
-            hideAd();
-        }
-    }, [banner, hideAd, user?.paid]);
+    if (user?.paid) return null;
 
-    useEffect(() => {
-        return () => {
-            hideAd();
-        };
-        // disabling, because we want to hide the ad when the component unmounts
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return <div className="banner-ad" />;
+    return <div className="banner-ad mb-12" />;
 };

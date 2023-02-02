@@ -45,7 +45,6 @@ export const Auth: FC = () => {
                         <Routes />
                         <ScrollToTop />
                         <MinVersion />
-                        {!user.paid && <BannerAd />}
                     </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>

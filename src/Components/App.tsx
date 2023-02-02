@@ -5,18 +5,10 @@ import { Auth } from './Auth/Auth';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 
 import '../index.css';
+import { firebaseConfig } from '../utils/firebase';
+import { initializeApp } from 'firebase/app';
 
 setupIonicReact();
-
-const firebaseConfig = {
-    apiKey: 'AIzaSyB8hv3LRia0DArtg9o4Mq3wZJEHvyZxwog',
-    authDomain: 'lifttrack-b8673.firebaseapp.com',
-    projectId: 'lifttrack-b8673',
-    storageBucket: 'lifttrack-b8673.appspot.com',
-    messagingSenderId: '857870999277',
-    appId: '1:857870999277:web:1ffbb703370f977714b6e4',
-    measurementId: 'G-SN0LHF572Z',
-};
 
 export const App: FC = () => {
     const queryClient = new QueryClient();
@@ -25,6 +17,7 @@ export const App: FC = () => {
 
     useMemo(() => {
         if (!analyticsInitialized) {
+            initializeApp(firebaseConfig);
             FirebaseAnalytics.initializeFirebase(firebaseConfig);
             FirebaseAnalytics.enable();
 

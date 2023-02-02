@@ -8,16 +8,22 @@ import { HeaderContext } from './HeaderContext';
 import { UserSolid } from '../Icons/UserSolid';
 import { Dumbbell } from '../Icons/Dumbbell';
 import { PurchaseAccessIcon } from '../Purchase/PurchaseAccessIcon';
+import { signOut } from '../../utils/auth';
+import { BannerAd } from '../Ads/BannerAd';
 
 export const Header: FC = () => {
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     const { goBack } = useContext(HeaderContext);
     const history = useHistory();
 
-    const logout = () => {
-        localStorage.clear();
+    const logout = async () => {
+        try {
+            await signOut();
+        } finally {
+            localStorage.clear();
 
-        setUser(undefined);
+            setUser(undefined);
+        }
     };
 
     return (
@@ -25,6 +31,7 @@ export const Header: FC = () => {
             as="nav"
             className="fixed inset-x-0 top-0 z-10 block bg-primary-dark shadow pt-safe dark:bg-background"
         >
+            {!user?.paid && <BannerAd />}
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     {goBack ? (

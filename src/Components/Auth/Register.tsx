@@ -4,7 +4,7 @@ import { TextField } from '../TextFields/TextField';
 import { Loading } from '../Loading';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
-import { auth, createUser, getUser } from '../../api';
+import { authV2, createUser, getUser } from '../../api';
 import { User } from '../../types/user';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';
@@ -33,8 +33,8 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
         }
     };
 
-    const loginMutation = useMutation(auth, {
-        onSuccess: async (data, variables, context) => {
+    const loginMutation = useMutation(authV2, {
+        onSuccess: async (data) => {
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('userId', data.data.userId);
 

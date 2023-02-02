@@ -4,10 +4,18 @@ import { User } from '../../types/user';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { TextField } from '../TextFields/TextField';
-import { auth, getUser } from '../../api';
+import { authV2, getUser, ssoAuthV2 } from '../../api';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';
+import { Apple } from '../Icons/Apple';
+import { Google } from '../Icons/Google';
+import {
+    getCurrentUser,
+    getIdToken,
+    signInWithApple,
+    signInWithGoogle,
+} from '../../utils/auth';
 
 interface IProps {
     setUser: (user?: User) => void;
@@ -41,8 +49,8 @@ export const Login: FC<IProps> = ({
         }
     );
 
-    const loginMutation = useMutation(auth, {
-        onSuccess: async (data, variables, context) => {
+    const loginMutation = useMutation(authV2, {
+        onSuccess: async (data) => {
             localStorage.setItem('token', data.data.token);
             localStorage.setItem('userId', data.data.userId);
 
@@ -57,6 +65,53 @@ export const Login: FC<IProps> = ({
             setUser(user.data);
         },
     });
+
+    const ssoMutation = useMutation(ssoAuthV2, {
+        onSuccess: async (data) => {
+            localStorage.setItem('token', data.data.token);
+            localStorage.setItem('userId', data.data.userId);
+
+            if (Capacitor.getPlatform() === 'ios') {
+                await SavePassword.promptDialog({
+                    username: email,
+                    password: password,
+                });
+            }
+
+            const user = await getUser();
+            setUser(user.data);
+        },
+    });
+
+    const handleGoogleSignIn = async () => {
+        await signInWithGoogle();
+
+        const userIdToken = await getIdToken();
+        const user = await getCurrentUser();
+
+        if (!user?.email) return;
+        if (!userIdToken) return;
+
+        ssoMutation.mutate({
+            email: user.email,
+            token: userIdToken,
+        });
+    };
+
+    const handleAppleSignIn = async () => {
+        await signInWithApple();
+
+        const userIdToken = await getIdToken();
+        const user = await getCurrentUser();
+
+        if (!user?.email) return;
+        if (!userIdToken) return;
+
+        ssoMutation.mutate({
+            email: user.email,
+            token: userIdToken,
+        });
+    };
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -139,6 +194,26 @@ export const Login: FC<IProps> = ({
                             </button>
                         </div>
                     </form>
+                </div>
+                <div className="mt-4 grid grid-cols-1 gap-4">
+                    {Capacitor.getPlatform() === 'ios' ? (
+                        <Button
+                            className="flex w-full justify-center text-center"
+                            onClick={handleAppleSignIn}
+                        >
+                            <Apple className="mr-2 w-4 fill-secondary" /> Sign
+                            In with Apple
+                        </Button>
+                    ) : null}
+                    {Capacitor.getPlatform() === 'android' ? (
+                        <Button
+                            className="flex w-full justify-center text-center"
+                            onClick={handleGoogleSignIn}
+                        >
+                            <Google className="mr-2 w-4 fill-secondary" /> Sign
+                            In with Google
+                        </Button>
+                    ) : null}
                 </div>
             </div>
         </main>

@@ -1,13 +1,15 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode, useContext } from 'react';
 import { Sidebar } from './Navigation/Sidebar';
 import { BottomNavigation } from './Navigation/BottomNavigation';
 import { Header } from './Navigation/Header';
+import { AuthContext } from './Auth/Auth';
 
 interface IProps {
     children: ReactNode;
 }
 
 export const Layout: FC<IProps> = ({ children }) => {
+    const { user } = useContext(AuthContext);
     return (
         <>
             <div className="min-h-screen bg-background dark:bg-black">
@@ -18,7 +20,11 @@ export const Layout: FC<IProps> = ({ children }) => {
                     <Header />
                 </header>
                 <main className="my-24 flex justify-center p-4 pt-safe md:ml-48">
-                    <div className="flex flex-1 flex-col items-center justify-center">
+                    <div
+                        className={`${
+                            user?.paid ? '' : 'mt-8'
+                        } flex flex-1 flex-col items-center justify-center`}
+                    >
                         {children}
                     </div>
                 </main>
