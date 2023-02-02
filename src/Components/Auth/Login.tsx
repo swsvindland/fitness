@@ -126,7 +126,7 @@ export const Login: FC<IProps> = ({
         setForgotPassword(true);
     };
 
-    if (silentLoginQuery.isFetching) {
+    if (silentLoginQuery.isFetching || ssoMutation.isLoading) {
         return (
             <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
