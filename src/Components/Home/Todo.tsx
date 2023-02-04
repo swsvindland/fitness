@@ -73,7 +73,11 @@ export const Todo: FC = () => {
                     dashboardQuery.data?.data.supplementsTracked ||
                     false
                 }
-                checked={dashboardQuery.data?.data.supplementsTracked || false}
+                checked={
+                    (!dashboardQuery.data?.data.addSupplements &&
+                        dashboardQuery.data?.data.supplementsTracked) ||
+                    false
+                }
                 route="/supplements"
             />
             <TodoItem
