@@ -28,6 +28,9 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
     const [time, setTime] = useState<string | undefined>(
         workoutExercise.time?.toString()
     );
+    const [restTime, setRestTime] = useState<string | undefined>(
+        workoutExercise.restTime?.toString()
+    );
     const [saved, setSaved] = useState<boolean>(false);
     const queryClient = useQueryClient();
 
@@ -69,6 +72,7 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
             time: time ? parseInt(time) : undefined,
             order: index,
             day: workoutExercise.day,
+            restTime: restTime ? parseInt(restTime) : undefined,
         });
     };
 
@@ -129,6 +133,14 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
                 onChange={(event) => {
                     setSaved(false);
                     setTime(event.target.value);
+                }}
+            />
+            <TextField
+                label="RestTime (in seconds) (will display in minutes on workout)"
+                value={restTime ?? ''}
+                onChange={(event) => {
+                    setSaved(false);
+                    setRestTime(event.target.value);
                 }}
             />
             <div className="mt-2 flex justify-between">

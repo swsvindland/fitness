@@ -12,4 +12,5 @@ export interface WorkoutExercise {
     maxReps?: number;
     time?: number;
     order: number;
+    restTime?: number;
 }

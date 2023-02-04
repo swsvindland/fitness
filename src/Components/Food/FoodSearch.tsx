@@ -2,10 +2,10 @@ import { FC, FormEvent } from 'react';
 import { Button } from '../Buttons/Button';
 import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
 import { Autocomplete } from '../Autocomplete';
-import { foodAutocomplete } from '../../api';
 import { useQuery } from '@tanstack/react-query';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { XSolid } from '../Icons/XSolid';
+import { foodAutocomplete } from '../../api';
 
 interface IProps {
     query: string;

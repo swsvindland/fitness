@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { LinkButton } from '../Buttons/LinkButton';
 import { classNames } from '../../utils/classNames';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getUserFoods } from '../../api';

@@ -9,15 +9,19 @@ import { quickAddFood, quickRemoveFood } from '../../api';
 import { useUpdateFoodCache } from './hooks';
 
 interface IProps {
+    userFoodId?: number;
     foodId: number;
     name: string;
+    brandName: string;
     servingSize: string;
     defaultServings?: number;
 }
 
 export const AddFoodCard: FC<IProps> = ({
+    userFoodId,
     foodId,
     name,
+    brandName,
     servingSize,
     defaultServings,
 }) => {
@@ -26,30 +30,39 @@ export const AddFoodCard: FC<IProps> = ({
 
     const quickAddMutation = useMutation(quickAddFood, {
         onSuccess: () => {
-            setServings(servings + 1);
             updateFoodCache();
         },
     });
 
     const quickRemoveMutation = useMutation(quickRemoveFood, {
         onSuccess: () => {
-            setServings(servings < 1 ? 0 : servings - 1);
             updateFoodCache();
         },
     });
 
     const handleAdd = () => {
+        setServings(servings + 1);
         quickAddMutation.mutate(foodId);
     };
 
     const handleRemove = () => {
+        setServings(servings < 1 ? 0 : servings - 1);
         quickRemoveMutation.mutate(foodId);
     };
 
     return (
         <div className="card my-2 flex flex-row items-center justify-between p-4">
-            <Link to={`/eat/food/${foodId}`} className="flex flex-col p-4">
-                <span className="text-lg text-secondary">{name}</span>
+            <Link
+                to={
+                    defaultServings && userFoodId
+                        ? `/eat/user-food/${userFoodId}`
+                        : `/eat/food/${foodId}`
+                }
+                className="flex flex-col p-4"
+            >
+                <span className="text-lg text-secondary">
+                    {name} ({brandName})
+                </span>
                 <span className="text-sm text-ternary">{servingSize}</span>
             </Link>
             <div className="flex items-center">

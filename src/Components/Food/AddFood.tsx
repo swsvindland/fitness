@@ -45,6 +45,7 @@ export const AddFood: FC = () => {
                             key={food.foodId}
                             foodId={food.foodId}
                             name={food.foodName}
+                            brandName={food.brandName ?? 'generic'}
                             servingSize={food.foodDescription}
                         />
                     ))
@@ -62,8 +63,10 @@ export const AddFood: FC = () => {
                     recentlyEaten.data?.data.map((food, index) => (
                         <AddFoodCard
                             key={food.id}
+                            userFoodId={food.id}
                             foodId={food.foodV2Id}
                             name={food.foodV2?.name ?? ''}
+                            brandName={food.foodV2?.brand ?? 'generic'}
                             servingSize={food.serving?.servingDescription ?? ''}
                             defaultServings={food.servingAmount}
                         />
