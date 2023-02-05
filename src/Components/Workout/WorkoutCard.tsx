@@ -57,8 +57,6 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
         return <Loading />;
     }
 
-    console.log(workoutExerciseQuery.data);
-
     return (
         <div
             role="listitem"
@@ -109,6 +107,9 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                                     defaultReps={activity.reps}
                                     defaultTime={activity.time}
                                     defaultSaved={activity.saved}
+                                    timer={
+                                        workoutExerciseQuery.data?.data.restTime
+                                    }
                                 />
                             ) : (
                                 <WorkoutSet
@@ -123,6 +124,9 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                                     defaultReps={activity.reps}
                                     defaultWeight={activity.weight}
                                     defaultSaved={activity.saved}
+                                    timer={
+                                        workoutExerciseQuery.data?.data.restTime
+                                    }
                                 />
                             )}
                         </>

@@ -9,5 +9,6 @@ export interface UserWorkoutExercise {
     minReps?: number;
     maxReps?: number;
     time?: number;
+    restTime?: number;
     userWorkoutActivities: UserWorkoutActivity[];
 }

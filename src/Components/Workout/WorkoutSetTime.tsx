@@ -5,6 +5,7 @@ import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { addWorkoutActivity } from '../../api';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
+import { SnackbarContext } from '../Snackbars/SnackbarProvider';
 
 interface IProps {
     id: number | undefined;
@@ -15,6 +16,7 @@ interface IProps {
     defaultReps: number;
     defaultTime?: number;
     defaultSaved: boolean;
+    timer?: number;
 }
 
 interface IState {
@@ -31,8 +33,10 @@ export const WorkoutSetTime: FC<IProps> = ({
     defaultReps,
     defaultTime,
     defaultSaved,
+    timer,
 }) => {
     const { user } = useContext(AuthContext);
+    const { setOpenRestTimer } = useContext(SnackbarContext);
     const [state, setState] = useState<IState>({
         reps: defaultReps ?? 0,
         time: ((defaultTime ?? 0) / 60)?.toString(),
@@ -47,6 +51,10 @@ export const WorkoutSetTime: FC<IProps> = ({
                 workoutExerciseId,
             ]);
             setSaved(true);
+            setOpenRestTimer({
+                id: `${workoutExerciseId}-${set}`,
+                time: timer,
+            });
         },
     });
 

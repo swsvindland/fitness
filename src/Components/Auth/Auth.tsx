@@ -8,7 +8,7 @@ import { HeaderProvider } from '../Navigation/HeaderContext';
 import { ScrollToTop } from '../ScrollToTop';
 import { MinVersion } from '../MinVersion';
 import { ForgotPassword } from './ForgotPassword';
-import { BannerAd } from '../Ads/BannerAd';
+import { SnackbarProvider } from '../Snackbars/SnackbarProvider';
 
 interface IAuthContext {
     user?: User;
@@ -42,9 +42,11 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
-                        <Routes />
-                        <ScrollToTop />
-                        <MinVersion />
+                        <SnackbarProvider>
+                            <Routes />
+                            <ScrollToTop />
+                            <MinVersion />
+                        </SnackbarProvider>
                     </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>
