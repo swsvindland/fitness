@@ -50,6 +50,7 @@ export const EditCustomWorkoutExercises: FC = () => {
             time: undefined,
             day,
             order: workoutExercises.length + 1,
+            restTime: undefined,
         };
 
         setWorkoutExercises([...workoutExercises, newWorkoutExercise]);
