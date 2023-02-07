@@ -34,35 +34,37 @@ export const RestTimer: FC<IProps> = ({ timer }) => {
 
     return (
         <div
-            id="toast-default"
-            className="sticky top-20 z-20 flex w-full items-center rounded-lg bg-card p-4 text-secondary shadow dark:bg-primary-dark"
+            id="rest-timer"
+            className="sticky top-20 z-20 mx-2 h-0 w-full"
             role="alert"
         >
-            <div className="flex w-full flex-row items-center justify-between">
-                <div className="ml-3 mr-8 w-full text-sm font-normal">
-                    <div className="relative w-full">
-                        <span>Rest Timer</span>
-                        <div className="my-2 flex h-2 overflow-hidden rounded bg-secondary-light text-xs shadow-inner">
-                            <div
-                                style={{
-                                    width: `${percentage}%`,
-                                }}
-                                className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-none shadow-inner ${
-                                    percentage < 10
-                                        ? 'bg-secondary'
-                                        : 'bg-primary'
-                                }`}
-                            ></div>
+            <div className="flex w-full items-center rounded-lg bg-card p-4 text-secondary shadow dark:bg-primary-dark">
+                <div className="flex w-full flex-row items-center justify-between">
+                    <div className="ml-3 mr-8 w-full text-sm font-normal">
+                        <div className="relative w-full">
+                            <span>Rest Timer</span>
+                            <div className="my-2 flex h-2 overflow-hidden rounded bg-secondary-light text-xs shadow-inner">
+                                <div
+                                    style={{
+                                        width: `${percentage}%`,
+                                    }}
+                                    className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-none shadow-inner ${
+                                        percentage < 10
+                                            ? 'bg-secondary'
+                                            : 'bg-primary'
+                                    }`}
+                                ></div>
+                            </div>
+                            <span>{time} seconds left</span>
                         </div>
-                        <span>{time} seconds left</span>
                     </div>
+                    <SecondaryButton
+                        className="my-auto h-8 p-2"
+                        onClick={handleClose}
+                    >
+                        <XSolid className="h-4 w-4 fill-secondary" />
+                    </SecondaryButton>
                 </div>
-                <SecondaryButton
-                    className="my-auto h-8 p-2"
-                    onClick={handleClose}
-                >
-                    <XSolid className="h-4 w-4 fill-secondary" />
-                </SecondaryButton>
             </div>
         </div>
     );

@@ -42,11 +42,9 @@ export const Auth: FC = () => {
             <AuthContext.Provider value={authContext}>
                 <IonReactRouter>
                     <HeaderProvider>
-                        <SnackbarProvider>
-                            <Routes />
-                            <ScrollToTop />
-                            <MinVersion />
-                        </SnackbarProvider>
+                        <Routes />
+                        <ScrollToTop />
+                        <MinVersion />
                     </HeaderProvider>
                 </IonReactRouter>
             </AuthContext.Provider>

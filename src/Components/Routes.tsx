@@ -36,6 +36,7 @@ import { ProgressGallery } from './ProgressPhotos/ProgressGallery';
 import { AllWeights } from './Body/Weight/AllWeights';
 import { AllBloodPressure } from './Body/BloodPressure/AllBloodPressure';
 import { AllBody } from './Body/Body/AllBody';
+import { SnackbarProvider } from './Snackbars/SnackbarProvider';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -68,102 +69,107 @@ export const Routes: FC = () => {
                 <Scanner />
             </Route>
             <Layout>
-                <Route path="/" exact={true}>
-                    <Home />
-                </Route>
-                <Route path="/workout" exact={true}>
-                    <Workout />
-                </Route>
-                <Route path="/workout/store" exact={true}>
-                    <WorkoutStore />
-                </Route>
-                <Route path="/workout/store/:workoutId" exact={true}>
-                    <WorkoutDetail />
-                </Route>
-                <Route path="/workout/custom/:workoutId" exact={true}>
-                    <UserCustomWorkoutDetail />
-                </Route>
-                <Route path="/cardio" exact={true}>
-                    <Cardio />
-                </Route>
-                <Route path="/cardio/store" exact={true}>
-                    <CardioStore />
-                </Route>
-                <Route path="/eat" exact={true}>
-                    <Eat />
-                </Route>
-                <Route path="/eat/add-food" exact={true}>
-                    <AddFood />
-                </Route>
-                <Route path="/eat/food/:foodId" exact={true}>
-                    <FoodDetail />
-                </Route>
-                <Route path="/eat/user-food/:userFoodId" exact={true}>
-                    <UserFoodDetail />
-                </Route>
-                <Route path="/eat/scan/:barcode" exact={true}>
-                    <ScanFood />
-                </Route>
-                <Route path="/eat/custom-macros" exact={true}>
-                    <CustomMacroForm />
-                </Route>
-                <Route path="/supplements" exact={true}>
-                    <Supplements />
-                </Route>
-                <Route path="/supplements/all-supplements" exact={true}>
-                    <AllSupplements />
-                </Route>
-                <Route path="/body" exact={true}>
-                    <Body />
-                </Route>
-                <Route path="/body/weight" exact={true}>
-                    <WeighInForm />
-                </Route>
-                <Route path="/body/all-weight" exact={true}>
-                    <AllWeights />
-                </Route>
-                <Route path="/body/body" exact={true}>
-                    <BodyCheckInForm />
-                </Route>
-                <Route path="/body/all-bodies" exact={true}>
-                    <AllBody />
-                </Route>
-                <Route path="/body/height" exact={true}>
-                    <HeightForm />
-                </Route>
-                <Route path="/body/blood-pressure" exact={true}>
-                    <BloodPressureCheckInForm />
-                </Route>
-                <Route path="/body/all-blood-pressure" exact={true}>
-                    <AllBloodPressure />
-                </Route>
-                <Route path="/body/sex" exact={true}>
-                    <SexForm />
-                </Route>
-                <Route path="/body/progress/upload" exact={true}>
-                    <ProgressCamera />
-                </Route>
-                <Route path="/body/progress" exact={true}>
-                    <ProgressGallery />
-                </Route>
-                <Route path="/settings" exact={true}>
-                    <Settings />
-                </Route>
-                <Route path="/settings/units" exact={true}>
-                    <UnitsForm />
-                </Route>
-                <Route path="/settings/change-password" exact={true}>
-                    <ChangePasswordForm />
-                </Route>
-                <Route path="/workout/create" exact={true}>
-                    <CreateCustomWorkout />
-                </Route>
-                <Route path="/workout/edit/:workoutId" exact={true}>
-                    <EditCustomWorkout />
-                </Route>
-                <Route path="/workout/edit/exercises/:workoutId" exact={true}>
-                    <EditCustomWorkoutExercises />
-                </Route>
+                <SnackbarProvider>
+                    <Route path="/" exact={true}>
+                        <Home />
+                    </Route>
+                    <Route path="/workout" exact={true}>
+                        <Workout />
+                    </Route>
+                    <Route path="/workout/store" exact={true}>
+                        <WorkoutStore />
+                    </Route>
+                    <Route path="/workout/store/:workoutId" exact={true}>
+                        <WorkoutDetail />
+                    </Route>
+                    <Route path="/workout/custom/:workoutId" exact={true}>
+                        <UserCustomWorkoutDetail />
+                    </Route>
+                    <Route path="/cardio" exact={true}>
+                        <Cardio />
+                    </Route>
+                    <Route path="/cardio/store" exact={true}>
+                        <CardioStore />
+                    </Route>
+                    <Route path="/eat" exact={true}>
+                        <Eat />
+                    </Route>
+                    <Route path="/eat/add-food" exact={true}>
+                        <AddFood />
+                    </Route>
+                    <Route path="/eat/food/:foodId" exact={true}>
+                        <FoodDetail />
+                    </Route>
+                    <Route path="/eat/user-food/:userFoodId" exact={true}>
+                        <UserFoodDetail />
+                    </Route>
+                    <Route path="/eat/scan/:barcode" exact={true}>
+                        <ScanFood />
+                    </Route>
+                    <Route path="/eat/custom-macros" exact={true}>
+                        <CustomMacroForm />
+                    </Route>
+                    <Route path="/supplements" exact={true}>
+                        <Supplements />
+                    </Route>
+                    <Route path="/supplements/all-supplements" exact={true}>
+                        <AllSupplements />
+                    </Route>
+                    <Route path="/body" exact={true}>
+                        <Body />
+                    </Route>
+                    <Route path="/body/weight" exact={true}>
+                        <WeighInForm />
+                    </Route>
+                    <Route path="/body/all-weight" exact={true}>
+                        <AllWeights />
+                    </Route>
+                    <Route path="/body/body" exact={true}>
+                        <BodyCheckInForm />
+                    </Route>
+                    <Route path="/body/all-bodies" exact={true}>
+                        <AllBody />
+                    </Route>
+                    <Route path="/body/height" exact={true}>
+                        <HeightForm />
+                    </Route>
+                    <Route path="/body/blood-pressure" exact={true}>
+                        <BloodPressureCheckInForm />
+                    </Route>
+                    <Route path="/body/all-blood-pressure" exact={true}>
+                        <AllBloodPressure />
+                    </Route>
+                    <Route path="/body/sex" exact={true}>
+                        <SexForm />
+                    </Route>
+                    <Route path="/body/progress/upload" exact={true}>
+                        <ProgressCamera />
+                    </Route>
+                    <Route path="/body/progress" exact={true}>
+                        <ProgressGallery />
+                    </Route>
+                    <Route path="/settings" exact={true}>
+                        <Settings />
+                    </Route>
+                    <Route path="/settings/units" exact={true}>
+                        <UnitsForm />
+                    </Route>
+                    <Route path="/settings/change-password" exact={true}>
+                        <ChangePasswordForm />
+                    </Route>
+                    <Route path="/workout/create" exact={true}>
+                        <CreateCustomWorkout />
+                    </Route>
+                    <Route path="/workout/edit/:workoutId" exact={true}>
+                        <EditCustomWorkout />
+                    </Route>
+                    <Route
+                        path="/workout/edit/exercises/:workoutId"
+                        exact={true}
+                    >
+                        <EditCustomWorkoutExercises />
+                    </Route>
+                </SnackbarProvider>
             </Layout>
             <Redirect from="*" to="/" />
         </Switch>
