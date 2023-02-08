@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "857870999277-01qjsspeoort7u2m3met8dpqt7a5qpkl.apps.googleusercontent.com",
+          "client_id": "857870999277-9sklqgoek4leok6upmkh1s81d76rfssc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.svindland.fitness",
             "certificate_hash": "1363226da8610ce9756ae3560839d70eeb3fa3dc"
+          }
+        },
+        {
+          "client_id": "857870999277-j6gdqabl7pjbq2vjs7fn097ubuqhqjjc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.svindland.fitness",
+            "certificate_hash": "9492ef048709658170a30b6cb8e45772755a8a9b"
           }
         },
         {
