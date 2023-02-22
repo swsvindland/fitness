@@ -37,6 +37,7 @@ import { AllWeights } from './Body/Weight/AllWeights';
 import { AllBloodPressure } from './Body/BloodPressure/AllBloodPressure';
 import { AllBody } from './Body/Body/AllBody';
 import { SnackbarProvider } from './Snackbars/SnackbarProvider';
+import { WorkoutSubstitution } from './Workout/WorkoutSubstitution';
 
 export const Routes: FC = () => {
     const { newUser } = useContext(AuthContext);
@@ -168,6 +169,12 @@ export const Routes: FC = () => {
                         exact={true}
                     >
                         <EditCustomWorkoutExercises />
+                    </Route>
+                    <Route
+                        path="/workout/substitution/:workoutExerciseId"
+                        exact={true}
+                    >
+                        <WorkoutSubstitution />
                     </Route>
                 </SnackbarProvider>
             </Layout>

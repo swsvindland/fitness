@@ -213,6 +213,9 @@ export const PurchaseOptions: FC = () => {
                                                     <li className="text-start text-lg text-ternary">
                                                         Upload progress photos
                                                     </li>
+                                                    <li className="text-start text-lg text-ternary">
+                                                        Exercise Substitutions
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <div className="mx-auto max-w-7xl">
@@ -248,7 +251,7 @@ export const PurchaseOptions: FC = () => {
                                                     <div className="card relative flex flex-col rounded-2xl border border-ternary p-8 shadow-sm">
                                                         <div className="flex-1">
                                                             <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
-                                                                Most popular
+                                                                Best Value
                                                             </p>
                                                             <p className="mt-4 flex items-baseline text-secondary">
                                                                 <span className="text-5xl font-bold tracking-tight">

@@ -21,17 +21,18 @@ import { UserFoodV2 } from './types/UserFoodV2';
 import { WorkoutType } from './types/WorkoutType';
 import { ProgressPhoto } from './types/ProgressPhoto';
 import { UserWorkoutExercise } from './types/UserWorkoutExercise';
+import { UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
 
 // export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://10.0.2.2:7071';
 // export const API_URL = 'http://192.168.1.6:7071';
-// export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+export const API_URL = 'https://fitness-dev.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
-// export const CDN_URL =
-//     'https://fitnessdev.blob.core.windows.net/progress-photos/';
 export const CDN_URL =
-    'https://fitnessprod.blob.core.windows.net/progress-photos/';
+    'https://fitnessdev.blob.core.windows.net/progress-photos/';
+// export const CDN_URL =
+//     'https://fitnessprod.blob.core.windows.net/progress-photos/';
 
 const getHeaders = (params?: object, headers?: object) => {
     const userId = localStorage.getItem('userId');
@@ -606,4 +607,34 @@ export const addProgressPhoto = async (photos: Blob[]) => {
     });
 
     return fileNames;
+};
+
+export const getUserWorkoutSubstitution = (
+    workoutExerciseId: number
+): Promise<AxiosResponse<UserWorkoutSubstitution>> => {
+    const params = getHeaders({ workoutExerciseId });
+
+    return axios.get(`${API_URL}/api/GetUserWorkoutSubstitution`, params);
+};
+
+export const addUserWorkoutSubstitution = (sub: UserWorkoutSubstitution) => {
+    const params = getHeaders();
+
+    return axios.post(`${API_URL}/api/AddUserWorkoutSubstitution`, sub, params);
+};
+
+export const updateUserWorkoutSubstitution = (sub: UserWorkoutSubstitution) => {
+    const params = getHeaders();
+
+    return axios.put(
+        `${API_URL}/api/UpdateUserWorkoutSubstitution`,
+        sub,
+        params
+    );
+};
+
+export const deleteUserWorkoutSubstitution = (id: number) => {
+    const params = getHeaders({ id });
+
+    return axios.delete(`${API_URL}/api/DeleteUserWorkoutSubstitution`, params);
 };

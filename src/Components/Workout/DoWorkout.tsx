@@ -137,11 +137,10 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             <div role="list" className="grid grid-cols-1 gap-6">
                 {exercisesQuery.data?.data?.map((exercise, index) => (
                     <WorkoutCard
-                        key={`${exercise.id}-${day}-${index}`}
-                        exercise={exercise}
+                        key={exercise.id}
+                        workoutExerciseId={exercise.id ?? 0}
                         week={week.id}
                         day={day}
-                        icon={exercise.exercise?.icon}
                     />
                 ))}
             </div>

@@ -1,6 +1,5 @@
-import { FC } from 'react';
+import { FC, Fragment } from 'react';
 import { WorkoutSet } from './WorkoutSet';
-import { WorkoutExercise } from '../../types/WorkoutExercise';
 import { ExerciseIcon } from '../../types/Exercise';
 import { Barbell } from '../Icons/Barbell';
 import { Dumbbell } from '../Icons/Dumbbell';
@@ -13,12 +12,13 @@ import { WorkoutSetTime } from './WorkoutSetTime';
 import { getUserWorkoutExercise } from '../../api';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../Loading';
+import { Gear } from '../Icons/Gear';
+import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 
 interface IProps {
-    exercise: WorkoutExercise;
+    workoutExerciseId: number;
     week: number;
     day: number;
-    icon?: ExerciseIcon;
 }
 
 const mapToIcon = (icon?: ExerciseIcon) => {
@@ -42,16 +42,14 @@ const mapToIcon = (icon?: ExerciseIcon) => {
     }
 };
 
-export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
+export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
     const workoutExerciseQuery = useQuery(
-        ['UserWorkoutExercises', exercise.id, week, day],
-        () => getUserWorkoutExercise(exercise.id!, week, day),
-        { enabled: !!exercise.id }
+        ['UserWorkoutExercises', workoutExerciseId, week, day],
+        () => getUserWorkoutExercise(workoutExerciseId!, week, day),
+        { enabled: !!workoutExerciseId }
     );
 
-    if (exercise.id === undefined) {
-        return null;
-    }
+    if (!workoutExerciseId) return null;
 
     if (workoutExerciseQuery.isLoading) {
         return <Loading />;
@@ -60,40 +58,54 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
     return (
         <div
             role="listitem"
-            key={exercise.id}
             className="card col-span-1 w-full rounded-lg shadow"
         >
             <div className="flex w-full items-center justify-start space-x-6 p-6">
                 <div className="">
                     <div className="flex h-10 w-10 items-center justify-center rounded-full bg-ternary">
-                        <div className="">{mapToIcon(icon)}</div>
+                        <div className="">
+                            {mapToIcon(
+                                workoutExerciseQuery.data?.data.exercise?.icon
+                            )}
+                        </div>
                     </div>
                 </div>
                 <div className="flex-1 truncate">
                     <div className="flex items-center space-x-3">
                         <h3 className="truncate text-sm font-medium text-secondary">
-                            {exercise.exercise?.name}
+                            {workoutExerciseQuery.data?.data.exercise?.name}
                         </h3>
                     </div>
 
-                    {exercise.time ? (
+                    {workoutExerciseQuery.data?.data.time ? (
                         <p className="mt-1 truncate text-sm text-ternary">
-                            {(exercise.time ?? 0) / 60} minutes
+                            {(workoutExerciseQuery.data?.data.time ?? 0) / 60}{' '}
+                            minutes
                         </p>
                     ) : (
                         <p className="mt-1 truncate text-sm text-ternary">
-                            {exercise.minReps === exercise.maxReps
-                                ? exercise.maxReps
-                                : `${exercise.minReps} - ${exercise.maxReps}`}{' '}
-                            {exercise?.maxReps ?? 0 > 1 ? 'Reps' : 'Rep'}
+                            {workoutExerciseQuery.data?.data.minReps ===
+                            workoutExerciseQuery.data?.data.maxReps
+                                ? workoutExerciseQuery.data?.data.maxReps
+                                : `${workoutExerciseQuery.data?.data.minReps} - ${workoutExerciseQuery.data?.data.maxReps}`}{' '}
+                            {workoutExerciseQuery.data?.data?.maxReps ?? 0 > 1
+                                ? 'Reps'
+                                : 'Rep'}
                         </p>
                     )}
+                </div>
+                <div className="">
+                    <LinkSecondaryButton
+                        to={`/workout/substitution/${workoutExerciseId}`}
+                    >
+                        <Gear className="h-6 w-6 fill-secondary" />
+                    </LinkSecondaryButton>
                 </div>
             </div>
             <div>
                 {workoutExerciseQuery.data?.data.userWorkoutActivities.map(
                     (activity, index) => (
-                        <>
+                        <Fragment key={index}>
                             {activity.time ? (
                                 <WorkoutSetTime
                                     key={`${index}-${activity.id}-${activity.time}`}
@@ -129,7 +141,7 @@ export const WorkoutCard: FC<IProps> = ({ exercise, week, day, icon }) => {
                                     }
                                 />
                             )}
-                        </>
+                        </Fragment>
                     )
                 )}
             </div>
