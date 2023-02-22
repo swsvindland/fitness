@@ -8,7 +8,6 @@ import { HeaderProvider } from '../Navigation/HeaderContext';
 import { ScrollToTop } from '../ScrollToTop';
 import { MinVersion } from '../MinVersion';
 import { ForgotPassword } from './ForgotPassword';
-import { SnackbarProvider } from '../Snackbars/SnackbarProvider';
 
 interface IAuthContext {
     user?: User;

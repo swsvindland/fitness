@@ -26,6 +26,16 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
 
     return (
         <div className="w-full">
+            <>
+                {currentMacrosQuery.isFetching ? (
+                    <div className="card my-2 flex items-center justify-start p-2">
+                        <Loading />{' '}
+                        <span className="text-ternary">
+                            Fetching current macros...
+                        </span>
+                    </div>
+                ) : null}
+            </>
             <div className="w-full">
                 <MacroGridUnit
                     name="Calories"
