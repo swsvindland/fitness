@@ -105,7 +105,12 @@ export const BodyGraph = () => {
     }, [userBodyQuery.data]);
 
     if (userBodyQuery.isLoading || !data) {
-        return <Loading />;
+        return (
+            <div role="status" className="w-full animate-pulse">
+                <div className="my-2 h-80 rounded bg-card dark:bg-primary-dark"></div>
+                <span className="sr-only">Loading...</span>
+            </div>
+        );
     }
 
     return (

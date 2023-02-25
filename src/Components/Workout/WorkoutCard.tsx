@@ -11,7 +11,6 @@ import { Machine } from '../Icons/Machine';
 import { WorkoutSetTime } from './WorkoutSetTime';
 import { getUserWorkoutExercise } from '../../api';
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from '../Loading';
 import { Gear } from '../Icons/Gear';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 
@@ -52,7 +51,12 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
     if (!workoutExerciseId) return null;
 
     if (workoutExerciseQuery.isLoading) {
-        return <Loading />;
+        return (
+            <div role="status" className="w-full animate-pulse">
+                <div className="my-2 h-64 rounded bg-card dark:bg-primary-dark"></div>
+                <span className="sr-only">Loading...</span>
+            </div>
+        );
     }
 
     return (

@@ -63,7 +63,12 @@ export const BodyFatGraph: FC = () => {
     }, [userBodyFatQuery.data]);
 
     if (userBodyFatQuery.isLoading) {
-        return <Loading />;
+        return (
+            <div role="status" className="w-full animate-pulse">
+                <div className="my-2 h-80 rounded bg-card dark:bg-primary-dark"></div>
+                <span className="sr-only">Loading...</span>
+            </div>
+        );
     }
 
     if (!data) {

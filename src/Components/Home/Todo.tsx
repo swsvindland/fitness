@@ -10,7 +10,16 @@ export const Todo: FC = () => {
     });
 
     if (dashboardQuery.isLoading) {
-        return <Loading />;
+        return (
+            <div role="status" className="w-full animate-pulse">
+                <h1 className="text-2xl font-bold text-secondary">To Do</h1>
+                <div className="my-2 h-16 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="my-2 h-16 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="my-2 h-16 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="my-2 h-16 rounded bg-card dark:bg-primary-dark"></div>
+                <span className="sr-only">Loading...</span>
+            </div>
+        );
     }
 
     return (
