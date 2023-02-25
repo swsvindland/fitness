@@ -82,7 +82,7 @@ export const WorkoutSubstitution: FC = () => {
 
     if (!workoutSubstitutionQuery.data?.data) {
         return (
-            <div className="card my-2 w-full max-w-2xl p-4">
+            <div className="card container my-2 p-4">
                 <Autocomplete
                     label="Exercise"
                     isLoading={false}
@@ -125,7 +125,7 @@ export const WorkoutSubstitution: FC = () => {
     }
 
     return (
-        <div className="card my-2 w-full max-w-2xl p-4">
+        <div className="card container my-2 p-4">
             <Autocomplete
                 label="Exercise"
                 isLoading={false}
