@@ -1,6 +1,6 @@
 import { FC, FormEvent, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { User } from '../../types/user';
+import { User } from '../../types/User';
 import { Button } from '../Buttons/Button';
 import { Loading } from '../Loading';
 import { TextField } from '../TextFields/TextField';

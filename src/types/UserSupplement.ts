@@ -1,4 +1,4 @@
-import { Supplement } from './supplement';
+import { Supplement } from './Supplement';
 
 export interface UserSupplement {
     id?: number;

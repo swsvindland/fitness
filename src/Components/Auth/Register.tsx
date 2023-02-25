@@ -5,7 +5,7 @@ import { Loading } from '../Loading';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
 import { authV2, createUser, getUser } from '../../api';
-import { User } from '../../types/user';
+import { User } from '../../types/User';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';
 

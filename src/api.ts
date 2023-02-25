@@ -1,18 +1,17 @@
 import axios, { AxiosResponse } from 'axios';
-import { Supplement } from './types/supplement';
-import { UserSupplement } from './types/userSupplement';
+import { Supplement } from './types/Supplement';
+import { UserSupplement } from './types/UserSupplement';
 import { UserBodyFat } from './types/UserBodyFat';
 import { Workout } from './types/Workout';
 import { Macros } from './types/Macros';
 import { Dashboard } from './types/Dashboard';
 import { UserNextWorkout } from './types/UserNextWorkout';
 import { Auth } from './types/Auth';
-import { UserWorkoutActivity } from './types/UserWorkoutActivity';
 import { UserWorkout } from './types/UserWorkout';
-import { UserBloodPressure } from './types/userBloodPressure';
-import { UserBody } from './types/userBody';
-import { UserWeight } from './types/userWeight';
-import { Sex, Units, User } from './types/user';
+import { UserBloodPressure } from './types/UserBloodPressure';
+import { UserBody } from './types/UserBody';
+import { UserWeight } from './types/UserWeight';
+import { Sex, Units, User } from './types/User';
 import { Food } from './types/Food';
 import { WorkoutExercise } from './types/WorkoutExercise';
 import { Exercise } from './types/Exercise';
@@ -22,21 +21,23 @@ import { WorkoutType } from './types/WorkoutType';
 import { ProgressPhoto } from './types/ProgressPhoto';
 import { UserWorkoutExercise } from './types/UserWorkoutExercise';
 import { UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
+import { FatSecretAuth } from './types/FatSecretAuth';
 
-// export const API_URL = 'http://localhost:7071';
+export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://10.0.2.2:7071';
 // export const API_URL = 'http://192.168.1.6:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-export const API_URL = 'https://fitness-prod.azurewebsites.net';
+// export const API_URL = 'https://fitness-prod.azurewebsites.net';
 
-// export const CDN_URL =
-//     'https://fitnessdev.blob.core.windows.net/progress-photos/';
 export const CDN_URL =
-    'https://fitnessprod.blob.core.windows.net/progress-photos/';
+    'https://fitnessdev.blob.core.windows.net/progress-photos/';
+// export const CDN_URL =
+//     'https://fitnessprod.blob.core.windows.net/progress-photos/';
 
 const getHeaders = (params?: object, headers?: object) => {
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
+    const oldToken = sessionStorage.getItem('oldToken');
 
     return {
         headers: {
@@ -45,6 +46,7 @@ const getHeaders = (params?: object, headers?: object) => {
         },
         params: {
             userId,
+            oldToken,
             date: new Date().toDateString(),
             ...params,
         },
@@ -130,17 +132,6 @@ export const buyWorkout = (workoutId: number) => {
     });
 
     return axios.post(`${API_URL}/api/BuyWorkout`, {}, params);
-};
-
-export const getWorkoutActivity = (
-    workoutExerciseId: number,
-    set: number,
-    week: number,
-    day: number
-): Promise<AxiosResponse<UserWorkoutActivity>> => {
-    const params = getHeaders({ workoutExerciseId, set, week, day });
-
-    return axios.get(`${API_URL}/api/GetUserWorkoutActivity`, params);
 };
 
 export const getUserWorkoutExercise = (
@@ -637,4 +628,10 @@ export const deleteUserWorkoutSubstitution = (id: number) => {
     const params = getHeaders({ id });
 
     return axios.delete(`${API_URL}/api/DeleteUserWorkoutSubstitution`, params);
+};
+
+export const foodApiAuth = (): Promise<AxiosResponse<FatSecretAuth>> => {
+    const params = getHeaders();
+
+    return axios.get(`${API_URL}/api/FoodApiAuth`, params);
 };

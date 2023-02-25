@@ -8,7 +8,7 @@ import {
     InAppPurchase2 as iap,
 } from '@awesome-cordova-plugins/in-app-purchase-2';
 import { AuthContext } from '../Auth/Auth';
-import { UserRole } from '../../types/user';
+import { UserRole } from '../../types/User';
 import { DeleteAccount } from '../DeleteAccount';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePaid } from '../../api';

@@ -6,7 +6,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { updateSex } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Sex, User } from '../../types/user';
+import { Sex, User } from '../../types/User';
 
 export const SexForm: FC = () => {
     const { user, setUser, newUser, setNewUser } = useContext(AuthContext);

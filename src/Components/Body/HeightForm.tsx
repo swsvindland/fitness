@@ -7,7 +7,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { addHeight } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Units } from '../../types/user';
+import { Units } from '../../types/User';
 
 export const HeightForm: FC = () => {
     useShowBackButton();

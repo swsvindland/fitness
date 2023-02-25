@@ -5,7 +5,7 @@ import { AuthContext } from '../Auth/Auth';
 import { Loading } from '../Loading';
 import { addWorkoutActivity } from '../../api';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
-import { Units } from '../../types/user';
+import { Units } from '../../types/User';
 import { SnackbarContext } from '../Snackbars/SnackbarProvider';
 
 interface IProps {

@@ -3,7 +3,7 @@ import { MacroGridUnit } from './MacroGridUnit';
 import { useQuery } from '@tanstack/react-query';
 import { Loading } from '../Loading';
 import { getCurrentUserMacros, getMacros } from '../../api';
-import { Units } from '../../types/user';
+import { Units } from '../../types/User';
 import { AuthContext } from '../Auth/Auth';
 
 interface IProps {

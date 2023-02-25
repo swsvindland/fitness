@@ -6,7 +6,7 @@ import { ChangeEvent, FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteUserBody, updateUserBody } from '../../../api';
 import { CircleXMark } from '../../Icons/CircleXMark';
-import { UserBody } from '../../../types/userBody';
+import { UserBody } from '../../../types/UserBody';
 
 interface IProps {
     id: number;

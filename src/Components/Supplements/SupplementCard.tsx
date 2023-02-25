@@ -8,7 +8,7 @@ import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
 } from '../../api';
-import { SupplementIcon } from '../../types/supplement';
+import { SupplementIcon } from '../../types/Supplement';
 import { Capsule } from '../Icons/Capsule';
 import { Injection } from '../Icons/Injection';
 import { Tablet } from '../Icons/Tablet';

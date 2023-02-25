@@ -6,7 +6,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { updateUnits } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Units, User } from '../../types/user';
+import { Units, User } from '../../types/User';
 
 export const UnitsForm: FC = () => {
     const { user, setUser, newUser } = useContext(AuthContext);

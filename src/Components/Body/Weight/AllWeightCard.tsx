@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
-import { Units } from '../../../types/user';
+import { Units } from '../../../types/User';
 import { Loading } from '../../Loading';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useContext, useState } from 'react';
