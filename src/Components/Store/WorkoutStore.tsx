@@ -32,7 +32,7 @@ export const WorkoutStore: FC = () => {
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="container flex flex-col">
             {!user?.paid && (
                 <PurchaseAccess
                     body="Get access to all workouts, macro tracking, and more!"
@@ -42,7 +42,7 @@ export const WorkoutStore: FC = () => {
             {(customWorkoutsQuery.data?.data.length ?? 0) > 0 && (
                 <h2 className="text-lg text-secondary">Your Custom Workouts</h2>
             )}
-            <LinkButton to="/workout/create">
+            <LinkButton to="/workout/create" className="m-4">
                 Create New Custom Workout (beta)
             </LinkButton>
             {customWorkoutsQuery.data?.data.map((item) => (

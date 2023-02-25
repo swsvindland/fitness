@@ -17,7 +17,7 @@ export const WorkoutTabs: FC = () => {
     ];
 
     return (
-        <div className="mb-4 w-full max-w-2xl">
+        <div className="container mb-4">
             <div className="block">
                 <div className="border-b border-ternary">
                     <nav className="-mb-px flex" aria-label="Tabs">

@@ -61,7 +61,7 @@ export const UserFoodDetail: FC = () => {
     }, [foodDetailsQuery.data?.data.servingAmount]);
 
     return (
-        <div className="grid w-full max-w-2xl grid-cols-1">
+        <div className="container grid grid-cols-1">
             <div className="my-8">
                 <h1 className="text-2xl font-bold text-secondary">
                     {foodDetailsQuery.data?.data.foodV2?.name}

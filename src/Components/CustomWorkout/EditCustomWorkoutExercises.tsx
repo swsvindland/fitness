@@ -76,17 +76,19 @@ export const EditCustomWorkoutExercises: FC = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
-            {workoutExercises
-                .filter((e) => e.day === day)
-                .map((item, index) => (
-                    <EditWorkoutExercise
-                        key={index}
-                        index={index}
-                        workoutExercise={item}
-                    />
-                ))}
+            <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+                {workoutExercises
+                    .filter((e) => e.day === day)
+                    .map((item, index) => (
+                        <EditWorkoutExercise
+                            key={index}
+                            index={index}
+                            workoutExercise={item}
+                        />
+                    ))}
+            </div>
             <div className="flex justify-between">
                 <Button onClick={handleAddWorkoutExercise}>Add</Button>
             </div>

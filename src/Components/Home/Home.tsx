@@ -30,24 +30,25 @@ export const Home: FC = () => {
     };
 
     return (
-        <div className="grid w-full max-w-2xl grid-cols-1">
-            <MacroGrid home />
-            <div className="my-2 flex flex-row justify-between">
-                <SecondaryButton
-                    className="mr-1 flex w-full justify-center"
-                    onClick={handleStartScan}
-                >
-                    Scan Barcode
-                </SecondaryButton>
-                <Button
-                    className="ml-1 flex w-full justify-center"
-                    onClick={handleAddFood}
-                >
-                    Add Food
-                </Button>
+        <div className="container grid grid-cols-1 gap-2 lg:grid-cols-2">
+            <div className="md:mt-10">
+                <MacroGrid home />
+                <div className="my-2 flex flex-row justify-between">
+                    <SecondaryButton
+                        className="mr-1 flex w-full justify-center"
+                        onClick={handleStartScan}
+                    >
+                        Scan Barcode
+                    </SecondaryButton>
+                    <Button
+                        className="ml-1 flex w-full justify-center"
+                        onClick={handleAddFood}
+                    >
+                        Add Food
+                    </Button>
+                </div>
             </div>
             <Todo />
-            <BodyFatGraph />
         </div>
     );
 };

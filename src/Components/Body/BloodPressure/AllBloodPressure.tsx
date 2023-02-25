@@ -19,18 +19,20 @@ export const AllBloodPressure: FC = () => {
     );
 
     return (
-        <div className="grid w-full max-w-2xl grid-cols-1">
+        <div className="container grid grid-cols-1">
             <h2 className="text-2xl text-secondary">
                 All Blood Pressure Records
             </h2>
-            {weights?.map((item) => (
-                <AllBloodPressureCard
-                    id={item.id}
-                    date={item.created}
-                    defaultSystolic={item.systolic}
-                    defaultDiastolic={item.diastolic}
-                />
-            ))}
+            <div className=" grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+                {weights?.map((item) => (
+                    <AllBloodPressureCard
+                        id={item.id}
+                        date={item.created}
+                        defaultSystolic={item.systolic}
+                        defaultDiastolic={item.diastolic}
+                    />
+                ))}
+            </div>
         </div>
     );
 };

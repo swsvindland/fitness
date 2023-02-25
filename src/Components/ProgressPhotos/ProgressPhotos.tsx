@@ -15,7 +15,7 @@ export const ProgressPhotos: FC = () => {
 
     if (!user?.paid) {
         return (
-            <div className="card mb-2 w-full max-w-2xl p-4">
+            <div className="card mb-2 p-4">
                 <h2 className="my-4 text-lg text-secondary">Progress Photos</h2>
                 <p className="text-secondary">
                     You must be a paid member to view and upload progress
@@ -30,7 +30,7 @@ export const ProgressPhotos: FC = () => {
 
     return (
         <>
-            <div className="card w-full p-4">
+            <div className="card p-4">
                 <h2 className="my-4 text-lg text-secondary">Progress Photos</h2>
                 <div className="flex flex-row">
                     <LinkButton to="body/progress" className="mr-2">

@@ -90,10 +90,10 @@ export const BodyCheckInForm: FC = () => {
     };
 
     return (
-        <div className="m-4">
+        <div className="container">
             <div className="mt-5 md:col-span-2 md:mt-0">
                 <form onSubmit={handleSubmit}>
-                    <div className="card mb-8 w-80 overflow-hidden rounded shadow">
+                    <div className="card mb-8 overflow-hidden rounded shadow">
                         <div className="p-4">
                             <TextField
                                 id="neck"

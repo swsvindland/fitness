@@ -113,7 +113,7 @@ export const SupplementCard: FC<IProps> = ({
     };
 
     return (
-        <>
+        <div>
             <button
                 onClick={() => (isUser ? handleCheck() : setOpen(true))}
                 className={`${
@@ -175,6 +175,6 @@ export const SupplementCard: FC<IProps> = ({
                 userSupplementId={userSupplementId}
                 defaultTimes={times ?? []}
             />
-        </>
+        </div>
     );
 };

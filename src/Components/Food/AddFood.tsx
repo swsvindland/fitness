@@ -25,7 +25,7 @@ export const AddFood: FC = () => {
     }
 
     return (
-        <div className="grid w-full max-w-2xl grid-cols-1">
+        <div className="container grid grid-cols-1">
             <div className="card p-4">
                 <FoodSearch
                     query={query}
@@ -34,7 +34,7 @@ export const AddFood: FC = () => {
                     selected={selected}
                 />
             </div>
-            <div className="w-full max-w-2xl">
+            <div className="w-full">
                 {!searchFoodQuery.data?.data && selected ? (
                     <div className="flex items-center justify-between text-center">
                         <span className="text-ternary">No Results</span>
@@ -51,7 +51,7 @@ export const AddFood: FC = () => {
                     ))
                 )}
             </div>
-            <div className="w-full max-w-2xl">
+            <div className="w-full">
                 {!recentlyEaten.data?.data ? null : (
                     <h2 className="mt-2 text-lg text-secondary">
                         Recently Eaten

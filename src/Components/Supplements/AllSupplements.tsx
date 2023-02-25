@@ -33,7 +33,7 @@ export const AllSupplements: FC = () => {
     );
 
     return (
-        <div className="w-full max-w-2xl">
+        <div className="container">
             <SupplementSearch
                 query={query}
                 setQuery={setQuery}

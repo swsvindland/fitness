@@ -41,9 +41,9 @@ export const UserSupplements: FC = () => {
     );
 
     return (
-        <>
+        <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 lg:grid-cols-4">
             {(morningSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Morning</h2>
                     {morningSups?.map((userSupplement) => (
                         <SupplementCard
@@ -56,12 +56,10 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
+                </div>
+            ) : null}
             {(breakfastSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Breakfast</h2>
                     {breakfastSups?.map((userSupplement) => (
                         <SupplementCard
@@ -74,12 +72,10 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
+                </div>
+            ) : null}
             {(lunchSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Lunch</h2>
                     {lunchSups?.map((userSupplement) => (
                         <SupplementCard
@@ -92,12 +88,10 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
+                </div>
+            ) : null}
             {(preWorkoutSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">PreWorkout</h2>
                     {preWorkoutSups?.map((userSupplement) => (
                         <SupplementCard
@@ -110,12 +104,10 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
+                </div>
+            ) : null}
             {(postWorkoutSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">PostWorkout</h2>
                     {postWorkoutSups?.map((userSupplement) => (
                         <SupplementCard
@@ -128,12 +120,10 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
+                </div>
+            ) : null}
             {(dinnerSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Dinner</h2>
                     {dinnerSups?.map((userSupplement) => (
                         <SupplementCard
@@ -146,12 +136,10 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
+                </div>
+            ) : null}
             {(eveningSups?.length ?? 0) > 0 ? (
-                <>
+                <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Evening</h2>
                     {eveningSups?.map((userSupplement) => (
                         <SupplementCard
@@ -164,10 +152,8 @@ export const UserSupplements: FC = () => {
                             icon={userSupplement.supplement!.icon}
                         />
                     ))}
-                </>
-            ) : (
-                <div />
-            )}
-        </>
+                </div>
+            ) : null}
+        </div>
     );
 };

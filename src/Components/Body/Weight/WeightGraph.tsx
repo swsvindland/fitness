@@ -66,7 +66,7 @@ export const WeightGraph: FC = () => {
     }
 
     return (
-        <div className="card my-2 w-full rounded p-4 shadow">
+        <div className="card w-full rounded p-4 shadow">
             <div className="flex flex-row">
                 <LinkButton to="body/all-weight" className="mr-2">
                     See All

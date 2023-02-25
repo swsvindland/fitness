@@ -41,10 +41,10 @@ export const SexForm: FC = () => {
     };
 
     return (
-        <div className="m-4">
+        <div className="container">
             <div className="mt-5 md:col-span-2 md:mt-0">
                 <form onSubmit={handleSubmit}>
-                    <div className="card w-80 overflow-hidden rounded shadow">
+                    <div className="card overflow-hidden rounded shadow">
                         <div className="p-4">
                             <div className="flex items-center">
                                 <input

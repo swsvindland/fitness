@@ -131,10 +131,13 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
     };
 
     return (
-        <div className="w-full max-w-2xl">
+        <div className="container">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
-            <div role="list" className="grid grid-cols-1 gap-6">
+            <div
+                role="list"
+                className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4"
+            >
                 {exercisesQuery.data?.data?.map((exercise, index) => (
                     <WorkoutCard
                         key={exercise.id}
@@ -144,28 +147,30 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
                     />
                 ))}
             </div>
-            {workoutQuery.data?.data.type !== WorkoutType.Cardio ? (
-                <Button
-                    onClick={handleCompleteWorkoutAndStartCardio}
-                    className="my-2 flex w-full justify-center align-middle"
+            <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-3">
+                {workoutQuery.data?.data.type !== WorkoutType.Cardio ? (
+                    <Button
+                        onClick={handleCompleteWorkoutAndStartCardio}
+                        className="flex w-full justify-center align-middle"
+                    >
+                        Finish Lift and Start Cardio
+                    </Button>
+                ) : null}
+                <SecondaryButton
+                    onClick={handleCompleteWorkout}
+                    className="flex w-full justify-center align-middle"
                 >
-                    Finish Lift and Start Cardio
-                </Button>
-            ) : null}
-            <SecondaryButton
-                onClick={handleCompleteWorkout}
-                className="my-2 flex w-full justify-center align-middle"
-            >
-                Complete Workout
-            </SecondaryButton>
-            {workoutQuery.data?.data.userId && (
-                <LinkSecondaryButton
-                    to={`/workout/edit/${workoutId}`}
-                    className="my-2 flex w-full justify-center align-middle"
-                >
-                    Edit Workout
-                </LinkSecondaryButton>
-            )}
+                    Complete Workout
+                </SecondaryButton>
+                {workoutQuery.data?.data.userId ? (
+                    <LinkSecondaryButton
+                        to={`/workout/edit/${workoutId}`}
+                        className="flex w-full justify-center align-middle"
+                    >
+                        Edit Workout
+                    </LinkSecondaryButton>
+                ) : null}
+            </div>
         </div>
     );
 };

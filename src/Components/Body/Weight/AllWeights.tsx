@@ -16,15 +16,17 @@ export const AllWeights: FC = () => {
     );
 
     return (
-        <div className="grid w-full max-w-2xl grid-cols-1">
+        <div className="container grid grid-cols-1">
             <h2 className="text-2xl text-secondary">All Weights</h2>
-            {weights?.map((item) => (
-                <AllWeightCard
-                    id={item.id}
-                    date={item.created}
-                    defaultWeight={item.weight}
-                />
-            ))}
+            <div className=" grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+                {weights?.map((item) => (
+                    <AllWeightCard
+                        id={item.id}
+                        date={item.created}
+                        defaultWeight={item.weight}
+                    />
+                ))}
+            </div>
         </div>
     );
 };

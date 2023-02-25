@@ -16,7 +16,7 @@ export const Body: FC = () => {
     });
 
     return (
-        <div className="grid w-full max-w-2xl grid-cols-1">
+        <div className="container grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
             <ProgressPhotos />
             <WeightGraph />
             <BodyFatGraph />

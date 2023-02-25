@@ -13,9 +13,11 @@ export const Eat: FC = () => {
     });
 
     return (
-        <div className="w-full max-w-3xl">
-            <MacroGrid />
-            <FoodGrid />
+        <div className="container">
+            <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2">
+                <MacroGrid />
+                <FoodGrid />
+            </div>
             <div className="float-right my-2">
                 <a href="https://platform.fatsecret.com">
                     <img
