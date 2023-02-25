@@ -46,6 +46,7 @@ export const Login: FC<IProps> = ({
             enabled:
                 !!localStorage.getItem('token') &&
                 !!localStorage.getItem('userId'),
+            retry: 1,
         }
     );
 
