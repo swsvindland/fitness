@@ -32,7 +32,7 @@ export const Header: FC = () => {
             className="fixed inset-x-0 top-0 z-10 block bg-primary-dark shadow pt-safe dark:bg-background"
         >
             {!user?.paid && <BannerAd />}
-            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     {goBack ? (
                         <div className="flex flex-1 items-center">
