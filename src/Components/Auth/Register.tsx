@@ -12,10 +12,9 @@ import { SavePassword } from 'capacitor-ios-autofill-save-password';
 interface IProps {
     setUser: (user: User) => void;
     setRegister: (register: boolean) => void;
-    setNewUser: (newUser: boolean) => void;
 }
 
-export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
+export const Register: FC<IProps> = ({ setUser, setRegister }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
@@ -30,6 +29,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
             setError('Passwords do not match');
         } else {
             registerMutation.mutate({ email, password });
+            setRegister(false);
         }
     };
 
@@ -51,11 +51,11 @@ export const Register: FC<IProps> = ({ setUser, setRegister, setNewUser }) => {
     });
 
     const registerMutation = useMutation(createUser, {
-        onSuccess: async (data, variables, context) => {
-            setNewUser(true);
+        onSuccess: async () => {
             loginMutation.mutate({ email, password });
+            setRegister(false);
         },
-        onError: (error, variables, context) => {
+        onError: () => {
             setError('Something went wrong');
         },
     });

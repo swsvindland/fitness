@@ -26,6 +26,12 @@ export const Todo: FC = () => {
         <div>
             <h1 className="text-2xl font-bold text-secondary">To Do</h1>
             <TodoItem
+                name="Add your sex"
+                show={dashboardQuery.data?.data.addSex || false}
+                checked={false}
+                route="/body/sex"
+            />
+            <TodoItem
                 name="Track your macros"
                 show={
                     dashboardQuery.data?.data.trackMacros ||

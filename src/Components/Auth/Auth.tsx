@@ -12,8 +12,6 @@ import { ForgotPassword } from './ForgotPassword';
 interface IAuthContext {
     user?: User;
     setUser: (user?: User) => void;
-    newUser: boolean;
-    setNewUser: (newUser: boolean) => void;
     openPurchase: boolean;
     setOpenPurchase: (openPurchase: boolean) => void;
 }
@@ -24,14 +22,11 @@ export const Auth: FC = () => {
     const [user, setUser] = useState<User | undefined>(undefined);
     const [register, setRegister] = useState<boolean>(false);
     const [forgotPassword, setForgotPassword] = useState<boolean>(false);
-    const [newUser, setNewUser] = useState<boolean>(false);
     const [openPurchase, setOpenPurchase] = useState<boolean>(false);
 
     const authContext: IAuthContext = {
         user,
         setUser,
-        newUser,
-        setNewUser,
         openPurchase,
         setOpenPurchase,
     };
@@ -51,13 +46,7 @@ export const Auth: FC = () => {
     }
 
     if (register) {
-        return (
-            <Register
-                setUser={setUser}
-                setRegister={setRegister}
-                setNewUser={setNewUser}
-            />
-        );
+        return <Register setUser={setUser} setRegister={setRegister} />;
     }
 
     if (forgotPassword) {

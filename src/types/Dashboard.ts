@@ -1,4 +1,5 @@
 export interface Dashboard {
+    addSex: boolean;
     doWorkout: boolean;
     workoutAdded: boolean;
     addWeight: boolean;

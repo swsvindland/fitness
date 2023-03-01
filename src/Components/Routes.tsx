@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Home } from './Home/Home';
 import { Workout } from './Workout/Workout';
 import { WorkoutStore } from './Store/WorkoutStore';
@@ -23,8 +23,6 @@ import { CustomMacroForm } from './Macros/CustomMacroForm';
 import { Scanner } from './Scanner/Scanner';
 import { Layout } from './Layout';
 import { UnitsForm } from './Settings/UnitsForm';
-import { AuthContext } from './Auth/Auth';
-import { GettingStartedLayout } from './GettingStartedLayout';
 import { CreateCustomWorkout } from './CustomWorkout/CreateCustomWorkout';
 import { UserCustomWorkoutDetail } from './Workout/UserCustomWorkoutDetail';
 import { EditCustomWorkoutExercises } from './CustomWorkout/EditCustomWorkoutExercises';
@@ -40,30 +38,6 @@ import { SnackbarProvider } from './Snackbars/SnackbarProvider';
 import { WorkoutSubstitution } from './Workout/WorkoutSubstitution';
 
 export const Routes: FC = () => {
-    const { newUser } = useContext(AuthContext);
-
-    if (newUser) {
-        return (
-            <Switch>
-                <GettingStartedLayout>
-                    <Route path="/getting-started/units" exact={true}>
-                        <UnitsForm />
-                    </Route>
-                    <Route path="/getting-started/height" exact={true}>
-                        <HeightForm />
-                    </Route>
-                    <Route path="/getting-started/weight" exact={true}>
-                        <WeighInForm />
-                    </Route>
-                    <Route path="/getting-started/sex" exact={true}>
-                        <SexForm />
-                    </Route>
-                    <Redirect from="*" to="/getting-started/units" />
-                </GettingStartedLayout>
-            </Switch>
-        );
-    }
-
     return (
         <Switch>
             <Route path="/scanner" exact={true}>

@@ -30,6 +30,7 @@ export const Login: FC<IProps> = ({
 }) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string | undefined>(undefined);
 
     const silentLoginQuery = useQuery(
         ['User'],
@@ -64,6 +65,9 @@ export const Login: FC<IProps> = ({
 
             const user = await getUser();
             setUser(user.data);
+        },
+        onError: () => {
+            setError('Username or password is incorrect');
         },
     });
 
@@ -166,6 +170,11 @@ export const Login: FC<IProps> = ({
                                 setPassword(event.target.value as string)
                             }
                         />
+                        {error && (
+                            <span className="text-center text-red-500">
+                                {error}
+                            </span>
+                        )}
                         <div>
                             {loginMutation.isLoading ? (
                                 <Loading />
