@@ -8,7 +8,7 @@ import {
     updateUserWorkoutSubstitution,
 } from '../../api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Autocomplete } from '../Autocomplete';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
@@ -78,7 +78,7 @@ export const WorkoutSubstitution: FC = () => {
         );
     }
 
-    if (workoutSubstitutionQuery.isLoading) return <Loading />;
+    if (workoutSubstitutionQuery.isLoading) return <LoadingSpinner />;
 
     if (!workoutSubstitutionQuery.data?.data) {
         return (

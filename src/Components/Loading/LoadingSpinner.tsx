@@ -4,7 +4,7 @@ interface IProps {
     className?: string;
 }
 
-export const Loading: FC<IProps> = ({ className }) => {
+export const LoadingSpinner: FC<IProps> = ({ className }) => {
     return (
         <div role="status">
             <svg

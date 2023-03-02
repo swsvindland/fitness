@@ -1,6 +1,6 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Pagination } from '../Pagination';
 import { WorkoutCard } from './WorkoutCard';
 import {
@@ -96,7 +96,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         nextWorkoutQuery.isLoading ||
         nextCardioWorkoutQuery.isLoading
     ) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     if (nextWorkoutQuery.data?.data.workoutCompleted) {

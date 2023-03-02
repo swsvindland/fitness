@@ -17,8 +17,9 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
 import { getAllUserBodies } from '../../../api';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
+import { LoadingCard } from '../../Loading/LoadingCard';
 
 ChartJS.register(
     RadialLinearScale,
@@ -105,12 +106,7 @@ export const BodyGraph = () => {
     }, [userBodyQuery.data]);
 
     if (userBodyQuery.isLoading || !data) {
-        return (
-            <div role="status" className="w-full animate-pulse">
-                <div className="my-2 h-80 rounded bg-card dark:bg-primary-dark"></div>
-                <span className="sr-only">Loading...</span>
-            </div>
-        );
+        return <LoadingCard isLoading />;
     }
 
     return (

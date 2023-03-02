@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { ChangeEvent, FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -195,7 +195,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             }}
                         >
                             {updateMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <CircleCheckSolid
                                     className={
@@ -213,7 +213,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             }}
                         >
                             {deleteMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <CircleXMark className="fill-error" />
                             )}

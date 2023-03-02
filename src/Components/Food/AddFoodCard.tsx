@@ -7,7 +7,7 @@ import { FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { quickAddFood, quickRemoveFood } from '../../api';
 import { useUpdateFoodCache } from './hooks';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 
 interface IProps {
     userFoodId?: number;
@@ -80,7 +80,7 @@ export const AddFoodCard: FC<IProps> = ({
                     </Button>
                 </div>
             ) : (
-                <Loading />
+                <LoadingSpinner />
             )}
         </div>
     );

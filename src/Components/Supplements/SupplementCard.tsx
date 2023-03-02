@@ -3,7 +3,7 @@ import { AddSupplement } from './AddSupplement';
 import { AuthContext } from '../Auth/Auth';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ExternalLink } from '../Icons/ExternalLink';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
@@ -155,7 +155,9 @@ export const SupplementCard: FC<IProps> = ({
                     )}
                 {isUser &&
                     (mutation.isLoading ||
-                        userSupplementActivityQuery.isFetching) && <Loading />}
+                        userSupplementActivityQuery.isFetching) && (
+                        <LoadingSpinner />
+                    )}
                 {url && (
                     <a
                         href={url}

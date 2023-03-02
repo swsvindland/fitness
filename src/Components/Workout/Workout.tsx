@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { DoWorkout } from './DoWorkout';
 import { getUserWorkouts } from '../../api';
 import { useHideBackButton } from '../Navigation/headerHooks';
@@ -19,7 +19,7 @@ export const Workout: FC = () => {
     const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
 
     if (userWorkoutsQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     const activeWorkouts = userWorkoutsQuery.data?.data.filter(

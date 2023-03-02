@@ -1,7 +1,7 @@
 import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
 import { Units } from '../../../types/User';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useContext, useState } from 'react';
 import { AuthContext } from '../../Auth/Auth';
@@ -69,7 +69,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                             }}
                         >
                             {updateMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <CircleCheckSolid
                                     className={
@@ -89,7 +89,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                             }}
                         >
                             {deleteMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <CircleXMark className="fill-error" />
                             )}

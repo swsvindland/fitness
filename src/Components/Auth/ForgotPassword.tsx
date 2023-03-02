@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
 import { forgotPassword } from '../../api';
@@ -66,7 +66,7 @@ export const ForgotPassword: FC<IProps> = ({ setForgotPassword }) => {
                         {!submitted && (
                             <div>
                                 {resetMutation.isLoading ? (
-                                    <Loading />
+                                    <LoadingSpinner />
                                 ) : (
                                     <Button
                                         type="submit"

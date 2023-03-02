@@ -2,7 +2,7 @@ import { FC, useContext, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { addWorkoutActivity } from '../../api';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
 import { SnackbarContext } from '../Snackbars/SnackbarProvider';
@@ -96,7 +96,7 @@ export const WorkoutSetTime: FC<IProps> = ({
                         }}
                     >
                         {mutation.isLoading ? (
-                            <Loading />
+                            <LoadingSpinner />
                         ) : (
                             <CircleCheckSolid
                                 className={

@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { WorkoutStoreCard } from './WorkoutStoreCard';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getUserWorkouts, getWorkouts, getWorkoutsByUserId } from '../../api';
 import { HeaderContext } from '../Navigation/HeaderContext';
 import { PurchaseAccess } from '../Purchase/PurchaseAccess';
@@ -28,7 +28,7 @@ export const WorkoutStore: FC = () => {
     });
 
     if (workoutsQuery.isLoading || customWorkoutsQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     return (

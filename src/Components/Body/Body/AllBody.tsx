@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getAllUserBodies } from '../../../api';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBodyCard } from './AllBodyCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
@@ -9,7 +9,7 @@ export const AllBody: FC = () => {
     useShowBackButton();
     const userBodiesQuery = useQuery(['UserBodies'], getAllUserBodies);
 
-    if (userBodiesQuery.isLoading) return <Loading />;
+    if (userBodiesQuery.isLoading) return <LoadingSpinner />;
 
     const bodies = userBodiesQuery.data?.data.sort((a, b) =>
         a.created < b.created ? 1 : -1

@@ -2,7 +2,7 @@ import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addUserFood, getFoodDetails } from '../../api';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
 import { Dropdown, DropdownOption } from '../Dropdown';
@@ -73,7 +73,7 @@ export const FoodDetail: FC = () => {
                 />
                 <div className="mt-2 p-1">
                     {mutation.isLoading ? (
-                        <Loading />
+                        <LoadingSpinner />
                     ) : (
                         <Button
                             className="w-full"
@@ -93,7 +93,7 @@ export const FoodDetail: FC = () => {
                 </div>
             </div>
             <div className="flex flex-col justify-center">
-                {foodDetailsQuery.isFetching && <Loading />}
+                {foodDetailsQuery.isFetching && <LoadingSpinner />}
                 {foodDetailsQuery.data?.data.servings
                     .filter((item) => item.id === unit?.id)
                     .map((serving) => (

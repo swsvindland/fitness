@@ -1,7 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
 import { authV2, createUser, getUser } from '../../api';
@@ -140,7 +140,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                         {error && <span className="text-error">{error}</span>}
                         <div>
                             {registerMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <Button
                                     type="submit"

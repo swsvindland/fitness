@@ -2,7 +2,7 @@ import { FC, FormEvent, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { User } from '../../types/User';
 import { Button } from '../Buttons/Button';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { TextField } from '../TextFields/TextField';
 import { authV2, getUser, ssoAuthV2 } from '../../api';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
@@ -136,7 +136,7 @@ export const Login: FC<IProps> = ({
             <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="card py-8 px-4 sm:px-10">
-                        <Loading />
+                        <LoadingSpinner />
                     </div>
                 </div>
             </main>
@@ -177,7 +177,7 @@ export const Login: FC<IProps> = ({
                         )}
                         <div>
                             {loginMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <Button
                                     type="submit"

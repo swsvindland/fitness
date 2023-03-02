@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CDN_URL, getProgressPhotos } from '../../api';
 import { LinkButton } from '../Buttons/LinkButton';
@@ -6,6 +6,7 @@ import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { AuthContext } from '../Auth/Auth';
 import { Button } from '../Buttons/Button';
 import { Viewer } from './Viewer';
+import { LoadingCard } from '../Loading/LoadingCard';
 
 export const ProgressPhotos: FC = () => {
     const { user, setOpenPurchase } = useContext(AuthContext);
@@ -26,6 +27,10 @@ export const ProgressPhotos: FC = () => {
                 </Button>
             </div>
         );
+    }
+
+    if (photosQuery.isLoading) {
+        return <LoadingCard isLoading />;
     }
 
     return (
@@ -53,6 +58,7 @@ export const ProgressPhotos: FC = () => {
                                 src={`${CDN_URL}${photo.filename}`}
                                 alt=""
                                 width={150}
+                                loading="lazy"
                             />
                         </button>
                     ))}

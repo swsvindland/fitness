@@ -3,9 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { getAllSupplements, getUserSupplements } from '../../api';
 import { AuthContext } from '../Auth/Auth';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { SupplementSearch } from './SupplementSearch';
+import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
 
 export const AllSupplements: FC = () => {
     const [query, setQuery] = useState<string>('');
@@ -21,7 +22,7 @@ export const AllSupplements: FC = () => {
     });
 
     if (allSupplementQuery.isLoading || userSupplementsQuery.isLoading) {
-        return <Loading />;
+        return <LoadingListOfCards isLoading />;
     }
 
     const userSupIds = userSupplementsQuery.data?.data.map(

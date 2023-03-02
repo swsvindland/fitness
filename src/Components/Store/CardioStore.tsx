@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { WorkoutStoreCard } from './WorkoutStoreCard';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getCardioWorkouts, getWorkoutsByUserId } from '../../api';
 import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 import { AuthContext } from '../Auth/Auth';
@@ -18,7 +18,7 @@ export const CardioStore: FC = () => {
     );
 
     if (cardioWorkoutsQuery.isLoading || customWorkoutsQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     return (

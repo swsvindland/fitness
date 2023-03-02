@@ -2,7 +2,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { searchFoodByBarcode } from '../../api';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { LinkButton } from '../Buttons/LinkButton';
 
 export const ScanFood: FC = () => {
@@ -19,7 +19,7 @@ export const ScanFood: FC = () => {
     }
 
     if (searchFoodQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     if (searchFoodQuery.data?.data.id) {

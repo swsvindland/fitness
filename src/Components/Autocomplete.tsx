@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { Loading } from './Loading';
+import { LoadingSpinner } from './Loading/LoadingSpinner';
 import { CircleCheckSolid } from './Icons/CircleCheckSolid';
 
 interface IProps {
@@ -44,7 +44,7 @@ export const Autocomplete: FC<IProps> = ({
                     afterLeave={() => setQuery('')}
                 >
                     <Combobox.Options className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-card py-1 text-base text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {isLoading && <Loading />}
+                        {isLoading && <LoadingSpinner />}
                         {filtered.length === 0 && query !== '' ? (
                             <Combobox.Option
                                 key={query}

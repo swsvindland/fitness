@@ -1,10 +1,10 @@
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
 import { useQuery } from '@tanstack/react-query';
 import { getRecentUserFoods, searchFood } from '../../api';
-import { Loading } from '../Loading';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { AddFoodCard } from './AddFoodCard';
+import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
 
 export const AddFood: FC = () => {
     useShowBackButton();
@@ -20,10 +20,6 @@ export const AddFood: FC = () => {
         return getRecentUserFoods();
     });
 
-    if (searchFoodQuery.isLoading) {
-        return <Loading />;
-    }
-
     return (
         <div className="container grid grid-cols-1">
             <div className="card p-4">
@@ -35,6 +31,7 @@ export const AddFood: FC = () => {
                 />
             </div>
             <div className="w-full">
+                <LoadingListOfCards isLoading={searchFoodQuery.isLoading} />
                 {!searchFoodQuery.data?.data && selected ? (
                     <div className="flex items-center justify-between text-center">
                         <span className="text-ternary">No Results</span>
@@ -51,6 +48,7 @@ export const AddFood: FC = () => {
                     ))
                 )}
             </div>
+            <LoadingListOfCards isLoading={recentlyEaten.isLoading} />
             <div className="w-full">
                 {!recentlyEaten.data?.data ? null : (
                     <h2 className="mt-2 text-lg text-secondary">

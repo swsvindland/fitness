@@ -1,12 +1,13 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { classNames } from '../../utils/classNames';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { foodApiAuth, getUserFoods } from '../../api';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory } from 'react-router-dom';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 import { da } from 'date-fns/locale';
+import { LoadingCard } from '../Loading/LoadingCard';
 
 export const FoodGrid: FC = () => {
     const history = useHistory();
@@ -43,7 +44,11 @@ export const FoodGrid: FC = () => {
     });
 
     if (foodQuery.isLoading || foodApiAuthTokenQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
+    }
+
+    if (foodQuery.isLoading || foodApiAuthTokenQuery.isLoading) {
+        return <LoadingCard isLoading />;
     }
 
     return (

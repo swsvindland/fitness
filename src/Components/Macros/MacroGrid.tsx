@@ -1,11 +1,12 @@
 import { FC, useContext } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { useQuery } from '@tanstack/react-query';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getCurrentUserMacros, getMacros } from '../../api';
 import { Units } from '../../types/User';
 import { AuthContext } from '../Auth/Auth';
 import { classNames } from '../../utils/classNames';
+import { LoadingMacroGrid } from '../Loading/LoadingMacroGrid';
 
 interface IProps {
     home?: boolean;
@@ -22,18 +23,7 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
     });
 
     if (macrosQuery.isLoading || currentMacrosQuery.isLoading) {
-        return (
-            <div role="status" className="w-full animate-pulse">
-                <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
-                    <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                    <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                    <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                    <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                </div>
-                <span className="sr-only">Loading...</span>
-            </div>
-        );
+        return <LoadingMacroGrid isLoading={true} />;
     }
 
     return (
@@ -41,7 +31,7 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
             <>
                 {currentMacrosQuery.isFetching ? (
                     <div className="card my-2 flex items-center justify-start p-2">
-                        <Loading />{' '}
+                        <LoadingSpinner />{' '}
                         <span className="text-ternary">
                             Fetching current macros...
                         </span>

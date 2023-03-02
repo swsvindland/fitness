@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getUserWorkouts, restartWorkout } from '../../api';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 
 export const RestartWorkout: FC = () => {
     const history = useHistory();
@@ -30,7 +30,7 @@ export const RestartWorkout: FC = () => {
     };
 
     if (userWorkoutsQuery.isLoading || restartWorkoutMutation.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     return (

@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { AuthContext } from '../Auth/Auth';
 import { getUserSupplements } from '../../api';
-import { Loading } from '../Loading';
 import { useShowBackButton } from '../Navigation/headerHooks';
+import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
 
 export const UserSupplements: FC = () => {
     const { user } = useContext(AuthContext);
@@ -15,7 +15,52 @@ export const UserSupplements: FC = () => {
     });
 
     if (userSupplementsQuery.isLoading) {
-        return <Loading />;
+        return (
+            <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">Morning</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">Breakfast</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">Lunch</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">PreWorkout</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">PostWorkout</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">Dinner</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+                <div className="grid grid-cols-1">
+                    <h2 className="text-secondary">Evening</h2>
+                    <LoadingListOfCards
+                        isLoading={userSupplementsQuery.isLoading}
+                    />
+                </div>
+            </div>
+        );
     }
 
     const morningSups = userSupplementsQuery.data?.data.filter((item) =>

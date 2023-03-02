@@ -11,7 +11,7 @@ import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addProgressPhoto } from '../../api';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Filesystem } from '@capacitor/filesystem';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { MinusSolid } from '../Icons/MinusSolid';
@@ -56,7 +56,7 @@ export const ProgressCamera: FC = () => {
         <div className="flex flex-col p-4">
             <div className="mb-4">
                 {uploadPhotosMutation.isLoading ? (
-                    <Loading />
+                    <LoadingSpinner />
                 ) : (
                     <>
                         <Button className="mr-2" onClick={takePicture}>

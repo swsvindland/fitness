@@ -15,8 +15,9 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getUserBodyFat } from '../../api';
+import { LoadingCard } from '../Loading/LoadingCard';
 
 ChartJS.register(
     CategoryScale,
@@ -63,12 +64,7 @@ export const BodyFatGraph: FC = () => {
     }, [userBodyFatQuery.data]);
 
     if (userBodyFatQuery.isLoading) {
-        return (
-            <div role="status" className="w-full animate-pulse">
-                <div className="my-2 h-80 rounded bg-card dark:bg-primary-dark"></div>
-                <span className="sr-only">Loading...</span>
-            </div>
-        );
+        return <LoadingCard isLoading />;
     }
 
     if (!data) {

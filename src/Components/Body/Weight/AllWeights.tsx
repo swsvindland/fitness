@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getAllUserWeights } from '../../../api';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllWeightCard } from './AllWeightCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
@@ -9,7 +9,7 @@ export const AllWeights: FC = () => {
     useShowBackButton();
     const userWeightQuery = useQuery(['UserWeights'], getAllUserWeights);
 
-    if (userWeightQuery.isLoading) return <Loading />;
+    if (userWeightQuery.isLoading) return <LoadingSpinner />;
 
     const weights = userWeightQuery.data?.data.sort((a, b) =>
         a.created < b.created ? 1 : -1

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getAllUserBloodPressure } from '../../../api';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBloodPressureCard } from './AllBloodPressureCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
@@ -12,7 +12,7 @@ export const AllBloodPressure: FC = () => {
         getAllUserBloodPressure
     );
 
-    if (userBloodPressureQuery.isLoading) return <Loading />;
+    if (userBloodPressureQuery.isLoading) return <LoadingSpinner />;
 
     const weights = userBloodPressureQuery.data?.data.sort((a, b) =>
         a.created < b.created ? 1 : -1

@@ -2,7 +2,7 @@ import { FC, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { buyWorkout, getAllWorkoutExercises, getWorkout } from '../../api';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Pagination } from '../Pagination';
 import { Button } from '../Buttons/Button';
 import { EditWorkoutExercise } from './EditWorkoutExercise';
@@ -72,7 +72,7 @@ export const EditCustomWorkoutExercises: FC = () => {
     };
 
     if (workoutQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     return (

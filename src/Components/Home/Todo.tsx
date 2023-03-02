@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getUserDashboard } from '../../api';
 import { TodoItem } from './TodoItem';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 
 export const Todo: FC = () => {
     const dashboardQuery = useQuery(['Dashboard'], () => {

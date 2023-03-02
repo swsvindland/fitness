@@ -1,7 +1,7 @@
 import { FC, MouseEvent } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
-import { Loading } from '../Loading';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory, useParams } from 'react-router-dom';
 import { buyWorkout, deleteWorkout, getWorkout } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
@@ -50,7 +50,7 @@ export const UserCustomWorkoutDetail: FC = () => {
     };
 
     if (workoutQuery.isLoading) {
-        return <Loading />;
+        return <LoadingSpinner />;
     }
 
     return (
@@ -64,7 +64,7 @@ export const UserCustomWorkoutDetail: FC = () => {
                     </div>
                     <div className="lg:col-span-5">
                         {mutation.isLoading ? (
-                            <Loading />
+                            <LoadingSpinner />
                         ) : (
                             <form
                                 onSubmit={(event) => {

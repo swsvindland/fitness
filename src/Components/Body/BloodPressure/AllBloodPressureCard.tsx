@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
-import { Loading } from '../../Loading';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useContext, useState } from 'react';
 import { AuthContext } from '../../Auth/Auth';
@@ -91,7 +91,7 @@ export const AllBloodPressureCard: FC<IProps> = ({
                             }}
                         >
                             {updateMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <CircleCheckSolid
                                     className={
@@ -111,7 +111,7 @@ export const AllBloodPressureCard: FC<IProps> = ({
                             }}
                         >
                             {deleteMutation.isLoading ? (
-                                <Loading />
+                                <LoadingSpinner />
                             ) : (
                                 <CircleXMark className="fill-error" />
                             )}
