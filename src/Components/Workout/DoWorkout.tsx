@@ -17,7 +17,6 @@ import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { WorkoutType } from '../../types/WorkoutType';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
 
 interface IProps {
     workoutId: number;
@@ -136,7 +135,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
             <div
                 role="list"
-                className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4"
+                className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             >
                 {exercisesQuery.data?.data?.map((exercise, index) => (
                     <WorkoutCard
@@ -147,25 +146,17 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
                     />
                 ))}
             </div>
-            <div className="mt-2 grid grid-cols-1 gap-2 md:grid-cols-3">
-                {workoutQuery.data?.data.type !== WorkoutType.Cardio ? (
-                    <Button
-                        onClick={handleCompleteWorkoutAndStartCardio}
-                        className="flex w-full justify-center align-middle"
-                    >
-                        Finish Lift and Start Cardio
-                    </Button>
-                ) : null}
-                <SecondaryButton
+            <div className="mt-2 flex w-full flex-col items-center justify-center gap-2 md:flex-row">
+                <Button
                     onClick={handleCompleteWorkout}
-                    className="flex w-full justify-center align-middle"
+                    className="flex w-full max-w-md justify-center align-middle"
                 >
                     Complete Workout
-                </SecondaryButton>
+                </Button>
                 {workoutQuery.data?.data.userId ? (
                     <LinkSecondaryButton
                         to={`/workout/edit/${workoutId}`}
-                        className="flex w-full justify-center align-middle"
+                        className="flex w-full max-w-md justify-center align-middle"
                     >
                         Edit Workout
                     </LinkSecondaryButton>

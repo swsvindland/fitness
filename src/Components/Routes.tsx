@@ -60,12 +60,6 @@ export const Routes: FC = () => {
                     <Route path="/workout/custom/:workoutId" exact={true}>
                         <UserCustomWorkoutDetail />
                     </Route>
-                    <Route path="/cardio" exact={true}>
-                        <Cardio />
-                    </Route>
-                    <Route path="/cardio/store" exact={true}>
-                        <CardioStore />
-                    </Route>
                     <Route path="/eat" exact={true}>
                         <Eat />
                     </Route>
