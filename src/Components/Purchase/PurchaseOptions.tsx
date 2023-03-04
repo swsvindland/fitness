@@ -225,9 +225,8 @@ export const PurchaseOptions: FC = () => {
                                                         <div className="flex-1">
                                                             <p className="mt-4 flex items-baseline text-secondary">
                                                                 <span className="text-5xl font-bold tracking-tight">
-                                                                    {
-                                                                        monthly?.price
-                                                                    }
+                                                                    {monthly?.price ??
+                                                                        '$2.99'}
                                                                 </span>
                                                                 <span className="ml-1 text-xl font-semibold">
                                                                     month
@@ -255,9 +254,8 @@ export const PurchaseOptions: FC = () => {
                                                             </p>
                                                             <p className="mt-4 flex items-baseline text-secondary">
                                                                 <span className="text-5xl font-bold tracking-tight">
-                                                                    {
-                                                                        yearly?.price
-                                                                    }
+                                                                    {yearly?.price ??
+                                                                        '$29.99'}
                                                                 </span>
                                                                 <span className="ml-1 text-xl font-semibold">
                                                                     year
