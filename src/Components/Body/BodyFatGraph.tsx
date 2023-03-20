@@ -43,9 +43,10 @@ export const BodyFatGraph: FC = () => {
     });
 
     useMemo(() => {
-        const labels = userBodyFatQuery.data?.data?.map((item) =>
-            format(new Date(item.created), 'PP')
-        );
+        const labels = userBodyFatQuery.data?.data
+            ?.slice(1)
+            .slice(-30)
+            .map((item) => format(new Date(item.created), 'PP'));
 
         setData({
             labels,
@@ -53,9 +54,10 @@ export const BodyFatGraph: FC = () => {
                 {
                     label: 'Body Fat',
                     data:
-                        userBodyFatQuery.data?.data?.map(
-                            (item) => item.bodyFat
-                        ) ?? [],
+                        userBodyFatQuery.data?.data
+                            ?.slice(1)
+                            .slice(-30)
+                            .map((item) => item.bodyFat) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },

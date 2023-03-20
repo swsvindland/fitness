@@ -43,9 +43,10 @@ export const WeightGraph: FC = () => {
     const userWeightQuery = useQuery(['UserWeight'], getAllUserWeights);
 
     useMemo(() => {
-        const labels = userWeightQuery.data?.data.map((item) =>
-            format(new Date(item.created), 'PP')
-        );
+        const labels = userWeightQuery.data?.data
+            .slice(1)
+            .slice(-30)
+            .map((item) => format(new Date(item.created), 'PP'));
 
         setData({
             labels,
@@ -53,8 +54,10 @@ export const WeightGraph: FC = () => {
                 {
                     label: 'Weights',
                     data:
-                        userWeightQuery.data?.data.map((item) => item.weight) ??
-                        [],
+                        userWeightQuery.data?.data
+                            .slice(1)
+                            .slice(-30)
+                            .map((item) => item.weight) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },
