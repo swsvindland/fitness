@@ -41,7 +41,7 @@
         "cordova-plugin-purchase": "^11.0.0",
         "date-fns": "^2.29.3",
         "firebase": "^9.18.0",
-        "ionicons": "^7.0.0",
+        "ionicons": "^7.1.0",
         "react": "^18.2.0",
         "react-chartjs-2": "^5.2.0",
         "react-dom": "^18.2.0",
