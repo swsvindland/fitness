@@ -28,7 +28,7 @@ import { FatSecretAuth } from './types/FatSecretAuth';
 // export const API_URL = 'http://192.168.1.6:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
 export const API_URL = 'https://fitness-prod.azurewebsites.net';
-
+//
 // export const CDN_URL =
 //     'https://fitnessdev.blob.core.windows.net/progress-photos/';
 export const CDN_URL =
