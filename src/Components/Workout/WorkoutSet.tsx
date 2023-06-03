@@ -64,6 +64,7 @@ export const WorkoutSet: FC<IProps> = ({
             <div className=" flex flex-1">
                 <div className="inline-flex flex-1 items-center justify-center p-2">
                     <TextField
+                        label="Reps"
                         id={`exercise-reps-${id}-${set}`}
                         value={state.reps}
                         type="number"
@@ -75,11 +76,11 @@ export const WorkoutSet: FC<IProps> = ({
                             });
                         }}
                     />
-                    <span className="mx-2 text-xs text-ternary">Reps</span>
                 </div>
             </div>
             <div className="flex flex-1 border-x border-ternary p-2">
                 <TextField
+                    label={user?.unit === Units.Imperial ? 'lbs' : 'kg'}
                     id={`exercise-weight-${id}-${set}`}
                     value={state.weight}
                     type="number"
@@ -92,14 +93,10 @@ export const WorkoutSet: FC<IProps> = ({
                     }}
                     className="my-auto"
                 />
-                <span className="mx-2 my-auto text-xs text-ternary">
-                    {user?.unit === Units.Imperial ? 'lbs' : 'kg'}
-                </span>
             </div>
-            <div className="flex w-16 flex-none">
+            <div className="flex w-24 flex-none">
                 <div className="inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium">
                     <button
-                        className="h-8 w-8"
                         onClick={() => {
                             mutation.mutate({
                                 id: id,
@@ -114,13 +111,13 @@ export const WorkoutSet: FC<IProps> = ({
                         }}
                     >
                         {mutation.isLoading ? (
-                            <LoadingSpinner />
+                            <LoadingSpinner className="ml-2 h-12 w-12" />
                         ) : (
                             <CircleCheckSolid
                                 className={
                                     saved
-                                        ? 'fill-secondary'
-                                        : 'rounded-full border border-ternary fill-transparent'
+                                        ? 'w-12 fill-secondary'
+                                        : 'w-12 rounded-full border border-ternary fill-transparent'
                                 }
                             />
                         )}

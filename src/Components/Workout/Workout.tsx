@@ -6,7 +6,6 @@ import { getUserWorkouts } from '../../api';
 import { useHideBackButton } from '../Navigation/headerHooks';
 import { LinkButton } from '../Buttons/LinkButton';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
-import { WorkoutType } from '../../types/WorkoutType';
 
 export const Workout: FC = () => {
     useHideBackButton();

@@ -102,7 +102,7 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
                     <LinkSecondaryButton
                         to={`/workout/substitution/${workoutExerciseId}`}
                     >
-                        <Gear className="h-6 w-6 fill-secondary" />
+                        <Gear className="w-8 fill-secondary" />
                     </LinkSecondaryButton>
                 </div>
             </div>
