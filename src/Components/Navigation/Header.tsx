@@ -9,10 +9,9 @@ import { UserSolid } from '../Icons/UserSolid';
 import { Dumbbell } from '../Icons/Dumbbell';
 import { PurchaseAccessIcon } from '../Purchase/PurchaseAccessIcon';
 import { signOut } from '../../utils/auth';
-import { BannerAd } from '../Ads/BannerAd';
 
 export const Header: FC = () => {
-    const { user, setUser } = useContext(AuthContext);
+    const { setUser } = useContext(AuthContext);
     const { goBack } = useContext(HeaderContext);
     const history = useHistory();
 
@@ -31,7 +30,6 @@ export const Header: FC = () => {
             as="nav"
             className="fixed inset-x-0 top-0 z-10 block bg-primary-dark shadow pt-safe dark:bg-background"
         >
-            {!user?.paid && <BannerAd />}
             <div className="container mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     {goBack ? (
@@ -49,16 +47,6 @@ export const Header: FC = () => {
                         </div>
                     )}
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        {/* TODO: Add back with notifications */}
-                        {/*<button*/}
-                        {/*    type="button"*/}
-                        {/*    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"*/}
-                        {/*>*/}
-                        {/*    <span className="sr-only">View notifications</span>*/}
-                        {/*    <BellIcon className="h-6 w-6" aria-hidden="true" />*/}
-                        {/*</button>*/}
-
-                        {/* Profile dropdown */}
                         <PurchaseAccessIcon />
                         <Menu as="div" className="relative ml-3">
                             <div>

@@ -27,8 +27,6 @@ import { CreateCustomWorkout } from './CustomWorkout/CreateCustomWorkout';
 import { UserCustomWorkoutDetail } from './Workout/UserCustomWorkoutDetail';
 import { EditCustomWorkoutExercises } from './CustomWorkout/EditCustomWorkoutExercises';
 import { EditCustomWorkout } from './CustomWorkout/EditCustomWorkout';
-import { CardioStore } from './Store/CardioStore';
-import { Cardio } from './Cardio/Cardio';
 import { ProgressCamera } from './ProgressPhotos/ProgressCamera';
 import { ProgressGallery } from './ProgressPhotos/ProgressGallery';
 import { AllWeights } from './Body/Weight/AllWeights';
