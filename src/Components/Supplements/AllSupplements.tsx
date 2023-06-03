@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { getAllSupplements, getUserSupplements } from '../../api';
 import { AuthContext } from '../Auth/Auth';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { SupplementSearch } from './SupplementSearch';
 import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
@@ -57,10 +56,7 @@ export const AllSupplements: FC = () => {
                         key={supplement.id}
                         id={supplement.supplementId}
                         name={supplement.supplement?.name ?? ''}
-                        brand={supplement.supplement?.brand}
                         times={supplement.times}
-                        url={supplement.supplement?.url}
-                        commission={supplement.supplement?.commission}
                         userSupplementId={supplement.id}
                         icon={supplement.supplement?.icon}
                     />
@@ -78,9 +74,6 @@ export const AllSupplements: FC = () => {
                         key={supplement.id}
                         id={supplement.id}
                         name={supplement.name}
-                        brand={supplement.brand}
-                        url={supplement.url}
-                        commission={supplement.commission}
                         icon={supplement?.icon}
                     />
                 ))}

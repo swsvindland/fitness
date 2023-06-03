@@ -2,7 +2,6 @@ import { FC, useContext, useMemo, useState } from 'react';
 import { AddSupplement } from './AddSupplement';
 import { AuthContext } from '../Auth/Auth';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ExternalLink } from '../Icons/ExternalLink';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import {
     getUserSupplementActivity,
@@ -21,10 +20,7 @@ interface IProps {
     isUser: boolean;
     id: number;
     name: string;
-    brand?: string;
     times?: string[];
-    url?: string;
-    commission?: number;
     userSupplementId?: number;
     icon?: SupplementIcon;
 }
@@ -57,10 +53,7 @@ export const SupplementCard: FC<IProps> = ({
     isUser,
     id,
     name,
-    brand,
     times,
-    url,
-    commission,
     userSupplementId,
     icon,
 }) => {
@@ -128,13 +121,6 @@ export const SupplementCard: FC<IProps> = ({
                     </div>
                     <div className="flex flex-col">
                         <span className="text-lg text-secondary">{name}</span>
-                        {commission ? (
-                            <span className="text-xs text-ternary">
-                                {commission}%
-                            </span>
-                        ) : (
-                            <div />
-                        )}
                         <div>
                             {times?.map((time, index) => (
                                 <span
@@ -158,16 +144,6 @@ export const SupplementCard: FC<IProps> = ({
                         userSupplementActivityQuery.isFetching) && (
                         <LoadingSpinner />
                     )}
-                {url && (
-                    <a
-                        href={url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="h-5 w-5 fill-ternary"
-                    >
-                        <ExternalLink />
-                    </a>
-                )}
             </button>
             <AddSupplement
                 open={open}
