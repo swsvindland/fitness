@@ -115,7 +115,7 @@ export const Todo: FC = () => {
                 checked={
                     dashboardQuery.data?.data.bodyMeasurementsAdded || false
                 }
-                route="/body/body-measurements"
+                route="/body/body"
             />
         </div>
     );
