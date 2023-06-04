@@ -14,6 +14,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 import { AuthContext } from '../Auth/Auth';
 import { PurchaseAccess } from '../Purchase/PurchaseAccess';
+import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const WorkoutSubstitution: FC = () => {
     const { user } = useContext(AuthContext);
@@ -23,6 +24,7 @@ export const WorkoutSubstitution: FC = () => {
     const { workoutExerciseId } = useParams<{ workoutExerciseId: string }>();
     const queryClient = useQueryClient();
     const history = useHistory();
+    useShowBackButton();
 
     const workoutSubstitutionQuery = useQuery(
         ['WorkoutSubstitution', workoutExerciseId],
