@@ -13,10 +13,10 @@ export const LoadingMacroGrid: FC<IProps> = ({ isLoading }) => {
         <div role="status" className="w-full animate-pulse">
             <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
             <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
-                <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
-                <div className="my-2 h-32 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="h-32 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="h-32 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="h-32 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="h-32 rounded bg-card dark:bg-primary-dark"></div>
             </div>
             <span className="sr-only">Loading...</span>
         </div>
