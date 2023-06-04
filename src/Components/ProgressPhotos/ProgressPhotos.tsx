@@ -48,6 +48,7 @@ export const ProgressPhotos: FC = () => {
                 <div className="mt-2 grid grid-cols-4 gap-4">
                     {photosQuery.data?.data.slice(0, 4).map((photo) => (
                         <button
+                            key={photo.id}
                             onClick={() => {
                                 setOpen(true);
                                 setOpenedImage(`${CDN_URL}${photo.filename}`);

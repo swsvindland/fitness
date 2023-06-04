@@ -17,7 +17,7 @@ export const ProgressGallery: FC = () => {
         <>
             <div className="grid w-full max-w-2xl grid-cols-1">
                 {dates.map((date) => (
-                    <div>
+                    <div key={date}>
                         <h2 className="my-2 text-lg text-secondary">
                             {format(new Date(date), 'PP')}
                         </h2>
@@ -26,6 +26,7 @@ export const ProgressGallery: FC = () => {
                                 ?.filter((item) => item.created === date)
                                 .map((photo) => (
                                     <button
+                                        key={photo.id}
                                         onClick={() => {
                                             setOpen(true);
                                             setOpenedImage(
