@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, HTMLInputTypeAttribute } from 'react';
+import { type ChangeEvent, type FC, type HTMLInputTypeAttribute } from 'react';
 
 interface IProps {
     id?: string;
@@ -31,7 +31,7 @@ export const TextField: FC<IProps> = ({
     const isRequired = required !== undefined ? required : true;
 
     return (
-        <div className={`${className} m-1 w-full`}>
+        <div className={`${className ?? ''} m-1 w-full`}>
             <label htmlFor={id} className="block text-sm font-medium">
                 {label}
                 {isRequired && label ? '*' : null}

@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { type FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';

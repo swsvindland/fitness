@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo, useState } from 'react';
+import { type FC, useContext, useMemo, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Pagination } from '../Pagination';
@@ -11,7 +11,7 @@ import {
     getWorkoutExercises,
 } from '../../api';
 import { Button } from '../Buttons/Button';
-import { Dropdown, DropdownOption } from '../Dropdown';
+import { Dropdown, type DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
@@ -103,19 +103,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         return <WorkoutCompleted />;
     }
 
-    const handleCompleteWorkoutAndStartCardio = () => {
-        if (!user) return;
-
-        mutation.mutate({
-            workoutId,
-            userId: user.id,
-            day,
-            week: week.id,
-        });
-
-        history.push('/cardio');
-    };
-
     const handleCompleteWorkout = () => {
         if (!user) return;
 
@@ -137,7 +124,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
                 role="list"
                 className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             >
-                {exercisesQuery.data?.data?.map((exercise, index) => (
+                {exercisesQuery.data?.data?.map((exercise) => (
                     <WorkoutCard
                         key={exercise.id}
                         workoutExerciseId={exercise.id ?? 0}

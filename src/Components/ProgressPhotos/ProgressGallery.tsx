@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { CDN_URL, getProgressPhotos } from '../../api';
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import { format } from 'date-fns';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { Viewer } from './Viewer';

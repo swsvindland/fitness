@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { Gear } from '../Icons/Gear';
 import { LinkButton } from '../Buttons/LinkButton';
 

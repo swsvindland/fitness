@@ -1,5 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom';
-import { FC } from 'react';
+import { type FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { searchFoodByBarcode } from '../../api';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';

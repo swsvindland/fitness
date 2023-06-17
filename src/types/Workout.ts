@@ -1,4 +1,4 @@
-import { WorkoutType } from './WorkoutType';
+import { type WorkoutType } from './WorkoutType';
 
 export interface Workout {
     id: number;

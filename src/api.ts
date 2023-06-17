@@ -1,27 +1,28 @@
-import axios, { AxiosResponse } from 'axios';
-import { Supplement } from './types/Supplement';
-import { UserSupplement } from './types/UserSupplement';
-import { UserBodyFat } from './types/UserBodyFat';
-import { Workout } from './types/Workout';
-import { Macros } from './types/Macros';
-import { Dashboard } from './types/Dashboard';
-import { UserNextWorkout } from './types/UserNextWorkout';
-import { Auth } from './types/Auth';
-import { UserWorkout } from './types/UserWorkout';
-import { UserBloodPressure } from './types/UserBloodPressure';
-import { UserBody } from './types/UserBody';
-import { UserWeight } from './types/UserWeight';
-import { Sex, Units, User } from './types/User';
-import { Food } from './types/Food';
-import { WorkoutExercise } from './types/WorkoutExercise';
-import { Exercise } from './types/Exercise';
-import { SearchFood } from './types/SearchFood';
-import { UserFoodV2 } from './types/UserFoodV2';
-import { WorkoutType } from './types/WorkoutType';
-import { ProgressPhoto } from './types/ProgressPhoto';
-import { UserWorkoutExercise } from './types/UserWorkoutExercise';
-import { UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
-import { FatSecretAuth } from './types/FatSecretAuth';
+import axios, { type AxiosResponse } from 'axios';
+import { type Supplement } from './types/Supplement';
+import { type UserSupplement } from './types/UserSupplement';
+import { type UserBodyFat } from './types/UserBodyFat';
+import { type Workout } from './types/Workout';
+import { type Macros } from './types/Macros';
+import { type Dashboard } from './types/Dashboard';
+import { type UserNextWorkout } from './types/UserNextWorkout';
+import { type Auth } from './types/Auth';
+import { type UserWorkout } from './types/UserWorkout';
+import { type UserBloodPressure } from './types/UserBloodPressure';
+import { type UserBody } from './types/UserBody';
+import { type UserWeight } from './types/UserWeight';
+import { type Sex, type Units, type User } from './types/User';
+import { type Food } from './types/Food';
+import { type WorkoutExercise } from './types/WorkoutExercise';
+import { type Exercise } from './types/Exercise';
+import { type SearchFood } from './types/SearchFood';
+import { type UserFoodV2 } from './types/UserFoodV2';
+import { type WorkoutType } from './types/WorkoutType';
+import { type ProgressPhoto } from './types/ProgressPhoto';
+import { type UserWorkoutExercise } from './types/UserWorkoutExercise';
+import { type UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
+import { type FatSecretAuth } from './types/FatSecretAuth';
+import { type UserSupplementActivity } from './types/UserSupplementActivity';
 
 // export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://10.0.2.2:7071';
@@ -37,16 +38,18 @@ export const CDN_URL =
 const getHeaders = (params?: object, headers?: object) => {
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    const oldToken = sessionStorage.getItem('oldToken');
+
+    if (!userId || !token) {
+        throw new Error('Unauthorized');
+    }
 
     return {
         headers: {
-            Authorization: 'Bearer ' + token,
+            Authorization: `Bearer ${token}`,
             ...headers,
         },
         params: {
             userId,
-            oldToken,
             date: new Date().toDateString(),
             ...params,
         },
@@ -330,7 +333,7 @@ export const updateUserSupplement = (userSupplement: UserSupplement) => {
 export const getUserSupplementActivity = (
     userSupplementId: number,
     time: string
-): Promise<AxiosResponse<any>> | undefined => {
+): Promise<AxiosResponse<UserSupplementActivity>> | undefined => {
     const params = getHeaders({ userSupplementId, time });
 
     return axios.get(`${API_URL}/api/GetUserSupplementActivity`, params);
@@ -578,7 +581,7 @@ export const getProgressPhotos = (): Promise<
     return axios.get(`${API_URL}/api/GetProgressPhotos`, params);
 };
 
-export const addProgressPhoto = async (photos: Blob[]) => {
+export const addProgressPhoto = (photos: Blob[]) => {
     const headers = { 'Content-Type': 'multipart/form-data' };
     const params = getHeaders({}, { ...headers });
     const fileNames: string[] = [];
@@ -593,7 +596,7 @@ export const addProgressPhoto = async (photos: Blob[]) => {
             params
         );
 
-        fileNames.push(response.data);
+        fileNames.push(response.data as string);
     });
 
     return fileNames;

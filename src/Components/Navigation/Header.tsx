@@ -1,4 +1,4 @@
-import { FC, Fragment, useContext } from 'react';
+import { type FC, Fragment, useContext } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Auth/Auth';

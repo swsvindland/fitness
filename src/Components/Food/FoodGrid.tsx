@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { type FC } from 'react';
 import { classNames } from '../../utils/classNames';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { foodApiAuth, getUserFoods } from '../../api';

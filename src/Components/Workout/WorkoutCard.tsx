@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { type FC, Fragment } from 'react';
 import { WorkoutSet } from './WorkoutSet';
 import { ExerciseIcon } from '../../types/Exercise';
 import { Barbell } from '../Icons/Barbell';
@@ -44,7 +44,7 @@ const mapToIcon = (icon?: ExerciseIcon) => {
 export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
     const workoutExerciseQuery = useQuery(
         ['UserWorkoutExercises', workoutExerciseId, week, day],
-        () => getUserWorkoutExercise(workoutExerciseId!, week, day),
+        () => getUserWorkoutExercise(workoutExerciseId, week, day),
         { enabled: !!workoutExerciseId }
     );
 
@@ -91,7 +91,13 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
                             {workoutExerciseQuery.data?.data.minReps ===
                             workoutExerciseQuery.data?.data.maxReps
                                 ? workoutExerciseQuery.data?.data.maxReps
-                                : `${workoutExerciseQuery.data?.data.minReps} - ${workoutExerciseQuery.data?.data.maxReps}`}{' '}
+                                : `${
+                                      workoutExerciseQuery?.data?.data
+                                          .minReps ?? 0
+                                  } - ${
+                                      workoutExerciseQuery?.data?.data
+                                          .maxReps ?? 0
+                                  }`}{' '}
                             {workoutExerciseQuery.data?.data?.maxReps ?? 0 > 1
                                 ? 'Reps'
                                 : 'Rep'}
@@ -129,7 +135,9 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
                                 />
                             ) : (
                                 <WorkoutSet
-                                    key={`${index}-${activity.id}-${activity.weight}`}
+                                    key={`${index}-${activity.id}-${
+                                        activity?.weight ?? ''
+                                    }`}
                                     id={activity.id}
                                     workoutExerciseId={
                                         activity.workoutExerciseId

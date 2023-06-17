@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo, useState } from 'react';
+import { type FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
     addUserWorkoutSubstitution,
@@ -47,25 +47,25 @@ export const WorkoutSubstitution: FC = () => {
     }, [workoutSubstitutionQuery.data?.data, exerciseQuery.data?.data]);
 
     const addMutation = useMutation(addUserWorkoutSubstitution, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['WorkoutSubstitution']);
-            queryClient.invalidateQueries(['UserWorkoutExercises']);
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['WorkoutSubstitution']);
+            await queryClient.invalidateQueries(['UserWorkoutExercises']);
             history.push('/workout');
         },
     });
 
     const updateMutation = useMutation(updateUserWorkoutSubstitution, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['WorkoutSubstitution']);
-            queryClient.invalidateQueries(['UserWorkoutExercises']);
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['WorkoutSubstitution']);
+            await queryClient.invalidateQueries(['UserWorkoutExercises']);
             history.push('/workout');
         },
     });
 
     const deleteMutation = useMutation(deleteUserWorkoutSubstitution, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['WorkoutSubstitution']);
-            queryClient.invalidateQueries(['UserWorkoutExercises']);
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['WorkoutSubstitution']);
+            await queryClient.invalidateQueries(['UserWorkoutExercises']);
         },
     });
 

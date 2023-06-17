@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { type FC, Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CircleCheckSolid } from './Icons/CircleCheckSolid';
 import { ChevronDownSolid } from './Icons/ChevronDownSolid';

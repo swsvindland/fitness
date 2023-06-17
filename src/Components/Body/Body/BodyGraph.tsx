@@ -7,9 +7,9 @@ import {
     Filler,
     Tooltip,
     Legend,
-    ChartData,
-    ScatterDataPoint,
-    BubbleDataPoint,
+    type ChartData,
+    type ScatterDataPoint,
+    type BubbleDataPoint,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import { AuthContext } from '../../Auth/Auth';

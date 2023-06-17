@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useState } from 'react';
+import { createContext, type FC, type ReactNode, useState } from 'react';
 
 interface IHeaderContext {
     goBack: boolean;

@@ -1,5 +1,5 @@
-import { IconProps } from './IconProps';
-import { FC } from 'react';
+import { type IconProps } from './IconProps';
+import { type FC } from 'react';
 
 export const UserSolid: FC<IconProps> = (props) => {
     return (

@@ -1,11 +1,11 @@
-import { FC, useContext, useMemo, useState } from 'react';
+import { type FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addUserFood, getFoodDetails } from '../../api';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
-import { Dropdown, DropdownOption } from '../Dropdown';
+import { Dropdown, type DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { NutritionLabel } from './NutritionLabel';

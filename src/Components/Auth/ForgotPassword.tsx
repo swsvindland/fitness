@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from 'react';
+import { type FC, type FormEvent, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
@@ -22,11 +22,11 @@ export const ForgotPassword: FC<IProps> = ({ setForgotPassword }) => {
     };
 
     const resetMutation = useMutation(forgotPassword, {
-        onSuccess: async (data, variables, context) => {
+        onSuccess: () => {
             setSubmitted(true);
             setError(undefined);
         },
-        onError: (error, variables, context) => {
+        onError: () => {
             setError('Something went wrong');
         },
     });
@@ -36,9 +36,9 @@ export const ForgotPassword: FC<IProps> = ({ setForgotPassword }) => {
     };
 
     return (
-        <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+        <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="card py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div className="card px-4 py-8 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         {!submitted ? (
                             <TextField
@@ -49,7 +49,7 @@ export const ForgotPassword: FC<IProps> = ({ setForgotPassword }) => {
                                 label="Email Address"
                                 value={email}
                                 onChange={(event) =>
-                                    setEmail(event.target.value as string)
+                                    setEmail(event.target.value)
                                 }
                             />
                         ) : (

@@ -1,4 +1,4 @@
-import { FC, FormEvent, useContext, useMemo, useState } from 'react';
+import { type FC, type FormEvent, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useHistory, useParams } from 'react-router-dom';
 import { editWorkout, getWorkout } from '../../api';
 import { TextArea } from '../TextFields/TextArea';
-import { Dropdown, DropdownOption } from '../Dropdown';
+import { Dropdown, type DropdownOption } from '../Dropdown';
 import { WorkoutType } from '../../types/WorkoutType';
 
 interface IState {

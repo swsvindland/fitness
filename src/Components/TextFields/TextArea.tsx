@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { type ChangeEvent, type FC } from 'react';
 
 interface IProps {
     id?: string;
@@ -22,7 +22,7 @@ export const TextArea: FC<IProps> = ({
     className,
 }) => {
     return (
-        <div className={`${className} m-1 w-full`}>
+        <div className={`${className ?? ''} m-1 w-full`}>
             <label htmlFor={id} className="block text-sm font-medium">
                 {label}
             </label>

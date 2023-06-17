@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { PersonSolid } from '../Icons/PersonSolid';
 import { Food } from '../Icons/Food';
 import { Dumbbell } from '../Icons/Dumbbell';

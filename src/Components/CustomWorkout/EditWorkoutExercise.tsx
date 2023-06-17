@@ -1,9 +1,9 @@
 import { TextField } from '../TextFields/TextField';
-import { FC, useMemo, useState } from 'react';
+import { type FC, useMemo, useState } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getExercises, upsertWorkoutExercises } from '../../api';
-import { WorkoutExercise } from '../../types/WorkoutExercise';
+import { type WorkoutExercise } from '../../types/WorkoutExercise';
 import { Button } from '../Buttons/Button';
 import { Autocomplete } from '../Autocomplete';
 
@@ -37,8 +37,8 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
     const exerciseQuery = useQuery(['Exercises'], getExercises);
 
     const mutation = useMutation(upsertWorkoutExercises, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['WorkoutExercises']);
+        onSuccess: async () => {
+            await queryClient.invalidateQueries(['WorkoutExercises']);
             setSaved(true);
         },
     });
@@ -79,7 +79,7 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
     return (
         <div className="card my-2 p-4">
             {!saved && (
-                <span className="mb-4 text-ternary">*Unsaved changes</span>
+                <span className="text-ternary mb-4">*Unsaved changes</span>
             )}
             <Autocomplete
                 label="Exercise"
@@ -105,7 +105,7 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
                     }}
                 />
             </div>
-            <span className="my-4 text-ternary">
+            <span className="text-ternary my-4">
                 *Choose either a time or rep range. If you choose a time and rep
                 range, it will only show a time based set.
             </span>

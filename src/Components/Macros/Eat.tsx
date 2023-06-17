@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { MacroGrid } from './MacroGrid';
 import { FoodGrid } from '../Food/FoodGrid';
 import { useHideBackButton } from '../Navigation/headerHooks';
@@ -10,7 +10,7 @@ export const Eat: FC = () => {
     FirebaseAnalytics.setScreenName({
         screenName: 'eat',
         nameOverride: 'EatScreen',
-    });
+    }).catch((error) => console.error(error));
 
     return (
         <div className="container">

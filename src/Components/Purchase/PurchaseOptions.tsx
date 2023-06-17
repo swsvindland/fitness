@@ -1,10 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { type FC, Fragment, useContext, useEffect, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { isPlatform } from '@ionic/react';
 import {
-    IAPProduct,
+    type IAPProduct,
     InAppPurchase2 as iap,
 } from '@awesome-cordova-plugins/in-app-purchase-2';
 import { AuthContext } from '../Auth/Auth';
@@ -106,13 +106,13 @@ export const PurchaseOptions: FC = () => {
                 p.finish();
                 updatePaidIfNeeded(false);
             });
-            iap.when(MONTHLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
+            iap.when(MONTHLY_SUBSCRIPTION).cancelled(() => {
                 updatePaidIfNeeded(false);
             });
-            iap.when(MONTHLY_SUBSCRIPTION).expired((p: IAPProduct) => {
+            iap.when(MONTHLY_SUBSCRIPTION).expired(() => {
                 updatePaidIfNeeded(false);
             });
-            iap.when(MONTHLY_SUBSCRIPTION).error((p: IAPProduct) => {
+            iap.when(MONTHLY_SUBSCRIPTION).error(() => {
                 updatePaidIfNeeded(false);
             });
         }
@@ -125,13 +125,13 @@ export const PurchaseOptions: FC = () => {
                 p.finish();
                 updatePaidIfNeeded(false);
             });
-            iap.when(YEARLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
+            iap.when(YEARLY_SUBSCRIPTION).cancelled(() => {
                 updatePaidIfNeeded(false);
             });
-            iap.when(YEARLY_SUBSCRIPTION).expired((p: IAPProduct) => {
+            iap.when(YEARLY_SUBSCRIPTION).expired(() => {
                 updatePaidIfNeeded(false);
             });
-            iap.when(YEARLY_SUBSCRIPTION).error((p: IAPProduct) => {
+            iap.when(YEARLY_SUBSCRIPTION).error(() => {
                 updatePaidIfNeeded(false);
             });
         }
@@ -139,7 +139,7 @@ export const PurchaseOptions: FC = () => {
 
     useEffect(() => {
         if (canCharge) {
-            iap.when('subscription').updated((product: IAPProduct) => {
+            iap.when('subscription').updated(() => {
                 const monthly = iap.get(MONTHLY_SUBSCRIPTION);
                 const yearly = iap.get(YEARLY_SUBSCRIPTION);
 
@@ -167,7 +167,11 @@ export const PurchaseOptions: FC = () => {
     return (
         <>
             <Transition.Root show={openPurchase} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={() => {}}>
+                <Dialog
+                    as="div"
+                    className="relative z-10"
+                    onClose={() => setOpenPurchase}
+                >
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -191,29 +195,29 @@ export const PurchaseOptions: FC = () => {
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="card relative transform rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                                <Dialog.Panel className="card relative transform rounded-lg px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                                     <div>
                                         <div className="mt-3 text-center sm:mt-5">
                                             <Dialog.Title
                                                 as="h3"
-                                                className="text-2xl font-bold text-secondary"
+                                                className="text-secondary text-2xl font-bold"
                                             >
                                                 Subscribe to Premium for the
                                                 best WorkoutTrack experience!
                                             </Dialog.Title>
                                             <div className="ml-8">
                                                 <ul className="my-8 list-disc">
-                                                    <li className="text-start text-lg text-ternary">
+                                                    <li className="text-ternary text-start text-lg">
                                                         Remove all ads
                                                     </li>
-                                                    <li className="text-start text-lg text-ternary">
+                                                    <li className="text-ternary text-start text-lg">
                                                         Get access to all
                                                         workouts
                                                     </li>
-                                                    <li className="text-start text-lg text-ternary">
+                                                    <li className="text-ternary text-start text-lg">
                                                         Upload progress photos
                                                     </li>
-                                                    <li className="text-start text-lg text-ternary">
+                                                    <li className="text-ternary text-start text-lg">
                                                         Exercise Substitutions
                                                     </li>
                                                 </ul>
@@ -221,9 +225,9 @@ export const PurchaseOptions: FC = () => {
                                             <div className="mx-auto max-w-7xl">
                                                 {/* Tiers */}
                                                 <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
-                                                    <div className="card relative flex flex-col rounded-2xl border border-ternary p-8 shadow-sm">
+                                                    <div className="card border-ternary relative flex flex-col rounded-2xl border p-8 shadow-sm">
                                                         <div className="flex-1">
-                                                            <p className="mt-4 flex items-baseline text-secondary">
+                                                            <p className="text-secondary mt-4 flex items-baseline">
                                                                 <span className="text-5xl font-bold tracking-tight">
                                                                     {monthly?.price ??
                                                                         '$2.99'}
@@ -247,12 +251,12 @@ export const PurchaseOptions: FC = () => {
                                                             </SecondaryButton>
                                                         </div>
                                                     </div>
-                                                    <div className="card relative flex flex-col rounded-2xl border border-ternary p-8 shadow-sm">
+                                                    <div className="card border-ternary relative flex flex-col rounded-2xl border p-8 shadow-sm">
                                                         <div className="flex-1">
-                                                            <p className="absolute top-0 -translate-y-1/2 transform rounded-full bg-secondary py-1.5 px-4 text-sm font-semibold text-primary-dark">
+                                                            <p className="bg-secondary text-primary-dark absolute top-0 -translate-y-1/2 transform rounded-full px-4 py-1.5 text-sm font-semibold">
                                                                 Best Value
                                                             </p>
-                                                            <p className="mt-4 flex items-baseline text-secondary">
+                                                            <p className="text-secondary mt-4 flex items-baseline">
                                                                 <span className="text-5xl font-bold tracking-tight">
                                                                     {yearly?.price ??
                                                                         '$29.99'}

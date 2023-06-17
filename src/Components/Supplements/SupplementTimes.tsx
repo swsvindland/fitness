@@ -1,6 +1,6 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { Switch } from '@headlessui/react';
-import { Time } from './SupplementCard';
+import { type Time } from './SupplementCard';
 
 interface IProps {
     times: Time[];

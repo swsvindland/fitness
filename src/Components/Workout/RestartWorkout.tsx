@@ -1,5 +1,5 @@
 import { Button } from '../Buttons/Button';
-import { FC } from 'react';
+import { type FC } from 'react';
 import { useHistory } from 'react-router-dom';
 import { getUserWorkouts, restartWorkout } from '../../api';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -11,12 +11,12 @@ export const RestartWorkout: FC = () => {
     const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
 
     const restartWorkoutMutation = useMutation(restartWorkout, {
-        onSuccess: async () => {
+        onSuccess: () => {
             history.push(`/workout`, { replace: true });
         },
     });
 
-    const handleRestartWorkout = async () => {
+    const handleRestartWorkout = () => {
         const activeWorkouts = userWorkoutsQuery.data?.data.filter(
             (item) => item.active
         );
@@ -26,7 +26,7 @@ export const RestartWorkout: FC = () => {
             return null;
         }
 
-        restartWorkoutMutation.mutate(activeWorkouts[0].workoutId);
+        restartWorkoutMutation.mutate(activeWorkouts?.at(0)?.workoutId ?? 0);
     };
 
     if (userWorkoutsQuery.isLoading || restartWorkoutMutation.isLoading) {

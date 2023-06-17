@@ -3,7 +3,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { MinusSolid } from '../Icons/MinusSolid';
 import { Button } from '../Buttons/Button';
 import { PlusSolid } from '../Icons/PlusSolid';
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { quickAddFood, quickRemoveFood } from '../../api';
 import { useUpdateFoodCache } from './hooks';

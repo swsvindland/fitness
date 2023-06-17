@@ -1,4 +1,4 @@
-import { FC, FormEvent, useContext, useState } from 'react';
+import { type FC, type FormEvent, useContext, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
@@ -42,7 +42,7 @@ export const ChangePasswordForm: FC = () => {
 
             history.goBack();
         },
-        onError: (error) => {
+        onError: () => {
             setState((s) => ({ ...s, error: 'Old Password is incorrect' }));
         },
     });
@@ -123,7 +123,7 @@ export const ChangePasswordForm: FC = () => {
                                 </span>
                             )}
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

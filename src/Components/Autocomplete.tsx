@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react';
+import { type FC, Fragment } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
 import { LoadingSpinner } from './Loading/LoadingSpinner';
 import { CircleCheckSolid } from './Icons/CircleCheckSolid';
@@ -31,8 +31,7 @@ export const Autocomplete: FC<IProps> = ({
                     </Combobox.Label>
                     <Combobox.Input
                         className="focus:bg-background block w-full appearance-none rounded-lg border px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500"
-                        // @ts-ignore
-                        displayValue={(item) => item}
+                        displayValue={(item: string) => item}
                         onChange={(event) => setQuery(event.target.value)}
                     />
                 </div>

@@ -1,6 +1,6 @@
-import { FC, FormEvent, useState } from 'react';
+import { type FC, type FormEvent, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { User } from '../../types/User';
+import { type User } from '../../types/User';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { TextField } from '../TextFields/TextField';
@@ -158,7 +158,7 @@ export const Login: FC<IProps> = ({
                             label="Email Address"
                             value={email}
                             onChange={(event) =>
-                                setEmail(event.target.value as string)
+                                setEmail(event.target.value )
                             }
                         />
                         <TextField
@@ -169,7 +169,7 @@ export const Login: FC<IProps> = ({
                             label="Password"
                             value={password}
                             onChange={(event) =>
-                                setPassword(event.target.value as string)
+                                setPassword(event.target.value )
                             }
                         />
                         {error && (

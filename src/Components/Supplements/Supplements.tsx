@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { type FC } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
 import { UserSupplements } from './UserSupplements';
 import { useHideBackButton } from '../Navigation/headerHooks';
@@ -10,7 +10,7 @@ export const Supplements: FC = () => {
     FirebaseAnalytics.setScreenName({
         screenName: 'supplements',
         nameOverride: 'SupplementsScreen',
-    });
+    }).catch((error) => console.error(error));
 
     return (
         <div className="container">

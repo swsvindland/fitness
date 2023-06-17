@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState } from 'react';
+import React, { type FC, useMemo, useState } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -8,9 +8,9 @@ import {
     Title,
     Tooltip,
     Legend,
-    ChartData,
-    ScatterDataPoint,
-    BubbleDataPoint,
+    type ChartData,
+    type ScatterDataPoint,
+    type BubbleDataPoint,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';

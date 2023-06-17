@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from 'react';
+import { type FC, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { getAllSupplements, getUserSupplements } from '../../api';

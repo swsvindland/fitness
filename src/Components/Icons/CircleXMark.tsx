@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { IconProps } from './IconProps';
+import { type FC } from 'react';
+import { type IconProps } from './IconProps';
 
 export const CircleXMark: FC<IconProps> = (props) => {
     return (

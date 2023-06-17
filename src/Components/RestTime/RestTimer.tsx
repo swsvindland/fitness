@@ -1,4 +1,4 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { type FC, useContext, useEffect, useState } from 'react';
 import { XSolid } from '../Icons/XSolid';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { SnackbarContext } from '../Snackbars/SnackbarProvider';

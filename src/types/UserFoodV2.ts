@@ -1,4 +1,4 @@
-import { Food, Serving } from './Food';
+import { type Food, type Serving } from './Food';
 
 export interface UserFoodV2 {
     id?: number;
