@@ -26,16 +26,13 @@ export const TextField: FC<IProps> = ({
     required,
 }) => {
     const styles =
-        'appearance-none block w-full px-3 py-2 border border-ternary rounded-md shadow-sm placeholder-ternary focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm bg-background text-secondary focus:bg-background focus:text-secondary autofill:!bg-background autofill:!text-secondary';
+        'bg-white dark:bg-black appearance-none block w-full px-3 py-2 border border-teal-500 rounded-lg focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm';
 
     const isRequired = required !== undefined ? required : true;
 
     return (
         <div className={`${className} m-1 w-full`}>
-            <label
-                htmlFor={id}
-                className="block text-sm font-medium text-secondary"
-            >
+            <label htmlFor={id} className="block text-sm font-medium">
                 {label}
                 {isRequired && label ? '*' : null}
             </label>

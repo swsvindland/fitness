@@ -15,7 +15,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getUserBodyFat } from '../../api';
 import { LoadingCard } from '../Loading/LoadingCard';
 
@@ -58,8 +57,8 @@ export const BodyFatGraph: FC = () => {
                             ?.slice(1)
                             .slice(-30)
                             .map((item) => item.bodyFat) ?? [],
-                    borderColor: 'rgba(247, 198, 25, 1)',
-                    backgroundColor: 'rgba(247, 198, 25, 0.1)',
+                    borderColor: 'rgba(20, 184, 166, 1)',
+                    backgroundColor: 'rgba(20, 184, 166, 0.1)',
                 },
             ],
         });

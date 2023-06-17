@@ -27,7 +27,7 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
     }
 
     return (
-        <div className="w-full">
+        <div className="mb-4 w-full">
             <>
                 {currentMacrosQuery.isFetching ? (
                     <div className="card my-2 flex items-center justify-start p-2">
@@ -47,12 +47,7 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
                     unit={user?.unit === Units.Imperial ? 'Cal' : 'kcal'}
                     customMacros={!home}
                 />
-                <dl
-                    className={classNames(
-                        home ? 'hidden md:grid' : '',
-                        'mt-2 grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-4'
-                    )}
-                >
+                <dl className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
                     <MacroGridUnit
                         name="Protein"
                         amount={macrosQuery.data?.data?.protein ?? 0}

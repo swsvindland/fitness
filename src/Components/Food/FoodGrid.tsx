@@ -6,7 +6,6 @@ import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory } from 'react-router-dom';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
-import { da } from 'date-fns/locale';
 import { LoadingCard } from '../Loading/LoadingCard';
 
 export const FoodGrid: FC = () => {
@@ -61,43 +60,43 @@ export const FoodGrid: FC = () => {
                     Add Food
                 </Button>
             </div>
-            <div className="my-2 rounded ring-1 ring-ternary md:mx-0">
-                <table className="min-w-full divide-y divide-ternary">
+            <div className="my-2 rounded ring-1 ring-teal-500 md:mx-0">
+                <table className="table min-w-full divide-y divide-teal-500">
                     <thead>
                         <tr>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Name
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Protein
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Fat
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Carbs
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Calories
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Servings
                             </th>
@@ -117,14 +116,14 @@ export const FoodGrid: FC = () => {
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
+                                            : 'border-ternary border-t',
                                         'relative py-4 pl-4 pr-3 text-sm sm:pl-6'
                                     )}
                                 >
-                                    <div className="font-medium text-secondary">
+                                    <div className="text-secondary font-medium">
                                         {food?.foodV2?.name}
                                     </div>
-                                    <div className="mt-1 flex flex-col text-ternary lg:hidden">
+                                    <div className="text-ternary mt-1 flex flex-col lg:hidden">
                                         <span>
                                             Protein:{' '}
                                             {(
@@ -162,15 +161,13 @@ export const FoodGrid: FC = () => {
                                         </span>
                                     </div>
                                     {foodIdx !== 0 ? (
-                                        <div className="absolute right-0 left-6 -top-px h-px bg-ternary" />
+                                        <div className="absolute -top-px left-6 right-0 h-px" />
                                     ) : null}
                                 </td>
                                 <td
                                     className={classNames(
-                                        foodIdx === 0
-                                            ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                        foodIdx === 0 ? '' : 'border-t',
+                                        'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -181,10 +178,8 @@ export const FoodGrid: FC = () => {
                                 </td>
                                 <td
                                     className={classNames(
-                                        foodIdx === 0
-                                            ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                        foodIdx === 0 ? '' : 'border-t',
+                                        'hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -195,10 +190,8 @@ export const FoodGrid: FC = () => {
                                 </td>
                                 <td
                                     className={classNames(
-                                        foodIdx === 0
-                                            ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                        foodIdx === 0 ? '' : 'border-t',
+                                        'hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -209,10 +202,8 @@ export const FoodGrid: FC = () => {
                                 </td>
                                 <td
                                     className={classNames(
-                                        foodIdx === 0
-                                            ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                        foodIdx === 0 ? '' : 'border-t',
+                                        'hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -223,10 +214,8 @@ export const FoodGrid: FC = () => {
                                 </td>
                                 <td
                                     className={classNames(
-                                        foodIdx === 0
-                                            ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                        foodIdx === 0 ? '' : 'border-t',
+                                        'hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {food.servingAmount?.toFixed(2)} Servings

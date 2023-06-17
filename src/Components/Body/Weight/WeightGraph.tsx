@@ -17,7 +17,6 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
 import { getAllUserWeights } from '../../../api';
-import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
 
@@ -58,8 +57,8 @@ export const WeightGraph: FC = () => {
                             .slice(1)
                             .slice(-30)
                             .map((item) => item.weight) ?? [],
-                    borderColor: 'rgba(247, 198, 25, 1)',
-                    backgroundColor: 'rgba(247, 198, 25, 0.1)',
+                    borderColor: 'rgba(20, 184, 166, 1)',
+                    backgroundColor: 'rgba(20, 184, 166, 0.1)',
                 },
             ],
         });

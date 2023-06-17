@@ -18,9 +18,9 @@ export const Pagination: FC<IProps> = ({ selected, setSelected, pages }) => {
                         }}
                         className={`${
                             selected === index + 1
-                                ? 'bg-ternary text-primary-dark'
-                                : 'bg-primary-dark text-secondary-light'
-                        } mx-2 rounded-full px-3.5 py-2 text-sm font-medium`}
+                                ? 'bg-teal-800'
+                                : 'bg-teal-400'
+                        } mx-2 rounded-full px-3.5 py-2 text-sm font-medium text-white`}
                     >
                         {index + 1}
                     </button>

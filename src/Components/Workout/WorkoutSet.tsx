@@ -60,7 +60,7 @@ export const WorkoutSet: FC<IProps> = ({
     });
 
     return (
-        <div className="flex border-t border-ternary">
+        <div className="flex border-t border-teal-800">
             <div className=" flex flex-1">
                 <div className="inline-flex flex-1 items-center justify-center p-2">
                     <TextField
@@ -78,7 +78,7 @@ export const WorkoutSet: FC<IProps> = ({
                     />
                 </div>
             </div>
-            <div className="flex flex-1 border-x border-ternary p-2">
+            <div className="flex flex-1 border-x border-teal-800 p-2">
                 <TextField
                     label={user?.unit === Units.Imperial ? 'lbs' : 'kg'}
                     id={`exercise-weight-${id}-${set}`}
@@ -116,8 +116,8 @@ export const WorkoutSet: FC<IProps> = ({
                             <CircleCheckSolid
                                 className={
                                     saved
-                                        ? 'w-12 fill-secondary'
-                                        : 'w-12 rounded-full border border-ternary fill-transparent'
+                                        ? 'w-12 fill-teal-500'
+                                        : 'w-12 rounded-full border border-teal-500 fill-transparent'
                                 }
                             />
                         )}

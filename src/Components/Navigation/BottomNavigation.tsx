@@ -20,18 +20,20 @@ export const BottomNavigation: FC = () => {
 
     const linkStyle = (route: string[]) =>
         `${
-            isSelected(pathname, route) ? 'text-ternary' : 'text-secondary'
+            isSelected(pathname, route) ? 'text-teal-400' : ''
         } w-full justify-center inline-block text-center pt-2 pb-1`;
 
     const iconStyle = (route: string[]) =>
         `${
-            isSelected(pathname, route) ? 'fill-ternary' : 'fill-secondary'
+            isSelected(pathname, route)
+                ? 'fill-teal-400'
+                : 'fill-teal-950 dark:fill-white '
         } tab tab-home block text-xs w-6 h-6 m-auto`;
 
     return (
         <div
             id="bottom-navigation"
-            className="fixed inset-x-0 bottom-0 z-10 block bg-primary-dark pb-6 shadow dark:bg-background"
+            className="fixed inset-x-0 bottom-0 z-10 block bg-white pb-6 shadow dark:bg-teal-800"
         >
             <div id="tabs" className="flex justify-between">
                 <Link to="/" className={linkStyle(['/'])}>

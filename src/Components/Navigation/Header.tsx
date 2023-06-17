@@ -28,7 +28,7 @@ export const Header: FC = () => {
     return (
         <Disclosure
             as="nav"
-            className="fixed inset-x-0 top-0 z-10 block bg-primary-dark shadow pt-safe dark:bg-background"
+            className="fixed inset-x-0 top-0 z-10 block bg-white shadow pt-safe dark:bg-teal-800"
         >
             <div className="container mx-auto px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
@@ -38,12 +38,12 @@ export const Header: FC = () => {
                                 type="button"
                                 onClick={() => history.goBack()}
                             >
-                                <ArrowBackSolid className="h-6 w-6 fill-secondary" />
+                                <ArrowBackSolid className="fill-secondary h-6 w-6" />
                             </button>
                         </div>
                     ) : (
                         <div className="flex flex-1 items-center">
-                            <Dumbbell className="h-10 w-10 fill-secondary" />
+                            <Dumbbell className="h-10 w-10 fill-teal-400 dark:fill-white" />
                         </div>
                     )}
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -54,8 +54,8 @@ export const Header: FC = () => {
                                     <span className="sr-only">
                                         Open user menu
                                     </span>
-                                    <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-ternary">
-                                        <UserSolid className="h-5 w-5 fill-primary-dark" />
+                                    <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-teal-400 dark:bg-white">
+                                        <UserSolid className="h-5 w-5 fill-white dark:fill-teal-800" />
                                     </div>
                                 </Menu.Button>
                             </div>
@@ -73,7 +73,7 @@ export const Header: FC = () => {
                                         <Link
                                             to="/settings"
                                             className={
-                                                'block px-4 py-2 text-sm text-ternary hover:bg-primary-dark'
+                                                'text-ternary hover:bg-primary-dark block px-4 py-2 text-sm'
                                             }
                                         >
                                             Settings
@@ -85,7 +85,7 @@ export const Header: FC = () => {
                                             target="_blank"
                                             rel="noreferrer"
                                             className={
-                                                'block px-4 py-2 text-sm text-ternary hover:bg-primary-dark'
+                                                'text-ternary hover:bg-primary-dark block px-4 py-2 text-sm'
                                             }
                                         >
                                             Terms &amp; Conditions
@@ -97,7 +97,7 @@ export const Header: FC = () => {
                                             target="_blank"
                                             rel="noreferrer"
                                             className={
-                                                'block px-4 py-2 text-sm text-ternary hover:bg-primary-dark'
+                                                'text-ternary hover:bg-primary-dark block px-4 py-2 text-sm'
                                             }
                                         >
                                             Privacy Policy
@@ -107,7 +107,7 @@ export const Header: FC = () => {
                                         <button
                                             onClick={logout}
                                             className={
-                                                'block w-full px-4 py-2 text-left text-sm text-ternary hover:bg-primary-dark'
+                                                'text-ternary hover:bg-primary-dark block w-full px-4 py-2 text-left text-sm'
                                             }
                                         >
                                             Sign out

@@ -8,15 +8,12 @@ import { useMutation } from '@tanstack/react-query';
 import { useHistory } from 'react-router-dom';
 import { TextArea } from '../TextFields/TextArea';
 import { addWorkout } from '../../api';
-import { WorkoutType } from '../../types/WorkoutType';
-import { Dropdown, DropdownOption } from '../Dropdown';
 
 interface IState {
     name: string;
     description: string;
     days: string;
     weeks: string;
-    type: DropdownOption;
 }
 
 export const CreateCustomWorkout: FC = () => {
@@ -27,7 +24,6 @@ export const CreateCustomWorkout: FC = () => {
         description: '',
         days: '',
         weeks: '',
-        type: { id: WorkoutType.Resistance, name: 'Resistance' },
     });
     const history = useHistory();
 
@@ -46,7 +42,6 @@ export const CreateCustomWorkout: FC = () => {
             description: state.description,
             days: parseInt(state.days),
             duration: parseInt(state.weeks),
-            type: state.type.id,
         });
     };
 
@@ -56,13 +51,8 @@ export const CreateCustomWorkout: FC = () => {
             description: '',
             days: '',
             weeks: '',
-            type: { id: WorkoutType.Resistance, name: 'Resistance' },
         });
     };
-
-    const typeOptions = Object.keys(WorkoutType)
-        .filter((item) => isNaN(parseInt(item)))
-        .map((item, index) => ({ id: index, name: item }));
 
     return (
         <div className="container">
@@ -70,16 +60,6 @@ export const CreateCustomWorkout: FC = () => {
                 <form onSubmit={handleSubmit}>
                     <div className="card overflow-hidden rounded shadow">
                         <div className="p-4">
-                            <Dropdown
-                                label="Workout Type"
-                                id="workoutType"
-                                selected={state.type}
-                                setSelected={(value) => {
-                                    setState({ ...state, type: value });
-                                }}
-                                className="ml-1"
-                                options={typeOptions}
-                            />
                             <TextField
                                 id="name"
                                 type="text"
@@ -135,7 +115,7 @@ export const CreateCustomWorkout: FC = () => {
                                 }
                             />
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

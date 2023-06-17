@@ -23,19 +23,19 @@ interface IProps {
 const mapToIcon = (icon?: ExerciseIcon) => {
     switch (icon) {
         case ExerciseIcon.Barbell:
-            return <Barbell className="w-8 fill-primary-dark" />;
+            return <Barbell className="fill-primary-dark w-8" />;
         case ExerciseIcon.Dumbbell:
-            return <Dumbbell className="w-8 fill-primary-dark" />;
+            return <Dumbbell className="fill-primary-dark w-8" />;
         case ExerciseIcon.Cable:
-            return <Cable className="w-8 fill-primary-dark" />;
+            return <Cable className="fill-primary-dark w-8" />;
         case ExerciseIcon.Bodyweight:
-            return <BodyWeight className="w-8 fill-primary-dark" />;
+            return <BodyWeight className="fill-primary-dark w-8" />;
         case ExerciseIcon.Band:
-            return <Band className="w-8 fill-primary-dark" />;
+            return <Band className="fill-primary-dark w-8" />;
         case ExerciseIcon.Machine:
-            return <Machine className="w-8 fill-primary-dark" />;
+            return <Machine className="fill-primary-dark w-8" />;
         case ExerciseIcon.Cardio:
-            return <Cardio className="w-8 fill-primary-dark" />;
+            return <Cardio className="fill-primary-dark w-8" />;
         default:
             return <></>;
     }
@@ -53,7 +53,7 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
     if (workoutExerciseQuery.isLoading) {
         return (
             <div role="status" className="w-full animate-pulse">
-                <div className="my-2 h-64 rounded bg-card dark:bg-primary-dark"></div>
+                <div className="my-2 h-64 rounded bg-teal-100 dark:bg-teal-900"></div>
                 <span className="sr-only">Loading...</span>
             </div>
         );
@@ -66,7 +66,7 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
         >
             <div className="flex w-full items-center justify-start space-x-6 p-6">
                 <div className="">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-ternary">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 fill-white dark:fill-black">
                         <div className="">
                             {mapToIcon(
                                 workoutExerciseQuery.data?.data.exercise?.icon
@@ -76,18 +76,18 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
                 </div>
                 <div className="flex-1 truncate">
                     <div className="flex items-center space-x-3">
-                        <h3 className="truncate text-sm font-medium text-secondary">
+                        <h3 className="truncate text-sm font-medium">
                             {workoutExerciseQuery.data?.data.exercise?.name}
                         </h3>
                     </div>
 
                     {workoutExerciseQuery.data?.data.time ? (
-                        <p className="mt-1 truncate text-sm text-ternary">
+                        <p className="mt-1 truncate text-sm">
                             {(workoutExerciseQuery.data?.data.time ?? 0) / 60}{' '}
                             minutes
                         </p>
                     ) : (
-                        <p className="mt-1 truncate text-sm text-ternary">
+                        <p className="mt-1 truncate text-sm">
                             {workoutExerciseQuery.data?.data.minReps ===
                             workoutExerciseQuery.data?.data.maxReps
                                 ? workoutExerciseQuery.data?.data.maxReps
@@ -102,7 +102,7 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
                     <LinkSecondaryButton
                         to={`/workout/substitution/${workoutExerciseId}`}
                     >
-                        <Gear className="w-8 fill-secondary" />
+                        <Gear className="w-8 fill-teal-400" />
                     </LinkSecondaryButton>
                 </div>
             </div>

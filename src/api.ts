@@ -495,7 +495,6 @@ export const addWorkout = (body: {
     description: string;
     days: number;
     duration: number;
-    type: WorkoutType;
 }): Promise<AxiosResponse<number>> => {
     const params = getHeaders();
 
