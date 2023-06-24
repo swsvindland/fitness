@@ -25,7 +25,7 @@ export const SupplementTimes: FC<IProps> = ({ times, setTimes }) => {
                 {times.map((time) => (
                     <Switch.Group key={time.name}>
                         <div className="my-2 flex items-center justify-between">
-                            <Switch.Label className="mr-4 text-ternary">
+                            <Switch.Label className="text-ternary mr-4">
                                 {time.name}
                             </Switch.Label>
                             <Switch
@@ -33,8 +33,8 @@ export const SupplementTimes: FC<IProps> = ({ times, setTimes }) => {
                                 onChange={() => handleChanged(time.name)}
                                 className={`${
                                     time.enabled
-                                        ? 'bg-secondary'
-                                        : 'bg-primary-dark'
+                                        ? 'bg-teal-500'
+                                        : 'bg-amber-500'
                                 } relative inline-flex h-6 w-11 items-center rounded-full transition-colors`}
                             >
                                 <span

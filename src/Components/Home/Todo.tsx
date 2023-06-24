@@ -11,11 +11,11 @@ export const Todo: FC = () => {
     if (dashboardQuery.isLoading) {
         return (
             <div role="status" className="w-full animate-pulse">
-                <h1 className="text-secondary text-2xl font-bold">To Do</h1>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
+                <h1 className="text-2xl font-bold">To Do</h1>
+                <div className="my-2 h-16 rounded-2xl bg-teal-100 dark:bg-teal-900"></div>
+                <div className="my-2 h-16 rounded-2xl bg-teal-100 dark:bg-teal-900"></div>
+                <div className="my-2 h-16 rounded-2xl bg-teal-100 dark:bg-teal-900"></div>
+                <div className="my-2 h-16 rounded-2xl bg-teal-100 dark:bg-teal-900"></div>
                 <span className="sr-only">Loading...</span>
             </div>
         );
@@ -95,26 +95,14 @@ export const Todo: FC = () => {
                 route="/supplements"
             />
             <TodoItem
-                name="Add your blood pressure"
+                name="Check In"
                 show={
-                    dashboardQuery.data?.data.addBloodPressure ||
-                    dashboardQuery.data?.data.bloodPressureAdded ||
+                    dashboardQuery.data?.data.addCheckIn ||
+                    dashboardQuery.data?.data.checkInAdded ||
                     false
                 }
-                checked={dashboardQuery.data?.data.bloodPressureAdded || false}
-                route="/body/blood-pressure"
-            />
-            <TodoItem
-                name="Add your body measurements"
-                show={
-                    dashboardQuery.data?.data.addBodyMeasurements ||
-                    dashboardQuery.data?.data.bodyMeasurementsAdded ||
-                    false
-                }
-                checked={
-                    dashboardQuery.data?.data.bodyMeasurementsAdded || false
-                }
-                route="/body/body"
+                checked={dashboardQuery.data?.data.checkInAdded || false}
+                route="/home/check-in"
             />
         </div>
     );

@@ -30,16 +30,16 @@ export const AddFoodCard: FC<IProps> = ({
     const updateFoodCache = useUpdateFoodCache();
 
     const quickAddMutation = useMutation(quickAddFood, {
-        onSuccess: () => {
+        onSuccess: async () => {
             setServings(servings + 1);
-            updateFoodCache();
+            await updateFoodCache();
         },
     });
 
     const quickRemoveMutation = useMutation(quickRemoveFood, {
-        onSuccess: () => {
+        onSuccess: async () => {
             setServings(servings < 1 ? 0 : servings - 1);
-            updateFoodCache();
+            await updateFoodCache();
         },
     });
 
@@ -61,22 +61,22 @@ export const AddFoodCard: FC<IProps> = ({
                 }
                 className="flex flex-col p-4"
             >
-                <span className="text-lg text-secondary">
+                <span className="text-secondary text-lg">
                     {name} ({brandName})
                 </span>
-                <span className="text-sm text-ternary">{servingSize}</span>
+                <span className="text-ternary text-sm">{servingSize}</span>
             </Link>
             {!quickAddMutation.isLoading && !quickRemoveMutation.isLoading ? (
                 <div className="flex items-center">
                     <SecondaryButton
                         onClick={handleRemove}
-                        className="ml-1 w-8 w-8 !p-2"
+                        className="ml-1 w-8 !p-2"
                     >
-                        <MinusSolid className="h-6 w-6 fill-secondary" />
+                        <MinusSolid className="h-6 w-6 fill-teal-500" />
                     </SecondaryButton>
-                    <span className="m-3 text-ternary">{servings}</span>
-                    <Button onClick={handleAdd} className="mr-1 w-8 w-8 !p-2">
-                        <PlusSolid className="h-6 w-6 fill-secondary" />
+                    <span className="text-ternary m-3">{servings}</span>
+                    <Button onClick={handleAdd} className="mr-1 w-8 !p-2">
+                        <PlusSolid className="h-6 w-6" />
                     </Button>
                 </div>
             ) : (

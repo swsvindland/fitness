@@ -16,7 +16,7 @@ export const Body: FC = () => {
     }).catch((err) => console.error(err));
 
     return (
-        <div className="container grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+        <div className="container grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
             <ProgressPhotos />
             <WeightGraph />
             <BodyFatGraph />

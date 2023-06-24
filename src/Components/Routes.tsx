@@ -34,6 +34,7 @@ import { AllBloodPressure } from './Body/BloodPressure/AllBloodPressure';
 import { AllBody } from './Body/Body/AllBody';
 import { SnackbarProvider } from './Snackbars/SnackbarProvider';
 import { WorkoutSubstitution } from './Workout/WorkoutSubstitution';
+import { CheckIn } from './CheckIn/CheckIn';
 
 export const Routes: FC = () => {
     return (
@@ -114,6 +115,9 @@ export const Routes: FC = () => {
                     </Route>
                     <Route path="/body/progress" exact={true}>
                         <ProgressGallery />
+                    </Route>
+                    <Route path="/home/check-in" exact={true}>
+                        <CheckIn />
                     </Route>
                     <Route path="/settings" exact={true}>
                         <Settings />

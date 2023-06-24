@@ -38,7 +38,7 @@ export const Header: FC = () => {
                                 type="button"
                                 onClick={() => history.goBack()}
                             >
-                                <ArrowBackSolid className="fill-secondary h-6 w-6" />
+                                <ArrowBackSolid className="h-6 w-6 fill-white" />
                             </button>
                         </div>
                     ) : (

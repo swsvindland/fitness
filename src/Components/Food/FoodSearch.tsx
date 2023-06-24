@@ -53,10 +53,10 @@ export const FoodSearch: FC<IProps> = ({
                 className=" ml-2 h-10 w-10 !p-2"
                 onClick={handleClear}
             >
-                <XSolid className="h-6 w-6 fill-secondary" />
+                <XSolid className="h-6 w-6 fill-teal-500" />
             </SecondaryButton>
             <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
-                <MagnifyingGlassSolid className="h-6 w-6 fill-secondary" />
+                <MagnifyingGlassSolid className="h-6 w-6" />
             </Button>
         </form>
     );
