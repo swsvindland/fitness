@@ -111,9 +111,7 @@ export const SupplementCard: FC<IProps> = ({
         <div>
             <button
                 onClick={() => (isUser ? handleCheck() : setOpen(true))}
-                className={`${
-                    checked ? 'bg-primary-dark' : 'card'
-                } my-2 flex w-full items-center justify-between overflow-hidden rounded-2xl p-4 text-left shadow-lg`}
+                className="card my-2 flex w-full items-center justify-between p-4 text-left shadow-lg"
             >
                 <div className="flex items-center">
                     <div className="mr-4">
@@ -139,7 +137,7 @@ export const SupplementCard: FC<IProps> = ({
                     checked &&
                     !mutation.isLoading &&
                     !userSupplementActivityQuery.isFetching && (
-                        <CircleCheckSolid className="fill-secondary h-8 w-8" />
+                        <CircleCheckSolid className="h-8 w-8 fill-teal-500" />
                     )}
                 {isUser &&
                     (mutation.isLoading ||
