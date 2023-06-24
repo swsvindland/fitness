@@ -12,7 +12,7 @@ export const Layout: FC<IProps> = ({ children }) => {
     const { user } = useContext(AuthContext);
     return (
         <>
-            <div className="min-h-screen bg-background dark:bg-black">
+            <div className="min-h-screen">
                 <div className="hidden md:fixed md:inset-y-0 md:flex md:w-48 md:flex-col">
                     <Sidebar />
                 </div>

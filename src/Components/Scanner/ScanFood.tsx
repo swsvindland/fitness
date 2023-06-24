@@ -29,9 +29,7 @@ export const ScanFood: FC = () => {
     if (!searchFoodQuery.data?.data) {
         return (
             <div>
-                <h1 className="text-2xl font-bold text-secondary">
-                    Food not found
-                </h1>
+                <h1 className="text-2xl font-bold">Food not found</h1>
                 <p>{barcode}</p>
                 <LinkButton to="/eat">Go Back</LinkButton>
             </div>
