@@ -7,11 +7,7 @@ import { Units } from '../../types/User';
 import { AuthContext } from '../Auth/Auth';
 import { LoadingMacroGrid } from '../Loading/LoadingMacroGrid';
 
-interface IProps {
-    home?: boolean;
-}
-
-export const MacroGrid: FC<IProps> = ({ home }) => {
+export const MacroGrid: FC = () => {
     const { user } = useContext(AuthContext);
     const macrosQuery = useQuery(['Macros'], () => {
         return getMacros();
@@ -44,7 +40,6 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
                     amountHigh={macrosQuery.data?.data.caloriesHigh}
                     currentAmount={currentMacrosQuery.data?.data.calories}
                     unit={user?.unit === Units.Imperial ? 'Cal' : 'kcal'}
-                    customMacros={!home}
                 />
                 <dl className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
                     <MacroGridUnit
