@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { XSolid } from '../Icons/XSolid';
 import { foodAutocomplete } from '../../api';
+import { Barcode } from '../Icons/Barcode';
+import { useHistory } from 'react-router-dom';
 
 interface IProps {
     query: string;
@@ -20,6 +22,8 @@ export const FoodSearch: FC<IProps> = ({
     selected,
     setSelected,
 }) => {
+    const history = useHistory();
+
     const optionsQuery = useQuery(['SearchFoodOptions', query], () => {
         if (!query) return;
         return foodAutocomplete(query);
@@ -33,6 +37,10 @@ export const FoodSearch: FC<IProps> = ({
     const handleSearch = (event: FormEvent) => {
         event.preventDefault();
         setSelected(query);
+    };
+
+    const handleStartScan = () => {
+        history.push('/scanner');
     };
 
     return (
@@ -58,6 +66,12 @@ export const FoodSearch: FC<IProps> = ({
             <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
                 <MagnifyingGlassSolid className="h-6 w-6" />
             </Button>
+            <SecondaryButton
+                className=" ml-2 h-10 w-10 !p-2"
+                onClick={handleStartScan}
+            >
+                <Barcode className="h-6 w-6 fill-teal-500" />
+            </SecondaryButton>
         </form>
     );
 };

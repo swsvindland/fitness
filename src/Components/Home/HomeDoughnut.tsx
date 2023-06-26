@@ -5,8 +5,6 @@ import {
     Legend,
     type ChartData,
     ArcElement,
-    ScatterDataPoint,
-    BubbleDataPoint,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 
@@ -54,7 +52,7 @@ export const HomeDoughnut: FC<HomeDoughnutProps> = ({ defaultData }) => {
     }
 
     return (
-        <div className="flex w-full items-center justify-center">
+        <div className="flex h-64 w-full items-center justify-center">
             <Doughnut data={data} />
         </div>
     );
