@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 
 interface IProps {
     className?: string;
@@ -9,9 +9,7 @@ export const LoadingSpinner: FC<IProps> = ({ className }) => {
         <div role="status">
             <svg
                 aria-hidden="true"
-                className={`${
-                    className ?? ''
-                } mr-2 h-8 w-8 animate-spin fill-teal-500`}
+                className={`${className} mr-2 h-8 w-8 animate-spin fill-teal-500`}
                 viewBox="0 0 100 101"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

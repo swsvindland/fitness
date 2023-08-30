@@ -1,4 +1,4 @@
-import { type FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export const ScrollToTop: FC = () => {

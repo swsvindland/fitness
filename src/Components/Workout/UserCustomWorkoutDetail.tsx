@@ -1,4 +1,4 @@
-import { type FC, type MouseEvent } from 'react';
+import { FC, MouseEvent } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
@@ -39,7 +39,6 @@ export const UserCustomWorkoutDetail: FC = () => {
         event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
     ) => {
         event.preventDefault();
-        if (!workoutId) return;
         history.push(`/workout/edit/${workoutId}`);
     };
 
@@ -59,7 +58,7 @@ export const UserCustomWorkoutDetail: FC = () => {
             <div className="py-6">
                 <div className="mx-auto mt-8 w-96 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div className="flex justify-between">
-                        <h1 className="text-secondary mb-2 text-xl font-medium">
+                        <h1 className="mb-2 text-xl font-medium text-secondary">
                             {workoutQuery.data?.data.name}
                         </h1>
                     </div>
@@ -94,10 +93,10 @@ export const UserCustomWorkoutDetail: FC = () => {
                             </form>
                         )}
                         <div className="mt-10">
-                            <h2 className="text-secondary text-sm font-medium">
+                            <h2 className="text-sm font-medium text-secondary">
                                 Description
                             </h2>
-                            <div className="prose prose-sm text-ternary mt-4">
+                            <div className="prose prose-sm mt-4 text-ternary">
                                 {workoutQuery.data?.data.description ? (
                                     <p>{workoutQuery.data?.data.description}</p>
                                 ) : (
@@ -105,12 +104,12 @@ export const UserCustomWorkoutDetail: FC = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="text-secondary mt-8 border-t pt-8">
-                            <h2 className="text-secondary text-sm font-medium">
+                        <div className="mt-8 border-t pt-8 text-secondary">
+                            <h2 className="text-sm font-medium text-secondary">
                                 Workout Details
                             </h2>
 
-                            <div className="prose prose-sm text-ternary mt-4">
+                            <div className="prose prose-sm mt-4 text-ternary">
                                 <div role="list">
                                     <li>
                                         {workoutQuery.data?.data.days} days per

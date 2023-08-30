@@ -1,11 +1,11 @@
-import { type FC, type FormEvent, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
 import { authV2, createUser, getUser } from '../../api';
-import { type User } from '../../types/User';
+import { User } from '../../types/User';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';
 
@@ -51,7 +51,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
     });
 
     const registerMutation = useMutation(createUser, {
-        onSuccess: () => {
+        onSuccess: async () => {
             loginMutation.mutate({ email, password });
             setRegister(false);
         },
@@ -65,9 +65,9 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
     };
 
     return (
-        <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+        <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="card px-4 py-8 shadow sm:rounded-lg sm:px-10">
+                <div className="card py-8 px-4 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <TextField
                             id="email"
@@ -76,7 +76,9 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                             autoComplete="email"
                             label="Email Address"
                             value={email}
-                            onChange={(event) => setEmail(event.target.value)}
+                            onChange={(event) =>
+                                setEmail(event.target.value as string)
+                            }
                         />
                         <TextField
                             id="password"
@@ -86,7 +88,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                             label="Password"
                             value={password}
                             onChange={(event) =>
-                                setPassword(event.target.value)
+                                setPassword(event.target.value as string)
                             }
                         />
                         <TextField
@@ -97,7 +99,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                             label="Confirm Password"
                             value={passwordConfirm}
                             onChange={(event) =>
-                                setPasswordConfirm(event.target.value)
+                                setPasswordConfirm(event.target.value as string)
                             }
                         />
                         <div className="flex items-center">
@@ -109,11 +111,11 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
                                 onChange={(event) => {
                                     setAgree(event.target.checked);
                                 }}
-                                className="border-ternary accent-secondary focus:ring-secondary h-4 w-4 rounded"
+                                className="h-4 w-4 rounded border-ternary accent-secondary focus:ring-secondary"
                             />
                             <label
                                 htmlFor="agree"
-                                className="text-ternary ml-2 block text-sm"
+                                className="ml-2 block text-sm text-ternary"
                             >
                                 Agree to{' '}
                                 <a

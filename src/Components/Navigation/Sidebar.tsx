@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { PersonSolid } from '../Icons/PersonSolid';
 import { Capsule } from '../Icons/Capsule';
 import { Dumbbell } from '../Icons/Dumbbell';
@@ -23,7 +23,7 @@ export const Sidebar: FC = () => {
             isSelected(pathname, route) ? 'bg-teal-400' : ''
         } hover:bg-teal-300 group flex items-center px-2 py-2 text-sm font-medium rounded-md`;
 
-    const iconStyle = () => `mr-2 h-6 w-6 dark:fill-white`;
+    const iconStyle = (route: string[]) => `mr-2 h-6 w-6 dark:fill-white`;
 
     return (
         <div className="z-20 flex min-h-0 flex-1 flex-col border-gray-200 bg-white shadow pl-safe dark:bg-teal-800 ">

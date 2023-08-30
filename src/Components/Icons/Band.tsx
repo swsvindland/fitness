@@ -1,5 +1,5 @@
-import { type FC } from 'react';
-import { type IconProps } from './IconProps';
+import { FC } from 'react';
+import { IconProps } from './IconProps';
 
 export const Band: FC<IconProps> = (props) => {
     return (

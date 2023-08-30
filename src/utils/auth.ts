@@ -6,7 +6,7 @@ export const getCurrentUser = async () => {
 };
 
 export const getIdToken = async () => {
-    const currentUser = await getCurrentUser();
+    const currentUser = getCurrentUser();
     if (!currentUser) {
         return;
     }

@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
 import { RestartWorkout } from './RestartWorkout';
 

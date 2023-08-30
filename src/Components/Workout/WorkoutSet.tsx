@@ -1,4 +1,4 @@
-import { type FC, useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
@@ -46,8 +46,8 @@ export const WorkoutSet: FC<IProps> = ({
     const queryClient = useQueryClient();
 
     const mutation = useMutation(addWorkoutActivity, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries([
+        onSuccess: () => {
+            queryClient.invalidateQueries([
                 'UserWorkoutExercises',
                 workoutExerciseId,
             ]);
@@ -65,6 +65,7 @@ export const WorkoutSet: FC<IProps> = ({
                 <div className="inline-flex flex-1 items-center justify-center p-2">
                     <TextField
                         label="Reps"
+                        id={`exercise-reps-${id}-${set}`}
                         value={state.reps}
                         type="number"
                         inputMode="numeric"
@@ -80,6 +81,7 @@ export const WorkoutSet: FC<IProps> = ({
             <div className="flex flex-1 border-x border-teal-800 p-2">
                 <TextField
                     label={user?.unit === Units.Imperial ? 'lbs' : 'kg'}
+                    id={`exercise-weight-${id}-${set}`}
                     value={state.weight}
                     type="number"
                     inputMode="decimal"

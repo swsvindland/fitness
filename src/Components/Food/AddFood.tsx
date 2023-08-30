@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
 import { useQuery } from '@tanstack/react-query';
 import { getRecentUserFoods, searchFood } from '../../api';
@@ -37,7 +37,7 @@ export const AddFood: FC = () => {
                         <span className="text-ternary">No Results</span>
                     </div>
                 ) : (
-                    searchFoodQuery.data?.data.map((food) => (
+                    searchFoodQuery.data?.data.map((food, foodIdx) => (
                         <AddFoodCard
                             key={food.foodId}
                             foodId={food.foodId}
@@ -51,14 +51,14 @@ export const AddFood: FC = () => {
             <LoadingListOfCards isLoading={recentlyEaten.isLoading} />
             <div className="w-full">
                 {!recentlyEaten.data?.data ? null : (
-                    <h2 className="text-secondary mt-2 text-lg">
+                    <h2 className="mt-2 text-lg text-secondary">
                         Recently Eaten
                     </h2>
                 )}
                 {!recentlyEaten.data?.data ? (
                     <div className="flex items-center justify-between text-center" />
                 ) : (
-                    recentlyEaten.data?.data.map((food) => (
+                    recentlyEaten.data?.data.map((food, index) => (
                         <AddFoodCard
                             key={food.id}
                             userFoodId={food.id}

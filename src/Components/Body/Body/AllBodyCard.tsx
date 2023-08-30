@@ -2,11 +2,11 @@ import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
-import { type ChangeEvent, type FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteUserBody, updateUserBody } from '../../../api';
 import { CircleXMark } from '../../Icons/CircleXMark';
-import { type UserBody } from '../../../types/UserBody';
+import { UserBody } from '../../../types/UserBody';
 
 interface IProps {
     id: number;
@@ -26,8 +26,8 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
     });
 
     const deleteMutation = useMutation(deleteUserBody, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserBodies']);
+        onSuccess: () => {
+            queryClient.invalidateQueries(['UserBodies']);
         },
     });
 
@@ -40,7 +40,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
 
     return (
         <div className="card my-2 p-4">
-            <span className="text-secondary text-lg">
+            <span className="text-lg text-secondary">
                 {format(new Date(date ?? ''), 'PP')}
             </span>
             <hr className="border-secondary" />
@@ -201,7 +201,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                                     className={
                                         saved
                                             ? 'fill-secondary'
-                                            : 'border-ternary rounded-full border fill-transparent'
+                                            : 'rounded-full border border-ternary fill-transparent'
                                     }
                                 />
                             )}

@@ -1,4 +1,4 @@
-import { type FC, type MouseEventHandler, type ReactNode } from 'react';
+import { FC, MouseEventHandler, ReactNode } from 'react';
 
 interface IProps {
     type?: 'button' | 'reset' | 'submit';
@@ -19,7 +19,7 @@ export const Button: FC<IProps> = ({
         <button
             type={type}
             onClick={onClick}
-            className={`${className ?? ''} btn-primary`}
+            className={`${className} btn-primary`}
             disabled={disabled}
         >
             {children}

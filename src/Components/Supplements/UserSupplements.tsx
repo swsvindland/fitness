@@ -1,4 +1,4 @@
-import { type FC, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
 import { AuthContext } from '../Auth/Auth';
@@ -96,9 +96,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-Morning`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['Morning']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>
@@ -112,9 +112,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-Breakfast`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['Breakfast']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>
@@ -128,9 +128,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-Lunch`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['Lunch']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>
@@ -144,9 +144,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-PreWorkout`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['PreWorkout']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>
@@ -160,9 +160,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-PostWorkout`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['PostWorkout']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>
@@ -176,9 +176,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-Dinner`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['Dinner']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>
@@ -192,9 +192,9 @@ export const UserSupplements: FC = () => {
                             id={userSupplement.id ?? -1}
                             userSupplementId={userSupplement.id}
                             key={`${userSupplement.supplementId}-Evening`}
-                            name={userSupplement.supplement?.name ?? ''}
+                            name={userSupplement.supplement!.name}
                             times={['Evening']}
-                            icon={userSupplement.supplement?.icon}
+                            icon={userSupplement.supplement!.icon}
                         />
                     ))}
                 </div>

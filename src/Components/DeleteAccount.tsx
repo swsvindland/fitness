@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { type FC, Fragment, useContext, useState } from 'react';
+import { FC, Fragment, useContext, useState } from 'react';
 import { Button } from './Buttons/Button';
 import { SecondaryButton } from './Buttons/SecondaryButton';
 import { AuthContext } from './Auth/Auth';
@@ -11,7 +11,7 @@ export const DeleteAccount: FC = () => {
     const [open, setOpen] = useState(false);
 
     const deleteMutation = useMutation(deleteUser, {
-        onSuccess: () => {
+        onSuccess: async () => {
             localStorage.clear();
             setUser(undefined);
         },
@@ -52,17 +52,17 @@ export const DeleteAccount: FC = () => {
                                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                             >
-                                <Dialog.Panel className="card relative transform overflow-hidden rounded-lg px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+                                <Dialog.Panel className="card relative transform overflow-hidden rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                                     <div>
                                         <div className="mt-3 text-center sm:mt-5">
                                             <Dialog.Title
                                                 as="h3"
-                                                className="text-secondary text-lg font-medium leading-6"
+                                                className="text-lg font-medium leading-6 text-secondary"
                                             >
                                                 Delete Account?
                                             </Dialog.Title>
                                             <div className="mt-2">
-                                                <p className="text-ternary text-sm">
+                                                <p className="text-sm text-ternary">
                                                     This will delete all data we
                                                     have stored about you. You
                                                     will not be able to revert

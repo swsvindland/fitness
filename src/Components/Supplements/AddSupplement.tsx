@@ -1,11 +1,11 @@
-import { type FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { SupplementTimes } from './SupplementTimes';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
-import { type Time } from './SupplementCard';
+import { Time } from './SupplementCard';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { type UserSupplement } from '../../types/UserSupplement';
+import { UserSupplement } from '../../types/UserSupplement';
 import { updateUserSupplement } from '../../api';
 
 interface IProps {
@@ -58,8 +58,8 @@ export const AddSupplement: FC<IProps> = ({
     ]);
 
     const mutation = useMutation(updateUserSupplement, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserSupplements']);
+        onSuccess: () => {
+            queryClient.invalidateQueries(['UserSupplements']);
         },
     });
 

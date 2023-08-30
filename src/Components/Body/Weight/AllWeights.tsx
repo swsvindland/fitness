@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { getAllUserWeights } from '../../../api';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';

@@ -1,4 +1,4 @@
-import { type FC, useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
@@ -45,8 +45,8 @@ export const WorkoutSetTime: FC<IProps> = ({
     const queryClient = useQueryClient();
 
     const mutation = useMutation(addWorkoutActivity, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries([
+        onSuccess: () => {
+            queryClient.invalidateQueries([
                 'UserWorkoutExercises',
                 workoutExerciseId,
             ]);
@@ -59,9 +59,10 @@ export const WorkoutSetTime: FC<IProps> = ({
     });
 
     return (
-        <div className="border-ternary flex border-t">
-            <div className="border-ternary flex flex-1 border-r p-2">
+        <div className="flex border-t border-ternary">
+            <div className="flex flex-1 border-r border-ternary p-2">
                 <TextField
+                    id={`exercise-weight-${id}-${set}`}
                     value={state.time}
                     type="number"
                     inputMode="decimal"
@@ -73,7 +74,7 @@ export const WorkoutSetTime: FC<IProps> = ({
                     }}
                     className="my-auto"
                 />
-                <span className="text-ternary mx-2 my-auto text-xs">
+                <span className="mx-2 my-auto text-xs text-ternary">
                     minutes
                 </span>
             </div>
@@ -101,7 +102,7 @@ export const WorkoutSetTime: FC<IProps> = ({
                                 className={
                                     saved
                                         ? 'fill-secondary'
-                                        : 'border-ternary rounded-full border fill-transparent'
+                                        : 'rounded-full border border-ternary fill-transparent'
                                 }
                             />
                         )}

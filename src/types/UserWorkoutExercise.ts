@@ -1,5 +1,5 @@
-import { type Exercise } from './Exercise';
-import { type UserWorkoutActivity } from './UserWorkoutActivity';
+import { Exercise } from './Exercise';
+import { UserWorkoutActivity } from './UserWorkoutActivity';
 
 export interface UserWorkoutExercise {
     workoutId: number;

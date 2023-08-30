@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 import { DeleteAccount } from '../DeleteAccount';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { LinkButton } from '../Buttons/LinkButton';

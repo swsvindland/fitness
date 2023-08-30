@@ -1,6 +1,6 @@
-import { createContext, type FC, useState } from 'react';
+import { createContext, FC, useState } from 'react';
 import { Login } from './Login';
-import { type User } from '../../types/User';
+import { User } from '../../types/User';
 import { Routes } from '../Routes';
 import { IonReactRouter } from '@ionic/react-router';
 import { Register } from './Register';

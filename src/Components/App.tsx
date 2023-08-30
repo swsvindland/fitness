@@ -1,6 +1,6 @@
 import { IonApp, setupIonicReact } from '@ionic/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { type FC, useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { Auth } from './Auth/Auth';
 import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 
@@ -18,10 +18,8 @@ export const App: FC = () => {
     useMemo(() => {
         if (!analyticsInitialized) {
             initializeApp(firebaseConfig);
-            FirebaseAnalytics.initializeFirebase(firebaseConfig).catch((err) =>
-                console.error(err)
-            );
-            FirebaseAnalytics.enable().catch((err) => console.error(err));
+            FirebaseAnalytics.initializeFirebase(firebaseConfig);
+            FirebaseAnalytics.enable();
 
             setAnalyticsInitialized(true);
         }

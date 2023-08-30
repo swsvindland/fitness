@@ -1,4 +1,4 @@
-import { type FC, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Auth/Auth';
 

@@ -1,4 +1,4 @@
-import { type FC, type FormEvent } from 'react';
+import { FC, FormEvent } from 'react';
 import { Button } from '../Buttons/Button';
 import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
 import { Autocomplete } from '../Autocomplete';

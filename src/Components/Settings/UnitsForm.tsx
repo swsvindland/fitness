@@ -1,4 +1,4 @@
-import { type FC, type FormEvent, useContext, useState } from 'react';
+import { FC, FormEvent, useContext, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -6,7 +6,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { updateUnits } from '../../api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Units, type User } from '../../types/User';
+import { Units, User } from '../../types/User';
 
 export const UnitsForm: FC = () => {
     const { user, setUser, newUser } = useContext(AuthContext);

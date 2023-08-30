@@ -1,7 +1,7 @@
 import { MacroGridUnit } from '../Macros/MacroGridUnit';
 import { FoodDetailRow } from './FoodDetailRow';
-import { type Serving } from '../../types/Food';
-import { type FC } from 'react';
+import { Serving } from '../../types/Food';
+import { FC } from 'react';
 
 interface IProps {
     serving: Serving;

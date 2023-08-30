@@ -1,4 +1,4 @@
-import { type FC, type FormEvent, useContext, useMemo, useState } from 'react';
+import { FC, FormEvent, useContext, useMemo, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';

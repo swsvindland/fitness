@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { DoWorkout } from './DoWorkout';
@@ -13,7 +13,7 @@ export const Workout: FC = () => {
     FirebaseAnalytics.setScreenName({
         screenName: 'workout',
         nameOverride: 'WorkoutScreen',
-    }).catch((error) => console.error(error));
+    });
 
     const userWorkoutsQuery = useQuery(['UserWorkouts'], getUserWorkouts);
 
@@ -37,5 +37,5 @@ export const Workout: FC = () => {
         );
     }
 
-    return <DoWorkout workoutId={activeWorkouts?.at(0)?.workoutId ?? 0} />;
+    return <DoWorkout workoutId={activeWorkouts[0].workoutId} />;
 };

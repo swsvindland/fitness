@@ -1,4 +1,4 @@
-import { type FC, useContext, useMemo, useState } from 'react';
+import { FC, useContext, useMemo, useState } from 'react';
 import { AddSupplement } from './AddSupplement';
 import { AuthContext } from '../Auth/Auth';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -105,8 +105,6 @@ export const SupplementCard: FC<IProps> = ({
         });
     };
 
-    if (!user) return null;
-
     return (
         <div>
             <button
@@ -150,7 +148,7 @@ export const SupplementCard: FC<IProps> = ({
             <AddSupplement
                 open={open}
                 setOpen={setOpen}
-                userId={user.id}
+                userId={user!.id}
                 supplementId={id}
                 userSupplementId={userSupplementId}
                 defaultTimes={times ?? []}

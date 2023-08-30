@@ -1,4 +1,4 @@
-import React, { type FC, useContext, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CDN_URL, getProgressPhotos } from '../../api';
 import { LinkButton } from '../Buttons/LinkButton';

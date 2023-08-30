@@ -1,4 +1,4 @@
-import { type FC, type ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 interface IProps {
@@ -16,14 +16,14 @@ export const LinkSecondaryButton: FC<IProps> = ({
 }) => {
     if (disabled) {
         return (
-            <button className={`btn-secondary ${className ?? ''}`} disabled>
+            <button className={`btn-secondary ${className}`} disabled>
                 {children}
             </button>
         );
     }
 
     return (
-        <Link to={to} className={`${className ?? ''} btn-secondary`}>
+        <Link to={to} className={`${className} btn-secondary`}>
             {children}
         </Link>
     );

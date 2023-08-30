@@ -1,10 +1,10 @@
-import { type FC, useState } from 'react';
+import { FC, useState } from 'react';
 import {
     Camera,
     CameraDirection,
     CameraResultType,
     CameraSource,
-    type Photo,
+    Photo,
 } from '@capacitor/camera';
 import { useHistory } from 'react-router-dom';
 import { Button } from '../Buttons/Button';
@@ -59,10 +59,7 @@ export const ProgressCamera: FC = () => {
                     <LoadingSpinner />
                 ) : (
                     <>
-                        <Button
-                            className="mr-2"
-                            onClick={() => takePicture().catch()}
-                        >
+                        <Button className="mr-2" onClick={takePicture}>
                             Add Photo
                         </Button>
                         <SecondaryButton
@@ -84,9 +81,7 @@ export const ProgressCamera: FC = () => {
                                         .filter((item) => item.path)
                                         .map(async (photo) => {
                                             return await b64toBlob(
-                                                await readFilePath(
-                                                    photo.path ?? ''
-                                                )
+                                                await readFilePath(photo.path!)
                                             );
                                         })
                                 );
@@ -99,17 +94,17 @@ export const ProgressCamera: FC = () => {
                 )}
             </div>
             <div>
-                <span className="text-secondary mb-2 text-lg">
+                <span className="mb-2 text-lg text-secondary">
                     Photos {photos.length} / 10
                 </span>
                 <div className="grid grid-cols-3 gap-2">
                     {photos.map((photo, index) => (
                         <div>
                             <button
-                                className="border-ternary float-right my-2 rounded-full border"
+                                className="float-right my-2 rounded-full border border-ternary"
                                 onClick={() => removePhotos(index)}
                             >
-                                <MinusSolid className="fill-ternary h-4 w-4" />
+                                <MinusSolid className="h-4 w-4 fill-ternary" />
                             </button>
                             <img src={photo.webPath} alt="" />
                         </div>

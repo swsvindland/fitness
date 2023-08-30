@@ -3,7 +3,7 @@ import { TextField } from '../../TextFields/TextField';
 import { Units } from '../../../types/User';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
-import { type FC, useContext, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { AuthContext } from '../../Auth/Auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteUserWeight, updateUserWeight } from '../../../api';
@@ -28,19 +28,19 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
     });
 
     const deleteMutation = useMutation(deleteUserWeight, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserWeights']);
+        onSuccess: () => {
+            queryClient.invalidateQueries(['UserWeights']);
         },
     });
 
     return (
         <div className="card my-2 p-4">
-            <span className="text-secondary text-lg">
+            <span className="text-lg text-secondary">
                 {format(new Date(date ?? ''), 'PP')}
             </span>
             <hr className="border-secondary" />
             <div className="flex flex-row">
-                <div className="border-secondary flex flex-1 border-r p-2">
+                <div className="flex flex-1 border-r border-secondary p-2">
                     <TextField
                         id={`user-weight-${date}`}
                         value={weight}
@@ -51,12 +51,12 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                         }}
                         className="my-auto"
                     />
-                    <span className="text-ternary mx-2 my-auto text-xs">
+                    <span className="mx-2 my-auto text-xs text-ternary">
                         {user?.unit === Units.Imperial ? 'lbs' : 'kg'}
                     </span>
                 </div>
                 <div className="flex flex-none">
-                    <div className="border-secondary inline-flex w-16 flex-1 items-center justify-center border-r py-4 text-sm font-medium">
+                    <div className="inline-flex w-16 flex-1 items-center justify-center border-r border-secondary py-4 text-sm font-medium">
                         <button
                             className="h-8 w-8"
                             onClick={() => {
@@ -75,7 +75,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                                     className={
                                         saved
                                             ? 'fill-secondary'
-                                            : 'border-ternary rounded-full border fill-transparent'
+                                            : 'rounded-full border border-ternary fill-transparent'
                                     }
                                 />
                             )}

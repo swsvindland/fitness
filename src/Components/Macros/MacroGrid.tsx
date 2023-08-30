@@ -1,10 +1,11 @@
-import { type FC, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getCurrentUserMacros, getMacros } from '../../api';
 import { Units } from '../../types/User';
 import { AuthContext } from '../Auth/Auth';
+import { classNames } from '../../utils/classNames';
 import { LoadingMacroGrid } from '../Loading/LoadingMacroGrid';
 
 interface IProps {

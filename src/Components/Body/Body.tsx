@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 import { BloodPressureGraph } from './BloodPressure/BloodPressureGraph';
 import { WeightGraph } from './Weight/WeightGraph';
 import { BodyGraph } from './Body/BodyGraph';
@@ -13,7 +13,7 @@ export const Body: FC = () => {
     FirebaseAnalytics.setScreenName({
         screenName: 'body',
         nameOverride: 'BodyScreen',
-    }).catch((err) => console.error(err));
+    });
 
     return (
         <div className="container grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">

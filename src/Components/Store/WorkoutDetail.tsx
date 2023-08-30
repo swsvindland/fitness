@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { FC } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
