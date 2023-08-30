@@ -6,13 +6,10 @@ import { Button } from '../Buttons/Button';
 export const Scanner: FC = () => {
     const [err, setErr] = useState<string>();
     const history = useHistory();
-    const isDarkMode = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-    ).matches;
 
     const stopScan = async () => {
         await BarcodeScanner.showBackground();
-        document.body.style.backgroundColor = isDarkMode ? '#000' : '#f0fdfa'; // return background to default
+        document.body.style.backgroundColor = '#0D3140'; // return background to default
         await BarcodeScanner.stopScan();
     };
 
@@ -61,7 +58,7 @@ export const Scanner: FC = () => {
 
     return (
         <div className="z-50 flex min-h-screen flex-col items-center justify-center p-4">
-            <hr className="w-full border-y border-teal-500" />
+            <hr className="border-secondary w-full border-y" />
             <span>{err}</span>
             <Button className="fixed bottom-24" onClick={clickStopScan}>
                 Stop Scan
