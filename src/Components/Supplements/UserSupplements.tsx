@@ -86,7 +86,7 @@ export const UserSupplements: FC = () => {
     );
 
     return (
-        <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 lg:grid-cols-4">
             {(morningSups?.length ?? 0) > 0 ? (
                 <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Morning</h2>
