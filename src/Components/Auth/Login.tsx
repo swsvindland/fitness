@@ -135,7 +135,7 @@ export const Login: FC<IProps> = ({
 
     if (silentLoginQuery.isFetching || ssoMutation.isLoading) {
         return (
-            <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+            <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="card px-4 py-8 sm:px-10">
                         <LoadingSpinner />
@@ -146,7 +146,7 @@ export const Login: FC<IProps> = ({
     }
 
     return (
-        <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+        <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="card px-4 py-8 sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -157,7 +157,9 @@ export const Login: FC<IProps> = ({
                             autoComplete="email"
                             label="Email Address"
                             value={email}
-                            onChange={(event) => setEmail(event.target.value)}
+                            onChange={(event) =>
+                                setEmail(event.target.value )
+                            }
                         />
                         <TextField
                             id="password"
@@ -167,7 +169,7 @@ export const Login: FC<IProps> = ({
                             label="Password"
                             value={password}
                             onChange={(event) =>
-                                setPassword(event.target.value)
+                                setPassword(event.target.value )
                             }
                         />
                         {error && (
@@ -198,7 +200,7 @@ export const Login: FC<IProps> = ({
                         <div>
                             <button
                                 onClick={handleForgotPassword}
-                                className="flex w-full justify-center text-center"
+                                className="flex w-full justify-center text-center text-secondary"
                             >
                                 Forgot Password
                             </button>
@@ -211,8 +213,8 @@ export const Login: FC<IProps> = ({
                             className="flex w-full justify-center text-center"
                             onClick={handleAppleSignIn}
                         >
-                            <Apple className="mr-2 w-4 fill-white" /> Sign In
-                            with Apple
+                            <Apple className="mr-2 w-4 fill-secondary" /> Sign
+                            In with Apple
                         </Button>
                     ) : null}
                     {Capacitor.getPlatform() === 'android' ? (
@@ -220,8 +222,8 @@ export const Login: FC<IProps> = ({
                             className="flex w-full justify-center text-center"
                             onClick={handleGoogleSignIn}
                         >
-                            <Google className="mr-2 w-4 fill-white" /> Sign In
-                            with Google
+                            <Google className="mr-2 w-4 fill-secondary" /> Sign
+                            In with Google
                         </Button>
                     ) : null}
                 </div>

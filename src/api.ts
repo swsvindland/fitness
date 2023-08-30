@@ -23,7 +23,7 @@ import { type UserWorkoutExercise } from './types/UserWorkoutExercise';
 import { type UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
 import { type FatSecretAuth } from './types/FatSecretAuth';
 import { type UserSupplementActivity } from './types/UserSupplementActivity';
-import { type CheckIn } from './types/checkIn';
+import { CheckIn } from './types/checkIn';
 
 export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://10.0.2.2:7071';
