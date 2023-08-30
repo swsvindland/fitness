@@ -35,18 +35,18 @@ export const Dropdown: FC<IProps> = ({
                 <div className={className}>
                     <label
                         htmlFor={id}
-                        className="text-secondary block text-sm font-medium"
+                        className="block text-sm font-medium text-secondary"
                     >
                         {label}
                     </label>
                     <div className="relative mt-1" id={id}>
-                        <Listbox.Button className="relative w-full cursor-default rounded-lg border bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 dark:bg-black sm:text-sm">
-                            <span className="text-secondary block truncate">
+                        <Listbox.Button className="relative w-full cursor-default rounded-md border border-ternary bg-background py-2 pl-3 pr-10 text-left shadow-sm focus:border-secondary focus:outline-none focus:ring-1 focus:ring-secondary sm:text-sm">
+                            <span className="block truncate text-secondary">
                                 {selected ? selected.name : 'Select an option'}
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <ChevronDownSolid
-                                    className="fill-secondary h-5 w-5"
+                                    className="h-5 w-5 fill-secondary"
                                     aria-hidden="true"
                                 />
                             </span>
@@ -96,7 +96,7 @@ export const Dropdown: FC<IProps> = ({
                                                         )}
                                                     >
                                                         <CircleCheckSolid
-                                                            className="fill-ternary h-5 w-5"
+                                                            className="h-5 w-5 fill-ternary"
                                                             aria-hidden="true"
                                                         />
                                                     </span>

@@ -33,17 +33,17 @@ export interface Time {
 const mapToIcon = (icon?: SupplementIcon) => {
     switch (icon) {
         case SupplementIcon.Capsule:
-            return <Capsule className="w-6 fill-white dark:fill-black" />;
+            return <Capsule className="w-6 fill-primary-dark" />;
         case SupplementIcon.Tablet:
-            return <Tablet className="w-6 fill-white dark:fill-black" />;
+            return <Tablet className="w-6 fill-primary-dark" />;
         case SupplementIcon.Injection:
-            return <Injection className="w-6 fill-white dark:fill-black" />;
+            return <Injection className="w-6 fill-primary-dark" />;
         case SupplementIcon.LargeScoop:
-            return <LargeScoop className="w-6 fill-white dark:fill-black" />;
+            return <LargeScoop className="w-6 fill-primary-dark" />;
         case SupplementIcon.SmallScoop:
-            return <SmallScoop className="w-6 fill-white dark:fill-black" />;
+            return <SmallScoop className="w-6 fill-primary-dark" />;
         case SupplementIcon.Liquid:
-            return <Liquid className="w-6 fill-white dark:fill-black" />;
+            return <Liquid className="w-6 fill-primary-dark" />;
         default:
             return <></>;
     }
@@ -115,16 +115,16 @@ export const SupplementCard: FC<IProps> = ({
             >
                 <div className="flex items-center">
                     <div className="mr-4">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-500">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-ternary">
                             <div>{mapToIcon(icon)}</div>
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-secondary text-lg">{name}</span>
+                        <span className="text-lg text-secondary">{name}</span>
                         <div>
                             {times?.map((time, index) => (
                                 <span
-                                    className="text-ternary mr-1 text-xs"
+                                    className="mr-1 text-xs text-ternary"
                                     key={time}
                                 >
                                     {time} {index !== times.length - 1 && '|'}
@@ -137,7 +137,7 @@ export const SupplementCard: FC<IProps> = ({
                     checked &&
                     !mutation.isLoading &&
                     !userSupplementActivityQuery.isFetching && (
-                        <CircleCheckSolid className="fill-secondary h-8 w-8" />
+                        <CircleCheckSolid className="h-8 w-8 fill-secondary" />
                     )}
                 {isUser &&
                     (mutation.isLoading ||

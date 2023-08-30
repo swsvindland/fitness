@@ -21,9 +21,15 @@ export const TextArea: FC<IProps> = ({
     onChange,
     className,
 }) => {
+    const styles =
+        'appearance-none block w-full px-3 py-2 border border-ternary rounded-md shadow-sm placeholder-ternary focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm bg-background text-secondary focus:bg-background focus:text-secondary autofill:!bg-background autofill:!text-secondary';
+
     return (
         <div className={`${className} m-1 w-full`}>
-            <label htmlFor={id} className="block text-sm font-medium">
+            <label
+                htmlFor={id}
+                className="block text-sm font-medium text-secondary"
+            >
                 {label}
             </label>
             <div className="mt-1">
@@ -33,7 +39,7 @@ export const TextArea: FC<IProps> = ({
                     autoComplete={autoComplete}
                     value={value}
                     rows={rows}
-                    className="sm:text-sm; block w-full appearance-none rounded-lg border border-teal-500 bg-white px-3 py-2 focus:border-teal-500 focus:outline-none focus:ring-teal-500 dark:bg-black"
+                    className={styles}
                     onChange={onChange}
                 />
             </div>

@@ -17,6 +17,7 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
 import { getAllUserBloodPressure } from '../../../api';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
 
@@ -58,8 +59,8 @@ export const BloodPressureGraph: FC = () => {
                         userBloodPressureQuery.data?.data.map(
                             (item) => item.systolic
                         ) ?? [],
-                    borderColor: 'rgba(245, 158, 11, 1)',
-                    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                    borderColor: 'rgba(247, 198, 25, 1)',
+                    backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },
                 {
                     label: 'Diastolic',
@@ -67,8 +68,8 @@ export const BloodPressureGraph: FC = () => {
                         userBloodPressureQuery.data?.data.map(
                             (item) => item.diastolic
                         ) ?? [],
-                    borderColor: 'rgba(20, 184, 166, 1)',
-                    backgroundColor: 'rgba(20, 184, 166, 0.1)',
+                    borderColor: 'rgba(175, 210, 87, 1)',
+                    backgroundColor: 'rgba(175, 210, 87, 0.1)',
                 },
             ],
         });

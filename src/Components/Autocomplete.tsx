@@ -26,11 +26,11 @@ export const Autocomplete: FC<IProps> = ({
         <Combobox value={selected} onChange={setSelected}>
             <div className="relative w-full">
                 <div className="relative w-full cursor-default overflow-hidden rounded text-left">
-                    <Combobox.Label className="text-secondary block text-sm font-medium">
+                    <Combobox.Label className="block text-sm font-medium text-secondary">
                         {label}
                     </Combobox.Label>
                     <Combobox.Input
-                        className="focus:bg-background block w-full appearance-none rounded-lg border px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500"
+                        className="block w-full appearance-none rounded-md border border-ternary bg-background px-3 py-2 text-sm text-secondary placeholder-ternary shadow-sm autofill:!bg-background autofill:!text-secondary focus:border-secondary focus:bg-background focus:text-secondary focus:outline-none focus:ring-secondary"
                         // @ts-ignore
                         displayValue={(item) => item}
                         onChange={(event) => setQuery(event.target.value)}
@@ -43,7 +43,7 @@ export const Autocomplete: FC<IProps> = ({
                     leaveTo="opacity-0"
                     afterLeave={() => setQuery('')}
                 >
-                    <Combobox.Options className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-lg bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-black">
+                    <Combobox.Options className="absolute z-20 mt-1 max-h-60 w-full overflow-auto rounded-md bg-card py-1 text-base text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {isLoading && <LoadingSpinner />}
                         {filtered.length === 0 && query !== '' ? (
                             <Combobox.Option
@@ -77,7 +77,7 @@ export const Autocomplete: FC<IProps> = ({
                                                 }`}
                                             >
                                                 <CircleCheckSolid
-                                                    className="fill-ternary h-5 w-5"
+                                                    className="h-5 w-5 fill-ternary"
                                                     aria-hidden="true"
                                                 />
                                             </span>
@@ -118,7 +118,7 @@ export const Autocomplete: FC<IProps> = ({
                                                     }`}
                                                 >
                                                     <CircleCheckSolid
-                                                        className="fill-ternary h-5 w-5"
+                                                        className="h-5 w-5 fill-ternary"
                                                         aria-hidden="true"
                                                     />
                                                 </span>

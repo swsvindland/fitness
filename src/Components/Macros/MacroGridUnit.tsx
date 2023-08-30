@@ -25,42 +25,42 @@ export const MacroGridUnit: FC<IProps> = ({
 
     return (
         <div className="card px-4 py-5 sm:p-6">
-            <dt className="text-secondary flex justify-between text-base font-normal">
+            <dt className="flex justify-between text-base font-normal text-secondary">
                 <span>{name}</span>
                 {customMacros && (
                     <LinkButton
                         to="/eat/custom-macros"
                         className="bg-transparent"
                     >
-                        <Gear className="fill-secondary h-6 w-6" />
+                        <Gear className="h-6 w-6 fill-secondary" />
                     </LinkButton>
                 )}
             </dt>
             <dd className="mt-1 flex items-baseline">
                 {currentAmount !== undefined ? (
                     <>
-                        <span className="text-ternary flex items-baseline text-lg font-semibold sm:text-2xl">
+                        <span className="flex items-baseline text-lg font-semibold text-ternary sm:text-2xl">
                             {currentAmount?.toFixed(0) ?? 0}
                         </span>
-                        <span className="text-ternary text-xs sm:text-lg">
+                        <span className="text-xs text-ternary sm:text-lg">
                             {unit}
                         </span>
-                        <span className="text-ternary flex items-baseline text-lg font-semibold sm:text-2xl">
+                        <span className="flex items-baseline text-lg font-semibold text-ternary sm:text-2xl">
                             /
                         </span>
                     </>
                 ) : null}
-                <span className="text-ternary flex items-baseline text-lg font-semibold sm:text-2xl">
+                <span className="flex items-baseline text-lg font-semibold text-ternary sm:text-2xl">
                     {amount?.toFixed(0)}
                 </span>
-                <span className="text-ternary flex items-baseline text-lg font-semibold sm:text-2xl">
+                <span className="flex items-baseline text-lg font-semibold text-ternary sm:text-2xl">
                     {amountHigh ? `-${amountHigh.toFixed(0)}` : null}
                 </span>
-                <span className="text-ternary text-xs sm:text-lg">{unit}</span>
+                <span className="text-xs text-ternary sm:text-lg">{unit}</span>
             </dd>
             {currentAmount !== undefined ? (
                 <div className="relative mt-4">
-                    <div className="bg-secondary-light mb-4 flex h-2 overflow-hidden rounded text-xs shadow-inner">
+                    <div className="mb-4 flex h-2 overflow-hidden rounded bg-secondary-light text-xs shadow-inner">
                         <div
                             style={{
                                 width: `${
@@ -69,12 +69,12 @@ export const MacroGridUnit: FC<IProps> = ({
                                     100
                                 }%`,
                             }}
-                            className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-inner ${
+                            className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-none shadow-inner ${
                                 percentage < 98
-                                    ? 'bg-amber-500'
+                                    ? 'bg-secondary'
                                     : percentageHigh > 100
-                                    ? 'bg-rose-500'
-                                    : 'bg-teal-500'
+                                    ? 'bg-error'
+                                    : 'bg-primary'
                             }`}
                         ></div>
                     </div>

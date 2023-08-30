@@ -17,6 +17,7 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
 import { getAllUserBodies } from '../../../api';
+import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
 
@@ -59,11 +60,11 @@ export const BodyGraph = () => {
         }
 
         const backgrounds = [
-            'rgba(20, 184, 166, 0.1)',
-            'rgba(132, 204, 22, 0.1)',
-            'rgba(245, 158, 11, 0.1)',
+            'rgba(40, 130, 122, 0.2)',
+            'rgba(175, 210, 87, 0.2)',
+            'rgba(247, 198, 25, 0.2)',
         ];
-        const colors = ['#14b8a6', '#84cc16', '#f59e0b'];
+        const colors = ['#28827A', '#AFD257', '#F7C619'];
 
         setData({
             labels: [

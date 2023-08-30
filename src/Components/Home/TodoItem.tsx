@@ -15,10 +15,16 @@ export const TodoItem: FC<IProps> = ({ name, show, checked, route }) => {
 
     return (
         <Link to={route}>
-            <div className="card my-2 flex w-full flex-row justify-between p-4">
-                <h2 className="text-ternary text-lg">{name}</h2>
+            <div
+                className={
+                    checked
+                        ? 'card my-2 flex w-full flex-row justify-between bg-primary-dark p-4'
+                        : 'card my-2 flex w-full flex-row justify-between p-4'
+                }
+            >
+                <h2 className="text-lg text-ternary">{name}</h2>
                 {checked && (
-                    <CircleCheckSolid className="h-6 w-6 fill-teal-400" />
+                    <CircleCheckSolid className="h-6 w-6 fill-secondary" />
                 )}
             </div>
         </Link>

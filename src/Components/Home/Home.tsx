@@ -30,8 +30,8 @@ export const Home: FC = () => {
     };
 
     return (
-        <div className="container grid grid-cols-1 gap-2">
-            <div>
+        <div className="container grid grid-cols-1 gap-2 lg:grid-cols-2">
+            <div className="md:mt-10">
                 <MacroGrid home />
                 <div className="my-2 flex flex-row justify-between">
                     <SecondaryButton
