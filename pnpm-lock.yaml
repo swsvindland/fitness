@@ -13,64 +13,64 @@ dependencies:
     version: 6.3.0(@awesome-cordova-plugins/core@6.3.0)(rxjs@7.8.1)
   '@capacitor-community/barcode-scanner':
     specifier: ^4.0.1
-    version: 4.0.1(@capacitor/core@5.0.5)
+    version: 4.0.1(@capacitor/core@5.0.4)
   '@capacitor-community/firebase-analytics':
     specifier: ^5.0.1
-    version: 5.0.1(@capacitor/core@5.0.5)
+    version: 5.0.1(@capacitor/core@5.0.4)
   '@capacitor-firebase/app':
     specifier: ^5.0.0
-    version: 5.0.0(@capacitor/core@5.0.5)(firebase@9.22.2)
+    version: 5.0.0(@capacitor/core@5.0.4)(firebase@9.22.2)
   '@capacitor-firebase/authentication':
     specifier: ^5.0.0
-    version: 5.0.0(@capacitor/core@5.0.5)(firebase@9.22.2)
+    version: 5.0.0(@capacitor/core@5.0.4)(firebase@9.22.2)
   '@capacitor/android':
-    specifier: 5.0.5
-    version: 5.0.5(@capacitor/core@5.0.5)
-  '@capacitor/app':
-    specifier: 5.0.3
-    version: 5.0.3(@capacitor/core@5.0.5)
-  '@capacitor/camera':
-    specifier: ^5.0.4
-    version: 5.0.4(@capacitor/core@5.0.5)
-  '@capacitor/core':
-    specifier: 5.0.5
-    version: 5.0.5
-  '@capacitor/filesystem':
-    specifier: ^5.0.4
-    version: 5.0.4(@capacitor/core@5.0.5)
-  '@capacitor/haptics':
     specifier: 5.0.4
-    version: 5.0.4(@capacitor/core@5.0.5)
+    version: 5.0.4(@capacitor/core@5.0.4)
+  '@capacitor/app':
+    specifier: 5.0.2
+    version: 5.0.2(@capacitor/core@5.0.4)
+  '@capacitor/camera':
+    specifier: ^5.0.2
+    version: 5.0.4(@capacitor/core@5.0.4)
+  '@capacitor/core':
+    specifier: 5.0.4
+    version: 5.0.4
+  '@capacitor/filesystem':
+    specifier: ^5.0.2
+    version: 5.0.4(@capacitor/core@5.0.4)
+  '@capacitor/haptics':
+    specifier: 5.0.2
+    version: 5.0.2(@capacitor/core@5.0.4)
   '@capacitor/ios':
-    specifier: ^5.0.5
-    version: 5.0.5(@capacitor/core@5.0.5)
+    specifier: ^5.0.4
+    version: 5.0.5(@capacitor/core@5.0.4)
   '@capacitor/keyboard':
-    specifier: ^5.0.4
-    version: 5.0.4(@capacitor/core@5.0.5)
+    specifier: ^5.0.2
+    version: 5.0.4(@capacitor/core@5.0.4)
   '@capacitor/status-bar':
-    specifier: ^5.0.4
-    version: 5.0.4(@capacitor/core@5.0.5)
+    specifier: ^5.0.2
+    version: 5.0.4(@capacitor/core@5.0.4)
   '@headlessui/react':
     specifier: ^1.7.15
     version: 1.7.15(react-dom@18.2.0)(react@18.2.0)
   '@ionic/react':
-    specifier: ^7.0.14
+    specifier: ^7.0.10
     version: 7.0.14(react-dom@18.2.0)(react@18.2.0)
   '@ionic/react-router':
-    specifier: ^7.0.14
+    specifier: ^7.0.10
     version: 7.0.14(react-dom@18.2.0)(react-router-dom@5.3.4)(react-router@5.3.4)(react@18.2.0)
   '@tailwindcss/forms':
     specifier: ^0.5.3
     version: 0.5.3(tailwindcss@3.3.2)
   '@tanstack/react-query':
-    specifier: ^4.29.14
+    specifier: ^4.29.12
     version: 4.29.14(react-dom@18.2.0)(react@18.2.0)
   axios:
     specifier: ^1.4.0
     version: 1.4.0
   capacitor-ios-autofill-save-password:
     specifier: ^1.1.5
-    version: 1.1.5(@capacitor/core@5.0.5)
+    version: 1.1.5(@capacitor/core@5.0.4)
   chart.js:
     specifier: ^4.3.0
     version: 4.3.0
@@ -81,7 +81,7 @@ dependencies:
     specifier: ^2.30.0
     version: 2.30.0
   firebase:
-    specifier: ^9.22.2
+    specifier: ^9.22.1
     version: 9.22.2
   ionicons:
     specifier: ^7.1.2
@@ -102,27 +102,24 @@ dependencies:
     specifier: '=5.3.4'
     version: 5.3.4(react@18.2.0)
   tailwindcss-safe-area:
-    specifier: ^0.3.0
-    version: 0.3.0
+    specifier: ^0.2.2
+    version: 0.2.2
+  web-vitals:
+    specifier: ^3.2.4
+    version: 3.3.0
 
 devDependencies:
   '@capacitor/cli':
-    specifier: 5.0.5
-    version: 5.0.5
-  '@types/eslint':
-    specifier: ^8.40.2
-    version: 8.40.2
+    specifier: 5.0.4
+    version: 5.0.4
   '@types/node':
-    specifier: ^18.16.18
+    specifier: ^18.16.16
     version: 18.16.18
-  '@types/prettier':
-    specifier: ^2.7.3
-    version: 2.7.3
   '@types/react':
-    specifier: ^18.2.12
+    specifier: ^18.2.8
     version: 18.2.12
   '@types/react-dom':
-    specifier: ^18.2.5
+    specifier: ^18.2.4
     version: 18.2.5
   '@types/react-router':
     specifier: ^5.1.20
@@ -130,12 +127,6 @@ devDependencies:
   '@types/react-router-dom':
     specifier: ^5.3.3
     version: 5.3.3
-  '@typescript-eslint/eslint-plugin':
-    specifier: ^5.59.11
-    version: 5.59.11(@typescript-eslint/parser@5.59.11)(eslint@8.43.0)(typescript@5.1.3)
-  '@typescript-eslint/parser':
-    specifier: ^5.59.11
-    version: 5.59.11(eslint@8.43.0)(typescript@5.1.3)
   '@vitejs/plugin-react-swc':
     specifier: ^3.3.2
     version: 3.3.2(vite@4.3.9)
@@ -143,7 +134,7 @@ devDependencies:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.24)
   eslint:
-    specifier: ^8.43.0
+    specifier: ^8.42.0
     version: 8.43.0
   eslint-config-react-app:
     specifier: ^7.0.1
@@ -158,7 +149,7 @@ devDependencies:
     specifier: ^0.3.0
     version: 0.3.0(prettier@2.8.8)
   sass:
-    specifier: ^1.63.4
+    specifier: ^1.62.1
     version: 1.63.4
   tailwindcss:
     specifier: ^3.3.2
@@ -1620,25 +1611,25 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@capacitor-community/barcode-scanner@4.0.1(@capacitor/core@5.0.5):
+  /@capacitor-community/barcode-scanner@4.0.1(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-acuhDU2mqskSeCIQMc5TGNnDszXXs4IqEES+3C2JDiq+MkJMTr+B2Dhq4k55hlkRFMOumMhlnbr2R9G6qyFPhw==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
       '@zxing/browser': 0.1.4(@zxing/library@0.20.0)
       '@zxing/library': 0.20.0
     dev: false
 
-  /@capacitor-community/firebase-analytics@5.0.1(@capacitor/core@5.0.5):
+  /@capacitor-community/firebase-analytics@5.0.1(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-6au0ovXcgtW3O8CT5cprXftELqK4qz8X3QqLc8xDM+c+77JwwriIxE+jST9y18AM2lmpTFWHbPX/Sl0fWxPtTg==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor-firebase/app@5.0.0(@capacitor/core@5.0.5)(firebase@9.22.2):
+  /@capacitor-firebase/app@5.0.0(@capacitor/core@5.0.4)(firebase@9.22.2):
     resolution: {integrity: sha512-w9lXagm6zHe0y7tsEmHZJeE+lbLSDgOPiKdqTBQOYev+Fv9eSVge6GUl587V5gBTkybKb+5RTGw4ItdohyQFig==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
@@ -1647,11 +1638,11 @@ packages:
       firebase:
         optional: true
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
       firebase: 9.22.2
     dev: false
 
-  /@capacitor-firebase/authentication@5.0.0(@capacitor/core@5.0.5)(firebase@9.22.2):
+  /@capacitor-firebase/authentication@5.0.0(@capacitor/core@5.0.4)(firebase@9.22.2):
     resolution: {integrity: sha512-Dj41lzpMyvB5IzoGxrs7RCi8JZUblTZSzs8c/LdF34V7OVq1SqIX4kejtW6DawUJRbZE43xAe3DMNtusYxLaCg==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
@@ -1660,36 +1651,36 @@ packages:
       firebase:
         optional: true
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
       firebase: 9.22.2
     dev: false
 
-  /@capacitor/android@5.0.5(@capacitor/core@5.0.5):
-    resolution: {integrity: sha512-vH5Qoy+p2Egsu1GtPtOsihHcEI2fCGCIHwlUGPaXXGysudzpzWtJZ5JZNlycJyfRdjECrjkutgbNaHLog+YlXQ==}
+  /@capacitor/android@5.0.4(@capacitor/core@5.0.4):
+    resolution: {integrity: sha512-WtXmjRQ0bCtFkwBID/jVEPbqnh0uR9wTSgkW7QNzogDuA0iyJJI2nxDfT9knUmg6mne/CnfTXg093zzdc13C0w==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/app@5.0.3(@capacitor/core@5.0.5):
-    resolution: {integrity: sha512-YqGWnD+O8wjNVyIctZCMkVqOr3RhxunLUBbmLpdRc66RzPN7xEk8GAwxY2YV/ehTL054mo3uqovpWvei7rYsEA==}
+  /@capacitor/app@5.0.2(@capacitor/core@5.0.4):
+    resolution: {integrity: sha512-TRs5Iu94+IfUJ4iiljWC0tuVsHXBOD4asADggpUH6DnwlQo3cVuRnFK+A0jJnWW9GvlFy9uTsXxytzzXP/V0vQ==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/camera@5.0.4(@capacitor/core@5.0.5):
+  /@capacitor/camera@5.0.4(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-Sl4PpoRv/FahCTugjyCZQ8MMH9Tgh5ySr8ZqY59mFKReoCu7xKnp9Ue8D8mzR9nE08gRiUBMqtl5FJbJR2f+Yg==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/cli@5.0.5:
-    resolution: {integrity: sha512-Mf+lr2L98NfDZki3e5jdG176LUH0rf+OFoMa/oFf6dp4iHwQjS1HiHN5iaGcfJ5RWt432SMEB0dOgicXPb4KCQ==}
+  /@capacitor/cli@5.0.4:
+    resolution: {integrity: sha512-ALzAZlU1L0lwrxtBcvYeu6tFt5i3cLglQdsbohGLqAhipMWW/QNuafIJshxMMR8lMeBAEVYizdDOxEUFHcnWOQ==}
     engines: {node: '>=16.0.0'}
     hasBin: true
     dependencies:
@@ -1714,50 +1705,50 @@ packages:
       - supports-color
     dev: true
 
-  /@capacitor/core@5.0.5:
-    resolution: {integrity: sha512-sulwWXEhYI6cBIj1WnH9k+a8z1f4XTRDtdh3YfXNdeV36UT7T55GCeGrPoQMm7ww6iWyGuv1VEzVIuZFga8rtw==}
+  /@capacitor/core@5.0.4:
+    resolution: {integrity: sha512-BFvziz9jM87pLHW2sXPNIzwrdmI5mAP0tBsBHgXoCO2+wVdpvIMYCpcst5BuTULaMz5JBFZZ6g6nqwgfs+SMCA==}
     dependencies:
       tslib: 2.6.2
     dev: false
 
-  /@capacitor/filesystem@5.0.4(@capacitor/core@5.0.5):
+  /@capacitor/filesystem@5.0.4(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-dsmy8Hz19+SMI5hwTzHto3TXT3ckbgCJ5kfI4oel73yyn3G7zjdKZuHoZRINoX1BbFNSZryzpbMQ69lSOLCpnQ==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/haptics@5.0.4(@capacitor/core@5.0.5):
-    resolution: {integrity: sha512-gcldLYE517h7t/r9oK1J7EV6hX854gjZNiDrS5j5O91V193L2K43Yqyp2ZKfdZ05ZLTBYkr/vg1ZTScfHseLxg==}
+  /@capacitor/haptics@5.0.2(@capacitor/core@5.0.4):
+    resolution: {integrity: sha512-HGkvL3a8yW26YVR7pfgMpkJrspD0+9sUrBB77SWR/GqQV+m32FTx9ECGlw+sHhwLnv0XtFx4PocIL5SlU1m3Vw==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/ios@5.0.5(@capacitor/core@5.0.5):
+  /@capacitor/ios@5.0.5(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-U72TPbKN1HlUqEGCOPsCBp6j93Qu1TazWUuA8Q1yfcGDfSOE0zMDNl3eU7XO5OyzpV7z9lf8NJdehimezVl7sA==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/keyboard@5.0.4(@capacitor/core@5.0.5):
+  /@capacitor/keyboard@5.0.4(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-vIv2NLZRBXgMDkyZurFpANCe7pEbpChdXNGdQFnk1Kg31DFScgwmq4ednZwT4+SHojH6SHCXxaBPg7Y265LWVQ==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
-  /@capacitor/status-bar@5.0.4(@capacitor/core@5.0.5):
+  /@capacitor/status-bar@5.0.4(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-6gvkUTotpzHlfn5KoIglbIqdaEWV/crLtCYXebtFtRAPofCU8EWcljGeeISKBYPE99xqsk3M66vRUY4OzsAYyA==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
   /@esbuild/android-arm64@0.17.19:
@@ -3044,13 +3035,6 @@ packages:
     resolution: {integrity: sha512-AtBm1IAqqXsXszJe6XxuA2iXLhraNCj25p/FHRyikPeW0Z3YfgM6qzWb+VJglJTmZc5lqRNy84cYM/sQI5v6Vw==}
     dev: false
 
-  /@types/eslint@8.40.2:
-    resolution: {integrity: sha512-PRVjQ4Eh9z9pmmtaq8nTjZjQwKFk7YIHIud3lRoKRBgUQjgjRmoGxxGEPXQkF+lH7QkHJRNr5F4aBgYCW0lqpQ==}
-    dependencies:
-      '@types/estree': 1.0.1
-      '@types/json-schema': 7.0.12
-    dev: true
-
   /@types/estree@1.0.1:
     resolution: {integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==}
     dev: true
@@ -3082,10 +3066,6 @@ packages:
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
-    dev: true
-
-  /@types/prettier@2.7.3:
-    resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
     dev: true
 
   /@types/prop-types@15.7.5:
@@ -3738,12 +3718,12 @@ packages:
     resolution: {integrity: sha512-Jj917pJtYg9HSJBF95HVX3Cdr89JUyLT4IZ8SvM5aDRni95swKgYi3TgYLH5hnGfPE/U1dg6IfZ50UsIlLkwSA==}
     dev: true
 
-  /capacitor-ios-autofill-save-password@1.1.5(@capacitor/core@5.0.5):
+  /capacitor-ios-autofill-save-password@1.1.5(@capacitor/core@5.0.4):
     resolution: {integrity: sha512-hbPIhaV4xgpSPnABOusYYTctfFScFyVHhFKJ2Z+ksz+hU1M3rM/bPqINlxJe9AWtyEwvbotDR6gtaRq5Lz1+4g==}
     peerDependencies:
       '@capacitor/core': ^5.0.0
     dependencies:
-      '@capacitor/core': 5.0.5
+      '@capacitor/core': 5.0.4
     dev: false
 
   /chalk@2.4.2:
@@ -6251,9 +6231,8 @@ packages:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
     dev: true
 
-  /tailwindcss-safe-area@0.3.0:
-    resolution: {integrity: sha512-FKsCmMOG+WU4FNfr60T6FiCQPBj9m4oCyHHQN0jJAiEXCk0H31HwBWs7In7v/W8hG8+qgLsrMaB+SX/mhxPECg==}
-    engines: {node: '>=16'}
+  /tailwindcss-safe-area@0.2.2:
+    resolution: {integrity: sha512-sygGuEFFBBzjqR6d2gB9hDW9xX/4yLt7ymhR2E/XVa6Ar4B86Net8/9EmPAsqFUvXY40+W0HnXwFavFJEM+eCQ==}
     dev: false
 
   /tailwindcss@3.3.2:
@@ -6589,6 +6568,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /web-vitals@3.3.0:
+    resolution: {integrity: sha512-GZsEmJBNclIpViS/7QVOTr7Kbt4BgLeR7kQ5zCCtJVuiWsA+K6xTXaoEXssvl8yYFICEyNmA2Nr+vgBYTnS4bA==}
+    dev: false
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
