@@ -30,16 +30,16 @@ export const AddFoodCard: FC<IProps> = ({
     const updateFoodCache = useUpdateFoodCache();
 
     const quickAddMutation = useMutation(quickAddFood, {
-        onSuccess: async () => {
+        onSuccess: () => {
             setServings(servings + 1);
-            await updateFoodCache();
+            updateFoodCache();
         },
     });
 
     const quickRemoveMutation = useMutation(quickRemoveFood, {
-        onSuccess: async () => {
+        onSuccess: () => {
             setServings(servings < 1 ? 0 : servings - 1);
-            await updateFoodCache();
+            updateFoodCache();
         },
     });
 
@@ -61,22 +61,22 @@ export const AddFoodCard: FC<IProps> = ({
                 }
                 className="flex flex-col p-4"
             >
-                <span className="text-secondary text-lg">
+                <span className="text-lg text-secondary">
                     {name} ({brandName})
                 </span>
-                <span className="text-ternary text-sm">{servingSize}</span>
+                <span className="text-sm text-ternary">{servingSize}</span>
             </Link>
             {!quickAddMutation.isLoading && !quickRemoveMutation.isLoading ? (
                 <div className="flex items-center">
                     <SecondaryButton
                         onClick={handleRemove}
-                        className="ml-1 w-8 !p-2"
+                        className="ml-1 w-8 w-8 !p-2"
                     >
-                        <MinusSolid className="h-6 w-6 fill-teal-500" />
+                        <MinusSolid className="h-6 w-6 fill-secondary" />
                     </SecondaryButton>
-                    <span className="text-ternary m-3">{servings}</span>
-                    <Button onClick={handleAdd} className="mr-1 w-8 !p-2">
-                        <PlusSolid className="h-6 w-6" />
+                    <span className="m-3 text-ternary">{servings}</span>
+                    <Button onClick={handleAdd} className="mr-1 w-8 w-8 !p-2">
+                        <PlusSolid className="h-6 w-6 fill-secondary" />
                     </Button>
                 </div>
             ) : (

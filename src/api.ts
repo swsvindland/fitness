@@ -23,18 +23,17 @@ import { type UserWorkoutExercise } from './types/UserWorkoutExercise';
 import { type UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
 import { type FatSecretAuth } from './types/FatSecretAuth';
 import { type UserSupplementActivity } from './types/UserSupplementActivity';
-import { CheckIn } from './types/checkIn';
 
-export const API_URL = 'http://localhost:7071';
+// export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://10.0.2.2:7071';
 // export const API_URL = 'http://192.168.1.6:7071';
 // export const API_URL = 'https://fitness-dev.azurewebsites.net';
-// export const API_URL = 'https://fitness-prod.azurewebsites.net';
+export const API_URL = 'https://fitness-prod.azurewebsites.net';
 //
-export const CDN_URL =
-    'https://fitnessdev.blob.core.windows.net/progress-photos/';
 // export const CDN_URL =
-//     'https://fitnessprod.blob.core.windows.net/progress-photos/';
+//     'https://fitnessdev.blob.core.windows.net/progress-photos/';
+export const CDN_URL =
+    'https://fitnessprod.blob.core.windows.net/progress-photos/';
 
 const getHeaders = (params?: object, headers?: object) => {
     const userId = localStorage.getItem('userId');
@@ -313,12 +312,6 @@ export const getUserDashboard = (): Promise<AxiosResponse<Dashboard>> => {
     const params = getHeaders();
 
     return axios.get(`${API_URL}/api/GetUserDashboard`, params);
-};
-
-export const getUserCheckIn = (): Promise<AxiosResponse<CheckIn>> => {
-    const params = getHeaders();
-
-    return axios.get(`${API_URL}/api/GetUserCheckIn`, params);
 };
 
 export const restartWorkout = (workoutId: number) => {
@@ -643,10 +636,4 @@ export const foodApiAuth = (): Promise<AxiosResponse<FatSecretAuth>> => {
     const params = getHeaders();
 
     return axios.get(`${API_URL}/api/FoodApiAuth`, params);
-};
-
-export const completeCheckIn = () => {
-    const params = getHeaders();
-
-    return axios.get(`${API_URL}/api/CompleteCheckIn`, params);
 };

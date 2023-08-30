@@ -6,12 +6,14 @@ export interface Dashboard {
     weightAdded: boolean;
     addHeight: boolean;
     heightAdded: boolean;
+    addBloodPressure: boolean;
+    bloodPressureAdded: boolean;
+    addBodyMeasurements: boolean;
+    bodyMeasurementsAdded: boolean;
     trackMacros: boolean;
     macrosAdded: boolean;
     addSupplements: boolean;
     supplementsAdded: boolean;
     trackSupplements: boolean;
     supplementsTracked: boolean;
-    addCheckIn: boolean;
-    checkInAdded: boolean;
 }

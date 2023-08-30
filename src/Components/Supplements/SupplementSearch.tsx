@@ -52,10 +52,10 @@ export const SupplementSearch: FC<IProps> = ({
                 className=" ml-2 h-10 w-10 !p-2"
                 onClick={handleClear}
             >
-                <XSolid className="h-6 w-6 fill-teal-500" />
+                <XSolid className="h-6 w-6 fill-secondary" />
             </SecondaryButton>
             <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
-                <MagnifyingGlassSolid className="h-6 w-6" />
+                <MagnifyingGlassSolid className="h-6 w-6 fill-secondary" />
             </Button>
         </form>
     );

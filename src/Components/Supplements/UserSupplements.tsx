@@ -16,7 +16,7 @@ export const UserSupplements: FC = () => {
 
     if (userSupplementsQuery.isLoading) {
         return (
-            <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 items-start gap-2 md:grid-cols-2 lg:grid-cols-4">
                 <div className="grid grid-cols-1">
                     <h2 className="text-secondary">Morning</h2>
                     <LoadingListOfCards

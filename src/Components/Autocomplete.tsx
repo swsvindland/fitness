@@ -30,7 +30,7 @@ export const Autocomplete: FC<IProps> = ({
                         {label}
                     </Combobox.Label>
                     <Combobox.Input
-                        className="block w-full appearance-none rounded-lg border px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500 dark:bg-black"
+                        className="focus:bg-background block w-full appearance-none rounded-lg border px-3 py-2 text-sm focus:border-teal-500 focus:outline-none focus:ring-teal-500"
                         displayValue={(item: string) => item}
                         onChange={(event) => setQuery(event.target.value)}
                     />
