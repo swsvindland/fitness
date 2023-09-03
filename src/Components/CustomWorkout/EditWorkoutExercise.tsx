@@ -98,6 +98,8 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
             <div className="flex flex-row">
                 <TextField
                     label="Sets"
+                    type="number"
+                    inputMode="numeric"
                     value={sets}
                     onChange={(event) => {
                         setSaved(false);
@@ -112,6 +114,8 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
             <div className="flex flex-row">
                 <TextField
                     label="MinReps"
+                    type="number"
+                    inputMode="numeric"
                     value={minReps ?? ''}
                     onChange={(event) => {
                         setSaved(false);
@@ -120,6 +124,8 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
                 />
                 <TextField
                     label="MaxReps"
+                    type="number"
+                    inputMode="numeric"
                     value={maxReps ?? ''}
                     onChange={(event) => {
                         setSaved(false);
@@ -129,6 +135,8 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
             </div>
             <TextField
                 label="Time (in seconds) (will display in minutes on workout)"
+                type="number"
+                inputMode="numeric"
                 value={time ?? ''}
                 onChange={(event) => {
                     setSaved(false);
@@ -137,6 +145,8 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
             />
             <TextField
                 label="RestTime (in seconds) (will display in minutes on workout)"
+                type="number"
+                inputMode="numeric"
                 value={restTime ?? ''}
                 onChange={(event) => {
                     setSaved(false);
