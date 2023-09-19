@@ -135,7 +135,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
             <div
                 role="list"
-                className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                className="grid grid-cols-1 gap-6"
             >
                 {exercisesQuery.data?.data?.map((exercise, index) => (
                     <WorkoutCard

@@ -9,6 +9,7 @@ import { LinkButton } from '../Buttons/LinkButton';
 import { useHistory } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
+import {Capacitor} from "@capacitor/core";
 
 export const Home: FC = () => {
     useHideBackButton();
@@ -30,16 +31,18 @@ export const Home: FC = () => {
     };
 
     return (
-        <div className="container grid grid-cols-1 gap-2 lg:grid-cols-2">
-            <div className="md:mt-10">
+        <div className="container grid grid-cols-1 gap-2">
+            <div>
                 <MacroGrid home />
                 <div className="my-2 flex flex-row justify-between">
+                    {Capacitor.getPlatform() === 'web' ? null : (
                     <SecondaryButton
                         className="mr-1 flex w-full justify-center"
                         onClick={handleStartScan}
                     >
                         Scan Barcode
                     </SecondaryButton>
+                    )}
                     <Button
                         className="ml-1 flex w-full justify-center"
                         onClick={handleAddFood}
