@@ -11,7 +11,8 @@
         "ionic:build": "vite build",
         "ios": "ionic capacitor run ios -l --external",
         "android": "ionic capacitor run android -l --external",
-        "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
+        "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+        "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,html,css,scss,md}\""
     },
     "dependencies": {
         "@awesome-cordova-plugins/core": "^6.4.0",

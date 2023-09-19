@@ -8,6 +8,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 import { da } from 'date-fns/locale';
 import { LoadingCard } from '../Loading/LoadingCard';
+import { Capacitor } from '@capacitor/core';
 
 export const FoodGrid: FC = () => {
     const history = useHistory();
@@ -54,9 +55,11 @@ export const FoodGrid: FC = () => {
     return (
         <div className="card rounded p-4 px-4 sm:px-6 lg:px-8">
             <div className="flex flex-row justify-end">
-                <SecondaryButton className="mx-1" onClick={handleStartScan}>
-                    Scan Barcode
-                </SecondaryButton>
+                {Capacitor.getPlatform() === 'web' ? null : (
+                    <SecondaryButton className="mx-1" onClick={handleStartScan}>
+                        Scan Barcode
+                    </SecondaryButton>
+                )}
                 <Button className="mx-1" onClick={handleAddFood}>
                     Add Food
                 </Button>
@@ -162,7 +165,7 @@ export const FoodGrid: FC = () => {
                                         </span>
                                     </div>
                                     {foodIdx !== 0 ? (
-                                        <div className="absolute right-0 left-6 -top-px h-px bg-ternary" />
+                                        <div className="absolute -top-px left-6 right-0 h-px bg-ternary" />
                                     ) : null}
                                 </td>
                                 <td

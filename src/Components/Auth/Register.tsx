@@ -67,7 +67,7 @@ export const Register: FC<IProps> = ({ setUser, setRegister }) => {
     return (
         <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="card py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div className="card px-4 py-8 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <TextField
                             id="email"

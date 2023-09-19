@@ -48,7 +48,7 @@ export const RestTimer: FC<IProps> = ({ timer }) => {
                                     style={{
                                         width: `${percentage}%`,
                                     }}
-                                    className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-none shadow-inner ${
+                                    className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-inner shadow-none ${
                                         percentage < 10
                                             ? 'bg-secondary'
                                             : 'bg-primary'

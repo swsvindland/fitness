@@ -69,7 +69,7 @@ export const MacroGridUnit: FC<IProps> = ({
                                     100
                                 }%`,
                             }}
-                            className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-none shadow-inner ${
+                            className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-inner shadow-none ${
                                 percentage < 98
                                     ? 'bg-secondary'
                                     : percentageHigh > 100

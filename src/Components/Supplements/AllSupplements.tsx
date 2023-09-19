@@ -45,10 +45,11 @@ export const AllSupplements: FC = () => {
             />
             <h2 className="my-4 text-lg text-secondary ">Active</h2>
             {userSupplementsQuery.data?.data
-                .filter((item) =>
-                    item.supplement?.name
-                        .toLowerCase()
-                        .includes(selected?.toLowerCase() ?? '')
+                .filter(
+                    (item) =>
+                        item.supplement?.name
+                            .toLowerCase()
+                            .includes(selected?.toLowerCase() ?? '')
                 )
                 .map((supplement) => (
                     <SupplementCard
@@ -63,10 +64,11 @@ export const AllSupplements: FC = () => {
                 ))}
             <h2 className="my-4 text-lg text-secondary">all</h2>
             {filteredAllSupplements
-                ?.filter((item) =>
-                    item?.name
-                        .toLowerCase()
-                        .includes(selected?.toLowerCase() ?? '')
+                ?.filter(
+                    (item) =>
+                        item?.name
+                            .toLowerCase()
+                            .includes(selected?.toLowerCase() ?? '')
                 )
                 .map((supplement) => (
                     <SupplementCard

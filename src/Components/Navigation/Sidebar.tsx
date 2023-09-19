@@ -30,7 +30,7 @@ export const Sidebar: FC = () => {
 
     return (
         <div className="z-20 flex min-h-0 flex-1 flex-col border-gray-200 bg-primary-dark shadow pl-safe dark:bg-background ">
-            <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
+            <div className="flex flex-1 flex-col overflow-y-auto pb-4 pt-5">
                 <nav className="mt-16 flex-1 space-y-1 bg-transparent px-2">
                     <Link to="/" className={linkStyle(['/'])}>
                         <Home className={iconStyle(['/'])} />

@@ -26,11 +26,11 @@ export const CustomMacroForm: FC = () => {
     const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const [state, setState] = useState<IState>({
-        calories: "",
-        protein: "",
-        fat: "",
-        carbs: "",
-        fiber: "",
+        calories: '',
+        protein: '',
+        fat: '',
+        carbs: '',
+        fiber: '',
         caloriesHigh: undefined,
         proteinHigh: undefined,
         fatHigh: undefined,
@@ -49,11 +49,11 @@ export const CustomMacroForm: FC = () => {
 
     useMemo(() => {
         setState({
-            calories: macrosQuery.data?.data.calories.toFixed(0) ?? "",
-            protein: macrosQuery.data?.data.protein.toFixed(0) ?? "",
-            fat: macrosQuery.data?.data.fat.toFixed(0) ?? "",
-            carbs: macrosQuery.data?.data.carbs.toFixed(0) ?? "",
-            fiber: macrosQuery.data?.data.fiber.toFixed(0) ?? "",
+            calories: macrosQuery.data?.data.calories.toFixed(0) ?? '',
+            protein: macrosQuery.data?.data.protein.toFixed(0) ?? '',
+            fat: macrosQuery.data?.data.fat.toFixed(0) ?? '',
+            carbs: macrosQuery.data?.data.carbs.toFixed(0) ?? '',
+            fiber: macrosQuery.data?.data.fiber.toFixed(0) ?? '',
             caloriesHigh: macrosQuery.data?.data.caloriesHigh?.toFixed(0),
             proteinHigh: macrosQuery.data?.data.proteinHigh?.toFixed(0),
             fatHigh: macrosQuery.data?.data.fatHigh?.toFixed(0),
@@ -64,12 +64,14 @@ export const CustomMacroForm: FC = () => {
 
     useMemo(() => {
         let caloriesHigh = 0;
-        caloriesHigh += parseInt(state.proteinHigh ?? "0") * 4;
-        caloriesHigh += parseInt(state.fatHigh ?? "0") * 9;
-        caloriesHigh += parseInt(state.carbsHigh ?? "0") * 4;
+        caloriesHigh += parseInt(state.proteinHigh ?? '0') * 4;
+        caloriesHigh += parseInt(state.fatHigh ?? '0') * 9;
+        caloriesHigh += parseInt(state.carbsHigh ?? '0') * 4;
         setState({
             ...state,
-            caloriesHigh: isNaN(caloriesHigh) ? undefined : caloriesHigh.toString(),
+            caloriesHigh: isNaN(caloriesHigh)
+                ? undefined
+                : caloriesHigh.toString(),
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.proteinHigh, state.fatHigh, state.carbsHigh]);
@@ -81,7 +83,7 @@ export const CustomMacroForm: FC = () => {
         calories += parseInt(state.carbs) * 4;
         setState({
             ...state,
-            calories: isNaN(calories) ? "" : calories.toString(),
+            calories: isNaN(calories) ? '' : calories.toString(),
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.protein, state.fat, state.carbs]);
@@ -96,8 +98,12 @@ export const CustomMacroForm: FC = () => {
             fat: parseInt(state.fat),
             carbs: parseInt(state.carbs),
             fiber: parseInt(state.fiber),
-            caloriesHigh: state.caloriesHigh ? parseInt(state.caloriesHigh) : undefined,
-            proteinHigh: state.proteinHigh ? parseInt(state.proteinHigh) : undefined,
+            caloriesHigh: state.caloriesHigh
+                ? parseInt(state.caloriesHigh)
+                : undefined,
+            proteinHigh: state.proteinHigh
+                ? parseInt(state.proteinHigh)
+                : undefined,
             fatHigh: state.fatHigh ? parseInt(state.fatHigh) : undefined,
             carbsHigh: state.carbsHigh ? parseInt(state.carbsHigh) : undefined,
             fiberHigh: state.fiberHigh ? parseInt(state.fiberHigh) : undefined,
@@ -108,11 +114,11 @@ export const CustomMacroForm: FC = () => {
     const handleClear = (event: FormEvent) => {
         event.preventDefault();
         setState({
-            calories: macrosQuery.data?.data.calories.toFixed(0) ?? "",
-            protein: macrosQuery.data?.data.protein.toFixed(0) ?? "",
-            fat: macrosQuery.data?.data.fat.toFixed(0) ?? "",
-            carbs: macrosQuery.data?.data.carbs.toFixed(0) ?? "",
-            fiber: macrosQuery.data?.data.fiber.toFixed(0) ?? "",
+            calories: macrosQuery.data?.data.calories.toFixed(0) ?? '',
+            protein: macrosQuery.data?.data.protein.toFixed(0) ?? '',
+            fat: macrosQuery.data?.data.fat.toFixed(0) ?? '',
+            carbs: macrosQuery.data?.data.carbs.toFixed(0) ?? '',
+            fiber: macrosQuery.data?.data.fiber.toFixed(0) ?? '',
             caloriesHigh: macrosQuery.data?.data.caloriesHigh?.toFixed(0),
             proteinHigh: macrosQuery.data?.data.proteinHigh?.toFixed(0),
             fatHigh: macrosQuery.data?.data.fatHigh?.toFixed(0),
@@ -144,9 +150,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            protein:
-                                                event.target.value
-                                            ,
+                                            protein: event.target.value,
                                         })
                                     }
                                 />
@@ -161,8 +165,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            proteinHigh:
-                                                event.target.value
+                                            proteinHigh: event.target.value,
                                         })
                                     }
                                 />
@@ -193,9 +196,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            fatHigh:
-                                                event.target.value
-                                            ,
+                                            fatHigh: event.target.value,
                                         })
                                     }
                                 />
@@ -211,9 +212,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            carbs:
-                                                event.target.value
-                                            ,
+                                            carbs: event.target.value,
                                         })
                                     }
                                 />
@@ -228,9 +227,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            carbsHigh:
-                                                event.target.value
-                                            ,
+                                            carbsHigh: event.target.value,
                                         })
                                     }
                                 />
@@ -246,9 +243,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            fiber:
-                                                event.target.value
-                                            ,
+                                            fiber: event.target.value,
                                         })
                                     }
                                 />
@@ -263,9 +258,7 @@ export const CustomMacroForm: FC = () => {
                                     onChange={(event) =>
                                         setState({
                                             ...state,
-                                            fiberHigh:
-                                                event.target.value
-                                            ,
+                                            fiberHigh: event.target.value,
                                         })
                                     }
                                 />
