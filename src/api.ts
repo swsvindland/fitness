@@ -166,12 +166,6 @@ export const getWorkouts = (): Promise<AxiosResponse<Workout[]>> => {
     return axios.get(`${API_URL}/api/GetWorkouts`, params);
 };
 
-export const getCardioWorkouts = (): Promise<AxiosResponse<Workout[]>> => {
-    const params = getHeaders();
-
-    return axios.get(`${API_URL}/api/GetCardioWorkouts`, params);
-};
-
 export const getUserWorkouts = (): Promise<AxiosResponse<UserWorkout[]>> => {
     const params = getHeaders();
 
@@ -251,12 +245,6 @@ export const getUserFood = (
     const params = getHeaders({ userFoodId });
 
     return axios.get(`${API_URL}/api/GetUserFoodV2`, params);
-};
-
-export const getFood = (foodId: string): Promise<AxiosResponse<Food>> => {
-    const params = getHeaders({ foodId });
-
-    return axios.get(`${API_URL}/api/GetFood`, params);
 };
 
 export const getUserFoods = (): Promise<AxiosResponse<UserFoodV2[]>> => {

@@ -41,14 +41,12 @@
         "cordova-plugin-purchase": "^11.0.0",
         "date-fns": "^2.30.0",
         "firebase": "^10.4.0",
-        "ionicons": "^7.1.2",
         "react": "^18.2.0",
         "react-chartjs-2": "^5.2.0",
         "react-dom": "^18.2.0",
         "react-router": "5.3.4",
         "react-router-dom": "=5.3.4",
-        "tailwindcss-safe-area": "^0.4.0",
-        "web-vitals": "^3.4.0"
+        "tailwindcss-safe-area": "^0.4.0"
     },
     "devDependencies": {
         "@capacitor/cli": "5.4.0",

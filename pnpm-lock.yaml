@@ -83,9 +83,6 @@ dependencies:
   firebase:
     specifier: ^10.4.0
     version: 10.4.0
-  ionicons:
-    specifier: ^7.1.2
-    version: 7.1.2
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -104,9 +101,6 @@ dependencies:
   tailwindcss-safe-area:
     specifier: ^0.4.0
     version: 0.4.0
-  web-vitals:
-    specifier: ^3.4.0
-    version: 3.4.0
 
 devDependencies:
   '@capacitor/cli':
@@ -6498,10 +6492,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
-
-  /web-vitals@3.4.0:
-    resolution: {integrity: sha512-n9fZ5/bG1oeDkyxLWyep0eahrNcPDF6bFqoyispt7xkW0xhDzpUBTgyDKqWDi1twT0MgH4HvvqzpUyh0ZxZV4A==}
-    dev: false
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
