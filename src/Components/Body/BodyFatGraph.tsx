@@ -15,7 +15,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getUserBodyFat } from '../../api';
 import { LoadingCard } from '../Loading/LoadingCard';
 

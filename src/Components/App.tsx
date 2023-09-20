@@ -1,8 +1,7 @@
 import { IonApp, setupIonicReact } from '@ionic/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { FC, useMemo, useState } from 'react';
+import {FC, useEffect, useState} from 'react';
 import { Auth } from './Auth/Auth';
-import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 
 import '../index.css';
 import { firebaseConfig } from '../utils/firebase';
@@ -12,18 +11,15 @@ setupIonicReact();
 
 export const App: FC = () => {
     const queryClient = new QueryClient();
-    const [analyticsInitialized, setAnalyticsInitialized] =
+    const [firebaseEnabled, setFirebaseEnabled] =
         useState<boolean>(false);
 
-    useMemo(() => {
-        if (!analyticsInitialized) {
+    useEffect(() => {
+        if (!firebaseEnabled) {
             initializeApp(firebaseConfig);
-            FirebaseAnalytics.initializeFirebase(firebaseConfig);
-            FirebaseAnalytics.enable();
-
-            setAnalyticsInitialized(true);
+            setFirebaseEnabled(true);
         }
-    }, [analyticsInitialized]);
+    }, [firebaseEnabled]);
 
     return (
         <IonApp>

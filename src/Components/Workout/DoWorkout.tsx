@@ -103,19 +103,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         return <WorkoutCompleted />;
     }
 
-    const handleCompleteWorkoutAndStartCardio = () => {
-        if (!user) return;
-
-        mutation.mutate({
-            workoutId,
-            userId: user.id,
-            day,
-            week: week.id,
-        });
-
-        history.push('/cardio');
-    };
-
     const handleCompleteWorkout = () => {
         if (!user) return;
 

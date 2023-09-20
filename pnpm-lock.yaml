@@ -14,9 +14,6 @@ dependencies:
   '@capacitor-community/barcode-scanner':
     specifier: ^4.0.1
     version: 4.0.1(@capacitor/core@5.4.0)
-  '@capacitor-community/firebase-analytics':
-    specifier: ^5.0.1
-    version: 5.0.1(@capacitor/core@5.4.0)
   '@capacitor-firebase/app':
     specifier: ^5.1.0
     version: 5.1.0(@capacitor/core@5.4.0)(firebase@10.4.0)
@@ -1628,14 +1625,6 @@ packages:
       '@capacitor/core': 5.4.0
       '@zxing/browser': 0.1.4(@zxing/library@0.20.0)
       '@zxing/library': 0.20.0
-    dev: false
-
-  /@capacitor-community/firebase-analytics@5.0.1(@capacitor/core@5.4.0):
-    resolution: {integrity: sha512-6au0ovXcgtW3O8CT5cprXftELqK4qz8X3QqLc8xDM+c+77JwwriIxE+jST9y18AM2lmpTFWHbPX/Sl0fWxPtTg==}
-    peerDependencies:
-      '@capacitor/core': ^5.0.0
-    dependencies:
-      '@capacitor/core': 5.4.0
     dev: false
 
   /@capacitor-firebase/app@5.1.0(@capacitor/core@5.4.0)(firebase@10.4.0):

@@ -6,7 +6,6 @@ import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory } from 'react-router-dom';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
-import { da } from 'date-fns/locale';
 import { LoadingCard } from '../Loading/LoadingCard';
 import { Capacitor } from '@capacitor/core';
 
