@@ -1,33 +1,15 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { CDN_URL, getProgressPhotos } from '../../api';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
-import { AuthContext } from '../Auth/Auth';
-import { Button } from '../Buttons/Button';
 import { Viewer } from './Viewer';
 import { LoadingCard } from '../Loading/LoadingCard';
 
 export const ProgressPhotos: FC = () => {
-    const { user, setOpenPurchase } = useContext(AuthContext);
     const [open, setOpen] = useState(false);
     const [openedImage, setOpenedImage] = useState<string>('');
     const photosQuery = useQuery(['ProgressPhotos'], getProgressPhotos);
-
-    if (!user?.paid) {
-        return (
-            <div className="card mb-2 p-4">
-                <h2 className="my-4 text-lg text-secondary">Progress Photos</h2>
-                <p className="text-secondary">
-                    You must be a paid member to view and upload progress
-                    photos.
-                </p>
-                <Button className="mt-4" onClick={() => setOpenPurchase(true)}>
-                    Upgrade to Premium
-                </Button>
-            </div>
-        );
-    }
 
     if (photosQuery.isLoading) {
         return <LoadingCard isLoading />;

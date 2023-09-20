@@ -73,7 +73,7 @@ export const ProgressCamera: FC = () => {
                                         path,
                                     });
 
-                                    return contents.data;
+                                    return contents.data.toString();
                                 };
 
                                 const blobs = await Promise.all(
