@@ -13,7 +13,6 @@ import { Autocomplete } from '../Autocomplete';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 import { AuthContext } from '../Auth/Auth';
-import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 import { useShowBackButton } from '../Navigation/headerHooks';
 
 export const WorkoutSubstitution: FC = () => {
@@ -68,17 +67,6 @@ export const WorkoutSubstitution: FC = () => {
             queryClient.invalidateQueries(['UserWorkoutExercises']);
         },
     });
-
-    if (!user?.paid) {
-        return (
-            <PurchaseAccess
-                body={
-                    'Exercise substitutions are only available to premium users.'
-                }
-                button="Start Substituting Exercises"
-            />
-        );
-    }
 
     if (workoutSubstitutionQuery.isLoading) return <LoadingSpinner />;
 

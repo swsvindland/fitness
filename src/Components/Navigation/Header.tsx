@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { HeaderContext } from './HeaderContext';
 import { UserSolid } from '../Icons/UserSolid';
 import { Dumbbell } from '../Icons/Dumbbell';
-import { PurchaseAccessIcon } from '../Purchase/PurchaseAccessIcon';
 import { signOut } from '../../utils/auth';
 
 export const Header: FC = () => {
@@ -47,7 +46,6 @@ export const Header: FC = () => {
                         </div>
                     )}
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <PurchaseAccessIcon />
                         <Menu as="div" className="relative ml-3">
                             <div>
                                 <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

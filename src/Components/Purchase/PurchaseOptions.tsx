@@ -18,7 +18,7 @@ const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
 
 export const PurchaseOptions: FC = () => {
-    const { user, setUser, openPurchase, setOpenPurchase } =
+    const { user, setUser } =
         useContext(AuthContext);
     const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
     const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
@@ -31,7 +31,7 @@ export const PurchaseOptions: FC = () => {
 
     const paidMutation = useMutation(updatePaid, {
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['user', user?.id]);
+            await queryClient.invalidateQueries();
             setUser(await queryClient.getQueryData(['user', user?.id]));
         },
     });
@@ -153,20 +153,18 @@ export const PurchaseOptions: FC = () => {
                         true,
                         addDays(new Date(), 30).toISOString()
                     );
-                    setOpenPurchase(false);
                 } else {
                     updatePaidIfNeeded(false);
                 }
             });
         } else {
             updatePaidIfNeeded(true, addDays(new Date(), 30).toISOString());
-            setOpenPurchase(false);
         }
     });
 
     return (
         <>
-            <Transition.Root show={openPurchase} as={Fragment}>
+            <Transition.Root show={true} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={() => {}}>
                     <Transition.Child
                         as={Fragment}
@@ -278,14 +276,6 @@ export const PurchaseOptions: FC = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <SecondaryButton
-                                                className="my-4 flex w-full justify-center align-middle"
-                                                onClick={() =>
-                                                    setOpenPurchase(false)
-                                                }
-                                            >
-                                                Close
-                                            </SecondaryButton>
                                             <DeleteAccount />
                                         </div>
                                     </div>

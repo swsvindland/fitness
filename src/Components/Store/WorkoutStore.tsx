@@ -4,7 +4,6 @@ import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { getUserWorkouts, getWorkouts, getWorkoutsByUserId } from '../../api';
 import { HeaderContext } from '../Navigation/HeaderContext';
-import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 import { AuthContext } from '../Auth/Auth';
 import { LinkButton } from '../Buttons/LinkButton';
 
@@ -33,12 +32,6 @@ export const WorkoutStore: FC = () => {
 
     return (
         <div className="container flex flex-col">
-            {!user?.paid && (
-                <PurchaseAccess
-                    body="Get access to all workouts, macro tracking, and more!"
-                    button="Get Access"
-                />
-            )}
             {(customWorkoutsQuery.data?.data.length ?? 0) > 0 && (
                 <h2 className="text-lg text-secondary">Your Custom Workouts</h2>
             )}
