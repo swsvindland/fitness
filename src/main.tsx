@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from './Components/App';
 import reportWebVitals from './reportWebVitals';
 import { Chart as ChartJS } from 'chart.js';
+import { Analytics } from '@vercel/analytics/react';
 
 ChartJS.defaults.color = '#AFD257';
 ChartJS.defaults.borderColor = '#0D3140';
@@ -14,6 +15,7 @@ const root = createRoot(container!);
 root.render(
     <StrictMode>
         <App />
+        <Analytics />
     </StrictMode>
 );
 
