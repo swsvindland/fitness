@@ -196,23 +196,21 @@ export const PurchaseOptions: FC = () => {
                                                 as="h3"
                                                 className="text-2xl font-bold text-secondary"
                                             >
-                                                Subscribe to Premium for the
-                                                best WorkoutTrack experience!
+                                                WorkoutTrack is a premium app. Subscribe for access.
                                             </Dialog.Title>
                                             <div className="ml-8">
                                                 <ul className="my-8 list-disc">
                                                     <li className="text-start text-lg text-ternary">
-                                                        Remove all ads
+                                                        Track your workouts
                                                     </li>
                                                     <li className="text-start text-lg text-ternary">
-                                                        Get access to all
-                                                        workouts
+                                                        Calculate and meet your macros
                                                     </li>
                                                     <li className="text-start text-lg text-ternary">
-                                                        Upload progress photos
+                                                        Create custom workouts
                                                     </li>
                                                     <li className="text-start text-lg text-ternary">
-                                                        Exercise Substitutions
+                                                        Measure your progress
                                                     </li>
                                                 </ul>
                                             </div>
@@ -276,7 +274,9 @@ export const PurchaseOptions: FC = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div className="mt-4">
                                             <DeleteAccount />
+                                            </div>
                                         </div>
                                     </div>
                                 </Dialog.Panel>

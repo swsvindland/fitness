@@ -12,7 +12,6 @@ def capacitor_pods
   pod 'Capacitor', :path => '../../node_modules/.pnpm/@capacitor+ios@5.4.0_@capacitor+core@5.4.0/node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/.pnpm/@capacitor+ios@5.4.0_@capacitor+core@5.4.0/node_modules/@capacitor/ios'
   pod 'CapacitorCommunityBarcodeScanner', :path => '../../node_modules/.pnpm/@capacitor-community+barcode-scanner@4.0.1_@capacitor+core@5.4.0/node_modules/@capacitor-community/barcode-scanner'
-  pod 'CapacitorCommunityFirebaseAnalytics', :path => '../../node_modules/.pnpm/@capacitor-community+firebase-analytics@5.0.1_@capacitor+core@5.4.0/node_modules/@capacitor-community/firebase-analytics'
   pod 'CapacitorFirebaseApp', :path => '../../node_modules/.pnpm/@capacitor-firebase+app@5.1.0_@capacitor+core@5.4.0_firebase@10.4.0/node_modules/@capacitor-firebase/app'
   pod 'CapacitorFirebaseAuthentication', :path => '../../node_modules/.pnpm/@capacitor-firebase+authentication@5.1.0_@capacitor+core@5.4.0_firebase@10.4.0/node_modules/@capacitor-firebase/authentication'
   pod 'CapacitorApp', :path => '../../node_modules/.pnpm/@capacitor+app@5.0.6_@capacitor+core@5.4.0/node_modules/@capacitor/app'
