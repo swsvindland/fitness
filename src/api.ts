@@ -192,14 +192,6 @@ export const getUserNextWorkout = (): Promise<
     return axios.get(`${API_URL}/api/GetNextWorkout`, params);
 };
 
-export const getUserNextCardioWorkout = (): Promise<
-    AxiosResponse<UserNextWorkout>
-> => {
-    const params = getHeaders();
-
-    return axios.get(`${API_URL}/api/GetNextCardioWorkout`, params);
-};
-
 export const foodAutocomplete = (
     query: string
 ): Promise<AxiosResponse<string[]>> => {

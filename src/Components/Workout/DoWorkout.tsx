@@ -5,7 +5,6 @@ import { Pagination } from '../Pagination';
 import { WorkoutCard } from './WorkoutCard';
 import {
     completeWorkout,
-    getUserNextCardioWorkout,
     getUserNextWorkout,
     getWorkout,
     getWorkoutExercises,
@@ -55,10 +54,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         return getUserNextWorkout();
     });
 
-    const nextCardioWorkoutQuery = useQuery(['UserNextCardioWorkout'], () => {
-        return getUserNextCardioWorkout();
-    });
-
     const mutation = useMutation(completeWorkout, {
         onSuccess: async () => {
             await queryClient.invalidateQueries(['Dashboard']);
@@ -82,19 +77,9 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
     }, [nextWorkoutQuery.data?.data, workoutQuery.data?.data.type]);
 
-    useMemo(() => {
-        if (workoutQuery.data?.data.type !== WorkoutType.Cardio) return;
-        const nextWorkout = nextCardioWorkoutQuery.data?.data;
-        if (!nextWorkout) return;
-
-        setDay(nextWorkout.day);
-        setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
-    }, [nextCardioWorkoutQuery.data?.data, workoutQuery.data?.data.type]);
-
     if (
         workoutQuery.isLoading ||
-        nextWorkoutQuery.isLoading ||
-        nextCardioWorkoutQuery.isLoading
+        nextWorkoutQuery.isLoading
     ) {
         return <LoadingSpinner />;
     }
