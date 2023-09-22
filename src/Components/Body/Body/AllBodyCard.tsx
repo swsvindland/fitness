@@ -46,7 +46,19 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
             <hr className="border-secondary" />
             <div className="flex flex-col">
                 <div className="flex flex-row">
-                    <div className="flex flex-1  p-2">
+                    <div className="flex flex-1 p-2">
+                        <TextField
+                            id={`user-neck-${date}`}
+                            label="Neck"
+                            value={bodyState.neck}
+                            type="number"
+                            inputMode="decimal"
+                            name="neck"
+                            onChange={handleChange}
+                            className="my-auto"
+                        />
+                    </div>
+                    <div className="flex flex-1 p-2">
                         <TextField
                             id={`user-shoulders-${date}`}
                             label="Shoulders"

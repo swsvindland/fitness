@@ -18,7 +18,7 @@ export const AllBody: FC = () => {
     return (
         <div className="container grid grid-cols-1">
             <h2 className="text-2xl text-secondary">All Body Records</h2>
-            <div className=" grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
+            <div className=" grid grid-cols-1 gap-2">
                 {bodies?.map((item) => (
                     <AllBodyCard
                         id={item.id!}
