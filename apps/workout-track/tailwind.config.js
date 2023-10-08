@@ -17,8 +17,7 @@ module.exports = {
                 error: '#ba1a1a',
             },
             fontFamily: {
-                sans: ['Oswald', 'sans-serif'],
-                serif: ['Quicksand', 'serif'],
+                sans: ['Oswald', 'sans-serif']
             },
         },
     },
