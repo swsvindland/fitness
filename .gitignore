@@ -31,3 +31,6 @@ yarn-error.log*
 # Secrets
 GoogleService-Info.plist
 google-services.json
+
+# Turbo Repo
+.turbo
