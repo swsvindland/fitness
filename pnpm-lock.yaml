@@ -86,8 +86,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       cordova-plugin-purchase:
-        specifier: ^11.0.0
-        version: 11.0.0
+        specifier: ^13.8.6
+        version: 13.8.6
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -246,8 +246,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0
       cordova-plugin-purchase:
-        specifier: ^11.0.0
-        version: 11.0.0
+        specifier: ^13.8.6
+        version: 13.8.6
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -4080,8 +4080,8 @@ packages:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
     dev: true
 
-  /cordova-plugin-purchase@11.0.0:
-    resolution: {integrity: sha512-FkgOyWBYS989dYpM6d3R36VrdsHweTbmp5y7ELa1GwMYq2AG+ImdB6DJcVpyU/se/zpTndBWH/zN9s3AFKfsLg==}
+  /cordova-plugin-purchase@13.8.6:
+    resolution: {integrity: sha512-BttD5UiyAgAS07NrqE/C7sM2vXopBWbtjq0Ae/vFP0op8TnIDlGRsZbEZfG3hXyIz9fZ363nOJk4mEtAo3iPYQ==}
     dev: false
 
   /core-js-compat@3.33.0:
