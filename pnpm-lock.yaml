@@ -52,6 +52,12 @@ importers:
       '@capacitor/status-bar':
         specifier: ^5.0.6
         version: 5.0.6(@capacitor/core@5.4.0)
+      '@fitness/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@fitness/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@headlessui/react':
         specifier: ^1.7.17
         version: 1.7.17(react-dom@18.2.0)(react@18.2.0)
@@ -327,6 +333,25 @@ importers:
       vite-tsconfig-paths:
         specifier: ^4.2.1
         version: 4.2.1(typescript@5.2.2)(vite@4.4.11)
+
+  packages/api:
+    dependencies:
+      '@fitness/types':
+        specifier: workspace:*
+        version: link:../types
+      axios:
+        specifier: ^1.5.1
+        version: 1.5.1
+    devDependencies:
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
+
+  packages/types:
+    devDependencies:
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
 
 packages:
 

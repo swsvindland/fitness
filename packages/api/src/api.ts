@@ -1,27 +1,31 @@
 import axios, { AxiosResponse } from 'axios';
-import { Supplement } from './types/Supplement';
-import { UserSupplement } from './types/UserSupplement';
-import { UserBodyFat } from './types/UserBodyFat';
-import { Workout } from './types/Workout';
-import { Macros } from './types/Macros';
-import { Dashboard } from './types/Dashboard';
-import { UserNextWorkout } from './types/UserNextWorkout';
-import { Auth } from './types/Auth';
-import { UserWorkout } from './types/UserWorkout';
-import { UserBloodPressure } from './types/UserBloodPressure';
-import { UserBody } from './types/UserBody';
-import { UserWeight } from './types/UserWeight';
-import { Sex, Units, User } from './types/User';
-import { Food } from './types/Food';
-import { WorkoutExercise } from './types/WorkoutExercise';
-import { Exercise } from './types/Exercise';
-import { SearchFood } from './types/SearchFood';
-import { UserFoodV2 } from './types/UserFoodV2';
-import { WorkoutType } from './types/WorkoutType';
-import { ProgressPhoto } from './types/ProgressPhoto';
-import { UserWorkoutExercise } from './types/UserWorkoutExercise';
-import { UserWorkoutSubstitution } from './types/UserWorkoutSubstitution';
-import { FatSecretAuth } from './types/FatSecretAuth';
+import {
+    Auth,
+    Dashboard,
+    Exercise,
+    FatSecretAuth,
+    Food,
+    Macros,
+    ProgressPhoto,
+    SearchFood,
+    Supplement,
+    User,
+    UserBloodPressure,
+    UserBodyFat,
+    UserFoodV2,
+    UserNextWorkout,
+    UserSupplement,
+    UserWeight,
+    UserWorkoutExercise,
+    UserWorkout,
+    UserWorkoutSubstitution,
+    Workout,
+    WorkoutExercise,
+    WorkoutType,
+    UserBody,
+    Sex,
+    Units,
+} from '@fitness/types';
 
 // export const API_URL = 'http://localhost:7071';
 // export const API_URL = 'http://10.0.2.2:7071';

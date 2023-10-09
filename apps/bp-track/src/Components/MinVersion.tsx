@@ -1,7 +1,7 @@
 import { FC, Fragment, useMemo, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
-import { getMinVersion } from '../api';
+import { getMinVersion } from '@fitness/api';
 
 export const VERSION = 34;
 
@@ -50,12 +50,12 @@ export const MinVersion: FC = () => {
                                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                         <Dialog.Title
                                             as="h3"
-                                            className="text-lg font-medium leading-6 text-secondary"
+                                            className="text-secondary text-lg font-medium leading-6"
                                         >
                                             App Update Required
                                         </Dialog.Title>
                                         <div className="mt-2">
-                                            <p className="text-sm text-ternary">
+                                            <p className="text-ternary text-sm">
                                                 It looks like the version of the
                                                 app you are using is out of
                                                 date. Please update the app in

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllUserBloodPressure } from '../../../api';
+import { getAllUserBloodPressure } from '@fitness/api';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBloodPressureCard } from './AllBloodPressureCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';
@@ -20,7 +20,7 @@ export const AllBloodPressure: FC = () => {
 
     return (
         <div className="container grid grid-cols-1">
-            <h2 className="text-2xl text-secondary">
+            <h2 className="text-secondary text-2xl">
                 All Blood Pressure Records
             </h2>
             <div className=" grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">

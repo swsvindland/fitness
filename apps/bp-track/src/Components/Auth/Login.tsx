@@ -1,10 +1,10 @@
 import { FC, FormEvent, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { User } from '../../types/User';
+import { User } from '@fitness/types';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { TextField } from '../TextFields/TextField';
-import { authV2, getUser, ssoAuthV2 } from '../../api';
+import { authV2, getUser, ssoAuthV2 } from '@fitness/api';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';
@@ -135,7 +135,7 @@ export const Login: FC<IProps> = ({
 
     if (silentLoginQuery.isFetching || ssoMutation.isLoading) {
         return (
-            <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+            <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="card px-4 py-8 sm:px-10">
                         <LoadingSpinner />
@@ -146,7 +146,7 @@ export const Login: FC<IProps> = ({
     }
 
     return (
-        <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+        <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="card px-4 py-8 sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -200,7 +200,7 @@ export const Login: FC<IProps> = ({
                         <div>
                             <button
                                 onClick={handleForgotPassword}
-                                className="flex w-full justify-center text-center text-secondary"
+                                className="text-secondary flex w-full justify-center text-center"
                             >
                                 Forgot Password
                             </button>
@@ -213,7 +213,7 @@ export const Login: FC<IProps> = ({
                             className="flex w-full justify-center text-center"
                             onClick={handleAppleSignIn}
                         >
-                            <Apple className="mr-2 w-4 fill-secondary" /> Sign
+                            <Apple className="fill-secondary mr-2 w-4" /> Sign
                             In with Apple
                         </Button>
                     ) : null}
@@ -222,7 +222,7 @@ export const Login: FC<IProps> = ({
                             className="flex w-full justify-center text-center"
                             onClick={handleGoogleSignIn}
                         >
-                            <Google className="mr-2 w-4 fill-secondary" /> Sign
+                            <Google className="fill-secondary mr-2 w-4" /> Sign
                             In with Google
                         </Button>
                     ) : null}

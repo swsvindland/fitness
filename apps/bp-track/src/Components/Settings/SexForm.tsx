@@ -4,12 +4,12 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { updateSex } from '../../api';
+import { updateSex } from '@fitness/api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Sex, User } from '../../types/User';
+import { Sex, User } from '@fitness/types';
 
 export const SexForm: FC = () => {
-    const { user, setUser, newUser, setNewUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     useShowBackButton();
     const [sex, setSex] = useState<Sex>(user?.sex ?? Sex.Unknown);
     const queryClient = useQueryClient();
@@ -28,12 +28,7 @@ export const SexForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ sex });
-        if (newUser) {
-            setNewUser(false);
-            history.push('/');
-        } else {
-            history.goBack();
-        }
+        history.goBack();
     };
 
     const handleClear = () => {
@@ -57,11 +52,11 @@ export const SexForm: FC = () => {
                                             setSex(Sex.Male);
                                         }
                                     }}
-                                    className="h-4 w-4 border-ternary accent-secondary"
+                                    className="border-ternary accent-secondary h-4 w-4"
                                 />
                                 <label
                                     htmlFor="sex-male"
-                                    className="ml-3 block text-sm font-medium text-ternary"
+                                    className="text-ternary ml-3 block text-sm font-medium"
                                 >
                                     Male
                                 </label>
@@ -77,17 +72,17 @@ export const SexForm: FC = () => {
                                             setSex(Sex.Female);
                                         }
                                     }}
-                                    className="h-4 w-4 border-ternary accent-secondary"
+                                    className="border-ternary accent-secondary h-4 w-4"
                                 />
                                 <label
                                     htmlFor="sex-female"
-                                    className="ml-3 block text-sm font-medium text-ternary"
+                                    className="text-ternary ml-3 block text-sm font-medium"
                                 >
                                     Female
                                 </label>
                             </div>
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

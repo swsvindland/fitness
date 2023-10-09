@@ -5,7 +5,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { changePassword } from '../../api';
+import { changePassword } from '@fitness/api';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';
@@ -123,7 +123,7 @@ export const ChangePasswordForm: FC = () => {
                                 </span>
                             )}
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>
