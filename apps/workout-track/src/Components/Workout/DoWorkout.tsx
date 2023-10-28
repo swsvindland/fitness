@@ -8,14 +8,14 @@ import {
     getUserNextWorkout,
     getWorkout,
     getWorkoutExercises,
-} from '../../api';
+} from '@fitness/api';
 import { Button } from '../Buttons/Button';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
 import { WorkoutCompleted } from './WorkoutCompleted';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
-import { WorkoutType } from '../../types/WorkoutType';
+import { WorkoutType } from '@fitness/types';
 
 interface IProps {
     workoutId: number;
@@ -77,10 +77,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
     }, [nextWorkoutQuery.data?.data, workoutQuery.data?.data.type]);
 
-    if (
-        workoutQuery.isLoading ||
-        nextWorkoutQuery.isLoading
-    ) {
+    if (workoutQuery.isLoading || nextWorkoutQuery.isLoading) {
         return <LoadingSpinner />;
     }
 
@@ -105,10 +102,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         <div className="container">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
             <Pagination selected={day} setSelected={setDay} pages={maxDays} />
-            <div
-                role="list"
-                className="grid grid-cols-1 gap-6"
-            >
+            <div role="list" className="grid grid-cols-1 gap-6">
                 {exercisesQuery.data?.data?.map((exercise, index) => (
                     <WorkoutCard
                         key={exercise.id}

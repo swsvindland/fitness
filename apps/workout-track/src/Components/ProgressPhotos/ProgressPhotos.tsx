@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { CDN_URL, getProgressPhotos } from '../../api';
+import { CDN_URL, getProgressPhotos } from '@fitness/api';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { Viewer } from './Viewer';
@@ -18,7 +18,7 @@ export const ProgressPhotos: FC = () => {
     return (
         <>
             <div className="card p-4">
-                <h2 className="my-4 text-lg text-secondary">Progress Photos</h2>
+                <h2 className="text-secondary my-4 text-lg">Progress Photos</h2>
                 <div className="flex flex-row">
                     <LinkButton to="body/progress" className="mr-2">
                         See All

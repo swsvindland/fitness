@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
-import { getAllSupplements, getUserSupplements } from '../../api';
+import { getAllSupplements, getUserSupplements } from '@fitness/api';
 import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { SupplementSearch } from './SupplementSearch';
@@ -43,7 +43,7 @@ export const AllSupplements: FC = () => {
                     allSupplementQuery.data?.data.map((item) => item.name) || []
                 }
             />
-            <h2 className="my-4 text-lg text-secondary ">Active</h2>
+            <h2 className="text-secondary my-4 text-lg ">Active</h2>
             {userSupplementsQuery.data?.data
                 .filter(
                     (item) =>
@@ -62,7 +62,7 @@ export const AllSupplements: FC = () => {
                         icon={supplement.supplement?.icon}
                     />
                 ))}
-            <h2 className="my-4 text-lg text-secondary">all</h2>
+            <h2 className="text-secondary my-4 text-lg">all</h2>
             {filteredAllSupplements
                 ?.filter(
                     (item) =>

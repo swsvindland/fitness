@@ -16,6 +16,8 @@
         "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
     },
     "dependencies": {
+        "@fitness/api": "workspace:*",
+        "@fitness/types": "workspace:*",
         "@awesome-cordova-plugins/core": "^6.4.0",
         "@awesome-cordova-plugins/in-app-purchase-2": "^6.4.0",
         "@capacitor-community/barcode-scanner": "^4.0.1",

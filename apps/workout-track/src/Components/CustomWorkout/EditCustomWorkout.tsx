@@ -6,10 +6,10 @@ import { useShowBackButton } from '../Navigation/headerHooks';
 import { AuthContext } from '../Auth/Auth';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useHistory, useParams } from 'react-router-dom';
-import { editWorkout, getWorkout } from '../../api';
+import { editWorkout, getWorkout } from '@fitness/api';
 import { TextArea } from '../TextFields/TextArea';
 import { Dropdown, DropdownOption } from '../Dropdown';
-import { WorkoutType } from '../../types/WorkoutType';
+import { WorkoutType } from '@fitness/types';
 
 interface IState {
     name: string;
@@ -164,7 +164,7 @@ export const EditCustomWorkout: FC = () => {
                                 }
                             />
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

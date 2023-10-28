@@ -6,7 +6,7 @@ import {
     getExercises,
     getUserWorkoutSubstitution,
     updateUserWorkoutSubstitution,
-} from '../../api';
+} from '@fitness/api';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Autocomplete } from '../Autocomplete';

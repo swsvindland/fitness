@@ -1,6 +1,6 @@
 import { createContext, FC, useState } from 'react';
 import { Login } from './Login';
-import { User } from '../../types/User';
+import { User } from '@fitness/types';
 import { Routes } from '../Routes';
 import { IonReactRouter } from '@ionic/react-router';
 import { Register } from './Register';
@@ -8,7 +8,7 @@ import { HeaderProvider } from '../Navigation/HeaderContext';
 import { ScrollToTop } from '../ScrollToTop';
 import { MinVersion } from '../MinVersion';
 import { ForgotPassword } from './ForgotPassword';
-import {PurchaseAccess} from "../Purchase/PurchaseAccess";
+import { PurchaseAccess } from '../Purchase/PurchaseAccess';
 
 interface IAuthContext {
     user?: User;

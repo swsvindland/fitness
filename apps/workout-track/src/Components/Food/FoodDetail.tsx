@@ -1,7 +1,7 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { addUserFood, getFoodDetails } from '../../api';
+import { addUserFood, getFoodDetails } from '@fitness/api';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
@@ -49,7 +49,7 @@ export const FoodDetail: FC = () => {
     return (
         <div className="container grid grid-cols-1">
             <div className="my-8">
-                <h1 className="text-2xl font-bold text-secondary">
+                <h1 className="text-secondary text-2xl font-bold">
                     {foodDetailsQuery.data?.data.name}
                 </h1>
             </div>

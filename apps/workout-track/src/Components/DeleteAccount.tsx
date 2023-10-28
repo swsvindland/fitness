@@ -4,7 +4,7 @@ import { Button } from './Buttons/Button';
 import { SecondaryButton } from './Buttons/SecondaryButton';
 import { AuthContext } from './Auth/Auth';
 import { useMutation } from '@tanstack/react-query';
-import { deleteUser } from '../api';
+import { deleteUser } from '@fitness/api';
 
 export const DeleteAccount: FC = () => {
     const { setUser } = useContext(AuthContext);
@@ -57,12 +57,12 @@ export const DeleteAccount: FC = () => {
                                         <div className="mt-3 text-center sm:mt-5">
                                             <Dialog.Title
                                                 as="h3"
-                                                className="text-lg font-medium leading-6 text-secondary"
+                                                className="text-secondary text-lg font-medium leading-6"
                                             >
                                                 Delete Account?
                                             </Dialog.Title>
                                             <div className="mt-2">
-                                                <p className="text-sm text-ternary">
+                                                <p className="text-ternary text-sm">
                                                     This will delete all data we
                                                     have stored about you. You
                                                     will not be able to revert

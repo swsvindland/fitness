@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { classNames } from '../../utils/classNames';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { foodApiAuth, getUserFoods } from '../../api';
+import { foodApiAuth, getUserFoods } from '@fitness/api';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory } from 'react-router-dom';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
@@ -63,43 +63,43 @@ export const FoodGrid: FC = () => {
                     Add Food
                 </Button>
             </div>
-            <div className="my-2 rounded ring-1 ring-ternary md:mx-0">
-                <table className="min-w-full divide-y divide-ternary">
+            <div className="ring-ternary my-2 rounded ring-1 md:mx-0">
+                <table className="divide-ternary min-w-full divide-y">
                     <thead>
                         <tr>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="text-secondary hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Name
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="text-secondary hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Protein
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="text-secondary hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Fat
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="text-secondary hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Carbs
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="text-secondary hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Calories
                             </th>
                             <th
                                 scope="col"
-                                className="hidden px-3 py-3.5 text-left text-sm font-semibold text-secondary lg:table-cell"
+                                className="text-secondary hidden px-3 py-3.5 text-left text-sm font-semibold lg:table-cell"
                             >
                                 Servings
                             </th>
@@ -119,14 +119,14 @@ export const FoodGrid: FC = () => {
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
+                                            : 'border-ternary border-t',
                                         'relative py-4 pl-4 pr-3 text-sm sm:pl-6'
                                     )}
                                 >
-                                    <div className="font-medium text-secondary">
+                                    <div className="text-secondary font-medium">
                                         {food?.foodV2?.name}
                                     </div>
-                                    <div className="mt-1 flex flex-col text-ternary lg:hidden">
+                                    <div className="text-ternary mt-1 flex flex-col lg:hidden">
                                         <span>
                                             Protein:{' '}
                                             {(
@@ -164,15 +164,15 @@ export const FoodGrid: FC = () => {
                                         </span>
                                     </div>
                                     {foodIdx !== 0 ? (
-                                        <div className="absolute -top-px left-6 right-0 h-px bg-ternary" />
+                                        <div className="bg-ternary absolute -top-px left-6 right-0 h-px" />
                                     ) : null}
                                 </td>
                                 <td
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                            : 'border-ternary border-t',
+                                        'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -185,8 +185,8 @@ export const FoodGrid: FC = () => {
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                            : 'border-ternary border-t',
+                                        'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -199,8 +199,8 @@ export const FoodGrid: FC = () => {
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                            : 'border-ternary border-t',
+                                        'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -213,8 +213,8 @@ export const FoodGrid: FC = () => {
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                            : 'border-ternary border-t',
+                                        'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {(
@@ -227,8 +227,8 @@ export const FoodGrid: FC = () => {
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
-                                            : 'border-t border-ternary',
-                                        'hidden px-3 py-3.5 text-sm text-ternary lg:table-cell'
+                                            : 'border-ternary border-t',
+                                        'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
                                     {food.servingAmount?.toFixed(2)} Servings

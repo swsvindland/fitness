@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllUserWeights } from '../../../api';
+import { getAllUserWeights } from '@fitness/api';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllWeightCard } from './AllWeightCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';
@@ -17,7 +17,7 @@ export const AllWeights: FC = () => {
 
     return (
         <div className="container grid grid-cols-1">
-            <h2 className="text-2xl text-secondary">All Weights</h2>
+            <h2 className="text-secondary text-2xl">All Weights</h2>
             <div className=" grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
                 {weights?.map((item) => (
                     <AllWeightCard

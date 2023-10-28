@@ -5,7 +5,7 @@ import { SecondaryButton } from '../../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addBody } from '../../../api';
+import { addBody } from '@fitness/api';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
 export interface IBodyState {
@@ -41,7 +41,7 @@ const initialState = {
 export const BodyCheckInForm: FC = () => {
     useShowBackButton();
     const [state, setState] = useState<IBodyState>(initialState);
-    const { user, newUser, setNewUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -70,12 +70,8 @@ export const BodyCheckInForm: FC = () => {
             userId: user?.id ?? '',
             created: new Date().toISOString(),
         });
-        if (newUser) {
-            setNewUser(false);
-            history.push('/');
-        } else {
-            history.goBack();
-        }
+
+        history.goBack();
     };
 
     const handleClear = () => {
@@ -210,7 +206,7 @@ export const BodyCheckInForm: FC = () => {
                                 />
                             </div>
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

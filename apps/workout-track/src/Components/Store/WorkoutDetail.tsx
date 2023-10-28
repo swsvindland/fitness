@@ -3,9 +3,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory, useParams } from 'react-router-dom';
-import { buyWorkout, getWorkout } from '../../api';
+import { buyWorkout, getWorkout } from '@fitness/api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { WorkoutType } from '../../types/WorkoutType';
+import { WorkoutType } from '@fitness/types';
 
 export const WorkoutDetail: FC = () => {
     const { workoutId } = useParams<{ workoutId?: string }>();
@@ -41,7 +41,7 @@ export const WorkoutDetail: FC = () => {
                     <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
                         <div className="lg:col-span-5 lg:col-start-8">
                             <div className="flex justify-between">
-                                <h1 className="mb-2 text-xl font-medium text-secondary">
+                                <h1 className="text-secondary mb-2 text-xl font-medium">
                                     {workoutQuery.data?.data.name}
                                 </h1>
                             </div>
@@ -82,11 +82,11 @@ export const WorkoutDetail: FC = () => {
                             )}
                             {/* Product details */}
                             <div className="mt-10">
-                                <h2 className="text-sm font-medium text-secondary">
+                                <h2 className="text-secondary text-sm font-medium">
                                     Description
                                 </h2>
 
-                                <div className="prose prose-sm mt-4 text-ternary">
+                                <div className="prose prose-sm text-ternary mt-4">
                                     {workoutQuery.data?.data.description && (
                                         <p>
                                             {
@@ -98,12 +98,12 @@ export const WorkoutDetail: FC = () => {
                                 </div>
                             </div>
 
-                            <div className="mt-8 border-t pt-8 text-secondary">
-                                <h2 className="text-sm font-medium text-secondary">
+                            <div className="text-secondary mt-8 border-t pt-8">
+                                <h2 className="text-secondary text-sm font-medium">
                                     Workout Details
                                 </h2>
 
-                                <div className="prose prose-sm mt-4 text-ternary">
+                                <div className="prose prose-sm text-ternary mt-4">
                                     <div role="list">
                                         <li>
                                             {workoutQuery.data?.data.days} days

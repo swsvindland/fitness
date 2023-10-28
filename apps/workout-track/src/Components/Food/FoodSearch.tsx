@@ -5,7 +5,7 @@ import { Autocomplete } from '../Autocomplete';
 import { useQuery } from '@tanstack/react-query';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { XSolid } from '../Icons/XSolid';
-import { foodAutocomplete } from '../../api';
+import { foodAutocomplete } from '@fitness/api';
 
 interface IProps {
     query: string;
@@ -53,10 +53,10 @@ export const FoodSearch: FC<IProps> = ({
                 className=" ml-2 h-10 w-10 !p-2"
                 onClick={handleClear}
             >
-                <XSolid className="h-6 w-6 fill-secondary" />
+                <XSolid className="fill-secondary h-6 w-6" />
             </SecondaryButton>
             <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
-                <MagnifyingGlassSolid className="h-6 w-6 fill-secondary" />
+                <MagnifyingGlassSolid className="fill-secondary h-6 w-6" />
             </Button>
         </form>
     );

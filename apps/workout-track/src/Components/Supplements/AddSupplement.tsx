@@ -5,8 +5,8 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Button } from '../Buttons/Button';
 import { Time } from './SupplementCard';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { UserSupplement } from '../../types/UserSupplement';
-import { updateUserSupplement } from '../../api';
+import { UserSupplement } from '@fitness/types';
+import { updateUserSupplement } from '@fitness/api';
 
 interface IProps {
     userSupplementId?: number;

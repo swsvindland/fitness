@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllUserBodies } from '../../../api';
+import { getAllUserBodies } from '@fitness/api';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBodyCard } from './AllBodyCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';
@@ -17,7 +17,7 @@ export const AllBody: FC = () => {
 
     return (
         <div className="container grid grid-cols-1">
-            <h2 className="text-2xl text-secondary">All Body Records</h2>
+            <h2 className="text-secondary text-2xl">All Body Records</h2>
             <div className=" grid grid-cols-1 gap-2">
                 {bodies?.map((item) => (
                     <AllBodyCard

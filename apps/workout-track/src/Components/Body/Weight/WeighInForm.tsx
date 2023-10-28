@@ -5,13 +5,13 @@ import { SecondaryButton } from '../../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addWeight } from '../../../api';
+import { addWeight } from '@fitness/api';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
 export const WeighInForm: FC = () => {
     useShowBackButton();
     const [weight, setWeight] = useState<string>('');
-    const { user, newUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -25,11 +25,7 @@ export const WeighInForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ weight: parseFloat(weight), userId: user?.id ?? '' });
-        if (newUser) {
-            history.push('/getting-started/sex');
-        } else {
-            history.goBack();
-        }
+        history.goBack();
     };
 
     const handleClear = () => {
@@ -53,7 +49,7 @@ export const WeighInForm: FC = () => {
                                 }
                             />
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

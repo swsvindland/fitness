@@ -7,8 +7,8 @@ import { AuthContext } from '../Auth/Auth';
 import { useMutation } from '@tanstack/react-query';
 import { useHistory } from 'react-router-dom';
 import { TextArea } from '../TextFields/TextArea';
-import { addWorkout } from '../../api';
-import { WorkoutType } from '../../types/WorkoutType';
+import { addWorkout } from '@fitness/api';
+import { WorkoutType } from '@fitness/types';
 import { Dropdown, DropdownOption } from '../Dropdown';
 
 interface IState {
@@ -135,7 +135,7 @@ export const CreateCustomWorkout: FC = () => {
                                 }
                             />
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

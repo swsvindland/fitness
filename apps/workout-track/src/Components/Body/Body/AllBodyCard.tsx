@@ -4,9 +4,9 @@ import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { ChangeEvent, FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserBody, updateUserBody } from '../../../api';
+import { deleteUserBody, updateUserBody } from '@fitness/api';
 import { CircleXMark } from '../../Icons/CircleXMark';
-import { UserBody } from '../../../types/UserBody';
+import { UserBody } from '@fitness/types';
 
 interface IProps {
     id: number;
@@ -40,7 +40,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
 
     return (
         <div className="card my-2 p-4">
-            <span className="text-lg text-secondary">
+            <span className="text-secondary text-lg">
                 {format(new Date(date ?? ''), 'PP')}
             </span>
             <hr className="border-secondary" />
@@ -213,7 +213,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                                     className={
                                         saved
                                             ? 'fill-secondary'
-                                            : 'rounded-full border border-ternary fill-transparent'
+                                            : 'border-ternary rounded-full border fill-transparent'
                                     }
                                 />
                             )}

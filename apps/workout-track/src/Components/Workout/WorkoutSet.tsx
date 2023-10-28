@@ -3,9 +3,9 @@ import { TextField } from '../TextFields/TextField';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
-import { addWorkoutActivity } from '../../api';
+import { addWorkoutActivity } from '@fitness/api';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
-import { Units } from '../../types/User';
+import { Units } from '@fitness/types';
 import { SnackbarContext } from '../Snackbars/SnackbarProvider';
 
 interface IProps {
@@ -60,7 +60,7 @@ export const WorkoutSet: FC<IProps> = ({
     });
 
     return (
-        <div className="flex border-t border-ternary">
+        <div className="border-ternary flex border-t">
             <div className=" flex flex-1">
                 <div className="inline-flex flex-1 items-center justify-center p-2">
                     <TextField
@@ -78,7 +78,7 @@ export const WorkoutSet: FC<IProps> = ({
                     />
                 </div>
             </div>
-            <div className="flex flex-1 border-x border-ternary p-2">
+            <div className="border-ternary flex flex-1 border-x p-2">
                 <TextField
                     label={user?.unit === Units.Imperial ? 'lbs' : 'kg'}
                     id={`exercise-weight-${id}-${set}`}
@@ -116,8 +116,8 @@ export const WorkoutSet: FC<IProps> = ({
                             <CircleCheckSolid
                                 className={
                                     saved
-                                        ? 'w-12 fill-secondary'
-                                        : 'w-12 rounded-full border border-ternary fill-transparent'
+                                        ? 'fill-secondary w-12'
+                                        : 'border-ternary w-12 rounded-full border fill-transparent'
                                 }
                             />
                         )}

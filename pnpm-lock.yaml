@@ -218,6 +218,12 @@ importers:
       '@capacitor/status-bar':
         specifier: ^5.0.6
         version: 5.0.6(@capacitor/core@5.4.0)
+      '@fitness/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@fitness/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@headlessui/react':
         specifier: ^1.7.17
         version: 1.7.17(react-dom@18.2.0)(react@18.2.0)
@@ -389,7 +395,7 @@ packages:
     peerDependencies:
       rxjs: ^5.5.0 || ^6.5.0 || ^7.3.0
     dependencies:
-      '@types/cordova': 11.0.1
+      '@types/cordova': 11.0.2
       rxjs: 7.8.1
     dev: false
 
@@ -400,7 +406,7 @@ packages:
       rxjs: ^5.5.0 || ^6.5.0 || ^7.3.0
     dependencies:
       '@awesome-cordova-plugins/core': 6.4.0(rxjs@7.8.1)
-      '@types/cordova': 11.0.1
+      '@types/cordova': 11.0.2
       rxjs: 7.8.1
     dev: false
 
@@ -3297,8 +3303,8 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@types/cordova@11.0.1:
-    resolution: {integrity: sha512-Zd6LAhYUAdn0mL0SbxHeF4fO/3uzkcW3fzE0ZIK1wDlTRCWlI4/0i+Phb+otP9ryziyeW2LKofRNSP5yil85hA==}
+  /@types/cordova@11.0.2:
+    resolution: {integrity: sha512-swXLtFffXPQYz80eEX4URII7obHBZCS01JtI2Fh0Gt6dxgwoyDB7ZzfkRZgHHDxl1qRdMVRICMvfx2USIHPWCA==}
     dev: false
 
   /@types/estree@0.0.39:

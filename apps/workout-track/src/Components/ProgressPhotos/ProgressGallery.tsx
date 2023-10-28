@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { CDN_URL, getProgressPhotos } from '../../api';
+import { CDN_URL, getProgressPhotos } from '@fitness/api';
 import { FC, useState } from 'react';
 import { format } from 'date-fns';
 import { useShowBackButton } from '../Navigation/headerHooks';
@@ -18,7 +18,7 @@ export const ProgressGallery: FC = () => {
             <div className="grid w-full max-w-2xl grid-cols-1">
                 {dates.map((date) => (
                     <div key={date}>
-                        <h2 className="my-2 text-lg text-secondary">
+                        <h2 className="text-secondary my-2 text-lg">
                             {format(new Date(date), 'PP')}
                         </h2>
                         <div className="grid grid-cols-3 gap-4">

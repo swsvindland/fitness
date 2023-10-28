@@ -4,7 +4,7 @@ import { TextField } from '../TextFields/TextField';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
-import { forgotPassword } from '../../api';
+import { forgotPassword } from '@fitness/api';
 
 interface IProps {
     setForgotPassword: (forgotPassword: boolean) => void;
@@ -36,7 +36,7 @@ export const ForgotPassword: FC<IProps> = ({ setForgotPassword }) => {
     };
 
     return (
-        <main className="flex min-h-screen flex-col justify-center bg-background p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
+        <main className="bg-background flex min-h-screen flex-col justify-center p-4 align-middle dark:bg-black sm:px-6 lg:px-8">
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="card px-4 py-8 shadow sm:rounded-lg sm:px-10">
                     <form className="space-y-6" onSubmit={handleSubmit}>

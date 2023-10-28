@@ -6,8 +6,8 @@ import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
-} from '../../api';
-import { SupplementIcon } from '../../types/Supplement';
+} from '@fitness/api';
+import { SupplementIcon } from '@fitness/types';
 import { Capsule } from '../Icons/Capsule';
 import { Injection } from '../Icons/Injection';
 import { Tablet } from '../Icons/Tablet';
@@ -33,17 +33,17 @@ export interface Time {
 const mapToIcon = (icon?: SupplementIcon) => {
     switch (icon) {
         case SupplementIcon.Capsule:
-            return <Capsule className="w-6 fill-primary-dark" />;
+            return <Capsule className="fill-primary-dark w-6" />;
         case SupplementIcon.Tablet:
-            return <Tablet className="w-6 fill-primary-dark" />;
+            return <Tablet className="fill-primary-dark w-6" />;
         case SupplementIcon.Injection:
-            return <Injection className="w-6 fill-primary-dark" />;
+            return <Injection className="fill-primary-dark w-6" />;
         case SupplementIcon.LargeScoop:
-            return <LargeScoop className="w-6 fill-primary-dark" />;
+            return <LargeScoop className="fill-primary-dark w-6" />;
         case SupplementIcon.SmallScoop:
-            return <SmallScoop className="w-6 fill-primary-dark" />;
+            return <SmallScoop className="fill-primary-dark w-6" />;
         case SupplementIcon.Liquid:
-            return <Liquid className="w-6 fill-primary-dark" />;
+            return <Liquid className="fill-primary-dark w-6" />;
         default:
             return <></>;
     }
@@ -115,16 +115,16 @@ export const SupplementCard: FC<IProps> = ({
             >
                 <div className="flex items-center">
                     <div className="mr-4">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-ternary">
+                        <div className="bg-ternary flex h-8 w-8 items-center justify-center rounded-full">
                             <div>{mapToIcon(icon)}</div>
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <span className="text-lg text-secondary">{name}</span>
+                        <span className="text-secondary text-lg">{name}</span>
                         <div>
                             {times?.map((time, index) => (
                                 <span
-                                    className="mr-1 text-xs text-ternary"
+                                    className="text-ternary mr-1 text-xs"
                                     key={time}
                                 >
                                     {time} {index !== times.length - 1 && '|'}
@@ -137,7 +137,7 @@ export const SupplementCard: FC<IProps> = ({
                     checked &&
                     !mutation.isLoading &&
                     !userSupplementActivityQuery.isFetching && (
-                        <CircleCheckSolid className="h-8 w-8 fill-secondary" />
+                        <CircleCheckSolid className="fill-secondary h-8 w-8" />
                     )}
                 {isUser &&
                     (mutation.isLoading ||

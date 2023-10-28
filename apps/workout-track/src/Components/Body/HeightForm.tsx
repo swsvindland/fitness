@@ -5,14 +5,14 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addHeight } from '../../api';
+import { addHeight } from '@fitness/api';
 import { useShowBackButton } from '../Navigation/headerHooks';
-import { Units } from '../../types/User';
+import { Units } from '@fitness/types';
 
 export const HeightForm: FC = () => {
     useShowBackButton();
     const [height, setHeight] = useState<string>('');
-    const { user, newUser } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const queryClient = useQueryClient();
     const history = useHistory();
 
@@ -26,11 +26,7 @@ export const HeightForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({ height: parseFloat(height), userId: user?.id ?? '' });
-        if (newUser) {
-            history.push('/getting-started/weight');
-        } else {
-            history.goBack();
-        }
+        history.goBack();
     };
 
     const handleClear = () => {
@@ -58,7 +54,7 @@ export const HeightForm: FC = () => {
                                 }
                             />
                         </div>
-                        <div className="flex justify-between bg-primary-dark px-4 py-3 text-right dark:bg-background sm:px-6">
+                        <div className="bg-primary-dark dark:bg-background flex justify-between px-4 py-3 text-right sm:px-6">
                             <SecondaryButton onClick={handleClear}>
                                 Clear
                             </SecondaryButton>

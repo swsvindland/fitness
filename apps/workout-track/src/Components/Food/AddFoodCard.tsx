@@ -5,7 +5,7 @@ import { Button } from '../Buttons/Button';
 import { PlusSolid } from '../Icons/PlusSolid';
 import { FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { quickAddFood, quickRemoveFood } from '../../api';
+import { quickAddFood, quickRemoveFood } from '@fitness/api';
 import { useUpdateFoodCache } from './hooks';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 
@@ -61,10 +61,10 @@ export const AddFoodCard: FC<IProps> = ({
                 }
                 className="flex flex-col p-4"
             >
-                <span className="text-lg text-secondary">
+                <span className="text-secondary text-lg">
                     {name} ({brandName})
                 </span>
-                <span className="text-sm text-ternary">{servingSize}</span>
+                <span className="text-ternary text-sm">{servingSize}</span>
             </Link>
             {!quickAddMutation.isLoading && !quickRemoveMutation.isLoading ? (
                 <div className="flex items-center">
@@ -72,11 +72,11 @@ export const AddFoodCard: FC<IProps> = ({
                         onClick={handleRemove}
                         className="ml-1 w-8 w-8 !p-2"
                     >
-                        <MinusSolid className="h-6 w-6 fill-secondary" />
+                        <MinusSolid className="fill-secondary h-6 w-6" />
                     </SecondaryButton>
-                    <span className="m-3 text-ternary">{servings}</span>
+                    <span className="text-ternary m-3">{servings}</span>
                     <Button onClick={handleAdd} className="mr-1 w-8 w-8 !p-2">
-                        <PlusSolid className="h-6 w-6 fill-secondary" />
+                        <PlusSolid className="fill-secondary h-6 w-6" />
                     </Button>
                 </div>
             ) : (

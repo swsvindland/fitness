@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { searchFoodByBarcode } from '../../api';
+import { searchFoodByBarcode } from '@fitness/api';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { LinkButton } from '../Buttons/LinkButton';
 
@@ -29,7 +29,7 @@ export const ScanFood: FC = () => {
     if (!searchFoodQuery.data?.data) {
         return (
             <div>
-                <h1 className="text-2xl font-bold text-secondary">
+                <h1 className="text-secondary text-2xl font-bold">
                     Food not found
                 </h1>
                 <p>{barcode}</p>

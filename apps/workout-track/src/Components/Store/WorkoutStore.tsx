@@ -2,7 +2,11 @@ import { FC, useContext, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { WorkoutStoreCard } from './WorkoutStoreCard';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
-import { getUserWorkouts, getWorkouts, getWorkoutsByUserId } from '../../api';
+import {
+    getUserWorkouts,
+    getWorkouts,
+    getWorkoutsByUserId,
+} from '@fitness/api';
 import { HeaderContext } from '../Navigation/HeaderContext';
 import { AuthContext } from '../Auth/Auth';
 import { LinkButton } from '../Buttons/LinkButton';
@@ -33,7 +37,7 @@ export const WorkoutStore: FC = () => {
     return (
         <div className="container flex flex-col">
             {(customWorkoutsQuery.data?.data.length ?? 0) > 0 && (
-                <h2 className="text-lg text-secondary">Your Custom Workouts</h2>
+                <h2 className="text-secondary text-lg">Your Custom Workouts</h2>
             )}
             <LinkButton to="/workout/create" className="m-4">
                 Create New Custom Workout (beta)
@@ -48,7 +52,7 @@ export const WorkoutStore: FC = () => {
                 />
             ))}
             {(customWorkoutsQuery.data?.data.length ?? 0) > 0 && (
-                <h2 className="text-lg text-secondary">Workouts</h2>
+                <h2 className="text-secondary text-lg">Workouts</h2>
             )}
             {workoutsQuery.data?.data.map((item) => (
                 <WorkoutStoreCard

@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
 import { useQuery } from '@tanstack/react-query';
-import { getRecentUserFoods, searchFood } from '../../api';
+import { getRecentUserFoods, searchFood } from '@fitness/api';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { AddFoodCard } from './AddFoodCard';
 import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
@@ -51,7 +51,7 @@ export const AddFood: FC = () => {
             <LoadingListOfCards isLoading={recentlyEaten.isLoading} />
             <div className="w-full">
                 {!recentlyEaten.data?.data ? null : (
-                    <h2 className="mt-2 text-lg text-secondary">
+                    <h2 className="text-secondary mt-2 text-lg">
                         Recently Eaten
                     </h2>
                 )}

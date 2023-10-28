@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addProgressPhoto } from '../../api';
+import { addProgressPhoto } from '@fitness/api';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Filesystem } from '@capacitor/filesystem';
 import { useShowBackButton } from '../Navigation/headerHooks';
@@ -94,17 +94,17 @@ export const ProgressCamera: FC = () => {
                 )}
             </div>
             <div>
-                <span className="mb-2 text-lg text-secondary">
+                <span className="text-secondary mb-2 text-lg">
                     Photos {photos.length} / 10
                 </span>
                 <div className="grid grid-cols-3 gap-2">
                     {photos.map((photo, index) => (
                         <div>
                             <button
-                                className="float-right my-2 rounded-full border border-ternary"
+                                className="border-ternary float-right my-2 rounded-full border"
                                 onClick={() => removePhotos(index)}
                             >
-                                <MinusSolid className="h-4 w-4 fill-ternary" />
+                                <MinusSolid className="fill-ternary h-4 w-4" />
                             </button>
                             <img src={photo.webPath} alt="" />
                         </div>
