@@ -48,28 +48,33 @@ export const PurchaseOptions: FC = () => {
             CdvPurchase.store.validator =
                 'https://validator.fovea.cc/v1/validate?appName=com.svindland.fitness&apiKey=85cb7102-17c8-4f39-adaf-35051a4fb53b';
 
-            CdvPurchase.store.register([
-                {
-                    id: MONTHLY_SUBSCRIPTION,
-                    type: ProductType.PAID_SUBSCRIPTION,
-                    platform: Platform.APPLE_APPSTORE,
-                },
-                {
-                    id: MONTHLY_SUBSCRIPTION,
-                    type: ProductType.PAID_SUBSCRIPTION,
-                    platform: Platform.GOOGLE_PLAY,
-                },
-                {
-                    id: YEARLY_SUBSCRIPTION,
-                    type: ProductType.PAID_SUBSCRIPTION,
-                    platform: Platform.APPLE_APPSTORE,
-                },
-                {
-                    id: YEARLY_SUBSCRIPTION,
-                    type: ProductType.PAID_SUBSCRIPTION,
-                    platform: Platform.GOOGLE_PLAY,
-                },
-            ]);
+            if (isPlatform('ios')) {
+                CdvPurchase.store.register([
+                    {
+                        id: MONTHLY_SUBSCRIPTION,
+                        type: ProductType.PAID_SUBSCRIPTION,
+                        platform: Platform.APPLE_APPSTORE,
+                    },
+                    {
+                        id: YEARLY_SUBSCRIPTION,
+                        type: ProductType.PAID_SUBSCRIPTION,
+                        platform: Platform.APPLE_APPSTORE,
+                    },
+                ]);
+            } else if (isPlatform('android')) {
+                CdvPurchase.store.register([
+                    {
+                        id: MONTHLY_SUBSCRIPTION,
+                        type: ProductType.PAID_SUBSCRIPTION,
+                        platform: Platform.GOOGLE_PLAY,
+                    },
+                    {
+                        id: YEARLY_SUBSCRIPTION,
+                        type: ProductType.PAID_SUBSCRIPTION,
+                        platform: Platform.GOOGLE_PLAY,
+                    },
+                ]);
+            }
 
             CdvPurchase.store.ready(() => {
                 const newMonthly = CdvPurchase.store.get(MONTHLY_SUBSCRIPTION);
@@ -83,31 +88,34 @@ export const PurchaseOptions: FC = () => {
         }
     }, [canCharge]);
 
+    console.log(monthly?.offers);
+    console.log(yearly?.offers);
+
     //if user clicks purchase button
-    const purchaseMonthly = () => {
+    const purchaseMonthly = async (offerId: string) => {
         if (canCharge) {
-            const offer = monthly?.getOffer(MONTHLY_SUBSCRIPTION);
+            const offer = monthly?.getOffer(offerId);
             if (!offer) return;
             try {
-                CdvPurchase.store.order(offer);
+                await CdvPurchase.store.order(offer);
             } catch (e) {
                 console.error(e);
             } finally {
-                CdvPurchase.store.initialize();
+                await CdvPurchase.store.initialize();
             }
         }
     };
 
-    const purchaseYearly = () => {
+    const purchaseYearly = async (offerId: string) => {
         if (canCharge) {
-            const offer = monthly?.getOffer(YEARLY_SUBSCRIPTION);
+            const offer = yearly?.getOffer(offerId);
             if (!offer) return;
             try {
-                CdvPurchase.store.order(offer);
+                await CdvPurchase.store.order(offer);
             } catch (e) {
                 console.error(e);
             } finally {
-                CdvPurchase.store.initialize();
+                await CdvPurchase.store.initialize();
             }
         }
     };
@@ -189,22 +197,40 @@ export const PurchaseOptions: FC = () => {
                                                     <div className="card border-ternary relative flex flex-col rounded-2xl border p-8 shadow-sm">
                                                         <div className="flex-1">
                                                             <p className="text-secondary mt-4 flex items-baseline">
-                                                                <span className="text-5xl font-bold tracking-tight">
-                                                                    {monthly
-                                                                        ?.pricing
-                                                                        ?.price ??
-                                                                        '$2.99'}
-                                                                </span>
-                                                                <span className="ml-1 text-xl font-semibold">
-                                                                    month
+                                                                <span className="text-lg font-bold tracking-tight">
+                                                                    {monthly?.offers.map(
+                                                                        (
+                                                                            offer
+                                                                        ) =>
+                                                                            offer.pricingPhases
+                                                                                .map(
+                                                                                    (
+                                                                                        pricing
+                                                                                    ) => {
+                                                                                        return `${
+                                                                                            pricing.price
+                                                                                        } (${CdvPurchase.Utils.formatBillingCycleEN(
+                                                                                            pricing
+                                                                                        )})`;
+                                                                                    }
+                                                                                )
+                                                                                .join(
+                                                                                    ' then '
+                                                                                )
+                                                                    )}
                                                                 </span>
                                                             </p>
                                                         </div>
                                                         <div className="mt-4">
                                                             <SecondaryButton
                                                                 className="flex w-full justify-center align-middle"
-                                                                onClick={
-                                                                    purchaseMonthly
+                                                                onClick={() =>
+                                                                    purchaseMonthly(
+                                                                        monthly
+                                                                            ?.offers[0]
+                                                                            .id ??
+                                                                            ''
+                                                                    )
                                                                 }
                                                                 disabled={
                                                                     !monthly?.canPurchase
@@ -220,22 +246,40 @@ export const PurchaseOptions: FC = () => {
                                                                 Best Value
                                                             </p>
                                                             <p className="text-secondary mt-4 flex items-baseline">
-                                                                <span className="text-5xl font-bold tracking-tight">
-                                                                    {yearly
-                                                                        ?.pricing
-                                                                        ?.price ??
-                                                                        '$29.99'}
-                                                                </span>
-                                                                <span className="ml-1 text-xl font-semibold">
-                                                                    year
+                                                                <span className="text-lg font-bold tracking-tight">
+                                                                    {yearly?.offers.map(
+                                                                        (
+                                                                            offer
+                                                                        ) =>
+                                                                            offer.pricingPhases
+                                                                                .map(
+                                                                                    (
+                                                                                        pricing
+                                                                                    ) => {
+                                                                                        return `${
+                                                                                            pricing.price
+                                                                                        } (${CdvPurchase.Utils.formatBillingCycleEN(
+                                                                                            pricing
+                                                                                        )})`;
+                                                                                    }
+                                                                                )
+                                                                                .join(
+                                                                                    ' then '
+                                                                                )
+                                                                    )}
                                                                 </span>
                                                             </p>
                                                         </div>
                                                         <div className="mt-4">
                                                             <Button
                                                                 className="flex w-full justify-center align-middle"
-                                                                onClick={
-                                                                    purchaseYearly
+                                                                onClick={() =>
+                                                                    purchaseYearly(
+                                                                        yearly
+                                                                            ?.offers[0]
+                                                                            .id ??
+                                                                            ''
+                                                                    )
                                                                 }
                                                                 disabled={
                                                                     !yearly?.canPurchase
