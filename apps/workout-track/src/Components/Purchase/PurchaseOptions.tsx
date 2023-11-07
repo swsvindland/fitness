@@ -3,24 +3,24 @@ import { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { isPlatform } from '@ionic/react';
-import {
-    IAPProduct,
-    InAppPurchase2 as iap,
-} from '@awesome-cordova-plugins/in-app-purchase-2';
 import { AuthContext } from '../Auth/Auth';
 import { UserRole } from '@fitness/types';
 import { DeleteAccount } from '../DeleteAccount';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePaid } from '@fitness/api';
 import { addDays } from 'date-fns';
+import 'cordova-plugin-purchase';
+import Platform = CdvPurchase.Platform;
+import ProductType = CdvPurchase.ProductType;
+import Product = CdvPurchase.Product;
 
 const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
 const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
 
 export const PurchaseOptions: FC = () => {
     const { user, setUser } = useContext(AuthContext);
-    const [monthly, setMonthly] = useState<IAPProduct | undefined>(undefined);
-    const [yearly, setYearly] = useState<IAPProduct | undefined>(undefined);
+    const [monthly, setMonthly] = useState<Product | undefined>(undefined);
+    const [yearly, setYearly] = useState<Product | undefined>(undefined);
     const queryClient = useQueryClient();
 
     const canCharge =
@@ -43,119 +43,87 @@ export const PurchaseOptions: FC = () => {
 
     useEffect(() => {
         if (canCharge) {
-            iap.verbosity = iap.QUIET;
+            // CdvPurchase.store.verbosity = CdvPurchase.store.QUIET;
 
-            iap.validator =
+            CdvPurchase.store.validator =
                 'https://validator.fovea.cc/v1/validate?appName=com.svindland.fitness&apiKey=85cb7102-17c8-4f39-adaf-35051a4fb53b';
 
-            iap.register([
+            CdvPurchase.store.register([
                 {
                     id: MONTHLY_SUBSCRIPTION,
-                    alias: 'Access Monthly',
-                    type: iap.PAID_SUBSCRIPTION,
+                    type: ProductType.PAID_SUBSCRIPTION,
+                    platform: Platform.APPLE_APPSTORE,
+                },
+                {
+                    id: MONTHLY_SUBSCRIPTION,
+                    type: ProductType.PAID_SUBSCRIPTION,
+                    platform: Platform.GOOGLE_PLAY,
                 },
                 {
                     id: YEARLY_SUBSCRIPTION,
-                    alias: 'Access Yearly',
-                    type: iap.PAID_SUBSCRIPTION,
+                    type: ProductType.PAID_SUBSCRIPTION,
+                    platform: Platform.APPLE_APPSTORE,
+                },
+                {
+                    id: YEARLY_SUBSCRIPTION,
+                    type: ProductType.PAID_SUBSCRIPTION,
+                    platform: Platform.GOOGLE_PLAY,
                 },
             ]);
 
-            iap.ready(() => {
-                const newMonthly = iap.get(MONTHLY_SUBSCRIPTION);
+            CdvPurchase.store.ready(() => {
+                const newMonthly = CdvPurchase.store.get(MONTHLY_SUBSCRIPTION);
                 setMonthly(newMonthly);
 
-                const newYearly = iap.get(YEARLY_SUBSCRIPTION);
+                const newYearly = CdvPurchase.store.get(YEARLY_SUBSCRIPTION);
                 setYearly(newYearly);
             });
 
-            iap.refresh();
+            CdvPurchase.store.initialize();
         }
     }, [canCharge]);
 
     //if user clicks purchase button
     const purchaseMonthly = () => {
         if (canCharge) {
+            const offer = monthly?.getOffer(MONTHLY_SUBSCRIPTION);
+            if (!offer) return;
             try {
-                iap.order('Access Monthly');
+                CdvPurchase.store.order(offer);
             } catch (e) {
                 console.error(e);
             } finally {
-                iap.refresh();
+                CdvPurchase.store.initialize();
             }
         }
     };
 
     const purchaseYearly = () => {
-        if (isPlatform('ios') || isPlatform('android')) {
+        if (canCharge) {
+            const offer = monthly?.getOffer(YEARLY_SUBSCRIPTION);
+            if (!offer) return;
             try {
-                iap.order('Access Yearly');
+                CdvPurchase.store.order(offer);
             } catch (e) {
                 console.error(e);
             } finally {
-                iap.refresh();
+                CdvPurchase.store.initialize();
             }
         }
     };
 
     useEffect(() => {
         if (canCharge) {
-            iap.when(MONTHLY_SUBSCRIPTION).approved((p: IAPProduct) => {
-                p.verify();
-                p.finish();
+            if (monthly?.owned) {
+                updatePaidIfNeeded(true, addDays(new Date(), 30).toISOString());
+            } else if (yearly?.owned) {
+                updatePaidIfNeeded(
+                    true,
+                    addDays(new Date(), 365).toISOString()
+                );
+            } else {
                 updatePaidIfNeeded(false);
-            });
-            iap.when(MONTHLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
-                updatePaidIfNeeded(false);
-            });
-            iap.when(MONTHLY_SUBSCRIPTION).expired((p: IAPProduct) => {
-                updatePaidIfNeeded(false);
-            });
-            iap.when(MONTHLY_SUBSCRIPTION).error((p: IAPProduct) => {
-                updatePaidIfNeeded(false);
-            });
-        }
-    });
-
-    useEffect(() => {
-        if (canCharge) {
-            iap.when(YEARLY_SUBSCRIPTION).approved((p: IAPProduct) => {
-                p.verify();
-                p.finish();
-                updatePaidIfNeeded(false);
-            });
-            iap.when(YEARLY_SUBSCRIPTION).cancelled((p: IAPProduct) => {
-                updatePaidIfNeeded(false);
-            });
-            iap.when(YEARLY_SUBSCRIPTION).expired((p: IAPProduct) => {
-                updatePaidIfNeeded(false);
-            });
-            iap.when(YEARLY_SUBSCRIPTION).error((p: IAPProduct) => {
-                updatePaidIfNeeded(false);
-            });
-        }
-    });
-
-    useEffect(() => {
-        if (canCharge) {
-            iap.when('subscription').updated((product: IAPProduct) => {
-                const monthly = iap.get(MONTHLY_SUBSCRIPTION);
-                const yearly = iap.get(YEARLY_SUBSCRIPTION);
-
-                if (
-                    user?.userRole === UserRole.FreeUser ||
-                    user?.userRole === UserRole.Admin
-                ) {
-                    updatePaidIfNeeded(true);
-                } else if (monthly.owned || yearly.owned) {
-                    updatePaidIfNeeded(
-                        true,
-                        addDays(new Date(), 30).toISOString()
-                    );
-                } else {
-                    updatePaidIfNeeded(false);
-                }
-            });
+            }
         } else {
             updatePaidIfNeeded(true, addDays(new Date(), 30).toISOString());
         }
@@ -222,7 +190,9 @@ export const PurchaseOptions: FC = () => {
                                                         <div className="flex-1">
                                                             <p className="text-secondary mt-4 flex items-baseline">
                                                                 <span className="text-5xl font-bold tracking-tight">
-                                                                    {monthly?.price ??
+                                                                    {monthly
+                                                                        ?.pricing
+                                                                        ?.price ??
                                                                         '$2.99'}
                                                                 </span>
                                                                 <span className="ml-1 text-xl font-semibold">
@@ -251,7 +221,9 @@ export const PurchaseOptions: FC = () => {
                                                             </p>
                                                             <p className="text-secondary mt-4 flex items-baseline">
                                                                 <span className="text-5xl font-bold tracking-tight">
-                                                                    {yearly?.price ??
+                                                                    {yearly
+                                                                        ?.pricing
+                                                                        ?.price ??
                                                                         '$29.99'}
                                                                 </span>
                                                                 <span className="ml-1 text-xl font-semibold">

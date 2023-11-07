@@ -176,12 +176,6 @@ importers:
 
   apps/workout-track:
     dependencies:
-      '@awesome-cordova-plugins/core':
-        specifier: ^6.4.0
-        version: 6.4.0(rxjs@7.8.1)
-      '@awesome-cordova-plugins/in-app-purchase-2':
-        specifier: ^6.4.0
-        version: 6.4.0(@awesome-cordova-plugins/core@6.4.0)(rxjs@7.8.1)
       '@capacitor-community/barcode-scanner':
         specifier: ^4.0.1
         version: 4.0.1(@capacitor/core@5.5.1)
