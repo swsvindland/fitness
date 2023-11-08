@@ -1,32 +1,16 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { FC, Fragment, useContext, useEffect, useState } from 'react';
-import { Button } from '../Buttons/Button';
+import { FC, Fragment, useContext } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { isPlatform } from '@ionic/react';
 import { AuthContext } from '../Auth/Auth';
-import { UserRole } from '@fitness/types';
 import { DeleteAccount } from '../DeleteAccount';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePaid } from '@fitness/api';
 import { addDays } from 'date-fns';
-import 'cordova-plugin-purchase';
-import Platform = CdvPurchase.Platform;
-import ProductType = CdvPurchase.ProductType;
-import Product = CdvPurchase.Product;
-
-const MONTHLY_SUBSCRIPTION = 'f345a58b28124c28b14b7a6c3093114e';
-const YEARLY_SUBSCRIPTION = '5b0353d4799845989d2f4e143b3cb3ad';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
 
 export const PurchaseOptions: FC = () => {
     const { user, setUser } = useContext(AuthContext);
-    const [monthly, setMonthly] = useState<Product | undefined>(undefined);
-    const [yearly, setYearly] = useState<Product | undefined>(undefined);
     const queryClient = useQueryClient();
-
-    const canCharge =
-        !isPlatform('mobileweb') &&
-        user?.userRole === UserRole.User &&
-        (isPlatform('android') || isPlatform('ios'));
 
     const paidMutation = useMutation(updatePaid, {
         onSuccess: async () => {
@@ -37,105 +21,12 @@ export const PurchaseOptions: FC = () => {
 
     const updatePaidIfNeeded = (paid: boolean, paidUntil?: string) => {
         if (user?.paid === paid) return;
-        if (user?.userRole !== UserRole.User) return;
         paidMutation.mutate({ paid, paidUntil });
     };
 
-    useEffect(() => {
-        if (canCharge) {
-            // CdvPurchase.store.verbosity = CdvPurchase.store.QUIET;
-
-            CdvPurchase.store.validator =
-                'https://validator.fovea.cc/v1/validate?appName=com.svindland.fitness&apiKey=85cb7102-17c8-4f39-adaf-35051a4fb53b';
-
-            if (isPlatform('ios')) {
-                CdvPurchase.store.register([
-                    {
-                        id: MONTHLY_SUBSCRIPTION,
-                        type: ProductType.PAID_SUBSCRIPTION,
-                        platform: Platform.APPLE_APPSTORE,
-                    },
-                    {
-                        id: YEARLY_SUBSCRIPTION,
-                        type: ProductType.PAID_SUBSCRIPTION,
-                        platform: Platform.APPLE_APPSTORE,
-                    },
-                ]);
-            } else if (isPlatform('android')) {
-                CdvPurchase.store.register([
-                    {
-                        id: MONTHLY_SUBSCRIPTION,
-                        type: ProductType.PAID_SUBSCRIPTION,
-                        platform: Platform.GOOGLE_PLAY,
-                    },
-                    {
-                        id: YEARLY_SUBSCRIPTION,
-                        type: ProductType.PAID_SUBSCRIPTION,
-                        platform: Platform.GOOGLE_PLAY,
-                    },
-                ]);
-            }
-
-            CdvPurchase.store.ready(() => {
-                const newMonthly = CdvPurchase.store.get(MONTHLY_SUBSCRIPTION);
-                setMonthly(newMonthly);
-
-                const newYearly = CdvPurchase.store.get(YEARLY_SUBSCRIPTION);
-                setYearly(newYearly);
-            });
-
-            CdvPurchase.store.initialize();
-        }
-    }, [canCharge]);
-
-    console.log(monthly?.offers);
-    console.log(yearly?.offers);
-
-    //if user clicks purchase button
-    const purchaseMonthly = async (offerId: string) => {
-        if (canCharge) {
-            const offer = monthly?.getOffer(offerId);
-            if (!offer) return;
-            try {
-                await CdvPurchase.store.order(offer);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await CdvPurchase.store.initialize();
-            }
-        }
+    const purchaseFreeTrial = async () => {
+        updatePaidIfNeeded(true, addDays(new Date(), 90).toISOString());
     };
-
-    const purchaseYearly = async (offerId: string) => {
-        if (canCharge) {
-            const offer = yearly?.getOffer(offerId);
-            if (!offer) return;
-            try {
-                await CdvPurchase.store.order(offer);
-            } catch (e) {
-                console.error(e);
-            } finally {
-                await CdvPurchase.store.initialize();
-            }
-        }
-    };
-
-    useEffect(() => {
-        if (canCharge) {
-            if (monthly?.owned) {
-                updatePaidIfNeeded(true, addDays(new Date(), 30).toISOString());
-            } else if (yearly?.owned) {
-                updatePaidIfNeeded(
-                    true,
-                    addDays(new Date(), 365).toISOString()
-                );
-            } else {
-                updatePaidIfNeeded(false);
-            }
-        } else {
-            updatePaidIfNeeded(true, addDays(new Date(), 30).toISOString());
-        }
-    });
 
     return (
         <>
@@ -175,6 +66,15 @@ export const PurchaseOptions: FC = () => {
                                                 Subscribe for access.
                                             </Dialog.Title>
                                             <div className="ml-8">
+                                                <p className="text-ternary">
+                                                    Do to an update in billing
+                                                    software, WorkoutTrack will
+                                                    be free until further
+                                                    notice. Expect pricing to
+                                                    remain the same, but get 90
+                                                    days at a time for free till
+                                                    we get the next update out.
+                                                </p>
                                                 <ul className="my-8 list-disc">
                                                     <li className="text-ternary text-start text-lg">
                                                         Track your workouts
@@ -192,102 +92,28 @@ export const PurchaseOptions: FC = () => {
                                                 </ul>
                                             </div>
                                             <div className="mx-auto max-w-7xl">
-                                                {/* Tiers */}
-                                                <div className="mt-8 space-y-12 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:space-y-0">
+                                                <div className="mt-8 space-y-12">
                                                     <div className="card border-ternary relative flex flex-col rounded-2xl border p-8 shadow-sm">
-                                                        <div className="flex-1">
-                                                            <p className="text-secondary mt-4 flex items-baseline">
-                                                                <span className="text-lg font-bold tracking-tight">
-                                                                    {monthly?.offers.map(
-                                                                        (
-                                                                            offer
-                                                                        ) =>
-                                                                            offer.pricingPhases
-                                                                                .map(
-                                                                                    (
-                                                                                        pricing
-                                                                                    ) => {
-                                                                                        return `${
-                                                                                            pricing.price
-                                                                                        } (${CdvPurchase.Utils.formatBillingCycleEN(
-                                                                                            pricing
-                                                                                        )})`;
-                                                                                    }
-                                                                                )
-                                                                                .join(
-                                                                                    ' then '
-                                                                                )
-                                                                    )}
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div className="mt-4">
-                                                            <SecondaryButton
-                                                                className="flex w-full justify-center align-middle"
-                                                                onClick={() =>
-                                                                    purchaseMonthly(
-                                                                        monthly
-                                                                            ?.offers[0]
-                                                                            .id ??
-                                                                            ''
-                                                                    )
-                                                                }
-                                                                disabled={
-                                                                    !monthly?.canPurchase
-                                                                }
-                                                            >
-                                                                Monthly Billing
-                                                            </SecondaryButton>
-                                                        </div>
-                                                    </div>
-                                                    <div className="card border-ternary relative flex flex-col rounded-2xl border p-8 shadow-sm">
-                                                        <div className="flex-1">
-                                                            <p className="bg-secondary text-primary-dark absolute top-0 -translate-y-1/2 transform rounded-full px-4 py-1.5 text-sm font-semibold">
-                                                                Best Value
-                                                            </p>
-                                                            <p className="text-secondary mt-4 flex items-baseline">
-                                                                <span className="text-lg font-bold tracking-tight">
-                                                                    {yearly?.offers.map(
-                                                                        (
-                                                                            offer
-                                                                        ) =>
-                                                                            offer.pricingPhases
-                                                                                .map(
-                                                                                    (
-                                                                                        pricing
-                                                                                    ) => {
-                                                                                        return `${
-                                                                                            pricing.price
-                                                                                        } (${CdvPurchase.Utils.formatBillingCycleEN(
-                                                                                            pricing
-                                                                                        )})`;
-                                                                                    }
-                                                                                )
-                                                                                .join(
-                                                                                    ' then '
-                                                                                )
-                                                                    )}
-                                                                </span>
-                                                            </p>
-                                                        </div>
-                                                        <div className="mt-4">
-                                                            <Button
-                                                                className="flex w-full justify-center align-middle"
-                                                                onClick={() =>
-                                                                    purchaseYearly(
-                                                                        yearly
-                                                                            ?.offers[0]
-                                                                            .id ??
-                                                                            ''
-                                                                    )
-                                                                }
-                                                                disabled={
-                                                                    !yearly?.canPurchase
-                                                                }
-                                                            >
-                                                                Yearly Billing
-                                                            </Button>
-                                                        </div>
+                                                        <span className="text-secondary text-center text-lg font-bold tracking-tight">
+                                                            Free (90 Days)
+                                                        </span>
+                                                        {paidMutation.isLoading ? (
+                                                            <LoadingSpinner />
+                                                        ) : (
+                                                            <div className="mt-4">
+                                                                <SecondaryButton
+                                                                    className="flex w-full justify-center align-middle"
+                                                                    onClick={
+                                                                        purchaseFreeTrial
+                                                                    }
+                                                                >
+                                                                    Free Trial
+                                                                    (No Credit
+                                                                    Card
+                                                                    Required)
+                                                                </SecondaryButton>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
