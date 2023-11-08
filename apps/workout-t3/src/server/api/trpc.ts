@@ -25,6 +25,7 @@ import { auth } from "@clerk/nextjs/server";
 interface CreateContextOptions {
   headers: Headers;
   auth: {
+    clerkId: string | null;
     userId: string | null;
   };
 }
@@ -47,21 +48,42 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   };
 };
 
+async function getUserAndClerkIdAndUpdateOldUserIfNeeded() {
+  const { userId, user } = auth();
+
+  const oldUser = await db.users.findUnique({
+    where: {
+      Email: user?.emailAddresses[0]?.emailAddress ?? undefined,
+    },
+  });
+
+  if (!oldUser?.ClerkId) {
+    await db.users.update({
+      where: {
+        Id: oldUser?.Id,
+      },
+      data: {
+        ClerkId: userId,
+      },
+    });
+  }
+
+  return { userId: oldUser?.Id ?? null, clerkId: userId };
+}
+
 /**
  * This is the actual context you will use in your router. It will be used to process every request
  * that goes through your tRPC endpoint.
  *
  * @see https://trpc.io/docs/context
  */
-export const createTRPCContext = (opts: { req: NextRequest }) => {
+export const createTRPCContext = async (opts: { req: NextRequest }) => {
   // Fetch stuff that depends on the request
-  const { userId } = auth();
+  const auth = await getUserAndClerkIdAndUpdateOldUserIfNeeded();
 
   return createInnerTRPCContext({
     headers: opts.req.headers,
-    auth: {
-      userId,
-    },
+    auth,
   });
 };
 
