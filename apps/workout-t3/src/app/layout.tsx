@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { type ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <body className={`font-sans ${inter.variable}`}>
           <TRPCReactProvider cookies={cookies().toString()}>
             {children}
+            <Analytics />
           </TRPCReactProvider>
         </body>
       </html>
