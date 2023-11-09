@@ -1,4 +1,4 @@
-import { FC, useContext, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { Pagination } from "../Pagination";
@@ -14,7 +14,6 @@ import { Dropdown, DropdownOption } from "../Dropdown";
 import { WorkoutCompleted } from "./WorkoutCompleted";
 import { LinkSecondaryButton } from "../Buttons/LinkSecondaryButton";
 import { WorkoutType } from "@fitness/types";
-import { UserContext } from "~/contexts/UserContext";
 import { useRouter } from "next/navigation";
 
 interface IProps {
@@ -31,7 +30,7 @@ const generateOptions = (weeks: number): DropdownOption[] => {
 };
 
 export const DoWorkout: FC<IProps> = ({ workoutId }) => {
-  const { user } = useContext(UserContext);
+  const userId = localStorage.getItem("userId") ?? "";
   const [maxDays, setMaxDays] = useState<number>(1);
   const [day, setDay] = useState<number>(1);
   const [week, setWeek] = useState<DropdownOption>({ id: 1, name: "Week 1" });
@@ -86,11 +85,9 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
   }
 
   const handleCompleteWorkout = () => {
-    if (!user) return;
-
     mutation.mutate({
       workoutId,
-      userId: user.id,
+      userId,
       day,
       week: week.id,
     });

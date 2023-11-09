@@ -1,10 +1,9 @@
-import { FC, useContext, useState } from "react";
+import { FC, useState } from "react";
 import { TextField } from "../TextFields/TextField";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { addWorkoutActivity } from "@fitness/api-legacy";
 import { CircleCheckSolid } from "../Icons/CircleCheckSolid";
-import { UserContext } from "~/contexts/UserContext";
 
 interface IProps {
   id: number | undefined;
@@ -15,7 +14,6 @@ interface IProps {
   defaultReps: number;
   defaultTime?: number;
   defaultSaved: boolean;
-  timer?: number;
 }
 
 interface IState {
@@ -32,9 +30,8 @@ export const WorkoutSetTime: FC<IProps> = ({
   defaultReps,
   defaultTime,
   defaultSaved,
-  timer,
 }) => {
-  const { user } = useContext(UserContext);
+  const userId = localStorage.getItem("userId") ?? "";
   const [state, setState] = useState<IState>({
     reps: defaultReps ?? 0,
     time: ((defaultTime ?? 0) / 60)?.toString(),
@@ -77,7 +74,7 @@ export const WorkoutSetTime: FC<IProps> = ({
             onClick={() => {
               mutation.mutate({
                 id: id,
-                userId: user?.id ?? "",
+                userId,
                 workoutExerciseId: workoutExerciseId,
                 reps: state.reps,
                 time: parseFloat(state.time) * 60,

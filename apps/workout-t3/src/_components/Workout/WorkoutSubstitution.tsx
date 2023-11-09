@@ -1,4 +1,6 @@
-import { FC, useContext, useMemo, useState } from "react";
+"use client";
+
+import { FC, useMemo, useState } from "react";
 import {
   addUserWorkoutSubstitution,
   deleteUserWorkoutSubstitution,
@@ -12,14 +14,13 @@ import { Autocomplete } from "../Autocomplete";
 import { SecondaryButton } from "../Buttons/SecondaryButton";
 import { Button } from "../Buttons/Button";
 import { useRouter } from "next/navigation";
-import { UserContext } from "~/contexts/UserContext";
 
 interface IProps {
   workoutExerciseId: number;
 }
 
 export const WorkoutSubstitution: FC<IProps> = ({ workoutExerciseId }) => {
-  const { user } = useContext(UserContext);
+  const userId = localStorage.getItem("userId") ?? "";
   const [query, setQuery] = useState<string>("");
   const [options, setOptions] = useState<string[]>([]);
   const [option, setOption] = useState<string | undefined>(undefined);
@@ -98,7 +99,7 @@ export const WorkoutSubstitution: FC<IProps> = ({ workoutExerciseId }) => {
                   exerciseQuery.data?.data
                     .filter((item) => item.name === option)
                     .at(0)?.id ?? 0,
-                userId: user?.id ?? "",
+                userId: userId,
                 created: new Date().toISOString(),
                 updated: new Date().toISOString(),
               });
@@ -142,7 +143,7 @@ export const WorkoutSubstitution: FC<IProps> = ({ workoutExerciseId }) => {
                 exerciseQuery.data?.data
                   .filter((item) => item.name === option)
                   .at(0)?.id ?? 0,
-              userId: user?.id ?? "",
+              userId: userId,
               created: new Date().toISOString(),
               updated: new Date().toISOString(),
             });

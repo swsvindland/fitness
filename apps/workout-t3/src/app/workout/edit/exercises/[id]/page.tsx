@@ -1,16 +1,16 @@
-import { WorkoutDetail } from "~/_components/WorkoutStore/WorkoutDetail";
+import { EditCustomWorkoutExercises } from "~/_components/WorkoutCustom/EditCustomWorkoutExercises";
 
-export default async function WorkoutStorePage({
+export default async function WorkoutEditExercises({
   params,
 }: {
-  params: { id: string };
+  params: { id: number };
 }) {
   if (isNaN(Number(params.id))) return null;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-secondary">
       <div className="container grid grid-cols-1 gap-2">
-        <WorkoutDetail workoutId={Number(params.id)} />
+        <EditCustomWorkoutExercises workoutId={params.id} />
       </div>
     </main>
   );

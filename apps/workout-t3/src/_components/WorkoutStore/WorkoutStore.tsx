@@ -1,16 +1,14 @@
-import { FC, useContext } from "react";
+import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { WorkoutStoreCard } from "./WorkoutStoreCard";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { getWorkouts, getWorkoutsByUserId } from "@fitness/api-legacy";
 import { LinkButton } from "../Buttons/LinkButton";
-import { UserContext } from "~/contexts/UserContext";
 
 export const WorkoutStore: FC = () => {
-  const { user } = useContext(UserContext);
   const workoutsQuery = useQuery(["Workouts"], getWorkouts);
   const customWorkoutsQuery = useQuery(
-    ["WorkoutsByUserId", user?.id],
+    ["WorkoutsByUserId"],
     getWorkoutsByUserId,
   );
 

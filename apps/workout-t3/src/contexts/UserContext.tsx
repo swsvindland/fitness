@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, FC, ReactNode, useState } from "react";
+import { createContext, FC, ReactNode, useEffect, useState } from "react";
 import { User } from "@fitness/types";
+import { api } from "~/trpc/react";
 
 interface IUserContext {
   user?: User;
@@ -16,6 +17,25 @@ interface UserProps {
 
 export const UserProvider: FC<UserProps> = ({ children }) => {
   const [user, setUser] = useState<User | undefined>(undefined);
+
+  const userQuery = api.user.getUser.useQuery();
+
+  useEffect(() => {
+    if (!user && userQuery.data) {
+      setUser({
+        created: userQuery.data.Created.toISOString(),
+        lastLogin: userQuery.data.LastLogin?.toISOString(),
+        paid: true,
+        sex: Number(userQuery.data.Sex),
+        unit: Number(userQuery.data.Unit),
+        userRole: 0,
+        id: userQuery.data.Id,
+        email: userQuery.data.Email,
+      });
+
+      localStorage.setItem("userId", userQuery.data.Id);
+    }
+  }, []);
 
   const userContext: IUserContext = {
     user,

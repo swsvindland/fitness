@@ -1,4 +1,4 @@
-import { WorkoutDetail } from "~/_components/WorkoutStore/WorkoutDetail";
+import { WorkoutSubstitution } from "~/_components/Workout/WorkoutSubstitution";
 
 export default async function WorkoutStorePage({
   params,
@@ -10,7 +10,7 @@ export default async function WorkoutStorePage({
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-secondary">
       <div className="container grid grid-cols-1 gap-2">
-        <WorkoutDetail workoutId={Number(params.id)} />
+        <WorkoutSubstitution workoutExerciseId={Number(params.id)} />
       </div>
     </main>
   );

@@ -2,7 +2,6 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserProvider } from "~/contexts/UserContext";
-import { Home } from "~/_components/Home/Home";
 import { Workout } from "~/_components/Workout/Workout";
 
 export default async function WorkoutPage() {
