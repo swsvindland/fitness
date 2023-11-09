@@ -1,0 +1,27 @@
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { UserProvider } from "~/contexts/UserContext";
+import { WorkoutDetail } from "~/_components/WorkoutStore/WorkoutDetail";
+
+export default async function WorkoutStorePage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const queryClient = new QueryClient();
+
+  if (isNaN(Number(params.id))) return null;
+
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center text-secondary">
+      <div className="container grid grid-cols-1 gap-2">
+        <UserProvider>
+          <QueryClientProvider client={queryClient}>
+            <WorkoutDetail workoutId={Number(params.id)} />
+          </QueryClientProvider>
+        </UserProvider>
+      </div>
+    </main>
+  );
+}
