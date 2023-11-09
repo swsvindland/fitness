@@ -23,6 +23,8 @@ export const Home: FC = () => {
         id: userQuery.data.Id,
         email: userQuery.data.Email,
       });
+
+      localStorage.setItem("userId", userQuery.data.Id);
     }
   }, []);
 
