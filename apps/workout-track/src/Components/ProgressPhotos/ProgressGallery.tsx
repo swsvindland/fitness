@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { CDN_URL, getProgressPhotos } from '@fitness/api';
+import { CDN_URL, getProgressPhotos } from '@fitness/api-legacy';
 import { FC, useState } from 'react';
 import { format } from 'date-fns';
 import { useShowBackButton } from '../Navigation/headerHooks';

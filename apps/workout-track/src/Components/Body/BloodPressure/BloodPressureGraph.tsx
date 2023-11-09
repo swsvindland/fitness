@@ -16,7 +16,7 @@ import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
-import { getAllUserBloodPressure } from '@fitness/api';
+import { getAllUserBloodPressure } from '@fitness/api-legacy';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
 

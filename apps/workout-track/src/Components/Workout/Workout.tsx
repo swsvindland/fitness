@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { DoWorkout } from './DoWorkout';
-import { getUserWorkouts } from '@fitness/api';
+import { getUserWorkouts } from '@fitness/api-legacy';
 import { useHideBackButton } from '../Navigation/headerHooks';
 import { LinkButton } from '../Buttons/LinkButton';
 

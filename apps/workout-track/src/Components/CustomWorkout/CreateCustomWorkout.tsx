@@ -7,7 +7,7 @@ import { AuthContext } from '../Auth/Auth';
 import { useMutation } from '@tanstack/react-query';
 import { useHistory } from 'react-router-dom';
 import { TextArea } from '../TextFields/TextArea';
-import { addWorkout } from '@fitness/api';
+import { addWorkout } from '@fitness/api-legacy';
 import { WorkoutType } from '@fitness/types';
 import { Dropdown, DropdownOption } from '../Dropdown';
 

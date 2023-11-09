@@ -1,7 +1,7 @@
 import { FC, Fragment, useMemo, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useQuery } from '@tanstack/react-query';
-import { getMinVersion } from '@fitness/api';
+import { getMinVersion } from '@fitness/api-legacy';
 
 export const VERSION = 34;
 

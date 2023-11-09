@@ -2,7 +2,7 @@ import { TextField } from '../TextFields/TextField';
 import { FC, useMemo, useState } from 'react';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { getExercises, upsertWorkoutExercises } from '@fitness/api';
+import { getExercises, upsertWorkoutExercises } from '@fitness/api-legacy';
 import { WorkoutExercise } from '@fitness/types';
 import { Button } from '../Buttons/Button';
 import { Autocomplete } from '../Autocomplete';

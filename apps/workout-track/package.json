@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "dev": "vite --port 5000",
+        "start": "vite --port 5000",
         "build": "vite build",
         "serve": "vite preview",
         "ionic:serve": "vite",
@@ -16,7 +16,7 @@
         "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
     },
     "dependencies": {
-        "@fitness/api": "workspace:*",
+        "@fitness/api-legacy": "workspace:*",
         "@fitness/types": "workspace:*",
         "@capacitor-community/barcode-scanner": "^4.0.1",
         "@capacitor-firebase/app": "^5.2.0",

@@ -4,7 +4,7 @@ import { Button } from './Buttons/Button';
 import { SecondaryButton } from './Buttons/SecondaryButton';
 import { AuthContext } from './Auth/Auth';
 import { useMutation } from '@tanstack/react-query';
-import { deleteUser } from '@fitness/api';
+import { deleteUser } from '@fitness/api-legacy';
 
 export const DeleteAccount: FC = () => {
     const { setUser } = useContext(AuthContext);

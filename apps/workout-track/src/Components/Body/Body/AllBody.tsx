@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllUserBodies } from '@fitness/api';
+import { getAllUserBodies } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBodyCard } from './AllBodyCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';

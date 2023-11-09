@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { classNames } from '../../utils/classNames';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { foodApiAuth, getUserFoods } from '@fitness/api';
+import { foodApiAuth, getUserFoods } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory } from 'react-router-dom';
 import { SecondaryButton } from '../Buttons/SecondaryButton';

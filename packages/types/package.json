@@ -5,6 +5,7 @@
     "dependencies": {
     },
     "devDependencies": {
+        "@fitness/tsconfig": "workspace:*",
         "typescript": "^5.2.2"
     }
 }

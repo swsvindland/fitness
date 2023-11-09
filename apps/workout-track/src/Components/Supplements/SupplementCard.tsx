@@ -6,7 +6,7 @@ import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import {
     getUserSupplementActivity,
     toggleUserSupplementActivity,
-} from '@fitness/api';
+} from '@fitness/api-legacy';
 import { SupplementIcon } from '@fitness/types';
 import { Capsule } from '../Icons/Capsule';
 import { Injection } from '../Icons/Injection';

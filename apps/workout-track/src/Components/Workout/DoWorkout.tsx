@@ -8,7 +8,7 @@ import {
     getUserNextWorkout,
     getWorkout,
     getWorkoutExercises,
-} from '@fitness/api';
+} from '@fitness/api-legacy';
 import { Button } from '../Buttons/Button';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { AuthContext } from '../Auth/Auth';

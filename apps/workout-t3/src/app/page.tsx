@@ -1,10 +1,20 @@
-export default async function Home() {
+"use client";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { UserProvider } from "~/contexts/UserContext";
+import { Home } from "~/_components/Home/Home";
+
+export default async function HomePage() {
+  const queryClient = new QueryClient();
+
   return (
-    <main className="bg-background text-secondary flex min-h-screen flex-col items-center justify-center">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          WorkoutTrack
-        </h1>
+    <main className="flex min-h-screen flex-col items-center justify-center text-secondary">
+      <div className="container grid grid-cols-1 gap-2">
+        <UserProvider>
+          <QueryClientProvider client={queryClient}>
+            <Home />
+          </QueryClientProvider>
+        </UserProvider>
       </div>
     </main>
   );

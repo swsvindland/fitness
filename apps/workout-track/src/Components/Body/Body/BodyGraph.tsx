@@ -16,7 +16,7 @@ import { AuthContext } from '../../Auth/Auth';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
-import { getAllUserBodies } from '@fitness/api';
+import { getAllUserBodies } from '@fitness/api-legacy';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
 

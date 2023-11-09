@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
-import { getCurrentUserMacros, getMacros } from '@fitness/api';
+import { getCurrentUserMacros, getMacros } from '@fitness/api-legacy';
 import { Units } from '@fitness/types';
 import { AuthContext } from '../Auth/Auth';
 import { classNames } from '../../utils/classNames';

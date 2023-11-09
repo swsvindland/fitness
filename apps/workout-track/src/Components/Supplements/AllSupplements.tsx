@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { SupplementCard } from './SupplementCard';
-import { getAllSupplements, getUserSupplements } from '@fitness/api';
+import { getAllSupplements, getUserSupplements } from '@fitness/api-legacy';
 import { AuthContext } from '../Auth/Auth';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { SupplementSearch } from './SupplementSearch';

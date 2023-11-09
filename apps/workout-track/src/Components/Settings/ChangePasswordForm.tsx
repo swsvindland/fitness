@@ -5,7 +5,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { changePassword } from '@fitness/api';
+import { changePassword } from '@fitness/api-legacy';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';

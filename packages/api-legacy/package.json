@@ -1,0 +1,14 @@
+{
+    "name": "@fitness/api-legacy",
+    "version": "1.0.0",
+    "main": "./src/api.ts",
+    "dependencies": {
+        "@clerk/nextjs": "^4.27.0",
+        "@fitness/types": "workspace:*",
+        "axios": "^1.5.1"
+    },
+    "devDependencies": {
+        "@fitness/tsconfig": "workspace:*",
+        "typescript": "^5.2.2"
+    }
+}

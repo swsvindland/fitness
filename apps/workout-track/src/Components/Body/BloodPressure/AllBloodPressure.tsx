@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getAllUserBloodPressure } from '@fitness/api';
+import { getAllUserBloodPressure } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBloodPressureCard } from './AllBloodPressureCard';
 import { useShowBackButton } from '../../Navigation/headerHooks';

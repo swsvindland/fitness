@@ -1,7 +1,7 @@
 import { useParams, useHistory } from 'react-router-dom';
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { searchFoodByBarcode } from '@fitness/api';
+import { searchFoodByBarcode } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { LinkButton } from '../Buttons/LinkButton';
 

@@ -4,7 +4,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { AuthContext } from '../Auth/Auth';
 import { DeleteAccount } from '../DeleteAccount';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { updatePaid } from '@fitness/api';
+import { updatePaid } from '@fitness/api-legacy';
 import { addDays } from 'date-fns';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 

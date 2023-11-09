@@ -6,7 +6,7 @@ import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useContext, useState } from 'react';
 import { AuthContext } from '../../Auth/Auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserWeight, updateUserWeight } from '@fitness/api';
+import { deleteUserWeight, updateUserWeight } from '@fitness/api-legacy';
 import { CircleXMark } from '../../Icons/CircleXMark';
 
 interface IProps {

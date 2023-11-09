@@ -5,7 +5,7 @@ import { Autocomplete } from '../Autocomplete';
 import { useQuery } from '@tanstack/react-query';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { XSolid } from '../Icons/XSolid';
-import { foodAutocomplete } from '@fitness/api';
+import { foodAutocomplete } from '@fitness/api-legacy';
 
 interface IProps {
     query: string;

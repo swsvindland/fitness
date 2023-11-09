@@ -5,7 +5,7 @@ import { SecondaryButton } from '../../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addWeight } from '@fitness/api';
+import { addWeight } from '@fitness/api-legacy';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
 export const WeighInForm: FC = () => {

@@ -6,7 +6,7 @@ import {
     getUserWorkouts,
     getWorkouts,
     getWorkoutsByUserId,
-} from '@fitness/api';
+} from '@fitness/api-legacy';
 import { HeaderContext } from '../Navigation/HeaderContext';
 import { AuthContext } from '../Auth/Auth';
 import { LinkButton } from '../Buttons/LinkButton';

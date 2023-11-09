@@ -4,7 +4,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { updateUnits } from '@fitness/api';
+import { updateUnits } from '@fitness/api-legacy';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { Units, User } from '@fitness/types';
 

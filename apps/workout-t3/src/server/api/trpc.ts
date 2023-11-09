@@ -12,7 +12,7 @@ import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "~/server/db";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 /**
  * 1. CONTEXT
@@ -27,6 +27,7 @@ interface CreateContextOptions {
   auth: {
     clerkId: string | null;
     userId: string | null;
+    email: string | null;
   };
 }
 
@@ -49,26 +50,31 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
 };
 
 async function getUserAndClerkIdAndUpdateOldUserIfNeeded() {
-  const { userId, user } = auth();
+  const { userId } = auth();
+  const user = await currentUser();
 
-  const oldUser = await db.users.findUnique({
-    where: {
-      Email: user?.emailAddresses[0]?.emailAddress ?? undefined,
-    },
-  });
+  // const oldUser = await db.users.findUnique({
+  //   where: {
+  //     Email: user?.emailAddresses[0]?.emailAddress ?? undefined,
+  //   },
+  // });
+  //
+  // if (!oldUser?.ClerkId) {
+  //   await db.users.update({
+  //     where: {
+  //       Id: oldUser?.Id,
+  //     },
+  //     data: {
+  //       ClerkId: userId,
+  //     },
+  //   });
+  // }
 
-  if (!oldUser?.ClerkId) {
-    await db.users.update({
-      where: {
-        Id: oldUser?.Id,
-      },
-      data: {
-        ClerkId: userId,
-      },
-    });
-  }
-
-  return { userId: oldUser?.Id ?? null, clerkId: userId };
+  return {
+    userId: null,
+    clerkId: userId,
+    email: user?.emailAddresses[0]?.emailAddress ?? null,
+  };
 }
 
 /**
@@ -134,7 +140,7 @@ export const publicProcedure = t.procedure;
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const isAuthed = t.middleware(({ next, ctx }) => {
-  if (!ctx.auth.userId) {
+  if (!ctx.auth.clerkId) {
     throw new TRPCError({ code: "UNAUTHORIZED", message: "Not authenticated" });
   }
   return next({

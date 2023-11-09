@@ -3,7 +3,7 @@ import { TextField } from '../TextFields/TextField';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
-import { addWorkoutActivity } from '@fitness/api';
+import { addWorkoutActivity } from '@fitness/api-legacy';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
 import { Units } from '@fitness/types';
 import { SnackbarContext } from '../Snackbars/SnackbarProvider';

@@ -1,7 +1,11 @@
 import { FC, useContext, useMemo, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { deleteUserFood, getUserFood, updateUserFood } from '@fitness/api';
+import {
+    deleteUserFood,
+    getUserFood,
+    updateUserFood,
+} from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';

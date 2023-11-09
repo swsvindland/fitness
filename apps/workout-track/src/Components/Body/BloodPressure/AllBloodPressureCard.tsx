@@ -5,7 +5,10 @@ import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useContext, useState } from 'react';
 import { AuthContext } from '../../Auth/Auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserBloodPressure, updateUserBloodPressure } from '@fitness/api';
+import {
+    deleteUserBloodPressure,
+    updateUserBloodPressure,
+} from '@fitness/api-legacy';
 import { CircleXMark } from '../../Icons/CircleXMark';
 
 interface IProps {

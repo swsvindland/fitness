@@ -4,7 +4,7 @@ import { TextField } from '../TextFields/TextField';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
-import { authV2, createUser, getUser } from '@fitness/api';
+import { authV2, createUser, getUser } from '@fitness/api-legacy';
 import { User } from '@fitness/types';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';

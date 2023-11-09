@@ -5,7 +5,7 @@ import { SecondaryButton } from '../../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addBloodPressure } from '@fitness/api';
+import { addBloodPressure } from '@fitness/api-legacy';
 import { useShowBackButton } from '../../Navigation/headerHooks';
 
 interface IState {

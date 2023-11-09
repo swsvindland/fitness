@@ -4,7 +4,7 @@ import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { ChangeEvent, FC, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserBody, updateUserBody } from '@fitness/api';
+import { deleteUserBody, updateUserBody } from '@fitness/api-legacy';
 import { CircleXMark } from '../../Icons/CircleXMark';
 import { UserBody } from '@fitness/types';
 

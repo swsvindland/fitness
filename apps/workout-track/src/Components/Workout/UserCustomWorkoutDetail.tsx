@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { useHistory, useParams } from 'react-router-dom';
-import { buyWorkout, deleteWorkout, getWorkout } from '@fitness/api';
+import { buyWorkout, deleteWorkout, getWorkout } from '@fitness/api-legacy';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 

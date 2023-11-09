@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { CDN_URL, getProgressPhotos } from '@fitness/api';
+import { CDN_URL, getProgressPhotos } from '@fitness/api-legacy';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { Viewer } from './Viewer';

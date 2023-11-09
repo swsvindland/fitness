@@ -4,7 +4,7 @@ import { User } from '@fitness/types';
 import { Button } from '../Buttons/Button';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { TextField } from '../TextFields/TextField';
-import { authV2, getUser, ssoAuthV2 } from '@fitness/api';
+import { authV2, getUser, ssoAuthV2 } from '@fitness/api-legacy';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { Capacitor } from '@capacitor/core';
 import { SavePassword } from 'capacitor-ios-autofill-save-password';

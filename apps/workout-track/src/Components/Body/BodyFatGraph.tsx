@@ -15,7 +15,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { getUserBodyFat } from '@fitness/api';
+import { getUserBodyFat } from '@fitness/api-legacy';
 import { LoadingCard } from '../Loading/LoadingCard';
 
 ChartJS.register(

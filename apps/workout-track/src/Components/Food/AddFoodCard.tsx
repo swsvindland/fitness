@@ -5,7 +5,7 @@ import { Button } from '../Buttons/Button';
 import { PlusSolid } from '../Icons/PlusSolid';
 import { FC, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { quickAddFood, quickRemoveFood } from '@fitness/api';
+import { quickAddFood, quickRemoveFood } from '@fitness/api-legacy';
 import { useUpdateFoodCache } from './hooks';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 

@@ -5,7 +5,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addHeight } from '@fitness/api';
+import { addHeight } from '@fitness/api-legacy';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { Units } from '@fitness/types';
 

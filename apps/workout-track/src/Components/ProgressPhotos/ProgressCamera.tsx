@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addProgressPhoto } from '@fitness/api';
+import { addProgressPhoto } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Filesystem } from '@capacitor/filesystem';
 import { useShowBackButton } from '../Navigation/headerHooks';

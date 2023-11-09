@@ -1,7 +1,7 @@
 export interface User {
     id: string;
     created: string;
-    lastLogin: string;
+    lastLogin: string | undefined;
     email: string;
     sex: Sex;
     userRole: UserRole;

@@ -5,7 +5,7 @@ import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AuthContext } from '../Auth/Auth';
 import { useHistory } from 'react-router-dom';
-import { addCustomMacros, getMacros } from '@fitness/api';
+import { addCustomMacros, getMacros } from '@fitness/api-legacy';
 import { useShowBackButton } from '../Navigation/headerHooks';
 
 interface IState {

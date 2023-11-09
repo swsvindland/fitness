@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getUserDashboard } from '@fitness/api';
+import { getUserDashboard } from '@fitness/api-legacy';
 import { TodoItem } from './TodoItem';
 
 export const Todo: FC = () => {

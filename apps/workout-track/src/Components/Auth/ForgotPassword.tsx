@@ -4,7 +4,7 @@ import { TextField } from '../TextFields/TextField';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { useMutation } from '@tanstack/react-query';
-import { forgotPassword } from '@fitness/api';
+import { forgotPassword } from '@fitness/api-legacy';
 
 interface IProps {
     setForgotPassword: (forgotPassword: boolean) => void;

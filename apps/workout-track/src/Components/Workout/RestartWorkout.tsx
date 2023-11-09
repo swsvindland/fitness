@@ -1,7 +1,7 @@
 import { Button } from '../Buttons/Button';
 import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getUserWorkouts, restartWorkout } from '@fitness/api';
+import { getUserWorkouts, restartWorkout } from '@fitness/api-legacy';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 

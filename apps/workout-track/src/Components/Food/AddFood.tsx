@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
 import { useQuery } from '@tanstack/react-query';
-import { getRecentUserFoods, searchFood } from '@fitness/api';
+import { getRecentUserFoods, searchFood } from '@fitness/api-legacy';
 import { useShowBackButton } from '../Navigation/headerHooks';
 import { AddFoodCard } from './AddFoodCard';
 import { LoadingListOfCards } from '../Loading/LoadingListOfCards';

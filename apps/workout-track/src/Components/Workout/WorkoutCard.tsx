@@ -9,7 +9,7 @@ import { BodyWeight } from '../Icons/BodyWeight';
 import { Band } from '../Icons/Band';
 import { Machine } from '../Icons/Machine';
 import { WorkoutSetTime } from './WorkoutSetTime';
-import { getUserWorkoutExercise } from '@fitness/api';
+import { getUserWorkoutExercise } from '@fitness/api-legacy';
 import { useQuery } from '@tanstack/react-query';
 import { Gear } from '../Icons/Gear';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';

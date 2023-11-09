@@ -6,7 +6,7 @@ import { useShowBackButton } from '../Navigation/headerHooks';
 import { AuthContext } from '../Auth/Auth';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useHistory, useParams } from 'react-router-dom';
-import { editWorkout, getWorkout } from '@fitness/api';
+import { editWorkout, getWorkout } from '@fitness/api-legacy';
 import { TextArea } from '../TextFields/TextArea';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { WorkoutType } from '@fitness/types';
