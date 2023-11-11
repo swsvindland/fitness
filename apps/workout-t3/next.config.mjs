@@ -1,5 +1,6 @@
 // Importing env files here to validate on build
 import "./src/env.mjs";
+import pwa from "next-pwa";
 
 /** @type {import("next").NextConfig} */
 const config = {
