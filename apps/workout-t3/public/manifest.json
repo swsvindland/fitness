@@ -1,6 +1,12 @@
 {
     "short_name": "WorkoutTrack",
     "name": "WorkoutTrack",
+    "theme_color": "#0D3140",
+    "background_color": "#0D3140",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "description": "An application for tracking workouts and macros",
     "icons": [
         {
             "src": "assets/icon/favicon.png",
@@ -19,9 +25,5 @@
             "sizes": "144x144",
             "purpose": "any"
         }
-    ],
-    "start_url": ".",
-    "display": "standalone",
-    "theme_color": "#0D3140",
-    "background_color": "#ffffff"
+    ]
 }
