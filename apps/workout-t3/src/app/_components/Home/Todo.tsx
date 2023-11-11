@@ -22,7 +22,7 @@ export const Todo: FC = () => {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <h1 className="text-2xl font-bold text-secondary">To Do</h1>
       <TodoItem
         name="Add your sex"
