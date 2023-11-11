@@ -16,8 +16,8 @@ export enum Sex {
 }
 
 export enum Units {
-    Imperial,
-    Metric,
+    Imperial = 'Imperial',
+    Metric = 'Metric',
 }
 
 export enum UserRole {
