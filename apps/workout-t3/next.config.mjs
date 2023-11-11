@@ -11,4 +11,12 @@ const config = {
     typescript: { ignoreBuildErrors: true },
 };
 
-export default config;
+const withPWA = pwa({
+    dest: 'public',
+    register: true,
+    skipWaiting: true,
+});
+
+export default withPWA({
+    ...config,
+});
