@@ -41,7 +41,6 @@ export const CDN_URL =
 const getHeaders = (params?: object, headers?: object) => {
     const userId = localStorage.getItem('userId');
     const clerkToken = localStorage.getItem('clerk-db-jwt');
-    const oldToken = sessionStorage.getItem('oldToken');
 
     return {
         headers: {
@@ -50,7 +49,6 @@ const getHeaders = (params?: object, headers?: object) => {
         },
         params: {
             userId,
-            oldToken,
             date: new Date().toDateString(),
             ...params,
         },
