@@ -11,7 +11,7 @@ export const Header: FC = () => {
       as="nav"
       className="pt-safe fixed inset-x-0 top-0 z-10 block bg-primary-dark shadow dark:bg-background"
     >
-      <div className="container mx-auto px-2 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="flex flex-1 items-center">
             <Dumbbell className="h-10 w-10 fill-secondary" />

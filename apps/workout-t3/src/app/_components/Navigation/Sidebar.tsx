@@ -9,14 +9,17 @@ import { Home } from "../Icons/Home";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { isSelected } from "~/app/_components/Navigation/utils";
+import { Gear } from "~/app/_components/Icons/Gear";
 
 export const Sidebar: FC = () => {
   const pathname = usePathname();
 
   const linkStyle = (route: string[]) =>
     `${
-      isSelected(pathname, route) ? "text-ternary" : "text-secondary"
-    } w-full justify-center inline-block text-center pt-2 pb-1`;
+      isSelected(pathname, route)
+        ? "text-ternary bg-primary-dark"
+        : "text-secondary"
+    } w-full justify-center inline-block text-center py-4 rounded hover:bg-primary-dark active:bg-primary-dark`;
 
   const iconStyle = (route: string[]) =>
     `${
@@ -52,7 +55,7 @@ export const Sidebar: FC = () => {
           </Link>
 
           <Link href="/settings" className={linkStyle(["/body"])}>
-            <PersonSolid className={iconStyle(["/body"])} />
+            <Gear className={iconStyle(["/body"])} />
             Settings
           </Link>
         </nav>

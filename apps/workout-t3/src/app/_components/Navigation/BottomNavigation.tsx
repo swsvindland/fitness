@@ -15,8 +15,10 @@ export const BottomNavigation: FC = () => {
 
   const linkStyle = (route: string[]) =>
     `${
-      isSelected(pathname, route) ? "text-ternary" : "text-secondary"
-    } w-full justify-center inline-block text-center pt-2 pb-1`;
+      isSelected(pathname, route)
+        ? "text-ternary bg-primary-dark"
+        : "text-secondary"
+    } w-full justify-center inline-block text-center py-2 rounded hover:bg-primary-dark active:bg-primary-dark`;
 
   const iconStyle = (route: string[]) =>
     `${
@@ -26,7 +28,7 @@ export const BottomNavigation: FC = () => {
   return (
     <div
       id="bottom-navigation"
-      className="fixed inset-x-0 bottom-0 z-10 block bg-primary-dark pb-6 shadow dark:bg-background"
+      className="fixed inset-x-0 bottom-0 z-10 block bg-primary-dark p-2 shadow dark:bg-background"
     >
       <div id="tabs" className="flex justify-between">
         <Link href="/" className={linkStyle(["/"])}>
@@ -43,7 +45,7 @@ export const BottomNavigation: FC = () => {
         </Link>
         <Link href="/supplements" className={linkStyle(["/supplements"])}>
           <Capsule className={iconStyle(["/supplements"])} />
-          <span className="tab tab-home block text-xs">Supplements</span>
+          <span className="tab tab-home block text-xs">Sups</span>
         </Link>
         <Link href="/body" className={linkStyle(["/body"])}>
           <PersonSolid className={iconStyle(["/body"])} />
