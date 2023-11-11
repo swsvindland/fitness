@@ -50,6 +50,11 @@ export const Sidebar: FC = () => {
             <PersonSolid className={iconStyle(["/body"])} />
             Body
           </Link>
+
+          <Link href="/settings" className={linkStyle(["/body"])}>
+            <PersonSolid className={iconStyle(["/body"])} />
+            Settings
+          </Link>
         </nav>
       </div>
     </div>
