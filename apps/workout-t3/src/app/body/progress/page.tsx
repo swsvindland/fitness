@@ -1,4 +1,4 @@
-import { ProgressGallery } from "~/_components/ProgressPhotos/ProgressGallery";
+import { ProgressGallery } from "~/app/_components/ProgressPhotos/ProgressGallery";
 
 export default async function EatPage() {
   return (

@@ -7,8 +7,8 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { type ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/react";
-import { Layout } from "~/_components/Navigation/Layout";
-import { MinVersion } from "~/_components/MinVersion";
+import { Layout } from "~/app/_components/Navigation/Layout";
+import { MinVersion } from "~/app/_components/MinVersion";
 
 const oswald = Oswald({
   subsets: ["latin"],

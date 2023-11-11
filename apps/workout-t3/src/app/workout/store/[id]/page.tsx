@@ -1,4 +1,4 @@
-import { WorkoutDetail } from "~/_components/WorkoutStore/WorkoutDetail";
+import { WorkoutDetail } from "~/app/_components/WorkoutStore/WorkoutDetail";
 
 export default async function WorkoutStorePage({
   params,

@@ -1,4 +1,4 @@
-import { ProgressCamera } from "~/_components/ProgressPhotos/ProgressCamera";
+import { ProgressCamera } from "~/app/_components/ProgressPhotos/ProgressCamera";
 
 export default async function EatPage() {
   return (

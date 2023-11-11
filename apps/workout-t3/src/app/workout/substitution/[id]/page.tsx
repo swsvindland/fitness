@@ -1,4 +1,4 @@
-import { WorkoutSubstitution } from "~/_components/Workout/WorkoutSubstitution";
+import { WorkoutSubstitution } from "~/app/_components/Workout/WorkoutSubstitution";
 
 export default async function WorkoutStorePage({
   params,

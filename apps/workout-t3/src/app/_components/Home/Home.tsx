@@ -2,9 +2,9 @@ import { FC, useContext, useEffect } from "react";
 import { UserContext } from "~/contexts/UserContext";
 import { api } from "~/trpc/react";
 import { undefined } from "zod";
-import { MacroGrid } from "~/_components/Macros/MacroGrid";
-import { LinkButton } from "~/_components/Buttons/LinkButton";
-import { Todo } from "~/_components/Home/Todo";
+import { MacroGrid } from "~/app/_components/Macros/MacroGrid";
+import { LinkButton } from "~/app/_components/Buttons/LinkButton";
+import { Todo } from "~/app/_components/Home/Todo";
 
 export const Home: FC = () => {
   return (

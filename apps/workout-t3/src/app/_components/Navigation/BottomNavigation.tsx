@@ -8,7 +8,7 @@ import { Capsule } from "../Icons/Capsule";
 import { Home } from "../Icons/Home";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { isSelected } from "~/_components/Navigation/utils";
+import { isSelected } from "~/app/_components/Navigation/utils";
 
 export const BottomNavigation: FC = () => {
   const pathname = usePathname();

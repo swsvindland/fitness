@@ -1,4 +1,4 @@
-import { BloodPressureCheckInForm } from "~/_components/Body/BloodPressure/BloodPressureCheckInForm";
+import { BloodPressureCheckInForm } from "~/app/_components/Body/BloodPressure/BloodPressureCheckInForm";
 
 export default async function EatPage() {
   return (

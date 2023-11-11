@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserProvider } from "~/contexts/UserContext";
-import { Eat } from "~/_components/Macros/Eat";
+import { Eat } from "~/app/_components/Macros/Eat";
 
 export default async function EatPage() {
   const queryClient = new QueryClient();

@@ -1,4 +1,4 @@
-import { WorkoutStore } from "~/_components/WorkoutStore/WorkoutStore";
+import { WorkoutStore } from "~/app/_components/WorkoutStore/WorkoutStore";
 
 export default async function WorkoutStorePage() {
   return (

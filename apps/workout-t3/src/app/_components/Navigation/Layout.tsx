@@ -1,7 +1,7 @@
 import { FC, ReactNode } from "react";
-import { Sidebar } from "~/_components/Navigation/Sidebar";
-import { Header } from "~/_components/Navigation/Header";
-import { BottomNavigation } from "~/_components/Navigation/BottomNavigation";
+import { Sidebar } from "~/app/_components/Navigation/Sidebar";
+import { Header } from "~/app/_components/Navigation/Header";
+import { BottomNavigation } from "~/app/_components/Navigation/BottomNavigation";
 import { auth } from "@clerk/nextjs/server";
 
 interface IProps {

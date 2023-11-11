@@ -8,7 +8,7 @@ import { Food } from "../Icons/Food";
 import { Home } from "../Icons/Home";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { isSelected } from "~/_components/Navigation/utils";
+import { isSelected } from "~/app/_components/Navigation/utils";
 
 export const Sidebar: FC = () => {
   const pathname = usePathname();

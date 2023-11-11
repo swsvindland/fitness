@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { foodApiAuth, getUserFoods } from "@fitness/api-legacy";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { LoadingCard } from "../Loading/LoadingCard";
-import { LinkButton } from "~/_components/Buttons/LinkButton";
+import { LinkButton } from "~/app/_components/Buttons/LinkButton";
 import { useRouter } from "next/navigation";
 
 export const FoodGrid: FC = () => {

@@ -1,4 +1,4 @@
-import { EditCustomWorkout } from "~/_components/WorkoutCustom/EditCustomWorkout";
+import { EditCustomWorkout } from "~/app/_components/WorkoutCustom/EditCustomWorkout";
 
 export default async function WorkoutEditExercises({
   params,

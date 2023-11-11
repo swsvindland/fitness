@@ -1,4 +1,4 @@
-import { FoodDetail } from "~/_components/Food/FoodDetail";
+import { FoodDetail } from "~/app/_components/Food/FoodDetail";
 
 export default async function WorkoutEditExercises({
   params,
