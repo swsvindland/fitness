@@ -153,15 +153,14 @@ export const ProgressCamera: FC = () => {
                             canvas: "Canvas is not supported.",
                           }}
                         />
-                        <button
-                          onClick={() =>
-                            setPhotos([...photos, camera.current?.takePhoto()])
-                          }
-                        >
-                          Take photo
-                        </button>
-                        {/*<img src={image} alt="Taken photo" />*/}
                       </div>
+                      <Button
+                        onClick={() =>
+                          setPhotos([...photos, camera.current?.takePhoto()])
+                        }
+                      >
+                        Take photo
+                      </Button>
                     </div>
                   </div>
                 </Dialog.Panel>
