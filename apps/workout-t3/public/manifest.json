@@ -82,9 +82,27 @@
     {
       "name": "Supplements",
       "url": "/supplements"
-    },    {
+    },
+    {
       "name": "Body",
       "url": "/body"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://www.myfitnesspal.com/",
+      "id": ""
+    },
+    {
+      "platform": "webapp",
+      "url": "https://www.fatsecret.com/",
+      "id": ""
+    },
+    {
+      "platform": "webapp",
+      "url": "https://macrofactorapp.com/",
+      "id": ""
     }
   ]
 }
