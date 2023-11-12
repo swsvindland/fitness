@@ -15,7 +15,7 @@ const config = {
 const withPWA = pwa({
     dest: 'public',
     register: true,
-    skipWaiting: true,
+    swSrc: 'src/service-worker.js'
 });
 
 export default withPWA({
