@@ -65,5 +65,26 @@
     "fullscreen",
     "minimal-ui",
     "browser"
+  ],
+  "shortcuts": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Workout",
+      "url": "/workout"
+    },
+    {
+      "name": "Eat",
+      "url": "/eat"
+    },
+    {
+      "name": "Supplements",
+      "url": "/supplements"
+    },    {
+      "name": "Body",
+      "url": "/body"
+    }
   ]
 }
