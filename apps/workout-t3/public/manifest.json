@@ -35,5 +35,10 @@
     "food",
     "health",
     "lifestyle"
-  ]
+  ],
+  "iarc_rating_id": "65c5cfc7-374a-4fc0-be21-b6d38a853fbf",
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  }
 }
