@@ -9,7 +9,7 @@ import { type ReactNode } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { Layout } from "~/app/_components/Navigation/Layout";
 import { MinVersion } from "~/app/_components/MinVersion";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     "A workout tracking app is the perfect companion for the discerning fitness enthusiast.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  viewportFit: "cover",
   themeColor: "#0D3140",
 };
 
