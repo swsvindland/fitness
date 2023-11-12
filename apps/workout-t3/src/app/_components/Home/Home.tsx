@@ -16,7 +16,11 @@ export const Home: FC = () => {
         <LinkButton className="flex w-full justify-center" to={"/eat/add-food"}>
           Add Food
         </LinkButton>
-        <Scanner open={openScanner} setOpen={setOpenScanner} />
+        <Scanner
+          buttonClassName="flex w-full justify-center"
+          open={openScanner}
+          setOpen={setOpenScanner}
+        />
       </div>
       <Todo />
     </>

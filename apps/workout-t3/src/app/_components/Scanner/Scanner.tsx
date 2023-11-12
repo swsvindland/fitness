@@ -9,9 +9,10 @@ import { useRouter } from "next/navigation";
 interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
+  buttonClassName?: string;
 }
 
-export const Scanner: FC<Props> = ({ open, setOpen }) => {
+export const Scanner: FC<Props> = ({ open, setOpen, buttonClassName }) => {
   const [data, setData] = useState("");
   const router = useRouter();
 
@@ -27,7 +28,7 @@ export const Scanner: FC<Props> = ({ open, setOpen }) => {
   return (
     <>
       <SecondaryButton
-        className="flex w-full justify-center"
+        className={buttonClassName}
         onClick={() => setOpen(true)}
       >
         Scan Barcode
@@ -79,6 +80,7 @@ export const Scanner: FC<Props> = ({ open, setOpen }) => {
                           height={500}
                           facingMode={"environment"}
                           onUpdate={(err, result) => {
+                            // @ts-ignore
                             if (result) setData(result.text);
                             else setData("");
                           }}
