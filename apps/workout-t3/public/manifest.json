@@ -1,29 +1,39 @@
 {
-    "short_name": "WorkoutTrack",
-    "name": "WorkoutTrack",
-    "theme_color": "#0D3140",
-    "background_color": "#0D3140",
-    "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
-    "description": "An application for tracking workouts and macros",
-    "icons": [
-        {
-            "src": "assets/icon/favicon.png",
-            "sizes": "64x64 32x32 24x24 16x16",
-            "type": "image/x-icon"
-        },
-        {
-            "src": "assets/icon/icon.png",
-            "type": "image/png",
-            "sizes": "512x512 144x144",
-            "purpose": "maskable"
-        },
-        {
-            "src": "assets/icon/icon.png",
-            "type": "image/png",
-            "sizes": "144x144",
-            "purpose": "any"
-        }
-    ]
+  "short_name": "WorkoutTrack",
+  "name": "WorkoutTrack",
+  "theme_color": "#0D3140",
+  "background_color": "#0D3140",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "description": "A workout tracking app is the perfect companion for the discerning fitness enthusiast. With its sleek and intuitive design, this app makes it easy to track workouts, monitor progress, and achieve your fitness goals.\n\nThe app features a range of premium tools to help users get the most out of their workouts. This includes personalized weight recommendations, macro tracking, and supplement tracking to ensure users are fueling their bodies for maximum performance. In addition to tracking workouts, the app also allows users to log their food intake and track their macronutrient intake. This can be useful for users who are trying to stick to a specific diet or nutrition plan.\n\nIn addition to its sophisticated workout tracking capabilities, the app also offers a range of upscale features for monitoring overall health and well-being. Users can track their body measurements and blood pressure, and the app provides expert recommendations for maintaining optimal health. This can be especially useful for users who are trying to lose weight or improve their overall health.\n\nBut the real standout feature of this high-end workout tracking app is its exceptional user experience. With a clean and elegant interface, the app makes it easy to navigate and use, so users can focus on their workouts and achieving their goals. The app is also constantly updated with new features and improvements, so users can always be sure they are using the best and most up-to-date tools for their fitness journey.\n\nOverall, this workout tracking app is the ultimate tool for the fitness-conscious individual who demands the very best. With its advanced features and elegant design, it is the perfect companion for anyone looking to elevate their workout routine and improve their health.",
+  "icons": [
+    {
+      "src": "assets/icon/favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "512x512 144x144",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "144x144",
+      "purpose": "any"
+    }
+  ],
+  "id": "com.svindland.fitness",
+  "dir": "ltr",
+  "lang": "en",
+  "orientation": "any",
+  "categories": [
+    "fitness",
+    "food",
+    "health",
+    "lifestyle"
+  ]
 }
