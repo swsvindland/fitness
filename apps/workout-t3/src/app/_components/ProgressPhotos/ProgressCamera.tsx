@@ -139,7 +139,7 @@ export const ProgressCamera: FC = () => {
                   </div>
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <div className="mt-2">
+                      <div className="mt-2 h-96 w-96">
                         <Camera
                           facingMode="environment"
                           ref={camera}
