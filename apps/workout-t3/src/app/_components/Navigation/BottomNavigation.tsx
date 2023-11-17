@@ -1,10 +1,8 @@
 "use client";
 
 import { FC } from "react";
-import { PersonSolid } from "../Icons/PersonSolid";
 import { Food } from "../Icons/Food";
 import { Dumbbell } from "../Icons/Dumbbell";
-import { Capsule } from "../Icons/Capsule";
 import { Home } from "../Icons/Home";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,7 +27,7 @@ export const BottomNavigation: FC = () => {
   return (
     <div
       id="bottom-navigation"
-      className="fixed inset-x-0 bottom-0 z-10 block bg-primary-dark p-2 shadow dark:bg-background"
+      className="pb-safe fixed inset-x-0 bottom-0 z-10 block bg-primary-dark p-2 shadow dark:bg-background"
     >
       <div id="tabs" className="pb-safe flex justify-between">
         <Link href="/" className={linkStyle(["/"])}>
