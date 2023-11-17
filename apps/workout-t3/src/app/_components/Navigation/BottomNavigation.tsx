@@ -9,6 +9,7 @@ import { Home } from "../Icons/Home";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { isSelected } from "~/app/_components/Navigation/utils";
+import { Gear } from "~/app/_components/Icons/Gear";
 
 export const BottomNavigation: FC = () => {
   const pathname = usePathname();
@@ -43,13 +44,9 @@ export const BottomNavigation: FC = () => {
           <Food className={iconStyle(["/eat"])} />
           <span className="tab tab-home block text-xs">Eat</span>
         </Link>
-        <Link href="/supplements" className={linkStyle(["/supplements"])}>
-          <Capsule className={iconStyle(["/supplements"])} />
-          <span className="tab tab-home block text-xs">Sups</span>
-        </Link>
-        <Link href="/body" className={linkStyle(["/body"])}>
-          <PersonSolid className={iconStyle(["/body"])} />
-          <span className="tab tab-home block text-xs">Body</span>
+        <Link href="/settings" className={linkStyle(["/settings"])}>
+          <Gear className={iconStyle(["/settings"])} />
+          <span className="tab tab-home block text-xs">Settings</span>
         </Link>
       </div>
     </div>
