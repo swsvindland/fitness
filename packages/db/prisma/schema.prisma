@@ -1,0 +1,243 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Exercise {
+  Id      BigInt   @id @default(autoincrement())
+  Created DateTime @db.DateTime(0)
+  Name    String   @db.VarChar(255)
+  Icon    String?  @db.VarChar(255)
+}
+
+model FoodV2 {
+  Id       BigInt    @id @default(autoincrement())
+  Brand    String?   @db.VarChar(255)
+  Name     String    @db.VarChar(255)
+  FoodType String    @db.VarChar(255)
+  Created  DateTime? @db.DateTime(0)
+  Updated  DateTime? @db.DateTime(0)
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model FoodV2Servings {
+  Id                     BigInt    @id
+  AddedSugar             Float?    @db.Float
+  Calcium                Float?    @db.Float
+  Calories               Float?    @db.Float
+  Carbohydrate           Float?    @db.Float
+  Cholesterol            Float?    @db.Float
+  Fat                    Float?    @db.Float
+  Fiber                  Float?    @db.Float
+  Iron                   Float?    @db.Float
+  MeasurementDescription String?   @db.VarChar(255)
+  MetricServingAmount    Float?    @db.Float
+  MetricServingUnit      String?   @db.VarChar(255)
+  NumberOfUnits          Float?    @db.Float
+  MonounsaturatedFat     Float?    @db.Float
+  PolyunsaturatedFat     Float?    @db.Float
+  Potassium              Float?    @db.Float
+  Protein                Float?    @db.Float
+  SaturatedFat           Float?    @db.Float
+  ServingDescription     String?   @db.VarChar(255)
+  Sodium                 Float?    @db.Float
+  Sugar                  Float?    @db.Float
+  TransFat               Float?    @db.Float
+  VitaminA               Float?    @db.Float
+  VitaminC               Float?    @db.Float
+  VitaminD               Float?    @db.Float
+  FoodV2Id               BigInt
+  Created                DateTime? @db.DateTime(0)
+  Updated                DateTime? @db.DateTime(0)
+}
+
+model ProgressPhoto {
+  Id       BigInt   @id @default(autoincrement())
+  Filename String   @db.VarChar(255)
+  FileId   String   @db.Char(64)
+  UserId   String   @db.Char(64)
+  Created  DateTime @db.DateTime(0)
+}
+
+model Supplements {
+  Id      BigInt   @id @default(autoincrement())
+  Created DateTime @db.DateTime(0)
+  Name    String   @db.VarChar(255)
+  Icon    String?  @db.VarChar(255)
+}
+
+model UserBloodPressure {
+  Id        BigInt   @id @default(autoincrement())
+  Created   DateTime @db.DateTime(0)
+  UserId    String   @db.Char(64)
+  Systolic  Int      @db.SmallInt
+  Diastolic Int      @db.SmallInt
+}
+
+model UserBody {
+  Id         BigInt   @id @default(autoincrement())
+  Created    DateTime @db.DateTime(0)
+  Neck       Float    @db.Float
+  Shoulders  Float    @db.Float
+  Chest      Float    @db.Float
+  LeftBicep  Float    @db.Float
+  RightBicep Float    @db.Float
+  Navel      Float    @db.Float
+  Waist      Float    @db.Float
+  Hip        Float    @db.Float
+  LeftThigh  Float    @db.Float
+  RightThigh Float    @db.Float
+  LeftCalf   Float    @db.Float
+  RightCalf  Float    @db.Float
+  UserId     String   @db.Char(64)
+}
+
+model UserCustomMacros {
+  Id           BigInt   @id @default(autoincrement())
+  UserId       String   @db.Char(64)
+  Calories     Float    @db.Float
+  Protein      Float    @db.Float
+  Fat          Float    @db.Float
+  Carbs        Float    @db.Float
+  Fiber        Float    @db.Float
+  Created      DateTime @db.DateTime(0)
+  CaloriesHigh Float?   @db.Float
+  ProteinHigh  Float?   @db.Float
+  FatHigh      Float?   @db.Float
+  CarbsHigh    Float?   @db.Float
+  FiberHigh    Float?   @db.Float
+}
+
+model UserFoodV2 {
+  Id            BigInt    @id @default(autoincrement())
+  UserId        String    @db.Char(64)
+  FoodV2Id      BigInt
+  ServingId     BigInt
+  ServingAmount Float     @db.Float
+  Created       DateTime? @db.DateTime(0)
+  Updated       DateTime? @db.DateTime(0)
+}
+
+model UserHeight {
+  Id      BigInt   @id @default(autoincrement())
+  Created DateTime @db.DateTime(0)
+  UserId  String   @db.Char(64)
+  Height  Float    @db.Float
+}
+
+model UserOneRepMaxEstimates {
+  Id         BigInt   @id @default(autoincrement())
+  Created    DateTime @db.DateTime(0)
+  ExerciseId BigInt
+  Estimate   Int      @db.SmallInt
+  UserId     String   @db.Char(64)
+}
+
+model UserSupplementActivity {
+  Id               BigInt   @id @default(autoincrement())
+  Updated          DateTime @db.Date
+  UserSupplementId BigInt
+  UserId           String   @db.Char(64)
+  Time             Int      @db.SmallInt
+}
+
+model UserSupplements {
+  Id           BigInt   @id @default(autoincrement())
+  Created      DateTime @db.DateTime(0)
+  UserId       String   @db.Char(64)
+  SupplementId BigInt
+  Times        String   @db.VarChar(1024)
+}
+
+model UserWeight {
+  Id      BigInt   @id @default(autoincrement())
+  Created DateTime @db.DateTime(0)
+  UserId  String   @db.Char(64)
+  Weight  Float    @db.Float
+}
+
+model UserWorkout {
+  Id        BigInt   @id @default(autoincrement())
+  Created   DateTime @db.DateTime(0)
+  WorkoutId BigInt
+  Active    Boolean
+  UserId    String   @db.Char(64)
+}
+
+model UserWorkoutActivity {
+  Id                BigInt   @id @default(autoincrement())
+  Created           DateTime @db.Date
+  Set               Int      @db.SmallInt
+  Reps              Int?     @db.SmallInt
+  Weight            Float?   @db.Float
+  UserId            String   @db.Char(64)
+  Week              Int      @db.SmallInt
+  Day               Int      @db.SmallInt
+  WorkoutExerciseId BigInt
+  Time              Int?
+}
+
+model UserWorkoutSubstitution {
+  Id                BigInt    @id @default(autoincrement())
+  UserId            String    @db.Char(64)
+  WorkoutExerciseId BigInt
+  ExerciseId        BigInt
+  Created           DateTime? @db.DateTime(0)
+  Updated           DateTime? @db.DateTime(0)
+}
+
+model UserWorkoutsCompleted {
+  Id        BigInt   @id @default(autoincrement())
+  WorkoutId BigInt
+  Week      Int      @db.SmallInt
+  Day       Int?     @db.SmallInt
+  UserId    String   @db.Char(64)
+  Created   DateTime @db.DateTime(0)
+}
+
+model Users {
+  Id         String    @id @db.Char(64)
+  Email      String    @unique(map: "Users_Email") @db.VarChar(255)
+  LastLogin  DateTime? @db.DateTime(0)
+  Created    DateTime  @db.DateTime(0)
+  Sex        String    @db.VarChar(255)
+  Salt       String?   @db.VarChar(64)
+  Password   String?   @db.VarChar(64)
+  UserRole   String    @db.VarChar(255)
+  Unit       String    @db.VarChar(255)
+  Paid       Boolean   @default(false)
+  PaidUntil  DateTime? @db.DateTime(0)
+  LoginCount Int       @default(0)
+  ClerkId    String?   @db.Char(64)
+}
+
+model Workout {
+  Id          BigInt    @id @default(autoincrement())
+  Created     DateTime  @db.DateTime(0)
+  Name        String    @db.VarChar(255)
+  Description String?   @db.VarChar(1024)
+  Days        Int
+  Duration    Int
+  Premium     Boolean   @default(false)
+  UserId      String?   @db.Char(64)
+  Updated     DateTime? @db.DateTime(0)
+}
+
+model WorkoutExercise {
+  Id         BigInt    @id @default(autoincrement())
+  Created    DateTime  @db.DateTime(0)
+  WorkoutId  BigInt
+  ExerciseId BigInt
+  Day        Int
+  Sets       Int
+  MinReps    Int?
+  MaxReps    Int?
+  Updated    DateTime? @db.DateTime(0)
+  Order      Int?
+  Time       Int?
+  RestTime   Int?
+}

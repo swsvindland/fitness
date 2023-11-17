@@ -1,7 +1,0 @@
-{
-    "name": "fitness",
-    "integrations": {
-        "capacitor": {}
-    },
-    "type": "custom"
-}

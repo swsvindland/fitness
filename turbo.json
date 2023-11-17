@@ -37,6 +37,18 @@
         },
         "//#clean": {
             "cache": false
+        },
+        "db-pull": {
+            "dependsOn": ["^topo"],
+            "outputs": ["db/schema.prisma"]
+        },
+        "db-push": {
+            "dependsOn": ["^topo"],
+            "outputs": ["db/schema.prisma"]
+        },
+        "db-generate": {
+            "dependsOn": ["^topo"],
+            "outputs": ["db/schema.prisma"]
         }
     },
     "globalEnv": [

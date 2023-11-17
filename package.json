@@ -6,7 +6,10 @@
         "dev": "turbo run dev --parallel",
         "lint": "turbo run lint",
         "test": "vitest",
-        "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo"
+        "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo",
+        "db-push": "turbo run db-push",
+        "db-pull": "turbo run db-pull",
+        "postinstall": "turbo run db-generate"
     },
     "dependencies": {}
 }

@@ -1,6 +1,0 @@
-/dist
-/node_modules
-
-# Secrets
-GoogleService-Info.plist
-google-services.json
