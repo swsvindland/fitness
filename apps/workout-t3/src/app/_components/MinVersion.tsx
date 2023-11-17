@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, Fragment, useCallback, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { getMinVersion } from "@fitness/api-legacy";
 
@@ -30,7 +30,7 @@ export const MinVersion: FC = () => {
     } else {
       minVersion();
     }
-  }, [v]);
+  }, [minVersion, v]);
 
   return (
     <Transition.Root show={open} as={Fragment}>

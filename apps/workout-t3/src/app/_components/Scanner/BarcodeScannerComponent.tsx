@@ -83,7 +83,7 @@ export const BarcodeScannerComponent: FC<Props> = ({
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [capture, delay]);
 
   return (
     <Webcam

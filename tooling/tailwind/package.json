@@ -28,7 +28,7 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@fitnesseslint-config/base"
+      "@fitness/eslint-config/base"
     ]
   },
   "prettier": "@fitnessprettier-config"

@@ -13,9 +13,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XSolid } from "~/app/_components/Icons/XSolid";
 import { Camera, CameraType } from "react-camera-pro";
 
-const b64toBlob = (base64: string, type = "image/jpeg") =>
-  fetch(`data:${type};base64,${base64}`).then((res) => res.blob());
-
 export const ProgressCamera: FC = () => {
   const camera = useRef<CameraType | null>(null);
   const [open, setOpen] = useState(false);
@@ -23,23 +20,7 @@ export const ProgressCamera: FC = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const takePicture = async () => {
-    // const image = await Camera.getPhoto({
-    //     quality: 90,
-    //     allowEditing: false,
-    //     resultType: CameraResultType.Uri,
-    //     source: CameraSource.Camera,
-    //     direction: CameraDirection.Front,
-    // });
-    // image.webPath will contain a path that can be set as an image src.
-    // You can access the original file using image.path, which can be
-    // passed to the Filesystem API to read the raw data of the image,
-    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
-    // Can be set to the src of an image now
-    setPhotos([...photos]);
-  };
-
-  const { startUpload, permittedFileInfo } = useUploadThing("imageUploader", {
+  const { startUpload } = useUploadThing("imageUploader", {
     onClientUploadComplete: () => {
       alert("uploaded successfully!");
     },

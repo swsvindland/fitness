@@ -23,7 +23,7 @@ export const Scanner: FC<Props> = ({ open, setOpen, buttonClassName }) => {
       setOpen(false);
       router.push(`/eat/scan-food/${data}`);
     }
-  }, [data]);
+  }, [data, router, setOpen]);
 
   return (
     <>
