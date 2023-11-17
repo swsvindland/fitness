@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model Exercise {
@@ -15,12 +16,14 @@ model Exercise {
 }
 
 model FoodV2 {
-    Id       BigInt    @id @default(autoincrement())
-    Brand    String?   @db.VarChar(255)
-    Name     String    @db.VarChar(255)
-    FoodType String    @db.VarChar(255)
-    Created  DateTime? @db.DateTime(0)
-    Updated  DateTime? @db.DateTime(0)
+    Id             BigInt           @id @default(autoincrement())
+    Brand          String?          @db.VarChar(255)
+    Name           String           @db.VarChar(255)
+    FoodType       String           @db.VarChar(255)
+    Created        DateTime?        @db.DateTime(0)
+    Updated        DateTime?        @db.DateTime(0)
+    UserFoodV2     UserFoodV2[]
+    FoodV2Servings FoodV2Servings[]
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -51,6 +54,7 @@ model FoodV2Servings {
     VitaminC               Float?    @db.Float
     VitaminD               Float?    @db.Float
     FoodV2Id               BigInt
+    FoodV2                 FoodV2    @relation(fields: [FoodV2Id], references: [Id])
     Created                DateTime? @db.DateTime(0)
     Updated                DateTime? @db.DateTime(0)
 }
@@ -116,6 +120,7 @@ model UserFoodV2 {
     Id            BigInt    @id @default(autoincrement())
     UserId        String    @db.Char(64)
     FoodV2Id      BigInt
+    FoodV2        FoodV2    @relation(fields: [FoodV2Id], references: [Id])
     ServingId     BigInt
     ServingAmount Float     @db.Float
     Created       DateTime? @db.DateTime(0)

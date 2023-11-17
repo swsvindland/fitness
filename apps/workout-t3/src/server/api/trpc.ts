@@ -53,25 +53,14 @@ async function getUserAndClerkIdAndUpdateOldUserIfNeeded() {
   const { userId } = auth();
   const user = await currentUser();
 
-  // const oldUser = await db.users.findUnique({
-  //   where: {
-  //     Email: user?.emailAddresses[0]?.emailAddress ?? undefined,
-  //   },
-  // });
-  //
-  // if (!oldUser?.ClerkId) {
-  //   await db.users.update({
-  //     where: {
-  //       Id: oldUser?.Id,
-  //     },
-  //     data: {
-  //       ClerkId: userId,
-  //     },
-  //   });
-  // }
+  const oldUserId = await db.users.findFirst({
+    where: {
+      ClerkId: userId,
+    },
+  });
 
   return {
-    userId: null,
+    userId: oldUserId?.Id ?? null,
     clerkId: userId,
     email: user?.emailAddresses[0]?.emailAddress ?? null,
   };

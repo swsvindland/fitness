@@ -2,11 +2,12 @@ import { FC, useContext } from "react";
 import { MacroGridUnit } from "./MacroGridUnit";
 import { useQuery } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
-import { getCurrentUserMacros, getMacros } from "@fitness/api-legacy";
+import { getCurrentUserMacros } from "@fitness/api-legacy";
 import { Units } from "@fitness/types";
 import { classNames } from "~/utils/classNames";
 import { LoadingMacroGrid } from "../Loading/LoadingMacroGrid";
 import { UserContext } from "~/contexts/UserContext";
+import { api } from "~/trpc/react";
 
 interface IProps {
   home?: boolean;
@@ -14,9 +15,8 @@ interface IProps {
 
 export const MacroGrid: FC<IProps> = ({ home }) => {
   const { user } = useContext(UserContext);
-  const macrosQuery = useQuery(["Macros"], () => {
-    return getMacros();
-  });
+
+  const macrosQuery = api.macros.getMacros.useQuery();
 
   const currentMacrosQuery = useQuery(["CurrentMacros"], () => {
     return getCurrentUserMacros();
@@ -39,8 +39,8 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
       <div className="w-full">
         <MacroGridUnit
           name="Calories"
-          amount={macrosQuery.data?.data?.calories ?? 0}
-          amountHigh={macrosQuery.data?.data.caloriesHigh}
+          amount={macrosQuery.data?.Calories ?? 0}
+          amountHigh={macrosQuery.data?.CaloriesHigh ?? 0}
           currentAmount={currentMacrosQuery.data?.data.calories}
           unit={user?.unit === Units.Imperial ? "Cal" : "kcal"}
           customMacros={!home}
@@ -53,29 +53,29 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
         >
           <MacroGridUnit
             name="Protein"
-            amount={macrosQuery.data?.data?.protein ?? 0}
-            amountHigh={macrosQuery.data?.data.proteinHigh}
+            amount={macrosQuery.data?.Protein ?? 0}
+            amountHigh={macrosQuery.data?.ProteinHigh ?? 0}
             currentAmount={currentMacrosQuery.data?.data?.protein ?? 0}
             unit="g"
           />
           <MacroGridUnit
             name="Fat"
-            amount={macrosQuery.data?.data?.fat ?? 0}
-            amountHigh={macrosQuery.data?.data.fatHigh}
+            amount={macrosQuery.data?.Fat ?? 0}
+            amountHigh={macrosQuery.data?.FatHigh ?? 0}
             currentAmount={currentMacrosQuery.data?.data?.fat ?? 0}
             unit="g"
           />
           <MacroGridUnit
             name="Carbs"
-            amount={macrosQuery.data?.data?.carbs ?? 0}
-            amountHigh={macrosQuery.data?.data.carbsHigh}
+            amount={macrosQuery.data?.Carbs ?? 0}
+            amountHigh={macrosQuery.data?.CarbsHigh ?? 0}
             currentAmount={currentMacrosQuery.data?.data?.carbs ?? 0}
             unit="g"
           />
           <MacroGridUnit
             name="Fiber"
-            amount={macrosQuery.data?.data?.fiber ?? 0}
-            amountHigh={macrosQuery.data?.data.fiberHigh}
+            amount={macrosQuery.data?.Fiber ?? 0}
+            amountHigh={macrosQuery.data?.FiberHigh ?? 0}
             currentAmount={currentMacrosQuery.data?.data?.fiber ?? 0}
             unit="g"
           />
