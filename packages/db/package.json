@@ -16,8 +16,8 @@
     "@prisma/client": "^5.6.0"
   },
   "devDependencies": {
-    "@types/node": "^18.15.3",
-    "dotenv-cli": "^6.0.0",
+    "@types/node": "^18.18.9",
+    "dotenv-cli": "^7.3.0",
     "prisma": "^5.6.0",
     "typescript": "^5.2.2"
   }
