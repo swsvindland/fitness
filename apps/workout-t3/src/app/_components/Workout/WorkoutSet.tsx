@@ -1,11 +1,11 @@
-import { FC, useContext, useState } from "react";
+import { FC, useState } from "react";
 import { TextField } from "../TextFields/TextField";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { addWorkoutActivity } from "@fitness/api-legacy";
 import { CircleCheckSolid } from "../Icons/CircleCheckSolid";
 import { Units } from "@fitness/types";
-import { UserContext } from "~/contexts/UserContext";
+import { api } from "~/trpc/react";
 
 interface IProps {
   id: number | undefined;
@@ -33,12 +33,15 @@ export const WorkoutSet: FC<IProps> = ({
   defaultWeight,
   defaultSaved,
 }) => {
-  const { user } = useContext(UserContext);
+  const userId = localStorage.getItem("userId") ?? "";
   const [state, setState] = useState<IState>({
     reps: defaultReps ?? 0,
     weight: defaultWeight?.toString() ?? "0",
   });
   const [saved, setSaved] = useState<boolean>(defaultSaved);
+
+  const userQuery = api.user.getUser.useQuery();
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation(addWorkoutActivity, {
@@ -72,7 +75,7 @@ export const WorkoutSet: FC<IProps> = ({
       </div>
       <div className="flex flex-1 border-x border-ternary p-2">
         <TextField
-          label={user?.unit === Units.Imperial ? "lbs" : "kg"}
+          label={userQuery.data?.Unit === Units.Imperial ? "lbs" : "kg"}
           id={`exercise-weight-${id}-${set}`}
           value={state.weight}
           type="number"
@@ -92,7 +95,7 @@ export const WorkoutSet: FC<IProps> = ({
             onClick={() => {
               mutation.mutate({
                 id: id,
-                userId: user?.id ?? "",
+                userId,
                 workoutExerciseId: workoutExerciseId,
                 reps: state.reps,
                 weight: parseFloat(state.weight),
