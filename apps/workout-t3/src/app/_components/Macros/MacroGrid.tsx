@@ -43,7 +43,6 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
           amountHigh={macrosQuery.data?.CaloriesHigh ?? 0}
           currentAmount={currentMacrosQuery.data?.data.calories}
           unit={user?.unit === Units.Imperial ? "Cal" : "kcal"}
-          customMacros={!home}
         />
         <dl
           className={classNames(
