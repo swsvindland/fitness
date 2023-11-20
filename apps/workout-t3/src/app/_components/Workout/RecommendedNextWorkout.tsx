@@ -36,7 +36,7 @@ export const RecommendedNextWorkout: FC = () => {
         <div className="-mt-px flex divide-x divide-gray-200">
           <div className="flex w-0 flex-1">
             <Link
-              href={`/workout/store`}
+              href={`/workout/store/${workoutType.toString().toLowerCase()}`}
               className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm text-ternary"
             >
               Change Workout

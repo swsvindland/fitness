@@ -2,18 +2,21 @@ import { createTRPCRouter, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
 export const storeRouter = createTRPCRouter({
-    getResistanceWorkouts: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.auth.userId) throw new Error('No user ID');
+    getWorkouts: protectedProcedure
+        .input(z.object({ type: z.string() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
 
-        return await ctx.prisma.workout.findMany({
-            where: {
-                UserId: null,
-            },
-            orderBy: {
-                Id: 'asc',
-            },
-        });
-    }),
+            return await ctx.prisma.workout.findMany({
+                where: {
+                    UserId: null,
+                    Type: input.type,
+                },
+                orderBy: {
+                    Id: 'asc',
+                },
+            });
+        }),
 
     getWorkout: protectedProcedure
         .input(z.object({ workoutId: z.number() }))
@@ -27,18 +30,21 @@ export const storeRouter = createTRPCRouter({
             });
         }),
 
-    getCustomWorkouts: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.auth.userId) throw new Error('No user ID');
+    getCustomWorkouts: protectedProcedure
+        .input(z.object({ type: z.string() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
 
-        return await ctx.prisma.workout.findMany({
-            where: {
-                UserId: ctx.auth.userId,
-            },
-            orderBy: {
-                Id: 'asc',
-            },
-        });
-    }),
+            return await ctx.prisma.workout.findMany({
+                where: {
+                    UserId: ctx.auth.userId,
+                    Type: input.type,
+                },
+                orderBy: {
+                    Id: 'asc',
+                },
+            });
+        }),
 
     buyWorkout: protectedProcedure
         .input(z.object({ workoutId: z.number() }))

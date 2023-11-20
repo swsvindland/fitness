@@ -5,10 +5,21 @@ import { WorkoutStoreCard } from "./WorkoutStoreCard";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { LinkButton } from "../Buttons/LinkButton";
 import { api } from "~/trpc/react";
+import { WorkoutType } from "@fitness/types";
 
-export const WorkoutStore: FC = () => {
-  const workoutsQuery = api.store.getResistanceWorkouts.useQuery();
-  const customWorkoutsQuery = api.store.getCustomWorkouts.useQuery();
+interface IProps {
+  type: WorkoutType;
+}
+
+export const WorkoutStore: FC<IProps> = ({ type }) => {
+  console.log(type.toString());
+
+  const workoutsQuery = api.store.getWorkouts.useQuery({
+    type: type.toString(),
+  });
+  const customWorkoutsQuery = api.store.getCustomWorkouts.useQuery({
+    type: type.toString(),
+  });
 
   if (workoutsQuery.isLoading || customWorkoutsQuery.isLoading) {
     return <LoadingSpinner />;
