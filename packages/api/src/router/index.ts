@@ -4,12 +4,14 @@ import { createTRPCRouter } from '../trpc';
 import { workoutRouter } from './workout';
 import { progressPhotosRouter } from './progressPhotos';
 import { dashboardRouter } from './dashboard';
+import { storeRouter } from './store';
 
 export const appRouter = createTRPCRouter({
     dashboard: dashboardRouter,
     progressPhotos: progressPhotosRouter,
     user: userRouter,
     macros: macrosRouter,
+    store: storeRouter,
     workouts: workoutRouter,
 });
 

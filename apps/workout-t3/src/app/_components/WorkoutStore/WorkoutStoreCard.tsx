@@ -2,7 +2,7 @@ import { FC } from "react";
 import Link from "next/link";
 
 interface IProps {
-  id: number;
+  id: bigint;
   name: string;
   custom: boolean;
 }

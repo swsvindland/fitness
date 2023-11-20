@@ -1,9 +1,10 @@
+"use client";
+
 import { FC } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "../Buttons/Button";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
-import { buyWorkout, getWorkout } from "@fitness/api-legacy";
 import { useRouter } from "next/navigation";
+import { api } from "~/trpc/react";
 
 interface IProps {
   workoutId: number;
@@ -11,17 +12,13 @@ interface IProps {
 
 export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const utils = api.useUtils();
 
-  const workoutQuery = useQuery(["Workout", workoutId], () => {
-    if (!workoutId) return;
-    return getWorkout(workoutId);
-  });
-
-  const mutation = useMutation(buyWorkout, {
+  const workoutQuery = api.store.getWorkout.useQuery({ workoutId });
+  const mutation = api.store.buyWorkout.useMutation({
     onSuccess: async () => {
-      await queryClient.invalidateQueries();
-      router.replace("/workout");
+      await utils.invalidate();
+      router.push("/workout");
     },
   });
 
@@ -37,24 +34,10 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
             <div className="lg:col-span-5 lg:col-start-8">
               <div className="flex justify-between">
                 <h1 className="mb-2 text-xl font-medium text-secondary">
-                  {workoutQuery.data?.data.name}
+                  {workoutQuery.data?.Name}
                 </h1>
               </div>
             </div>
-
-            {/* Image gallery */}
-            <div className="lg:col-span-7 lg:col-start-1 lg:row-span-3 lg:row-start-1 lg:mt-0">
-              <h2 className="sr-only">Images</h2>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-3 lg:gap-8">
-                <img
-                  src={workoutQuery.data?.data.image}
-                  alt=""
-                  className="rounded-lg lg:col-span-2 lg:row-span-2"
-                />
-              </div>
-            </div>
-
             <div className="lg:col-span-5">
               {mutation.isLoading ? (
                 <LoadingSpinner />
@@ -62,7 +45,7 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
                 <form
                   onSubmit={(event) => {
                     event.preventDefault();
-                    mutation.mutate(workoutId);
+                    mutation.mutate({ workoutId });
                   }}
                 >
                   <Button
@@ -80,8 +63,8 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
                 </h2>
 
                 <div className="prose prose-sm mt-4 text-ternary">
-                  {workoutQuery.data?.data.description && (
-                    <p>{workoutQuery.data?.data.description}</p>
+                  {workoutQuery.data?.Description && (
+                    <p>{workoutQuery.data?.Description}</p>
                   )}
                 </div>
               </div>
@@ -93,8 +76,8 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
 
                 <div className="prose prose-sm mt-4 text-ternary">
                   <div role="list">
-                    <li>{workoutQuery.data?.data.days} days per week</li>
-                    <li>{workoutQuery.data?.data.duration} weeks long</li>
+                    <li>{workoutQuery.data?.Days} days per week</li>
+                    <li>{workoutQuery.data?.Duration} weeks long</li>
                   </div>
                 </div>
               </div>
