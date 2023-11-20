@@ -3,8 +3,7 @@
 import { FC, Fragment, useRef, useState } from "react";
 import { Button } from "../Buttons/Button";
 import { SecondaryButton } from "../Buttons/SecondaryButton";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addProgressPhoto } from "@fitness/api-legacy";
+import { useQueryClient } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { MinusSolid } from "../Icons/MinusSolid";
 import { useRouter } from "next/navigation";
@@ -12,30 +11,37 @@ import { useUploadThing } from "~/utils/uploadthing";
 import { Dialog, Transition } from "@headlessui/react";
 import { XSolid } from "~/app/_components/Icons/XSolid";
 import { Camera, CameraType } from "react-camera-pro";
+import { v4 as uuidv4 } from "uuid";
+import { api } from "~/trpc/react";
+
+const base64ToFile = (data: string, filename: string) => {
+  const arr = data.split(",");
+  const mime = arr[0]?.match(/:(.*?);/)![1];
+  const bstr = atob(arr[1] ?? "");
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new File([u8arr], filename, { type: mime });
+};
 
 export const ProgressCamera: FC = () => {
+  const [uploading, setUploading] = useState(false);
   const camera = useRef<CameraType | null>(null);
   const [open, setOpen] = useState(false);
   const [photos, setPhotos] = useState<any[]>([]);
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const { startUpload } = useUploadThing("imageUploader", {
-    onClientUploadComplete: () => {
-      alert("uploaded successfully!");
-    },
-    onUploadError: () => {
-      alert("error occurred while uploading");
-    },
-    onUploadBegin: () => {
-      alert("upload has begun");
-    },
-  });
+  const uploadPhotosMutation =
+    api.progressPhotos.uploadProgressPhotos.useMutation();
 
-  const uploadPhotosMutation = useMutation(addProgressPhoto, {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries(["ProgressPhotos"]);
-      router.push("/body");
+  const { startUpload } = useUploadThing("imageUploader", {
+    onClientUploadComplete: (out) => {
+      console.log(out);
     },
   });
 
@@ -43,18 +49,33 @@ export const ProgressCamera: FC = () => {
     setPhotos(photos.filter((_, i) => i !== index));
   };
 
+  const handleUpload = async () => {
+    setUploading(true);
+    const files = photos.map((photo) => base64ToFile(photo, `${uuidv4()}.jpg`));
+
+    startUpload(files);
+
+    await uploadPhotosMutation.mutateAsync({
+      photos: files.map((file) => file.name.split(".")[0] ?? "") ?? [],
+    });
+    setUploading(false);
+
+    await queryClient.invalidateQueries(["ProgressPhotos"]);
+    router.back();
+  };
+
   return (
     <>
       <div className="flex flex-col p-4">
         <div className="mb-4">
-          {uploadPhotosMutation.isLoading ? (
+          {uploading ? (
             <LoadingSpinner />
           ) : (
             <>
               <Button className="mr-2" onClick={() => setOpen(true)}>
                 Add Photo
               </Button>
-              <SecondaryButton onClick={() => startUpload(photos)}>
+              <SecondaryButton onClick={handleUpload}>
                 Upload Photos
               </SecondaryButton>
             </>
@@ -73,7 +94,7 @@ export const ProgressCamera: FC = () => {
                 >
                   <MinusSolid className="h-4 w-4 fill-ternary" />
                 </button>
-                <img src={photo.webPath} alt="" />
+                <img src={photo} alt="" />
               </div>
             ))}
           </div>
@@ -120,30 +141,33 @@ export const ProgressCamera: FC = () => {
                   </div>
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <div className="mt-2 h-96 w-96">
-                        <Camera
-                          facingMode="environment"
-                          ref={camera}
-                          errorMessages={{
-                            noCameraAccessible:
-                              "No camera device accessible. Please connect your camera or try a different browser.",
-                            permissionDenied:
-                              "Permission denied. Please refresh and give camera permission.",
-                            switchCamera:
-                              "It is not possible to switch camera to different one because there is only one video device accessible.",
-                            canvas: "Canvas is not supported.",
-                          }}
-                        />
+                      <div>
+                        <div className="mt-2 h-96">
+                          <Camera
+                            facingMode="environment"
+                            ref={camera}
+                            errorMessages={{
+                              noCameraAccessible:
+                                "No camera device accessible. Please connect your camera or try a different browser.",
+                              permissionDenied:
+                                "Permission denied. Please refresh and give camera permission.",
+                              switchCamera:
+                                "It is not possible to switch camera to different one because there is only one video device accessible.",
+                              canvas: "Canvas is not supported.",
+                            }}
+                          />
+                        </div>
                       </div>
-                      <Button
-                        onClick={() =>
-                          setPhotos([...photos, camera.current?.takePhoto()])
-                        }
-                      >
-                        Take photo
-                      </Button>
                     </div>
                   </div>
+                  <Button
+                    className="relative bottom-0 left-0 flex w-full justify-center text-center"
+                    onClick={() =>
+                      setPhotos([...photos, camera.current?.takePhoto()])
+                    }
+                  >
+                    Take photo
+                  </Button>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
