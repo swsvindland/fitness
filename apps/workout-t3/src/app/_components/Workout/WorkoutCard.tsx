@@ -1,5 +1,4 @@
-import { FC, Fragment } from "react";
-import { WorkoutSet } from "./WorkoutSet";
+import { FC } from "react";
 import { ExerciseIcon } from "@fitness/types";
 import { Barbell } from "../Icons/Barbell";
 import { Dumbbell } from "../Icons/Dumbbell";
@@ -8,33 +7,29 @@ import { Cable } from "../Icons/Cable";
 import { BodyWeight } from "../Icons/BodyWeight";
 import { Band } from "../Icons/Band";
 import { Machine } from "../Icons/Machine";
-import { WorkoutSetTime } from "./WorkoutSetTime";
-import { getUserWorkoutExercise } from "@fitness/api-legacy";
-import { useQuery } from "@tanstack/react-query";
-import { Gear } from "../Icons/Gear";
-import { LinkSecondaryButton } from "../Buttons/LinkSecondaryButton";
+import { api } from "~/trpc/react";
 
 interface IProps {
-  workoutExerciseId: number;
+  workoutExerciseId: bigint;
   week: number;
   day: number;
 }
 
-const mapToIcon = (icon?: ExerciseIcon) => {
+const mapToIcon = (icon?: string | null) => {
   switch (icon) {
-    case ExerciseIcon.Barbell:
+    case ExerciseIcon.Barbell.toString():
       return <Barbell className="w-8 fill-primary-dark" />;
-    case ExerciseIcon.Dumbbell:
+    case ExerciseIcon.Dumbbell.toString():
       return <Dumbbell className="w-8 fill-primary-dark" />;
-    case ExerciseIcon.Cable:
+    case ExerciseIcon.Cable.toString():
       return <Cable className="w-8 fill-primary-dark" />;
-    case ExerciseIcon.Bodyweight:
+    case ExerciseIcon.Bodyweight.toString():
       return <BodyWeight className="w-8 fill-primary-dark" />;
-    case ExerciseIcon.Band:
+    case ExerciseIcon.Band.toString():
       return <Band className="w-8 fill-primary-dark" />;
-    case ExerciseIcon.Machine:
+    case ExerciseIcon.Machine.toString():
       return <Machine className="w-8 fill-primary-dark" />;
-    case ExerciseIcon.Cardio:
+    case ExerciseIcon.Cardio.toString():
       return <Cardio className="w-8 fill-primary-dark" />;
     default:
       return <></>;
@@ -42,11 +37,9 @@ const mapToIcon = (icon?: ExerciseIcon) => {
 };
 
 export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
-  const workoutExerciseQuery = useQuery(
-    ["UserWorkoutExercises", workoutExerciseId, week, day],
-    () => getUserWorkoutExercise(workoutExerciseId!, week, day),
-    { enabled: !!workoutExerciseId },
-  );
+  const workoutExerciseQuery = api.workouts.getWorkoutExercise.useQuery({
+    workoutExerciseId: Number(workoutExerciseId),
+  });
 
   if (!workoutExerciseId) return null;
 
@@ -65,73 +58,64 @@ export const WorkoutCard: FC<IProps> = ({ workoutExerciseId, week, day }) => {
         <div className="">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-ternary">
             <div className="">
-              {mapToIcon(workoutExerciseQuery.data?.data.exercise?.icon)}
+              {mapToIcon(workoutExerciseQuery.data?.Exercise?.Icon)}
             </div>
           </div>
         </div>
         <div className="flex-1 truncate">
           <div className="flex items-center space-x-3">
             <h3 className="truncate text-sm font-medium text-secondary">
-              {workoutExerciseQuery.data?.data.exercise?.name}
+              {workoutExerciseQuery.data?.Exercise?.Name}
             </h3>
           </div>
 
-          {workoutExerciseQuery.data?.data.time ? (
+          {workoutExerciseQuery.data?.Time ? (
             <p className="mt-1 truncate text-sm text-ternary">
-              {(workoutExerciseQuery.data?.data.time ?? 0) / 60} minutes
+              {(workoutExerciseQuery.data?.Time ?? 0) / 60} minutes
             </p>
           ) : (
             <p className="mt-1 truncate text-sm text-ternary">
-              {workoutExerciseQuery.data?.data.minReps ===
-              workoutExerciseQuery.data?.data.maxReps
-                ? workoutExerciseQuery.data?.data.maxReps
-                : `${workoutExerciseQuery.data?.data.minReps} - ${workoutExerciseQuery.data?.data.maxReps}`}{" "}
-              {workoutExerciseQuery.data?.data?.maxReps ?? 0 > 1
-                ? "Reps"
-                : "Rep"}
+              {workoutExerciseQuery.data?.MinReps ===
+              workoutExerciseQuery.data?.MaxReps
+                ? workoutExerciseQuery.data?.MaxReps
+                : `${workoutExerciseQuery.data?.MinReps} - ${workoutExerciseQuery.data?.MaxReps}`}{" "}
+              {workoutExerciseQuery.data?.MaxReps ?? 0 > 1 ? "Reps" : "Rep"}
             </p>
           )}
         </div>
-        <div className="">
-          <LinkSecondaryButton
-            to={`/workout/substitution/${workoutExerciseId}`}
-          >
-            <Gear className="w-8 fill-secondary" />
-          </LinkSecondaryButton>
-        </div>
       </div>
       <div>
-        {workoutExerciseQuery.data?.data.userWorkoutActivities.map(
-          (activity, index) => (
-            <Fragment key={index}>
-              {activity.time ? (
-                <WorkoutSetTime
-                  key={`${index}-${activity.id}-${activity.time}`}
-                  id={activity.id}
-                  workoutExerciseId={activity.workoutExerciseId}
-                  set={index}
-                  week={week}
-                  day={day}
-                  defaultReps={activity.reps}
-                  defaultTime={activity.time}
-                  defaultSaved={activity.saved}
-                />
-              ) : (
-                <WorkoutSet
-                  key={`${index}-${activity.id}-${activity.weight}`}
-                  id={activity.id}
-                  workoutExerciseId={activity.workoutExerciseId}
-                  set={index}
-                  week={week}
-                  day={day}
-                  defaultReps={activity.reps}
-                  defaultWeight={activity.weight}
-                  defaultSaved={activity.saved}
-                />
-              )}
-            </Fragment>
-          ),
-        )}
+        {/*{workoutExerciseQuery.data?.data.userWorkoutActivities.map(*/}
+        {/*  (activity, index) => (*/}
+        {/*    <Fragment key={index}>*/}
+        {/*      {activity.time ? (*/}
+        {/*        <WorkoutSetTime*/}
+        {/*          key={`${index}-${activity.id}-${activity.time}`}*/}
+        {/*          id={activity.id}*/}
+        {/*          workoutExerciseId={activity.workoutExerciseId}*/}
+        {/*          set={index}*/}
+        {/*          week={week}*/}
+        {/*          day={day}*/}
+        {/*          defaultReps={activity.reps}*/}
+        {/*          defaultTime={activity.time}*/}
+        {/*          defaultSaved={activity.saved}*/}
+        {/*        />*/}
+        {/*      ) : (*/}
+        {/*        <WorkoutSet*/}
+        {/*          key={`${index}-${activity.id}-${activity.weight}`}*/}
+        {/*          id={activity.id}*/}
+        {/*          workoutExerciseId={activity.workoutExerciseId}*/}
+        {/*          set={index}*/}
+        {/*          week={week}*/}
+        {/*          day={day}*/}
+        {/*          defaultReps={activity.reps}*/}
+        {/*          defaultWeight={activity.weight}*/}
+        {/*          defaultSaved={activity.saved}*/}
+        {/*        />*/}
+        {/*      )}*/}
+        {/*    </Fragment>*/}
+        {/*  ),*/}
+        {/*)}*/}
       </div>
     </div>
   );

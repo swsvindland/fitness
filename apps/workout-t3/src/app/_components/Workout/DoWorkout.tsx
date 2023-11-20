@@ -1,23 +1,20 @@
 import { FC, useMemo, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { Pagination } from "../Pagination";
 import { WorkoutCard } from "./WorkoutCard";
-import {
-  completeWorkout,
-  getUserNextWorkout,
-  getWorkout,
-  getWorkoutExercises,
-} from "@fitness/api-legacy";
+import { completeWorkout } from "@fitness/api-legacy";
 import { Button } from "../Buttons/Button";
 import { Dropdown, DropdownOption } from "../Dropdown";
 import { WorkoutCompleted } from "./WorkoutCompleted";
 import { LinkSecondaryButton } from "../Buttons/LinkSecondaryButton";
-import { WorkoutType } from "@fitness/types";
 import { useRouter } from "next/navigation";
+import { api } from "~/trpc/react";
+import { WorkoutType } from "@fitness/types";
 
 interface IProps {
-  workoutId: number;
+  workoutId: bigint;
+  type: WorkoutType;
 }
 
 const generateOptions = (weeks: number): DropdownOption[] => {
@@ -29,7 +26,7 @@ const generateOptions = (weeks: number): DropdownOption[] => {
   return options;
 };
 
-export const DoWorkout: FC<IProps> = ({ workoutId }) => {
+export const DoWorkout: FC<IProps> = ({ workoutId, type }) => {
   const userId = localStorage.getItem("userId") ?? "";
   const [maxDays, setMaxDays] = useState<number>(1);
   const [day, setDay] = useState<number>(1);
@@ -38,19 +35,12 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const workoutQuery = useQuery(["Workout", workoutId], () => {
-    return getWorkout(workoutId);
+  const workoutQuery = api.workouts.getWorkout.useQuery({
+    workoutId: Number(workoutId),
+    day,
   });
-
-  const exercisesQuery = useQuery(
-    ["WorkoutExercises", workoutId, day, week],
-    () => {
-      return getWorkoutExercises(workoutId, day);
-    },
-  );
-
-  const nextWorkoutQuery = useQuery(["UserNextWorkout"], () => {
-    return getUserNextWorkout();
+  const nextWorkoutQuery = api.workouts.getNextWorkout.useQuery({
+    type: type.toString(),
   });
 
   const mutation = useMutation(completeWorkout, {
@@ -60,33 +50,24 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
   });
 
   useMemo(() => {
-    const workout = workoutQuery.data?.data;
+    const workout = workoutQuery.data;
     if (!workout) return;
 
-    setMaxDays(workout.days);
-    setOptions(generateOptions(workout.duration));
-  }, [workoutQuery.data?.data]);
-
-  useMemo(() => {
-    if (workoutQuery.data?.data.type === WorkoutType.Cardio) return;
-    const nextWorkout = nextWorkoutQuery.data?.data;
-    if (!nextWorkout) return;
-
-    setDay(nextWorkout.day);
-    setWeek({ id: nextWorkout.week, name: `Week ${nextWorkout.week}` });
-  }, [nextWorkoutQuery.data?.data, workoutQuery.data?.data.type]);
+    setMaxDays(workout.Days);
+    setOptions(generateOptions(workout.Duration));
+  }, [workoutQuery.data]);
 
   if (workoutQuery.isLoading || nextWorkoutQuery.isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (nextWorkoutQuery.data?.data.workoutCompleted) {
+  if (nextWorkoutQuery.data?.workoutCompleted) {
     return <WorkoutCompleted />;
   }
 
   const handleCompleteWorkout = () => {
     mutation.mutate({
-      workoutId,
+      workoutId: Number(workoutId),
       userId,
       day,
       week: week.id,
@@ -100,14 +81,16 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
       <Dropdown options={options} selected={week} setSelected={setWeek} />
       <Pagination selected={day} setSelected={setDay} pages={maxDays} />
       <div role="list" className="grid grid-cols-1 gap-6">
-        {exercisesQuery.data?.data?.map((exercise, index) => (
-          <WorkoutCard
-            key={exercise.id}
-            workoutExerciseId={exercise.id ?? 0}
-            week={week.id}
-            day={day}
-          />
-        ))}
+        {workoutQuery.data?.WorkoutExercise.filter((ex) => ex.Day === day).map(
+          (exercise) => (
+            <WorkoutCard
+              key={exercise.Id}
+              workoutExerciseId={exercise.Id ?? 0}
+              day={day}
+              week={week.id}
+            />
+          ),
+        )}
       </div>
       <div className="mt-2 flex w-full flex-col items-center justify-center gap-2 md:flex-row">
         <Button
@@ -116,7 +99,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId }) => {
         >
           Complete Workout
         </Button>
-        {workoutQuery.data?.data.userId ? (
+        {workoutQuery.data?.UserId ? (
           <LinkSecondaryButton
             to={`/workout/edit/${workoutId}`}
             className="flex w-full max-w-md justify-center align-middle"

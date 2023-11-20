@@ -1,46 +1,127 @@
 import { createTRPCRouter, protectedProcedure } from '../trpc';
+import { z } from 'zod';
 
 export const workoutRouter = createTRPCRouter({
-    getRecommendedNextWorkout: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.auth.userId) throw new Error('No user ID');
+    getWorkout: protectedProcedure
+        .input(
+            z.object({
+                workoutId: z.number(),
+                day: z.number(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
 
-        const userWorkouts = await ctx.prisma.userWorkout.findMany({
-            where: {
-                UserId: ctx.auth.userId,
-                Active: true,
-            },
-            orderBy: {
-                Created: 'asc',
-            },
-        });
+            return await ctx.prisma.workout.findFirst({
+                include: {
+                    WorkoutExercise: {
+                        include: {
+                            Exercise: true,
+                        },
+                    },
+                },
+                where: {
+                    Id: input.workoutId,
+                },
+            });
+        }),
 
-        const userWorkoutsCompleted = [];
+    getActiveUserWorkouts: protectedProcedure
+        .input(z.object({ type: z.string() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
 
-        for (const workout of userWorkouts) {
-            const userWorkoutCompleted =
-                await ctx.prisma.userWorkoutsCompleted.findMany({
+            return await ctx.prisma.userWorkout.findMany({
+                include: {
+                    Workout: true,
+                },
+                where: {
+                    UserId: ctx.auth.userId,
+                    Active: true,
+                    Workout: {
+                        Type: input.type,
+                    },
+                },
+                orderBy: {
+                    Created: 'asc',
+                },
+            });
+        }),
+
+    getNextWorkout: protectedProcedure
+        .input(z.object({ type: z.string() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
+
+            const activeWorkout = await ctx.prisma.userWorkout.findFirst({
+                include: {
+                    Workout: true,
+                },
+                where: {
+                    UserId: ctx.auth.userId,
+                    Active: true,
+                    Workout: {
+                        Type: input.type,
+                    },
+                },
+            });
+
+            const lastWorkout =
+                await ctx.prisma.userWorkoutsCompleted.findFirst({
+                    include: {
+                        Workout: true,
+                    },
                     where: {
+                        WorkoutId: activeWorkout.WorkoutId,
                         UserId: ctx.auth.userId,
-                        WorkoutId: workout.WorkoutId,
-                        Created: {
-                            gte: new Date(new Date().setHours(0, 0, 0, 0)),
+                        Workout: {
+                            Type: input.type,
                         },
                     },
                     orderBy: {
-                        Created: 'asc',
+                        Created: 'desc',
                     },
                 });
 
-            userWorkoutsCompleted.push(userWorkoutCompleted);
-        }
+            const days = activeWorkout?.Workout.Days ?? 1;
+            const weeks = activeWorkout?.Workout.Duration ?? 1;
 
-        if (userWorkoutsCompleted.length === 0) {
-            return userWorkouts[0];
-        } else if (userWorkoutsCompleted.length < userWorkouts.length) {
-            return userWorkouts[
-                userWorkoutsCompleted.length - userWorkouts.length
-            ];
-        }
-        return null;
-    }),
+            const nextDay =
+                lastWorkout?.Day + 1 > days ? 1 : lastWorkout?.Day + 1 ?? 1;
+            const nextWeek =
+                lastWorkout?.Day >= days
+                    ? lastWorkout.Week + 1
+                    : lastWorkout?.Week ?? 1;
+
+            if (nextWeek > weeks) {
+                return {
+                    day: 0,
+                    week: 0,
+                    workoutId: activeWorkout.WorkoutId,
+                    workoutCompleted: true,
+                };
+            }
+
+            return {
+                day: nextDay,
+                week: nextWeek,
+                workoutId: activeWorkout.WorkoutId,
+                workoutCompleted: false,
+            };
+        }),
+
+    getWorkoutExercise: protectedProcedure
+        .input(z.object({ workoutExerciseId: z.number() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
+
+            return await ctx.prisma.workoutExercise.findFirst({
+                where: {
+                    Id: input.workoutExerciseId,
+                },
+                include: {
+                    Exercise: true,
+                },
+            });
+        }),
 });

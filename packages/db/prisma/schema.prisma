@@ -3,15 +3,17 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
 }
 
 model Exercise {
-    Id      BigInt   @id @default(autoincrement())
-    Created DateTime @db.DateTime(0)
-    Name    String   @db.VarChar(255)
-    Icon    String?  @db.VarChar(255)
+    Id              BigInt            @id @default(autoincrement())
+    Created         DateTime          @db.DateTime(0)
+    Name            String            @db.VarChar(255)
+    Icon            String?           @db.VarChar(255)
+    WorkoutExercise WorkoutExercise[]
 }
 
 model FoodV2 {
@@ -164,8 +166,12 @@ model UserWorkout {
     Id        BigInt   @id @default(autoincrement())
     Created   DateTime @db.DateTime(0)
     WorkoutId BigInt
+    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
     Active    Boolean
     UserId    String   @db.Char(64)
+
+    @@index([UserId], map: "UserWorkout_UserId")
+    @@index([WorkoutId], map: "UserWorkout_WorkoutId")
 }
 
 model UserWorkoutActivity {
@@ -193,10 +199,14 @@ model UserWorkoutSubstitution {
 model UserWorkoutsCompleted {
     Id        BigInt   @id @default(autoincrement())
     WorkoutId BigInt
+    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
     Week      Int      @db.SmallInt
     Day       Int?     @db.SmallInt
     UserId    String   @db.Char(64)
     Created   DateTime @db.DateTime(0)
+
+    @@index([UserId], map: "UserWorkoutsCompleted_UserId")
+    @@index([WorkoutId], map: "UserWorkoutsCompleted_WorkoutId")
 }
 
 model Users {
@@ -216,29 +226,36 @@ model Users {
 }
 
 model Workout {
-    Id          BigInt    @id @default(autoincrement())
-    Created     DateTime  @db.DateTime(0)
-    Name        String    @db.VarChar(255)
-    Description String?   @db.VarChar(1024)
-    Days        Int
-    Duration    Int
-    Premium     Boolean   @default(false)
-    UserId      String?   @db.Char(64)
-    Updated     DateTime? @db.DateTime(0)
-    Type        String    @default("Resistance") @db.VarChar(255)
+    Id                    BigInt                  @id @default(autoincrement())
+    Created               DateTime                @db.DateTime(0)
+    Name                  String                  @db.VarChar(255)
+    Description           String?                 @db.VarChar(1024)
+    Days                  Int
+    Duration              Int
+    UserId                String?                 @db.Char(64)
+    Updated               DateTime?               @db.DateTime(0)
+    Type                  String                  @default("Resistance") @db.VarChar(255)
+    WorkoutExercise       WorkoutExercise[]
+    UserWorkout           UserWorkout[]
+    UserWorkoutsCompleted UserWorkoutsCompleted[]
+
+    @@index([UserId], map: "Workout_UserId")
 }
 
 model WorkoutExercise {
     Id         BigInt    @id @default(autoincrement())
     Created    DateTime  @db.DateTime(0)
     WorkoutId  BigInt
+    Workout    Workout   @relation(fields: [WorkoutId], references: [Id])
     ExerciseId BigInt
+    Exercise   Exercise  @relation(fields: [ExerciseId], references: [Id])
     Day        Int
-    Sets       Int
     MinReps    Int?
     MaxReps    Int?
     Updated    DateTime? @db.DateTime(0)
     Order      Int?
     Time       Int?
-    RestTime   Int?
+
+    @@index([WorkoutId], map: "WorkoutExercise_WorkoutId")
+    @@index([ExerciseId], map: "WorkoutExercise_ExerciseId")
 }

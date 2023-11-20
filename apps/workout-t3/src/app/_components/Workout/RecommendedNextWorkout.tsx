@@ -5,7 +5,7 @@ import Link from "next/link";
 import { WorkoutType } from "@fitness/types";
 
 export const RecommendedNextWorkout: FC = () => {
-  const workout = api.workouts.getRecommendedNextWorkout.useQuery();
+  const workout = api.dashboard.getRecommendedNextWorkout.useQuery();
 
   if (workout.isLoading) {
     return <LoadingCard isLoading />;

@@ -1,24 +1,26 @@
 "use client";
 
 import { FC } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { DoWorkout } from "./DoWorkout";
-import { getUserWorkouts } from "@fitness/api-legacy";
 import { LinkButton } from "../Buttons/LinkButton";
+import { WorkoutType } from "@fitness/types";
+import { api } from "~/trpc/react";
 
-export const Workout: FC = () => {
-  const userWorkoutsQuery = useQuery(["UserWorkouts"], getUserWorkouts);
+interface IProps {
+  type: WorkoutType;
+}
+
+export const Workout: FC<IProps> = ({ type }) => {
+  const userWorkoutsQuery = api.workouts.getActiveUserWorkouts.useQuery({
+    type: type.toString(),
+  });
 
   if (userWorkoutsQuery.isLoading) {
     return <LoadingSpinner />;
   }
 
-  const activeWorkouts = userWorkoutsQuery.data?.data.filter(
-    (item) => item.active,
-  );
-
-  if (!activeWorkouts || activeWorkouts.length === 0) {
+  if (!userWorkoutsQuery.data || userWorkoutsQuery.data?.length === 0) {
     return (
       <>
         <h2 className="text-ternary">
@@ -29,5 +31,7 @@ export const Workout: FC = () => {
     );
   }
 
-  return <DoWorkout workoutId={activeWorkouts[0]!.workoutId} />;
+  return (
+    <DoWorkout workoutId={userWorkoutsQuery.data[0]!.WorkoutId} type={type} />
+  );
 };
