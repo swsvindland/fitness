@@ -1,4 +1,6 @@
-import { FC, useContext } from "react";
+"use client";
+
+import { FC, useContext, useState } from "react";
 import { MacroGridUnit } from "./MacroGridUnit";
 import { useQuery } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
@@ -8,13 +10,12 @@ import { classNames } from "~/utils/classNames";
 import { LoadingMacroGrid } from "../Loading/LoadingMacroGrid";
 import { UserContext } from "~/contexts/UserContext";
 import { api } from "~/trpc/react";
+import { LinkButton } from "~/app/_components/Buttons/LinkButton";
+import { Scanner } from "~/app/_components/Scanner/Scanner";
 
-interface IProps {
-  home?: boolean;
-}
-
-export const MacroGrid: FC<IProps> = ({ home }) => {
+export const MacroGrid: FC = () => {
   const { user } = useContext(UserContext);
+  const [openScanner, setOpenScanner] = useState(false);
 
   const macrosQuery = api.macros.getMacros.useQuery();
 
@@ -44,12 +45,7 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
           currentAmount={currentMacrosQuery.data?.data.calories}
           unit={user?.unit === Units.Imperial ? "Cal" : "kcal"}
         />
-        <dl
-          className={classNames(
-            home ? "hidden md:grid" : "",
-            "mt-2 grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-4",
-          )}
-        >
+        <dl className="mt-2 grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-4">
           <MacroGridUnit
             name="Protein"
             amount={macrosQuery.data?.Protein ?? 0}
@@ -79,6 +75,16 @@ export const MacroGrid: FC<IProps> = ({ home }) => {
             unit="g"
           />
         </dl>
+      </div>
+      <div className="flex w-full flex-row justify-between gap-2 pt-2">
+        <LinkButton className="flex w-full justify-center" to={"/eat/add-food"}>
+          Add Food
+        </LinkButton>
+        <Scanner
+          buttonClassName="flex w-full justify-center"
+          open={openScanner}
+          setOpen={setOpenScanner}
+        />
       </div>
     </div>
   );

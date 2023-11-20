@@ -1,15 +1,12 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { classNames } from "~/utils/classNames";
 import { useQuery } from "@tanstack/react-query";
 import { foodApiAuth, getUserFoods } from "@fitness/api-legacy";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { LoadingCard } from "../Loading/LoadingCard";
-import { LinkButton } from "~/app/_components/Buttons/LinkButton";
 import { useRouter } from "next/navigation";
-import { Scanner } from "~/app/_components/Scanner/Scanner";
 
 export const FoodGrid: FC = () => {
-  const [openScanner, setOpenScanner] = useState<boolean>(false);
   const router = useRouter();
 
   const handleRowClick = (foodId?: number) => {
@@ -43,12 +40,6 @@ export const FoodGrid: FC = () => {
 
   return (
     <div className="card rounded p-4 px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-row justify-end">
-        <Scanner open={openScanner} setOpen={setOpenScanner} />
-        <LinkButton className="mx-1" to="/eat/add-food">
-          Add Food
-        </LinkButton>
-      </div>
       <div className="my-2 rounded ring-1 ring-ternary md:mx-0">
         <table className="min-w-full divide-y divide-ternary">
           <thead>
