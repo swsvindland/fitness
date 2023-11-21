@@ -1,10 +1,12 @@
+"use client";
+
 import { FC, FormEvent, useState } from "react";
-import { TextField } from "../TextFields/TextField";
-import { Button } from "../Buttons/Button";
-import { SecondaryButton } from "../Buttons/SecondaryButton";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addHeight } from "@fitness/api-legacy";
 import { useRouter } from "next/navigation";
+import { SecondaryButton } from "~/app/_components/Buttons/SecondaryButton";
+import { Button } from "~/app/_components/Buttons/Button";
+import { TextField } from "~/app/_components/TextFields/TextField";
 
 export const HeightForm: FC = () => {
   const [height, setHeight] = useState<string>("");
