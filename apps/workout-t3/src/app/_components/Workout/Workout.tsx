@@ -26,7 +26,9 @@ export const Workout: FC<IProps> = ({ type }) => {
         <h2 className="text-ternary">
           Looks like you haven't started a workout. Select one in the store.
         </h2>
-        <LinkButton to="/workout/store">Workout Store</LinkButton>
+        <LinkButton to={`/workout/store/${type.toString().toLowerCase()}`}>
+          Workout Store
+        </LinkButton>
       </>
     );
   }

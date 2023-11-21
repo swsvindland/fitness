@@ -30,13 +30,11 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
     <div className="card rounded">
       <div className="py-6">
         <div className="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-          <div className="lg:grid lg:auto-rows-min lg:grid-cols-12 lg:gap-x-8">
-            <div className="lg:col-span-5 lg:col-start-8">
-              <div className="flex justify-between">
-                <h1 className="mb-2 text-xl font-medium text-secondary">
-                  {workoutQuery.data?.Name}
-                </h1>
-              </div>
+          <div className="">
+            <div className="flex justify-between">
+              <h1 className="mb-2 text-xl font-medium text-secondary">
+                {workoutQuery.data?.Name}
+              </h1>
             </div>
             <div className="lg:col-span-5">
               {mutation.isLoading ? (
