@@ -2,6 +2,7 @@ import { FC } from "react";
 import { MacroGrid } from "~/app/_components/Macros/MacroGrid";
 import { Todo } from "~/app/_components/Home/Todo";
 import { RecommendedNextWorkout } from "~/app/_components/Workout/RecommendedNextWorkout";
+import "@khmyznikov/pwa-install";
 
 export const Home: FC = () => {
   return (
@@ -13,6 +14,8 @@ export const Home: FC = () => {
       <div className="md:col-span-3">
         <Todo />
       </div>
+      {/* @ts-ignore */}
+      <pwa-install></pwa-install>
     </div>
   );
 };

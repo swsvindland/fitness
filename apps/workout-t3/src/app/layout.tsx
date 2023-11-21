@@ -40,8 +40,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Layout>{children}</Layout>
             <MinVersion />
             <Analytics />
-            {/* @ts-ignore */}
-            <pwa-install></pwa-install>
           </TRPCReactProvider>
         </body>
       </html>
