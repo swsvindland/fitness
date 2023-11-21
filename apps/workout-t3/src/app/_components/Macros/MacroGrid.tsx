@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { getCurrentUserMacros } from "@fitness/api-legacy";
 import { Units } from "@fitness/types";
-import { classNames } from "~/utils/classNames";
 import { LoadingMacroGrid } from "../Loading/LoadingMacroGrid";
 import { UserContext } from "~/contexts/UserContext";
 import { api } from "~/trpc/react";

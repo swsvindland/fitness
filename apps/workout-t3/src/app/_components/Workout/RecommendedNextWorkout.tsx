@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { api } from "~/trpc/react";
 import { LoadingCard } from "~/app/_components/Loading/LoadingCard";

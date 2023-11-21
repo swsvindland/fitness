@@ -10,6 +10,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Layout } from "~/app/_components/Navigation/Layout";
 import { MinVersion } from "~/app/_components/MinVersion";
 import { Metadata, Viewport } from "next";
+import "@khmyznikov/pwa-install";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -39,6 +40,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <Layout>{children}</Layout>
             <MinVersion />
             <Analytics />
+            {/* @ts-ignore */}
+            <pwa-install></pwa-install>
           </TRPCReactProvider>
         </body>
       </html>

@@ -1,10 +1,6 @@
-"use client";
-
-import { FC, useState } from "react";
+import { FC } from "react";
 import { MacroGrid } from "~/app/_components/Macros/MacroGrid";
-import { LinkButton } from "~/app/_components/Buttons/LinkButton";
 import { Todo } from "~/app/_components/Home/Todo";
-import { Scanner } from "~/app/_components/Scanner/Scanner";
 import { RecommendedNextWorkout } from "~/app/_components/Workout/RecommendedNextWorkout";
 
 export const Home: FC = () => {

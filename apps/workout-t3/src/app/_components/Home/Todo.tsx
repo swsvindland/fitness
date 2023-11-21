@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { TodoItem } from "./TodoItem";
 import { api } from "~/trpc/react";
