@@ -40,13 +40,13 @@ export const Todo: FC = () => {
         route="/body/height"
       />
       <TodoItem
-        name="Daily weigh in"
+        name="Add your weight"
         show={dashboardQuery.data?.addWeight || false}
         checked={false}
         route="/body/weight"
       />
       <TodoItem
-        name="Add supplements to track"
+        name="Add your supplements"
         show={dashboardQuery.data?.addSupplements || false}
         checked={false}
         route="/supplements/all-supplements"
