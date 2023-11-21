@@ -3,11 +3,10 @@
 import { TextField } from "../TextFields/TextField";
 import { FC, useMemo, useState } from "react";
 import { SecondaryButton } from "../Buttons/SecondaryButton";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getExercises, upsertWorkoutExercises } from "@fitness/api-legacy";
 import { WorkoutExercise } from "@fitness/types";
 import { Button } from "../Buttons/Button";
 import { Autocomplete } from "../Autocomplete";
+import { api } from "~/trpc/react";
 
 interface IProps {
   index: number;
@@ -20,7 +19,6 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
   );
   const [options, setOptions] = useState<string[]>([]);
   const [option, setOption] = useState<string | undefined>(undefined);
-  const [sets, setSets] = useState<string>(workoutExercise.sets.toString());
   const [minReps, setMinReps] = useState<string | undefined>(
     workoutExercise.minReps?.toString(),
   );
@@ -30,49 +28,44 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
   const [time, setTime] = useState<string | undefined>(
     workoutExercise.time?.toString(),
   );
-  const [restTime, setRestTime] = useState<string | undefined>(
-    workoutExercise.restTime?.toString(),
-  );
   const [saved, setSaved] = useState<boolean>(false);
-  const queryClient = useQueryClient();
+  const utils = api.useUtils();
 
-  const exerciseQuery = useQuery(["Exercises"], getExercises);
+  const exerciseQuery = api.customWorkout.getExercises.useQuery();
 
-  const mutation = useMutation(upsertWorkoutExercises, {
+  const mutation = api.customWorkout.upsertWorkoutExercise.useMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries(["WorkoutExercises"]);
+      utils.customWorkout.invalidate();
       setSaved(true);
     },
   });
 
   useMemo(() => {
-    const newOptions = exerciseQuery.data?.data.map((item) => item.name) || [];
-    const newOption = exerciseQuery.data?.data.find(
-      (item) => item.id === workoutExercise.exerciseId,
+    const newOptions = exerciseQuery.data?.map((item) => item.Name) || [];
+    const newOption = exerciseQuery.data?.find(
+      (item) => Number(item.Id) === workoutExercise.exerciseId,
     );
 
     setOptions(newOptions);
-    setOption(newOption?.name);
-    setQuery(newOption?.name ?? "");
-  }, [exerciseQuery.data?.data, workoutExercise.exerciseId]);
+    setOption(newOption?.Name);
+    setQuery(newOption?.Name ?? "");
+  }, [exerciseQuery.data, workoutExercise.exerciseId]);
 
   const handleSubmit = () => {
     if (!option) return;
     if (!workoutExercise.workoutId) return;
 
+    const exerciseId =
+      exerciseQuery.data?.find((item) => item.Name === option)?.Id ?? 0;
+
     mutation.mutate({
-      id: workoutExercise.id,
+      id: workoutExercise.id ?? null,
       workoutId: workoutExercise.workoutId,
-      exerciseId:
-        exerciseQuery.data?.data.filter((item) => item.name === option).at(0)
-          ?.id ?? 0,
-      sets: parseInt(sets),
-      minReps: minReps ? parseInt(minReps) : undefined,
-      maxReps: maxReps ? parseInt(maxReps) : undefined,
-      time: time ? parseInt(time) : undefined,
+      exerciseId: Number(exerciseId),
+      minReps: minReps ? parseInt(minReps) : null,
+      maxReps: maxReps ? parseInt(maxReps) : null,
       order: index,
       day: workoutExercise.day,
-      restTime: restTime ? parseInt(restTime) : undefined,
     });
   };
 
@@ -93,18 +86,6 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
         query={query}
         setQuery={setQuery}
       />
-      <div className="flex flex-row">
-        <TextField
-          label="Sets"
-          type="number"
-          inputMode="numeric"
-          value={sets}
-          onChange={(event) => {
-            setSaved(false);
-            setSets(event.target.value);
-          }}
-        />
-      </div>
       <span className="my-4 text-ternary">
         *Choose either a time or rep range. If you choose a time and rep range,
         it will only show a time based set.
@@ -139,16 +120,6 @@ export const EditWorkoutExercise: FC<IProps> = ({ index, workoutExercise }) => {
         onChange={(event) => {
           setSaved(false);
           setTime(event.target.value);
-        }}
-      />
-      <TextField
-        label="RestTime (in seconds) (will display in minutes on workout)"
-        type="number"
-        inputMode="numeric"
-        value={restTime ?? ""}
-        onChange={(event) => {
-          setSaved(false);
-          setRestTime(event.target.value);
         }}
       />
       <div className="mt-2 flex justify-between">

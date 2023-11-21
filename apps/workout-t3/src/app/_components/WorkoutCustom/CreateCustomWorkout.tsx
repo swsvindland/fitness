@@ -4,12 +4,11 @@ import { FC, FormEvent, useState } from "react";
 import { TextField } from "../TextFields/TextField";
 import { SecondaryButton } from "../Buttons/SecondaryButton";
 import { Button } from "../Buttons/Button";
-import { useMutation } from "@tanstack/react-query";
 import { TextArea } from "../TextFields/TextArea";
-import { addWorkout } from "@fitness/api-legacy";
 import { WorkoutType } from "@fitness/types";
 import { Dropdown, DropdownOption } from "../Dropdown";
 import { useRouter } from "next/navigation";
+import { api } from "~/trpc/react";
 
 interface IState {
   name: string;
@@ -20,7 +19,6 @@ interface IState {
 }
 
 export const CreateCustomWorkout: FC = () => {
-  const userId = localStorage.getItem("userId") ?? "";
   const [state, setState] = useState<IState>({
     name: "",
     description: "",
@@ -30,9 +28,9 @@ export const CreateCustomWorkout: FC = () => {
   });
   const router = useRouter();
 
-  const mutation = useMutation(addWorkout, {
+  const mutation = api.customWorkout.createWorkout.useMutation({
     onSuccess: (data) => {
-      router.push(`/workout/edit/exercises/${data.data}`);
+      router.push(`/workout/edit/exercises/${data.Id}`);
     },
   });
 
@@ -40,12 +38,11 @@ export const CreateCustomWorkout: FC = () => {
     event.preventDefault();
 
     mutation.mutate({
-      userId,
       name: state.name,
       description: state.description,
       days: parseInt(state.days),
       duration: parseInt(state.weeks),
-      type: state.type.id,
+      type: state.type.name,
     });
   };
 

@@ -4,12 +4,11 @@ import { FC, FormEvent, useMemo, useState } from "react";
 import { TextField } from "../TextFields/TextField";
 import { SecondaryButton } from "../Buttons/SecondaryButton";
 import { Button } from "../Buttons/Button";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { editWorkout, getWorkout } from "@fitness/api-legacy";
 import { TextArea } from "../TextFields/TextArea";
 import { Dropdown, DropdownOption } from "../Dropdown";
 import { WorkoutType } from "@fitness/types";
 import { useRouter } from "next/navigation";
+import { api } from "~/trpc/react";
 
 interface IState {
   name: string;
@@ -24,7 +23,6 @@ interface IProps {
 }
 
 export const EditCustomWorkout: FC<IProps> = ({ workoutId }) => {
-  const userId = localStorage.getItem("userId") ?? "";
   const [state, setState] = useState<IState>({
     name: "",
     description: "",
@@ -34,47 +32,42 @@ export const EditCustomWorkout: FC<IProps> = ({ workoutId }) => {
   });
   const router = useRouter();
 
-  const mutation = useMutation(editWorkout, {
+  const mutation = api.customWorkout.editWorkout.useMutation({
     onSuccess: (data) => {
-      router.push(`/workout/edit/exercises/${data.data}`);
+      router.push(`/workout/edit/exercises/${data.Id}`);
     },
   });
 
-  const workoutQuery = useQuery(["Workout", workoutId], () => {
-    return getWorkout(workoutId);
-  });
+  const workoutQuery = api.customWorkout.getWorkout.useQuery({ workoutId });
 
   useMemo(() => {
     setState({
-      name: workoutQuery.data?.data?.name ?? "",
-      description: workoutQuery.data?.data?.description ?? "",
-      days: workoutQuery.data?.data?.days.toString() ?? "",
-      weeks: workoutQuery.data?.data?.duration.toString() ?? "",
+      name: workoutQuery.data?.Name ?? "",
+      description: workoutQuery.data?.Description ?? "",
+      days: workoutQuery.data?.Days.toString() ?? "",
+      weeks: workoutQuery.data?.Duration.toString() ?? "",
       type: {
-        id: workoutQuery.data?.data?.type ?? WorkoutType.Resistance,
-        name: WorkoutType[
-          workoutQuery.data?.data?.type ?? WorkoutType.Resistance
-        ],
+        id: workoutQuery.data?.Type ?? WorkoutType.Resistance,
+        name: workoutQuery.data?.Type ?? WorkoutType.Resistance,
       },
     });
   }, [
-    workoutQuery.data?.data?.days,
-    workoutQuery.data?.data?.description,
-    workoutQuery.data?.data?.duration,
-    workoutQuery.data?.data?.name,
-    workoutQuery.data?.data?.type,
+    workoutQuery.data?.Days,
+    workoutQuery.data?.Description,
+    workoutQuery.data?.Duration,
+    workoutQuery.data?.Name,
+    workoutQuery.data?.Type,
   ]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     mutation.mutate({
-      id: workoutId,
-      userId: userId,
+      workoutId,
       name: state.name,
       description: state.description,
       days: parseInt(state.days),
       duration: parseInt(state.weeks),
-      type: state.type.id,
+      type: state.type.name,
     });
   };
 

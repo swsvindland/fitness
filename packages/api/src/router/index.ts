@@ -5,8 +5,10 @@ import { workoutRouter } from './workout';
 import { progressPhotosRouter } from './progressPhotos';
 import { dashboardRouter } from './dashboard';
 import { storeRouter } from './store';
+import { customWorkoutRouter } from './customWorkout';
 
 export const appRouter = createTRPCRouter({
+    customWorkout: customWorkoutRouter,
     dashboard: dashboardRouter,
     progressPhotos: progressPhotosRouter,
     user: userRouter,

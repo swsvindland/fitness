@@ -1,18 +1,13 @@
 "use client";
 
-import { FC, useMemo, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  buyWorkout,
-  getAllWorkoutExercises,
-  getWorkout,
-} from "@fitness/api-legacy";
+import { FC, useEffect, useState } from "react";
 import { LoadingSpinner } from "../Loading/LoadingSpinner";
 import { Pagination } from "../Pagination";
 import { Button } from "../Buttons/Button";
 import { EditWorkoutExercise } from "./EditWorkoutExercise";
-import { WorkoutExercise } from "@fitness/types";
 import { useRouter } from "next/navigation";
+import { api } from "~/trpc/react";
+import { WorkoutExercise } from "@fitness/types";
 
 interface IProps {
   workoutId: number;
@@ -24,31 +19,30 @@ export const EditCustomWorkoutExercises: FC<IProps> = ({ workoutId }) => {
   const [workoutExercises, setWorkoutExercises] = useState<WorkoutExercise[]>(
     [],
   );
-  const queryClient = useQueryClient();
   const router = useRouter();
+  const utils = api.useUtils();
 
-  const workoutQuery = useQuery(["Workout", workoutId], () => {
-    if (!workoutId) return;
-    return getWorkout(workoutId);
-  });
+  const workoutQuery = api.customWorkout.getWorkout.useQuery({ workoutId });
 
-  const workoutExercisesQuery = useQuery(["WorkoutExercises", workoutId], () =>
-    getAllWorkoutExercises(workoutId),
-  );
-
-  useMemo(() => {
-    setMaxDays(workoutQuery.data?.data?.days || 1);
-  }, [workoutQuery.data?.data?.days]);
-
-  useMemo(() => {
-    setWorkoutExercises(workoutExercisesQuery.data?.data || []);
-  }, [workoutExercisesQuery.data?.data]);
+  useEffect(() => {
+    setMaxDays(workoutQuery.data?.Days || 1);
+    setWorkoutExercises(
+      workoutQuery.data?.WorkoutExercise?.map((item) => ({
+        id: Number(item.Id),
+        workoutId: Number(item.WorkoutId),
+        exerciseId: Number(item.ExerciseId),
+        minReps: item.MinReps ?? undefined,
+        maxReps: item.MaxReps ?? undefined,
+        day: item.Day,
+        order: item.Order ?? 0,
+      })) || [],
+    );
+  }, [workoutQuery.data]);
 
   const handleAddWorkoutExercise = () => {
-    const newWorkoutExercise: WorkoutExercise = {
+    const newWorkoutExercise = {
       workoutId: workoutId,
       exerciseId: 0,
-      sets: 0,
       minReps: undefined,
       maxReps: undefined,
       time: undefined,
@@ -60,15 +54,15 @@ export const EditCustomWorkoutExercises: FC<IProps> = ({ workoutId }) => {
     setWorkoutExercises([...workoutExercises, newWorkoutExercise]);
   };
 
-  const mutation = useMutation(buyWorkout, {
+  const mutation = api.store.buyWorkout.useMutation({
     onSuccess: async () => {
-      await queryClient.invalidateQueries();
+      await utils.invalidate();
       router.replace(`/workout`);
     },
   });
 
   const handleStartWorkout = () => {
-    mutation.mutate(workoutId);
+    mutation.mutate({ workoutId });
   };
 
   if (workoutQuery.isLoading) {

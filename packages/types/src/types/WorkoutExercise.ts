@@ -7,10 +7,8 @@ export interface WorkoutExercise {
     exerciseId: number;
     exercise?: Exercise;
     day: number;
-    sets: number;
     minReps?: number;
     maxReps?: number;
     time?: number;
     order: number;
-    restTime?: number;
 }
