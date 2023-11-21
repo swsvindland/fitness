@@ -53,7 +53,7 @@ export const ProgressCamera: FC = () => {
     setUploading(true);
     const files = photos.map((photo) => base64ToFile(photo, `${uuidv4()}.jpg`));
 
-    startUpload(files);
+    await startUpload(files);
 
     await uploadPhotosMutation.mutateAsync({
       photos: files.map((file) => file.name.split(".")[0] ?? "") ?? [],

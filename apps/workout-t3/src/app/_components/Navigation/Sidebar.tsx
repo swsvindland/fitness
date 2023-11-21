@@ -54,8 +54,8 @@ export const Sidebar: FC = () => {
             Body
           </Link>
 
-          <Link href="/settings" className={linkStyle(["/body"])}>
-            <Gear className={iconStyle(["/body"])} />
+          <Link href="/settings" className={linkStyle(["/settings"])}>
+            <Gear className={iconStyle(["/settings"])} />
             Settings
           </Link>
         </nav>

@@ -38,7 +38,7 @@ export const ProgressPhotos: FC = () => {
             >
               <img
                 className="rounded shadow"
-                src={`https://utfs.io/f/${photo.filename}`}
+                src={`${CDN_URL}${photo.filename}`}
                 alt=""
                 width={150}
                 loading="lazy"

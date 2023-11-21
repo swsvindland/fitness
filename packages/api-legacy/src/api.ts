@@ -33,8 +33,11 @@ import {
 export const API_URL = 'https://fitness-dev.azurewebsites.net';
 // export const API_URL = 'https://fitness-prod.azurewebsites.net';
 //
-export const CDN_URL =
-    'https://fitnessdev.blob.core.windows.net/progress-photos/';
+
+export const CDN_URL = 'https://utfs.io/f/';
+
+// export const CDN_URL =
+//     'https://fitnessdev.blob.core.windows.net/progress-photos/';
 // export const CDN_URL =
 //     'https://fitnessprod.blob.core.windows.net/progress-photos/';
 
