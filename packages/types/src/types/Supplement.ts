@@ -6,11 +6,11 @@ export interface Supplement {
 }
 
 export enum SupplementIcon {
-    Unknown,
-    SmallScoop,
-    LargeScoop,
-    Capsule,
-    Tablet,
-    Liquid,
-    Injection,
+    Unknown = 'Unknown',
+    SmallScoop = 'SmallScoop',
+    LargeScoop = 'LargeScoop',
+    Capsule = 'Capsule',
+    Tablet = 'Tablet',
+    Liquid = 'Liquid',
+    Injection = 'Injection',
 }

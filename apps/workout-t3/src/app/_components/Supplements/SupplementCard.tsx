@@ -1,27 +1,23 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AddSupplement } from "./AddSupplement";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { LoadingSpinner } from "../Loading/LoadingSpinner";
-import {
-  getUserSupplementActivity,
-  toggleUserSupplementActivity,
-} from "@fitness/api-legacy";
 import { SupplementIcon } from "@fitness/types";
 import { Capsule } from "../Icons/Capsule";
 import { Injection } from "../Icons/Injection";
 import { Tablet } from "../Icons/Tablet";
-import { CircleCheckSolid } from "../Icons/CircleCheckSolid";
 import { LargeScoop } from "../Icons/LargeScoop";
 import { SmallScoop } from "../Icons/SmallScoop";
 import { Liquid } from "../Icons/Liquid";
+import { api } from "~/trpc/react";
+import { CircleCheckSolid } from "~/app/_components/Icons/CircleCheckSolid";
+import { LoadingSpinner } from "~/app/_components/Loading/LoadingSpinner";
 
 interface IProps {
   isUser: boolean;
-  id: number;
   name: string;
   times?: string[];
+  supplementId: number;
   userSupplementId?: number;
-  icon?: SupplementIcon;
+  icon?: string;
 }
 
 export interface Time {
@@ -29,7 +25,7 @@ export interface Time {
   enabled: boolean;
 }
 
-const mapToIcon = (icon?: SupplementIcon) => {
+const mapToIcon = (icon?: string) => {
   switch (icon) {
     case SupplementIcon.Capsule:
       return <Capsule className="w-6 fill-primary-dark" />;
@@ -50,54 +46,53 @@ const mapToIcon = (icon?: SupplementIcon) => {
 
 export const SupplementCard: FC<IProps> = ({
   isUser,
-  id,
   name,
   times,
+  supplementId,
   userSupplementId,
   icon,
 }) => {
-  const userId = localStorage.getItem("userId") ?? "";
   const [open, setOpen] = useState<boolean>(false);
   const [checked, setChecked] = useState<boolean>(false);
-  const queryClient = useQueryClient();
-  const today = new Date().toDateString();
+  const today = new Date();
+  const utils = api.useUtils();
 
-  const userSupplementActivityQuery = useQuery(
-    ["UserSupplementActivity", today, id, times?.at(0)],
-    () => {
-      if (!times || !times[0]) return;
-
-      return getUserSupplementActivity(id, times[0]);
+  const mutation = api.supplements.toggleUserSupplementActivity.useMutation({
+    onSuccess: async () => {
+      await utils.supplements.getUserSupplementActivity.invalidate();
     },
-  );
+  });
 
-  useMemo(() => {
-    if (userSupplementActivityQuery.data?.data) {
+  const userSupplementActivityQuery =
+    api.supplements.getUserSupplementActivity.useQuery(
+      {
+        date: today.toDateString(),
+        supplementId: supplementId,
+        userSupplementId: userSupplementId ?? null,
+        time: times ? times?.at(0) ?? null : null,
+      },
+      {
+        enabled:
+          isUser && !!times?.length && !!supplementId && !!userSupplementId,
+      },
+    );
+
+  useEffect(() => {
+    if (userSupplementActivityQuery?.data) {
       setChecked(true);
     } else {
       setChecked(false);
     }
-  }, [userSupplementActivityQuery.data]);
-
-  const mutation = useMutation(toggleUserSupplementActivity, {
-    onSuccess: async () => {
-      await queryClient.invalidateQueries([
-        "UserSupplementActivity",
-        today,
-        userId,
-        id,
-        times?.at(0),
-      ]);
-    },
-  });
+  }, [userSupplementActivityQuery?.data]);
 
   const handleCheck = () => {
     if (!times || !times[0]) return;
+    if (!userSupplementId) return;
+    if (mutation.isLoading) return;
 
     mutation.mutate({
       date: today,
-      userId,
-      userSupplementId: id,
+      userSupplementId: userSupplementId,
       time: times[0],
     });
   };
@@ -141,8 +136,7 @@ export const SupplementCard: FC<IProps> = ({
       <AddSupplement
         open={open}
         setOpen={setOpen}
-        userId={userId}
-        supplementId={id}
+        supplementId={supplementId}
         userSupplementId={userSupplementId}
         defaultTimes={times ?? []}
       />

@@ -1,32 +1,34 @@
 "use client";
 
-import { FC, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { FC, useMemo, useState } from "react";
 import { SupplementCard } from "./SupplementCard";
-import { getAllSupplements, getUserSupplements } from "@fitness/api-legacy";
 import { SupplementSearch } from "./SupplementSearch";
 import { LoadingListOfCards } from "../Loading/LoadingListOfCards";
+import { api } from "~/trpc/react";
 
 export const AllSupplements: FC = () => {
   const [query, setQuery] = useState<string>("");
   const [selected, setSelected] = useState<string | undefined>(undefined);
 
-  const allSupplementQuery = useQuery(["Supplements"], getAllSupplements);
-  const userSupplementsQuery = useQuery(["UserSupplements"], () => {
-    return getUserSupplements();
-  });
+  const allSupplementsQuery = api.supplements.getAllSupplements.useQuery();
+  const userSupplementsQuery = api.supplements.getUserSupplements.useQuery();
 
-  if (allSupplementQuery.isLoading || userSupplementsQuery.isLoading) {
+  const userSupIds = useMemo(
+    () => userSupplementsQuery.data?.map((userSup) => userSup.Supplement?.Id),
+    [userSupplementsQuery.data],
+  );
+
+  const filteredAllSupplements = useMemo(
+    () =>
+      allSupplementsQuery.data?.filter(
+        (item) => userSupIds?.indexOf(item.Id) === -1,
+      ),
+    [allSupplementsQuery.data],
+  );
+
+  if (allSupplementsQuery.isLoading || userSupplementsQuery.isLoading) {
     return <LoadingListOfCards isLoading />;
   }
-
-  const userSupIds = userSupplementsQuery.data?.data.map(
-    (userSup) => userSup.supplement?.id,
-  );
-
-  const filteredAllSupplements = allSupplementQuery.data?.data.filter(
-    (item) => userSupIds?.indexOf(item.id) === -1,
-  );
 
   return (
     <div className="container">
@@ -35,40 +37,40 @@ export const AllSupplements: FC = () => {
         setQuery={setQuery}
         selected={selected}
         setSelected={setSelected}
-        options={allSupplementQuery.data?.data.map((item) => item.name) || []}
+        options={allSupplementsQuery.data?.map((item) => item.Name) || []}
       />
       <h2 className="my-4 text-lg text-secondary ">Active</h2>
-      {userSupplementsQuery.data?.data
-        .filter(
+      {userSupplementsQuery.data
+        ?.filter(
           (item) =>
-            item.supplement?.name
-              .toLowerCase()
-              .includes(selected?.toLowerCase() ?? ""),
+            item.Supplement?.Name.toLowerCase().includes(
+              selected?.toLowerCase() ?? "",
+            ),
         )
         .map((supplement) => (
           <SupplementCard
             isUser={false}
-            key={supplement.id}
-            id={supplement.supplementId}
-            name={supplement.supplement?.name ?? ""}
-            times={supplement.times}
-            userSupplementId={supplement.id}
-            icon={supplement.supplement?.icon}
+            key={supplement.Id}
+            id={Number(supplement.SupplementId)}
+            name={supplement.Supplement?.Name ?? ""}
+            times={supplement.Times.split(",")}
+            userSupplementId={Number(supplement.Id)}
+            icon={supplement.Supplement?.Icon ?? undefined}
           />
         ))}
       <h2 className="my-4 text-lg text-secondary">all</h2>
       {filteredAllSupplements
         ?.filter(
           (item) =>
-            item?.name.toLowerCase().includes(selected?.toLowerCase() ?? ""),
+            item?.Name.toLowerCase().includes(selected?.toLowerCase() ?? ""),
         )
         .map((supplement) => (
           <SupplementCard
             isUser={false}
-            key={supplement.id}
-            id={supplement.id}
-            name={supplement.name}
-            icon={supplement?.icon}
+            key={supplement.Id}
+            id={Number(supplement.Id)}
+            name={supplement.Name}
+            icon={supplement?.Icon ?? undefined}
           />
         ))}
     </div>

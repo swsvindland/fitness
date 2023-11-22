@@ -1,13 +1,34 @@
+"use client";
+
 import { FC } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { SupplementCard } from "./SupplementCard";
-import { getUserSupplements } from "@fitness/api-legacy";
 import { LoadingListOfCards } from "../Loading/LoadingListOfCards";
+import { api } from "~/trpc/react";
 
 export const UserSupplements: FC = () => {
-  const userSupplementsQuery = useQuery(["UserSupplements"], () => {
-    return getUserSupplements();
-  });
+  const userSupplementsQuery = api.supplements.getUserSupplements.useQuery();
+
+  const morningSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("Morning"),
+  );
+  const breakfastSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("Breakfast"),
+  );
+  const lunchSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("Lunch"),
+  );
+  const preWorkoutSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("PreWorkout"),
+  );
+  const postWorkoutSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("PostWorkout"),
+  );
+  const dinnerSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("Dinner"),
+  );
+  const eveningSups = userSupplementsQuery.data?.filter((item) =>
+    item.Times.includes("Evening"),
+  );
 
   if (userSupplementsQuery.isLoading) {
     return (
@@ -44,28 +65,6 @@ export const UserSupplements: FC = () => {
     );
   }
 
-  const morningSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("Morning"),
-  );
-  const breakfastSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("Breakfast"),
-  );
-  const lunchSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("Lunch"),
-  );
-  const preWorkoutSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("PreWorkout"),
-  );
-  const postWorkoutSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("PostWorkout"),
-  );
-  const dinnerSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("Dinner"),
-  );
-  const eveningSups = userSupplementsQuery.data?.data.filter((item) =>
-    item.times.includes("Evening"),
-  );
-
   return (
     <div className="grid grid-cols-1 items-start gap-2">
       {(morningSups?.length ?? 0) > 0 ? (
@@ -74,12 +73,12 @@ export const UserSupplements: FC = () => {
           {morningSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-Morning`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-Morning`}
+              name={userSupplement.Supplement!.Name}
               times={["Morning"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>
@@ -90,12 +89,12 @@ export const UserSupplements: FC = () => {
           {breakfastSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-Breakfast`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-Breakfast`}
+              name={userSupplement.Supplement!.Name}
               times={["Breakfast"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>
@@ -106,12 +105,12 @@ export const UserSupplements: FC = () => {
           {lunchSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-Lunch`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-Lunch`}
+              name={userSupplement.Supplement!.Name}
               times={["Lunch"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>
@@ -122,12 +121,12 @@ export const UserSupplements: FC = () => {
           {preWorkoutSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-PreWorkout`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-PreWorkout`}
+              name={userSupplement.Supplement!.Name}
               times={["PreWorkout"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>
@@ -138,12 +137,12 @@ export const UserSupplements: FC = () => {
           {postWorkoutSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-PostWorkout`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-PostWorkout`}
+              name={userSupplement.Supplement!.Name}
               times={["PostWorkout"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>
@@ -154,12 +153,12 @@ export const UserSupplements: FC = () => {
           {dinnerSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-Dinner`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-Dinner`}
+              name={userSupplement.Supplement!.Name}
               times={["Dinner"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>
@@ -170,12 +169,12 @@ export const UserSupplements: FC = () => {
           {eveningSups?.map((userSupplement) => (
             <SupplementCard
               isUser={true}
-              id={userSupplement.id ?? -1}
-              userSupplementId={userSupplement.id}
-              key={`${userSupplement.supplementId}-Evening`}
-              name={userSupplement.supplement!.name}
+              supplementId={Number(userSupplement.SupplementId ?? -1)}
+              userSupplementId={Number(userSupplement.Id)}
+              key={`${userSupplement.SupplementId}-Evening`}
+              name={userSupplement.Supplement!.Name}
               times={["Evening"]}
-              icon={userSupplement.supplement!.icon}
+              icon={userSupplement.Supplement!.Icon ?? undefined}
             />
           ))}
         </div>

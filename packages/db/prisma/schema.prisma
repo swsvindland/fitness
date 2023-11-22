@@ -66,10 +66,11 @@ model ProgressPhoto {
 }
 
 model Supplements {
-    Id      BigInt   @id @default(autoincrement())
-    Created DateTime @db.DateTime(0)
-    Name    String   @db.VarChar(255)
-    Icon    String?  @db.VarChar(255)
+    Id              BigInt            @id @default(autoincrement())
+    Created         DateTime          @db.DateTime(0)
+    Name            String            @db.VarChar(255)
+    Icon            String?           @db.VarChar(255)
+    UserSupplements UserSupplements[]
 }
 
 model UserBloodPressure {
@@ -140,19 +141,28 @@ model UserOneRepMaxEstimates {
 }
 
 model UserSupplementActivity {
-    Id               BigInt   @id @default(autoincrement())
-    Updated          DateTime @db.Date
+    Id               BigInt          @id @default(autoincrement())
+    Updated          DateTime        @db.Date
     UserSupplementId BigInt
-    UserId           String   @db.Char(64)
-    Time             Int      @db.SmallInt
+    UserSupplement   UserSupplements @relation(fields: [UserSupplementId], references: [Id])
+    UserId           String          @db.Char(64)
+    Time             String          @db.VarChar(255)
+
+    @@index([UserId], map: "UserSupplementActivity_UserId")
+    @@index([UserSupplementId], map: "UserSupplementActivity_UserSupplementId")
 }
 
 model UserSupplements {
-    Id           BigInt   @id @default(autoincrement())
-    Created      DateTime @db.DateTime(0)
-    UserId       String   @db.Char(64)
-    SupplementId BigInt
-    Times        String   @db.VarChar(1024)
+    Id                     BigInt                   @id @default(autoincrement())
+    Created                DateTime                 @db.DateTime(0)
+    UserId                 String                   @db.Char(64)
+    SupplementId           BigInt
+    Supplement             Supplements              @relation(fields: [SupplementId], references: [Id])
+    Times                  String                   @db.VarChar(1024)
+    UserSupplementActivity UserSupplementActivity[]
+
+    @@index([UserId], map: "UserSupplements_UserId")
+    @@index([SupplementId], map: "UserSupplements_SupplementId")
 }
 
 model UserWeight {
