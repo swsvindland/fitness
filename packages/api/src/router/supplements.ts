@@ -46,7 +46,7 @@ export const supplementsRouter = createTRPCRouter({
                         gte: new Date(
                             today.getFullYear(),
                             today.getMonth(),
-                            today.getDay(),
+                            today.getDate(),
                             0,
                             0,
                             0,
@@ -77,7 +77,7 @@ export const supplementsRouter = createTRPCRouter({
                         gte: new Date(
                             input.date.getFullYear(),
                             input.date.getMonth(),
-                            input.date.getDay(),
+                            input.date.getDate(),
                             0,
                             0,
                             0,

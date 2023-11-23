@@ -17,44 +17,46 @@ model Exercise {
 }
 
 model FoodV2 {
-    Id       BigInt    @id @default(autoincrement())
-    Brand    String?   @db.VarChar(255)
-    Name     String    @db.VarChar(255)
-    FoodType String    @db.VarChar(255)
-    Created  DateTime? @db.DateTime(0)
-    Updated  DateTime? @db.DateTime(0)
+    Id         BigInt       @id @default(autoincrement())
+    Brand      String?      @db.VarChar(255)
+    Name       String       @db.VarChar(255)
+    FoodType   String       @db.VarChar(255)
+    Created    DateTime?    @db.DateTime(0)
+    Updated    DateTime?    @db.DateTime(0)
+    UserFoodV2 UserFoodV2[]
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model FoodV2Servings {
-    Id                     BigInt    @id
-    AddedSugar             Float?    @db.Float
-    Calcium                Float?    @db.Float
-    Calories               Float?    @db.Float
-    Carbohydrate           Float?    @db.Float
-    Cholesterol            Float?    @db.Float
-    Fat                    Float?    @db.Float
-    Fiber                  Float?    @db.Float
-    Iron                   Float?    @db.Float
-    MeasurementDescription String?   @db.VarChar(255)
-    MetricServingAmount    Float?    @db.Float
-    MetricServingUnit      String?   @db.VarChar(255)
-    NumberOfUnits          Float?    @db.Float
-    MonounsaturatedFat     Float?    @db.Float
-    PolyunsaturatedFat     Float?    @db.Float
-    Potassium              Float?    @db.Float
-    Protein                Float?    @db.Float
-    SaturatedFat           Float?    @db.Float
-    ServingDescription     String?   @db.VarChar(255)
-    Sodium                 Float?    @db.Float
-    Sugar                  Float?    @db.Float
-    TransFat               Float?    @db.Float
-    VitaminA               Float?    @db.Float
-    VitaminC               Float?    @db.Float
-    VitaminD               Float?    @db.Float
+    Id                     BigInt       @id
+    AddedSugar             Float?       @db.Float
+    Calcium                Float?       @db.Float
+    Calories               Float?       @db.Float
+    Carbohydrate           Float?       @db.Float
+    Cholesterol            Float?       @db.Float
+    Fat                    Float?       @db.Float
+    Fiber                  Float?       @db.Float
+    Iron                   Float?       @db.Float
+    MeasurementDescription String?      @db.VarChar(255)
+    MetricServingAmount    Float?       @db.Float
+    MetricServingUnit      String?      @db.VarChar(255)
+    NumberOfUnits          Float?       @db.Float
+    MonounsaturatedFat     Float?       @db.Float
+    PolyunsaturatedFat     Float?       @db.Float
+    Potassium              Float?       @db.Float
+    Protein                Float?       @db.Float
+    SaturatedFat           Float?       @db.Float
+    ServingDescription     String?      @db.VarChar(255)
+    Sodium                 Float?       @db.Float
+    Sugar                  Float?       @db.Float
+    TransFat               Float?       @db.Float
+    VitaminA               Float?       @db.Float
+    VitaminC               Float?       @db.Float
+    VitaminD               Float?       @db.Float
     FoodV2Id               BigInt
-    Created                DateTime? @db.DateTime(0)
-    Updated                DateTime? @db.DateTime(0)
+    Created                DateTime?    @db.DateTime(0)
+    Updated                DateTime?    @db.DateTime(0)
+    UserFoodV2             UserFoodV2[]
 }
 
 model ProgressPhoto {
@@ -116,13 +118,20 @@ model UserCustomMacros {
 }
 
 model UserFoodV2 {
-    Id            BigInt    @id @default(autoincrement())
-    UserId        String    @db.Char(64)
+    Id            BigInt         @id @default(autoincrement())
+    UserId        String         @db.Char(64)
     FoodV2Id      BigInt
+    FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
     ServingId     BigInt
-    ServingAmount Float     @db.Float
-    Created       DateTime? @db.DateTime(0)
-    Updated       DateTime? @db.DateTime(0)
+    FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
+    ServingAmount Float          @db.Float
+    Created       DateTime?      @db.DateTime(0)
+    Updated       DateTime?      @db.DateTime(0)
+
+    @@index([UserId], map: "UserFoodV2_UserId")
+    @@index([Created], map: "UserFoodV2_Created")
+    @@index([FoodV2Id], map: "UserFoodV2_FoodV2Id")
+    @@index([ServingId], map: "UserFoodV2_ServingId")
 }
 
 model UserHeight {
