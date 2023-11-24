@@ -19,11 +19,6 @@ export const FoodSearch: FC<IProps> = ({
     selected,
     setSelected,
 }) => {
-    // const optionsQuery = useQuery(['SearchFoodOptions', query], () => {
-    //     if (!query) return;
-    //     return foodAutocomplete(query);
-    // });
-
     const optionsQuery = api.food.autocomplete.useQuery({ query });
 
     const handleClear = () => {

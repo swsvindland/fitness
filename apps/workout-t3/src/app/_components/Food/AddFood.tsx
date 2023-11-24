@@ -2,23 +2,18 @@
 
 import { FC, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
-import { useQuery } from '@tanstack/react-query';
-import { getRecentUserFoods, searchFood } from '@fitness/api-legacy';
 import { AddFoodCard } from './AddFoodCard';
 import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
+import { api } from '~/trpc/react';
 
 export const AddFood: FC = () => {
     const [query, setQuery] = useState('');
     const [selected, setSelected] = useState<string | undefined>(undefined);
 
-    const searchFoodQuery = useQuery(['SearchFood', selected], () => {
-        if (!selected) return;
-        return searchFood(selected, 0);
+    const searchFoodQuery = api.food.searchFood.useQuery({
+        query: selected ?? null,
     });
-
-    const recentlyEaten = useQuery(['RecentUserFoods'], () => {
-        return getRecentUserFoods();
-    });
+    const recentlyEaten = api.food.getRecentUserFoods.useQuery();
 
     return (
         <div className="container grid grid-cols-1">
@@ -32,41 +27,46 @@ export const AddFood: FC = () => {
             </div>
             <div className="w-full">
                 <LoadingListOfCards isLoading={searchFoodQuery.isLoading} />
-                {!searchFoodQuery.data?.data && selected ? (
+                {!searchFoodQuery.data && selected ? (
                     <div className="flex items-center justify-between text-center">
                         <span className="text-ternary">No Results</span>
                     </div>
                 ) : (
-                    searchFoodQuery.data?.data.map((food, foodIdx) => (
+                    searchFoodQuery.data?.map((food) => (
                         <AddFoodCard
-                            key={food.foodId}
-                            foodId={food.foodId}
-                            name={food.foodName}
-                            brandName={food.brandName ?? 'generic'}
-                            servingSize={food.foodDescription}
+                            key={food.food_id}
+                            foodId={Number(food.food_id)}
+                            name={food.food_name}
+                            brandName={food.brand_name ?? 'generic'}
+                            servingSize={
+                                food.servings.serving[0]?.serving_description ??
+                                ''
+                            }
                         />
                     ))
                 )}
             </div>
             <LoadingListOfCards isLoading={recentlyEaten.isLoading} />
             <div className="w-full">
-                {!recentlyEaten.data?.data ? null : (
+                {!recentlyEaten.data ? null : (
                     <h2 className="text-secondary mt-2 text-lg">
                         Recently Eaten
                     </h2>
                 )}
-                {!recentlyEaten.data?.data ? (
+                {!recentlyEaten.data ? (
                     <div className="flex items-center justify-between text-center" />
                 ) : (
-                    recentlyEaten.data?.data.map((food, index) => (
+                    recentlyEaten.data?.map((food, index) => (
                         <AddFoodCard
-                            key={food.id}
-                            userFoodId={food.id}
-                            foodId={food.foodV2Id}
-                            name={food.foodV2?.name ?? ''}
-                            brandName={food.foodV2?.brand ?? 'generic'}
-                            servingSize={food.serving?.servingDescription ?? ''}
-                            defaultServings={food.servingAmount}
+                            key={food.Id}
+                            userFoodId={Number(food.Id)}
+                            foodId={Number(food.FoodV2Id)}
+                            name={food.FoodV2?.Name ?? ''}
+                            brandName={food.FoodV2?.Brand ?? 'generic'}
+                            servingSize={
+                                food.FoodV2Serving?.ServingDescription ?? ''
+                            }
+                            defaultServings={food.ServingAmount}
                         />
                     ))
                 )}
