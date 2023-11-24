@@ -9,7 +9,8 @@
         "clean": "turbo run clean && rm -rf node_modules && rm -rf .turbo",
         "db-push": "turbo run db-push",
         "db-pull": "turbo run db-pull",
-        "postinstall": "turbo run db-generate"
+        "postinstall": "turbo run db-generate",
+        "format": "pnpm prettier --write **/*.{js,json,md,yml,css,scss,html,ts,tsx}"
     },
     "dependencies": {}
 }

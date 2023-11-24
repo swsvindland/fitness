@@ -51,7 +51,5 @@
             "outputs": ["db/schema.prisma"]
         }
     },
-    "globalEnv": [
-        "DATABASE_URL"
-    ]
+    "globalEnv": ["DATABASE_URL"]
 }

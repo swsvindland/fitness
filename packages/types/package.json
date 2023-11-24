@@ -2,8 +2,7 @@
     "name": "@fitness/types",
     "version": "1.0.0",
     "main": "src/index.ts",
-    "dependencies": {
-    },
+    "dependencies": {},
     "devDependencies": {
         "@fitness/tsconfig": "workspace:*",
         "typescript": "^5.3.2"

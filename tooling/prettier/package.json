@@ -17,5 +17,5 @@
     "@fitness/tsconfig": "workspace:*",
     "typescript": "^5.3.2"
   },
-  "prettier": "@fitnessprettier-config"
+  "prettier": "./index.mjs"
 }

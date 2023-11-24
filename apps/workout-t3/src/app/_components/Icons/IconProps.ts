@@ -1,4 +1,4 @@
 export interface IconProps {
-    className?: string;
-    ariaHidden?: boolean;
+  className?: string;
+  ariaHidden?: boolean;
 }

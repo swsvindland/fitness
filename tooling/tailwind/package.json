@@ -31,5 +31,5 @@
       "@fitness/eslint-config/base"
     ]
   },
-  "prettier": "@fitnessprettier-config"
+  "prettier": "@fitness/prettier-config"
 }
