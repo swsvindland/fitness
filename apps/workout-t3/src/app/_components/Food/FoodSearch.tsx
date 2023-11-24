@@ -2,10 +2,9 @@ import { FC, FormEvent } from 'react';
 import { Button } from '../Buttons/Button';
 import { MagnifyingGlassSolid } from '../Icons/MagnifyingGlassSolid';
 import { Autocomplete } from '../Autocomplete';
-import { useQuery } from '@tanstack/react-query';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { XSolid } from '../Icons/XSolid';
-import { foodAutocomplete } from '@fitness/api-legacy';
+import { api } from '~/trpc/react';
 
 interface IProps {
     query: string;
@@ -20,10 +19,12 @@ export const FoodSearch: FC<IProps> = ({
     selected,
     setSelected,
 }) => {
-    const optionsQuery = useQuery(['SearchFoodOptions', query], () => {
-        if (!query) return;
-        return foodAutocomplete(query);
-    });
+    // const optionsQuery = useQuery(['SearchFoodOptions', query], () => {
+    //     if (!query) return;
+    //     return foodAutocomplete(query);
+    // });
+
+    const optionsQuery = api.food.autocomplete.useQuery({ query });
 
     const handleClear = () => {
         setSelected(undefined);
@@ -46,7 +47,7 @@ export const FoodSearch: FC<IProps> = ({
                 setQuery={setQuery}
                 setSelected={setSelected}
                 selected={selected}
-                filtered={optionsQuery.data?.data ?? []}
+                filtered={optionsQuery.data ?? []}
                 isLoading={optionsQuery.isLoading}
             />
             <SecondaryButton

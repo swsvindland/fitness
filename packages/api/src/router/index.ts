@@ -7,10 +7,12 @@ import { dashboardRouter } from './dashboard';
 import { storeRouter } from './store';
 import { customWorkoutRouter } from './customWorkout';
 import { supplementsRouter } from './supplements';
+import { foodRouter } from './food';
 
 export const appRouter = createTRPCRouter({
     customWorkout: customWorkoutRouter,
     dashboard: dashboardRouter,
+    food: foodRouter,
     progressPhotos: progressPhotosRouter,
     user: userRouter,
     macros: macrosRouter,
