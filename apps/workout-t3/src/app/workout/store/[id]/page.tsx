@@ -1,11 +1,11 @@
-import { WorkoutDetail } from "~/app/_components/WorkoutStore/WorkoutDetail";
+import { WorkoutDetail } from '~/app/_components/WorkoutStore/WorkoutDetail';
 
 export default async function WorkoutStorePage({
-  params,
+    params,
 }: {
-  params: { id: string };
+    params: { id: string };
 }) {
-  if (isNaN(parseInt(params.id))) return null;
+    if (isNaN(parseInt(params.id))) return null;
 
-  return <WorkoutDetail workoutId={Number(params.id)} />;
+    return <WorkoutDetail workoutId={Number(params.id)} />;
 }

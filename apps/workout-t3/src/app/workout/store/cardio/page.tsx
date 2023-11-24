@@ -1,6 +1,6 @@
-import { WorkoutStore } from "~/app/_components/WorkoutStore/WorkoutStore";
-import { WorkoutType } from "@fitness/types";
+import { WorkoutStore } from '~/app/_components/WorkoutStore/WorkoutStore';
+import { WorkoutType } from '@fitness/types';
 
 export default async function WorkoutStorePage() {
-  return <WorkoutStore type={WorkoutType.Cardio} />;
+    return <WorkoutStore type={WorkoutType.Cardio} />;
 }

@@ -1,10 +1,10 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from '@tanstack/react-query';
 
 export const useUpdateFoodCache = () => {
-  const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-  return () => {
-    queryClient.invalidateQueries(["UserFood"]);
-    queryClient.invalidateQueries(["CurrentMacros"]);
-  };
+    return () => {
+        queryClient.invalidateQueries(['UserFood']);
+        queryClient.invalidateQueries(['CurrentMacros']);
+    };
 };

@@ -10,7 +10,7 @@
         "db-push": "turbo run db-push",
         "db-pull": "turbo run db-pull",
         "postinstall": "turbo run db-generate",
-        "format": "pnpm prettier --write **/*.{js,json,md,yml,css,scss,html,ts,tsx}"
+        "format": "pnpm prettier --write **/*.{js,json,md,yml,css,ts,tsx}"
     },
     "dependencies": {}
 }

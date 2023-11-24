@@ -1,25 +1,25 @@
-import { FC, MouseEventHandler, ReactNode } from "react";
+import { FC, MouseEventHandler, ReactNode } from 'react';
 
 interface IProps {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
-  children: ReactNode;
-  className?: string;
-  disabled?: boolean;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
+    children: ReactNode;
+    className?: string;
+    disabled?: boolean;
 }
 
 export const SecondaryButton: FC<IProps> = ({
-  onClick,
-  children,
-  className,
-  disabled,
+    onClick,
+    children,
+    className,
+    disabled,
 }) => {
-  return (
-    <button
-      onClick={onClick}
-      className={`${className} btn-secondary`}
-      disabled={disabled}
-    >
-      {children}
-    </button>
-  );
+    return (
+        <button
+            onClick={onClick}
+            className={`${className} btn-secondary`}
+            disabled={disabled}
+        >
+            {children}
+        </button>
+    );
 };

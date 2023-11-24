@@ -1,9 +1,9 @@
-import { ScanFood } from "~/app/_components/Scanner/ScanFood";
+import { ScanFood } from '~/app/_components/Scanner/ScanFood';
 
 export default async function ScanFoodBarcodePage({
-  params,
+    params,
 }: {
-  params: { slug: string };
+    params: { slug: string };
 }) {
-  return <ScanFood barcode={params.slug} />;
+    return <ScanFood barcode={params.slug} />;
 }

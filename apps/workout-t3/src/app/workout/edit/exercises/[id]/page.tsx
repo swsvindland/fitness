@@ -1,11 +1,11 @@
-import { EditCustomWorkoutExercises } from "~/app/_components/WorkoutCustom/EditCustomWorkoutExercises";
+import { EditCustomWorkoutExercises } from '~/app/_components/WorkoutCustom/EditCustomWorkoutExercises';
 
 export default async function WorkoutEditExercises({
-  params,
+    params,
 }: {
-  params: { id: string };
+    params: { id: string };
 }) {
-  if (isNaN(Number(params.id))) return null;
+    if (isNaN(Number(params.id))) return null;
 
-  return <EditCustomWorkoutExercises workoutId={Number(params.id)} />;
+    return <EditCustomWorkoutExercises workoutId={Number(params.id)} />;
 }

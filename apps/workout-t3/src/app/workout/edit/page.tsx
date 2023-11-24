@@ -1,5 +1,5 @@
-import { CreateCustomWorkout } from "~/app/_components/WorkoutCustom/CreateCustomWorkout";
+import { CreateCustomWorkout } from '~/app/_components/WorkoutCustom/CreateCustomWorkout';
 
 export default async function WorkoutPage() {
-  return <CreateCustomWorkout />;
+    return <CreateCustomWorkout />;
 }
