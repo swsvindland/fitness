@@ -5,10 +5,10 @@ export const useUpdateFoodCache = () => {
     const queryClient = useQueryClient();
     const utils = api.useUtils();
 
-    return () => {
-        queryClient.invalidateQueries(['UserFood']);
-        queryClient.invalidateQueries(['CurrentMacros']);
-        utils.food.invalidate();
-        utils.macros.invalidate();
+    return async () => {
+        await queryClient.invalidateQueries(['UserFood']);
+        await queryClient.invalidateQueries(['CurrentMacros']);
+        await utils.food.invalidate();
+        await utils.macros.invalidate();
     };
 };

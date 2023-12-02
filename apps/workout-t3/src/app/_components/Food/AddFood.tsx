@@ -1,19 +1,44 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FoodSearch } from './FoodSearch';
 import { AddFoodCard } from './AddFoodCard';
 import { LoadingListOfCards } from '../Loading/LoadingListOfCards';
 import { api } from '~/trpc/react';
 
+const sameDay = (d1: Date, d2: Date) =>
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate();
+
 export const AddFood: FC = () => {
     const [query, setQuery] = useState('');
     const [selected, setSelected] = useState<string | undefined>(undefined);
+    const [recentlyEaten, setRecentlyEaten] = useState<any[]>([]);
 
     const searchFoodQuery = api.food.searchFood.useQuery({
         query: selected ?? null,
     });
-    const recentlyEaten = api.food.getRecentUserFoods.useQuery();
+    const recentlyEatenQuery = api.food.getRecentUserFoods.useQuery();
+
+    useEffect(() => {
+        if (recentlyEatenQuery.data) {
+            const mapped = recentlyEatenQuery.data.map((food) => {
+                if (!food.Created) return food;
+
+                if (sameDay(food.Created, new Date())) {
+                    return food;
+                } else {
+                    return {
+                        ...food,
+                        ServingAmount: 0,
+                    };
+                }
+            });
+
+            setRecentlyEaten(mapped);
+        }
+    }, [recentlyEatenQuery.data]);
 
     return (
         <div className="container grid grid-cols-1">
@@ -46,17 +71,17 @@ export const AddFood: FC = () => {
                     ))
                 )}
             </div>
-            <LoadingListOfCards isLoading={recentlyEaten.isLoading} />
+            <LoadingListOfCards isLoading={recentlyEatenQuery.isLoading} />
             <div className="w-full">
-                {!recentlyEaten.data ? null : (
+                {!recentlyEaten ? null : (
                     <h2 className="text-secondary mt-2 text-lg">
                         Recently Eaten
                     </h2>
                 )}
-                {!recentlyEaten.data ? (
+                {!recentlyEaten ? (
                     <div className="flex items-center justify-between text-center" />
                 ) : (
-                    recentlyEaten.data?.map((food, index) => (
+                    recentlyEaten?.map((food, index) => (
                         <AddFoodCard
                             key={food.Id}
                             userFoodId={Number(food.Id)}
