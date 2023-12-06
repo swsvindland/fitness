@@ -58,6 +58,8 @@ export const BottomNavigation: FC = () => {
                     </Link>
                 </div>
             </div>
+            <div className="p-safe" />
+            <div className="p-safe" />
         </div>
     );
 };
