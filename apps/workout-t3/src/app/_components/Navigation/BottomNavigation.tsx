@@ -58,8 +58,8 @@ export const BottomNavigation: FC = () => {
                     </Link>
                 </div>
             </div>
-            <div className="pb-safe" />
-            <div className="pb-safe" />
+            <div className="mb-safe" />
+            <div className="mb-safe" />
         </div>
     );
 };
