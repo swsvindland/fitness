@@ -34,18 +34,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
-        <Suspense fallback={<LoadingSpinner />}>
-            <ClerkProvider>
-                <html lang="en">
-                    <body className={`font-sans ${oswald.variable}`}>
-                        <TRPCReactProvider cookies={cookies().toString()}>
-                            <Layout>{children}</Layout>
-                            <MinVersion />
-                            <Analytics />
-                        </TRPCReactProvider>
-                    </body>
-                </html>
-            </ClerkProvider>
-        </Suspense>
+        <ClerkProvider>
+            <html lang="en">
+                <body className={`font-sans ${oswald.variable}`}>
+                    <TRPCReactProvider cookies={cookies().toString()}>
+                        <Layout>{children}</Layout>
+                        <MinVersion />
+                        <Analytics />
+                    </TRPCReactProvider>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }
