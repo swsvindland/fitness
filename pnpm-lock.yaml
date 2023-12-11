@@ -167,6 +167,9 @@ importers:
       '@fitness/db':
         specifier: '*'
         version: link:../db
+      '@fitness/types':
+        specifier: '*'
+        version: link:../types
       '@trpc/client':
         specifier: ^10.44.1
         version: 10.44.1(@trpc/server@10.44.1)

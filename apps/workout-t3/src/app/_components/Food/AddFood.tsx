@@ -23,20 +23,24 @@ export const AddFood: FC = () => {
 
     useEffect(() => {
         if (recentlyEatenQuery.data) {
-            const mapped = recentlyEatenQuery.data.map((food) => {
+            const seen = new Map<string, any>();
+
+            recentlyEatenQuery.data.forEach((food) => {
                 if (!food.Created) return food;
 
-                if (sameDay(food.Created, new Date())) {
-                    return food;
-                } else {
-                    return {
-                        ...food,
-                        ServingAmount: 0,
-                    };
+                if (!seen.has(food.FoodV2.Name)) {
+                    if (sameDay(food.Created, new Date())) {
+                        seen.set(food.FoodV2.Name, food);
+                    } else {
+                        seen.set(food.FoodV2.Name, {
+                            ...food,
+                            ServingAmount: 0,
+                        });
+                    }
                 }
             });
 
-            setRecentlyEaten(mapped);
+            setRecentlyEaten(Array.from(seen.values()));
         }
     }, [recentlyEatenQuery.data]);
 
@@ -81,7 +85,7 @@ export const AddFood: FC = () => {
                 {!recentlyEaten ? (
                     <div className="flex items-center justify-between text-center" />
                 ) : (
-                    recentlyEaten?.map((food, index) => (
+                    recentlyEaten?.map((food) => (
                         <AddFoodCard
                             key={food.Id}
                             userFoodId={Number(food.Id)}
