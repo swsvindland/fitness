@@ -1,8 +1,6 @@
 'use client';
 
 import { FC, useMemo, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { addUserFood } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
@@ -23,9 +21,9 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
 
     const router = useRouter();
 
-    const mutation = useMutation(addUserFood, {
-        onSuccess: () => {
-            updateFoodCache();
+    const mutation = api.food.addUserFood.useMutation({
+        onSuccess: async () => {
+            await updateFoodCache();
             router.push(`/eat`);
         },
     });

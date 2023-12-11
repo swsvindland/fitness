@@ -166,4 +166,52 @@ export const foodRouter = createTRPCRouter({
                 });
             }
         }),
+
+    addUserFood: protectedProcedure
+        .input(
+            z.object({
+                foodId: z.number(),
+                servingId: z.number(),
+                servingAmount: z.number(),
+                date: z.string(),
+            })
+        )
+        .mutation(async ({ ctx, input }) => {
+            await ctx.prisma.userFoodV2.create({
+                data: {
+                    UserId: ctx.auth.userId!,
+                    FoodV2Id: input.foodId,
+                    ServingId: input.servingId,
+                    ServingAmount: input.servingAmount,
+                    Created: new Date(input.date),
+                },
+            });
+        }),
+
+    updateUserFood: protectedProcedure
+        .input(
+            z.object({
+                userFoodId: z.number(),
+                servingId: z.number(),
+                servingAmount: z.number(),
+            })
+        )
+        .mutation(async ({ ctx, input }) => {
+            await ctx.prisma.userFoodV2.update({
+                where: { Id: input.userFoodId },
+                data: {
+                    ServingId: input.servingId,
+                    ServingAmount: input.servingAmount,
+                    Updated: new Date(),
+                },
+            });
+        }),
+
+    deleteUserFood: protectedProcedure
+        .input(z.object({ userFoodId: z.number() }))
+        .mutation(async ({ ctx, input }) => {
+            await ctx.prisma.userFoodV2.delete({
+                where: { Id: input.userFoodId },
+            });
+        }),
 });

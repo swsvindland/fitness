@@ -1,7 +1,6 @@
 'use client';
+
 import { FC, useMemo, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { deleteUserFood, updateUserFood } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Button } from '../Buttons/Button';
 import { TextField } from '../TextFields/TextField';
@@ -22,16 +21,16 @@ export const UserFoodDetail: FC<IProps> = ({ userFoodId }) => {
     const router = useRouter();
     const updateFoodCache = useUpdateFoodCache();
 
-    const updateMutation = useMutation(updateUserFood, {
-        onSuccess: () => {
-            updateFoodCache();
+    const updateMutation = api.food.updateUserFood.useMutation({
+        onSuccess: async () => {
+            await updateFoodCache();
             router.push(`/eat`);
         },
     });
 
-    const deleteMutation = useMutation(deleteUserFood, {
-        onSuccess: () => {
-            updateFoodCache();
+    const deleteMutation = api.food.deleteUserFood.useMutation({
+        onSuccess: async () => {
+            await updateFoodCache();
             router.push(`/eat`);
         },
     });
@@ -92,22 +91,14 @@ export const UserFoodDetail: FC<IProps> = ({ userFoodId }) => {
                     ) : (
                         <Button
                             className="w-full"
-                            // onClick={() =>
-                            //     updateMutation.mutate({
-                            //         id: foodDetailsQuery.data?.data.id,
-                            //         servingAmount:
-                            //             parseFloat(displayedQuantity),
-                            //         servingId: unit?.id ?? 0,
-                            //         foodV2Id:
-                            //             foodDetailsQuery.data?.data.foodV2Id ??
-                            //             0,
-                            //         userId,
-                            //         created:
-                            //             foodDetailsQuery.data?.data.created,
-                            //         updated:
-                            //             foodDetailsQuery.data?.data.updated,
-                            //     })
-                            // }
+                            onClick={() =>
+                                updateMutation.mutate({
+                                    userFoodId,
+                                    servingAmount:
+                                        parseFloat(displayedQuantity),
+                                    servingId: Number(unit?.id) ?? 0,
+                                })
+                            }
                         >
                             Update
                         </Button>
@@ -119,11 +110,9 @@ export const UserFoodDetail: FC<IProps> = ({ userFoodId }) => {
                     ) : (
                         <SecondaryButton
                             className="w-full"
-                            // onClick={() =>
-                            //     deleteMutation.mutate(
-                            //         userfoodDetailsQuery.data?.Id ?? 0
-                            //     )
-                            // }
+                            onClick={() =>
+                                deleteMutation.mutate({ userFoodId })
+                            }
                         >
                             Delete
                         </SecondaryButton>
