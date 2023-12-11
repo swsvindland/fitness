@@ -25,9 +25,7 @@ import { auth, currentUser } from '@clerk/nextjs';
 interface CreateContextOptions {
     headers: Headers;
     auth: {
-        clerkId: string | null;
         userId: string | null;
-        email: string | null;
     };
 }
 
@@ -49,23 +47,6 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
     };
 };
 
-async function getUserAndClerkIdAndUpdateOldUserIfNeeded() {
-    const { userId } = auth();
-    const user = await currentUser();
-
-    const oldUserId = await prisma.users.findFirst({
-        where: {
-            ClerkId: userId,
-        },
-    });
-
-    return {
-        userId: oldUserId?.Id ?? null,
-        clerkId: userId,
-        email: user?.emailAddresses[0]?.emailAddress ?? null,
-    };
-}
-
 /**
  * This is the actual context you will use in your router. It will be used to process every request
  * that goes through your tRPC endpoint.
@@ -74,11 +55,13 @@ async function getUserAndClerkIdAndUpdateOldUserIfNeeded() {
  */
 export const createTRPCContext = async (opts: { req: NextRequest }) => {
     // Fetch stuff that depends on the request
-    const auth = await getUserAndClerkIdAndUpdateOldUserIfNeeded();
+    const { userId } = auth();
 
     return createInnerTRPCContext({
         headers: opts.req.headers,
-        auth,
+        auth: {
+            userId,
+        },
     });
 };
 
@@ -131,7 +114,7 @@ export const publicProcedure = t.procedure;
 
 /** Reusable middleware that enforces users are logged in before running the procedure. */
 const isAuthed = t.middleware(({ next, ctx }) => {
-    if (!ctx.auth.clerkId) {
+    if (!ctx.auth.userId) {
         throw new TRPCError({
             code: 'UNAUTHORIZED',
             message: 'Not authenticated',

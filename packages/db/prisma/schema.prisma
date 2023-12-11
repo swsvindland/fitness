@@ -245,7 +245,6 @@ model Users {
     Paid       Boolean   @default(false)
     PaidUntil  DateTime? @db.DateTime(0)
     LoginCount Int       @default(0)
-    ClerkId    String?   @db.Char(64)
 }
 
 model Workout {

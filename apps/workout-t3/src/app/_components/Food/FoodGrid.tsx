@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { classNames } from '~/utils/classNames';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
