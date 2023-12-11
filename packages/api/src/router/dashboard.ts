@@ -41,7 +41,7 @@ export const dashboardRouter = createTRPCRouter({
             addHeight,
             addWeight,
             addSupplements,
-            done: !(addSex && addHeight && addWeight && addSupplements),
+            done: !!(addSex && addHeight && addWeight && addSupplements),
         };
     }),
 
