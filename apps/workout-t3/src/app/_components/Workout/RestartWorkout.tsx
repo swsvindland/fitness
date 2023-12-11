@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '../Buttons/Button';
 import { FC } from 'react';
 import { getUserWorkouts, restartWorkout } from '@fitness/api-legacy';

@@ -1,3 +1,5 @@
+'use client';
+
 import { Dialog, Transition } from '@headlessui/react';
 import { FC, Fragment, useContext, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
