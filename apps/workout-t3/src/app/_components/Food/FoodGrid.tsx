@@ -1,40 +1,27 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { classNames } from '~/utils/classNames';
-import { useQuery } from '@tanstack/react-query';
-import { foodApiAuth, getUserFoods } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { LoadingCard } from '../Loading/LoadingCard';
 import { useRouter } from 'next/navigation';
+import { api } from '~/trpc/react';
 
 export const FoodGrid: FC = () => {
     const router = useRouter();
 
-    const handleRowClick = (foodId?: number) => {
+    const handleRowClick = (foodId?: bigint) => {
         if (!foodId) return;
         router.push(`/eat/user-food/${foodId}`);
     };
 
-    const foodApiAuthTokenQuery = useQuery(
-        ['FatSecretAuth'],
-        () => {
-            return foodApiAuth();
-        },
-        {
-            onSuccess: (data) => {
-                sessionStorage.setItem('oldToken', data.data.accessToken);
-            },
-        }
-    );
-
-    const foodQuery = useQuery(['UserFood'], () => {
-        return getUserFoods();
+    const foodQuery = api.food.getAllUserFood.useQuery({
+        date: new Date().toDateString(),
     });
 
-    if (foodQuery.isLoading || foodApiAuthTokenQuery.isLoading) {
+    if (foodQuery.isLoading) {
         return <LoadingSpinner />;
     }
 
-    if (foodQuery.isLoading || foodApiAuthTokenQuery.isLoading) {
+    if (foodQuery.isLoading) {
         return <LoadingCard isLoading />;
     }
 
@@ -89,10 +76,10 @@ export const FoodGrid: FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {foodQuery.data?.data?.map((food, foodIdx) => (
-                            <tr key={food.id} className="">
+                        {foodQuery.data?.map((food, foodIdx) => (
+                            <tr key={food.Id} className="">
                                 <td
-                                    onClick={() => handleRowClick(food.id)}
+                                    onClick={() => handleRowClick(food.Id)}
                                     className={classNames(
                                         foodIdx === 0
                                             ? ''
@@ -101,42 +88,43 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     <div className="text-secondary font-medium">
-                                        {food?.foodV2?.name}
+                                        {food?.FoodV2?.Name}
                                     </div>
                                     <div className="text-ternary mt-1 flex flex-col lg:hidden">
                                         <span>
                                             Protein:{' '}
                                             {(
-                                                (food.serving?.protein ?? 0) *
-                                                food.servingAmount
+                                                (food.FoodV2Serving?.Protein ??
+                                                    0) * food.ServingAmount
                                             ).toFixed(2)}
                                             g
                                         </span>
                                         <span>
                                             Fat:{' '}
                                             {(
-                                                (food.serving?.fat ?? 0) *
-                                                food.servingAmount
+                                                (food.FoodV2Serving?.Fat ?? 0) *
+                                                food.ServingAmount
                                             )?.toFixed(2)}
                                             g
                                         </span>
                                         <span>
                                             Carbs:{' '}
                                             {(
-                                                (food.serving?.carbohydrate ??
-                                                    0) * food.servingAmount
+                                                (food.FoodV2Serving
+                                                    ?.Carbohydrate ?? 0) *
+                                                food.ServingAmount
                                             )?.toFixed(2)}
                                             g
                                         </span>
                                         <span>
                                             {(
-                                                (food.serving?.calories ?? 0) *
-                                                food.servingAmount
+                                                (food.FoodV2Serving?.Calories ??
+                                                    0) * food.ServingAmount
                                             ).toFixed(2)}{' '}
                                             Calories
                                         </span>
                                         <span>
-                                            {food.servingAmount?.toFixed(2)}{' '}
+                                            {food.ServingAmount?.toFixed(2)}{' '}
                                             Servings
                                         </span>
                                     </div>
@@ -153,8 +141,8 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     {(
-                                        (food.serving?.protein ?? 0) *
-                                        food.servingAmount
+                                        (food.FoodV2Serving?.Protein ?? 0) *
+                                        food.ServingAmount
                                     )?.toFixed(2)}
                                     g
                                 </td>
@@ -167,8 +155,8 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     {(
-                                        (food.serving?.fat ?? 0) *
-                                        food.servingAmount
+                                        (food.FoodV2Serving?.Fat ?? 0) *
+                                        food.ServingAmount
                                     )?.toFixed(2)}
                                     g
                                 </td>
@@ -181,8 +169,8 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     {(
-                                        (food.serving?.carbohydrate ?? 0) *
-                                        food.servingAmount
+                                        (food.FoodV2Serving?.Carbohydrate ??
+                                            0) * food.ServingAmount
                                     )?.toFixed(2)}
                                     g
                                 </td>
@@ -195,8 +183,8 @@ export const FoodGrid: FC = () => {
                                     )}
                                 >
                                     {(
-                                        (food.serving?.calories ?? 0) *
-                                        food.servingAmount
+                                        (food.FoodV2Serving?.Calories ?? 0) *
+                                        food.ServingAmount
                                     )?.toFixed(2)}
                                     Cal
                                 </td>
@@ -208,7 +196,7 @@ export const FoodGrid: FC = () => {
                                         'text-ternary hidden px-3 py-3.5 text-sm lg:table-cell'
                                     )}
                                 >
-                                    {food.servingAmount?.toFixed(2)} Servings
+                                    {food.ServingAmount?.toFixed(2)} Servings
                                 </td>
                             </tr>
                         ))}

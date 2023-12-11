@@ -17,13 +17,14 @@ model Exercise {
 }
 
 model FoodV2 {
-    Id         BigInt       @id @default(autoincrement())
-    Brand      String?      @db.VarChar(255)
-    Name       String       @db.VarChar(255)
-    FoodType   String       @db.VarChar(255)
-    Created    DateTime?    @db.DateTime(0)
-    Updated    DateTime?    @db.DateTime(0)
-    UserFoodV2 UserFoodV2[]
+    Id             BigInt           @id @default(autoincrement())
+    Brand          String?          @db.VarChar(255)
+    Name           String           @db.VarChar(255)
+    FoodType       String           @db.VarChar(255)
+    Created        DateTime?        @db.DateTime(0)
+    Updated        DateTime?        @db.DateTime(0)
+    UserFoodV2     UserFoodV2[]
+    FoodV2Servings FoodV2Servings[]
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
@@ -54,9 +55,12 @@ model FoodV2Servings {
     VitaminC               Float?       @db.Float
     VitaminD               Float?       @db.Float
     FoodV2Id               BigInt
+    FoodV2                 FoodV2       @relation(fields: [FoodV2Id], references: [Id])
     Created                DateTime?    @db.DateTime(0)
     Updated                DateTime?    @db.DateTime(0)
     UserFoodV2             UserFoodV2[]
+
+    @@index([FoodV2Id], map: "FoodV2Servings_FoodV2Id")
 }
 
 model ProgressPhoto {

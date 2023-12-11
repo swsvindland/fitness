@@ -3,9 +3,9 @@ import { FoodDetail } from '~/app/_components/Food/FoodDetail';
 export default async function WorkoutEditExercises({
     params,
 }: {
-    params: { id: number };
+    params: { id: string };
 }) {
     if (isNaN(Number(params.id))) return null;
 
-    return <FoodDetail foodId={params.id} />;
+    return <FoodDetail foodId={Number(params.id)} />;
 }

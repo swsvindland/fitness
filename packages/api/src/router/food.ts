@@ -2,6 +2,7 @@ import { createTRPCRouter, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 import axios from 'axios';
 import { FoodSearch } from '../types/foodSearch';
+import { Food } from '../types/food';
 
 const authFatSecret = async (): Promise<string> => {
     const response = await axios({
@@ -21,8 +22,7 @@ const authFatSecret = async (): Promise<string> => {
 export const foodRouter = createTRPCRouter({
     autocomplete: protectedProcedure
         .input(z.object({ query: z.string() }))
-        .query(async ({ ctx, input }) => {
-            if (!ctx.auth.userId) throw new Error('No user ID');
+        .query(async ({ input }) => {
             if (input.query.length < 3) return [];
 
             const auth = await authFatSecret();
@@ -37,8 +37,7 @@ export const foodRouter = createTRPCRouter({
 
     searchFood: protectedProcedure
         .input(z.object({ query: z.string().nullable() }))
-        .query(async ({ ctx, input }) => {
-            if (!ctx.auth.userId) throw new Error('No user ID');
+        .query(async ({ input }) => {
             if (!input.query) return [];
 
             const auth = await authFatSecret();
@@ -61,4 +60,110 @@ export const foodRouter = createTRPCRouter({
             include: { FoodV2: true, FoodV2Serving: true },
         });
     }),
+
+    getAllUserFood: protectedProcedure
+        .input(z.object({ date: z.string() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
+            const today = new Date(input.date);
+
+            return ctx.prisma.userFoodV2.findMany({
+                where: {
+                    UserId: ctx.auth.userId,
+                    Created: {
+                        gte: new Date(
+                            today.getFullYear(),
+                            today.getMonth(),
+                            today.getDate(),
+                            0,
+                            0,
+                            0,
+                            0
+                        ),
+                    },
+                },
+                include: { FoodV2: true, FoodV2Serving: true },
+            });
+        }),
+
+    getUserFoodById: protectedProcedure
+        .input(z.object({ userFoodId: z.number() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
+
+            return ctx.prisma.userFoodV2.findFirst({
+                where: { Id: input.userFoodId, UserId: ctx.auth.userId },
+                include: { FoodV2: true, FoodV2Serving: true },
+            });
+        }),
+
+    getFoodById: protectedProcedure
+        .input(z.object({ foodId: z.number() }))
+        .query(async ({ ctx, input }) => {
+            const foodV2 = await ctx.prisma.foodV2.findFirst({
+                where: { Id: input.foodId },
+                include: {
+                    FoodV2Servings: true,
+                },
+            });
+
+            if (foodV2) return foodV2;
+
+            const auth = await authFatSecret();
+
+            const response = await axios.get(
+                `https://platform.fatsecret.com/rest/server.api?method=food.get.v2&food_id=${input.foodId}&format=json`,
+                { headers: { Authorization: `Bearer ${auth}` } }
+            );
+
+            const fatSecretFood = response.data?.food as Food;
+
+            await prisma.foodV2.create({
+                data: {
+                    Id: fatSecretFood.food_id,
+                    Name: fatSecretFood.food_name,
+                    Brand: fatSecretFood.brand_name,
+                    FoodType: fatSecretFood.food_type,
+                    Created: new Date(),
+                    Updated: new Date(),
+                },
+            });
+
+            for (const serving of fatSecretFood.servings.serving) {
+                await prisma.foodV2Servings.create({
+                    data: {
+                        Id: Number(serving.serving_id),
+                        FoodV2Id: fatSecretFood.food_id,
+                        Calories: Number(serving.calories),
+                        Carbohydrate: Number(serving.carbohydrates),
+                        Fat: Number(serving.fat),
+                        Protein: Number(serving.protein),
+                        MeasurementDescription: serving.measurement_description,
+                        MetricServingAmount: Number(
+                            serving.metric_serving_amount
+                        ),
+                        MetricServingUnit: serving.metric_serving_unit,
+                        ServingDescription: serving.serving_description,
+                        Created: new Date(),
+                        Updated: new Date(),
+                        AddedSugar: Number(serving.added_sugars),
+                        Calcium: Number(serving.calcium),
+                        Cholesterol: Number(serving.cholesterol),
+                        Fiber: Number(serving.fiber),
+                        Iron: Number(serving.iron),
+                        MonounsaturatedFat: Number(serving.monounsaturated_fat),
+                        NumberOfUnits: Number(serving.number_of_units),
+                        PolyunsaturatedFat: Number(serving.polyunsaturated_fat),
+                        Potassium: Number(serving.potassium),
+                        SaturatedFat: Number(serving.saturated_fat),
+                        Sodium: Number(serving.sodium),
+                        Sugar: Number(serving.sugar),
+                        TransFat: Number(serving.trans_fat),
+                        VitaminA: Number(serving.vitamin_a),
+                        VitaminC: Number(serving.vitamin_c),
+                        VitaminD: Number(serving.vitamin_d),
+                    },
+                });
+            }
+        }),
 });

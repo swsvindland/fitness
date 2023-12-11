@@ -23,3 +23,5 @@ export * from './types/UserWorkoutSubstitution';
 export * from './types/Workout';
 export * from './types/WorkoutExercise';
 export * from './types/WorkoutType';
+
+export * from './new';
