@@ -4,26 +4,24 @@ import { FC, FormEvent, useState } from 'react';
 import { TextField } from '../../TextFields/TextField';
 import { Button } from '../../Buttons/Button';
 import { SecondaryButton } from '../../Buttons/SecondaryButton';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addWeight } from '@fitness/api-legacy';
 import { useRouter } from 'next/navigation';
+import { api } from '~/trpc/react';
 
 export const WeighInForm: FC = () => {
-    const userId = localStorage.getItem('userId') ?? '';
     const [weight, setWeight] = useState<string>('');
-    const queryClient = useQueryClient();
     const router = useRouter();
+    const utils = api.useUtils();
 
-    const mutation = useMutation(addWeight, {
+    const mutation = api.body.addWeight.useMutation({
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserWeight']);
-            await queryClient.invalidateQueries(['Dashboard']);
+            await utils.body.invalidate();
+            await utils.dashboard.invalidate();
         },
     });
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate({ weight: parseFloat(weight), userId });
+        mutation.mutate({ weight: parseFloat(weight) });
         router.back();
     };
 

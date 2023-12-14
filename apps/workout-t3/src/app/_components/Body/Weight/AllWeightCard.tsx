@@ -4,8 +4,6 @@ import { Units } from '@fitness/types';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserWeight, updateUserWeight } from '@fitness/api-legacy';
 import { CircleXMark } from '../../Icons/CircleXMark';
 import { api } from '~/trpc/react';
 
@@ -16,22 +14,21 @@ interface IProps {
 }
 
 export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
-    const userId = localStorage.getItem('userId') ?? '';
     const [weight, setWeight] = useState<string>(defaultWeight.toString());
     const [saved, setSaved] = useState<boolean>(false);
-    const queryClient = useQueryClient();
+    const utils = api.useUtils();
 
     const userQuery = api.user.getUser.useQuery();
 
-    const updateMutation = useMutation(updateUserWeight, {
+    const updateMutation = api.body.updateWeight.useMutation({
         onSuccess: () => {
             setSaved(true);
         },
     });
 
-    const deleteMutation = useMutation(deleteUserWeight, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['UserWeights']);
+    const deleteMutation = api.body.deleteWeight.useMutation({
+        onSuccess: async () => {
+            await utils.body.invalidate();
         },
     });
 
@@ -64,9 +61,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                             onClick={() => {
                                 updateMutation.mutate({
                                     id,
-                                    userId,
                                     weight: parseFloat(weight),
-                                    created: date,
                                 });
                             }}
                         >
@@ -87,7 +82,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                         <button
                             className="h-8 w-8"
                             onClick={() => {
-                                deleteMutation.mutate(id);
+                                deleteMutation.mutate({ id });
                             }}
                         >
                             {deleteMutation.isLoading ? (

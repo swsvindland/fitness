@@ -4,9 +4,8 @@ import { FC, FormEvent, useState } from 'react';
 import { TextField } from '../../TextFields/TextField';
 import { Button } from '../../Buttons/Button';
 import { SecondaryButton } from '../../Buttons/SecondaryButton';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addBloodPressure } from '@fitness/api-legacy';
 import { useRouter } from 'next/navigation';
+import { api } from '~/trpc/react';
 
 interface IState {
     systolic: string;
@@ -14,22 +13,19 @@ interface IState {
 }
 
 export const BloodPressureCheckInForm: FC = () => {
-    const userId = localStorage.getItem('userId') ?? '';
-    const queryClient = useQueryClient();
     const [state, setState] = useState<IState>({ systolic: '', diastolic: '' });
     const router = useRouter();
+    const utils = api.useUtils();
 
-    const mutation = useMutation(addBloodPressure, {
+    const mutation = api.body.addBloodPressure.useMutation({
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserBloodPressure']);
-            await queryClient.invalidateQueries(['Dashboard']);
+            await utils.body.invalidate();
+            await utils.dashboard.invalidate();
         },
     });
-
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({
-            userId,
             systolic: parseInt(state.systolic),
             diastolic: parseInt(state.diastolic),
         });

@@ -5,12 +5,8 @@ import { TextField } from '../../TextFields/TextField';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-    deleteUserBloodPressure,
-    updateUserBloodPressure,
-} from '@fitness/api-legacy';
 import { CircleXMark } from '../../Icons/CircleXMark';
+import { api } from '~/trpc/react';
 
 interface IProps {
     id: number;
@@ -25,7 +21,6 @@ export const AllBloodPressureCard: FC<IProps> = ({
     defaultSystolic,
     defaultDiastolic,
 }) => {
-    const userId = localStorage.getItem('userId') ?? '';
     const [systolic, setSystolic] = useState<string>(
         defaultSystolic.toString()
     );
@@ -33,17 +28,17 @@ export const AllBloodPressureCard: FC<IProps> = ({
         defaultDiastolic.toString()
     );
     const [saved, setSaved] = useState<boolean>(false);
-    const queryClient = useQueryClient();
+    const utils = api.useUtils();
 
-    const updateMutation = useMutation(updateUserBloodPressure, {
+    const updateMutation = api.body.updateBloodPressure.useMutation({
         onSuccess: () => {
             setSaved(true);
         },
     });
 
-    const deleteMutation = useMutation(deleteUserBloodPressure, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['UserBloodPressure']);
+    const deleteMutation = api.body.deleteBloodPressure.useMutation({
+        onSuccess: async () => {
+            await utils.body.invalidate();
         },
     });
 
@@ -87,10 +82,8 @@ export const AllBloodPressureCard: FC<IProps> = ({
                             onClick={() => {
                                 updateMutation.mutate({
                                     id,
-                                    userId,
                                     systolic: parseInt(systolic),
                                     diastolic: parseInt(diastolic),
-                                    created: date,
                                 });
                             }}
                         >
@@ -111,7 +104,7 @@ export const AllBloodPressureCard: FC<IProps> = ({
                         <button
                             className="h-8 w-8"
                             onClick={() => {
-                                deleteMutation.mutate(id);
+                                deleteMutation.mutate({ id });
                             }}
                         >
                             {deleteMutation.isLoading ? (

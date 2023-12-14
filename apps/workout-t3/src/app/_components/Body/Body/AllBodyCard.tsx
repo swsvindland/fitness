@@ -5,31 +5,45 @@ import { TextField } from '../../TextFields/TextField';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { ChangeEvent, FC, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteUserBody, updateUserBody } from '@fitness/api-legacy';
 import { CircleXMark } from '../../Icons/CircleXMark';
 import { UserBody } from '@fitness/types';
+import { api } from '~/trpc/react';
 
 interface IProps {
     id: number;
     date: string;
-    defaultBody: UserBody;
+    neck: number;
+    shoulders: number;
+    chest: number;
+    leftBicep: number;
+    rightBicep: number;
+    navel: number;
+    waist: number;
+    hip: number;
+    leftThigh: number;
+    rightThigh: number;
+    leftCalf: number;
+    rightCalf: number;
 }
 
-export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
-    const [bodyState, setBodyState] = useState<UserBody>(defaultBody);
+export const AllBodyCard: FC<IProps> = (props) => {
+    const { id, date, ...defaultBody } = props;
+    const [bodyState, setBodyState] = useState<UserBody>({
+        id,
+        ...defaultBody,
+    });
     const [saved, setSaved] = useState<boolean>(false);
-    const queryClient = useQueryClient();
+    const utils = api.useUtils();
 
-    const updateMutation = useMutation(updateUserBody, {
+    const updateMutation = api.body.updateBody.useMutation({
         onSuccess: () => {
             setSaved(true);
         },
     });
 
-    const deleteMutation = useMutation(deleteUserBody, {
-        onSuccess: () => {
-            queryClient.invalidateQueries(['UserBodies']);
+    const deleteMutation = api.body.deleteBody.useMutation({
+        onSuccess: async () => {
+            await utils.body.invalidate();
         },
     });
 
@@ -203,7 +217,6 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                             className="mr-8 h-8 w-8"
                             onClick={() => {
                                 updateMutation.mutate({
-                                    id,
                                     ...bodyState,
                                 });
                             }}
@@ -223,7 +236,7 @@ export const AllBodyCard: FC<IProps> = ({ id, date, defaultBody }) => {
                         <button
                             className="h-8 w-8"
                             onClick={() => {
-                                deleteMutation.mutate(id);
+                                deleteMutation.mutate({ id });
                             }}
                         >
                             {deleteMutation.isLoading ? (

@@ -1,29 +1,27 @@
 'use client';
 
 import { FC, FormEvent, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addHeight } from '@fitness/api-legacy';
 import { useRouter } from 'next/navigation';
 import { SecondaryButton } from '~/app/_components/Buttons/SecondaryButton';
 import { Button } from '~/app/_components/Buttons/Button';
 import { TextField } from '~/app/_components/TextFields/TextField';
+import { api } from '~/trpc/react';
 
 export const HeightForm: FC = () => {
     const [height, setHeight] = useState<string>('');
-    const userId = localStorage.getItem('userId') ?? '';
-    const queryClient = useQueryClient();
     const router = useRouter();
+    const utils = api.useUtils();
 
-    const mutation = useMutation(addHeight, {
+    const mutation = api.body.addHeight.useMutation({
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserHeight']);
-            await queryClient.invalidateQueries(['Dashboard']);
+            await utils.body.invalidate();
+            await utils.dashboard.invalidate();
         },
     });
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate({ height: parseFloat(height), userId });
+        mutation.mutate({ height: parseFloat(height) });
         router.back();
     };
 

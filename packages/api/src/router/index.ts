@@ -8,8 +8,10 @@ import { storeRouter } from './store';
 import { customWorkoutRouter } from './customWorkout';
 import { supplementsRouter } from './supplements';
 import { foodRouter } from './food';
+import { bodyRouter } from './body';
 
 export const appRouter = createTRPCRouter({
+    body: bodyRouter,
     customWorkout: customWorkoutRouter,
     dashboard: dashboardRouter,
     food: foodRouter,

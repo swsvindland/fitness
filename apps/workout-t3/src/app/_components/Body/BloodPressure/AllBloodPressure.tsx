@@ -3,18 +3,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getAllUserBloodPressure } from '@fitness/api-legacy';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBloodPressureCard } from './AllBloodPressureCard';
+import { api } from '~/trpc/react';
 
 export const AllBloodPressure: FC = () => {
-    const userBloodPressureQuery = useQuery(
-        ['UserBloodPressure'],
-        getAllUserBloodPressure
-    );
+    const userBloodPressureQuery = api.body.getAllBloodPressures.useQuery();
 
     if (userBloodPressureQuery.isLoading) return <LoadingSpinner />;
-
-    const weights = userBloodPressureQuery.data?.data.sort((a, b) =>
-        a.created < b.created ? 1 : -1
-    );
 
     return (
         <div className="container grid grid-cols-1">
@@ -22,12 +16,12 @@ export const AllBloodPressure: FC = () => {
                 All Blood Pressure Records
             </h2>
             <div className=" grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
-                {weights?.map((item) => (
+                {userBloodPressureQuery.data?.map((item) => (
                     <AllBloodPressureCard
-                        id={item.id}
-                        date={item.created}
-                        defaultSystolic={item.systolic}
-                        defaultDiastolic={item.diastolic}
+                        id={Number(item.Id)}
+                        date={item.Created.toDateString()}
+                        defaultSystolic={item.Systolic}
+                        defaultDiastolic={item.Diastolic}
                     />
                 ))}
             </div>
