@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { AllBodyCard } from './AllBodyCard';

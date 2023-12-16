@@ -2,7 +2,9 @@ import { FC } from 'react';
 import { MacroGrid } from '~/app/_components/Macros/MacroGrid';
 import { Todo } from '~/app/_components/Home/Todo';
 import { RecommendedNextWorkout } from '~/app/_components/Workout/RecommendedNextWorkout';
-import '@khmyznikov/pwa-install';
+import { WeightGraph } from '~/app/_components/Body/Weight/WeightGraph';
+import { BodyGraph } from '~/app/_components/Body/Body/BodyGraph';
+import { BloodPressureGraph } from '~/app/_components/Body/BloodPressure/BloodPressureGraph';
 
 export const Home: FC = () => {
     return (
@@ -14,8 +16,9 @@ export const Home: FC = () => {
                 <MacroGrid />
             </div>
             <RecommendedNextWorkout />
-            {/* @ts-ignore */}
-            <pwa-install></pwa-install>
+            <WeightGraph />
+            <BodyGraph />
+            <BloodPressureGraph />
         </div>
     );
 };

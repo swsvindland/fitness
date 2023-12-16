@@ -1,3 +1,5 @@
+'use client';
+
 import React, { FC, useMemo, useState } from 'react';
 import {
     Chart as ChartJS,
@@ -41,10 +43,9 @@ export const WeightGraph: FC = () => {
     const userWeightQuery = api.body.getAllWeights.useQuery();
 
     useMemo(() => {
-        const labels = userWeightQuery.data
-            ?.slice(1)
-            .slice(-30)
-            .map((item) => format(new Date(item.Created), 'PP'));
+        const labels = userWeightQuery.data?.map((item) =>
+            format(new Date(item.Created), 'PP')
+        );
 
         setData({
             labels,
@@ -52,10 +53,7 @@ export const WeightGraph: FC = () => {
                 {
                     label: 'Weights',
                     data:
-                        userWeightQuery.data
-                            ?.slice(1)
-                            .slice(-30)
-                            .map((item) => item.Weight) ?? [],
+                        userWeightQuery.data?.map((item) => item.Weight) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },
