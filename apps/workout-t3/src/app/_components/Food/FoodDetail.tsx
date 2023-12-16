@@ -73,15 +73,15 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
                     ) : (
                         <Button
                             className="w-full"
-                            // onClick={() =>
-                            //     mutation.mutate({
-                            //         foodV2Id: foodId,
-                            //         userId,
-                            //         servingId: unit?.id ?? 0,
-                            //         servingAmount:
-                            //             parseFloat(displayedQuantity),
-                            //     })
-                            // }
+                            onClick={() =>
+                                mutation.mutate({
+                                    foodId: foodId,
+                                    date: new Date().toISOString(),
+                                    servingId: Number(unit?.id ?? 0),
+                                    servingAmount:
+                                        parseFloat(displayedQuantity),
+                                })
+                            }
                         >
                             Add
                         </Button>
