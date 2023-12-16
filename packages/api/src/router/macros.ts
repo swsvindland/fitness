@@ -51,8 +51,8 @@ export const macrosRouter = createTRPCRouter({
         const carbs = (calories - protein * 4 - fatHigh * 9) / 4;
         const carbsHigh = (caloriesHigh - proteinHigh * 4 - fat * 9) / 4;
 
-        const fiber = calories / 1000;
-        const fiberHigh = caloriesHigh / 1000;
+        const fiber = calories / 100;
+        const fiberHigh = caloriesHigh / 100;
 
         return {
             Calories: calories,
