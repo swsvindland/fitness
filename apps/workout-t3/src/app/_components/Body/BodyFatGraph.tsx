@@ -1,4 +1,6 @@
-import React, { FC, useMemo, useState } from 'react';
+'use client';
+
+import { FC, useMemo, useState } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,

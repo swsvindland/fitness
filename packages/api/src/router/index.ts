@@ -1,4 +1,3 @@
-import { userRouter } from './user';
 import { macrosRouter } from './macros';
 import { createTRPCRouter } from '../trpc';
 import { workoutRouter } from './workout';
@@ -18,7 +17,6 @@ export const appRouter = createTRPCRouter({
     dashboard: dashboardRouter,
     food: foodRouter,
     progressPhotos: progressPhotosRouter,
-    user: userRouter,
     macros: macrosRouter,
     store: storeRouter,
     supplements: supplementsRouter,

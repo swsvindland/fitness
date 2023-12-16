@@ -1,11 +1,6 @@
 import { FC, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
-import { addWorkoutActivity } from '@fitness/api-legacy';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
-import { Units } from '@fitness/types';
-import { api } from '~/trpc/react';
 
 interface IProps {
     id: number | undefined;
@@ -40,20 +35,6 @@ export const WorkoutSet: FC<IProps> = ({
     });
     const [saved, setSaved] = useState<boolean>(defaultSaved);
 
-    const userQuery = api.user.getUser.useQuery();
-
-    const queryClient = useQueryClient();
-
-    const mutation = useMutation(addWorkoutActivity, {
-        onSuccess: () => {
-            queryClient.invalidateQueries([
-                'UserWorkoutExercises',
-                workoutExerciseId,
-            ]);
-            setSaved(true);
-        },
-    });
-
     return (
         <div className="border-ternary flex border-t">
             <div className=" flex flex-1">
@@ -75,9 +56,7 @@ export const WorkoutSet: FC<IProps> = ({
             </div>
             <div className="border-ternary flex flex-1 border-x p-2">
                 <TextField
-                    label={
-                        userQuery.data?.Unit === Units.Imperial ? 'lbs' : 'kg'
-                    }
+                    label="lbs"
                     id={`exercise-weight-${id}-${set}`}
                     value={state.weight}
                     type="number"
@@ -93,31 +72,18 @@ export const WorkoutSet: FC<IProps> = ({
             </div>
             <div className="flex w-24 flex-none">
                 <div className="inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium">
-                    <button
-                        onClick={() => {
-                            mutation.mutate({
-                                id: id,
-                                userId,
-                                workoutExerciseId: workoutExerciseId,
-                                reps: state.reps,
-                                weight: parseFloat(state.weight),
-                                set,
-                                week,
-                                day,
-                            });
-                        }}
-                    >
-                        {mutation.isLoading ? (
-                            <LoadingSpinner className="ml-2 h-12 w-12" />
-                        ) : (
-                            <CircleCheckSolid
-                                className={
-                                    saved
-                                        ? 'fill-secondary w-12'
-                                        : 'border-ternary w-12 rounded-full border fill-transparent'
-                                }
-                            />
-                        )}
+                    <button onClick={() => {}}>
+                        {/*{mutation.isLoading ? (*/}
+                        {/*    <LoadingSpinner className="ml-2 h-12 w-12" />*/}
+                        {/*) : (*/}
+                        <CircleCheckSolid
+                            className={
+                                saved
+                                    ? 'fill-secondary w-12'
+                                    : 'border-ternary w-12 rounded-full border fill-transparent'
+                            }
+                        />
+                        {/*)}*/}
                     </button>
                 </div>
             </div>

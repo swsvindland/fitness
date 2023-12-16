@@ -1,6 +1,5 @@
 import { format } from 'date-fns';
 import { TextField } from '../../TextFields/TextField';
-import { Units } from '@fitness/types';
 import { LoadingSpinner } from '../../Loading/LoadingSpinner';
 import { CircleCheckSolid } from '../../Icons/CircleCheckSolid';
 import { FC, useState } from 'react';
@@ -17,8 +16,6 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
     const [weight, setWeight] = useState<string>(defaultWeight.toString());
     const [saved, setSaved] = useState<boolean>(false);
     const utils = api.useUtils();
-
-    const userQuery = api.user.getUser.useQuery();
 
     const updateMutation = api.body.updateWeight.useMutation({
         onSuccess: () => {
@@ -51,7 +48,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                         className="my-auto"
                     />
                     <span className="text-ternary mx-2 my-auto text-xs">
-                        {userQuery.data?.Unit === Units.Imperial ? 'lbs' : 'kg'}
+                        lbs
                     </span>
                 </div>
                 <div className="flex flex-none">

@@ -1,17 +1,14 @@
 'use client';
 
-import { FC, useContext, useState } from 'react';
+import { FC, useState } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
-import { Units } from '@fitness/types';
 import { LoadingMacroGrid } from '../Loading/LoadingMacroGrid';
-import { UserContext } from '~/contexts/UserContext';
 import { api } from '~/trpc/react';
 import { LinkButton } from '~/app/_components/Buttons/LinkButton';
 import { Scanner } from '~/app/_components/Scanner/Scanner';
 
 export const MacroGrid: FC = () => {
-    const { user } = useContext(UserContext);
     const [openScanner, setOpenScanner] = useState(false);
 
     const macrosQuery = api.macros.getMacros.useQuery();
@@ -41,7 +38,7 @@ export const MacroGrid: FC = () => {
                     amount={macrosQuery.data?.Calories ?? 0}
                     amountHigh={macrosQuery.data?.CaloriesHigh ?? 0}
                     currentAmount={currentMacrosQuery.data?.Calories}
-                    unit={user?.unit === Units.Imperial ? 'Cal' : 'kcal'}
+                    unit="kcal"
                 />
                 <dl className="mt-2 grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-4">
                     <MacroGridUnit

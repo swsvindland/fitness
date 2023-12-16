@@ -1,4 +1,6 @@
-import React, { FC, useState } from 'react';
+'use client';
+
+import { FC, useState } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { Viewer } from './Viewer';
