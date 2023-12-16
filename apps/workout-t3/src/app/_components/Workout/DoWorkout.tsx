@@ -1,14 +1,10 @@
 import { FC, useMemo, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Pagination } from '../Pagination';
 import { WorkoutCard } from './WorkoutCard';
-import { completeWorkout } from '@fitness/api-legacy';
-import { Button } from '../Buttons/Button';
 import { Dropdown, DropdownOption } from '../Dropdown';
 import { WorkoutCompleted } from './WorkoutCompleted';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
-import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
 import { WorkoutType } from '@fitness/types';
 
@@ -27,13 +23,10 @@ const generateOptions = (weeks: number): DropdownOption[] => {
 };
 
 export const DoWorkout: FC<IProps> = ({ workoutId, type }) => {
-    const userId = localStorage.getItem('userId') ?? '';
     const [maxDays, setMaxDays] = useState<number>(1);
     const [day, setDay] = useState<number>(1);
     const [week, setWeek] = useState<DropdownOption>({ id: 1, name: 'Week 1' });
     const [options, setOptions] = useState<DropdownOption[]>([]);
-    const router = useRouter();
-    const queryClient = useQueryClient();
 
     const workoutQuery = api.workouts.getWorkout.useQuery({
         workoutId: Number(workoutId),
@@ -41,12 +34,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId, type }) => {
     });
     const nextWorkoutQuery = api.workouts.getNextWorkout.useQuery({
         type: type.toString(),
-    });
-
-    const mutation = useMutation(completeWorkout, {
-        onSuccess: async () => {
-            await queryClient.invalidateQueries(['Dashboard']);
-        },
     });
 
     useMemo(() => {
@@ -65,17 +52,6 @@ export const DoWorkout: FC<IProps> = ({ workoutId, type }) => {
         return <WorkoutCompleted />;
     }
 
-    const handleCompleteWorkout = () => {
-        mutation.mutate({
-            workoutId: Number(workoutId),
-            userId,
-            day,
-            week: week.id,
-        });
-
-        router.replace('/');
-    };
-
     return (
         <div className="container">
             <Dropdown options={options} selected={week} setSelected={setWeek} />
@@ -88,17 +64,11 @@ export const DoWorkout: FC<IProps> = ({ workoutId, type }) => {
                         key={exercise.Id}
                         workoutExerciseId={exercise.Id ?? 0}
                         day={day}
-                        week={week.id}
+                        week={Number(week.id)}
                     />
                 ))}
             </div>
             <div className="mt-2 flex w-full flex-col items-center justify-center gap-2 md:flex-row">
-                <Button
-                    onClick={handleCompleteWorkout}
-                    className="flex w-full max-w-md justify-center align-middle"
-                >
-                    Complete Workout
-                </Button>
                 {workoutQuery.data?.UserId ? (
                     <LinkSecondaryButton
                         to={`/workout/edit/${workoutId}`}

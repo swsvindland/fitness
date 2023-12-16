@@ -14,12 +14,11 @@ import {
     BubbleDataPoint,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
-import { getAllUserBodies } from '@fitness/api-legacy';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
+import { api } from '~/trpc/react';
 
 ChartJS.register(
     RadialLinearScale,
@@ -40,10 +39,10 @@ export const BodyGraph = () => {
         | undefined
     >(undefined);
 
-    const userBodyQuery = useQuery(['UserBody'], getAllUserBodies);
+    const userBodyQuery = api.body.getAllBodies.useQuery();
 
     useMemo(() => {
-        const userBody = userBodyQuery.data?.data;
+        const userBody = userBodyQuery.data ?? [];
 
         if (!userBody) {
             return;
@@ -82,20 +81,20 @@ export const BodyGraph = () => {
             ],
             datasets:
                 graphedData.map((item, index) => ({
-                    label: format(new Date(item.created), 'PP'),
+                    label: format(new Date(item!.Created), 'PP'),
                     data: [
-                        item.neck,
-                        item.shoulders,
-                        item.chest,
-                        item.leftBicep,
-                        item.rightBicep,
-                        item.navel,
-                        item.waist,
-                        item.hip,
-                        item.leftThigh,
-                        item.rightThigh,
-                        item.leftCalf,
-                        item.rightCalf,
+                        item!.Neck,
+                        item!.Shoulders,
+                        item!.Chest,
+                        item!.LeftBicep,
+                        item!.RightBicep,
+                        item!.Navel,
+                        item!.Waist,
+                        item!.Hip,
+                        item!.LeftThigh,
+                        item!.RightThigh,
+                        item!.LeftCalf,
+                        item!.RightCalf,
                     ],
                     backgroundColor: backgrounds[index],
                     borderColor: colors[index],

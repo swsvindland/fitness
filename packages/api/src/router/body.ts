@@ -235,7 +235,7 @@ export const bodyRouter = createTRPCRouter({
                 rightBicep: z.number(),
                 navel: z.number(),
                 waist: z.number(),
-                hips: z.number(),
+                hip: z.number(),
                 leftThigh: z.number(),
                 rightThigh: z.number(),
                 leftCalf: z.number(),
@@ -255,7 +255,7 @@ export const bodyRouter = createTRPCRouter({
                     RightBicep: input.rightBicep,
                     Navel: input.navel,
                     Waist: input.waist,
-                    Hip: input.hips,
+                    Hip: input.hip,
                     LeftThigh: input.leftThigh,
                     RightThigh: input.rightThigh,
                     LeftCalf: input.leftCalf,
@@ -314,4 +314,10 @@ export const bodyRouter = createTRPCRouter({
                 },
             });
         }),
+
+    getAllBodyFats: protectedProcedure.query(async ({ ctx }) => {
+        if (!ctx.auth.userId) throw new Error('No user ID');
+
+        return [{ created: '2021-01-01', bodyFat: 20 }];
+    }),
 });

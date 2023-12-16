@@ -13,10 +13,9 @@ import {
     BubbleDataPoint,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import { getUserBodyFat } from '@fitness/api-legacy';
 import { LoadingCard } from '../Loading/LoadingCard';
+import { api } from '~/trpc/react';
 
 ChartJS.register(
     CategoryScale,
@@ -37,12 +36,10 @@ export const BodyFatGraph: FC = () => {
         | undefined
     >(undefined);
 
-    const userBodyFatQuery = useQuery(['UserBodyFat'], () => {
-        return getUserBodyFat();
-    });
+    const userBodyFatQuery = api.body.getAllBodyFats.useQuery();
 
     useMemo(() => {
-        const labels = userBodyFatQuery.data?.data
+        const labels = userBodyFatQuery.data
             ?.slice(1)
             .slice(-30)
             .map((item) => format(new Date(item.created), 'PP'));
@@ -53,7 +50,7 @@ export const BodyFatGraph: FC = () => {
                 {
                     label: 'Body Fat',
                     data:
-                        userBodyFatQuery.data?.data
+                        userBodyFatQuery.data
                             ?.slice(1)
                             .slice(-30)
                             .map((item) => item.bodyFat) ?? [],

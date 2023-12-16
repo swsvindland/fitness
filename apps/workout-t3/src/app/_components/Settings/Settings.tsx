@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { LinkButton } from '../Buttons/LinkButton';
-import { RestartWorkout } from '../Workout/RestartWorkout';
 import { DeleteAccount } from '~/app/_components/Settings/DeleteAccount';
 
 export const Settings: FC = () => {
@@ -19,7 +18,6 @@ export const Settings: FC = () => {
             <LinkButton to="/workout/store" className="mb-2">
                 Change Workout
             </LinkButton>
-            <RestartWorkout />
             <DeleteAccount />
         </div>
     );

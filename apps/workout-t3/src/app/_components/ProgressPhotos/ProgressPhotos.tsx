@@ -1,15 +1,15 @@
 import React, { FC, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { CDN_URL, getProgressPhotos } from '@fitness/api-legacy';
 import { LinkButton } from '../Buttons/LinkButton';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { Viewer } from './Viewer';
 import { LoadingCard } from '../Loading/LoadingCard';
+import { api } from '~/trpc/react';
+import { CDN_URL } from '~/utils/constants';
 
 export const ProgressPhotos: FC = () => {
     const [open, setOpen] = useState(false);
     const [openedImage, setOpenedImage] = useState<string>('');
-    const photosQuery = useQuery(['ProgressPhotos'], getProgressPhotos);
+    const photosQuery = api.progressPhotos.getProgressPhotos.useQuery();
 
     if (photosQuery.isLoading) {
         return <LoadingCard isLoading />;
@@ -28,17 +28,17 @@ export const ProgressPhotos: FC = () => {
                     </LinkSecondaryButton>
                 </div>
                 <div className="mt-2 grid grid-cols-4 gap-4">
-                    {photosQuery.data?.data.slice(0, 4).map((photo) => (
+                    {photosQuery.data?.slice(0, 4).map((photo) => (
                         <button
-                            key={photo.id}
+                            key={photo.Id}
                             onClick={() => {
                                 setOpen(true);
-                                setOpenedImage(`${CDN_URL}${photo.filename}`);
+                                setOpenedImage(`${CDN_URL}${photo.Filename}`);
                             }}
                         >
                             <img
                                 className="rounded shadow"
-                                src={`${CDN_URL}${photo.filename}`}
+                                src={`${CDN_URL}${photo.Filename}`}
                                 alt=""
                                 width={150}
                                 loading="lazy"

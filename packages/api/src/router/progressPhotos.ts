@@ -25,6 +25,19 @@ export const progressPhotosRouter = createTRPCRouter({
             }
         }),
 
+    getProgressPhotos: protectedProcedure.query(async ({ ctx }) => {
+        if (!ctx.auth.userId) throw new Error('No user ID');
+
+        return await ctx.prisma.progressPhoto.findMany({
+            where: {
+                UserId: ctx.auth.userId,
+            },
+            orderBy: {
+                Created: 'asc',
+            },
+        });
+    }),
+
     deleteProgressPhoto: protectedProcedure
         .input(
             z.object({

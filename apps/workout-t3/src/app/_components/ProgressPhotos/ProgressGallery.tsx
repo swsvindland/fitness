@@ -1,15 +1,15 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { CDN_URL, getProgressPhotos } from '@fitness/api-legacy';
 import { FC, useState } from 'react';
 import { format } from 'date-fns';
 import { Viewer } from './Viewer';
+import { api } from '~/trpc/react';
+import { CDN_URL } from '~/utils/constants';
 
 export const ProgressGallery: FC = () => {
-    const photosQuery = useQuery(['ProgressPhotos'], getProgressPhotos);
-    const photos = photosQuery.data?.data;
-    const dates = Array.from(new Set(photos?.map((photo) => photo.created)));
+    const photosQuery = api.progressPhotos.getProgressPhotos.useQuery();
+    const photos = photosQuery.data;
+    const dates = Array.from(new Set(photos?.map((photo) => photo.Created)));
     const [open, setOpen] = useState(false);
     const [openedImage, setOpenedImage] = useState<string>('');
 
@@ -17,26 +17,26 @@ export const ProgressGallery: FC = () => {
         <>
             <div className="grid w-full max-w-2xl grid-cols-1">
                 {dates.map((date) => (
-                    <div key={date}>
+                    <div key={date.toISOString()}>
                         <h2 className="text-secondary my-2 text-lg">
                             {format(new Date(date), 'PP')}
                         </h2>
                         <div className="grid grid-cols-3 gap-4">
                             {photos
-                                ?.filter((item) => item.created === date)
+                                ?.filter((item) => item.Created === date)
                                 .map((photo) => (
                                     <button
-                                        key={photo.id}
+                                        key={photo.Id}
                                         onClick={() => {
                                             setOpen(true);
                                             setOpenedImage(
-                                                `${CDN_URL}${photo.filename}`
+                                                `${CDN_URL}${photo.Filename}`
                                             );
                                         }}
                                     >
                                         <img
                                             className="rounded shadow"
-                                            src={`${CDN_URL}${photo.filename}`}
+                                            src={`${CDN_URL}${photo.Filename}`}
                                             alt=""
                                         />
                                     </button>

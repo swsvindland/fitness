@@ -125,6 +125,19 @@ export const foodRouter = createTRPCRouter({
                 []) as FoodSearch[];
         }),
 
+    searchFoodByBarcode: protectedProcedure
+        .input(z.object({ barcode: z.string() }))
+        .query(async ({ input }) => {
+            const auth = await authFatSecret();
+
+            const response = await axios.get(
+                `https://platform.fatsecret.com/rest/server.api?method=food.find_id_for_barcode&barcode=${input.barcode}&format=json`,
+                { headers: { Authorization: `Bearer ${auth}` } }
+            );
+
+            return response.data?.food_id;
+        }),
+
     getRecentUserFoods: protectedProcedure.query(async ({ ctx }) => {
         if (!ctx.auth.userId) throw new Error('No user ID');
 

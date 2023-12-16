@@ -4,9 +4,8 @@ import { FC, FormEvent, useMemo, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addCustomMacros, getMacros } from '@fitness/api-legacy';
 import { useRouter } from 'next/navigation';
+import { api } from '~/trpc/react';
 
 interface IState {
     calories: string;
@@ -22,7 +21,6 @@ interface IState {
 }
 
 export const CustomMacroForm: FC = () => {
-    const queryClient = useQueryClient();
     const [state, setState] = useState<IState>({
         calories: '',
         protein: '',
@@ -36,27 +34,29 @@ export const CustomMacroForm: FC = () => {
         fiberHigh: undefined,
     });
     const router = useRouter();
+    const utils = api.useUtils();
 
-    const macrosQuery = useQuery(['Macros'], () => getMacros());
+    const macrosQuery = api.macros.getMacros.useQuery();
 
-    const mutation = useMutation(addCustomMacros, {
+    const mutation = api.customMacros.createCustomMacros.useMutation({
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['Macros']);
+            await utils.macros.invalidate();
+            await utils.customMacros.invalidate();
         },
     });
 
     useMemo(() => {
         setState({
-            calories: macrosQuery.data?.data.calories.toFixed(0) ?? '',
-            protein: macrosQuery.data?.data.protein.toFixed(0) ?? '',
-            fat: macrosQuery.data?.data.fat.toFixed(0) ?? '',
-            carbs: macrosQuery.data?.data.carbs.toFixed(0) ?? '',
-            fiber: macrosQuery.data?.data.fiber.toFixed(0) ?? '',
-            caloriesHigh: macrosQuery.data?.data.caloriesHigh?.toFixed(0),
-            proteinHigh: macrosQuery.data?.data.proteinHigh?.toFixed(0),
-            fatHigh: macrosQuery.data?.data.fatHigh?.toFixed(0),
-            carbsHigh: macrosQuery.data?.data.carbsHigh?.toFixed(0),
-            fiberHigh: macrosQuery.data?.data.fiberHigh?.toFixed(0),
+            calories: macrosQuery.data?.Calories.toFixed(0) ?? '',
+            protein: macrosQuery.data?.Protein.toFixed(0) ?? '',
+            fat: macrosQuery.data?.Fat.toFixed(0) ?? '',
+            carbs: macrosQuery.data?.Carbs.toFixed(0) ?? '',
+            fiber: macrosQuery.data?.Fiber.toFixed(0) ?? '',
+            caloriesHigh: macrosQuery.data?.CaloriesHigh?.toFixed(0),
+            proteinHigh: macrosQuery.data?.ProteinHigh?.toFixed(0),
+            fatHigh: macrosQuery.data?.FatHigh?.toFixed(0),
+            carbsHigh: macrosQuery.data?.CarbsHigh?.toFixed(0),
+            fiberHigh: macrosQuery.data?.FiberHigh?.toFixed(0),
         });
     }, [macrosQuery.data]);
 
@@ -89,7 +89,6 @@ export const CustomMacroForm: FC = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         mutation.mutate({
-            id: macrosQuery.data?.data.id,
             calories: parseInt(state.calories),
             protein: parseInt(state.protein),
             fat: parseInt(state.fat),
@@ -97,13 +96,11 @@ export const CustomMacroForm: FC = () => {
             fiber: parseInt(state.fiber),
             caloriesHigh: state.caloriesHigh
                 ? parseInt(state.caloriesHigh)
-                : undefined,
-            proteinHigh: state.proteinHigh
-                ? parseInt(state.proteinHigh)
-                : undefined,
-            fatHigh: state.fatHigh ? parseInt(state.fatHigh) : undefined,
-            carbsHigh: state.carbsHigh ? parseInt(state.carbsHigh) : undefined,
-            fiberHigh: state.fiberHigh ? parseInt(state.fiberHigh) : undefined,
+                : null,
+            proteinHigh: state.proteinHigh ? parseInt(state.proteinHigh) : null,
+            fatHigh: state.fatHigh ? parseInt(state.fatHigh) : null,
+            carbsHigh: state.carbsHigh ? parseInt(state.carbsHigh) : null,
+            fiberHigh: state.fiberHigh ? parseInt(state.fiberHigh) : null,
         });
         router.back();
     };
@@ -111,16 +108,16 @@ export const CustomMacroForm: FC = () => {
     const handleClear = (event: FormEvent) => {
         event.preventDefault();
         setState({
-            calories: macrosQuery.data?.data.calories.toFixed(0) ?? '',
-            protein: macrosQuery.data?.data.protein.toFixed(0) ?? '',
-            fat: macrosQuery.data?.data.fat.toFixed(0) ?? '',
-            carbs: macrosQuery.data?.data.carbs.toFixed(0) ?? '',
-            fiber: macrosQuery.data?.data.fiber.toFixed(0) ?? '',
-            caloriesHigh: macrosQuery.data?.data.caloriesHigh?.toFixed(0),
-            proteinHigh: macrosQuery.data?.data.proteinHigh?.toFixed(0),
-            fatHigh: macrosQuery.data?.data.fatHigh?.toFixed(0),
-            carbsHigh: macrosQuery.data?.data.carbsHigh?.toFixed(0),
-            fiberHigh: macrosQuery.data?.data.fiberHigh?.toFixed(0),
+            calories: macrosQuery.data?.Calories.toFixed(0) ?? '',
+            protein: macrosQuery.data?.Protein.toFixed(0) ?? '',
+            fat: macrosQuery.data?.Fat.toFixed(0) ?? '',
+            carbs: macrosQuery.data?.Carbs.toFixed(0) ?? '',
+            fiber: macrosQuery.data?.Fiber.toFixed(0) ?? '',
+            caloriesHigh: macrosQuery.data?.CaloriesHigh?.toFixed(0),
+            proteinHigh: macrosQuery.data?.ProteinHigh?.toFixed(0),
+            fatHigh: macrosQuery.data?.FatHigh?.toFixed(0),
+            carbsHigh: macrosQuery.data?.CarbsHigh?.toFixed(0),
+            fiberHigh: macrosQuery.data?.FiberHigh?.toFixed(0),
         });
     };
 

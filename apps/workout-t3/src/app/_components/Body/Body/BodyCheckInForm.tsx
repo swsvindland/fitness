@@ -4,9 +4,8 @@ import { ChangeEvent, FC, FormEvent, useState } from 'react';
 import { TextField } from '../../TextFields/TextField';
 import { Button } from '../../Buttons/Button';
 import { SecondaryButton } from '../../Buttons/SecondaryButton';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { addBody } from '@fitness/api-legacy';
 import { useRouter } from 'next/navigation';
+import { api } from '~/trpc/react';
 
 export interface IBodyState {
     neck: string;
@@ -39,15 +38,14 @@ const initialState = {
 };
 
 export const BodyCheckInForm: FC = () => {
-    const userId = localStorage.getItem('userId') ?? '';
     const [state, setState] = useState<IBodyState>(initialState);
-    const queryClient = useQueryClient();
     const router = useRouter();
+    const utils = api.useUtils();
 
-    const mutation = useMutation(addBody, {
+    const mutation = api.body.addBody.useMutation({
         onSuccess: async () => {
-            await queryClient.invalidateQueries(['UserBody']);
-            await queryClient.invalidateQueries(['Dashboard']);
+            await utils.body.invalidate();
+            await utils.dashboard.invalidate();
         },
     });
 
@@ -66,8 +64,6 @@ export const BodyCheckInForm: FC = () => {
             rightThigh: parseFloat(state.rightThigh),
             leftCalf: parseFloat(state.leftCalf),
             rightCalf: parseFloat(state.rightCalf),
-            userId: userId,
-            created: new Date().toISOString(),
         });
 
         router.back();

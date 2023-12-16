@@ -13,12 +13,11 @@ import {
     BubbleDataPoint,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
-import { getAllUserWeights } from '@fitness/api-legacy';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
+import { api } from '~/trpc/react';
 
 ChartJS.register(
     CategoryScale,
@@ -39,13 +38,13 @@ export const WeightGraph: FC = () => {
         | undefined
     >(undefined);
 
-    const userWeightQuery = useQuery(['UserWeight'], getAllUserWeights);
+    const userWeightQuery = api.body.getAllWeights.useQuery();
 
     useMemo(() => {
-        const labels = userWeightQuery.data?.data
-            .slice(1)
+        const labels = userWeightQuery.data
+            ?.slice(1)
             .slice(-30)
-            .map((item) => format(new Date(item.created), 'PP'));
+            .map((item) => format(new Date(item.Created), 'PP'));
 
         setData({
             labels,
@@ -53,10 +52,10 @@ export const WeightGraph: FC = () => {
                 {
                     label: 'Weights',
                     data:
-                        userWeightQuery.data?.data
-                            .slice(1)
+                        userWeightQuery.data
+                            ?.slice(1)
                             .slice(-30)
-                            .map((item) => item.weight) ?? [],
+                            .map((item) => item.Weight) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
                 },

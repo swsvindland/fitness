@@ -12,7 +12,6 @@
     "dependencies": {
         "@clerk/nextjs": "^4.27.6",
         "@fitness/api": "workspace:*",
-        "@fitness/api-legacy": "workspace:*",
         "@fitness/types": "workspace:*",
         "@headlessui/react": "^1.7.17",
         "@khmyznikov/pwa-install": "^0.2.7",

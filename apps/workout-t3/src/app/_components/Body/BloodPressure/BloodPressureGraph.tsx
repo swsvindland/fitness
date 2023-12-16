@@ -13,12 +13,11 @@ import {
     BubbleDataPoint,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import { LinkButton } from '../../Buttons/LinkButton';
-import { getAllUserBloodPressure } from '@fitness/api-legacy';
 import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
 import { LoadingCard } from '../../Loading/LoadingCard';
+import { api } from '~/trpc/react';
 
 ChartJS.register(
     CategoryScale,
@@ -39,14 +38,11 @@ export const BloodPressureGraph: FC = () => {
         | undefined
     >(undefined);
 
-    const userBloodPressureQuery = useQuery(
-        ['UserBloodPressure'],
-        getAllUserBloodPressure
-    );
+    const userBloodPressureQuery = api.body.getAllBloodPressures.useQuery();
 
     useMemo(() => {
-        const labels = userBloodPressureQuery.data?.data.map((item) =>
-            format(new Date(item.created), 'PP')
+        const labels = userBloodPressureQuery.data?.map((item) =>
+            format(new Date(item.Created), 'PP')
         );
 
         setData({
@@ -55,8 +51,8 @@ export const BloodPressureGraph: FC = () => {
                 {
                     label: 'Systolic',
                     data:
-                        userBloodPressureQuery.data?.data.map(
-                            (item) => item.systolic
+                        userBloodPressureQuery.data?.map(
+                            (item) => item.Systolic
                         ) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
@@ -64,8 +60,8 @@ export const BloodPressureGraph: FC = () => {
                 {
                     label: 'Diastolic',
                     data:
-                        userBloodPressureQuery.data?.data.map(
-                            (item) => item.diastolic
+                        userBloodPressureQuery.data?.map(
+                            (item) => item.Diastolic
                         ) ?? [],
                     borderColor: 'rgba(175, 210, 87, 1)',
                     backgroundColor: 'rgba(175, 210, 87, 0.1)',

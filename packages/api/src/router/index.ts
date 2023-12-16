@@ -9,9 +9,11 @@ import { customWorkoutRouter } from './customWorkout';
 import { supplementsRouter } from './supplements';
 import { foodRouter } from './food';
 import { bodyRouter } from './body';
+import { customMacrosRouter } from './customMacros';
 
 export const appRouter = createTRPCRouter({
     body: bodyRouter,
+    customMacros: customMacrosRouter,
     customWorkout: customWorkoutRouter,
     dashboard: dashboardRouter,
     food: foodRouter,

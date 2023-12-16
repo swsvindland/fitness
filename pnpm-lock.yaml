@@ -16,9 +16,6 @@ importers:
       '@fitness/api':
         specifier: workspace:*
         version: link:../../packages/api
-      '@fitness/api-legacy':
-        specifier: workspace:*
-        version: link:../../packages/api-legacy
       '@fitness/types':
         specifier: workspace:*
         version: link:../../packages/types

@@ -2,8 +2,6 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { FC, Fragment, useContext, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
-import { deleteUser } from '@fitness/api-legacy';
 import { UserContext } from '~/contexts/UserContext';
 import { Button } from '~/app/_components/Buttons/Button';
 import { SecondaryButton } from '~/app/_components/Buttons/SecondaryButton';
@@ -14,17 +12,17 @@ export const DeleteAccount: FC = () => {
     const [open, setOpen] = useState(false);
     const { signOut } = useClerk();
 
-    const deleteMutation = useMutation(deleteUser, {
-        onSuccess: async () => {
-            localStorage.clear();
-            setUser(undefined);
-
-            await signOut();
-        },
-    });
+    // const deleteMutation = useMutation(deleteUser, {
+    //     onSuccess: async () => {
+    //         localStorage.clear();
+    //         setUser(undefined);
+    //
+    //         await signOut();
+    //     },
+    // });
 
     const handleDelete = () => {
-        deleteMutation.mutate();
+        // deleteMutation.mutate();
         setOpen(false);
     };
 
