@@ -232,21 +232,6 @@ model UserWorkoutsCompleted {
     @@index([WorkoutId], map: "UserWorkoutsCompleted_WorkoutId")
 }
 
-model Users {
-    Id         String    @id @db.Char(64)
-    Email      String    @unique(map: "Users_Email") @db.VarChar(255)
-    LastLogin  DateTime? @db.DateTime(0)
-    Created    DateTime  @db.DateTime(0)
-    Sex        String    @db.VarChar(255)
-    Salt       String?   @db.VarChar(64)
-    Password   String?   @db.VarChar(64)
-    UserRole   String    @db.VarChar(255)
-    Unit       String    @db.VarChar(255)
-    Paid       Boolean   @default(false)
-    PaidUntil  DateTime? @db.DateTime(0)
-    LoginCount Int       @default(0)
-}
-
 model Workout {
     Id                    BigInt                  @id @default(autoincrement())
     Created               DateTime                @db.DateTime(0)
