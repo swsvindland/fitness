@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { CircleCheckSolid } from '../Icons/CircleCheckSolid';
+import { api } from '~/trpc/react';
 
 interface IProps {
     id: number | undefined;
@@ -28,12 +29,13 @@ export const WorkoutSet: FC<IProps> = ({
     defaultWeight,
     defaultSaved,
 }) => {
-    const userId = localStorage.getItem('userId') ?? '';
     const [state, setState] = useState<IState>({
         reps: defaultReps ?? 0,
         weight: defaultWeight?.toString() ?? '0',
     });
     const [saved, setSaved] = useState<boolean>(defaultSaved);
+
+    const userSettings = api.settings.getUserSettings.useQuery();
 
     return (
         <div className="border-ternary flex border-t">
@@ -56,7 +58,7 @@ export const WorkoutSet: FC<IProps> = ({
             </div>
             <div className="border-ternary flex flex-1 border-x p-2">
                 <TextField
-                    label="lbs"
+                    label={userSettings.data?.Units === 'Metric' ? 'kg' : 'lbs'}
                     id={`exercise-weight-${id}-${set}`}
                     value={state.weight}
                     type="number"

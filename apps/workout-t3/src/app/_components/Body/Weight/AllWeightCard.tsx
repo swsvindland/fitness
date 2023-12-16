@@ -17,6 +17,8 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
     const [saved, setSaved] = useState<boolean>(false);
     const utils = api.useUtils();
 
+    const userSettings = api.settings.getUserSettings.useQuery();
+
     const updateMutation = api.body.updateWeight.useMutation({
         onSuccess: () => {
             setSaved(true);
@@ -48,7 +50,7 @@ export const AllWeightCard: FC<IProps> = ({ id, date, defaultWeight }) => {
                         className="my-auto"
                     />
                     <span className="text-ternary mx-2 my-auto text-xs">
-                        lbs
+                        {userSettings.data?.Units === 'Metric' ? 'kg' : 'lbs'}
                     </span>
                 </div>
                 <div className="flex flex-none">

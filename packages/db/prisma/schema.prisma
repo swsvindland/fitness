@@ -266,3 +266,13 @@ model WorkoutExercise {
     @@index([WorkoutId], map: "WorkoutExercise_WorkoutId")
     @@index([ExerciseId], map: "WorkoutExercise_ExerciseId")
 }
+
+model UserSettings {
+    Id      BigInt   @id @default(autoincrement())
+    UserId  String   @db.Char(64)
+    Sex     String   @db.VarChar(255)
+    Age     Int      @db.SmallInt
+    Units   String   @db.VarChar(255)
+    Created DateTime @db.DateTime(0)
+    Updated DateTime @db.DateTime(0)
+}

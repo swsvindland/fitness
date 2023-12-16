@@ -9,6 +9,7 @@ import { supplementsRouter } from './supplements';
 import { foodRouter } from './food';
 import { bodyRouter } from './body';
 import { customMacrosRouter } from './customMacros';
+import { settingsRouter } from './settings';
 
 export const appRouter = createTRPCRouter({
     body: bodyRouter,
@@ -17,6 +18,7 @@ export const appRouter = createTRPCRouter({
     dashboard: dashboardRouter,
     food: foodRouter,
     progressPhotos: progressPhotosRouter,
+    settings: settingsRouter,
     macros: macrosRouter,
     store: storeRouter,
     supplements: supplementsRouter,
