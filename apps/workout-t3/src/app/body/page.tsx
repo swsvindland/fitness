@@ -1,10 +1,10 @@
 import { Body } from '~/app/_components/Body/Body';
-import { LoadingSpinner } from '~/app/_components/Loading/LoadingSpinner';
 import { Suspense } from 'react';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 export default async function EatPage() {
     return (
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingPage />}>
             <Body />
         </Suspense>
     );

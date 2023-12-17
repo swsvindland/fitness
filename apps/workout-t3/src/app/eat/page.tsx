@@ -1,10 +1,10 @@
 import { Eat } from '~/app/_components/Macros/Eat';
-import { LoadingSpinner } from '~/app/_components/Loading/LoadingSpinner';
 import { Suspense } from 'react';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 export default async function EatPage() {
     return (
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingPage />}>
             <Eat />
         </Suspense>
     );

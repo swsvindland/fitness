@@ -1,10 +1,10 @@
 import { SignIn } from '@clerk/nextjs';
-import { LoadingSpinner } from '~/app/_components/Loading/LoadingSpinner';
 import { Suspense } from 'react';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 export default function Page() {
     return (
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingPage />}>
             <main className="text-secondary flex min-h-screen flex-col items-center justify-center">
                 <SignIn />
             </main>

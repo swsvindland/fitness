@@ -1,10 +1,10 @@
 import { Home } from '~/app/_components/Home/Home';
 import { Suspense } from 'react';
-import { LoadingSpinner } from '~/app/_components/Loading/LoadingSpinner';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 export default async function HomePage() {
     return (
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingPage />}>
             <Home />
         </Suspense>
     );
