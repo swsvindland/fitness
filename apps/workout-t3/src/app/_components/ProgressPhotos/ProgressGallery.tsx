@@ -30,13 +30,13 @@ export const ProgressGallery: FC = () => {
                                         onClick={() => {
                                             setOpen(true);
                                             setOpenedImage(
-                                                `${CDN_URL}${photo.Filename}`
+                                                `${CDN_URL}/${photo.Filename}`
                                             );
                                         }}
                                     >
                                         <img
                                             className="rounded shadow"
-                                            src={`${CDN_URL}${photo.Filename}`}
+                                            src={`${CDN_URL}/${photo.Filename}`}
                                             alt=""
                                         />
                                     </button>

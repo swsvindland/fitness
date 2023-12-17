@@ -7,7 +7,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { MinusSolid } from '../Icons/MinusSolid';
 import { useRouter } from 'next/navigation';
-import { useUploadThing } from '~/utils/uploadthing';
 import { Dialog, Transition } from '@headlessui/react';
 import { XSolid } from '~/app/_components/Icons/XSolid';
 import { Camera, CameraType } from 'react-camera-pro';
@@ -35,15 +34,10 @@ export const ProgressCamera: FC = () => {
     const [photos, setPhotos] = useState<any[]>([]);
     const router = useRouter();
     const queryClient = useQueryClient();
+    const utils = api.useUtils();
 
     const uploadPhotosMutation =
         api.progressPhotos.uploadProgressPhotos.useMutation();
-
-    const { startUpload } = useUploadThing('imageUploader', {
-        onClientUploadComplete: (out) => {
-            console.log(out);
-        },
-    });
 
     const removePhotos = (index: number) => {
         setPhotos(photos.filter((_, i) => i !== index));
@@ -55,14 +49,19 @@ export const ProgressCamera: FC = () => {
             base64ToFile(photo, `${uuidv4()}.jpg`)
         );
 
-        await startUpload(files);
+        for (const file of files) {
+            await fetch(`/api/upload?filename=${file.name}`, {
+                method: 'POST',
+                body: file,
+            });
+        }
 
         await uploadPhotosMutation.mutateAsync({
             photos: files.map((file) => file.name.split('.')[0] ?? '') ?? [],
         });
         setUploading(false);
 
-        await queryClient.invalidateQueries(['ProgressPhotos']);
+        await utils.progressPhotos.invalidate();
         router.back();
     };
 

@@ -35,12 +35,12 @@ export const ProgressPhotos: FC = () => {
                             key={photo.Id}
                             onClick={() => {
                                 setOpen(true);
-                                setOpenedImage(`${CDN_URL}${photo.Filename}`);
+                                setOpenedImage(`${CDN_URL}/${photo.Filename}`);
                             }}
                         >
                             <img
                                 className="rounded shadow"
-                                src={`${CDN_URL}${photo.Filename}`}
+                                src={`${CDN_URL}/${photo.Filename}`}
                                 alt=""
                                 width={150}
                                 loading="lazy"

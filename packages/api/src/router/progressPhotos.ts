@@ -12,13 +12,11 @@ export const progressPhotosRouter = createTRPCRouter({
             if (!ctx.auth.userId) throw new Error('No user ID');
 
             for (const photo of input.photos) {
-                console.log(photo);
-
                 await ctx.prisma.progressPhoto.create({
                     data: {
                         UserId: ctx.auth.userId,
                         FileId: photo,
-                        Filename: photo,
+                        Filename: `${photo}.jpg`,
                         Created: new Date(),
                     },
                 });
