@@ -4,11 +4,12 @@ export const dashboardRouter = createTRPCRouter({
     getTodos: protectedProcedure.query(async ({ ctx }) => {
         if (!ctx.auth.userId) throw new Error('No user ID');
 
-        const user = await ctx.prisma.users.findFirst({
+        const userSettings = await ctx.prisma.userSettings.findFirst({
             where: {
-                Id: ctx.auth.userId,
+                UserId: ctx.auth.userId,
             },
         });
+
         const height = await ctx.prisma.userHeight.findFirst({
             where: {
                 UserId: ctx.auth.userId,
@@ -31,7 +32,7 @@ export const dashboardRouter = createTRPCRouter({
             },
         });
 
-        const addSex = user.Sex === 'Unknown';
+        const addSex = userSettings?.Sex ?? 'Unknown' === 'Unknown';
         const addHeight = !height;
         const addWeight = !weight;
         const addSupplements = supplements.length === 0;
