@@ -1,4 +1,6 @@
 import { WorkoutDetail } from '~/app/_components/WorkoutStore/WorkoutDetail';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
+import { Suspense } from 'react';
 
 export default async function WorkoutStorePage({
     params,
@@ -7,5 +9,9 @@ export default async function WorkoutStorePage({
 }) {
     if (isNaN(parseInt(params.id))) return null;
 
-    return <WorkoutDetail workoutId={Number(params.id)} />;
+    return (
+        <Suspense fallback={<LoadingPage />}>
+            <WorkoutDetail workoutId={Number(params.id)} />
+        </Suspense>
+    );
 }
