@@ -10,9 +10,9 @@ export interface User {
 }
 
 export enum Sex {
-    Unknown,
-    Male,
-    Female,
+    Unknown = 'Unknown',
+    Male = 'Male',
+    Female = 'Female',
 }
 
 export enum Units {

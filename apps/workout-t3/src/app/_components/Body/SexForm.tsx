@@ -1,38 +1,42 @@
-import { FC, FormEvent, useContext, useState } from 'react';
+'use client';
+
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../Auth/Auth';
-import { useHistory } from 'react-router-dom';
-import { updateSex } from '@fitness/api-legacy';
-import { useShowBackButton } from '../Navigation/headerHooks';
 import { Sex, User } from '@fitness/types';
+import { useRouter } from 'next/navigation';
+import { api } from '~/trpc/react';
 
 export const SexForm: FC = () => {
-    const { user, setUser } = useContext(AuthContext);
-    useShowBackButton();
-    const [sex, setSex] = useState<Sex>(user?.sex ?? Sex.Unknown);
-    const queryClient = useQueryClient();
-    const history = useHistory();
+    const [sex, setSex] = useState<string>(Sex.Unknown);
+    const router = useRouter();
+    const utils = api.useUtils();
 
-    const mutation = useMutation(updateSex, {
+    const settings = api.settings.getUserSettings.useQuery();
+
+    const mutation = api.settings.updateSex.useMutation({
         onSuccess: async () => {
-            if (user) {
-                const newUser: User = { ...user, sex };
-                setUser(newUser);
-            }
-            await queryClient.invalidateQueries(['User', user?.id]);
+            await utils.settings.invalidate();
         },
     });
 
+    useEffect(() => {
+        if (settings.data && settings.data.Sex !== sex) {
+            setSex(settings.data.Sex);
+        }
+    }, [settings.data]);
+
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate({ sex });
-        history.goBack();
+
+        if (!settings.data) return;
+
+        mutation.mutate({ id: Number(settings.data.Id), sex });
+        router.back();
     };
 
     const handleClear = () => {
-        setSex(user?.sex ?? Sex.Unknown);
+        setSex(settings.data?.Sex ?? Sex.Unknown);
     };
 
     return (
