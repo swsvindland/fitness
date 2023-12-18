@@ -9,14 +9,14 @@ export const Todo: FC = () => {
 
     if (dashboardQuery.isLoading) {
         return (
-            <div role="status" className="w-full animate-pulse">
+            <div role="status" className="w-full ">
                 <h1 className="text-secondary text-2xl font-bold">
                     Onboarding To Do
                 </h1>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
-                <div className="bg-card dark:bg-primary-dark my-2 h-16 rounded"></div>
+                <div className="bg-card dark:bg-primary-dark my-2 h-16 animate-pulse rounded"></div>
+                <div className="bg-card dark:bg-primary-dark my-2 h-16 animate-pulse rounded"></div>
+                <div className="bg-card dark:bg-primary-dark my-2 h-16 animate-pulse rounded"></div>
+                <div className="bg-card dark:bg-primary-dark my-2 h-16 animate-pulse rounded"></div>
                 <span className="sr-only">Loading...</span>
             </div>
         );

@@ -32,7 +32,7 @@ export const dashboardRouter = createTRPCRouter({
             },
         });
 
-        const addSex = userSettings?.Sex ?? 'Unknown' === 'Unknown';
+        const addSex = (userSettings?.Sex ?? 'Unknown') === 'Unknown';
         const addHeight = !height;
         const addWeight = !weight;
         const addSupplements = supplements.length === 0;
