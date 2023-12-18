@@ -82,14 +82,14 @@ export const settingsRouter = createTRPCRouter({
         }),
 
     updateUnits: protectedProcedure
-        .input(z.object({ id: z.number(), units: z.string() }))
+        .input(z.object({ id: z.number(), unit: z.string() }))
         .mutation(async ({ ctx, input }) => {
             await ctx.prisma.userSettings.update({
                 where: {
                     Id: input.id,
                 },
                 data: {
-                    Units: input.units,
+                    Units: input.unit,
                 },
             });
         }),

@@ -3,7 +3,7 @@
 import { FC, FormEvent, useEffect, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { Sex, User } from '@fitness/types';
+import { Sex } from '@fitness/types';
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
 

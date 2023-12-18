@@ -14,9 +14,6 @@ export const Settings: FC = () => {
             <LinkButton to="/eat/custom-macros" className="mb-2">
                 Set Custom Macros
             </LinkButton>
-            <LinkButton to="/workout/store" className="mb-2">
-                Change Workout
-            </LinkButton>
         </div>
     );
 };

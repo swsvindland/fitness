@@ -1,11 +1,11 @@
-import { Settings } from '~/app/_components/Settings/Settings';
 import { Suspense } from 'react';
 import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
+import { UnitsForm } from '~/app/_components/Settings/UnitsForm';
 
-export default async function SettingsPage() {
+export default async function UnitsPage() {
     return (
         <Suspense fallback={<LoadingPage />}>
-            <Settings />
+            <UnitsForm />
         </Suspense>
     );
 }

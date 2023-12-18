@@ -1,38 +1,41 @@
-import { FC, FormEvent, useContext, useState } from 'react';
+'use client';
+
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AuthContext } from '../Auth/Auth';
-import { useHistory } from 'react-router-dom';
-import { updateUnits } from '@fitness/api-legacy';
-import { useShowBackButton } from '../Navigation/headerHooks';
-import { Units, User } from '@fitness/types';
+import { Units } from '@fitness/types';
+import { api } from '~/trpc/react';
+import { useRouter } from 'next/navigation';
 
 export const UnitsForm: FC = () => {
-    const { user, setUser } = useContext(AuthContext);
-    useShowBackButton();
-    const [unit, setUnit] = useState<Units>(user?.unit ?? Units.Imperial);
-    const queryClient = useQueryClient();
-    const history = useHistory();
+    const [unit, setUnit] = useState<string>(Units.Imperial);
+    const utils = api.useUtils();
+    const router = useRouter();
 
-    const mutation = useMutation(updateUnits, {
+    const settings = api.settings.getUserSettings.useQuery();
+
+    useEffect(() => {
+        if (settings.data && settings.data.Units !== unit) {
+            setUnit(settings.data.Units);
+        }
+    }, [settings.data]);
+
+    const mutation = api.settings.updateUnits.useMutation({
         onSuccess: async () => {
-            if (user) {
-                const newUser: User = { ...user, unit };
-                setUser(newUser);
-            }
-            await queryClient.invalidateQueries(['User', user?.id]);
+            await utils.settings.invalidate();
         },
     });
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        mutation.mutate({ unit });
-        history.goBack();
+        if (!settings.data) return;
+
+        mutation.mutate({ id: Number(settings.data.Id), unit });
+        router.back();
     };
 
     const handleClear = () => {
-        setUnit(user?.unit ?? Units.Imperial);
+        setUnit(settings.data?.Units ?? Units.Imperial);
     };
 
     return (
