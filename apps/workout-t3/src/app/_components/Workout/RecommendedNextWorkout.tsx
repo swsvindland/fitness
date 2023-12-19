@@ -13,13 +13,44 @@ export const RecommendedNextWorkout: FC = () => {
         return <LoadingCard isLoading />;
     }
 
-    const workoutType = WorkoutType.Resistance;
+    if (!workout.data) {
+        return (
+            <div className="card col-span-1 w-full divide-y divide-gray-200">
+                <div className="flex w-full items-center justify-between space-x-6 p-6">
+                    <div className="flex-1 truncate">
+                        <div className="flex items-center space-x-3">
+                            <h3 className="text-secondary text-lg">
+                                Recommended Next Workout
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div className="h-[65%] p-4">
+                    <p className="text-ternary">
+                        You don't have a workout selected. Please select a new
+                        workout.
+                    </p>
+                </div>
+                <div>
+                    <div className="-mt-px flex divide-x divide-gray-200">
+                        <div className="flex w-0 flex-1">
+                            <Link
+                                href={`/workout`}
+                                className="text-ternary relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm"
+                            >
+                                Select Workout
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    const workoutType = workout.data?.Workout.Type ?? '';
 
     return (
-        <div
-            key={workoutType}
-            className="card col-span-1 w-full divide-y divide-gray-200"
-        >
+        <div className="card col-span-1 w-full divide-y divide-gray-200">
             <div className="flex w-full items-center justify-between space-x-6 p-6">
                 <div className="flex-1 truncate">
                     <div className="flex items-center space-x-3">

@@ -54,10 +54,15 @@ export const dashboardRouter = createTRPCRouter({
                 UserId: ctx.auth.userId,
                 Active: true,
             },
+            include: {
+                Workout: true,
+            },
             orderBy: {
                 Created: 'asc',
             },
         });
+
+        if (userWorkouts.length === 0) return null;
 
         const userWorkoutsCompleted = [];
 
@@ -86,6 +91,7 @@ export const dashboardRouter = createTRPCRouter({
                 userWorkoutsCompleted.length - userWorkouts.length
             ];
         }
+
         return null;
     }),
 });

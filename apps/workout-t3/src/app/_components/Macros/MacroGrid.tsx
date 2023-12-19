@@ -72,17 +72,17 @@ export const MacroGrid: FC = () => {
                 </dl>
             </div>
             <div className="flex w-full flex-row justify-between gap-2 pt-2">
+                <Scanner
+                    buttonClassName="flex w-full justify-center"
+                    open={openScanner}
+                    setOpen={setOpenScanner}
+                />
                 <LinkButton
                     className="flex w-full justify-center"
                     to={'/eat/add-food'}
                 >
                     Add Food
                 </LinkButton>
-                <Scanner
-                    buttonClassName="flex w-full justify-center"
-                    open={openScanner}
-                    setOpen={setOpenScanner}
-                />
             </div>
         </div>
     );
