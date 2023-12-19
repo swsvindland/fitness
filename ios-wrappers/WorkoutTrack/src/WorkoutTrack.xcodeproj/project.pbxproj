@@ -372,16 +372,18 @@
 				CODE_SIGN_ENTITLEMENTS = WorkoutTrack/Entitlements/Entitlements.plist;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 9HAG9PT8LJ;
 				INFOPLIST_FILE = WorkoutTrack/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WorkoutTrack;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.svindland.fitness;
 				PRODUCT_NAME = WorkoutTrack;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -400,16 +402,18 @@
 				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = WorkoutTrack/Entitlements/Entitlements.plist;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 9HAG9PT8LJ;
 				INFOPLIST_FILE = WorkoutTrack/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WorkoutTrack;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 2.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.svindland.fitness;
 				PRODUCT_NAME = WorkoutTrack;
 				SUPPORTS_MACCATALYST = YES;
