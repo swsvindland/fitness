@@ -8,6 +8,12 @@ import { WorkoutType } from '@fitness/types';
 
 export const RecommendedNextWorkout: FC = () => {
     const workout = api.dashboard.getRecommendedNextWorkout.useQuery();
+    const nextWorkout = api.workouts.getNextWorkout.useQuery(
+        {
+            type: workout.data?.Workout.Type ?? '',
+        },
+        { enabled: !!workout.data }
+    );
 
     if (workout.isLoading) {
         return <LoadingCard isLoading />;
@@ -61,12 +67,20 @@ export const RecommendedNextWorkout: FC = () => {
                 </div>
             </div>
             <div className="p-4">
-                <p className="text-ternary">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Debitis eveniet magnam necessitatibus obcaecati voluptas
-                    voluptatem! Alias architecto at cum deserunt laborum libero
-                    sint sit.
-                </p>
+                <div>
+                    <h4 className="text-secondary">
+                        {nextWorkout.data?.workout?.Name}
+                    </h4>
+                    <span>
+                        Day {nextWorkout.data?.day} of{' '}
+                        {nextWorkout.data?.workout?.Days}
+                    </span>
+                    <br />
+                    <span>
+                        Week {nextWorkout.data?.week} of{' '}
+                        {nextWorkout.data?.workout?.Duration}
+                    </span>
+                </div>
             </div>
             <div>
                 <div className="-mt-px flex divide-x divide-gray-200">

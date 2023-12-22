@@ -1,5 +1,5 @@
 export enum WorkoutType {
-    Unknown = 0,
+    Unknown = 'Unknown',
     Resistance = 'Resistance',
     Cardio = 'Cardio',
     Vo2Max = 'Vo2Max',

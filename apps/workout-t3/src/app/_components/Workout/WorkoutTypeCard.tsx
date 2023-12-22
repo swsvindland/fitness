@@ -1,12 +1,26 @@
+'use client';
+
 import { WorkoutType } from '@fitness/types';
 import { FC } from 'react';
 import Link from 'next/link';
+import { api } from '~/trpc/react';
+import { LoadingCard } from '~/app/_components/Loading/LoadingCard';
 
 interface WorkoutTypeCardProps {
     workoutType: WorkoutType;
 }
 
 export const WorkoutTypeCard: FC<WorkoutTypeCardProps> = ({ workoutType }) => {
+    const nextWorkout = api.workouts.getNextWorkout.useQuery({
+        type: workoutType,
+    });
+
+    console.log(nextWorkout.data?.workout);
+
+    if (nextWorkout.isLoading) {
+        return <LoadingCard isLoading />;
+    }
+
     return (
         <li
             key={workoutType}
@@ -22,13 +36,28 @@ export const WorkoutTypeCard: FC<WorkoutTypeCardProps> = ({ workoutType }) => {
                     </div>
                 </div>
             </div>
-            <div className="p-4">
-                <p className="text-ternary">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Debitis eveniet magnam necessitatibus obcaecati voluptas
-                    voluptatem! Alias architecto at cum deserunt laborum libero
-                    sint sit.
-                </p>
+            <div className="text-ternary p-4">
+                {nextWorkout.data == null ? (
+                    <span>
+                        No {workoutType} workout selected. Click select workout
+                        button to get started.
+                    </span>
+                ) : (
+                    <div>
+                        <h4 className="text-secondary">
+                            {nextWorkout.data?.workout?.Name}
+                        </h4>
+                        <span>
+                            Day {nextWorkout.data?.day} of{' '}
+                            {nextWorkout.data?.workout?.Days}
+                        </span>
+                        <br />
+                        <span>
+                            Week {nextWorkout.data?.week} of{' '}
+                            {nextWorkout.data?.workout?.Duration}
+                        </span>
+                    </div>
+                )}
             </div>
             <div>
                 <div className="-mt-px flex divide-x divide-gray-200">
@@ -39,19 +68,23 @@ export const WorkoutTypeCard: FC<WorkoutTypeCardProps> = ({ workoutType }) => {
                                 .toLowerCase()}`}
                             className="text-ternary relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm"
                         >
-                            Change Workout
+                            {nextWorkout.data == null
+                                ? 'Select Workout'
+                                : 'Change Workout'}
                         </Link>
                     </div>
-                    <div className="-ml-px flex w-0 flex-1">
-                        <Link
-                            href={`/workout/${workoutType
-                                .toString()
-                                .toLowerCase()}`}
-                            className="text-ternary relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm"
-                        >
-                            Start Workout
-                        </Link>
-                    </div>
+                    {nextWorkout.data != null ? (
+                        <div className="-ml-px flex w-0 flex-1">
+                            <Link
+                                href={`/workout/${workoutType
+                                    .toString()
+                                    .toLowerCase()}`}
+                                className="text-ternary relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm"
+                            >
+                                Start Workout
+                            </Link>
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </li>

@@ -66,6 +66,8 @@ export const workoutRouter = createTRPCRouter({
                 },
             });
 
+            if (!activeWorkout) return null;
+
             const lastWorkout =
                 await ctx.prisma.userWorkoutsCompleted.findFirst({
                     include: {
@@ -83,15 +85,25 @@ export const workoutRouter = createTRPCRouter({
                     },
                 });
 
-            const days = activeWorkout?.Workout.Days ?? 1;
-            const weeks = activeWorkout?.Workout.Duration ?? 1;
+            if (!lastWorkout) {
+                return {
+                    workout: activeWorkout.Workout,
+                    day: 1,
+                    week: 1,
+                    workoutId: activeWorkout.WorkoutId,
+                    workoutCompleted: false,
+                };
+            }
+
+            const days = activeWorkout.Workout.Days;
+            const weeks = activeWorkout.Workout.Duration;
 
             const nextDay =
-                lastWorkout?.Day + 1 > days ? 1 : lastWorkout?.Day + 1 ?? 1;
+                lastWorkout.Day + 1 > days ? 1 : lastWorkout.Day + 1;
             const nextWeek =
-                lastWorkout?.Day >= days
+                lastWorkout.Day >= days
                     ? lastWorkout.Week + 1
-                    : lastWorkout?.Week ?? 1;
+                    : lastWorkout.Week;
 
             if (nextWeek > weeks) {
                 return {
@@ -103,6 +115,7 @@ export const workoutRouter = createTRPCRouter({
             }
 
             return {
+                workout: activeWorkout.Workout,
                 day: nextDay,
                 week: nextWeek,
                 workoutId: activeWorkout.WorkoutId,
