@@ -3,7 +3,6 @@ import { FC } from 'react';
 interface IProps {
     name: string;
     amount: number;
-    amountHigh?: number;
     currentAmount?: number;
     unit: string;
 }
@@ -11,13 +10,10 @@ interface IProps {
 export const MacroGridUnit: FC<IProps> = ({
     name,
     amount,
-    amountHigh,
     currentAmount,
     unit,
 }) => {
     const percentage = ((currentAmount ?? 0) / amount) * 100;
-    const percentageHigh =
-        ((currentAmount ?? 0) / (amountHigh ? amountHigh : amount)) * 100;
 
     return (
         <div className="card px-4 py-5 sm:p-6">
@@ -41,9 +37,6 @@ export const MacroGridUnit: FC<IProps> = ({
                 <span className="text-ternary flex items-baseline text-lg font-semibold sm:text-2xl">
                     {amount?.toFixed(0)}
                 </span>
-                <span className="text-ternary flex items-baseline text-lg font-semibold sm:text-2xl">
-                    {amountHigh ? `-${amountHigh.toFixed(0)}` : null}
-                </span>
                 <span className="text-ternary text-xs sm:text-lg">{unit}</span>
             </dd>
             {currentAmount !== undefined ? (
@@ -52,15 +45,13 @@ export const MacroGridUnit: FC<IProps> = ({
                         <div
                             style={{
                                 width: `${
-                                    ((currentAmount ?? 0) /
-                                        (amountHigh ? amountHigh : amount)) *
-                                    100
+                                    ((currentAmount ?? 0) / amount) * 100
                                 }%`,
                             }}
-                            className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-inner shadow-none ${
-                                percentage < 98
+                            className={`flex flex-col justify-center whitespace-nowrap text-center text-white shadow-inner ${
+                                percentage < 95
                                     ? 'bg-secondary'
-                                    : percentageHigh > 100
+                                    : percentage > 105
                                       ? 'bg-error'
                                       : 'bg-primary'
                             }`}

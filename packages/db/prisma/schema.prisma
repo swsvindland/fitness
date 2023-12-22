@@ -106,19 +106,14 @@ model UserBody {
 }
 
 model UserCustomMacros {
-    Id           BigInt   @id @default(autoincrement())
-    UserId       String   @db.Char(64)
-    Calories     Float    @db.Float
-    Protein      Float    @db.Float
-    Fat          Float    @db.Float
-    Carbs        Float    @db.Float
-    Fiber        Float    @db.Float
-    Created      DateTime @db.DateTime(0)
-    CaloriesHigh Float?   @db.Float
-    ProteinHigh  Float?   @db.Float
-    FatHigh      Float?   @db.Float
-    CarbsHigh    Float?   @db.Float
-    FiberHigh    Float?   @db.Float
+    Id       BigInt   @id @default(autoincrement())
+    UserId   String   @db.Char(64)
+    Calories Float    @db.Float
+    Protein  Float    @db.Float
+    Fat      Float    @db.Float
+    Carbs    Float    @db.Float
+    Fiber    Float    @db.Float
+    Created  DateTime @db.DateTime(0)
 }
 
 model UserFoodV2 {

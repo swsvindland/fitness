@@ -19,15 +19,10 @@ export const customMacrosRouter = createTRPCRouter({
         .input(
             z.object({
                 calories: z.number(),
-                caloriesHigh: z.number().nullable(),
                 protein: z.number(),
                 carbs: z.number(),
                 fat: z.number(),
-                proteinHigh: z.number().nullable(),
-                carbsHigh: z.number().nullable(),
-                fatHigh: z.number().nullable(),
                 fiber: z.number(),
-                fiberHigh: z.number().nullable(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -37,15 +32,10 @@ export const customMacrosRouter = createTRPCRouter({
                 data: {
                     UserId: ctx.auth.userId,
                     Calories: input.calories,
-                    CaloriesHigh: input.caloriesHigh,
                     Protein: input.protein,
                     Carbs: input.carbs,
                     Fat: input.fat,
-                    ProteinHigh: input.proteinHigh,
-                    CarbsHigh: input.carbsHigh,
-                    FatHigh: input.fatHigh,
                     Fiber: input.fiber,
-                    FiberHigh: input.fiberHigh,
                     Created: new Date(),
                 },
             });
@@ -56,15 +46,10 @@ export const customMacrosRouter = createTRPCRouter({
             z.object({
                 id: z.bigint(),
                 calories: z.number(),
-                caloriesHigh: z.number(),
                 protein: z.number(),
                 carbs: z.number(),
                 fat: z.number(),
-                proteinHigh: z.number(),
-                carbsHigh: z.number(),
-                fatHigh: z.number(),
                 fiber: z.number(),
-                fiberHigh: z.number(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -76,15 +61,10 @@ export const customMacrosRouter = createTRPCRouter({
                 },
                 data: {
                     Calories: input.calories,
-                    CaloriesHigh: input.caloriesHigh,
                     Protein: input.protein,
                     Carbs: input.carbs,
                     Fat: input.fat,
-                    ProteinHigh: input.proteinHigh,
-                    CarbsHigh: input.carbsHigh,
-                    FatHigh: input.fatHigh,
                     Fiber: input.fiber,
-                    FiberHigh: input.fiberHigh,
                 },
             });
         }),

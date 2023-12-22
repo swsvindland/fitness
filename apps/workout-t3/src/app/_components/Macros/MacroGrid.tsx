@@ -36,7 +36,6 @@ export const MacroGrid: FC = () => {
                 <MacroGridUnit
                     name="Calories"
                     amount={macrosQuery.data?.Calories ?? 0}
-                    amountHigh={macrosQuery.data?.CaloriesHigh ?? 0}
                     currentAmount={currentMacrosQuery.data?.Calories}
                     unit="kcal"
                 />
@@ -44,28 +43,24 @@ export const MacroGrid: FC = () => {
                     <MacroGridUnit
                         name="Protein"
                         amount={macrosQuery.data?.Protein ?? 0}
-                        amountHigh={macrosQuery.data?.ProteinHigh ?? 0}
                         currentAmount={currentMacrosQuery.data?.Protein ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fat"
                         amount={macrosQuery.data?.Fat ?? 0}
-                        amountHigh={macrosQuery.data?.FatHigh ?? 0}
                         currentAmount={currentMacrosQuery.data?.Fat ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Carbs"
                         amount={macrosQuery.data?.Carbs ?? 0}
-                        amountHigh={macrosQuery.data?.CarbsHigh ?? 0}
                         currentAmount={currentMacrosQuery.data?.Carbs ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fiber"
                         amount={macrosQuery.data?.Fiber ?? 0}
-                        amountHigh={macrosQuery.data?.FiberHigh ?? 0}
                         currentAmount={currentMacrosQuery.data?.Fiber ?? 0}
                         unit="g"
                     />
