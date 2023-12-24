@@ -47,20 +47,32 @@ export const storeRouter = createTRPCRouter({
         }),
 
     buyWorkout: protectedProcedure
-        .input(z.object({ workoutId: z.number() }))
+        .input(z.object({ workoutId: z.number(), type: z.string() }))
         .mutation(async ({ ctx, input }) => {
             if (!ctx.auth.userId) throw new Error('No user ID');
 
-            // Turn off any active workouts
-            await ctx.prisma.userWorkout.updateMany({
+            // check if same workout type
+            const workouts = await ctx.prisma.userWorkout.findMany({
                 where: {
                     UserId: ctx.auth.userId,
+                    Workout: {
+                        Type: input.type,
+                    },
                     Active: true,
                 },
-                data: {
-                    Active: false,
-                },
             });
+
+            // Turn off any active workouts
+            for (const workout of workouts) {
+                await ctx.prisma.userWorkout.updateMany({
+                    where: {
+                        Id: workout.Id,
+                    },
+                    data: {
+                        Active: false,
+                    },
+                });
+            }
 
             const activeWorkout = await ctx.prisma.userWorkout.findFirst({
                 where: {

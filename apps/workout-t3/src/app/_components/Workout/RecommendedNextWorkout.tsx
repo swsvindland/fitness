@@ -4,7 +4,6 @@ import { FC } from 'react';
 import { api } from '~/trpc/react';
 import { LoadingCard } from '~/app/_components/Loading/LoadingCard';
 import Link from 'next/link';
-import { WorkoutType } from '@fitness/types';
 
 export const RecommendedNextWorkout: FC = () => {
     const workout = api.dashboard.getRecommendedNextWorkout.useQuery();

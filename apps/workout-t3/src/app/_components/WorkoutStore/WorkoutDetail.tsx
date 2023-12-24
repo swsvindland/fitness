@@ -17,7 +17,7 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
     const workoutQuery = api.store.getWorkout.useQuery({ workoutId });
     const mutation = api.store.buyWorkout.useMutation({
         onSuccess: async () => {
-            await utils.invalidate();
+            await utils.workouts.invalidate();
             router.push('/workout');
         },
     });
@@ -27,7 +27,7 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
     }
 
     return (
-        <div className="card rounded">
+        <div className="card w-full rounded">
             <div className="py-6">
                 <div className="mx-auto mt-8 max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div className="">
@@ -43,7 +43,10 @@ export const WorkoutDetail: FC<IProps> = ({ workoutId }) => {
                                 <form
                                     onSubmit={(event) => {
                                         event.preventDefault();
-                                        mutation.mutate({ workoutId });
+                                        mutation.mutate({
+                                            workoutId,
+                                            type: workoutQuery.data?.Type ?? '',
+                                        });
                                     }}
                                 >
                                     <Button

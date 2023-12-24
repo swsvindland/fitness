@@ -15,8 +15,6 @@ export const WorkoutTypeCard: FC<WorkoutTypeCardProps> = ({ workoutType }) => {
         type: workoutType,
     });
 
-    console.log(nextWorkout.data?.workout);
-
     if (nextWorkout.isLoading) {
         return <LoadingCard isLoading />;
     }

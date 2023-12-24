@@ -12,8 +12,6 @@ interface IProps {
 }
 
 export const WorkoutStore: FC<IProps> = ({ type }) => {
-    console.log(type.toString());
-
     const workoutsQuery = api.store.getWorkouts.useQuery({
         type: type.toString(),
     });
