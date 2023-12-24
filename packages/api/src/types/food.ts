@@ -15,7 +15,7 @@ export interface FoodServing {
     added_sugars?: string;
     calcium?: string;
     calories: string;
-    carbohydrates: string;
+    carbohydrate: string;
     cholesterol?: string;
     fat: string;
     fiber?: string;

@@ -56,7 +56,7 @@ const getFoodById = async (prisma: any, foodId: number): Promise<FoodV2> => {
                 Id: Number(serving.serving_id),
                 FoodV2Id: fatSecretFood.food_id,
                 Calories: Number(serving.calories),
-                Carbohydrate: Number(serving.carbohydrates),
+                Carbohydrate: Number(serving.carbohydrate),
                 Fat: Number(serving.fat),
                 Protein: Number(serving.protein),
                 MeasurementDescription: serving.measurement_description,
