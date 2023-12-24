@@ -26,7 +26,7 @@ export const Layout: FC<IProps> = ({ children }) => {
                     {children}
                 </div>
             </main>
-            <footer className="pb-safe md:hidden">
+            <footer className="md:hidden">
                 <BottomNavigation />
             </footer>
         </>
