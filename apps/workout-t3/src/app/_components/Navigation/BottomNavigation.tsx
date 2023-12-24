@@ -29,7 +29,7 @@ export const BottomNavigation: FC = () => {
             id="bottom-navigation"
             className="pb-safe bg-primary-dark dark:bg-background fixed inset-x-0 bottom-0 z-10 block p-2 shadow"
         >
-            <div id="tabs" className="pb-safe flex justify-between">
+            <div id="tabs" className="flex justify-between">
                 <Link href="/" className={linkStyle(['/'])}>
                     <Home className={iconStyle(['/'])} />
                     <span className="tab tab-home block text-xs">Home</span>
