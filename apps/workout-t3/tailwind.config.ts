@@ -22,5 +22,5 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [require('tailwindcss-safe-area')],
 } as Config;
