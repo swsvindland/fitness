@@ -83,16 +83,6 @@ export const RecommendedNextWorkout: FC = () => {
             </div>
             <div>
                 <div className="-mt-px flex divide-x divide-gray-200">
-                    <div className="flex w-0 flex-1">
-                        <Link
-                            href={`/workout/store/${workoutType
-                                .toString()
-                                .toLowerCase()}`}
-                            className="text-ternary relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm"
-                        >
-                            Change Workout
-                        </Link>
-                    </div>
                     <div className="-ml-px flex w-0 flex-1">
                         <Link
                             href={`/workout/${workoutType
