@@ -1,11 +1,11 @@
 'use client';
 
 import { FC } from 'react';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { DoWorkout } from './DoWorkout';
 import { LinkButton } from '../Buttons/LinkButton';
 import { WorkoutType } from '@fitness/types';
 import { api } from '~/trpc/react';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 interface IProps {
     type: WorkoutType;
@@ -17,7 +17,7 @@ export const Workout: FC<IProps> = ({ type }) => {
     });
 
     if (userWorkoutsQuery.isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingPage />;
     }
 
     if (!userWorkoutsQuery.data || userWorkoutsQuery.data?.length === 0) {

@@ -1,5 +1,4 @@
 import { FC, useMemo, useState } from 'react';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { Pagination } from '../Pagination';
 import { WorkoutCard } from './WorkoutCard';
 import { Dropdown, DropdownOption } from '../Dropdown';
@@ -7,6 +6,7 @@ import { WorkoutCompleted } from './WorkoutCompleted';
 import { LinkSecondaryButton } from '../Buttons/LinkSecondaryButton';
 import { api } from '~/trpc/react';
 import { WorkoutType } from '@fitness/types';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 interface IProps {
     workoutId: bigint;
@@ -45,7 +45,7 @@ export const DoWorkout: FC<IProps> = ({ workoutId, type }) => {
     }, [workoutQuery.data]);
 
     if (workoutQuery.isLoading || nextWorkoutQuery.isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingPage />;
     }
 
     if (nextWorkoutQuery.data?.workoutCompleted) {

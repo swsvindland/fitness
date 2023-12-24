@@ -38,7 +38,7 @@ export const RecommendedNextWorkout: FC = () => {
                 </div>
                 <div>
                     <div className="-mt-px flex divide-x divide-gray-200">
-                        <div className="flex w-0 flex-1">
+                        <div className="hover:bg-primary-dark active:bg-background flex w-0 flex-1">
                             <Link
                                 href={`/workout`}
                                 className="text-ternary relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm"
@@ -83,7 +83,7 @@ export const RecommendedNextWorkout: FC = () => {
             </div>
             <div>
                 <div className="-mt-px flex divide-x divide-gray-200">
-                    <div className="-ml-px flex w-0 flex-1">
+                    <div className="hover:bg-primary-dark active:bg-background flex w-0 flex-1">
                         <Link
                             href={`/workout/${workoutType
                                 .toString()

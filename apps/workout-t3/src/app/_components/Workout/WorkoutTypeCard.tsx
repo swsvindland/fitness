@@ -59,7 +59,7 @@ export const WorkoutTypeCard: FC<WorkoutTypeCardProps> = ({ workoutType }) => {
             </div>
             <div>
                 <div className="-mt-px flex divide-x divide-gray-200">
-                    <div className="flex w-0 flex-1">
+                    <div className="hover:bg-primary-dark active:bg-background flex w-0 flex-1">
                         <Link
                             href={`/workout/store/${workoutType
                                 .toString()
@@ -72,7 +72,7 @@ export const WorkoutTypeCard: FC<WorkoutTypeCardProps> = ({ workoutType }) => {
                         </Link>
                     </div>
                     {nextWorkout.data != null ? (
-                        <div className="-ml-px flex w-0 flex-1">
+                        <div className="hover:bg-primary-dark active:bg-background -ml-px flex w-0 flex-1">
                             <Link
                                 href={`/workout/${workoutType
                                     .toString()
