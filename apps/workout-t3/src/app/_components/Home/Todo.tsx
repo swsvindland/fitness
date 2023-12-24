@@ -33,26 +33,22 @@ export const Todo: FC = () => {
             </h1>
             <TodoItem
                 name="Add your sex"
-                show={dashboardQuery.data?.addSex || false}
-                checked={false}
+                show={dashboardQuery.data?.addSex ?? false}
                 route="/body/sex"
             />
             <TodoItem
                 name="Add your height"
-                show={dashboardQuery.data?.addHeight || false}
-                checked={false}
+                show={dashboardQuery.data?.addHeight ?? false}
                 route="/body/height"
             />
             <TodoItem
                 name="Add your weight"
-                show={dashboardQuery.data?.addWeight || false}
-                checked={false}
+                show={dashboardQuery.data?.addWeight ?? false}
                 route="/body/weight"
             />
             <TodoItem
                 name="Add your supplements"
-                show={dashboardQuery.data?.addSupplements || false}
-                checked={false}
+                show={dashboardQuery.data?.addSupplements ?? false}
                 route="/supplements/all-supplements"
             />
         </div>
