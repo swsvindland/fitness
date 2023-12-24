@@ -38,7 +38,7 @@ export const macrosRouter = createTRPCRouter({
 
         const protein = weight?.Weight * 0.8;
 
-        const fat = weight?.Weight * 0.3;
+        const fat = weight?.Weight * 0.4;
 
         const carbs = (calories - protein * 4 - fat * 9) / 4;
 
