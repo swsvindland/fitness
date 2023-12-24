@@ -64,6 +64,8 @@ export const BodyGraph = () => {
         ];
         const colors = ['#28827A', '#AFD257', '#F7C619'];
 
+        const normalizedData = graphedData[0];
+
         setData({
             labels: [
                 'Neck',
@@ -81,20 +83,20 @@ export const BodyGraph = () => {
             ],
             datasets:
                 graphedData.map((item, index) => ({
-                    label: format(new Date(item!.Created), 'PP'),
+                    label: format(new Date(item!.Created ?? ''), 'PP'),
                     data: [
-                        item!.Neck,
-                        item!.Shoulders,
-                        item!.Chest,
-                        item!.LeftBicep,
-                        item!.RightBicep,
-                        item!.Navel,
-                        item!.Waist,
-                        item!.Hip,
-                        item!.LeftThigh,
-                        item!.RightThigh,
-                        item!.LeftCalf,
-                        item!.RightCalf,
+                        item!.Neck / normalizedData!.Neck,
+                        item!.Shoulders / normalizedData!.Shoulders,
+                        item!.Chest / normalizedData!.Chest,
+                        item!.LeftBicep / normalizedData!.LeftBicep,
+                        item!.RightBicep / normalizedData!.RightBicep,
+                        item!.Navel / normalizedData!.Navel,
+                        item!.Waist / normalizedData!.Waist,
+                        item!.Hip / normalizedData!.Hip,
+                        item!.LeftThigh / normalizedData!.LeftThigh,
+                        item!.RightThigh / normalizedData!.RightThigh,
+                        item!.LeftCalf / normalizedData!.LeftCalf,
+                        item!.RightCalf / normalizedData!.RightCalf,
                     ],
                     backgroundColor: backgrounds[index],
                     borderColor: colors[index],
