@@ -30,36 +30,48 @@ export const BottomNavigation: FC = () => {
             className="pb-safe bg-primary-dark dark:bg-background fixed inset-x-0 bottom-0 z-10 block p-2 shadow"
         >
             <div className="pb-safe">
-                <div id="tabs" className="pb-safe flex justify-between">
-                    <Link href="/" className={linkStyle(['/'])}>
-                        <Home className={iconStyle(['/'])} />
-                        <span className="tab tab-home block text-xs">Home</span>
-                    </Link>
-                    <Link
-                        href="/workout"
-                        className={linkStyle(['/workout', '/cardio'])}
-                    >
-                        <Dumbbell
-                            className={iconStyle(['/workout', '/cardio'])}
-                        />
-                        <span className="tab tab-home block text-xs">
-                            Workout
-                        </span>
-                    </Link>
-                    <Link href="/eat" className={linkStyle(['/eat'])}>
-                        <Food className={iconStyle(['/eat'])} />
-                        <span className="tab tab-home block text-xs">Eat</span>
-                    </Link>
-                    <Link href="/settings" className={linkStyle(['/settings'])}>
-                        <Gear className={iconStyle(['/settings'])} />
-                        <span className="tab tab-home block text-xs">
-                            Settings
-                        </span>
-                    </Link>
+                <div className="pb-safe">
+                    <div className="pb-safe">
+                        <div id="tabs" className="pb-safe flex justify-between">
+                            <Link href="/" className={linkStyle(['/'])}>
+                                <Home className={iconStyle(['/'])} />
+                                <span className="tab tab-home block text-xs">
+                                    Home
+                                </span>
+                            </Link>
+                            <Link
+                                href="/workout"
+                                className={linkStyle(['/workout', '/cardio'])}
+                            >
+                                <Dumbbell
+                                    className={iconStyle([
+                                        '/workout',
+                                        '/cardio',
+                                    ])}
+                                />
+                                <span className="tab tab-home block text-xs">
+                                    Workout
+                                </span>
+                            </Link>
+                            <Link href="/eat" className={linkStyle(['/eat'])}>
+                                <Food className={iconStyle(['/eat'])} />
+                                <span className="tab tab-home block text-xs">
+                                    Eat
+                                </span>
+                            </Link>
+                            <Link
+                                href="/settings"
+                                className={linkStyle(['/settings'])}
+                            >
+                                <Gear className={iconStyle(['/settings'])} />
+                                <span className="tab tab-home block text-xs">
+                                    Settings
+                                </span>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="mb-safe" />
-            <div className="mb-safe" />
         </div>
     );
 };
