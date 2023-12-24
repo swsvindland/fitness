@@ -31,7 +31,7 @@ export const RecommendedNextWorkout: FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-[65%] p-4">
+                <div className="h-[65%] min-h-[220px] p-4">
                     <p className="text-ternary">
                         You don't have a workout selected. Please select a new
                         workout.
