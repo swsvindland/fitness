@@ -65,7 +65,7 @@ export const RecommendedNextWorkout: FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="p-4">
+            <div className="text-ternary p-4">
                 <div>
                     <h4 className="text-secondary">
                         {nextWorkout.data?.workout?.Name}

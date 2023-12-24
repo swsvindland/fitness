@@ -68,7 +68,7 @@ export const dashboardRouter = createTRPCRouter({
 
         for (const workout of userWorkouts) {
             const userWorkoutCompleted =
-                await ctx.prisma.userWorkoutsCompleted.findMany({
+                await ctx.prisma.userWorkoutsCompleted.findFirst({
                     where: {
                         UserId: ctx.auth.userId,
                         WorkoutId: workout.WorkoutId,
@@ -77,11 +77,12 @@ export const dashboardRouter = createTRPCRouter({
                         },
                     },
                     orderBy: {
-                        Created: 'asc',
+                        Created: 'desc',
                     },
                 });
 
-            userWorkoutsCompleted.push(userWorkoutCompleted);
+            if (userWorkoutCompleted != null)
+                userWorkoutsCompleted.push(userWorkoutCompleted);
         }
 
         if (userWorkoutsCompleted.length === 0) {
