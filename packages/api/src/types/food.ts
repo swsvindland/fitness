@@ -1,4 +1,4 @@
-export interface Food {
+export interface GenericFood {
     food_id: number;
     brand_name?: string;
     food_name: string;
@@ -7,8 +7,21 @@ export interface Food {
     servings: FoodServings;
 }
 
+export interface BrandedFood {
+    food_id: number;
+    brand_name?: string;
+    food_name: string;
+    food_type: string;
+    food_url: string;
+    servings: BrandedFoodServings;
+}
+
 export interface FoodServings {
     serving: FoodServing[];
+}
+
+export interface BrandedFoodServings {
+    serving: FoodServing;
 }
 
 export interface FoodServing {

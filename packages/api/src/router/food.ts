@@ -2,7 +2,7 @@ import { createTRPCRouter, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 import axios from 'axios';
 import { FoodSearch } from '../types/foodSearch';
-import { Food } from '../types/food';
+import { BrandedFood, GenericFood } from '../types/food';
 import { FoodV2 } from '@fitness/types';
 
 const authFatSecret = async (): Promise<string> => {
@@ -37,20 +37,70 @@ const getFoodById = async (prisma: any, foodId: number): Promise<FoodV2> => {
         { headers: { Authorization: `Bearer ${auth}` } }
     );
 
-    const fatSecretFood = response.data?.food as Food;
+    if (response.data.food.food_type === 'Generic') {
+        const fatSecretFood = response.data?.food as GenericFood;
 
-    await prisma.foodV2.create({
-        data: {
-            Id: fatSecretFood.food_id,
-            Name: fatSecretFood.food_name,
-            Brand: fatSecretFood.brand_name,
-            FoodType: fatSecretFood.food_type,
-            Created: new Date(),
-            Updated: new Date(),
-        },
-    });
+        await prisma.foodV2.create({
+            data: {
+                Id: fatSecretFood.food_id,
+                Name: fatSecretFood.food_name,
+                Brand: fatSecretFood.brand_name,
+                FoodType: fatSecretFood.food_type,
+                Created: new Date(),
+                Updated: new Date(),
+            },
+        });
 
-    for (const serving of fatSecretFood.servings.serving) {
+        for (const serving of fatSecretFood.servings.serving) {
+            await prisma.foodV2Servings.create({
+                data: {
+                    Id: Number(serving.serving_id),
+                    FoodV2Id: fatSecretFood.food_id,
+                    Calories: Number(serving.calories),
+                    Carbohydrate: Number(serving.carbohydrate),
+                    Fat: Number(serving.fat),
+                    Protein: Number(serving.protein),
+                    MeasurementDescription: serving.measurement_description,
+                    MetricServingAmount: Number(serving.metric_serving_amount),
+                    MetricServingUnit: serving.metric_serving_unit,
+                    ServingDescription: serving.serving_description,
+                    Created: new Date(),
+                    Updated: new Date(),
+                    AddedSugar: Number(serving.added_sugars),
+                    Calcium: Number(serving.calcium),
+                    Cholesterol: Number(serving.cholesterol),
+                    Fiber: Number(serving.fiber),
+                    Iron: Number(serving.iron),
+                    MonounsaturatedFat: Number(serving.monounsaturated_fat),
+                    NumberOfUnits: Number(serving.number_of_units),
+                    PolyunsaturatedFat: Number(serving.polyunsaturated_fat),
+                    Potassium: Number(serving.potassium),
+                    SaturatedFat: Number(serving.saturated_fat),
+                    Sodium: Number(serving.sodium),
+                    Sugar: Number(serving.sugar),
+                    TransFat: Number(serving.trans_fat),
+                    VitaminA: Number(serving.vitamin_a),
+                    VitaminC: Number(serving.vitamin_c),
+                    VitaminD: Number(serving.vitamin_d),
+                },
+            });
+        }
+    } else {
+        const fatSecretFood = response.data?.food as BrandedFood;
+
+        await prisma.foodV2.create({
+            data: {
+                Id: fatSecretFood.food_id,
+                Name: fatSecretFood.food_name,
+                Brand: fatSecretFood.brand_name,
+                FoodType: fatSecretFood.food_type,
+                Created: new Date(),
+                Updated: new Date(),
+            },
+        });
+
+        const serving = fatSecretFood.servings.serving;
+
         await prisma.foodV2Servings.create({
             data: {
                 Id: Number(serving.serving_id),
