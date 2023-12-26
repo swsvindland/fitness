@@ -1,13 +1,14 @@
 'use client';
 
 import { FC } from 'react';
-import { Food } from '../Icons/Food';
-import { Dumbbell } from '../Icons/Dumbbell';
-import { Home } from '../Icons/Home';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isSelected } from '~/app/_components/Navigation/utils';
-import { Gear } from '~/app/_components/Icons/Gear';
+import {
+    Cog6ToothIcon,
+    HomeIcon,
+    ListBulletIcon,
+} from '@heroicons/react/24/outline';
 
 export const BottomNavigation: FC = () => {
     const pathname = usePathname();
@@ -21,7 +22,7 @@ export const BottomNavigation: FC = () => {
 
     const iconStyle = (route: string[]) =>
         `${
-            isSelected(pathname, route) ? 'fill-ternary' : 'fill-secondary'
+            isSelected(pathname, route) ? 'text-ternary' : 'text-secondary'
         } tab tab-home block text-xs w-6 h-6 m-auto`;
 
     return (
@@ -31,22 +32,15 @@ export const BottomNavigation: FC = () => {
         >
             <div id="tabs" className="flex justify-between">
                 <Link href="/" className={linkStyle(['/'])}>
-                    <Home className={iconStyle(['/'])} />
+                    <HomeIcon className={iconStyle(['/'])} />
                     <span className="tab tab-home block text-xs">Home</span>
                 </Link>
-                <Link
-                    href="/workout"
-                    className={linkStyle(['/workout', '/cardio'])}
-                >
-                    <Dumbbell className={iconStyle(['/workout', '/cardio'])} />
-                    <span className="tab tab-home block text-xs">Workout</span>
-                </Link>
-                <Link href="/eat" className={linkStyle(['/eat'])}>
-                    <Food className={iconStyle(['/eat'])} />
-                    <span className="tab tab-home block text-xs">Eat</span>
+                <Link href="/all" className={linkStyle(['/all'])}>
+                    <ListBulletIcon className={iconStyle(['/all'])} />
+                    <span className="tab tab-home block text-xs">All</span>
                 </Link>
                 <Link href="/settings" className={linkStyle(['/settings'])}>
-                    <Gear className={iconStyle(['/settings'])} />
+                    <Cog6ToothIcon className={iconStyle(['/settings'])} />
                     <span className="tab tab-home block text-xs">Settings</span>
                 </Link>
             </div>
