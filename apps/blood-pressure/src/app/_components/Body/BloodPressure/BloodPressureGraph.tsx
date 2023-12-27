@@ -78,14 +78,6 @@ export const BloodPressureGraph: FC = () => {
 
     return (
         <div className="card w-full rounded p-4 shadow">
-            <div className="flex flex-row">
-                <LinkButton to="body/blood-pressure/all" className="mr-2">
-                    See All
-                </LinkButton>
-                <LinkSecondaryButton to="body/blood-pressure">
-                    Add
-                </LinkSecondaryButton>
-            </div>
             {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
                 <Line data={data} />
             ) : (
