@@ -16,9 +16,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { format } from 'date-fns';
-import { LinkButton } from '../../Buttons/LinkButton';
-import { LinkSecondaryButton } from '../../Buttons/LinkSecondaryButton';
-import { LoadingCard } from '../../Loading/LoadingCard';
+import { LoadingCard } from '../Loading/LoadingCard';
 import { api } from '~/trpc/react';
 
 ChartJS.register(
@@ -31,7 +29,7 @@ ChartJS.register(
     Legend
 );
 
-export const BloodPressureGraph: FC = () => {
+export const HeartRateGraph: FC = () => {
     const [data, setData] = useState<
         | ChartData<
               'line',
@@ -51,22 +49,13 @@ export const BloodPressureGraph: FC = () => {
             labels,
             datasets: [
                 {
-                    label: 'Systolic',
+                    label: 'Heart Rate',
                     data:
                         userBloodPressureQuery.data?.map(
-                            (item) => item.Systolic
+                            (item) => item.HeartRate
                         ) ?? [],
                     borderColor: 'rgba(247, 198, 25, 1)',
                     backgroundColor: 'rgba(247, 198, 25, 0.1)',
-                },
-                {
-                    label: 'Diastolic',
-                    data:
-                        userBloodPressureQuery.data?.map(
-                            (item) => item.Diastolic
-                        ) ?? [],
-                    borderColor: 'rgba(175, 210, 87, 1)',
-                    backgroundColor: 'rgba(175, 210, 87, 0.1)',
                 },
             ],
         });

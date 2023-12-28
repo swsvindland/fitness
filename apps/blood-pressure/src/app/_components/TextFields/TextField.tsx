@@ -31,7 +31,7 @@ export const TextField: FC<IProps> = ({
     const isRequired = required !== undefined ? required : true;
 
     return (
-        <div className={`${className} m-1 w-full`}>
+        <div className={`${className} w-full`}>
             <label
                 htmlFor={id}
                 className="text-secondary block text-sm font-medium"

@@ -85,6 +85,7 @@ model UserBloodPressure {
     UserId    String   @db.Char(64)
     Systolic  Int      @db.SmallInt
     Diastolic Int      @db.SmallInt
+    HeartRate Int?     @db.SmallInt
 }
 
 model UserBody {

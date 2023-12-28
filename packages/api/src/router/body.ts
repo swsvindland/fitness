@@ -155,7 +155,13 @@ export const bodyRouter = createTRPCRouter({
     }),
 
     addBloodPressure: protectedProcedure
-        .input(z.object({ systolic: z.number(), diastolic: z.number() }))
+        .input(
+            z.object({
+                systolic: z.number(),
+                diastolic: z.number(),
+                heartRate: z.number().nullable(),
+            })
+        )
         .mutation(async ({ ctx, input }) => {
             if (!ctx.auth.userId) throw new Error('No user ID');
 
@@ -164,6 +170,7 @@ export const bodyRouter = createTRPCRouter({
                     UserId: ctx.auth.userId,
                     Systolic: input.systolic,
                     Diastolic: input.diastolic,
+                    HeartRate: input.heartRate,
                     Created: new Date(),
                 },
             });
@@ -175,6 +182,7 @@ export const bodyRouter = createTRPCRouter({
                 id: z.number(),
                 systolic: z.number(),
                 diastolic: z.number(),
+                heartRate: z.number().nullable(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -185,6 +193,7 @@ export const bodyRouter = createTRPCRouter({
                 data: {
                     Systolic: input.systolic,
                     Diastolic: input.diastolic,
+                    HeartRate: input.heartRate,
                 },
             });
         }),

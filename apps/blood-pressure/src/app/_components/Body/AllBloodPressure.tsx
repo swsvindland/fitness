@@ -1,27 +1,27 @@
 'use client';
 
 import { FC } from 'react';
-import { LoadingSpinner } from '../../Loading/LoadingSpinner';
-import { AllBloodPressureCard } from './AllBloodPressureCard';
+import { LoadingSpinner } from '../Loading/LoadingSpinner';
+import { BloodPressureCard } from './BloodPressureCard';
 import { api } from '~/trpc/react';
+import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 
 export const AllBloodPressure: FC = () => {
     const userBloodPressureQuery = api.body.getAllBloodPressures.useQuery();
 
-    if (userBloodPressureQuery.isLoading) return <LoadingSpinner />;
+    if (userBloodPressureQuery.isLoading) return <LoadingPage />;
 
     return (
         <div className="container grid grid-cols-1">
-            <h2 className="text-secondary text-2xl">
-                All Blood Pressure Records
-            </h2>
+            <h2 className="text-secondary text-2xl">All Records</h2>
             <div className=" grid grid-cols-1 gap-2">
                 {userBloodPressureQuery.data?.map((item) => (
-                    <AllBloodPressureCard
+                    <BloodPressureCard
                         id={Number(item.Id)}
                         date={item.Created.toDateString()}
-                        defaultSystolic={item.Systolic}
-                        defaultDiastolic={item.Diastolic}
+                        systolic={item.Systolic}
+                        diastolic={item.Diastolic}
+                        heartRate={item.HeartRate}
                     />
                 ))}
             </div>
