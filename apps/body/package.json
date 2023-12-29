@@ -18,7 +18,7 @@
         "@prisma/client": "^5.7.0",
         "@heroicons/react": "^2.1.1",
         "@t3-oss/env-nextjs": "^0.7.1",
-        "@tanstack/react-query": "^4.36.1",
+        "@tanstack/react-query": "^5.15.3",
         "@trpc/client": "^10.44.1",
         "@trpc/next": "^10.44.1",
         "@trpc/react-query": "^10.44.1",
