@@ -1,6 +1,5 @@
 'use client'
 
-import { Fragment } from 'react'
 import Link from 'next/link'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
@@ -62,7 +61,7 @@ function MobileNavigation() {
       </Popover.Button>
       <Transition.Root>
         <Transition.Child
-          as={Fragment}
+          as="div"
           enter="duration-150 ease-out"
           enterFrom="opacity-0"
           enterTo="opacity-100"
@@ -73,7 +72,7 @@ function MobileNavigation() {
           <Popover.Overlay className="fixed inset-0 bg-slate-300/50" />
         </Transition.Child>
         <Transition.Child
-          as={Fragment}
+          as="div"
           enter="duration-150 ease-out"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
