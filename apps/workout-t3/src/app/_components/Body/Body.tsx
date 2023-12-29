@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { BloodPressureGraph } from './BloodPressure/BloodPressureGraph';
 import { WeightGraph } from './Weight/WeightGraph';
 import { BodyGraph } from './Body/BodyGraph';
 import { BodyFatGraph } from './BodyFatGraph';
@@ -12,7 +11,6 @@ export const Body: FC = () => {
             <WeightGraph />
             <BodyFatGraph />
             <BodyGraph />
-            <BloodPressureGraph />
         </div>
     );
 };
