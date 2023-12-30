@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isSelected } from '~/app/_components/Navigation/utils';
 import {
+    ArrowsRightLeftIcon,
+    ArrowUpCircleIcon,
     Cog6ToothIcon,
     HomeIcon,
-    ListBulletIcon,
+    ScaleIcon,
 } from '@heroicons/react/24/outline';
 
 export const Sidebar: FC = () => {
@@ -33,9 +35,21 @@ export const Sidebar: FC = () => {
                         <HomeIcon className={iconStyle(['/'])} />
                         Home
                     </Link>
-                    <Link href="/all" className={linkStyle(['/all'])}>
-                        <ListBulletIcon className={iconStyle(['/all'])} />
-                        All
+                    <Link href="/weights" className={linkStyle(['/weights'])}>
+                        <ScaleIcon className={iconStyle(['/weights'])} />
+                        Weights
+                    </Link>
+                    <Link href="/heights" className={linkStyle(['/heights'])}>
+                        <ArrowUpCircleIcon
+                            className={iconStyle(['/heights'])}
+                        />
+                        Heights
+                    </Link>
+                    <Link href="/bodies" className={linkStyle(['/bodies'])}>
+                        <ArrowsRightLeftIcon
+                            className={iconStyle(['/bodies'])}
+                        />
+                        Bodies
                     </Link>
                     <Link href="/settings" className={linkStyle(['/settings'])}>
                         <Cog6ToothIcon className={iconStyle(['/settings'])} />
