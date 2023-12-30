@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
+import { LoadingPage } from '@fitness/ui';
 import { HeartRateGraph } from '~/app/_components/Body/HeartRateGraph';
 import { BloodPressureGraph } from '~/app/_components/Body/BloodPressureGraph';
 import { Create } from '~/app/_components/Body/Create';

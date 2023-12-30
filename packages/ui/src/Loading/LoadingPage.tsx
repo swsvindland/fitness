@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { LoadingSpinner } from '~/app/_components/Loading/LoadingSpinner';
+import { LoadingSpinner } from './LoadingSpinner';
 
 export const LoadingPage: FC = () => {
     return (

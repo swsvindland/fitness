@@ -1,4 +1,10 @@
 {
-    "extends": "../../tsconfig.json",
-    "include": ["src", "index.ts", "transformer.ts"]
+    "extends": "@fitness/tsconfig/base.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
+        "jsx": "react-jsx",
+
+    },
+    "include": ["."],
+    "exclude": ["node_modules"]
 }

@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react';
 import { Combobox, Transition } from '@headlessui/react';
-import { LoadingSpinner } from './Loading/LoadingSpinner';
+import { LoadingSpinner } from '@fitness/ui';
 import { CircleCheckSolid } from './Icons/CircleCheckSolid';
 
 interface IProps {

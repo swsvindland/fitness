@@ -5,7 +5,7 @@
     "scripts": {
         "with-env": "dotenv -e ../../.env --",
         "build": "pnpm with-env next build",
-        "dev": "pnpm with-env next dev --port 5000",
+        "dev": "pnpm with-env next dev --port 5001",
         "lint": "pnpm with-env next lint",
         "start": "next start"
     },
@@ -13,6 +13,7 @@
         "@clerk/nextjs": "^4.28.1",
         "@fitness/api": "workspace:*",
         "@fitness/types": "workspace:*",
+        "@fitness/ui": "workspace:*",
         "@headlessui/react": "^1.7.17",
         "@khmyznikov/pwa-install": "^0.2.7",
         "@prisma/client": "^5.7.0",

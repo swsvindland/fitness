@@ -16,7 +16,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { format } from 'date-fns';
-import { LoadingCard } from '../Loading/LoadingCard';
+import { LoadingCard } from '@fitness/ui';
 import { api } from '~/trpc/react';
 
 ChartJS.register(

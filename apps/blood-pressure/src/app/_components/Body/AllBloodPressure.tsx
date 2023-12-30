@@ -1,10 +1,9 @@
 'use client';
 
 import { FC } from 'react';
-import { LoadingSpinner } from '../Loading/LoadingSpinner';
 import { BloodPressureCard } from './BloodPressureCard';
 import { api } from '~/trpc/react';
-import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
+import { LoadingPage } from '@fitness/ui';
 
 export const AllBloodPressure: FC = () => {
     const userBloodPressureQuery = api.body.getAllBloodPressures.useQuery();

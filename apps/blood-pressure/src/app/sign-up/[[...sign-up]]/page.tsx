@@ -1,6 +1,6 @@
 import { SignUp } from '@clerk/nextjs';
 import { Suspense } from 'react';
-import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
+import { LoadingPage } from '@fitness/ui';
 
 export default function Page() {
     return (
