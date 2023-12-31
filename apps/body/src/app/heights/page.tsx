@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
 import { LoadingPage } from '@fitness/ui';
-import { AllBloodPressure } from '~/app/_components/Body/AllBloodPressure';
+import { AllHeights } from '~/app/_components/Height/AllHeights';
 
 export default async function AllPage() {
     return (
         <Suspense fallback={<LoadingPage />}>
-            <AllBloodPressure />
+            <AllHeights />
         </Suspense>
     );
 }
