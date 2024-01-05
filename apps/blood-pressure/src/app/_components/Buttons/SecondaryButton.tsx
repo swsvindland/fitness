@@ -1,6 +1,7 @@
 import { FC, MouseEventHandler, ReactNode } from 'react';
 
 interface IProps {
+    type?: 'button' | 'submit' | 'reset';
     onClick?: MouseEventHandler<HTMLButtonElement>;
     children: ReactNode;
     className?: string;
@@ -8,6 +9,7 @@ interface IProps {
 }
 
 export const SecondaryButton: FC<IProps> = ({
+    type,
     onClick,
     children,
     className,
@@ -15,6 +17,7 @@ export const SecondaryButton: FC<IProps> = ({
 }) => {
     return (
         <button
+            type={type}
             onClick={onClick}
             className={`${className} btn-secondary`}
             disabled={disabled}

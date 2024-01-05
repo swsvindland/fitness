@@ -1,10 +1,9 @@
 'use client';
 
-import { FC, FormEvent, useState } from 'react';
+import { FC, FormEvent, MouseEvent, useState } from 'react';
 import { TextField } from '../TextFields/TextField';
 import { Button } from '../Buttons/Button';
 import { SecondaryButton } from '../Buttons/SecondaryButton';
-import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
 
 interface IProps {
@@ -13,6 +12,7 @@ interface IProps {
     systolic: number | null;
     diastolic: number | null;
     heartRate: number | null;
+    setOpen: (open: boolean) => void;
 }
 
 interface IState {
@@ -27,7 +27,6 @@ export const BloodPressureForm: FC<IProps> = (props) => {
         diastolic: props.diastolic?.toString() ?? '',
         heartRate: props.heartRate?.toString(),
     });
-    const router = useRouter();
     const utils = api.useUtils();
 
     const createMutation = api.body.addBloodPressure.useMutation({
@@ -38,6 +37,13 @@ export const BloodPressureForm: FC<IProps> = (props) => {
     });
 
     const updateMutation = api.body.updateBloodPressure.useMutation({
+        onSuccess: async () => {
+            await utils.body.invalidate();
+            await utils.dashboard.invalidate();
+        },
+    });
+
+    const deleteMutation = api.body.deleteBloodPressure.useMutation({
         onSuccess: async () => {
             await utils.body.invalidate();
             await utils.dashboard.invalidate();
@@ -62,11 +68,20 @@ export const BloodPressureForm: FC<IProps> = (props) => {
             });
         }
 
-        router.back();
+        props.setOpen(false);
     };
 
-    const handleClear = () => {
+    const handleClear = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
         setState({ systolic: '', diastolic: '', heartRate: undefined });
+    };
+
+    const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        if (!props.id) return;
+
+        deleteMutation.mutate({ id: props.id });
+        props.setOpen(false);
     };
 
     return (
@@ -118,7 +133,14 @@ export const BloodPressureForm: FC<IProps> = (props) => {
                 />
             </div>
             <div className="flex justify-between pt-2">
-                <SecondaryButton onClick={handleClear}>Clear</SecondaryButton>
+                {props.id && (
+                    <SecondaryButton type="button" onClick={handleDelete}>
+                        Delete
+                    </SecondaryButton>
+                )}
+                <SecondaryButton type="button" onClick={handleClear}>
+                    Clear
+                </SecondaryButton>
                 <Button type="submit">Save</Button>
             </div>
         </form>

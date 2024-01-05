@@ -58,6 +58,7 @@ export const BloodPressureCard: FC<IProps> = ({
                     systolic={systolic}
                     diastolic={diastolic}
                     heartRate={heartRate}
+                    setOpen={setOpen}
                 />
             </Dialog>
         </>

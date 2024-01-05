@@ -28,6 +28,7 @@ export const Create: FC = () => {
                     systolic={null}
                     diastolic={null}
                     heartRate={null}
+                    setOpen={setOpen}
                 />
             </Dialog>
         </>

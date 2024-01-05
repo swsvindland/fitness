@@ -45,6 +45,7 @@ export const Dialog: FC<IProps> = ({ open, setOpen, children }) => {
                                         type="button"
                                         className="focus:ring-secondary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
                                         onClick={() => setOpen(false)}
+                                        tabIndex={-1}
                                     >
                                         <span className="sr-only">Close</span>
                                         <XSolid
