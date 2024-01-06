@@ -3,7 +3,6 @@ import { Sidebar } from '~/app/_components/Navigation/Sidebar';
 import { Header } from '~/app/_components/Navigation/Header';
 import { BottomNavigation } from '~/app/_components/Navigation/BottomNavigation';
 import { auth } from '@clerk/nextjs/server';
-import { NextUI } from '~/app/_components/NextUI';
 
 interface IProps {
     children: ReactNode;
@@ -15,7 +14,7 @@ export const Layout: FC<IProps> = ({ children }) => {
     if (!userId) return <>{children}</>;
 
     return (
-        <NextUI>
+        <>
             <div className="hidden md:fixed md:inset-y-0 md:flex md:w-28 md:flex-col">
                 <Sidebar />
             </div>
@@ -30,6 +29,6 @@ export const Layout: FC<IProps> = ({ children }) => {
             <footer className="md:hidden">
                 <BottomNavigation />
             </footer>
-        </NextUI>
+        </>
     );
 };

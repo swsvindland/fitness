@@ -1,29 +1,46 @@
-import { type Config } from 'tailwindcss';
+import {type Config} from 'tailwindcss';
+import {nextui} from "@nextui-org/react";
 
 export default {
     content: [
         './src/**/*.tsx',
-        './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+        "../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     ],
-    theme: {
-        extend: {
-            colors: {
-                background: '#0D3140',
-                card: '#2E586A',
-                'primary-dark': '#154255',
-                primary: '#28827A',
-                'primary-light': '#6FB6B0',
-                secondary: '#F7C619',
-                'secondary-light': '#FFF496',
-                'ternary-dark': '#86AE21',
-                ternary: '#AFD257',
-                'ternary-light': '#CEEE80',
-                error: '#ba1a1a',
+    darkMode: 'class',
+    theme: {},
+    plugins: [require('tailwindcss-safe-area'),
+        nextui({
+            layout: {
+                disabledOpacity: "0.3", // opacity-[0.3]
+                radius: {
+                    small: "2px", // rounded-small
+                    medium: "4px", // rounded-medium
+                    large: "6px", // rounded-large
+                },
+                borderWidth: {
+                    small: "1px", // border-small
+                    medium: "1px", // border-medium
+                    large: "2px", // border-large
+                },
             },
-            fontFamily: {
-                sans: ['Oswald', 'sans-serif'],
+            themes: {
+                light: {
+                },
+                dark: {
+                    colors: {
+                        background: '#0D3140',
+                        foreground: '#F7C619',
+                        primary: {
+                            700: '#154255',
+                            500: '#28827A',
+                            300: '#6FB6B0',
+                            DEFAULT: '#28827A',
+                            foreground: '#F7C619',
+                        },
+                        secondary: '#AFD257',
+                    }
+                },
             },
-        },
-    },
-    plugins: [require('tailwindcss-safe-area'), require('@nextui-org/react')],
+        })
+    ],
 } as Config;

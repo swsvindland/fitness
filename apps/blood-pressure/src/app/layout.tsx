@@ -9,6 +9,7 @@ import { type ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Layout } from '~/app/_components/Navigation/Layout';
 import { Metadata, Viewport } from 'next';
+import {Providers} from "~/app/providers";
 
 const oswald = Oswald({
     subsets: ['latin'],
@@ -34,12 +35,14 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <ClerkProvider>
-            <html lang="en">
+            <html lang="en" className="dark">
                 <body className={`font-sans ${oswald.variable}`}>
-                    <TRPCReactProvider cookies={cookies().toString()}>
-                        <Layout>{children}</Layout>
-                        <Analytics />
-                    </TRPCReactProvider>
+                    <Providers>
+                        <TRPCReactProvider cookies={cookies().toString()}>
+                            <Layout>{children}</Layout>
+                            <Analytics />
+                        </TRPCReactProvider>
+                    </Providers>
                 </body>
             </html>
         </ClerkProvider>

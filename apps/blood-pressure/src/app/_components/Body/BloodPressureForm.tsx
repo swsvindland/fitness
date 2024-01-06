@@ -1,10 +1,9 @@
 'use client';
 
 import { FC, FormEvent, MouseEvent, useState } from 'react';
-import { TextField } from '../TextFields/TextField';
-import { Button } from '../Buttons/Button';
-import { SecondaryButton } from '../Buttons/SecondaryButton';
 import { api } from '~/trpc/react';
+import {Button} from "@nextui-org/button";
+import {Input} from "@nextui-org/react";
 
 interface IProps {
     id: number | null;
@@ -87,7 +86,7 @@ export const BloodPressureForm: FC<IProps> = (props) => {
     return (
         <form className="w-full" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-2 py-2">
-                <TextField
+                <Input
                     id="systolic"
                     type="number"
                     inputMode="decimal"
@@ -102,7 +101,7 @@ export const BloodPressureForm: FC<IProps> = (props) => {
                         })
                     }
                 />
-                <TextField
+                <Input
                     id="diastolic"
                     type="number"
                     inputMode="decimal"
@@ -117,7 +116,7 @@ export const BloodPressureForm: FC<IProps> = (props) => {
                         })
                     }
                 />
-                <TextField
+                <Input
                     id="heart-rate"
                     type="number"
                     inputMode="decimal"
@@ -134,14 +133,14 @@ export const BloodPressureForm: FC<IProps> = (props) => {
             </div>
             <div className="flex justify-between pt-2">
                 {props.id && (
-                    <SecondaryButton type="button" onClick={handleDelete}>
+                    <Button type="button" color="secondary" onClick={handleDelete}>
                         Delete
-                    </SecondaryButton>
+                    </Button>
                 )}
-                <SecondaryButton type="button" onClick={handleClear}>
+                <Button type="button" color="secondary" onClick={handleClear}>
                     Clear
-                </SecondaryButton>
-                <Button type="submit">Save</Button>
+                </Button>
+                <Button type="submit" color="primary">Save</Button>
             </div>
         </form>
     );
