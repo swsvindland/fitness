@@ -1,7 +1,10 @@
 import { type Config } from 'tailwindcss';
 
 export default {
-    content: ['./src/**/*.tsx'],
+    content: [
+        './src/**/*.tsx',
+        './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    ],
     theme: {
         extend: {
             colors: {
@@ -22,5 +25,5 @@ export default {
             },
         },
     },
-    plugins: [require('tailwindcss-safe-area')],
+    plugins: [require('tailwindcss-safe-area'), require('@nextui-org/react')],
 } as Config;
