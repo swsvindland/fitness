@@ -55,9 +55,9 @@ model FoodV2Servings {
     VitaminC               Float?       @db.Float
     VitaminD               Float?       @db.Float
     FoodV2Id               BigInt
-    FoodV2                 FoodV2       @relation(fields: [FoodV2Id], references: [Id])
     Created                DateTime?    @db.DateTime(0)
     Updated                DateTime?    @db.DateTime(0)
+    FoodV2                 FoodV2       @relation(fields: [FoodV2Id], references: [Id])
     UserFoodV2             UserFoodV2[]
 
     @@index([FoodV2Id], map: "FoodV2Servings_FoodV2Id")
@@ -121,12 +121,12 @@ model UserFoodV2 {
     Id            BigInt         @id @default(autoincrement())
     UserId        String         @db.Char(64)
     FoodV2Id      BigInt
-    FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
     ServingId     BigInt
-    FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
     ServingAmount Float          @db.Float
     Created       DateTime?      @db.DateTime(0)
     Updated       DateTime?      @db.DateTime(0)
+    FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
+    FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
 
     @@index([UserId], map: "UserFoodV2_UserId")
     @@index([Created], map: "UserFoodV2_Created")
@@ -153,9 +153,9 @@ model UserSupplementActivity {
     Id               BigInt          @id @default(autoincrement())
     Updated          DateTime        @db.Date
     UserSupplementId BigInt
-    UserSupplement   UserSupplements @relation(fields: [UserSupplementId], references: [Id])
     UserId           String          @db.Char(64)
     Time             String          @db.VarChar(255)
+    UserSupplement   UserSupplements @relation(fields: [UserSupplementId], references: [Id])
 
     @@index([UserId], map: "UserSupplementActivity_UserId")
     @@index([UserSupplementId], map: "UserSupplementActivity_UserSupplementId")
@@ -166,8 +166,8 @@ model UserSupplements {
     Created                DateTime                 @db.DateTime(0)
     UserId                 String                   @db.Char(64)
     SupplementId           BigInt
-    Supplement             Supplements              @relation(fields: [SupplementId], references: [Id])
     Times                  String                   @db.VarChar(1024)
+    Supplement             Supplements              @relation(fields: [SupplementId], references: [Id])
     UserSupplementActivity UserSupplementActivity[]
 
     @@index([UserId], map: "UserSupplements_UserId")
@@ -185,9 +185,9 @@ model UserWorkout {
     Id        BigInt   @id @default(autoincrement())
     Created   DateTime @db.DateTime(0)
     WorkoutId BigInt
-    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
     Active    Boolean
     UserId    String   @db.Char(64)
+    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
 
     @@index([UserId], map: "UserWorkout_UserId")
     @@index([WorkoutId], map: "UserWorkout_WorkoutId")
@@ -218,11 +218,11 @@ model UserWorkoutSubstitution {
 model UserWorkoutsCompleted {
     Id        BigInt   @id @default(autoincrement())
     WorkoutId BigInt
-    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
     Week      Int      @db.SmallInt
     Day       Int?     @db.SmallInt
     UserId    String   @db.Char(64)
     Created   DateTime @db.DateTime(0)
+    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
 
     @@index([UserId], map: "UserWorkoutsCompleted_UserId")
     @@index([WorkoutId], map: "UserWorkoutsCompleted_WorkoutId")
@@ -249,15 +249,15 @@ model WorkoutExercise {
     Id         BigInt    @id @default(autoincrement())
     Created    DateTime  @db.DateTime(0)
     WorkoutId  BigInt
-    Workout    Workout   @relation(fields: [WorkoutId], references: [Id])
     ExerciseId BigInt
-    Exercise   Exercise  @relation(fields: [ExerciseId], references: [Id])
     Day        Int
     MinReps    Int?
     MaxReps    Int?
     Updated    DateTime? @db.DateTime(0)
     Order      Int?
     Time       Int?
+    Workout    Workout   @relation(fields: [WorkoutId], references: [Id])
+    Exercise   Exercise  @relation(fields: [ExerciseId], references: [Id])
 
     @@index([WorkoutId], map: "WorkoutExercise_WorkoutId")
     @@index([ExerciseId], map: "WorkoutExercise_ExerciseId")
