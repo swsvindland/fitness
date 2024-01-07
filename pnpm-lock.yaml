@@ -69,8 +69,8 @@ importers:
         specifier: ^4.4.1
         version: 4.4.1
       date-fns:
-        specifier: ^2.30.0
-        version: 2.30.0
+        specifier: ^3.1.0
+        version: 3.1.0
       framer-motion:
         specifier: ^10.17.9
         version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
@@ -214,8 +214,8 @@ importers:
         specifier: ^4.4.1
         version: 4.4.1
       date-fns:
-        specifier: ^2.30.0
-        version: 2.30.0
+        specifier: ^3.1.0
+        version: 3.1.0
       framer-motion:
         specifier: ^10.17.9
         version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
@@ -359,8 +359,8 @@ importers:
         specifier: ^4.4.1
         version: 4.4.1
       date-fns:
-        specifier: ^2.30.0
-        version: 2.30.0
+        specifier: ^3.1.0
+        version: 3.1.0
       framer-motion:
         specifier: ^10.17.9
         version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
@@ -507,8 +507,8 @@ importers:
         specifier: ^4.4.1
         version: 4.4.1
       date-fns:
-        specifier: ^2.30.0
-        version: 2.30.0
+        specifier: ^3.1.0
+        version: 3.1.0
       next:
         specifier: ^14.0.4
         version: 14.0.4(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
@@ -6091,11 +6091,8 @@ packages:
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
 
-  /date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
-    dependencies:
-      '@babel/runtime': 7.23.2
+  /date-fns@3.1.0:
+    resolution: {integrity: sha512-ZO7yefXV/wCWzd3I9haCHmfzlfA3i1a2HHO7ZXjtJrRjXt8FULKJ2Vl8wji3XYF4dQ0ZJ/tokXDZeYlFvgms9Q==}
     dev: false
 
   /debug@3.2.7:
