@@ -17,9 +17,9 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-    title: 'WorkoutTrack',
+    title: 'Blood Pressure Track',
     description:
-        'A workout tracking app is the perfect companion for the discerning fitness enthusiast.',
+        'A web app for keeping track of your blood pressure and heart rate.',
     icons: [{ rel: 'icon', url: '/favicon.ico' }],
     manifest: '/manifest.json',
 };
