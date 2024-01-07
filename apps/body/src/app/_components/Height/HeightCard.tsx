@@ -1,9 +1,15 @@
 'use client';
 
 import { format } from 'date-fns';
-import { FC, useState } from 'react';
-import { Dialog } from '~/app/_components/Body/Dialog';
+import { FC } from 'react';
 import { HeightForm } from '~/app/_components/Height/HeightForm';
+import {
+    Modal,
+    ModalBody,
+    ModalContent,
+    ModalHeader,
+    useDisclosure,
+} from '@nextui-org/react';
 
 interface IProps {
     id: number;
@@ -12,17 +18,13 @@ interface IProps {
 }
 
 export const HeightCard: FC<IProps> = ({ id, date, height }) => {
-    const [open, setOpen] = useState(false);
-
-    const handleClick = () => {
-        setOpen(!open);
-    };
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
         <>
             <button
                 className="card hover:bg-primary-dark active:bg-background my-2 cursor-pointer p-4 text-left"
-                onClick={handleClick}
+                onClick={onOpen}
             >
                 <span className="text-secondary text-lg">
                     {format(new Date(date ?? ''), 'PP')}
@@ -35,9 +37,24 @@ export const HeightCard: FC<IProps> = ({ id, date, height }) => {
                     </div>
                 </dl>
             </button>
-            <Dialog open={open} setOpen={setOpen}>
-                <HeightForm id={id} date={date} height={height} />
-            </Dialog>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">
+                                Enter Blood Pressure Reading
+                            </ModalHeader>
+                            <ModalBody>
+                                <HeightForm
+                                    id={id}
+                                    date={date}
+                                    height={height}
+                                />
+                            </ModalBody>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
         </>
     );
 };

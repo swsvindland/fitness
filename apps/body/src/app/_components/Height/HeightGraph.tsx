@@ -18,6 +18,7 @@ import { Line } from 'react-chartjs-2';
 import { format } from 'date-fns';
 import { LoadingCard } from '@fitness/ui';
 import { api } from '~/trpc/react';
+import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 
 ChartJS.register(
     CategoryScale,
@@ -64,14 +65,18 @@ export const HeightGraph: FC = () => {
     }
 
     return (
-        <div className="card w-full rounded p-4 shadow">
-            {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
-                <Line data={data} />
-            ) : (
-                <span className="text-ternary">
-                    Use the Add button to add your blood pressure
-                </span>
-            )}
-        </div>
+        <Card>
+            <CardHeader>Height</CardHeader>
+            <Divider />
+            <CardBody>
+                {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
+                    <Line data={data} />
+                ) : (
+                    <span className="text-ternary">
+                        Use the Add button to add your height
+                    </span>
+                )}
+            </CardBody>
+        </Card>
     );
 };

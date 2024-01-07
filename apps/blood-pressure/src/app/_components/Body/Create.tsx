@@ -4,8 +4,13 @@ import { FC } from 'react';
 import { BloodPressureForm } from '~/app/_components/Body/BloodPressureForm';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import { Button } from '@nextui-org/button';
-import { Modal, ModalContent } from '@nextui-org/modal';
-import { ModalBody, ModalHeader, useDisclosure } from '@nextui-org/react';
+import {
+    Modal,
+    ModalBody,
+    ModalContent,
+    ModalHeader,
+    useDisclosure,
+} from '@nextui-org/react';
 
 export const Create: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
