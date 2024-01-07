@@ -42,8 +42,8 @@ importers:
         specifier: ^2.2.9
         version: 2.2.9(@types/react@18.2.45)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)(tailwindcss@3.3.6)
       '@prisma/client':
-        specifier: ^5.7.0
-        version: 5.7.0(prisma@5.7.0)
+        specifier: ^5.7.1
+        version: 5.7.1(prisma@5.7.0)
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -187,8 +187,8 @@ importers:
         specifier: ^2.2.9
         version: 2.2.9(@types/react@18.2.45)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)(tailwindcss@3.4.0)
       '@prisma/client':
-        specifier: ^5.7.0
-        version: 5.7.0(prisma@5.7.0)
+        specifier: ^5.7.1
+        version: 5.7.1(prisma@5.7.0)
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -332,8 +332,8 @@ importers:
         specifier: ^2.2.9
         version: 2.2.9(@types/react@18.2.45)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)(tailwindcss@3.4.0)
       '@prisma/client':
-        specifier: ^5.7.0
-        version: 5.7.0(prisma@5.7.0)
+        specifier: ^5.7.1
+        version: 5.7.1(prisma@5.7.0)
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -471,8 +471,8 @@ importers:
         specifier: ^0.2.7
         version: 0.2.7
       '@prisma/client':
-        specifier: ^5.7.0
-        version: 5.7.0(prisma@5.7.0)
+        specifier: ^5.7.1
+        version: 5.7.1(prisma@5.7.0)
       '@t3-oss/env-nextjs':
         specifier: ^0.7.1
         version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
@@ -647,8 +647,8 @@ importers:
   packages/db:
     dependencies:
       '@prisma/client':
-        specifier: ^5.7.0
-        version: 5.7.0(prisma@5.7.0)
+        specifier: ^5.7.1
+        version: 5.7.1(prisma@5.7.0)
     devDependencies:
       '@types/node':
         specifier: ^18.19.3
@@ -3926,8 +3926,8 @@ packages:
       webcrypto-core: 1.7.7
     dev: false
 
-  /@prisma/client@5.7.0(prisma@5.7.0):
-    resolution: {integrity: sha512-cZmglCrfNbYpzUtz7HscVHl38e9CrUs31nrVoGUK1nIPXGgt8hT4jj2s657UXcNdQ/jBUxDgGmHyu2Nyrq1txg==}
+  /@prisma/client@5.7.1(prisma@5.7.0):
+    resolution: {integrity: sha512-TUSa4nUcC4nf/e7X3jyO1pEd6XcI/TLRCA0KjkA46RDIpxUaRsBYEOqITwXRW2c0bMFyKcCRXrH4f7h4q9oOlg==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
