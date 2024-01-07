@@ -11,19 +11,6 @@ export default {
     plugins: [
         require('tailwindcss-safe-area'),
         nextui({
-            layout: {
-                disabledOpacity: '0.3', // opacity-[0.3]
-                radius: {
-                    small: '2px', // rounded-small
-                    medium: '4px', // rounded-medium
-                    large: '6px', // rounded-large
-                },
-                borderWidth: {
-                    small: '1px', // border-small
-                    medium: '1px', // border-medium
-                    large: '2px', // border-large
-                },
-            },
             themes: {
                 light: {},
                 dark: {
@@ -31,12 +18,20 @@ export default {
                         background: '#0D3140',
                         foreground: '#F7C619',
                         primary: {
+                            900: '#0D3140',
+                            800: '#0F3C51',
                             700: '#154255',
+                            600: '#1D5A6F',
                             500: '#28827A',
+                            400: '#3C9F8C',
                             300: '#6FB6B0',
+                            200: '#A6D0C9',
+                            100: '#D4E7E1',
+                            50: '#F2F8F7',
                             DEFAULT: '#28827A',
                             foreground: '#F7C619',
                         },
+                        focus: '#F7C619',
                         secondary: '#AFD257',
                     },
                 },
