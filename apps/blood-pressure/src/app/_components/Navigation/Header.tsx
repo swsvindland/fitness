@@ -1,9 +1,9 @@
 'use client';
 
 import { FC } from 'react';
-import { Dumbbell } from '../Icons/Dumbbell';
 import { UserButton } from '@clerk/nextjs';
 import { Card } from '@nextui-org/react';
+import { Dumbbell } from '@fitness/ui';
 
 export const Header: FC = () => {
     return (
