@@ -154,6 +154,66 @@ export const bodyRouter = createTRPCRouter({
         });
     }),
 
+    getAvgBloodPressure: protectedProcedure.query(async ({ ctx }) => {
+        if (!ctx.auth.userId) throw new Error('No user ID');
+
+        const bps = await ctx.prisma.userBloodPressure.findMany({
+            where: {
+                UserId: ctx.auth.userId,
+                Created: {
+                    gte: new Date(
+                        new Date().setDate(new Date().getDate() - 30)
+                    ),
+                },
+            },
+            orderBy: {
+                Created: 'asc',
+            },
+        });
+
+        const avgSystolic =
+            bps.reduce((acc, bp) => acc + bp.Systolic, 0) / bps.length;
+        const avgDiastolic =
+            bps.reduce((acc, bp) => acc + bp.Diastolic, 0) / bps.length;
+
+        return {
+            systolic: avgSystolic,
+            diastolic: avgDiastolic,
+        };
+    }),
+
+    getAvgHeartRate: protectedProcedure.query(async ({ ctx }) => {
+        if (!ctx.auth.userId) throw new Error('No user ID');
+
+        const bps = await ctx.prisma.userBloodPressure.findMany({
+            where: {
+                UserId: ctx.auth.userId,
+                Created: {
+                    gte: new Date(
+                        new Date().setDate(new Date().getDate() - 30)
+                    ),
+                },
+            },
+            orderBy: {
+                Created: 'asc',
+            },
+        });
+
+        let heartRateSum = 0;
+        let heartRateCount = 0;
+
+        for (const bp of bps) {
+            if (bp.HeartRate) {
+                heartRateSum += bp.HeartRate;
+                heartRateCount++;
+            }
+        }
+
+        return {
+            heartRate: heartRateSum / heartRateCount,
+        };
+    }),
+
     addBloodPressure: protectedProcedure
         .input(
             z.object({

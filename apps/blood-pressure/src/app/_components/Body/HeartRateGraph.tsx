@@ -18,7 +18,7 @@ import { Line } from 'react-chartjs-2';
 import { format } from 'date-fns';
 import { LoadingCard } from '@fitness/ui';
 import { api } from '~/trpc/react';
-import { Card, CardBody } from '@nextui-org/react';
+import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 
 ChartJS.register(
     CategoryScale,
@@ -68,6 +68,8 @@ export const HeartRateGraph: FC = () => {
 
     return (
         <Card>
+            <CardHeader>Heart Rate</CardHeader>
+            <Divider />
             <CardBody>
                 {(data.datasets.at(0)?.data.length ?? 0) > 0 ? (
                     <Line data={data} />
