@@ -9,6 +9,7 @@ import { type ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Layout } from '~/app/_components/Navigation/Layout';
 import { Metadata, Viewport } from 'next';
+import { Providers } from '~/app/providers';
 
 const oswald = Oswald({
     subsets: ['latin'],
@@ -16,9 +17,8 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-    title: 'WorkoutTrack',
-    description:
-        'A workout tracking app is the perfect companion for the discerning fitness enthusiast.',
+    title: 'Body Track',
+    description: 'A web app for keeping track of your body measurements.',
     icons: [{ rel: 'icon', url: '/favicon.ico' }],
     manifest: '/manifest.json',
 };
@@ -34,12 +34,14 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <ClerkProvider>
-            <html lang="en">
+            <html lang="en" className="dark">
                 <body className={`font-sans ${oswald.variable}`}>
-                    <TRPCReactProvider cookies={cookies().toString()}>
-                        <Layout>{children}</Layout>
-                        <Analytics />
-                    </TRPCReactProvider>
+                    <Providers>
+                        <TRPCReactProvider cookies={cookies().toString()}>
+                            <Layout>{children}</Layout>
+                            <Analytics />
+                        </TRPCReactProvider>
+                    </Providers>
                 </body>
             </html>
         </ClerkProvider>

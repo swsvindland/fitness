@@ -1,6 +1,6 @@
 import { FC, Fragment, ReactNode } from 'react';
 import { Transition, Dialog as HeadlessDialog } from '@headlessui/react';
-import { XSolid } from '~/app/_components/Icons/XSolid';
+import { XSolid } from '@fitness/ui';
 
 interface IProps {
     open: boolean;

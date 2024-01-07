@@ -1,15 +1,15 @@
 'use client';
 
 import { FC } from 'react';
-import { Disclosure } from '@headlessui/react';
-import { Dumbbell } from '../Icons/Dumbbell';
 import { UserButton } from '@clerk/nextjs';
+import { Dumbbell } from '@fitness/ui';
+import { Card } from '@nextui-org/react';
 
 export const Header: FC = () => {
     return (
-        <Disclosure
+        <Card
             as="nav"
-            className="pt-safe bg-primary-dark dark:bg-background fixed inset-x-0 top-0 z-10 block shadow"
+            className="pt-safe fixed inset-x-0 top-0 z-10 block rounded-none"
         >
             <div className="mx-auto px-4 sm:px-8">
                 <div className="relative flex h-16 items-center justify-between">
@@ -21,6 +21,6 @@ export const Header: FC = () => {
                     </div>
                 </div>
             </div>
-        </Disclosure>
+        </Card>
     );
 };

@@ -69,7 +69,7 @@ export const WeightGraph: FC = () => {
                 <Line data={data} />
             ) : (
                 <span className="text-ternary">
-                    Use the Add button to add your blood pressure
+                    Use the Add button to add your weight
                 </span>
             )}
         </div>
