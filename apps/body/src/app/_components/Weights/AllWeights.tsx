@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { WeightCard } from './WeightCard';
 import { api } from '~/trpc/react';
 import { LoadingPage } from '@fitness/ui';
+import { CreateWeight } from '~/app/_components/Weights/CreateWeight';
 
 export const AllWeights: FC = () => {
     const userBloodPressureQuery = api.body.getAllWeights.useQuery();
@@ -12,7 +13,6 @@ export const AllWeights: FC = () => {
 
     return (
         <div className="container grid grid-cols-1">
-            <h2 className="text-secondary text-2xl">All Records</h2>
             <div className=" grid grid-cols-1 gap-2">
                 {userBloodPressureQuery.data?.map((item) => (
                     <WeightCard
@@ -22,6 +22,7 @@ export const AllWeights: FC = () => {
                     />
                 ))}
             </div>
+            <CreateWeight />
         </div>
     );
 };

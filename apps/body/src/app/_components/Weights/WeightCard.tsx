@@ -1,10 +1,22 @@
 'use client';
 
 import { format } from 'date-fns';
-import { FC, useState } from 'react';
-import { Dialog } from '~/app/_components/Body/Dialog';
+import React, { FC } from 'react';
 import { WeightForm } from '~/app/_components/Weights/WeightForm';
-import { useDisclosure } from '@nextui-org/react';
+import {
+    Card,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    Divider,
+    Modal,
+    ModalBody,
+    ModalContent,
+    ModalHeader,
+    useDisclosure,
+} from '@nextui-org/react';
+import { Button } from '@nextui-org/button';
+import { api } from '~/trpc/react';
 
 interface IProps {
     id: number;
@@ -15,23 +27,42 @@ interface IProps {
 export const WeightCard: FC<IProps> = ({ id, date, weight }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
+    const deleteMutation = api.body.deleteWeight.useMutation({
+        onSuccess: async () => {
+            await utils.body.invalidate();
+            await utils.dashboard.invalidate();
+        },
+    });
+
     return (
         <>
-            <button
-                className="card hover:bg-primary-dark active:bg-background my-2 cursor-pointer p-4 text-left"
-                onClick={onOpen}
-            >
-                <span className="text-secondary text-lg">
+            <Card>
+                <CardHeader className="text-secondary text-lg">
                     {format(new Date(date ?? ''), 'PP')}
-                </span>
-                <hr className="border-secondary" />
-                <dl className="text-ternary">
-                    <div className="grid grid-cols-2 gap-2">
-                        <dt className="text-secondary text-lg">Weight</dt>
-                        <dd>{weight}</dd>
-                    </div>
-                </dl>
-            </button>
+                </CardHeader>
+                <Divider />
+                <CardBody>
+                    <dl className="text-ternary">
+                        <div className="grid grid-cols-2 gap-2">
+                            <dt className="text-secondary text-lg">Weight</dt>
+                            <dd>{weight}</dd>
+                        </div>
+                    </dl>
+                </CardBody>
+                <Divider />
+                <CardFooter className="flex gap-2">
+                    <Button variant="light" color="primary" onPress={onOpen}>
+                        Update
+                    </Button>
+                    <Button
+                        variant="light"
+                        color="danger"
+                        onPress={() => deleteMutation.mutate({ id })}
+                    >
+                        Delete
+                    </Button>
+                </CardFooter>
+            </Card>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
@@ -44,12 +75,13 @@ export const WeightCard: FC<IProps> = ({ id, date, weight }) => {
                                     id={id}
                                     date={date}
                                     weight={weight}
+                                    setOpen={onClose}
                                 />
                             </ModalBody>
                         </>
                     )}
                 </ModalContent>
-            </Modal>{' '}
+            </Modal>
         </>
     );
 };
