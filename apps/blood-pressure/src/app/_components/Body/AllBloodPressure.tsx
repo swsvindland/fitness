@@ -12,7 +12,6 @@ export const AllBloodPressure: FC = () => {
 
     return (
         <div className="container grid grid-cols-1">
-            <h2 className="text-secondary text-2xl">All Records</h2>
             <div className=" grid grid-cols-1 gap-2">
                 {userBloodPressureQuery.data?.map((item) => (
                     <BloodPressureCard

@@ -42,13 +42,6 @@ export const BloodPressureForm: FC<IProps> = (props) => {
         },
     });
 
-    const deleteMutation = api.body.deleteBloodPressure.useMutation({
-        onSuccess: async () => {
-            await utils.body.invalidate();
-            await utils.dashboard.invalidate();
-        },
-    });
-
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -73,14 +66,6 @@ export const BloodPressureForm: FC<IProps> = (props) => {
     const handleClear = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setState({ systolic: '', diastolic: '', heartRate: undefined });
-    };
-
-    const handleDelete = (event: MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-        if (!props.id) return;
-
-        deleteMutation.mutate({ id: props.id });
-        props.setOpen(false);
     };
 
     return (
@@ -132,15 +117,6 @@ export const BloodPressureForm: FC<IProps> = (props) => {
                 />
             </div>
             <div className="flex justify-between pt-2">
-                {props.id && (
-                    <Button
-                        type="button"
-                        color="secondary"
-                        onClick={handleDelete}
-                    >
-                        Delete
-                    </Button>
-                )}
                 <Button type="button" color="secondary" onClick={handleClear}>
                     Clear
                 </Button>
