@@ -9,7 +9,7 @@ import { type ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { Layout } from '~/app/_components/Navigation/Layout';
 import { Metadata, Viewport } from 'next';
-import {Providers} from "~/app/providers";
+import { Providers } from '~/app/providers';
 
 const oswald = Oswald({
     subsets: ['latin'],

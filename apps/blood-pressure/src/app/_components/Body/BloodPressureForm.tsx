@@ -2,8 +2,8 @@
 
 import { FC, FormEvent, MouseEvent, useState } from 'react';
 import { api } from '~/trpc/react';
-import {Button} from "@nextui-org/button";
-import {Input} from "@nextui-org/react";
+import { Button } from '@nextui-org/button';
+import { Input } from '@nextui-org/react';
 
 interface IProps {
     id: number | null;
@@ -133,14 +133,20 @@ export const BloodPressureForm: FC<IProps> = (props) => {
             </div>
             <div className="flex justify-between pt-2">
                 {props.id && (
-                    <Button type="button" color="secondary" onClick={handleDelete}>
+                    <Button
+                        type="button"
+                        color="secondary"
+                        onClick={handleDelete}
+                    >
                         Delete
                     </Button>
                 )}
                 <Button type="button" color="secondary" onClick={handleClear}>
                     Clear
                 </Button>
-                <Button type="submit" color="primary">Save</Button>
+                <Button type="submit" color="primary">
+                    Save
+                </Button>
             </div>
         </form>
     );

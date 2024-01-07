@@ -50,8 +50,8 @@ export function Button({ className, ...props }: ButtonProps) {
     props.variant === 'outline'
       ? variantStyles.outline[props.color]
       : props.variant === 'solid'
-      ? variantStyles.solid[props.color]
-      : undefined,
+        ? variantStyles.solid[props.color]
+        : undefined,
     className,
   )
 

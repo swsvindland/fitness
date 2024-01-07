@@ -1,31 +1,31 @@
-import {type Config} from 'tailwindcss';
-import {nextui} from "@nextui-org/react";
+import { type Config } from 'tailwindcss';
+import { nextui } from '@nextui-org/react';
 
 export default {
     content: [
         './src/**/*.tsx',
-        "../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+        '../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     ],
     darkMode: 'class',
     theme: {},
-    plugins: [require('tailwindcss-safe-area'),
+    plugins: [
+        require('tailwindcss-safe-area'),
         nextui({
             layout: {
-                disabledOpacity: "0.3", // opacity-[0.3]
+                disabledOpacity: '0.3', // opacity-[0.3]
                 radius: {
-                    small: "2px", // rounded-small
-                    medium: "4px", // rounded-medium
-                    large: "6px", // rounded-large
+                    small: '2px', // rounded-small
+                    medium: '4px', // rounded-medium
+                    large: '6px', // rounded-large
                 },
                 borderWidth: {
-                    small: "1px", // border-small
-                    medium: "1px", // border-medium
-                    large: "2px", // border-large
+                    small: '1px', // border-small
+                    medium: '1px', // border-medium
+                    large: '2px', // border-large
                 },
             },
             themes: {
-                light: {
-                },
+                light: {},
                 dark: {
                     colors: {
                         background: '#0D3140',
@@ -38,9 +38,9 @@ export default {
                             foreground: '#F7C619',
                         },
                         secondary: '#AFD257',
-                    }
+                    },
                 },
             },
-        })
+        }),
     ],
 } as Config;

@@ -2,8 +2,7 @@
     "extends": "@fitness/tsconfig/base.json",
     "compilerOptions": {
         "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo.json",
-        "jsx": "react-jsx",
-
+        "jsx": "react-jsx"
     },
     "include": ["."],
     "exclude": ["node_modules"]
