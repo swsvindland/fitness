@@ -116,8 +116,8 @@ export const BloodPressureForm: FC<IProps> = (props) => {
                     }
                 />
             </div>
-            <div className="flex justify-between pt-2">
-                <Button type="button" color="secondary" onClick={handleClear}>
+            <div className="flex justify-between pb-3 pt-2">
+                <Button type="button" color="warning" onClick={handleClear}>
                     Clear
                 </Button>
                 <Button type="submit" color="primary">
