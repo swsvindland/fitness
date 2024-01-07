@@ -9,6 +9,7 @@ import {
     HomeIcon,
     ListBulletIcon,
 } from '@heroicons/react/24/outline';
+import { Card } from '@nextui-org/react';
 
 export const Sidebar: FC = () => {
     const pathname = usePathname();
@@ -26,7 +27,7 @@ export const Sidebar: FC = () => {
         } tab tab-home block text-xs w-6 h-6 m-auto`;
 
     return (
-        <div className="pl-safe bg-primary-dark dark:bg-background z-20 flex min-h-0 flex-1 flex-col border-gray-200 shadow ">
+        <Card className="pl-safe z-20 flex min-h-0 flex-1 flex-col rounded-none">
             <div className="flex flex-1 flex-col overflow-y-auto pb-4 pt-5">
                 <nav className="mt-16 flex-1 space-y-1 bg-transparent px-2">
                     <Link href="/" className={linkStyle(['/'])}>
@@ -43,6 +44,6 @@ export const Sidebar: FC = () => {
                     </Link>
                 </nav>
             </div>
-        </div>
+        </Card>
     );
 };

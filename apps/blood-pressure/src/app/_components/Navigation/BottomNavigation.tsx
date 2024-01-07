@@ -9,6 +9,7 @@ import {
     HomeIcon,
     ListBulletIcon,
 } from '@heroicons/react/24/outline';
+import { Card } from '@nextui-org/react';
 
 export const BottomNavigation: FC = () => {
     const pathname = usePathname();
@@ -18,7 +19,7 @@ export const BottomNavigation: FC = () => {
             isSelected(pathname, route)
                 ? 'text-ternary bg-primary-dark'
                 : 'text-secondary'
-        } w-full justify-center inline-block text-center py-2 rounded hover:bg-primary-dark active:bg-primary-dark`;
+        } w-full justify-center inline-block text-center py-3 rounded hover:bg-primary-dark active:bg-primary-dark`;
 
     const iconStyle = (route: string[]) =>
         `${
@@ -26,9 +27,9 @@ export const BottomNavigation: FC = () => {
         } tab tab-home block text-xs w-6 h-6 m-auto`;
 
     return (
-        <div
+        <Card
             id="bottom-navigation"
-            className="pb-safe bg-primary-dark dark:bg-background fixed inset-x-0 bottom-0 z-10 block p-2 shadow"
+            className="pb-safe fixed inset-x-0 bottom-0 z-10 block rounded-none"
         >
             <div id="tabs" className="flex justify-between">
                 <Link href="/" className={linkStyle(['/'])}>
@@ -44,6 +45,6 @@ export const BottomNavigation: FC = () => {
                     <span className="tab tab-home block text-xs">Settings</span>
                 </Link>
             </div>
-        </div>
+        </Card>
     );
 };
