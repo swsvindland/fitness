@@ -1,45 +1,49 @@
-import { Inter, Lexend } from 'next/font/google'
-import clsx from 'clsx'
+import '~/styles/globals.css'
 
-import '@/styles/tailwind.css'
-import { type Metadata } from 'next'
+import { Oswald } from 'next/font/google'
+import { cookies } from 'next/headers'
+
+import { TRPCReactProvider } from '~/trpc/react'
+import { ClerkProvider } from '@clerk/nextjs'
+import { type ReactNode } from 'react'
+import { Analytics } from '@vercel/analytics/react'
+import { Metadata, Viewport } from 'next'
+import { Providers } from '~/app/providers'
+
+const oswald = Oswald({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
 
 export const metadata: Metadata = {
-  title: {
-    template: '%s - TaxPal',
-    default: 'TaxPal - Accounting made simple for small businesses',
-  },
+  title: 'Blood Pressure Track',
   description:
-    'Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited.',
+    'A web app for keeping track of your blood pressure and heart rate.',
+  icons: [{ rel: 'icon', url: '/favicon.ico' }],
+  manifest: '/manifest.json',
 }
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+  themeColor: '#0D3140',
+}
 
-const lexend = Lexend({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-lexend',
-})
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={clsx(
-        'h-full scroll-smooth bg-white antialiased',
-        inter.variable,
-        lexend.variable,
-      )}
-    >
-      <body className="flex h-full flex-col">{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="dark">
+        <body className={`font-sans ${oswald.variable}`}>
+          <Providers>
+            <TRPCReactProvider cookies={cookies().toString()}>
+              <>{children}</>
+              <Analytics />
+            </TRPCReactProvider>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }

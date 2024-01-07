@@ -1,27 +1,14 @@
-import { CallToAction } from '@/components/CallToAction'
-import { Faqs } from '@/components/Faqs'
-import { Footer } from '@/components/Footer'
-import { Header } from '@/components/Header'
-import { Hero } from '@/components/Hero'
-import { Pricing } from '@/components/Pricing'
-import { PrimaryFeatures } from '@/components/PrimaryFeatures'
-import { SecondaryFeatures } from '@/components/SecondaryFeatures'
-import { Testimonials } from '@/components/Testimonials'
+import { Suspense } from 'react'
+import { LoadingPage } from '@fitness/ui'
 
-export default function Home() {
+export default async function HomePage() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <PrimaryFeatures />
-        <SecondaryFeatures />
-        <CallToAction />
-        <Testimonials />
-        <Pricing />
-        <Faqs />
-      </main>
-      <Footer />
-    </>
+    <Suspense fallback={<LoadingPage />}>
+      <>
+        <div className="flex w-full flex-col gap-2">
+          <h1>Search</h1>
+        </div>
+      </>
+    </Suspense>
   )
 }

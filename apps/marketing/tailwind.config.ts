@@ -1,37 +1,60 @@
-import formsPlugin from '@tailwindcss/forms'
-import headlessuiPlugin from '@headlessui/tailwindcss'
 import { type Config } from 'tailwindcss'
+import { nextui } from '@nextui-org/react'
 
 export default {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  theme: {
-    fontSize: {
-      xs: ['0.75rem', { lineHeight: '1rem' }],
-      sm: ['0.875rem', { lineHeight: '1.5rem' }],
-      base: ['1rem', { lineHeight: '1.75rem' }],
-      lg: ['1.125rem', { lineHeight: '2rem' }],
-      xl: ['1.25rem', { lineHeight: '2rem' }],
-      '2xl': ['1.5rem', { lineHeight: '2rem' }],
-      '3xl': ['2rem', { lineHeight: '2.5rem' }],
-      '4xl': ['2.5rem', { lineHeight: '3.5rem' }],
-      '5xl': ['3rem', { lineHeight: '3.5rem' }],
-      '6xl': ['3.75rem', { lineHeight: '1' }],
-      '7xl': ['4.5rem', { lineHeight: '1.1' }],
-      '8xl': ['6rem', { lineHeight: '1' }],
-      '9xl': ['8rem', { lineHeight: '1' }],
-    },
-    extend: {
-      borderRadius: {
-        '4xl': '2rem',
+  content: [
+    './src/**/*.tsx',
+    '../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  darkMode: 'class',
+  theme: {},
+  plugins: [
+    require('tailwindcss-safe-area'),
+    nextui({
+      themes: {
+        light: {},
+        dark: {
+          colors: {
+            content1: '#154255',
+            content2: '#154255',
+            content3: '#154255',
+            content4: '#154255',
+            background: '#0D3140',
+            foreground: '#F7C619',
+            primary: {
+              900: '#0D3140',
+              800: '#0F3C51',
+              700: '#154255',
+              600: '#1D5A6F',
+              500: '#28827A',
+              400: '#3C9F8C',
+              300: '#6FB6B0',
+              200: '#A6D0C9',
+              100: '#D4E7E1',
+              50: '#F2F8F7',
+              DEFAULT: '#28827A',
+              foreground: '#F7C619',
+            },
+            success: {
+              500: '#07B561',
+              DEFAULT: '#07B561',
+              foreground: '#fff',
+            },
+            warning: {
+              500: '#FFD400',
+              DEFAULT: '#FFD400',
+              foreground: '#0D3140',
+            },
+            danger: {
+              500: '#DB255E',
+              DEFAULT: '#DB255E',
+              foreground: '#fff',
+            },
+            focus: '#F7C619',
+            secondary: '#AFD257',
+          },
+        },
       },
-      fontFamily: {
-        sans: 'var(--font-inter)',
-        display: 'var(--font-lexend)',
-      },
-      maxWidth: {
-        '2xl': '40rem',
-      },
-    },
-  },
-  plugins: [formsPlugin, headlessuiPlugin],
-} satisfies Config
+    }),
+  ],
+} as Config
