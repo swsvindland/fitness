@@ -1,6 +1,7 @@
 import { FC, FormEvent } from 'react';
 import { MagnifyingGlassSolid, XSolid } from '@fitness/ui';
 import { Button } from '@nextui-org/button';
+import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 
 interface IProps {
     query: string;
@@ -36,21 +37,34 @@ export const SupplementSearch: FC<IProps> = ({
             className="flex flex-row items-end justify-between"
             onSubmit={handleSearch}
         >
-            {/*<Autocomplete*/}
-            {/*    label="Supplement"*/}
-            {/*    query={query}*/}
-            {/*    setQuery={setQuery}*/}
-            {/*    setSelected={setSelected}*/}
-            {/*    selected={selected}*/}
-            {/*    filtered={filtered}*/}
-            {/*    isLoading={false}*/}
-            {/*/>*/}
-            <Button className=" ml-2 h-10 w-10 !p-2" onClick={handleClear}>
-                <XSolid className="fill-secondary h-6 w-6" />
-            </Button>
-            <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
-                <MagnifyingGlassSolid className="fill-secondary h-6 w-6" />
-            </Button>
+            <div className="flex w-full items-center justify-center gap-2">
+                <Autocomplete
+                    label="Search for a supplement"
+                    className="flex-1"
+                    defaultInputValue={selected}
+                    value={query}
+                    onInputChange={setQuery}
+                >
+                    {filtered.map((item) => (
+                        <AutocompleteItem key={item} value={item}>
+                            {item}
+                        </AutocompleteItem>
+                    ))}
+                </Autocomplete>
+
+                <Button
+                    onClick={handleClear}
+                    color="danger"
+                    startContent={<XSolid className="fill-secondary h-6 w-6" />}
+                ></Button>
+                <Button
+                    type="submit"
+                    color="primary"
+                    startContent={
+                        <MagnifyingGlassSolid className="fill-secondary h-6 w-6" />
+                    }
+                ></Button>
+            </div>
         </form>
     );
 };

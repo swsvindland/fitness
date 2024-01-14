@@ -12,6 +12,15 @@ import {
     Tablet,
 } from '@fitness/ui';
 import { api } from '~/trpc/react';
+import {
+    Card,
+    CardFooter,
+    Modal,
+    ModalBody,
+    ModalContent,
+    ModalHeader,
+    useDisclosure,
+} from '@nextui-org/react';
 
 interface IProps {
     isUser: boolean;
@@ -27,22 +36,22 @@ export interface Time {
     enabled: boolean;
 }
 
-const mapToIcon = (icon?: string) => {
+const Icon: FC<{ icon?: string }> = ({ icon }) => {
     switch (icon) {
         case SupplementIcon.Capsule:
-            return <Capsule className="fill-primary-dark w-6" />;
+            return <Capsule className="fill-primary-900 w-6" />;
         case SupplementIcon.Tablet:
-            return <Tablet className="fill-primary-dark w-6" />;
+            return <Tablet className="fill-primary-900 w-6" />;
         case SupplementIcon.Injection:
-            return <Injection className="fill-primary-dark w-6" />;
+            return <Injection className="fill-primary-900 w-6" />;
         case SupplementIcon.LargeScoop:
-            return <LargeScoop className="fill-primary-dark w-6" />;
+            return <LargeScoop className="fill-primary-900 w-6" />;
         case SupplementIcon.SmallScoop:
-            return <SmallScoop className="fill-primary-dark w-6" />;
+            return <SmallScoop className="fill-primary-900 w-6" />;
         case SupplementIcon.Liquid:
-            return <Liquid className="fill-primary-dark w-6" />;
+            return <Liquid className="fill-primary-900 w-6" />;
         default:
-            return <></>;
+            return <div className="h-12 w-6" />;
     }
 };
 
@@ -54,7 +63,8 @@ export const SupplementCard: FC<IProps> = ({
     userSupplementId,
     icon,
 }) => {
-    const [open, setOpen] = useState<boolean>(false);
+    const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
     const [checked, setChecked] = useState<boolean>(false);
     const today = new Date();
     const utils = api.useUtils();
@@ -103,52 +113,62 @@ export const SupplementCard: FC<IProps> = ({
     };
 
     return (
-        <div>
-            <button
-                onClick={() => (isUser ? handleCheck() : setOpen(true))}
-                className={`${
-                    checked ? 'bg-primary-dark' : 'card'
-                } my-2 flex w-full items-center justify-between overflow-hidden rounded p-4 text-left shadow-lg`}
+        <>
+            <Card
+                isPressable
+                onPress={() => (isUser ? handleCheck() : onOpen())}
             >
-                <div className="flex items-center">
-                    <div className="mr-4">
-                        <div className="bg-ternary flex h-8 w-8 items-center justify-center rounded-full">
-                            <div>{mapToIcon(icon)}</div>
+                <div className="flex w-full items-center justify-between p-4">
+                    <div className="flex gap-5">
+                        <div className="bg-secondary rounded-full px-3.5">
+                            <Icon icon={icon} />
+                        </div>
+                        <div className="flex flex-col items-start justify-center gap-1">
+                            <h4>{name}</h4>
                         </div>
                     </div>
-                    <div className="flex flex-col">
-                        <span className="text-secondary text-lg">{name}</span>
-                        <div>
-                            {times?.map((time, index) => (
-                                <span
-                                    className="text-ternary mr-1 text-xs"
-                                    key={time}
-                                >
-                                    {time} {index !== times.length - 1 && '|'}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
+                    {isUser &&
+                        checked &&
+                        !mutation.isLoading &&
+                        !userSupplementActivityQuery.isFetching && (
+                            <CircleCheckSolid className="fill-secondary h-8 w-8" />
+                        )}
+                    {isUser &&
+                        (mutation.isLoading ||
+                            userSupplementActivityQuery.isFetching) && (
+                            <LoadingSpinner />
+                        )}
                 </div>
-                {isUser &&
-                    checked &&
-                    !mutation.isLoading &&
-                    !userSupplementActivityQuery.isFetching && (
-                        <CircleCheckSolid className="fill-secondary h-8 w-8" />
+                {!isUser && times && (
+                    <CardFooter>
+                        {times.map((time, index) => (
+                            <span className="text-xs" key={time}>
+                                {time}
+                                {index !== times.length - 1 && ' | '}
+                            </span>
+                        ))}
+                    </CardFooter>
+                )}
+            </Card>
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">
+                                Add Supplement
+                            </ModalHeader>
+                            <ModalBody>
+                                <AddSupplement
+                                    supplementId={supplementId}
+                                    userSupplementId={userSupplementId}
+                                    defaultTimes={times ?? []}
+                                    onClose={onClose}
+                                />
+                            </ModalBody>
+                        </>
                     )}
-                {isUser &&
-                    (mutation.isLoading ||
-                        userSupplementActivityQuery.isFetching) && (
-                        <LoadingSpinner />
-                    )}
-            </button>
-            <AddSupplement
-                open={open}
-                setOpen={setOpen}
-                supplementId={supplementId}
-                userSupplementId={userSupplementId}
-                defaultTimes={times ?? []}
-            />
-        </div>
+                </ModalContent>
+            </Modal>
+        </>
     );
 };

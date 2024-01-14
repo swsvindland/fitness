@@ -43,39 +43,43 @@ export const AllSupplements: FC = () => {
                 }
             />
             <h2 className="text-secondary my-4 text-lg ">Active</h2>
-            {userSupplementsQuery.data
-                ?.filter((item) =>
-                    item.Supplement?.Name.toLowerCase().includes(
-                        selected?.toLowerCase() ?? ''
+            <div className="flex flex-col gap-2">
+                {userSupplementsQuery.data
+                    ?.filter((item) =>
+                        item.Supplement?.Name.toLowerCase().includes(
+                            selected?.toLowerCase() ?? ''
+                        )
                     )
-                )
-                .map((supplement) => (
-                    <SupplementCard
-                        isUser={false}
-                        key={supplement.Id}
-                        id={Number(supplement.SupplementId)}
-                        name={supplement.Supplement?.Name ?? ''}
-                        times={supplement.Times.split(',')}
-                        userSupplementId={Number(supplement.Id)}
-                        icon={supplement.Supplement?.Icon ?? undefined}
-                    />
-                ))}
+                    .map((supplement) => (
+                        <SupplementCard
+                            isUser={false}
+                            key={supplement.Id}
+                            supplementId={Number(supplement.SupplementId)}
+                            name={supplement.Supplement?.Name ?? ''}
+                            times={supplement.Times.split(',')}
+                            userSupplementId={Number(supplement.Id)}
+                            icon={supplement.Supplement?.Icon ?? undefined}
+                        />
+                    ))}
+            </div>
             <h2 className="text-secondary my-4 text-lg">all</h2>
-            {filteredAllSupplements
-                ?.filter((item) =>
-                    item?.Name.toLowerCase().includes(
-                        selected?.toLowerCase() ?? ''
+            <div className="flex flex-col gap-2">
+                {filteredAllSupplements
+                    ?.filter((item) =>
+                        item?.Name.toLowerCase().includes(
+                            selected?.toLowerCase() ?? ''
+                        )
                     )
-                )
-                .map((supplement) => (
-                    <SupplementCard
-                        isUser={false}
-                        key={supplement.Id}
-                        id={Number(supplement.Id)}
-                        name={supplement.Name}
-                        icon={supplement?.Icon ?? undefined}
-                    />
-                ))}
+                    .map((supplement) => (
+                        <SupplementCard
+                            isUser={false}
+                            key={supplement.Id}
+                            supplementId={Number(supplement.Id)}
+                            name={supplement.Name}
+                            icon={supplement?.Icon ?? undefined}
+                        />
+                    ))}
+            </div>
         </div>
     );
 };

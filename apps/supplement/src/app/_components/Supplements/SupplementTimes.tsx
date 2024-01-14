@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Switch } from '@headlessui/react';
 import { Time } from './SupplementCard';
+import { Switch } from '@nextui-org/react';
 
 interface IProps {
     times: Time[];
@@ -20,35 +20,15 @@ export const SupplementTimes: FC<IProps> = ({ times, setTimes }) => {
     };
 
     return (
-        <div className="w-full px-4 py-8">
-            <div className="mx-auto w-full max-w-md">
-                {times.map((time) => (
-                    <Switch.Group key={time.name}>
-                        <div className="my-2 flex items-center justify-between">
-                            <Switch.Label className="text-ternary mr-4">
-                                {time.name}
-                            </Switch.Label>
-                            <Switch
-                                checked={time.enabled}
-                                onChange={() => handleChanged(time.name)}
-                                className={`${
-                                    time.enabled
-                                        ? 'bg-secondary'
-                                        : 'bg-primary-dark'
-                                } relative inline-flex h-6 w-11 items-center rounded-full transition-colors`}
-                            >
-                                <span
-                                    className={`${
-                                        time.enabled
-                                            ? 'translate-x-6'
-                                            : 'translate-x-1'
-                                    } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
-                                />
-                            </Switch>
-                        </div>
-                    </Switch.Group>
-                ))}
-            </div>
+        <div className="mb-8 flex flex-col gap-4">
+            {times.map((time) => (
+                <Switch
+                    checked={time.enabled}
+                    onValueChange={() => handleChanged(time.name)}
+                >
+                    {time.name}
+                </Switch>
+            ))}
         </div>
     );
 };

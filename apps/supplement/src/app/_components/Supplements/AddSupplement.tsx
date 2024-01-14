@@ -1,5 +1,4 @@
 import { FC, useState } from 'react';
-import { Dialog } from '@headlessui/react';
 import { SupplementTimes } from './SupplementTimes';
 import { Time } from './SupplementCard';
 import { api } from '~/trpc/react';
@@ -8,17 +7,15 @@ import { Button } from '@nextui-org/button';
 interface IProps {
     userSupplementId?: number;
     supplementId: number;
-    open: boolean;
-    setOpen: (open: boolean) => void;
     defaultTimes: string[];
+    onClose: () => void;
 }
 
 export const AddSupplement: FC<IProps> = ({
-    open,
-    setOpen,
     userSupplementId,
     supplementId,
     defaultTimes,
+    onClose,
 }) => {
     const utils = api.useUtils();
 
@@ -69,41 +66,21 @@ export const AddSupplement: FC<IProps> = ({
         };
 
         mutation.mutate(userSupplement);
-        setOpen(false);
+        onClose();
     };
 
     return (
-        <Dialog
-            open={open}
-            onClose={() => setOpen(false)}
-            className="relative z-50"
-        >
-            {/* The backdrop, rendered as a fixed sibling to the panel container */}
-            <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
+        <div>
+            <SupplementTimes times={enabledTimes} setTimes={setEnabledTimes} />
 
-            {/* Full-screen container to center the panel */}
-            <div className="fixed inset-0 flex items-center justify-center p-4">
-                <Dialog.Panel className="card mx-auto w-full max-w-sm p-4">
-                    <Dialog.Title className="text-secondary">
-                        Add Supplement
-                    </Dialog.Title>
-                    <Dialog.Description className="text-ternary">
-                        Select when you want to take this
-                    </Dialog.Description>
-
-                    <SupplementTimes
-                        times={enabledTimes}
-                        setTimes={setEnabledTimes}
-                    />
-
-                    <div className="flex justify-between align-middle">
-                        <Button onClick={() => setOpen(false)}>Cancel</Button>
-                        <Button onClick={() => handleSubmit()}>
-                            Set Times
-                        </Button>
-                    </div>
-                </Dialog.Panel>
+            <div className="mb-4 flex justify-between align-middle">
+                <Button color="warning" onClick={() => onClose()}>
+                    Cancel
+                </Button>
+                <Button color="primary" onClick={() => handleSubmit()}>
+                    Set Times
+                </Button>
             </div>
-        </Dialog>
+        </div>
     );
 };
