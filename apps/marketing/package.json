@@ -10,7 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.28.1",
+    "@clerk/nextjs": "^4.29.3",
     "@fitness/api": "workspace:*",
     "@fitness/types": "workspace:*",
     "@fitness/ui": "workspace:*",
