@@ -1,5 +1,5 @@
 import { FC, FormEvent } from 'react';
-import { MagnifyingGlassSolid, XSolid } from '@fitness/ui';
+import { MagnifyingGlassSolid } from '@fitness/ui';
 import { Button } from '@nextui-org/button';
 import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 
@@ -44,22 +44,18 @@ export const SupplementSearch: FC<IProps> = ({
                     defaultInputValue={selected}
                     value={query}
                     onInputChange={setQuery}
+                    onClear={handleClear}
                 >
-                    {filtered.map((item) => (
+                    {filtered?.map((item) => (
                         <AutocompleteItem key={item} value={item}>
                             {item}
                         </AutocompleteItem>
                     ))}
                 </Autocomplete>
-
-                <Button
-                    onClick={handleClear}
-                    color="danger"
-                    startContent={<XSolid className="fill-secondary h-6 w-6" />}
-                ></Button>
                 <Button
                     type="submit"
                     color="primary"
+                    className="py-7"
                     startContent={
                         <MagnifyingGlassSolid className="fill-secondary h-6 w-6" />
                     }
