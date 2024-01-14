@@ -16,8 +16,8 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
-    title: 'SV7',
-    description: 'Your homepage to the internet',
+    title: 'Supplement Track',
+    description: 'A web app for keeping track of your supplements.',
     icons: [{ rel: 'icon', url: '/favicon.ico' }],
     manifest: '/manifest.json',
 };
