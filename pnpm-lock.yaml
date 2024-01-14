@@ -453,6 +453,151 @@ importers:
         specifier: ^5.3.3
         version: 5.3.3
 
+  apps/supplement:
+    dependencies:
+      '@clerk/nextjs':
+        specifier: ^4.28.1
+        version: 4.28.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+      '@fitness/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@fitness/types':
+        specifier: workspace:*
+        version: link:../../packages/types
+      '@fitness/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@headlessui/react':
+        specifier: ^1.7.17
+        version: 1.7.17(react-dom@18.2.0)(react@18.2.0)
+      '@heroicons/react':
+        specifier: ^2.1.1
+        version: 2.1.1(react@18.2.0)
+      '@nextui-org/react':
+        specifier: ^2.2.9
+        version: 2.2.9(@types/react@18.2.45)(framer-motion@10.17.9)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.1.20)(tailwindcss@3.4.0)
+      '@prisma/client':
+        specifier: ^5.7.0
+        version: 5.7.0(prisma@5.7.0)
+      '@t3-oss/env-nextjs':
+        specifier: ^0.7.1
+        version: 0.7.1(typescript@5.3.3)(zod@3.22.4)
+      '@tanstack/react-query':
+        specifier: ^4.36.1
+        version: 4.36.1(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/client':
+        specifier: ^10.44.1
+        version: 10.44.1(@trpc/server@10.44.1)
+      '@trpc/next':
+        specifier: ^10.44.1
+        version: 10.44.1(@tanstack/react-query@4.36.1)(@trpc/client@10.44.1)(@trpc/react-query@10.44.1)(@trpc/server@10.44.1)(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/react-query':
+        specifier: ^10.44.1
+        version: 10.44.1(@tanstack/react-query@4.36.1)(@trpc/client@10.44.1)(@trpc/server@10.44.1)(react-dom@18.2.0)(react@18.2.0)
+      '@trpc/server':
+        specifier: ^10.44.1
+        version: 10.44.1
+      '@vercel/analytics':
+        specifier: ^1.1.1
+        version: 1.1.1
+      chart.js:
+        specifier: ^4.4.1
+        version: 4.4.1
+      date-fns:
+        specifier: ^2.30.0
+        version: 2.30.0
+      framer-motion:
+        specifier: ^10.17.9
+        version: 10.17.9(react-dom@18.2.0)(react@18.2.0)
+      next:
+        specifier: ^14.0.4
+        version: 14.0.4(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
+      next-pwa:
+        specifier: ^5.6.0
+        version: 5.6.0(@babel/core@7.23.3)(next@14.0.4)(webpack@5.89.0)
+      next-themes:
+        specifier: ^0.2.1
+        version: 0.2.1(next@14.0.4)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-chartjs-2:
+        specifier: ^5.2.0
+        version: 5.2.0(chart.js@4.4.1)(react@18.2.0)
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      superjson:
+        specifier: ^2.2.1
+        version: 2.2.1
+      uuid:
+        specifier: ^9.0.1
+        version: 9.0.1
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
+    devDependencies:
+      '@fitness/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@fitness/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@fitness/tailwind-config':
+        specifier: workspace:*
+        version: link:../../tooling/tailwind
+      '@fitness/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/eslint':
+        specifier: ^8.44.9
+        version: 8.44.9
+      '@types/node':
+        specifier: ^18.18.13
+        version: 18.19.3
+      '@types/react':
+        specifier: ^18.2.45
+        version: 18.2.45
+      '@types/react-dom':
+        specifier: ^18.2.18
+        version: 18.2.18
+      '@types/uuid':
+        specifier: ^9.0.7
+        version: 9.0.7
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.14.0
+        version: 6.14.0(@typescript-eslint/parser@6.14.0)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.14.0
+        version: 6.14.0(eslint@8.56.0)(typescript@5.3.3)
+      autoprefixer:
+        specifier: ^10.4.16
+        version: 10.4.16(postcss@8.4.32)
+      dotenv-cli:
+        specifier: ^7.3.0
+        version: 7.3.0
+      eslint:
+        specifier: ^8.56.0
+        version: 8.56.0
+      eslint-config-next:
+        specifier: ^14.0.4
+        version: 14.0.4(eslint@8.56.0)(typescript@5.3.3)
+      postcss:
+        specifier: ^8.4.32
+        version: 8.4.32
+      prettier:
+        specifier: ^3.1.1
+        version: 3.1.1
+      tailwindcss:
+        specifier: ^3.3.6
+        version: 3.4.0
+      tailwindcss-safe-area:
+        specifier: ^0.4.1
+        version: 0.4.1
+      typescript:
+        specifier: ^5.3.3
+        version: 5.3.3
+
   apps/workout-t3:
     dependencies:
       '@clerk/nextjs':
