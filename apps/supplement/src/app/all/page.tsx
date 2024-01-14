@@ -1,13 +1,12 @@
 import { Suspense } from 'react';
 import { LoadingPage } from '@fitness/ui';
-import { AllBloodPressure } from '~/app/_components/Body/AllBloodPressure';
-import { Create } from '~/app/_components/Body/Create';
+import { Supplements } from '~/app/_components/Supplements/Supplements';
+import { AllSupplements } from '~/app/_components/Supplements/AllSupplements';
 
-export default async function AllPage() {
+export default async function HomePage() {
     return (
         <Suspense fallback={<LoadingPage />}>
-            <AllBloodPressure />
-            <Create />
+            <AllSupplements />
         </Suspense>
     );
 }
