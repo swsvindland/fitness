@@ -15,7 +15,7 @@
         "@fitness/types": "workspace:*",
         "@headlessui/react": "^1.7.17",
         "@khmyznikov/pwa-install": "^0.2.7",
-        "@prisma/client": "^5.7.0",
+        "@prisma/client": "^5.8.0",
         "@t3-oss/env-nextjs": "^0.7.1",
         "@tanstack/react-query": "^4.36.1",
         "@trpc/client": "^10.44.1",
