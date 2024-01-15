@@ -1,6 +1,6 @@
 {
-  "short_name": "WorkoutTrack",
-  "name": "WorkoutTrack",
+  "short_name": "BloodPressureTrack",
+  "name": "BloodPressureTrack",
   "theme_color": "#0D3140",
   "background_color": "#0D3140",
   "display": "standalone",
