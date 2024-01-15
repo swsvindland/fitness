@@ -151,7 +151,7 @@ model UserOneRepMaxEstimates {
 
 model UserSupplementActivity {
     Id               BigInt          @id @default(autoincrement())
-    Updated          DateTime        @db.Date
+    Updated          DateTime        @db.DateTime(0)
     UserSupplementId BigInt
     UserId           String          @db.Char(64)
     Time             String          @db.VarChar(255)

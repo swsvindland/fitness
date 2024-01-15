@@ -106,7 +106,7 @@ export const SupplementCard: FC<IProps> = ({
         if (mutation.isLoading) return;
 
         mutation.mutate({
-            date: today,
+            date: today.toISOString(),
             userSupplementId: userSupplementId,
             time: times[0],
         });

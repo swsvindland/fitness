@@ -60,13 +60,15 @@ export const supplementsRouter = createTRPCRouter({
     toggleUserSupplementActivity: protectedProcedure
         .input(
             z.object({
-                date: z.date(),
+                date: z.string(),
                 userSupplementId: z.number(),
                 time: z.string().nullable(),
             })
         )
         .mutation(async ({ ctx, input }) => {
             if (!ctx.auth.userId) throw new Error('No user ID');
+
+            const today = new Date(input.date);
 
             const activity = await ctx.prisma.userSupplementActivity.findFirst({
                 where: {
@@ -75,9 +77,9 @@ export const supplementsRouter = createTRPCRouter({
                     Time: input.time,
                     Updated: {
                         gte: new Date(
-                            input.date.getFullYear(),
-                            input.date.getMonth(),
-                            input.date.getDate(),
+                            today.getFullYear(),
+                            today.getMonth(),
+                            today.getDate(),
                             0,
                             0,
                             0,
