@@ -4,11 +4,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isSelected } from '~/app/_components/Navigation/utils';
-import {
-    Cog6ToothIcon,
-    HomeIcon,
-    ListBulletIcon,
-} from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { Card } from '@nextui-org/react';
 
 export const BottomNavigation: FC = () => {
@@ -35,10 +31,6 @@ export const BottomNavigation: FC = () => {
                 <Link href="/" className={linkStyle(['/'])}>
                     <HomeIcon className={iconStyle(['/'])} />
                     <span className="tab tab-home block text-xs">Home</span>
-                </Link>
-                <Link href="/all" className={linkStyle(['/all'])}>
-                    <ListBulletIcon className={iconStyle(['/all'])} />
-                    <span className="tab tab-home block text-xs">All</span>
                 </Link>
                 <Link href="/settings" className={linkStyle(['/settings'])}>
                     <Cog6ToothIcon className={iconStyle(['/settings'])} />

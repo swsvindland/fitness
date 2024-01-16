@@ -4,11 +4,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isSelected } from '~/app/_components/Navigation/utils';
-import {
-    Cog6ToothIcon,
-    HomeIcon,
-    ListBulletIcon,
-} from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { Card } from '@nextui-org/react';
 
 export const Sidebar: FC = () => {
@@ -34,10 +30,10 @@ export const Sidebar: FC = () => {
                         <HomeIcon className={iconStyle(['/'])} />
                         Home
                     </Link>
-                    <Link href="/all" className={linkStyle(['/all'])}>
-                        <ListBulletIcon className={iconStyle(['/all'])} />
-                        All
-                    </Link>
+                    {/*<Link href="/all" className={linkStyle(['/all'])}>*/}
+                    {/*    <ListBulletIcon className={iconStyle(['/all'])} />*/}
+                    {/*    All*/}
+                    {/*</Link>*/}
                     <Link href="/settings" className={linkStyle(['/settings'])}>
                         <Cog6ToothIcon className={iconStyle(['/settings'])} />
                         Settings
