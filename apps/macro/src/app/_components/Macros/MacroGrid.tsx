@@ -4,10 +4,11 @@ import { FC, useState } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { api } from '~/trpc/react';
 import { LoadingMacroGrid, LoadingSpinner } from '@fitness/ui';
+import { Scanner } from '~/app/_components/Scanner/Scanner';
+import { Button } from '@nextui-org/button';
+import Link from 'next/link';
 
 export const MacroGrid: FC = () => {
-    const [openScanner, setOpenScanner] = useState(false);
-
     const macrosQuery = api.macros.getMacros.useQuery();
     const currentMacrosQuery = api.macros.getCurrentMacros.useQuery({
         date: new Date().toDateString(),
@@ -63,19 +64,17 @@ export const MacroGrid: FC = () => {
                     />
                 </dl>
             </div>
-            {/*<div className="flex w-full flex-row justify-between gap-2 pt-2">*/}
-            {/*    <Scanner*/}
-            {/*        buttonClassName="flex w-full justify-center"*/}
-            {/*        open={openScanner}*/}
-            {/*        setOpen={setOpenScanner}*/}
-            {/*    />*/}
-            {/*    <LinkButton*/}
-            {/*        className="flex w-full justify-center"*/}
-            {/*        to={'/eat/add-food'}*/}
-            {/*    >*/}
-            {/*        Add Food*/}
-            {/*    </LinkButton>*/}
-            {/*</div>*/}
+            <div className="mt-3 grid grid-cols-2 gap-2">
+                <Scanner />
+                <Button
+                    color="primary"
+                    className="flex w-full justify-center"
+                    href="/add-food"
+                    as={Link}
+                >
+                    Add Food
+                </Button>
+            </div>
         </div>
     );
 };
