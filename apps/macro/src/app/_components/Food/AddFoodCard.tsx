@@ -42,8 +42,6 @@ export const AddFoodCard: FC<IProps> = ({
     });
 
     const handlePress = () => {
-        console.log('pressed');
-
         if (defaultServings && userFoodId) {
             router.push(`/user-food/${userFoodId}`);
         } else {
@@ -75,10 +73,10 @@ export const AddFoodCard: FC<IProps> = ({
             className="flex flex-row items-center justify-between p-4"
         >
             <div className="flex flex-col items-start p-4">
-                <span className="text-secondary text-lg">
+                <span className="text-secondary text-left text-lg">
                     {name} ({brandName})
                 </span>
-                <span className="text-ternary text-sm">{servingSize}</span>
+                <span className=" text-left text-sm">{servingSize}</span>
             </div>
             {!quickAddMutation.isLoading && !quickRemoveMutation.isLoading ? (
                 <div className="flex flex-col items-center gap-2">

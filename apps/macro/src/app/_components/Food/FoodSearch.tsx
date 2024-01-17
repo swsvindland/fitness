@@ -43,6 +43,7 @@ export const FoodSearch: FC<IProps> = ({
                 value={query}
                 onInputChange={setQuery}
                 onClear={handleClear}
+                role={undefined}
             >
                 {filtered.map((item) => (
                     <AutocompleteItem key={item} value={item}>
