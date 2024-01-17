@@ -1,6 +1,6 @@
 import { UserFoodDetail } from '~/app/_components/Food/UserFoodDetail';
-import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 import { Suspense } from 'react';
+import { LoadingPage } from '@fitness/ui';
 
 export default async function WorkoutEditExercises({
     params,

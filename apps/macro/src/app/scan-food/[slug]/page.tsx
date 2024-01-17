@@ -1,6 +1,6 @@
 import { ScanFood } from '~/app/_components/Scanner/ScanFood';
-import { LoadingPage } from '~/app/_components/Loading/LoadingPage';
 import { Suspense } from 'react';
+import { LoadingPage } from '@fitness/ui';
 
 export default async function ScanFoodBarcodePage({
     params,

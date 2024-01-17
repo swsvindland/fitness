@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { api } from '~/trpc/react';
 import { Button } from '@nextui-org/button';
 import { LoadingSpinner, MinusSolid, PlusSolid } from '@fitness/ui';
+import { Card } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
 
 interface IProps {
     userFoodId?: number;
@@ -24,6 +26,7 @@ export const AddFoodCard: FC<IProps> = ({
 }) => {
     const [servings, setServings] = useState<number>(defaultServings ?? 0);
     const updateFoodCache = useUpdateFoodCache();
+    const router = useRouter();
 
     const quickAddMutation = api.food.quickAddFood.useMutation({
         onSuccess: async () => {
@@ -38,6 +41,16 @@ export const AddFoodCard: FC<IProps> = ({
             await updateFoodCache();
         },
     });
+
+    const handlePress = () => {
+        console.log('pressed');
+
+        if (defaultServings && userFoodId) {
+            router.push(`/user-food/${userFoodId}`);
+        } else {
+            router.push(`/food/${foodId}`);
+        }
+    };
 
     const handleAdd = () => {
         quickAddMutation.mutate({
@@ -57,20 +70,17 @@ export const AddFoodCard: FC<IProps> = ({
     };
 
     return (
-        <div className="card my-2 flex flex-row items-center justify-between p-4">
-            <Link
-                href={
-                    defaultServings && userFoodId
-                        ? `/eat/user-food/${userFoodId}`
-                        : `/eat/food/${foodId}`
-                }
-                className="flex flex-col p-4"
-            >
+        <Card
+            isPressable
+            onPress={handlePress}
+            className="flex flex-row items-center justify-between p-4"
+        >
+            <div className="flex flex-col p-4">
                 <span className="text-secondary text-lg">
                     {name} ({brandName})
                 </span>
                 <span className="text-ternary text-sm">{servingSize}</span>
-            </Link>
+            </div>
             {!quickAddMutation.isLoading && !quickRemoveMutation.isLoading ? (
                 <div className="flex items-center">
                     <Button onClick={handleRemove} className="ml-1 w-8 !p-2">
@@ -84,6 +94,6 @@ export const AddFoodCard: FC<IProps> = ({
             ) : (
                 <LoadingSpinner />
             )}
-        </div>
+        </Card>
     );
 };

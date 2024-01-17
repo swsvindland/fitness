@@ -1,8 +1,8 @@
 import { FC, FormEvent } from 'react';
 import { api } from '~/trpc/react';
-import { Autocomplete } from '@nextui-org/react';
+import { Autocomplete, AutocompleteItem } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
-import { MagnifyingGlassSolid, XSolid } from '@fitness/ui';
+import { MagnifyingGlassSolid } from '@fitness/ui';
 
 interface IProps {
     query: string;
@@ -29,25 +29,34 @@ export const FoodSearch: FC<IProps> = ({
         setSelected(query);
     };
 
+    const filtered = optionsQuery.data ?? [];
+
     return (
         <form
-            className="flex flex-row items-end justify-between"
+            className="flex flex-row items-center justify-between gap-2"
             onSubmit={handleSearch}
         >
-            {/*<Autocomplete*/}
-            {/*    label="Food"*/}
-            {/*    query={query}*/}
-            {/*    setQuery={setQuery}*/}
-            {/*    setSelected={setSelected}*/}
-            {/*    selected={selected}*/}
-            {/*    filtered={optionsQuery.data ?? []}*/}
-            {/*    isLoading={optionsQuery.isLoading}*/}
-            {/*/>*/}
-            <Button className=" ml-2 h-10 w-10 !p-2" onClick={handleClear}>
-                <XSolid className="fill-secondary h-6 w-6" />
-            </Button>
-            <Button className=" ml-2 h-10 w-10 !p-2" type="submit">
-                <MagnifyingGlassSolid className="fill-secondary h-6 w-6" />
+            <Autocomplete
+                label="Food"
+                className="flex-1"
+                defaultInputValue={selected}
+                value={query}
+                onInputChange={setQuery}
+                onClear={handleClear}
+            >
+                {filtered.map((item) => (
+                    <AutocompleteItem key={item} value={item}>
+                        {item}
+                    </AutocompleteItem>
+                ))}
+            </Autocomplete>
+            <Button
+                isIconOnly
+                color="primary"
+                type="submit"
+                className="h-14 w-14"
+            >
+                <MagnifyingGlassSolid className="h-6 w-6" />
             </Button>
         </form>
     );

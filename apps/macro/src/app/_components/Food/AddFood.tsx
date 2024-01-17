@@ -45,16 +45,14 @@ export const AddFood: FC = () => {
     }, [recentlyEatenQuery.data]);
 
     return (
-        <div className="container grid grid-cols-1">
-            <div className="card p-4">
-                <FoodSearch
-                    query={query}
-                    setQuery={setQuery}
-                    setSelected={setSelected}
-                    selected={selected}
-                />
-            </div>
-            <div className="w-full">
+        <div className="container grid grid-cols-1 gap-4">
+            <FoodSearch
+                query={query}
+                setQuery={setQuery}
+                setSelected={setSelected}
+                selected={selected}
+            />
+            <div className="flex w-full flex-col gap-2">
                 <LoadingListOfCards isLoading={searchFoodQuery.isLoading} />
                 {!searchFoodQuery.data && selected ? (
                     <div className="flex items-center justify-between text-center">
@@ -76,7 +74,7 @@ export const AddFood: FC = () => {
                 )}
             </div>
             <LoadingListOfCards isLoading={recentlyEatenQuery.isLoading} />
-            <div className="w-full">
+            <div className="flex w-full flex-col gap-2">
                 {!recentlyEaten ? null : (
                     <h2 className="text-secondary mt-2 text-lg">
                         Recently Eaten
