@@ -6,8 +6,7 @@ import { useUpdateFoodCache } from './hooks';
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
 import { DropdownOption } from '~/app/_components/Food/FoodDetail';
-import { Input, Select, SelectItem } from '@nextui-org/react';
-import { LoadingSpinner } from '@fitness/ui';
+import { Input, Select, SelectItem, Spinner } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 
 interface IProps {
@@ -118,7 +117,7 @@ export const UserFoodDetail: FC<IProps> = ({ userFoodId }) => {
                 </Button>
             </div>
             <div className="flex flex-col justify-center">
-                {foodDetailsQuery.isFetching && <LoadingSpinner />}
+                {foodDetailsQuery.isFetching && <Spinner />}
                 {foodDetailsQuery.data?.FoodV2Servings.filter(
                     (item) => item.Id.toString() === firstUnit
                 ).map((serving) => (

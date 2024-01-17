@@ -7,7 +7,6 @@ import {
     Injection,
     LargeScoop,
     Liquid,
-    LoadingSpinner,
     SmallScoop,
     Tablet,
 } from '@fitness/ui';
@@ -19,6 +18,7 @@ import {
     ModalBody,
     ModalContent,
     ModalHeader,
+    Spinner,
     useDisclosure,
 } from '@nextui-org/react';
 
@@ -136,7 +136,7 @@ export const SupplementCard: FC<IProps> = ({
                     {isUser &&
                         (mutation.isLoading ||
                             userSupplementActivityQuery.isFetching) && (
-                            <LoadingSpinner />
+                            <Spinner />
                         )}
                 </div>
                 {!isUser && times && (

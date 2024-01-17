@@ -3,8 +3,8 @@
 import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
-import { LoadingSpinner } from '@fitness/ui';
 import { Button } from '@nextui-org/button';
+import { LoadingPage } from '@fitness/ui';
 
 interface Props {
     barcode: string;
@@ -22,7 +22,7 @@ export const ScanFood: FC<Props> = ({ barcode }) => {
     }
 
     if (searchFoodQuery.isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingPage />;
     }
 
     if (searchFoodQuery.data) {

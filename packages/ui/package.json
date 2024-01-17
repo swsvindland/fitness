@@ -10,6 +10,7 @@
         "type-check": "tsc --noEmit"
     },
     "dependencies": {
+        "@nextui-org/react": "^2.2.9",
         "react": "^18.2.0"
     },
     "devDependencies": {

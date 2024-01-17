@@ -1,10 +1,9 @@
 import { FC, useState } from 'react';
 import { useUpdateFoodCache } from './hooks';
-import Link from 'next/link';
 import { api } from '~/trpc/react';
 import { Button } from '@nextui-org/button';
-import { LoadingSpinner, MinusSolid, PlusSolid } from '@fitness/ui';
-import { Card } from '@nextui-org/react';
+import { MinusSolid, PlusSolid } from '@fitness/ui';
+import { Card, Spinner } from '@nextui-org/react';
 import { useRouter } from 'next/navigation';
 
 interface IProps {
@@ -92,7 +91,7 @@ export const AddFoodCard: FC<IProps> = ({
                     </Button>
                 </div>
             ) : (
-                <LoadingSpinner />
+                <Spinner />
             )}
         </Card>
     );

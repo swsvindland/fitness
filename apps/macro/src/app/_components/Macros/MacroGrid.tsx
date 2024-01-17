@@ -1,12 +1,13 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { MacroGridUnit } from './MacroGridUnit';
 import { api } from '~/trpc/react';
-import { LoadingMacroGrid, LoadingSpinner } from '@fitness/ui';
+import { LoadingMacroGrid } from '@fitness/ui';
 import { Scanner } from '~/app/_components/Scanner/Scanner';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
+import { Spinner } from '@nextui-org/react';
 
 export const MacroGrid: FC = () => {
     const macrosQuery = api.macros.getMacros.useQuery();
@@ -23,7 +24,7 @@ export const MacroGrid: FC = () => {
             <>
                 {currentMacrosQuery.isFetching ? (
                     <div className="card my-2 flex items-center justify-start p-2">
-                        <LoadingSpinner />{' '}
+                        <Spinner />{' '}
                         <span className="text-ternary">
                             Fetching current macros...
                         </span>

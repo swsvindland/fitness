@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { LoadingSpinner } from './LoadingSpinner';
+import { Spinner } from '@nextui-org/react';
 
 export const LoadingPage: FC = () => {
     return (
-        <main className="text-secondary flex min-h-screen flex-col items-center justify-center">
-            <LoadingSpinner />
+        <main className="flex min-h-screen flex-col items-center justify-center">
+            <Spinner />
         </main>
     );
 };

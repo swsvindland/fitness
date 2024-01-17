@@ -3,7 +3,6 @@
 import { FC } from 'react';
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
-import { LoadingSpinner } from '@fitness/ui';
 import {
     Table,
     TableBody,
@@ -12,6 +11,7 @@ import {
     TableHeader,
     TableRow,
 } from '@nextui-org/react';
+import { LoadingPage } from '@fitness/ui';
 
 export const FoodGrid: FC = () => {
     const router = useRouter();
@@ -26,7 +26,7 @@ export const FoodGrid: FC = () => {
     });
 
     if (foodQuery.isLoading) {
-        return <LoadingSpinner />;
+        return <LoadingPage />;
     }
 
     if (!foodQuery.data) {
