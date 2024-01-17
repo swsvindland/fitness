@@ -75,20 +75,20 @@ export const AddFoodCard: FC<IProps> = ({
             onPress={handlePress}
             className="flex flex-row items-center justify-between p-4"
         >
-            <div className="flex flex-col p-4">
+            <div className="flex flex-col items-start p-4">
                 <span className="text-secondary text-lg">
                     {name} ({brandName})
                 </span>
                 <span className="text-ternary text-sm">{servingSize}</span>
             </div>
             {!quickAddMutation.isLoading && !quickRemoveMutation.isLoading ? (
-                <div className="flex items-center">
-                    <Button onClick={handleRemove} className="ml-1 w-8 !p-2">
-                        <MinusSolid className="fill-secondary h-6 w-6" />
+                <div className="flex flex-col items-center gap-2">
+                    <Button color="success" isIconOnly onClick={handleAdd}>
+                        <PlusSolid className="h-6 w-6" />
                     </Button>
-                    <span className="text-ternary m-3">{servings}</span>
-                    <Button onClick={handleAdd} className="mr-1 w-8 !p-2">
-                        <PlusSolid className="fill-secondary h-6 w-6" />
+                    <span>{servings}</span>
+                    <Button color="danger" isIconOnly onClick={handleRemove}>
+                        <MinusSolid className="h-6 w-6" />
                     </Button>
                 </div>
             ) : (
