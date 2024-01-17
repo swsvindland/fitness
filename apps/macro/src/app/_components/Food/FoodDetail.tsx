@@ -1,17 +1,17 @@
 'use client';
 
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { NutritionLabel } from './NutritionLabel';
 import { useUpdateFoodCache } from './hooks';
 import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
-import { Input } from '@nextui-org/react';
+import { Input, Select, SelectItem } from '@nextui-org/react';
 import { LoadingSpinner } from '@fitness/ui';
 import { Button } from '@nextui-org/button';
 
 export interface DropdownOption {
-    id: number;
-    name: string;
+    value: number;
+    label: string;
 }
 
 interface IProps {
@@ -20,7 +20,7 @@ interface IProps {
 
 export const FoodDetail: FC<IProps> = ({ foodId }) => {
     const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
-    const [unit, setUnit] = useState<DropdownOption | undefined>(undefined);
+    const [unit, setUnit] = useState<Set<string>>(new Set([]));
     const updateFoodCache = useUpdateFoodCache();
 
     const router = useRouter();
@@ -28,7 +28,7 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
     const mutation = api.food.addUserFood.useMutation({
         onSuccess: async () => {
             await updateFoodCache();
-            router.push(`/eat`);
+            router.push(`/`);
         },
     });
 
@@ -36,15 +36,19 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
 
     const options: DropdownOption[] | undefined =
         foodDetailsQuery.data?.FoodV2Servings.map((serving) => ({
-            id: Number(serving.Id),
-            name: serving.ServingDescription ?? '',
+            value: Number(serving.Id),
+            label: serving.ServingDescription ?? '',
         }));
 
-    useMemo(() => {
-        if (!unit && options && options.length > 0) {
-            setUnit(options.at(0));
+    useEffect(() => {
+        if (unit.size === 0 && options && options.length > 0) {
+            const newUnit = options[0]!;
+
+            setUnit(new Set([newUnit.value.toString()]));
         }
-    }, [options, unit]);
+    }, [options]);
+
+    const firstUnit = Array.from(unit).pop();
 
     return (
         <div className="container grid grid-cols-1">
@@ -53,7 +57,7 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
                     {foodDetailsQuery.data?.Name}
                 </h1>
             </div>
-            <div className="mb-2 flex w-full flex-col justify-between align-middle">
+            <div className="mb-2 flex w-full flex-col gap-2">
                 <Input
                     label="Quantity"
                     type="number"
@@ -62,40 +66,41 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
                         setDisplayedQuantity(event.target.value ?? '1')
                     }
                     value={displayedQuantity ?? ''}
-                    className="pr-2"
                 />
-                {/*<Dropdown*/}
-                {/*    label="Unit"*/}
-                {/*    options={options}*/}
-                {/*    selected={unit}*/}
-                {/*    setSelected={setUnit}*/}
-                {/*    className="p-1"*/}
-                {/*/>*/}
-                <div className="mt-2 p-1">
-                    {mutation.isLoading ? (
-                        <LoadingSpinner />
-                    ) : (
-                        <Button
-                            className="w-full"
-                            onClick={() =>
-                                mutation.mutate({
-                                    foodId: foodId,
-                                    date: new Date().toISOString(),
-                                    servingId: Number(unit?.id ?? 0),
-                                    servingAmount:
-                                        parseFloat(displayedQuantity),
-                                })
-                            }
-                        >
-                            Add
-                        </Button>
-                    )}
-                </div>
+                {options && (
+                    <Select
+                        label="Unit"
+                        selectionMode="single"
+                        selectedKeys={unit}
+                        onSelectionChange={setUnit}
+                    >
+                        {options.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </Select>
+                )}
+                <Button
+                    isLoading={mutation.isLoading}
+                    className="w-full"
+                    color="success"
+                    onClick={() =>
+                        mutation.mutate({
+                            foodId: foodId,
+                            date: new Date().toISOString(),
+                            servingId: Number(firstUnit ?? 0),
+                            servingAmount: parseFloat(displayedQuantity),
+                        })
+                    }
+                >
+                    Add
+                </Button>
             </div>
             <div className="flex flex-col justify-center">
                 {foodDetailsQuery.isFetching && <LoadingSpinner />}
                 {foodDetailsQuery.data?.FoodV2Servings.filter(
-                    (item) => Number(item.Id) === unit?.id
+                    (item) => item.Id.toString() === firstUnit
                 ).map((serving) => (
                     <NutritionLabel
                         serving={serving}
