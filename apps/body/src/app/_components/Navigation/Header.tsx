@@ -9,7 +9,7 @@ export const Header: FC = () => {
     return (
         <Card
             as="nav"
-            className="pt-safe fixed inset-x-0 top-0 z-10 block rounded-none"
+            className="pt-safe fixed inset-x-0 top-0 z-50 block rounded-none"
         >
             <div className="mx-auto px-4 sm:px-8">
                 <div className="relative flex h-16 items-center justify-between">
