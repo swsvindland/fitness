@@ -389,4 +389,90 @@ export const bodyRouter = createTRPCRouter({
 
         return [{ created: '2021-01-01', bodyFat: 20 }];
     }),
+
+    getAllBMI: protectedProcedure.query(async ({ ctx }) => {
+        if (!ctx.auth.userId) throw new Error('No user ID');
+
+        const bmi: { created: Date; bmi: number }[] = [];
+
+        const heights = await ctx.prisma.userHeight.findMany({
+            where: {
+                UserId: ctx.auth.userId,
+            },
+            orderBy: {
+                Created: 'asc',
+            },
+        });
+
+        if (heights.length === 0) return [];
+
+        if (heights.length === 1) {
+            const weights = await ctx.prisma.userWeight.findMany({
+                where: {
+                    UserId: ctx.auth.userId,
+                },
+                orderBy: {
+                    Created: 'asc',
+                },
+            });
+
+            if (weights.length === 0) return [];
+
+            if (weights.length === 1) {
+                bmi.push({
+                    created: heights[0].Created,
+                    bmi: calcBMI(weights[0].Weight, heights[0].Height),
+                });
+            }
+
+            if (weights.length > 1) {
+                for (let i = 1; i < weights.length; i++) {
+                    bmi.push({
+                        created: heights[0].Created,
+                        bmi: calcBMI(weights[i].Weight, heights[0].Height),
+                    });
+                }
+            }
+        }
+
+        if (heights.length > 1) {
+            for (let i = 1; i < heights.length; i++) {
+                const weights = await ctx.prisma.userWeight.findMany({
+                    where: {
+                        UserId: ctx.auth.userId,
+                        Created: {
+                            gte: heights[i].Created,
+                        },
+                    },
+                    orderBy: {
+                        Created: 'asc',
+                    },
+                });
+
+                if (weights.length === 0) return [];
+
+                if (weights.length === 1) {
+                    bmi.push({
+                        created: heights[i].Created,
+                        bmi: calcBMI(weights[0].Weight, heights[i].Height),
+                    });
+                }
+
+                if (weights.length > 1) {
+                    for (let j = 1; j < weights.length; j++) {
+                        bmi.push({
+                            created: heights[i].Created,
+                            bmi: calcBMI(weights[j].Weight, heights[i].Height),
+                        });
+                    }
+                }
+            }
+        }
+
+        return bmi;
+    }),
 });
+
+const calcBMI = (weight: number, height: number) => {
+    return (weight / (height * height)) * 703;
+};
