@@ -25,7 +25,7 @@ export const BottomNavigation: FC = () => {
     return (
         <Card
             id="bottom-navigation"
-            className="pb-safe fixed inset-x-0 bottom-0 z-10 block rounded-none"
+            className="pb-safe fixed inset-x-0 bottom-0 z-50 block rounded-none"
         >
             <div id="tabs" className="flex justify-between">
                 <Link href="/" className={linkStyle(['/'])}>
