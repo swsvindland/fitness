@@ -1,274 +1,274 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Exercise {
-    Id              BigInt            @id @default(autoincrement())
-    Created         DateTime          @db.DateTime(0)
-    Name            String            @db.VarChar(255)
-    Icon            String?           @db.VarChar(255)
-    WorkoutExercise WorkoutExercise[]
+  Id              BigInt            @id @default(autoincrement())
+  Created         DateTime          @db.DateTime(0)
+  Name            String            @db.VarChar(255)
+  Icon            String?           @db.VarChar(255)
+  WorkoutExercise WorkoutExercise[]
 }
 
 model FoodV2 {
-    Id             BigInt           @id @default(autoincrement())
-    Brand          String?          @db.VarChar(255)
-    Name           String           @db.VarChar(255)
-    FoodType       String           @db.VarChar(255)
-    Created        DateTime?        @db.DateTime(0)
-    Updated        DateTime?        @db.DateTime(0)
-    UserFoodV2     UserFoodV2[]
-    FoodV2Servings FoodV2Servings[]
+  Id             BigInt           @id @default(autoincrement())
+  Brand          String?          @db.VarChar(255)
+  Name           String           @db.VarChar(255)
+  FoodType       String           @db.VarChar(255)
+  Created        DateTime?        @db.DateTime(0)
+  Updated        DateTime?        @db.DateTime(0)
+  UserFoodV2     UserFoodV2[]
+  FoodV2Servings FoodV2Servings[]
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model FoodV2Servings {
-    Id                     BigInt       @id
-    AddedSugar             Float?       @db.Float
-    Calcium                Float?       @db.Float
-    Calories               Float?       @db.Float
-    Carbohydrate           Float?       @db.Float
-    Cholesterol            Float?       @db.Float
-    Fat                    Float?       @db.Float
-    Fiber                  Float?       @db.Float
-    Iron                   Float?       @db.Float
-    MeasurementDescription String?      @db.VarChar(255)
-    MetricServingAmount    Float?       @db.Float
-    MetricServingUnit      String?      @db.VarChar(255)
-    NumberOfUnits          Float?       @db.Float
-    MonounsaturatedFat     Float?       @db.Float
-    PolyunsaturatedFat     Float?       @db.Float
-    Potassium              Float?       @db.Float
-    Protein                Float?       @db.Float
-    SaturatedFat           Float?       @db.Float
-    ServingDescription     String?      @db.VarChar(255)
-    Sodium                 Float?       @db.Float
-    Sugar                  Float?       @db.Float
-    TransFat               Float?       @db.Float
-    VitaminA               Float?       @db.Float
-    VitaminC               Float?       @db.Float
-    VitaminD               Float?       @db.Float
-    FoodV2Id               BigInt
-    Created                DateTime?    @db.DateTime(0)
-    Updated                DateTime?    @db.DateTime(0)
-    FoodV2                 FoodV2       @relation(fields: [FoodV2Id], references: [Id])
-    UserFoodV2             UserFoodV2[]
+  Id                     BigInt       @id
+  AddedSugar             Float?       @db.Float
+  Calcium                Float?       @db.Float
+  Calories               Float?       @db.Float
+  Carbohydrate           Float?       @db.Float
+  Cholesterol            Float?       @db.Float
+  Fat                    Float?       @db.Float
+  Fiber                  Float?       @db.Float
+  Iron                   Float?       @db.Float
+  MeasurementDescription String?      @db.VarChar(255)
+  MetricServingAmount    Float?       @db.Float
+  MetricServingUnit      String?      @db.VarChar(255)
+  NumberOfUnits          Float?       @db.Float
+  MonounsaturatedFat     Float?       @db.Float
+  PolyunsaturatedFat     Float?       @db.Float
+  Potassium              Float?       @db.Float
+  Protein                Float?       @db.Float
+  SaturatedFat           Float?       @db.Float
+  ServingDescription     String?      @db.VarChar(255)
+  Sodium                 Float?       @db.Float
+  Sugar                  Float?       @db.Float
+  TransFat               Float?       @db.Float
+  VitaminA               Float?       @db.Float
+  VitaminC               Float?       @db.Float
+  VitaminD               Float?       @db.Float
+  FoodV2Id               BigInt
+  Created                DateTime?    @db.DateTime(0)
+  Updated                DateTime?    @db.DateTime(0)
+  FoodV2                 FoodV2       @relation(fields: [FoodV2Id], references: [Id])
+  UserFoodV2             UserFoodV2[]
 
-    @@index([FoodV2Id], map: "FoodV2Servings_FoodV2Id")
+  @@index([FoodV2Id], map: "FoodV2Servings_FoodV2Id")
 }
 
 model ProgressPhoto {
-    Id       BigInt   @id @default(autoincrement())
-    Filename String   @db.VarChar(255)
-    FileId   String   @db.Char(64)
-    UserId   String   @db.Char(64)
-    Created  DateTime @db.DateTime(0)
+  Id       BigInt   @id @default(autoincrement())
+  Filename String   @db.VarChar(255)
+  FileId   String   @db.Char(64)
+  UserId   String   @db.Char(64)
+  Created  DateTime @db.DateTime(0)
 }
 
 model Supplements {
-    Id              BigInt            @id @default(autoincrement())
-    Created         DateTime          @db.DateTime(0)
-    Name            String            @db.VarChar(255)
-    Icon            String?           @db.VarChar(255)
-    UserSupplements UserSupplements[]
+  Id              BigInt            @id @default(autoincrement())
+  Created         DateTime          @db.DateTime(0)
+  Name            String            @db.VarChar(255)
+  Icon            String?           @db.VarChar(255)
+  UserSupplements UserSupplements[]
 }
 
 model UserBloodPressure {
-    Id        BigInt   @id @default(autoincrement())
-    Created   DateTime @db.DateTime(0)
-    UserId    String   @db.Char(64)
-    Systolic  Int      @db.SmallInt
-    Diastolic Int      @db.SmallInt
-    HeartRate Int?     @db.SmallInt
+  Id        BigInt   @id @default(autoincrement())
+  Created   DateTime @db.DateTime(0)
+  UserId    String   @db.Char(64)
+  Systolic  Int      @db.SmallInt
+  Diastolic Int      @db.SmallInt
+  HeartRate Int?     @db.SmallInt
 }
 
 model UserBody {
-    Id         BigInt   @id @default(autoincrement())
-    Created    DateTime @db.DateTime(0)
-    Neck       Float    @db.Float
-    Shoulders  Float    @db.Float
-    Chest      Float    @db.Float
-    LeftBicep  Float    @db.Float
-    RightBicep Float    @db.Float
-    Navel      Float    @db.Float
-    Waist      Float    @db.Float
-    Hip        Float    @db.Float
-    LeftThigh  Float    @db.Float
-    RightThigh Float    @db.Float
-    LeftCalf   Float    @db.Float
-    RightCalf  Float    @db.Float
-    UserId     String   @db.Char(64)
+  Id         BigInt   @id @default(autoincrement())
+  Created    DateTime @db.DateTime(0)
+  Neck       Float    @db.Float
+  Shoulders  Float    @db.Float
+  Chest      Float    @db.Float
+  LeftBicep  Float    @db.Float
+  RightBicep Float    @db.Float
+  Navel      Float    @db.Float
+  Waist      Float    @db.Float
+  Hip        Float    @db.Float
+  LeftThigh  Float    @db.Float
+  RightThigh Float    @db.Float
+  LeftCalf   Float    @db.Float
+  RightCalf  Float    @db.Float
+  UserId     String   @db.Char(64)
 }
 
 model UserCustomMacros {
-    Id       BigInt   @id @default(autoincrement())
-    UserId   String   @db.Char(64)
-    Calories Float    @db.Float
-    Protein  Float    @db.Float
-    Fat      Float    @db.Float
-    Carbs    Float    @db.Float
-    Fiber    Float    @db.Float
-    Created  DateTime @db.DateTime(0)
+  Id       BigInt   @id @default(autoincrement())
+  UserId   String   @db.Char(64)
+  Calories Float    @db.Float
+  Protein  Float    @db.Float
+  Fat      Float    @db.Float
+  Carbs    Float    @db.Float
+  Fiber    Float    @db.Float
+  Created  DateTime @db.DateTime(0)
 }
 
 model UserFoodV2 {
-    Id            BigInt         @id @default(autoincrement())
-    UserId        String         @db.Char(64)
-    FoodV2Id      BigInt
-    ServingId     BigInt
-    ServingAmount Float          @db.Float
-    Created       DateTime?      @db.DateTime(0)
-    Updated       DateTime?      @db.DateTime(0)
-    FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
-    FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
+  Id            BigInt         @id @default(autoincrement())
+  UserId        String         @db.Char(64)
+  FoodV2Id      BigInt
+  ServingId     BigInt
+  ServingAmount Float          @db.Float
+  Created       DateTime?      @db.DateTime(0)
+  Updated       DateTime?      @db.DateTime(0)
+  FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
+  FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
 
-    @@index([UserId], map: "UserFoodV2_UserId")
-    @@index([Created], map: "UserFoodV2_Created")
-    @@index([FoodV2Id], map: "UserFoodV2_FoodV2Id")
-    @@index([ServingId], map: "UserFoodV2_ServingId")
+  @@index([UserId], map: "UserFoodV2_UserId")
+  @@index([Created], map: "UserFoodV2_Created")
+  @@index([FoodV2Id], map: "UserFoodV2_FoodV2Id")
+  @@index([ServingId], map: "UserFoodV2_ServingId")
 }
 
 model UserHeight {
-    Id      BigInt   @id @default(autoincrement())
-    Created DateTime @db.DateTime(0)
-    UserId  String   @db.Char(64)
-    Height  Float    @db.Float
+  Id      BigInt   @id @default(autoincrement())
+  Created DateTime @db.DateTime(0)
+  UserId  String   @db.Char(64)
+  Height  Float    @db.Float
 }
 
 model UserOneRepMaxEstimates {
-    Id         BigInt   @id @default(autoincrement())
-    Created    DateTime @db.DateTime(0)
-    ExerciseId BigInt
-    Estimate   Int      @db.SmallInt
-    UserId     String   @db.Char(64)
+  Id         BigInt   @id @default(autoincrement())
+  Created    DateTime @db.DateTime(0)
+  ExerciseId BigInt
+  Estimate   Int      @db.SmallInt
+  UserId     String   @db.Char(64)
 }
 
 model UserSupplementActivity {
-    Id               BigInt          @id @default(autoincrement())
-    Updated          DateTime        @db.DateTime(0)
-    UserSupplementId BigInt
-    UserId           String          @db.Char(64)
-    Time             String          @db.VarChar(255)
-    UserSupplement   UserSupplements @relation(fields: [UserSupplementId], references: [Id])
+  Id               BigInt          @id @default(autoincrement())
+  Updated          DateTime        @db.DateTime(0)
+  UserSupplementId BigInt
+  UserId           String          @db.Char(64)
+  Time             String          @db.VarChar(255)
+  UserSupplement   UserSupplements @relation(fields: [UserSupplementId], references: [Id])
 
-    @@index([UserId], map: "UserSupplementActivity_UserId")
-    @@index([UserSupplementId], map: "UserSupplementActivity_UserSupplementId")
+  @@index([UserId], map: "UserSupplementActivity_UserId")
+  @@index([UserSupplementId], map: "UserSupplementActivity_UserSupplementId")
 }
 
 model UserSupplements {
-    Id                     BigInt                   @id @default(autoincrement())
-    Created                DateTime                 @db.DateTime(0)
-    UserId                 String                   @db.Char(64)
-    SupplementId           BigInt
-    Times                  String                   @db.VarChar(1024)
-    Supplement             Supplements              @relation(fields: [SupplementId], references: [Id])
-    UserSupplementActivity UserSupplementActivity[]
+  Id                     BigInt                   @id @default(autoincrement())
+  Created                DateTime                 @db.DateTime(0)
+  UserId                 String                   @db.Char(64)
+  SupplementId           BigInt
+  Times                  String                   @db.VarChar(1024)
+  Supplement             Supplements              @relation(fields: [SupplementId], references: [Id])
+  UserSupplementActivity UserSupplementActivity[]
 
-    @@index([UserId], map: "UserSupplements_UserId")
-    @@index([SupplementId], map: "UserSupplements_SupplementId")
+  @@index([UserId], map: "UserSupplements_UserId")
+  @@index([SupplementId], map: "UserSupplements_SupplementId")
 }
 
 model UserWeight {
-    Id      BigInt   @id @default(autoincrement())
-    Created DateTime @db.DateTime(0)
-    UserId  String   @db.Char(64)
-    Weight  Float    @db.Float
+  Id      BigInt   @id @default(autoincrement())
+  Created DateTime @db.DateTime(0)
+  UserId  String   @db.Char(64)
+  Weight  Float    @db.Float
 }
 
 model UserWorkout {
-    Id        BigInt   @id @default(autoincrement())
-    Created   DateTime @db.DateTime(0)
-    WorkoutId BigInt
-    Active    Boolean
-    UserId    String   @db.Char(64)
-    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
+  Id        BigInt   @id @default(autoincrement())
+  Created   DateTime @db.DateTime(0)
+  WorkoutId BigInt
+  Active    Boolean
+  UserId    String   @db.Char(64)
+  Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
 
-    @@index([UserId], map: "UserWorkout_UserId")
-    @@index([WorkoutId], map: "UserWorkout_WorkoutId")
+  @@index([UserId], map: "UserWorkout_UserId")
+  @@index([WorkoutId], map: "UserWorkout_WorkoutId")
 }
 
 model UserWorkoutActivity {
-    Id                BigInt   @id @default(autoincrement())
-    Created           DateTime @db.Date
-    Set               Int      @db.SmallInt
-    Reps              Int?     @db.SmallInt
-    Weight            Float?   @db.Float
-    UserId            String   @db.Char(64)
-    Week              Int      @db.SmallInt
-    Day               Int      @db.SmallInt
-    WorkoutExerciseId BigInt
-    Time              Int?
+  Id                BigInt   @id @default(autoincrement())
+  Created           DateTime @db.Date
+  Set               Int      @db.SmallInt
+  Reps              Int?     @db.SmallInt
+  Weight            Float?   @db.Float
+  UserId            String   @db.Char(64)
+  Week              Int      @db.SmallInt
+  Day               Int      @db.SmallInt
+  WorkoutExerciseId BigInt
+  Time              Int?
 }
 
 model UserWorkoutSubstitution {
-    Id                BigInt    @id @default(autoincrement())
-    UserId            String    @db.Char(64)
-    WorkoutExerciseId BigInt
-    ExerciseId        BigInt
-    Created           DateTime? @db.DateTime(0)
-    Updated           DateTime? @db.DateTime(0)
+  Id                BigInt    @id @default(autoincrement())
+  UserId            String    @db.Char(64)
+  WorkoutExerciseId BigInt
+  ExerciseId        BigInt
+  Created           DateTime? @db.DateTime(0)
+  Updated           DateTime? @db.DateTime(0)
 }
 
 model UserWorkoutsCompleted {
-    Id        BigInt   @id @default(autoincrement())
-    WorkoutId BigInt
-    Week      Int      @db.SmallInt
-    Day       Int?     @db.SmallInt
-    UserId    String   @db.Char(64)
-    Created   DateTime @db.DateTime(0)
-    Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
+  Id        BigInt   @id @default(autoincrement())
+  WorkoutId BigInt
+  Week      Int      @db.SmallInt
+  Day       Int?     @db.SmallInt
+  UserId    String   @db.Char(64)
+  Created   DateTime @db.DateTime(0)
+  Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
 
-    @@index([UserId], map: "UserWorkoutsCompleted_UserId")
-    @@index([WorkoutId], map: "UserWorkoutsCompleted_WorkoutId")
+  @@index([UserId], map: "UserWorkoutsCompleted_UserId")
+  @@index([WorkoutId], map: "UserWorkoutsCompleted_WorkoutId")
 }
 
 model Workout {
-    Id                    BigInt                  @id @default(autoincrement())
-    Created               DateTime                @db.DateTime(0)
-    Name                  String                  @db.VarChar(255)
-    Description           String?                 @db.VarChar(1024)
-    Days                  Int
-    Duration              Int
-    UserId                String?                 @db.Char(64)
-    Updated               DateTime?               @db.DateTime(0)
-    Type                  String                  @default("Resistance") @db.VarChar(255)
-    WorkoutExercise       WorkoutExercise[]
-    UserWorkout           UserWorkout[]
-    UserWorkoutsCompleted UserWorkoutsCompleted[]
+  Id                    BigInt                  @id @default(autoincrement())
+  Created               DateTime                @db.DateTime(0)
+  Name                  String                  @db.VarChar(255)
+  Description           String?                 @db.VarChar(1024)
+  Days                  Int
+  Duration              Int
+  UserId                String?                 @db.Char(64)
+  Updated               DateTime?               @db.DateTime(0)
+  Type                  String                  @default("Resistance") @db.VarChar(255)
+  WorkoutExercise       WorkoutExercise[]
+  UserWorkout           UserWorkout[]
+  UserWorkoutsCompleted UserWorkoutsCompleted[]
 
-    @@index([UserId], map: "Workout_UserId")
+  @@index([UserId], map: "Workout_UserId")
 }
 
 model WorkoutExercise {
-    Id         BigInt    @id @default(autoincrement())
-    Created    DateTime  @db.DateTime(0)
-    WorkoutId  BigInt
-    ExerciseId BigInt
-    Day        Int
-    MinReps    Int?
-    MaxReps    Int?
-    Updated    DateTime? @db.DateTime(0)
-    Order      Int?
-    Time       Int?
-    Workout    Workout   @relation(fields: [WorkoutId], references: [Id])
-    Exercise   Exercise  @relation(fields: [ExerciseId], references: [Id])
+  Id         BigInt    @id @default(autoincrement())
+  Created    DateTime  @db.DateTime(0)
+  WorkoutId  BigInt
+  ExerciseId BigInt
+  Day        Int
+  MinReps    Int?
+  MaxReps    Int?
+  Updated    DateTime? @db.DateTime(0)
+  Order      Int?
+  Time       Int?
+  Workout    Workout   @relation(fields: [WorkoutId], references: [Id])
+  Exercise   Exercise  @relation(fields: [ExerciseId], references: [Id])
 
-    @@index([WorkoutId], map: "WorkoutExercise_WorkoutId")
-    @@index([ExerciseId], map: "WorkoutExercise_ExerciseId")
+  @@index([WorkoutId], map: "WorkoutExercise_WorkoutId")
+  @@index([ExerciseId], map: "WorkoutExercise_ExerciseId")
 }
 
 model UserSettings {
-    Id      BigInt   @id @default(autoincrement())
-    UserId  String   @db.Char(64)
-    Sex     String   @db.VarChar(255)
-    Age     Int      @db.SmallInt
-    Units   String   @db.VarChar(255)
-    Created DateTime @db.DateTime(0)
-    Updated DateTime @db.DateTime(0)
+  Id      BigInt   @id @default(autoincrement())
+  UserId  String   @db.Char(64)
+  Sex     String   @db.VarChar(255)
+  Age     Int      @db.SmallInt
+  Units   String   @db.VarChar(255)
+  Created DateTime @db.DateTime(0)
+  Updated DateTime @db.DateTime(0)
 }
