@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { FoodSearch } from './FoodSearch';
+import { FieldState, FoodSearch } from './FoodSearch';
 import { AddFoodCard } from './AddFoodCard';
 import { api } from '~/trpc/react';
 import { LoadingListOfCards } from '@fitness/ui';
@@ -12,12 +12,15 @@ const sameDay = (d1: Date, d2: Date) =>
     d1.getDate() === d2.getDate();
 
 export const AddFood: FC = () => {
-    const [query, setQuery] = useState('');
-    const [selected, setSelected] = useState<string | undefined>(undefined);
+    const [fieldState, setFieldState] = useState<FieldState>({
+        selectedKey: '',
+        inputValue: '',
+    });
+
     const [recentlyEaten, setRecentlyEaten] = useState<any[]>([]);
 
     const searchFoodQuery = api.food.searchFood.useQuery({
-        query: selected ?? null,
+        query: fieldState.selectedKey ?? null,
     });
     const recentlyEatenQuery = api.food.getRecentUserFoods.useQuery();
 
@@ -46,15 +49,10 @@ export const AddFood: FC = () => {
 
     return (
         <div className="container grid grid-cols-1 gap-4">
-            <FoodSearch
-                query={query}
-                setQuery={setQuery}
-                setSelected={setSelected}
-                selected={selected}
-            />
+            <FoodSearch field={fieldState} setField={setFieldState} />
             <div className="flex w-full flex-col gap-2">
                 <LoadingListOfCards isLoading={searchFoodQuery.isLoading} />
-                {!searchFoodQuery.data && selected ? (
+                {!searchFoodQuery.data && fieldState.selectedKey ? (
                     <div className="flex items-center justify-between text-center">
                         <span className="text-ternary">No Results</span>
                     </div>
