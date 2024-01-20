@@ -1,5 +1,6 @@
 'use client';
-import { FC, Fragment, useEffect, useState } from 'react';
+
+import { FC, useEffect, useState } from 'react';
 import { BarcodeScannerComponent } from './BarcodeScannerComponent';
 import { useRouter } from 'next/navigation';
 import { XSolid } from '@fitness/ui';
@@ -8,7 +9,6 @@ import {
     Modal,
     ModalBody,
     ModalContent,
-    ModalHeader,
     useDisclosure,
 } from '@nextui-org/react';
 
@@ -23,7 +23,7 @@ export const Scanner: FC = () => {
             console.log('data', data);
 
             onClose();
-            router.push(`/eat/scan-food/${data}`);
+            router.push(`/scan-food/${data}`);
         }
     }, [data, router, onClose]);
 

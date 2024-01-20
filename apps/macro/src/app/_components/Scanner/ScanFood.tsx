@@ -36,7 +36,7 @@ export const ScanFood: FC<Props> = ({ barcode }) => {
                     Food not found
                 </h1>
                 <p>{barcode}</p>
-                <Button href="/eat">Go Back</Button>
+                <Button href="/">Go Back</Button>
             </div>
         );
     }
