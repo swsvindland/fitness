@@ -3,28 +3,15 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { loggerLink, unstable_httpBatchStreamLink } from '@trpc/client';
 import { createTRPCReact } from '@trpc/react-query';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
-import { type AppRouter } from '@fitness/api';
 import { getUrl, transformer } from './shared';
+import { AppRouter } from '@fitness/api';
 
 export const api = createTRPCReact<AppRouter>();
 
-export function TRPCReactProvider(props: {
-    children: React.ReactNode;
-    cookies: string;
-}) {
-    const [queryClient] = useState(
-        () =>
-            new QueryClient({
-                defaultOptions: {
-                    queries: {
-                        staleTime: 1000 * 60 * 5,
-                        refetchOnWindowFocus: false,
-                    },
-                },
-            })
-    );
+export function TRPCReactProvider(props: { children: ReactNode }) {
+    const [queryClient] = useState(() => new QueryClient());
 
     const [trpcClient] = useState(() =>
         api.createClient({
@@ -37,12 +24,6 @@ export function TRPCReactProvider(props: {
                 }),
                 unstable_httpBatchStreamLink({
                     url: getUrl(),
-                    headers() {
-                        return {
-                            cookie: props.cookies,
-                            'x-trpc-source': 'react',
-                        };
-                    },
                 }),
             ],
         })

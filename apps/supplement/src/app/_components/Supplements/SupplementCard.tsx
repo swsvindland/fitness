@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useEffect, useState } from 'react';
 import { AddSupplement } from './AddSupplement';
 import { SupplementIcon } from '@fitness/types';
