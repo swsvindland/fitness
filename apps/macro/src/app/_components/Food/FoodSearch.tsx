@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { api } from '~/trpc/react';
 import {
     Autocomplete,
@@ -16,18 +16,27 @@ interface IProps {
     setField: (field: FieldState) => void;
 }
 
+interface IOption {
+    key: string;
+    value: string;
+}
+
 export const FoodSearch: FC<IProps> = ({ field, setField }) => {
+    const [filtered, setFiltered] = useState<IOption[]>([]);
+
     const optionsQuery = api.food.autocomplete.useQuery(
         {
             query: field.inputValue,
         },
-        { enabled: field.inputValue?.length > 3 }
+        { enabled: field.inputValue?.length > 0 }
     );
 
-    const filtered = useMemo(() => {
-        const items = optionsQuery.data ?? [];
-
-        return [...items];
+    useEffect(() => {
+        if (optionsQuery.data && optionsQuery.data.length > 0) {
+            setFiltered(
+                optionsQuery.data.map((item) => ({ key: item, value: item }))
+            );
+        }
     }, [optionsQuery.data]);
 
     const handleClear = () => {
@@ -35,13 +44,15 @@ export const FoodSearch: FC<IProps> = ({ field, setField }) => {
             selectedKey: '',
             inputValue: '',
         });
+
+        setFiltered([]);
     };
 
     const onSelectionChange = (key: string | number) => {
-        const newSelectedItem = filtered.find((option) => option === key);
+        const newSelectedItem = filtered.find((option) => option.key === key);
 
         setField({
-            selectedKey: newSelectedItem ?? null,
+            selectedKey: newSelectedItem?.key ?? null,
             inputValue: key?.toString(),
         });
     };
@@ -72,6 +83,8 @@ export const FoodSearch: FC<IProps> = ({ field, setField }) => {
         });
     };
 
+    console.log(filtered);
+
     return (
         <Autocomplete
             fullWidth
@@ -91,11 +104,9 @@ export const FoodSearch: FC<IProps> = ({ field, setField }) => {
             onBlur={handleSearch}
             onSubmit={handleSearch}
         >
-            {filtered.map((item) => (
-                <AutocompleteItem key={item} value={item}>
-                    {item}
-                </AutocompleteItem>
-            ))}
+            {(item) => (
+                <AutocompleteItem key={item.key}>{item.value}</AutocompleteItem>
+            )}
         </Autocomplete>
     );
 };

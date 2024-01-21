@@ -1,4 +1,3 @@
-import { FoodDetail } from '~/app/_components/Food/FoodDetail';
 import { Suspense } from 'react';
 import { LoadingPage } from '@fitness/ui';
 import { AddFood } from '~/app/_components/Food/AddFood';
