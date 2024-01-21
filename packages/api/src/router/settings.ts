@@ -94,6 +94,19 @@ export const settingsRouter = createTRPCRouter({
             });
         }),
 
+    updateMeals: protectedProcedure
+        .input(z.object({ id: z.number(), meal: z.number() }))
+        .mutation(async ({ ctx, input }) => {
+            await ctx.prisma.userSettings.update({
+                where: {
+                    Id: input.id,
+                },
+                data: {
+                    MealQuantity: input.meal,
+                },
+            });
+        }),
+
     updateAge: protectedProcedure
         .input(z.object({ id: z.number(), age: z.number() }))
         .mutation(async ({ ctx, input }) => {
