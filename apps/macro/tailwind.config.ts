@@ -33,7 +33,7 @@ export default {
                             100: '#D4E7E1',
                             50: '#F2F8F7',
                             DEFAULT: '#28827A',
-                            foreground: '#F7C619',
+                            foreground: '#0D3140',
                         },
                         success: {
                             500: '#07B561',

@@ -29,7 +29,7 @@ export const Scanner: FC = () => {
 
     return (
         <>
-            <Button variant="bordered" color="primary" onClick={onOpen}>
+            <Button variant="bordered" color="secondary" onClick={onOpen}>
                 Scan
             </Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>

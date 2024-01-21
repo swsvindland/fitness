@@ -56,7 +56,7 @@ export const FoodGrid: FC<FoodGridProps> = ({ meal }) => {
         <div className="py-4">
             <div className="grid grid-cols-4 gap-2 py-2">
                 <div className="col-span-2">
-                    <h2>Meal: {meal}</h2>
+                    <h2 className="text-secondary text-lg">Meal: {meal}</h2>
                     <span>
                         P: {Protein.toFixed(0)} F: {Fat.toFixed(0)} C:{' '}
                         {Carbs.toFixed(0)}

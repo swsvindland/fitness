@@ -51,7 +51,7 @@ export const MacroGridUnit: FC<IProps> = ({
                 </dd>
             </CardBody>
             <CardFooter>
-                <Progress value={percentage} />
+                <Progress aria-label="progress" value={percentage} />
             </CardFooter>
         </Card>
     );
