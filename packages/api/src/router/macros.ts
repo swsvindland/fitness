@@ -1,6 +1,32 @@
 import { createTRPCRouter, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
+const calcMacros = (userFoods: any[]) => {
+    let calories = 0;
+    let protein = 0;
+    let carbs = 0;
+    let fat = 0;
+    let fiber = 0;
+
+    for (const userFood of userFoods) {
+        const servings = userFood.ServingAmount;
+
+        calories += userFood.FoodV2Serving.Calories * servings;
+        protein += userFood.FoodV2Serving.Protein * servings;
+        carbs += userFood.FoodV2Serving.Carbohydrate * servings;
+        fat += userFood.FoodV2Serving.Fat * servings;
+        fiber += userFood.FoodV2Serving.Fiber * servings;
+    }
+
+    return {
+        Calories: calories,
+        Protein: protein,
+        Carbs: carbs,
+        Fat: fat,
+        Fiber: fiber,
+    };
+};
+
 export const macrosRouter = createTRPCRouter({
     getMacros: protectedProcedure.query(async ({ ctx }) => {
         if (!ctx.auth.userId) throw new Error('No user ID');
@@ -84,28 +110,42 @@ export const macrosRouter = createTRPCRouter({
                 },
             });
 
-            let calories = 0;
-            let protein = 0;
-            let carbs = 0;
-            let fat = 0;
-            let fiber = 0;
+            return calcMacros(userFoods);
+        }),
 
-            for (const userFood of userFoods) {
-                const servings = userFood.ServingAmount;
+    getMacrosPerMeal: protectedProcedure
+        .input(
+            z.object({
+                date: z.string(),
+                meal: z.number(),
+            })
+        )
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
+            const today = new Date(input.date);
 
-                calories += userFood.FoodV2Serving.Calories * servings;
-                protein += userFood.FoodV2Serving.Protein * servings;
-                carbs += userFood.FoodV2Serving.Carbohydrate * servings;
-                fat += userFood.FoodV2Serving.Fat * servings;
-                fiber += userFood.FoodV2Serving.Fiber * servings;
-            }
+            const userFoods = await ctx.prisma.userFoodV2.findMany({
+                where: {
+                    Meal: input.meal,
+                    UserId: ctx.auth.userId,
+                    Created: {
+                        gte: new Date(
+                            today.getFullYear(),
+                            today.getMonth(),
+                            today.getDate(),
+                            0,
+                            0,
+                            0,
+                            0
+                        ),
+                    },
+                },
+                include: {
+                    FoodV2: true,
+                    FoodV2Serving: true,
+                },
+            });
 
-            return {
-                Calories: calories,
-                Protein: protein,
-                Carbs: carbs,
-                Fat: fat,
-                Fiber: fiber,
-            };
+            return calcMacros(userFoods);
         }),
 });

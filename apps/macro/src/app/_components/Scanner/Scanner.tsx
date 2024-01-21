@@ -30,7 +30,7 @@ export const Scanner: FC = () => {
     return (
         <>
             <Button variant="bordered" color="primary" onClick={onOpen}>
-                Scan Barcode
+                Scan
             </Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>

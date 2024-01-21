@@ -13,6 +13,7 @@ interface IProps {
     brandName: string;
     servingSize: string;
     defaultServings?: number;
+    meal: number;
 }
 
 export const AddFoodCard: FC<IProps> = ({
@@ -22,6 +23,7 @@ export const AddFoodCard: FC<IProps> = ({
     brandName,
     servingSize,
     defaultServings,
+    meal,
 }) => {
     const [servings, setServings] = useState<number>(defaultServings ?? 0);
     const updateFoodCache = useUpdateFoodCache();
@@ -45,7 +47,7 @@ export const AddFoodCard: FC<IProps> = ({
         if (defaultServings && userFoodId) {
             router.push(`/user-food/${userFoodId}`);
         } else {
-            router.push(`/food/${foodId}`);
+            router.push(`/food/${foodId}/${meal}`);
         }
     };
 
@@ -55,6 +57,7 @@ export const AddFoodCard: FC<IProps> = ({
             userFoodId: userFoodId ?? null,
             servingAmount: servings + 1,
             date: new Date().toDateString(),
+            meal,
         });
     };
 
@@ -63,6 +66,7 @@ export const AddFoodCard: FC<IProps> = ({
             foodId,
             userFoodId: userFoodId ?? null,
             servingAmount: servings - 1,
+            meal,
         });
     };
 

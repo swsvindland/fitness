@@ -15,9 +15,10 @@ export interface DropdownOption {
 
 interface IProps {
     foodId: number;
+    meal: number;
 }
 
-export const FoodDetail: FC<IProps> = ({ foodId }) => {
+export const FoodDetail: FC<IProps> = ({ foodId, meal }) => {
     const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
     const [unit, setUnit] = useState<Set<string>>(new Set([]));
     const updateFoodCache = useUpdateFoodCache();
@@ -90,6 +91,7 @@ export const FoodDetail: FC<IProps> = ({ foodId }) => {
                             date: new Date().toISOString(),
                             servingId: Number(firstUnit ?? 0),
                             servingAmount: parseFloat(displayedQuantity),
+                            meal,
                         })
                     }
                 >

@@ -127,6 +127,7 @@ model UserFoodV2 {
     Updated       DateTime?      @db.DateTime(0)
     FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
     FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
+    Meal          Int            @default(1) @db.SmallInt
 
     @@index([UserId], map: "UserFoodV2_UserId")
     @@index([Created], map: "UserFoodV2_Created")

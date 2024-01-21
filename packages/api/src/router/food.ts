@@ -199,13 +199,14 @@ export const foodRouter = createTRPCRouter({
     }),
 
     getAllUserFood: protectedProcedure
-        .input(z.object({ date: z.string() }))
+        .input(z.object({ meal: z.number(), date: z.string() }))
         .query(async ({ ctx, input }) => {
             if (!ctx.auth.userId) throw new Error('No user ID');
             const today = new Date(input.date);
 
             return ctx.prisma.userFoodV2.findMany({
                 where: {
+                    Meal: input.meal,
                     UserId: ctx.auth.userId,
                     Created: {
                         gte: new Date(
@@ -247,6 +248,7 @@ export const foodRouter = createTRPCRouter({
                 servingId: z.number(),
                 servingAmount: z.number(),
                 date: z.string(),
+                meal: z.number(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -257,6 +259,7 @@ export const foodRouter = createTRPCRouter({
                     ServingId: input.servingId,
                     ServingAmount: input.servingAmount,
                     Created: new Date(input.date),
+                    Meal: input.meal,
                 },
             });
         }),
@@ -295,6 +298,7 @@ export const foodRouter = createTRPCRouter({
                 foodId: z.number(),
                 servingAmount: z.number(),
                 date: z.string(),
+                meal: z.number(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -311,6 +315,7 @@ export const foodRouter = createTRPCRouter({
                     ServingId: food.FoodV2Servings[0].Id,
                     ServingAmount: input.servingAmount,
                     Created: new Date(input.date),
+                    Meal: input.meal,
                 },
                 update: {
                     ServingAmount: input.servingAmount,
@@ -325,6 +330,7 @@ export const foodRouter = createTRPCRouter({
                 foodId: z.number(),
                 userFoodId: z.number().nullable(),
                 servingAmount: z.number(),
+                meal: z.number(),
             })
         )
         .mutation(async ({ ctx, input }) => {
@@ -333,6 +339,7 @@ export const foodRouter = createTRPCRouter({
             await ctx.prisma.userFoodV2.update({
                 where: {
                     Id: input.userFoodId,
+                    Meal: input.meal,
                 },
                 data: {
                     ServingAmount: input.servingAmount,

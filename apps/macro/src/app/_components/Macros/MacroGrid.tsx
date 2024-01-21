@@ -65,17 +65,6 @@ export const MacroGrid: FC = () => {
                     />
                 </dl>
             </div>
-            <div className="mt-3 grid grid-cols-2 gap-2">
-                <Scanner />
-                <Button
-                    color="primary"
-                    className="flex w-full justify-center"
-                    href="/add-food"
-                    as={Link}
-                >
-                    Add Food
-                </Button>
-            </div>
         </div>
     );
 };

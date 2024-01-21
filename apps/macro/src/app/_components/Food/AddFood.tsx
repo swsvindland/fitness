@@ -11,7 +11,11 @@ const sameDay = (d1: Date, d2: Date) =>
     d1.getMonth() === d2.getMonth() &&
     d1.getDate() === d2.getDate();
 
-export const AddFood: FC = () => {
+interface AddFoodProps {
+    meal: number;
+}
+
+export const AddFood: FC<AddFoodProps> = ({ meal }) => {
     const [fieldState, setFieldState] = useState<FieldState>({
         selectedKey: '',
         inputValue: '',
@@ -67,6 +71,7 @@ export const AddFood: FC = () => {
                                 food.servings.serving[0]?.serving_description ??
                                 ''
                             }
+                            meal={meal}
                         />
                     ))
                 )}
@@ -92,6 +97,7 @@ export const AddFood: FC = () => {
                                 food.FoodV2Serving?.ServingDescription ?? ''
                             }
                             defaultServings={food.ServingAmount}
+                            meal={meal}
                         />
                     ))
                 )}
