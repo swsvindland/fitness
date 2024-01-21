@@ -11,18 +11,6 @@ import { Button } from '@nextui-org/button';
 export const BottomNavigation: FC = () => {
     const pathname = usePathname();
 
-    const linkStyle = (route: string[]) =>
-        `${
-            isSelected(pathname, route)
-                ? 'text-ternary bg-primary-dark'
-                : 'text-secondary'
-        } w-full justify-center inline-block text-center py-3 rounded hover:bg-primary-dark active:bg-primary-dark`;
-
-    const iconStyle = (route: string[]) =>
-        `${
-            isSelected(pathname, route) ? 'text-ternary' : 'text-secondary'
-        } tab tab-home block text-xs w-6 h-6 m-auto`;
-
     const color = (route: string[]) =>
         isSelected(pathname, route) ? 'primary' : 'secondary';
 

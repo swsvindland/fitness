@@ -1,9 +1,9 @@
-import { FC } from 'react';
 import { MacroGrid } from './MacroGrid';
 import Link from 'next/link';
 import { Meals } from '~/app/_components/Food/Meals';
+import { FC } from 'react';
 
-export const Eat: FC = () => {
+export const Eat: FC = async () => {
     return (
         <div className="container">
             <div className="grid w-full grid-cols-1 gap-2">
