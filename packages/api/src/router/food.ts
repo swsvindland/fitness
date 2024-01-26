@@ -188,15 +188,17 @@ export const foodRouter = createTRPCRouter({
             return response.data?.food_id;
         }),
 
-    getRecentUserFoods: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.auth.userId) throw new Error('No user ID');
+    getRecentUserFoods: protectedProcedure
+        .input(z.object({ meal: z.number() }))
+        .query(async ({ ctx, input }) => {
+            if (!ctx.auth.userId) throw new Error('No user ID');
 
-        return ctx.prisma.userFoodV2.findMany({
-            where: { UserId: ctx.auth.userId },
-            orderBy: { Created: 'desc' },
-            include: { FoodV2: true, FoodV2Serving: true },
-        });
-    }),
+            return ctx.prisma.userFoodV2.findMany({
+                where: { UserId: ctx.auth.userId, Meal: input.meal },
+                orderBy: { Created: 'desc' },
+                include: { FoodV2: true, FoodV2Serving: true },
+            });
+        }),
 
     getAllUserFood: protectedProcedure
         .input(z.object({ meal: z.number(), date: z.string() }))

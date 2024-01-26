@@ -26,7 +26,7 @@ export const AddFood: FC<AddFoodProps> = ({ meal }) => {
     const searchFoodQuery = api.food.searchFood.useQuery({
         query: fieldState.selectedKey ?? null,
     });
-    const recentlyEatenQuery = api.food.getRecentUserFoods.useQuery();
+    const recentlyEatenQuery = api.food.getRecentUserFoods.useQuery({ meal });
 
     useEffect(() => {
         if (recentlyEatenQuery.data) {
