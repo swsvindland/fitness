@@ -8,7 +8,7 @@ import { Chart as ChartJS } from 'chart.js';
 ChartJS.defaults.color = '#AFD257';
 ChartJS.defaults.borderColor = '#0D3140';
 ChartJS.defaults.font.family = "'Oswald', 'sans-serif'";
-ChartJS.defaults.font.size = 10;
+ChartJS.defaults.font.size = 14;
 
 export function Providers({ children }: { children: ReactNode }) {
     return (
