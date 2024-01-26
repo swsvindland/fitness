@@ -26,6 +26,7 @@ interface IProps {
 
 export const HeightCard: FC<IProps> = ({ id, date, height }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const utils = api.useUtils();
 
     const deleteMutation = api.body.deleteHeight.useMutation({
         onSuccess: async () => {

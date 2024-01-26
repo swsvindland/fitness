@@ -1,10 +1,9 @@
 import { FC } from 'react';
-import { LocalizationSettings } from '~/app/_components/Settings/LocalizationSettings';
 
 export const Settings: FC = () => {
     return (
         <div className="container flex flex-col">
-            <LocalizationSettings />
+            <h1 className="text-secondary mb-2">Settings</h1>
         </div>
     );
 };

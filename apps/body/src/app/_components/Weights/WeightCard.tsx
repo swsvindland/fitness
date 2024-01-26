@@ -26,6 +26,7 @@ interface IProps {
 
 export const WeightCard: FC<IProps> = ({ id, date, weight }) => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const utils = api.useUtils();
 
     const deleteMutation = api.body.deleteWeight.useMutation({
         onSuccess: async () => {

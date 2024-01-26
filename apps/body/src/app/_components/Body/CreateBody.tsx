@@ -10,9 +10,9 @@ import {
     ModalHeader,
     useDisclosure,
 } from '@nextui-org/react';
-import { WeightForm } from '~/app/_components/Weights/WeightForm';
+import { BodyForm } from './BodyForm';
 
-export const CreateWeight: FC = () => {
+export const CreateBody: FC = () => {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
     return (
@@ -36,10 +36,10 @@ export const CreateWeight: FC = () => {
                                 Enter Weight
                             </ModalHeader>
                             <ModalBody>
-                                <WeightForm
+                                <BodyForm
                                     id={null}
                                     date={new Date().toISOString()}
-                                    weight={null}
+                                    body={null}
                                     setOpen={onClose}
                                 />
                             </ModalBody>
