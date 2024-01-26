@@ -11,9 +11,10 @@ import { Button } from '@nextui-org/button';
 
 interface IProps {
     userFoodId: number;
+    meal: number;
 }
 
-export const UserFoodDetail: FC<IProps> = ({ userFoodId }) => {
+export const UserFoodDetail: FC<IProps> = ({ userFoodId, meal }) => {
     const [displayedQuantity, setDisplayedQuantity] = useState<string>('1');
     const [unit, setUnit] = useState<Set<string>>(new Set([]));
     const router = useRouter();
@@ -33,7 +34,10 @@ export const UserFoodDetail: FC<IProps> = ({ userFoodId }) => {
         },
     });
 
-    const userFoodQuery = api.food.getUserFoodById.useQuery({ userFoodId });
+    const userFoodQuery = api.food.getUserFoodById.useQuery({
+        userFoodId,
+        meal,
+    });
 
     const foodDetailsQuery = api.food.getFoodById.useQuery(
         { foodId: Number(userFoodQuery.data?.FoodV2Id) ?? -1 },

@@ -25,7 +25,7 @@ export const FoodGrid: FC<FoodGridProps> = ({ meal }) => {
 
     const handleRowClick = (foodId?: bigint) => {
         if (!foodId) return;
-        router.push(`/user-food/${foodId}`);
+        router.push(`/user-food/${foodId}/${meal}`);
     };
 
     const foodQuery = api.food.getAllUserFood.useQuery({

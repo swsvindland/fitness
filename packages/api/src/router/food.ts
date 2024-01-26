@@ -225,12 +225,16 @@ export const foodRouter = createTRPCRouter({
         }),
 
     getUserFoodById: protectedProcedure
-        .input(z.object({ userFoodId: z.number() }))
+        .input(z.object({ userFoodId: z.number(), meal: z.number() }))
         .query(async ({ ctx, input }) => {
             if (!ctx.auth.userId) throw new Error('No user ID');
 
             return ctx.prisma.userFoodV2.findFirst({
-                where: { Id: input.userFoodId, UserId: ctx.auth.userId },
+                where: {
+                    Id: input.userFoodId,
+                    UserId: ctx.auth.userId,
+                    Meal: input.meal,
+                },
                 include: { FoodV2: true, FoodV2Serving: true },
             });
         }),
