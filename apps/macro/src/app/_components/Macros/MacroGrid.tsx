@@ -1,10 +1,12 @@
+'use client';
+
 import { MacroGridUnit } from './MacroGridUnit';
-import { api } from '~/trpc/server';
+import { api } from '~/trpc/react';
 import { FC } from 'react';
 
-export const MacroGrid: FC = async () => {
-    const macrosQuery = await api.macros.getMacros.query();
-    const currentMacrosQuery = await api.macros.getCurrentMacros.query({
+export const MacroGrid: FC = () => {
+    const macrosQuery = api.macros.getMacros.useQuery();
+    const currentMacrosQuery = api.macros.getCurrentMacros.useQuery({
         date: new Date().toDateString(),
     });
 
@@ -13,33 +15,33 @@ export const MacroGrid: FC = async () => {
             <div className="w-full">
                 <MacroGridUnit
                     name="Calories"
-                    amount={macrosQuery?.Calories ?? 0}
-                    currentAmount={currentMacrosQuery?.Calories}
+                    amount={macrosQuery.data?.Calories ?? 0}
+                    currentAmount={currentMacrosQuery.data?.Calories}
                     unit="kcal"
                 />
                 <dl className="mt-2 grid grid-cols-2 gap-2 overflow-hidden sm:grid-cols-4">
                     <MacroGridUnit
                         name="Protein"
-                        amount={macrosQuery?.Protein ?? 0}
-                        currentAmount={currentMacrosQuery?.Protein ?? 0}
+                        amount={macrosQuery.data?.Protein ?? 0}
+                        currentAmount={currentMacrosQuery.data?.Protein ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fat"
-                        amount={macrosQuery?.Fat ?? 0}
-                        currentAmount={currentMacrosQuery?.Fat ?? 0}
+                        amount={macrosQuery.data?.Fat ?? 0}
+                        currentAmount={currentMacrosQuery.data?.Fat ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Carbs"
-                        amount={macrosQuery?.Carbs ?? 0}
-                        currentAmount={currentMacrosQuery?.Carbs ?? 0}
+                        amount={macrosQuery.data?.Carbs ?? 0}
+                        currentAmount={currentMacrosQuery.data?.Carbs ?? 0}
                         unit="g"
                     />
                     <MacroGridUnit
                         name="Fiber"
-                        amount={macrosQuery?.Fiber ?? 0}
-                        currentAmount={currentMacrosQuery?.Fiber ?? 0}
+                        amount={macrosQuery.data?.Fiber ?? 0}
+                        currentAmount={currentMacrosQuery.data?.Fiber ?? 0}
                         unit="g"
                     />
                 </dl>

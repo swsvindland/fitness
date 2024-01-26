@@ -13,6 +13,7 @@ ChartJS.defaults.font.size = 10;
 
 export function Providers({ children }: { children: ReactNode }) {
     const router = useRouter();
+    const today = new Date().toDateString();
 
     return (
         <NextUIProvider navigate={router.push}>
