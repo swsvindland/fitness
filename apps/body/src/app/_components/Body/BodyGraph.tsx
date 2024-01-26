@@ -110,7 +110,7 @@ export const BodyGraph = () => {
 
     return (
         <Card>
-            <CardHeader>Height</CardHeader>
+            <CardHeader>Body</CardHeader>
             <Divider />
             <CardBody>
                 {data.datasets.length > 0 ? (
