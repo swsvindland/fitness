@@ -15,6 +15,7 @@ import { LoadingPage } from '@fitness/ui';
 import { Scanner } from '~/app/_components/Scanner/Scanner';
 import { Button } from '@nextui-org/button';
 import Link from 'next/link';
+import { PlusIcon } from '@heroicons/react/24/outline';
 
 interface FoodGridProps {
     meal: number;
@@ -54,23 +55,26 @@ export const FoodGrid: FC<FoodGridProps> = ({ meal }) => {
 
     return (
         <div className="py-4">
-            <div className="grid grid-cols-4 gap-2 py-2">
-                <div className="col-span-2">
+            <div className="flex justify-between items-center pb-1">
+                <div>
                     <h2 className="text-secondary text-lg">Meal: {meal}</h2>
                     <span>
                         P: {Protein.toFixed(0)} F: {Fat.toFixed(0)} C:{' '}
                         {Carbs.toFixed(0)}
                     </span>
                 </div>
-                <Scanner />
-                <Button
-                    color="primary"
-                    className="flex w-full justify-center"
-                    href={`/add-food/${meal}`}
-                    as={Link}
-                >
-                    Add
-                </Button>
+                <div className="flex gap-2">
+                    <Scanner />
+                    <Button
+                        color="primary"
+                        isIconOnly
+                        className="flex w-full justify-center"
+                        href={`/add-food/${meal}`}
+                        as={Link}
+                    >
+                        <PlusIcon className="w-6 h-6" />
+                    </Button>
+                </div>
             </div>
             <Table>
                 <TableHeader>

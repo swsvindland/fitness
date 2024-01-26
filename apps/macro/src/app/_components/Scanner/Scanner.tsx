@@ -11,6 +11,7 @@ import {
     ModalContent,
     useDisclosure,
 } from '@nextui-org/react';
+import { Bars4Icon } from '@heroicons/react/24/outline';
 
 export const Scanner: FC = () => {
     const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -29,8 +30,8 @@ export const Scanner: FC = () => {
 
     return (
         <>
-            <Button variant="bordered" color="secondary" onClick={onOpen}>
-                Scan
+            <Button isIconOnly color="secondary" onClick={onOpen}>
+                <Bars4Icon className="w-6 h-6" />
             </Button>
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
