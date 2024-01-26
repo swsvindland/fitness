@@ -311,23 +311,51 @@ export const foodRouter = createTRPCRouter({
             if (!ctx.auth.userId) throw new Error('No user ID');
             const food = await getFoodById(ctx.prisma, input.foodId);
 
-            await ctx.prisma.userFoodV2.upsert({
-                where: {
-                    Id: input.userFoodId,
-                },
-                create: {
-                    UserId: ctx.auth.userId!,
-                    FoodV2Id: input.foodId,
-                    ServingId: food.FoodV2Servings[0].Id,
-                    ServingAmount: input.servingAmount,
-                    Created: new Date(input.date),
-                    Meal: input.meal,
-                },
-                update: {
-                    ServingAmount: input.servingAmount,
-                    Updated: new Date(),
-                },
-            });
+            if (!input.userFoodId) {
+                const existing = await ctx.prisma.userFoodV2.findFirst({
+                    where: {
+                        UserId: ctx.auth.userId,
+                        FoodV2Id: input.foodId,
+                        Meal: input.meal,
+                        Created: {
+                            gte: new Date(input.date),
+                        },
+                    },
+                });
+
+                if (existing) {
+                    await ctx.prisma.userFoodV2.update({
+                        where: {
+                            Id: existing.Id,
+                        },
+                        data: {
+                            ServingAmount: input.servingAmount,
+                            Updated: new Date(),
+                        },
+                    });
+                } else {
+                    await ctx.prisma.userFoodV2.create({
+                        data: {
+                            UserId: ctx.auth.userId!,
+                            FoodV2Id: input.foodId,
+                            ServingId: food.FoodV2Servings[0].Id,
+                            ServingAmount: input.servingAmount,
+                            Created: new Date(input.date),
+                            Meal: input.meal,
+                        },
+                    });
+                }
+            } else {
+                await ctx.prisma.userFoodV2.update({
+                    where: {
+                        Id: input.userFoodId,
+                    },
+                    data: {
+                        ServingAmount: input.servingAmount,
+                        Updated: new Date(),
+                    },
+                });
+            }
         }),
 
     quickRemoveFood: protectedProcedure
@@ -340,17 +368,23 @@ export const foodRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ ctx, input }) => {
-            const food = await getFoodById(ctx.prisma, input.foodId);
-
-            await ctx.prisma.userFoodV2.update({
-                where: {
-                    Id: input.userFoodId,
-                    Meal: input.meal,
-                },
-                data: {
-                    ServingAmount: input.servingAmount,
-                    Updated: new Date(),
-                },
-            });
+            if (input.servingAmount < 1) {
+                await ctx.prisma.userFoodV2.delete({
+                    where: {
+                        Id: input.userFoodId,
+                    },
+                });
+            } else {
+                await ctx.prisma.userFoodV2.update({
+                    where: {
+                        Id: input.userFoodId,
+                        Meal: input.meal,
+                    },
+                    data: {
+                        ServingAmount: input.servingAmount,
+                        Updated: new Date(),
+                    },
+                });
+            }
         }),
 });
