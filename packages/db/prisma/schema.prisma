@@ -3,14 +3,15 @@ generator client {
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
+    provider     = "postgresql"
+    url          = env("POSTGRES_PRISMA_URL")
+    directUrl    = env("POSTGRES_URL_NON_POOLING")
     relationMode = "prisma"
 }
 
 model Exercise {
     Id              BigInt            @id @default(autoincrement())
-    Created         DateTime          @db.DateTime(0)
+    Created         DateTime          @db.Date
     Name            String            @db.VarChar(255)
     Icon            String?           @db.VarChar(255)
     WorkoutExercise WorkoutExercise[]
@@ -21,8 +22,8 @@ model FoodV2 {
     Brand          String?          @db.VarChar(255)
     Name           String           @db.VarChar(255)
     FoodType       String           @db.VarChar(255)
-    Created        DateTime?        @db.DateTime(0)
-    Updated        DateTime?        @db.DateTime(0)
+    Created        DateTime?        @db.Timestamp(6)
+    Updated        DateTime?        @db.Timestamp(6)
     UserFoodV2     UserFoodV2[]
     FoodV2Servings FoodV2Servings[]
 }
@@ -30,33 +31,33 @@ model FoodV2 {
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 model FoodV2Servings {
     Id                     BigInt       @id
-    AddedSugar             Float?       @db.Float
-    Calcium                Float?       @db.Float
-    Calories               Float?       @db.Float
-    Carbohydrate           Float?       @db.Float
-    Cholesterol            Float?       @db.Float
-    Fat                    Float?       @db.Float
-    Fiber                  Float?       @db.Float
-    Iron                   Float?       @db.Float
+    AddedSugar             Float?
+    Calcium                Float?
+    Calories               Float?
+    Carbohydrate           Float?
+    Cholesterol            Float?
+    Fat                    Float?
+    Fiber                  Float?
+    Iron                   Float?
     MeasurementDescription String?      @db.VarChar(255)
-    MetricServingAmount    Float?       @db.Float
+    MetricServingAmount    Float?
     MetricServingUnit      String?      @db.VarChar(255)
-    NumberOfUnits          Float?       @db.Float
-    MonounsaturatedFat     Float?       @db.Float
-    PolyunsaturatedFat     Float?       @db.Float
-    Potassium              Float?       @db.Float
-    Protein                Float?       @db.Float
-    SaturatedFat           Float?       @db.Float
+    NumberOfUnits          Float?
+    MonounsaturatedFat     Float?
+    PolyunsaturatedFat     Float?
+    Potassium              Float?
+    Protein                Float?
+    SaturatedFat           Float?
     ServingDescription     String?      @db.VarChar(255)
-    Sodium                 Float?       @db.Float
-    Sugar                  Float?       @db.Float
-    TransFat               Float?       @db.Float
-    VitaminA               Float?       @db.Float
-    VitaminC               Float?       @db.Float
-    VitaminD               Float?       @db.Float
+    Sodium                 Float?
+    Sugar                  Float?
+    TransFat               Float?
+    VitaminA               Float?
+    VitaminC               Float?
+    VitaminD               Float?
     FoodV2Id               BigInt
-    Created                DateTime?    @db.DateTime(0)
-    Updated                DateTime?    @db.DateTime(0)
+    Created                DateTime?    @db.Timestamp(6)
+    Updated                DateTime?    @db.Timestamp(6)
     FoodV2                 FoodV2       @relation(fields: [FoodV2Id], references: [Id])
     UserFoodV2             UserFoodV2[]
 
@@ -68,12 +69,12 @@ model ProgressPhoto {
     Filename String   @db.VarChar(255)
     FileId   String   @db.Char(64)
     UserId   String   @db.Char(64)
-    Created  DateTime @db.DateTime(0)
+    Created  DateTime @db.Timestamp(6)
 }
 
 model Supplements {
     Id              BigInt            @id @default(autoincrement())
-    Created         DateTime          @db.DateTime(0)
+    Created         DateTime          @db.Timestamp(6)
     Name            String            @db.VarChar(255)
     Icon            String?           @db.VarChar(255)
     UserSupplements UserSupplements[]
@@ -81,7 +82,7 @@ model Supplements {
 
 model UserBloodPressure {
     Id        BigInt   @id @default(autoincrement())
-    Created   DateTime @db.DateTime(0)
+    Created   DateTime @db.Timestamp(6)
     UserId    String   @db.Char(64)
     Systolic  Int      @db.SmallInt
     Diastolic Int      @db.SmallInt
@@ -90,31 +91,31 @@ model UserBloodPressure {
 
 model UserBody {
     Id         BigInt   @id @default(autoincrement())
-    Created    DateTime @db.DateTime(0)
-    Neck       Float    @db.Float
-    Shoulders  Float    @db.Float
-    Chest      Float    @db.Float
-    LeftBicep  Float    @db.Float
-    RightBicep Float    @db.Float
-    Navel      Float    @db.Float
-    Waist      Float    @db.Float
-    Hip        Float    @db.Float
-    LeftThigh  Float    @db.Float
-    RightThigh Float    @db.Float
-    LeftCalf   Float    @db.Float
-    RightCalf  Float    @db.Float
+    Created    DateTime @db.Timestamp(6)
+    Neck       Float
+    Shoulders  Float
+    Chest      Float
+    LeftBicep  Float
+    RightBicep Float
+    Navel      Float
+    Waist      Float
+    Hip        Float
+    LeftThigh  Float
+    RightThigh Float
+    LeftCalf   Float
+    RightCalf  Float
     UserId     String   @db.Char(64)
 }
 
 model UserCustomMacros {
     Id       BigInt   @id @default(autoincrement())
     UserId   String   @db.Char(64)
-    Calories Float    @db.Float
-    Protein  Float    @db.Float
-    Fat      Float    @db.Float
-    Carbs    Float    @db.Float
-    Fiber    Float    @db.Float
-    Created  DateTime @db.DateTime(0)
+    Calories Float
+    Protein  Float
+    Fat      Float
+    Carbs    Float
+    Fiber    Float
+    Created  DateTime @db.Timestamp(6)
 }
 
 model UserFoodV2 {
@@ -122,12 +123,12 @@ model UserFoodV2 {
     UserId        String         @db.Char(64)
     FoodV2Id      BigInt
     ServingId     BigInt
-    ServingAmount Float          @db.Float
-    Created       DateTime?      @db.DateTime(0)
-    Updated       DateTime?      @db.DateTime(0)
+    ServingAmount Float
+    Created       DateTime?      @db.Timestamp(6)
+    Updated       DateTime?      @db.Timestamp(6)
+    Meal          Int            @default(1) @db.SmallInt
     FoodV2        FoodV2         @relation(fields: [FoodV2Id], references: [Id])
     FoodV2Serving FoodV2Servings @relation(fields: [ServingId], references: [Id])
-    Meal          Int            @default(1) @db.SmallInt
 
     @@index([UserId], map: "UserFoodV2_UserId")
     @@index([Created], map: "UserFoodV2_Created")
@@ -137,14 +138,14 @@ model UserFoodV2 {
 
 model UserHeight {
     Id      BigInt   @id @default(autoincrement())
-    Created DateTime @db.DateTime(0)
+    Created DateTime @db.Timestamp(6)
     UserId  String   @db.Char(64)
-    Height  Float    @db.Float
+    Height  Float
 }
 
 model UserOneRepMaxEstimates {
     Id         BigInt   @id @default(autoincrement())
-    Created    DateTime @db.DateTime(0)
+    Created    DateTime @db.Timestamp(6)
     ExerciseId BigInt
     Estimate   Int      @db.SmallInt
     UserId     String   @db.Char(64)
@@ -152,7 +153,7 @@ model UserOneRepMaxEstimates {
 
 model UserSupplementActivity {
     Id               BigInt          @id @default(autoincrement())
-    Updated          DateTime        @db.DateTime(0)
+    Updated          DateTime        @db.Timestamp(6)
     UserSupplementId BigInt
     UserId           String          @db.Char(64)
     Time             String          @db.VarChar(255)
@@ -164,7 +165,7 @@ model UserSupplementActivity {
 
 model UserSupplements {
     Id                     BigInt                   @id @default(autoincrement())
-    Created                DateTime                 @db.DateTime(0)
+    Created                DateTime                 @db.Timestamp(6)
     UserId                 String                   @db.Char(64)
     SupplementId           BigInt
     Times                  String                   @db.VarChar(1024)
@@ -177,14 +178,14 @@ model UserSupplements {
 
 model UserWeight {
     Id      BigInt   @id @default(autoincrement())
-    Created DateTime @db.DateTime(0)
+    Created DateTime @db.Timestamp(6)
     UserId  String   @db.Char(64)
-    Weight  Float    @db.Float
+    Weight  Float
 }
 
 model UserWorkout {
     Id        BigInt   @id @default(autoincrement())
-    Created   DateTime @db.DateTime(0)
+    Created   DateTime @db.Timestamp(6)
     WorkoutId BigInt
     Active    Boolean
     UserId    String   @db.Char(64)
@@ -199,7 +200,7 @@ model UserWorkoutActivity {
     Created           DateTime @db.Date
     Set               Int      @db.SmallInt
     Reps              Int?     @db.SmallInt
-    Weight            Float?   @db.Float
+    Weight            Float?
     UserId            String   @db.Char(64)
     Week              Int      @db.SmallInt
     Day               Int      @db.SmallInt
@@ -212,8 +213,8 @@ model UserWorkoutSubstitution {
     UserId            String    @db.Char(64)
     WorkoutExerciseId BigInt
     ExerciseId        BigInt
-    Created           DateTime? @db.DateTime(0)
-    Updated           DateTime? @db.DateTime(0)
+    Created           DateTime? @db.Timestamp(6)
+    Updated           DateTime? @db.Timestamp(6)
 }
 
 model UserWorkoutsCompleted {
@@ -222,7 +223,7 @@ model UserWorkoutsCompleted {
     Week      Int      @db.SmallInt
     Day       Int?     @db.SmallInt
     UserId    String   @db.Char(64)
-    Created   DateTime @db.DateTime(0)
+    Created   DateTime @db.Timestamp(6)
     Workout   Workout  @relation(fields: [WorkoutId], references: [Id])
 
     @@index([UserId], map: "UserWorkoutsCompleted_UserId")
@@ -231,13 +232,13 @@ model UserWorkoutsCompleted {
 
 model Workout {
     Id                    BigInt                  @id @default(autoincrement())
-    Created               DateTime                @db.DateTime(0)
+    Created               DateTime                @db.Timestamp(6)
     Name                  String                  @db.VarChar(255)
     Description           String?                 @db.VarChar(1024)
     Days                  Int
     Duration              Int
     UserId                String?                 @db.Char(64)
-    Updated               DateTime?               @db.DateTime(0)
+    Updated               DateTime?               @db.Timestamp(6)
     Type                  String                  @default("Resistance") @db.VarChar(255)
     WorkoutExercise       WorkoutExercise[]
     UserWorkout           UserWorkout[]
@@ -248,13 +249,13 @@ model Workout {
 
 model WorkoutExercise {
     Id         BigInt    @id @default(autoincrement())
-    Created    DateTime  @db.DateTime(0)
+    Created    DateTime  @db.Timestamp(6)
     WorkoutId  BigInt
     ExerciseId BigInt
     Day        Int
     MinReps    Int?
     MaxReps    Int?
-    Updated    DateTime? @db.DateTime(0)
+    Updated    DateTime? @db.Timestamp(6)
     Order      Int?
     Time       Int?
     Workout    Workout   @relation(fields: [WorkoutId], references: [Id])
@@ -271,6 +272,6 @@ model UserSettings {
     Age          Int      @db.SmallInt
     Units        String   @db.VarChar(255)
     MealQuantity Int      @default(3) @db.SmallInt
-    Created      DateTime @db.DateTime(0)
-    Updated      DateTime @db.DateTime(0)
+    Created      DateTime @db.Timestamp(6)
+    Updated      DateTime @db.Timestamp(6)
 }
