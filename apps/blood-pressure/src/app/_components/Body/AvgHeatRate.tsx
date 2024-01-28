@@ -1,11 +1,9 @@
-'use client';
-
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import { FC } from 'react';
-import { api } from '~/trpc/react';
+import { api } from '~/trpc/server';
 
-export const AvgHeatRate: FC = () => {
-    const avgHeartRate = api.body.getAvgHeartRate.useQuery();
+export const AvgHeatRate: FC = async () => {
+    const avgHeartRate = await api.body.getAvgHeartRate.query();
 
     return (
         <Card className="py-4">
@@ -15,7 +13,7 @@ export const AvgHeatRate: FC = () => {
             </CardHeader>
             <CardBody className="overflow-visible py-2">
                 <h4 className="text-large font-bold">
-                    {avgHeartRate.data?.heartRate} bpm
+                    {avgHeartRate?.heartRate} bpm
                 </h4>
             </CardBody>
         </Card>

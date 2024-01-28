@@ -1,11 +1,9 @@
-'use client';
-
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import { FC } from 'react';
-import { api } from '~/trpc/react';
+import { api } from '~/trpc/server';
 
-export const AvgBloodPressure: FC = () => {
-    const avgBloodPressure = api.body.getAvgBloodPressure.useQuery();
+export const AvgBloodPressure: FC = async () => {
+    const avgBloodPressure = await api.body.getAvgBloodPressure.query();
 
     return (
         <Card className="py-4">
@@ -15,8 +13,8 @@ export const AvgBloodPressure: FC = () => {
             </CardHeader>
             <CardBody className="overflow-visible py-2">
                 <h4 className="text-large font-bold">
-                    {avgBloodPressure.data?.systolic}/
-                    {avgBloodPressure.data?.diastolic} mm Hg
+                    {avgBloodPressure?.systolic}/{avgBloodPressure?.diastolic}{' '}
+                    mm Hg
                 </h4>
             </CardBody>
         </Card>
