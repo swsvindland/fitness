@@ -1,19 +1,14 @@
-'use client';
-
 import { FC } from 'react';
 import { BloodPressureCard } from './BloodPressureCard';
-import { api } from '~/trpc/react';
-import { LoadingPage } from '@fitness/ui';
+import { api } from '~/trpc/server';
 
-export const AllBloodPressure: FC = () => {
-    const userBloodPressureQuery = api.body.getAllBloodPressures.useQuery();
-
-    if (userBloodPressureQuery.isLoading) return <LoadingPage />;
+export const AllBloodPressure: FC = async () => {
+    const userBloodPressureQuery = await api.body.getAllBloodPressures.query();
 
     return (
         <div className="container grid grid-cols-1">
             <div className=" grid grid-cols-1 gap-2">
-                {userBloodPressureQuery.data?.map((item) => (
+                {userBloodPressureQuery?.map((item) => (
                     <BloodPressureCard
                         id={Number(item.Id)}
                         date={item.Created.toDateString()}

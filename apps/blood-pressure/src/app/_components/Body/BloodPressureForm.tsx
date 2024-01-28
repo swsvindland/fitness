@@ -30,15 +30,13 @@ export const BloodPressureForm: FC<IProps> = (props) => {
 
     const createMutation = api.body.addBloodPressure.useMutation({
         onSuccess: async () => {
-            await utils.body.invalidate();
-            await utils.dashboard.invalidate();
+            await utils.invalidate();
         },
     });
 
     const updateMutation = api.body.updateBloodPressure.useMutation({
         onSuccess: async () => {
-            await utils.body.invalidate();
-            await utils.dashboard.invalidate();
+            await utils.invalidate();
         },
     });
 
