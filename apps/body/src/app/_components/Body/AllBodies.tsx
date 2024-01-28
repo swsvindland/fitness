@@ -1,20 +1,15 @@
-'use client';
-
 import { FC } from 'react';
 import { BodyCard } from './BodyCard';
-import { api } from '~/trpc/react';
-import { LoadingPage } from '@fitness/ui';
+import { api } from '~/trpc/server';
 import { CreateBody } from './CreateBody';
 
-export const AllBodies: FC = () => {
-    const userBodyQuery = api.body.getAllBodies.useQuery();
-
-    if (userBodyQuery.isLoading) return <LoadingPage />;
+export const AllBodies: FC = async () => {
+    const userBodyQuery = await api.body.getAllBodies.query();
 
     return (
         <div className="container grid grid-cols-1">
             <div className=" grid grid-cols-1 gap-2">
-                {userBodyQuery.data?.map((item) => (
+                {userBodyQuery?.map((item) => (
                     <BodyCard
                         id={Number(item.Id)}
                         date={item.Created.toDateString()}
