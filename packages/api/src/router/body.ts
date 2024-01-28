@@ -176,6 +176,8 @@ export const bodyRouter = createTRPCRouter({
         const avgDiastolic =
             bps.reduce((acc, bp) => acc + bp.Diastolic, 0) / bps.length;
 
+        if (isNaN(avgSystolic) || isNaN(avgDiastolic)) return null;
+
         return {
             systolic: avgSystolic,
             diastolic: avgDiastolic,
@@ -208,6 +210,8 @@ export const bodyRouter = createTRPCRouter({
                 heartRateCount++;
             }
         }
+
+        if (heartRateCount === 0) return null;
 
         return {
             heartRate: heartRateSum / heartRateCount,
