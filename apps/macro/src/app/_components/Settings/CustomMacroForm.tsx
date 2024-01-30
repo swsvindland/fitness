@@ -1,7 +1,6 @@
 'use client';
 
 import { FC, FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { api } from '~/trpc/react';
 import { Input, Button } from '@nextui-org/react';
 
@@ -25,7 +24,6 @@ export const CustomMacroForm: FC<IProps> = (props) => {
         carbs: '',
         fiber: '',
     });
-    const router = useRouter();
     const utils = api.useUtils();
 
     const macrosQuery = api.macros.getMacros.useQuery();
@@ -68,7 +66,6 @@ export const CustomMacroForm: FC<IProps> = (props) => {
             carbs: parseInt(state.carbs),
             fiber: parseInt(state.fiber),
         });
-        router.back();
     };
 
     const handleClear = (event: FormEvent) => {
