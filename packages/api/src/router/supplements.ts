@@ -1,10 +1,8 @@
-import { createTRPCRouter, protectedProcedure } from '../trpc';
+import { createTRPCRouter, protectedProcedure, publicProcedure } from '../trpc';
 import { z } from 'zod';
 
 export const supplementsRouter = createTRPCRouter({
-    getAllSupplements: protectedProcedure.query(async ({ ctx }) => {
-        if (!ctx.auth.userId) throw new Error('No user ID');
-
+    getAllSupplements: publicProcedure.query(async ({ ctx }) => {
         return await ctx.prisma.supplements.findMany();
     }),
 
