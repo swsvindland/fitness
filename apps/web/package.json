@@ -1,11 +1,11 @@
 {
-    "name": "macro",
+    "name": "web",
     "version": "0.1.0",
     "private": true,
     "scripts": {
         "with-env": "dotenv -e ../../.env --",
         "build": "pnpm with-env next build",
-        "dev": "pnpm with-env next dev --port 3030",
+        "dev": "pnpm with-env next dev --port 3000",
         "lint": "pnpm with-env next lint",
         "start": "next start"
     },
