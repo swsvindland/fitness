@@ -4,7 +4,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isSelected } from '~/app/_components/Navigation/utils';
-import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, HomeIcon, ScaleIcon } from '@heroicons/react/24/outline';
 import { Card } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 
@@ -28,6 +28,18 @@ export const Sidebar: FC = () => {
                         <div className="my-4 flex flex-col items-center justify-center">
                             <HomeIcon className="h-6" />
                             <span>Home</span>
+                        </div>
+                    </Button>
+                    <Button
+                        color={color(['/body'])}
+                        variant="light"
+                        as={Link}
+                        href="/body"
+                        className="h-20"
+                    >
+                        <div className="my-4 flex flex-col items-center justify-center">
+                            <ScaleIcon className="h-6" />
+                            <span>Body</span>
                         </div>
                     </Button>
                     <Button

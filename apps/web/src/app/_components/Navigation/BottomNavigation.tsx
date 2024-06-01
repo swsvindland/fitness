@@ -4,7 +4,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { isSelected } from '~/app/_components/Navigation/utils';
-import { Cog6ToothIcon, HomeIcon } from '@heroicons/react/24/outline';
+import { Cog6ToothIcon, HomeIcon, ScaleIcon } from '@heroicons/react/24/outline';
 import { Card } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 
@@ -19,7 +19,7 @@ export const BottomNavigation: FC = () => {
             id="bottom-navigation"
             className="pb-safe fixed inset-x-0 bottom-0 z-50 block rounded-none"
         >
-            <div id="tabs" className="grid h-full grid-cols-2">
+            <div id="tabs" className="grid h-full grid-cols-3">
                 <Button
                     color={color(['/'])}
                     variant="light"
@@ -30,6 +30,18 @@ export const BottomNavigation: FC = () => {
                     <div className="my-4 flex flex-col items-center justify-center">
                         <HomeIcon className="h-6" />
                         <span>Home</span>
+                    </div>
+                </Button>
+                <Button
+                    color={color(['/body'])}
+                    variant="light"
+                    as={Link}
+                    href="/body"
+                    className="h-16"
+                >
+                    <div className="my-4 flex flex-col items-center justify-center">
+                        <ScaleIcon className="h-6" />
+                        <span>Body</span>
                     </div>
                 </Button>
                 <Button
