@@ -11,8 +11,8 @@
     },
     "dependencies": {
         "@clerk/nextjs": "^4.29.4",
-        "@fitness/db": "*",
-        "@fitness/types": "*",
+        "@fitness/db": "workspace:*",
+        "@fitness/types": "workspace:*",
         "@trpc/client": "^10.45.0",
         "@trpc/server": "^10.45.0",
         "axios": "^1.6.5",
