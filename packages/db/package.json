@@ -13,12 +13,12 @@
         "db-generate": "pnpm with-env prisma generate"
     },
     "dependencies": {
-        "@prisma/client": "^5.8.1"
+        "@prisma/client": "^5.15.1"
     },
     "devDependencies": {
         "@types/node": "^18.19.8",
         "dotenv-cli": "^7.3.0",
-        "prisma": "^5.8.1",
+        "prisma": "^5.15.1",
         "typescript": "^5.3.3"
     }
 }
