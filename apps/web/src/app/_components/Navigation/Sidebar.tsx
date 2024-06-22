@@ -10,7 +10,6 @@ import {
     RectangleStackIcon,
     ScaleIcon,
 } from '@heroicons/react/24/outline';
-import { Card } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 
 export const Sidebar: FC = () => {
@@ -20,9 +19,9 @@ export const Sidebar: FC = () => {
         isSelected(pathname, route) ? 'primary' : 'secondary';
 
     return (
-        <Card className="pl-safe z-20 flex min-h-0 flex-1 flex-col rounded-none">
-            <div className="flex flex-1 flex-col overflow-y-auto pb-4 pt-5">
-                <nav className="mt-16 flex flex-col justify-center space-y-1">
+        <div className="pl-safe flex min-h-0 flex-1 flex-col rounded-none">
+            <div className="flex flex-1 flex-col overflow-y-auto">
+                <nav className="flex flex-col justify-center space-y-1">
                     <Button
                         color={color(['/'])}
                         variant="light"
@@ -73,6 +72,6 @@ export const Sidebar: FC = () => {
                     </Button>
                 </nav>
             </div>
-        </Card>
+        </div>
     );
 };

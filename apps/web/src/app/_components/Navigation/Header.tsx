@@ -2,15 +2,11 @@
 
 import { FC } from 'react';
 import { UserButton } from '@clerk/nextjs';
-import { Card } from '@nextui-org/react';
 import { Food } from '@fitness/ui';
 
 export const Header: FC = () => {
     return (
-        <Card
-            as="nav"
-            className="pt-safe fixed inset-x-0 top-0 z-50 block rounded-none"
-        >
+        <nav className="pt-safe block rounded-none">
             <div className="mx-auto px-4 sm:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="flex flex-1 items-center">
@@ -21,6 +17,6 @@ export const Header: FC = () => {
                     </div>
                 </div>
             </div>
-        </Card>
+        </nav>
     );
 };

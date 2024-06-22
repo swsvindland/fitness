@@ -10,7 +10,6 @@ import {
     RectangleStackIcon,
     ScaleIcon,
 } from '@heroicons/react/24/outline';
-import { Card } from '@nextui-org/react';
 import { Button } from '@nextui-org/button';
 
 export const BottomNavigation: FC = () => {
@@ -20,7 +19,7 @@ export const BottomNavigation: FC = () => {
         isSelected(pathname, route) ? 'primary' : 'secondary';
 
     return (
-        <Card
+        <div
             id="bottom-navigation"
             className="pb-safe fixed inset-x-0 bottom-0 z-50 block rounded-none"
         >
@@ -74,6 +73,6 @@ export const BottomNavigation: FC = () => {
                     </div>
                 </Button>
             </div>
-        </Card>
+        </div>
     );
 };

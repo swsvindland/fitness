@@ -14,21 +14,20 @@ export const Layout: FC<IProps> = ({ children }) => {
     if (!userId) return <>{children}</>;
 
     return (
-        <>
-            <div className="hidden md:fixed md:inset-y-0 md:flex md:w-28 md:flex-col">
-                <Sidebar />
-            </div>
-            <header className="md:ml-48">
+        <div>
+            <header>
                 <Header />
             </header>
-            <main className="my-20 flex justify-center p-4 md:ml-28 lg:px-16">
-                <div className="flex flex-1 flex-col items-center justify-center">
-                    {children}
+            <div className="flex flex-row">
+                <div>
+                    <Sidebar />
                 </div>
-            </main>
-            <footer className="md:hidden">
-                <BottomNavigation />
-            </footer>
-        </>
+                <main className="flex min-h-full w-full justify-center rounded-lg bg-zinc-800 p-4">
+                    <div className="flex flex-1 flex-col items-center justify-center ">
+                        {children}
+                    </div>
+                </main>
+            </div>
+        </div>
     );
 };

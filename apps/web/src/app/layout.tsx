@@ -35,7 +35,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <ClerkProvider>
-            <html lang="en" className="dark">
+            <html lang="en" className="dark bg-zinc-950">
                 <body className={`font-sans ${oswald.variable}`}>
                     <Providers>
                         <TRPCReactProvider cookies={cookies().toString()}>
